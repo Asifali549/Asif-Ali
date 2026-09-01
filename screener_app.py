@@ -1,17 +1,16 @@
 """
 Streamlit Live Screener - Ichimoku+Market Structure aur EMA+Breakout
-confluence signals, HAR timeframe (15m/1h/4h) par HAR coin ke liye check
-hote hain (kisi strategy ko kisi khaas timeframe tak mehdood nahi rakha).
-Chandelier trailing stop ke sath.
-
-Default: Binance ke SAB USDT spot coins (meme coins aur leveraged/binary
-tokens jaise BTCUP/BTCDOWN automatically exclude hote hain).
+confluence signals. Background mein har 15 minute (GitHub Actions se)
+top 100 coins x 1h par khud scan hota hai - is page par foran (bina wait)
+wahi taaza result dikhta hai. Chahen to neeche manual "Deep Scan" bhi
+chala sakte hain (sab coins x sab timeframes, jisme waqt lagta hai).
 
 Chalayen: streamlit run screener_app.py
-
-NOTE: Isay apne computer par chalayen jahan Binance tak internet access ho
-(sandbox mein exchange access nahi hai).
 """
+
+import json
+import os
+from datetime import datetime, timezone
 
 import pandas as pd
 import streamlit as st
@@ -27,28 +26,78 @@ from backtest_engine import compute_atr
 # ============================================================
 st.set_page_config(page_title="Crypto Confluence Screener", layout="wide")
 st.title("📊 Crypto Confluence Screener")
-st.caption(
-    "Har coin, har timeframe (15m/1h/4h) par **Ichimoku+MarketStructure** "
-    "aur **EMA+Breakout** dono confluence combos check hote hain — "
-    "kisi combo ko kisi khaas timeframe tak mehdood nahi rakha gaya."
-)
 
 COMBOS = [
-    ("ichimoku", "market_structure", "Ichimoku+MarketStructure"),
-    ("ema_crossover", "breakout", "EMA+Breakout"),
+    # (strategy_a, strategy_b, display_name, ce_period)
+    # 400-coin backtest se CONFIRM: Ichimoku+MS ke liye CE(16) bohot behtar (PF 1.41->2.94)
+    #                                EMA+Breakout ke liye CE(12) hi behtar (CE16 se nuksan)
+    ("ichimoku", "market_structure", "Ichimoku+MarketStructure", 16),
+    ("ema_crossover", "breakout", "EMA+Breakout", 12),
 ]
 TIMEFRAMES_TO_SCAN = ["15m", "1h", "4h"]
 
 
+def style_results(df_results):
+    def color_status(val):
+        if val == "OPEN":
+            return "background-color: #1a4d2e; color: white"
+        elif val == "TARGET HIT":
+            return "background-color: #0d4d0d; color: white"
+        else:
+            return "background-color: #4d1a1a; color: white"
+
+    def color_pnl(val):
+        color = "#1a4d2e" if val >= 0 else "#4d1a1a"
+        return f"background-color: {color}; color: white"
+
+    return df_results.style.map(color_status, subset=["Status"]).map(color_pnl, subset=["P/L %"])
+
+
 # ============================================================
-# SIDEBAR
+# SECTION 1: BACKGROUND AUTO-SCAN RESULT (foran, koi wait nahi)
 # ============================================================
-st.sidebar.header("Settings")
+st.header("🔴 LIVE — Background Auto-Scan (har 15 min, top 100 coins, 1h)")
+
+if os.path.exists("latest_signals.json"):
+    with open("latest_signals.json") as f:
+        auto_data = json.load(f)
+
+    last_updated = datetime.fromisoformat(auto_data["last_updated_utc"])
+    age_minutes = (datetime.now(timezone.utc) - last_updated).total_seconds() / 60
+
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Last Updated", f"{age_minutes:.0f} min pehle")
+    col2.metric("Coins Scanned", auto_data["coins_scanned"])
+    col3.metric("Fresh Signals", len(auto_data["signals"]))
+
+    if age_minutes > 30:
+        st.warning("⚠️ Ye data 30 minute se purana hai — GitHub Actions ka background scan shayad delay ho gaya ho, ya abhi setup na hua ho.")
+
+    if auto_data["signals"]:
+        df_auto = pd.DataFrame(auto_data["signals"]).sort_values(["Bars Ago", "Coin"])
+        st.dataframe(style_results(df_auto), use_container_width=True, hide_index=True)
+    else:
+        st.info("Is waqt koi fresh signal nahi (last scan mein).")
+else:
+    st.info(
+        "Background auto-scan abhi setup nahi hua ya pehli baar chalne ka wait ho raha hai. "
+        "GitHub repo mein '.github/workflows/scan.yml' hona chahiye — 15 minute mein pehla result aa jayega."
+    )
+
+st.markdown("---")
+
+
+# ============================================================
+# SECTION 2: MANUAL DEEP SCAN (sab coins x sab timeframes, waqt lagta hai)
+# ============================================================
+st.header("🔍 Manual Deep Scan (poora control, magar waqt lagta hai)")
+
+st.sidebar.header("Deep Scan Settings")
 
 coin_mode = st.sidebar.radio("Coin List", ["Binance ke SAB coins (meme/leveraged exclude)", "MANUAL"])
 
 if coin_mode.startswith("Binance"):
-    top_n = config.AUTO_TOP_N_COINS  # practically sab (meme/leveraged filter data_fetcher mein lagta hai)
+    top_n = config.AUTO_TOP_N_COINS
 else:
     manual_text = st.sidebar.text_area(
         "Coins (comma-separated, jaise BTC/USDT,ETH/USDT)",
@@ -56,7 +105,7 @@ else:
     )
 
 timeframes_selected = st.sidebar.multiselect(
-    "Kaunse timeframes scan karein", TIMEFRAMES_TO_SCAN, default=TIMEFRAMES_TO_SCAN
+    "Kaunse timeframes scan karein", TIMEFRAMES_TO_SCAN, default=["1h"]
 )
 
 lookback_bars = st.sidebar.slider(
@@ -64,33 +113,32 @@ lookback_bars = st.sidebar.slider(
 )
 
 rr_multiple = st.sidebar.number_input("Take Profit = Risk x", value=2.0, step=0.5)
-ce_period = st.sidebar.number_input("Chandelier Period", value=12, step=1)
 ce_mult = st.sidebar.number_input("Chandelier ATR Multiplier", value=3.0, step=0.5)
+st.sidebar.caption("Chandelier Period har combo apna alag, tasdeeq-shuda (16 ya 12) khud istemal karta hai.")
 
 st.sidebar.markdown("---")
 st.sidebar.warning(
-    "⚠️ Binance ke SAB coins + sab timeframes scan karne mein kaafi waqt "
-    "lag sakta hai (100+ coins x 3 timeframes x 2 combos). Sabar karein."
+    "⚠️ Zyada coins/timeframes scan karne mein kaafi waqt lag sakta hai. Sabar karein."
 )
 
-run_scan = st.sidebar.button("🔍 Scan Chalayen", type="primary", use_container_width=True)
+run_scan = st.sidebar.button("🔍 Deep Scan Chalayen", type="primary", use_container_width=True)
 
 
 # ============================================================
 # SCAN LOGIC
 # ============================================================
-def scan_symbol_timeframe(exchange, symbol, timeframe, lookback_bars, ce_period, ce_mult, rr_multiple):
-    """Ek symbol/timeframe ka data ek dafa fetch karta hai, phir dono combos check karta hai."""
+def scan_symbol_timeframe(exchange, symbol, timeframe, lookback_bars, ce_mult, rr_multiple):
+    """Ek symbol/timeframe ka data ek dafa fetch karta hai, phir dono combos apne apne CE ke sath check karta hai."""
     df = fetch_ohlcv(exchange, symbol, timeframe, limit=max(config.CANDLE_LIMITS.get(timeframe, 500), 300))
     if df is None or len(df) < 220:
         return []
 
-    atr = compute_atr(df, ce_period)
-    highest_high = df["high"].rolling(ce_period).max()
-    chandelier = highest_high - ce_mult * atr
-
     found = []
-    for strat_a, strat_b, combo_name in COMBOS:
+    for strat_a, strat_b, combo_name, ce_period in COMBOS:
+        atr = compute_atr(df, ce_period)
+        highest_high = df["high"].rolling(ce_period).max()
+        chandelier = highest_high - ce_mult * atr
+
         params_a = config.STRATEGY_PARAMS[strat_a]
         params_b = config.STRATEGY_PARAMS[strat_b]
 
@@ -171,7 +219,7 @@ if run_scan:
         for tf in timeframes_selected:
             call_count += 1
             try:
-                r = scan_symbol_timeframe(exchange, symbol, tf, lookback_bars, ce_period, ce_mult, rr_multiple)
+                r = scan_symbol_timeframe(exchange, symbol, tf, lookback_bars, ce_mult, rr_multiple)
                 results.extend(r)
             except Exception as e:
                 st.sidebar.warning(f"{symbol} {tf}: {e}")
@@ -196,20 +244,7 @@ if run_scan:
 
         df_filtered = df_results[df_results["Timeframe"].isin(filter_tf) & df_results["Combo"].isin(filter_combo)]
 
-        def color_status(val):
-            if val == "OPEN":
-                return "background-color: #1a4d2e; color: white"
-            elif val == "TARGET HIT":
-                return "background-color: #0d4d0d; color: white"
-            else:
-                return "background-color: #4d1a1a; color: white"
-
-        def color_pnl(val):
-            color = "#1a4d2e" if val >= 0 else "#4d1a1a"
-            return f"background-color: {color}; color: white"
-
-        styled = df_filtered.style.map(color_status, subset=["Status"]).map(color_pnl, subset=["P/L %"])
-        st.dataframe(styled, use_container_width=True, hide_index=True)
+        st.dataframe(style_results(df_filtered), use_container_width=True, hide_index=True)
 
         csv = df_filtered.to_csv(index=False).encode("utf-8")
         st.download_button("📥 CSV Download Karein", csv, "screener_results.csv", "text/csv")
