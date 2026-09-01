@@ -1,33 +1,75 @@
 """
 Scheduled Scan - Ye script GitHub Actions ke zariye background mein
-har 15 minute baad khud chalti hai (PC/mobile band ho tab bhi).
-Sirf top 100 coins, sirf 1h timeframe (backtest mein sab se behtareen
-sabit hua) - taake 15 minute ke andar poora ho jaye.
+har 2 ghante baad khud chalti hai (PC/mobile band ho tab bhi).
+400 coins, sirf 1h timeframe (backtest mein sab se behtareen sabit hua).
 
 Result 'latest_signals.json' mein save hota hai, jise screener_app.py
 seedha padh kar FORAN dikha deta hai - koi wait nahi karna parta.
+
+NAYA signal milte hi ntfy.sh ke zariye mobile par push notification
+bhi jati hai (sirf NAYE signals par - purane repeat nahi hote,
+'notified_signals.json' mein track hota hai kya already bhej chuke hain).
 """
 
 import json
-from datetime import datetime, timezone
+import os
+from datetime import datetime, timezone, timedelta
 
 import pandas as pd
+import requests
 
 import config
 from data_fetcher import get_exchange, get_coin_list, fetch_ohlcv
 from strategies import STRATEGY_FUNCTIONS, apply_cooldown
 from backtest_engine import compute_atr
 
-TOP_N_COINS = 100
+TOP_N_COINS = 400
 TIMEFRAME = "1h"   # backtest mein sab se behtareen (Ichimoku+MS PF 4.46, EMA+Breakout PF 2.41)
 LOOKBACK_BARS = 3
 RR_MULTIPLE = 2.0
 CE_MULT = 3.0
 
+# ntfy.sh topic - isay apna unique naam dein (jo aap ne app mein subscribe kiya)
+NTFY_TOPIC = "asifali549-crypto-alerts-8x2m9k"
+
 COMBOS = [
     ("ichimoku", "market_structure", "Ichimoku+MarketStructure", 16),
     ("ema_crossover", "breakout", "EMA+Breakout", 12),
 ]
+
+
+def send_notification(title, message):
+    try:
+        requests.post(
+            f"https://ntfy.sh/{NTFY_TOPIC}",
+            data=message.encode("utf-8"),
+            headers={
+                "Title": title.encode("utf-8"),
+                "Priority": "high",
+                "Tags": "chart_with_upwards_trend",
+            },
+            timeout=10,
+        )
+    except Exception as e:
+        print(f"  [NOTIFY FAILED] {e}")
+
+
+def load_notified_keys():
+    if not os.path.exists("notified_signals.json"):
+        return {}
+    with open("notified_signals.json") as f:
+        return json.load(f)
+
+
+def save_notified_keys(keys_dict):
+    # 24 ghante se purane entries hata dein (file chhoti rahe)
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=24)
+    pruned = {
+        k: v for k, v in keys_dict.items()
+        if datetime.fromisoformat(v) > cutoff
+    }
+    with open("notified_signals.json", "w") as f:
+        json.dump(pruned, f, indent=2)
 
 
 def scan_symbol(exchange, symbol):
@@ -114,6 +156,29 @@ def main():
         json.dump(output, f, indent=2)
 
     print(f"\nDone. {len(all_results)} fresh signals saved to latest_signals.json")
+
+    # ---- NAYE signals par notification bhejein (purane repeat na hon) ----
+    notified = load_notified_keys()
+    new_count = 0
+
+    for sig in all_results:
+        key = f"{sig['Coin']}|{sig['Combo']}|{sig['Signal Bar']}"
+        if key in notified:
+            continue  # ye pehle hi bhej chuke hain
+
+        title = f"🚀 {sig['Coin']} - {sig['Combo']}"
+        message = (
+            f"Timeframe: {sig['Timeframe']}\n"
+            f"Entry: {sig['Entry']}\n"
+            f"Take Profit: {sig['Take Profit']}\n"
+            f"Trail Stop: {sig['Trail Stop']}"
+        )
+        send_notification(title, message)
+        notified[key] = datetime.now(timezone.utc).isoformat()
+        new_count += 1
+
+    save_notified_keys(notified)
+    print(f"Notifications bheji: {new_count} naye signals")
 
 
 if __name__ == "__main__":
