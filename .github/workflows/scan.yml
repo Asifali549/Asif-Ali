@@ -2,9 +2,8 @@ name: Scheduled Crypto Scan
 
 on:
   schedule:
-    # Har 2 ghante baad (400 coins scan karne ke liye zyada waqt chahiye,
-    # is liye 15 min ki jagah ab 2 ghante rakha hai)
-    - cron: '0 */2 * * *'
+    # Har 1 ghante baad scan chalega (overlap se bachne ke liye)
+    - cron: '0 * * * *'
   workflow_dispatch: {}  # Manually bhi "Run workflow" button se chala sakte hain
 
 permissions:
