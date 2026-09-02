@@ -1,21 +1,63 @@
 {
-  "last_updated_utc": "2026-09-02T21:08:11.108271+00:00",
+  "last_updated_utc": "2026-09-02T22:09:02.044839+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
     {
-      "Coin": "SHARE/USDT",
+      "Coin": "CLO/USDT",
+      "Timeframe": "1h",
+      "Combo": "Ichimoku+MarketStructure",
+      "Signal Bar": "2026-09-03 02:00 AM PKT",
+      "Signal Bar UTC": "2026-09-02 21:00:00",
+      "Bars Ago": 1,
+      "Entry": 0.18038,
+      "Current": 0.18473,
+      "P/L %": 2.41,
+      "Trail Stop": 0.209356,
+      "Take Profit": 0.122428,
+      "Status": "STOPPED (trail)"
+    },
+    {
+      "Coin": "MELANIA/USDT",
+      "Timeframe": "1h",
+      "Combo": "Ichimoku+MarketStructure",
+      "Signal Bar": "2026-09-03 02:00 AM PKT",
+      "Signal Bar UTC": "2026-09-02 21:00:00",
+      "Bars Ago": 1,
+      "Entry": 0.11172,
+      "Current": 0.11029,
+      "P/L %": -1.28,
+      "Trail Stop": 0.107745,
+      "Take Profit": 0.119805,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "MELANIA/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-03 12:00 AM PKT",
-      "Signal Bar UTC": "2026-09-02 19:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.3881,
-      "Current": 0.383,
-      "P/L %": -1.31,
-      "Trail Stop": 0.3849,
-      "Take Profit": 0.3945,
-      "Status": "STOPPED (trail)"
+      "Signal Bar": "2026-09-03 02:00 AM PKT",
+      "Signal Bar UTC": "2026-09-02 21:00:00",
+      "Bars Ago": 1,
+      "Entry": 0.11172,
+      "Current": 0.11029,
+      "P/L %": -1.28,
+      "Trail Stop": 0.107475,
+      "Take Profit": 0.12021,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "CAP/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-03 02:00 AM PKT",
+      "Signal Bar UTC": "2026-09-02 21:00:00",
+      "Bars Ago": 1,
+      "Entry": 0.071349,
+      "Current": 0.071207,
+      "P/L %": -0.2,
+      "Trail Stop": 0.070068,
+      "Take Profit": 0.073999,
+      "Status": "OPEN"
     }
   ]
 }
