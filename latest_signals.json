@@ -1,6 +1,46 @@
 {
-  "last_updated_utc": "2026-09-02T04:02:13.039733+00:00",
-  "coins_scanned": 25,
+  "last_updated_utc": "2026-09-02T06:01:34.438143+00:00",
+  "coins_scanned": 400,
   "timeframe": "1h",
-  "signals": []
+  "signals": [
+    {
+      "Coin": "CLO/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-02 03:00:00",
+      "Bars Ago": 2,
+      "Entry": 0.16507,
+      "Current": 0.16923,
+      "P/L %": 2.52,
+      "Trail Stop": 0.154587,
+      "Take Profit": 0.192145,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "SUSHI/USDT",
+      "Timeframe": "1h",
+      "Combo": "Ichimoku+MarketStructure",
+      "Signal Bar": "2026-09-02 04:00:00",
+      "Bars Ago": 2,
+      "Entry": 0.2087,
+      "Current": 0.2132,
+      "P/L %": 2.16,
+      "Trail Stop": 0.211188,
+      "Take Profit": 0.2274,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "SUSHI/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-02 04:00:00",
+      "Bars Ago": 2,
+      "Entry": 0.2087,
+      "Current": 0.2132,
+      "P/L %": 2.16,
+      "Trail Stop": 0.2097,
+      "Take Profit": 0.2274,
+      "Status": "OPEN"
+    }
+  ]
 }
