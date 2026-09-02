@@ -1,7 +1,7 @@
 """
 Streamlit Live Screener - Ichimoku+Market Structure aur EMA+Breakout
-confluence signals. Background mein har 15 minute (GitHub Actions se)
-top 100 coins x 1h par khud scan hota hai - is page par foran (bina wait)
+confluence signals. Background mein har 1 ghanta (GitHub Actions se)
+400 coins x 1h par khud scan hota hai - is page par foran (bina wait)
 wahi taaza result dikhta hai. Chahen to neeche manual "Deep Scan" bhi
 chala sakte hain (sab coins x sab timeframes, jisme waqt lagta hai).
 
@@ -56,7 +56,7 @@ def style_results(df_results):
 # ============================================================
 # SECTION 1: BACKGROUND AUTO-SCAN RESULT (foran, koi wait nahi)
 # ============================================================
-st.header("🔴 LIVE — Background Auto-Scan (har 15 min, top 100 coins, 1h)")
+st.header("🔴 LIVE — Background Auto-Scan (har 1 ghanta, 400 coins, 1h)")
 
 if os.path.exists("latest_signals.json"):
     with open("latest_signals.json") as f:
@@ -70,8 +70,8 @@ if os.path.exists("latest_signals.json"):
     col2.metric("Coins Scanned", auto_data["coins_scanned"])
     col3.metric("Fresh Signals", len(auto_data["signals"]))
 
-    if age_minutes > 30:
-        st.warning("⚠️ Ye data 30 minute se purana hai — GitHub Actions ka background scan shayad delay ho gaya ho, ya abhi setup na hua ho.")
+    if age_minutes > 75:
+        st.warning("⚠️ Ye data 75 minute se purana hai — GitHub Actions ka background scan shayad delay ho gaya ho, ya abhi setup na hua ho.")
 
     if auto_data["signals"]:
         df_auto = pd.DataFrame(auto_data["signals"]).sort_values(["Bars Ago", "Coin"])
@@ -81,7 +81,7 @@ if os.path.exists("latest_signals.json"):
 else:
     st.info(
         "Background auto-scan abhi setup nahi hua ya pehli baar chalne ka wait ho raha hai. "
-        "GitHub repo mein '.github/workflows/scan.yml' hona chahiye — 15 minute mein pehla result aa jayega."
+        "GitHub repo mein '.github/workflows/scan.yml' hona chahiye — 1 ghante mein pehla result aa jayega."
     )
 
 st.markdown("---")
