@@ -1,7 +1,8 @@
 """
 Scheduled Scan - Ye script GitHub Actions ke zariye background mein
-har 1 ghanta khud chalti hai (PC/mobile band ho tab bhi).
-400 coins, sirf 1h timeframe (backtest mein sab se behtareen sabit hua).
+har 15 minute baad khud chalti hai (PC/mobile band ho tab bhi).
+Sirf top 100 coins, sirf 1h timeframe (backtest mein sab se behtareen
+sabit hua) - taake 15 minute ke andar poora ho jaye.
 
 Result 'latest_signals.json' mein save hota hai, jise screener_app.py
 seedha padh kar FORAN dikha deta hai - koi wait nahi karna parta.
@@ -56,7 +57,7 @@ def send_notification(title, message):
 
 def to_pkt_str(ts):
     """
-    Binance ka timestamp UTC hota hai. Isay Pakistan Time (UTC+5) mein
+    Exchange ka timestamp UTC hota hai. Isay Pakistan Time (UTC+5) mein
     convert kar ke insani-parhne-laiq banata hai.
     """
     ts_utc = pd.Timestamp(ts)
