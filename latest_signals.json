@@ -1,19 +1,32 @@
 {
-  "last_updated_utc": "2026-09-02T08:15:18.500985+00:00",
+  "last_updated_utc": "2026-09-02T09:08:02.849107+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
     {
-      "Coin": "ETHFI/USDT",
+      "Coin": "DMTR/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-02 06:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.6001,
-      "Current": 0.6013,
-      "P/L %": 0.2,
-      "Trail Stop": 0.5776,
-      "Take Profit": 0.66795,
+      "Signal Bar": "2026-09-02 08:00:00",
+      "Bars Ago": 1,
+      "Entry": 0.01409,
+      "Current": 0.01421,
+      "P/L %": 0.85,
+      "Trail Stop": 0.013325,
+      "Take Profit": 0.015715,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "SENT/USDT",
+      "Timeframe": "1h",
+      "Combo": "Ichimoku+MarketStructure",
+      "Signal Bar": "2026-09-02 08:00:00",
+      "Bars Ago": 1,
+      "Entry": 0.01294,
+      "Current": 0.01298,
+      "P/L %": 0.31,
+      "Trail Stop": 0.012764,
+      "Take Profit": 0.013295,
       "Status": "OPEN"
     }
   ]
