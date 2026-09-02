@@ -1,6 +1,6 @@
 """
 Scheduled Scan - Ye script GitHub Actions ke zariye background mein
-har 2 ghante baad khud chalti hai (PC/mobile band ho tab bhi).
+har 1 ghanta khud chalti hai (PC/mobile band ho tab bhi).
 400 coins, sirf 1h timeframe (backtest mein sab se behtareen sabit hua).
 
 Result 'latest_signals.json' mein save hota hai, jise screener_app.py
@@ -52,6 +52,18 @@ def send_notification(title, message):
         )
     except Exception as e:
         print(f"  [NOTIFY FAILED] {e}")
+
+
+def to_pkt_str(ts):
+    """
+    Binance ka timestamp UTC hota hai. Isay Pakistan Time (UTC+5) mein
+    convert kar ke insani-parhne-laiq banata hai.
+    """
+    ts_utc = pd.Timestamp(ts)
+    if ts_utc.tzinfo is None:
+        ts_utc = ts_utc.tz_localize("UTC")
+    ts_pkt = ts_utc.tz_convert("Asia/Karachi")
+    return ts_pkt.strftime("%Y-%m-%d %I:%M %p PKT")
 
 
 def load_notified_keys():
@@ -119,7 +131,8 @@ def scan_symbol(exchange, symbol):
             "Coin": symbol,
             "Timeframe": TIMEFRAME,
             "Combo": combo_name,
-            "Signal Bar": str(signal_bar["timestamp"]),
+            "Signal Bar": to_pkt_str(signal_bar["timestamp"]),
+            "Signal Bar UTC": str(signal_bar["timestamp"]),  # unique-key ke liye (notification dedup)
             "Bars Ago": int(bars_ago),
             "Entry": round(float(entry_price), 6),
             "Current": round(float(current_price), 6),
@@ -162,12 +175,13 @@ def main():
     new_count = 0
 
     for sig in all_results:
-        key = f"{sig['Coin']}|{sig['Combo']}|{sig['Signal Bar']}"
+        key = f"{sig['Coin']}|{sig['Combo']}|{sig['Signal Bar UTC']}"
         if key in notified:
             continue  # ye pehle hi bhej chuke hain
 
         title = f"🚀 {sig['Coin']} - {sig['Combo']}"
         message = (
+            f"Signal Candle: {sig['Signal Bar']}\n"
             f"Timeframe: {sig['Timeframe']}\n"
             f"Entry: {sig['Entry']}\n"
             f"Take Profit: {sig['Take Profit']}\n"
