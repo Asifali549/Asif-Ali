@@ -1,7 +1,7 @@
 """
 Streamlit Live Screener - Ichimoku+Market Structure aur EMA+Breakout
-confluence signals. Background mein har 1 ghanta (GitHub Actions se)
-400 coins x 1h par khud scan hota hai - is page par foran (bina wait)
+confluence signals. Background mein har 15 minute (GitHub Actions se)
+top 100 coins x 1h par khud scan hota hai - is page par foran (bina wait)
 wahi taaza result dikhta hai. Chahen to neeche manual "Deep Scan" bhi
 chala sakte hain (sab coins x sab timeframes, jisme waqt lagta hai).
 
@@ -38,7 +38,7 @@ TIMEFRAMES_TO_SCAN = ["15m", "1h", "4h"]
 
 
 def to_pkt_str(ts):
-    """Binance ka timestamp UTC hota hai - Pakistan Time (UTC+5) mein dikhate hain."""
+    """Exchange ka timestamp UTC hota hai - Pakistan Time (UTC+5) mein dikhate hain."""
     ts_utc = pd.Timestamp(ts)
     if ts_utc.tzinfo is None:
         ts_utc = ts_utc.tz_localize("UTC")
@@ -89,7 +89,7 @@ if os.path.exists("latest_signals.json"):
 else:
     st.info(
         "Background auto-scan abhi setup nahi hua ya pehli baar chalne ka wait ho raha hai. "
-        "GitHub repo mein '.github/workflows/scan.yml' hona chahiye — 1 ghante mein pehla result aa jayega."
+        "GitHub repo mein '.github/workflows/scan.yml' hona chahiye — 15 minute mein pehla result aa jayega."
     )
 
 st.markdown("---")
@@ -102,9 +102,9 @@ st.header("🔍 Manual Deep Scan (poora control, magar waqt lagta hai)")
 
 st.sidebar.header("Deep Scan Settings")
 
-coin_mode = st.sidebar.radio("Coin List", ["Binance ke SAB coins (meme/leveraged exclude)", "MANUAL"])
+coin_mode = st.sidebar.radio("Coin List", ["KuCoin ke SAB coins (meme/leveraged exclude)", "MANUAL"])
 
-if coin_mode.startswith("Binance"):
+if coin_mode.startswith("KuCoin"):
     top_n = config.AUTO_TOP_N_COINS
 else:
     manual_text = st.sidebar.text_area(
@@ -209,11 +209,22 @@ if run_scan:
 
     exchange = get_exchange()
 
-    if coin_mode.startswith("Binance"):
-        with st.spinner("Coin list le rahe hain (meme/leveraged coins exclude ho rahe hain)..."):
-            coins = get_coin_list(exchange)[:top_n]
-    else:
-        coins = [c.strip() for c in manual_text.split(",") if c.strip()]
+    try:
+        if coin_mode.startswith("KuCoin"):
+            with st.spinner("Coin list le rahe hain (meme/leveraged coins exclude ho rahe hain)..."):
+                coins = get_coin_list(exchange)[:top_n]
+        else:
+            coins = [c.strip() for c in manual_text.split(",") if c.strip()]
+    except Exception as e:
+        st.error(
+            "❌ Exchange (KuCoin) tak connect nahi ho pa raha is waqt "
+            "(shayad network ya exchange ki taraf se koi masla hai — ye code ka "
+            "masla nahi).\n\n"
+            "**Behtareen tareeqa:** Upar 'LIVE — Background Auto-Scan' section already "
+            "kaam kar raha hai (GitHub Actions se) — usi par bharosa karein.\n\n"
+            "Agar Deep Scan zaroori hai to isay apne PC par local chalayen bhi kar sakte hain."
+        )
+        st.stop()
 
     total_calls = len(coins) * len(timeframes_selected)
     st.info(f"Coins: **{len(coins)}** | Timeframes: **{', '.join(timeframes_selected)}** | "
@@ -264,7 +275,7 @@ else:
     st.markdown(
         """
         ### Ye screener kya karta hai
-        - Default: **Binance ke sab USDT spot coins** (meme coins jaise DOGE/SHIB/PEPE, aur
+        - Default: **KuCoin ke sab USDT spot coins** (meme coins jaise DOGE/SHIB/PEPE, aur
           leveraged/binary tokens jaise BTCUP/BTCDOWN automatically exclude)
         - Har coin par **har timeframe** (15m, 1h, 4h) check hota hai
         - Har timeframe par **dono combos** (Ichimoku+MarketStructure, EMA+Breakout) test hote hain
