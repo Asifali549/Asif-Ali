@@ -1,20 +1,62 @@
 {
-  "last_updated_utc": "2026-09-02T14:20:17.441898+00:00",
+  "last_updated_utc": "2026-09-02T15:13:27.595366+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
+    {
+      "Coin": "ASTER/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-02 07:00 PM PKT",
+      "Signal Bar UTC": "2026-09-02 14:00:00",
+      "Bars Ago": 1,
+      "Entry": 0.7361,
+      "Current": 0.7213,
+      "P/L %": -2.01,
+      "Trail Stop": 0.7149,
+      "Take Profit": 0.7785,
+      "Status": "OPEN"
+    },
     {
       "Coin": "ZKP/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-02 06:00 PM PKT",
       "Signal Bar UTC": "2026-09-02 13:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.0485,
-      "Current": 0.04719,
-      "P/L %": -2.7,
-      "Trail Stop": 0.045945,
+      "Current": 0.04553,
+      "P/L %": -6.12,
+      "Trail Stop": 0.045905,
       "Take Profit": 0.05369,
+      "Status": "STOPPED (trail)"
+    },
+    {
+      "Coin": "CFX/USDT",
+      "Timeframe": "1h",
+      "Combo": "Ichimoku+MarketStructure",
+      "Signal Bar": "2026-09-02 07:00 PM PKT",
+      "Signal Bar UTC": "2026-09-02 14:00:00",
+      "Bars Ago": 1,
+      "Entry": 0.04718,
+      "Current": 0.04729,
+      "P/L %": 0.23,
+      "Trail Stop": 0.04649,
+      "Take Profit": 0.04856,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "ES/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-02 07:00 PM PKT",
+      "Signal Bar UTC": "2026-09-02 14:00:00",
+      "Bars Ago": 1,
+      "Entry": 0.002095,
+      "Current": 0.002245,
+      "P/L %": 7.16,
+      "Trail Stop": 0.001721,
+      "Take Profit": 0.002964,
       "Status": "OPEN"
     }
   ]
