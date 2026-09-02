@@ -1,8 +1,8 @@
 """
-Data Fetcher - Binance se OHLCV data laata hai (ccxt library ke zariye)
+Data Fetcher - Exchange (KuCoin) se OHLCV data laata hai (ccxt library ke zariye)
 
 NOTE: Ye file sirf aapke apne computer/server par chalegi jahan
-Binance API tak internet access ho. Isay khud fetch karne ke liye
+Exchange API tak internet access ho. Isay khud fetch karne ke liye
 'pip install ccxt' zaroori hai.
 """
 
@@ -63,7 +63,7 @@ def get_coin_list(exchange=None):
 def fetch_ohlcv(exchange, symbol, timeframe, limit):
     """
     Ek symbol/timeframe ka OHLCV data laata hai aur pandas DataFrame return karta hai.
-    Binance ek call mein max ~1000-1500 candles deta hai, is liye zyada limit
+    Exchange ek call mein max ~1000-1500 candles deta hai, is liye zyada limit
     ke liye pagination (loop) ki zaroorat parti hai.
     """
     all_candles = []
