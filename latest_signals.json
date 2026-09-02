@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-02T17:08:35.922644+00:00",
+  "last_updated_utc": "2026-09-02T18:09:56.543044+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,41 +9,27 @@
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-02 09:00 PM PKT",
       "Signal Bar UTC": "2026-09-02 16:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.1221,
-      "Current": 0.1224,
-      "P/L %": 0.25,
-      "Trail Stop": 0.113712,
+      "Current": 0.1242,
+      "P/L %": 1.72,
+      "Trail Stop": 0.113394,
       "Take Profit": 0.139513,
       "Status": "OPEN"
     },
     {
-      "Coin": "COTI/USDT",
+      "Coin": "KITE/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-02 08:00 PM PKT",
-      "Signal Bar UTC": "2026-09-02 15:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.01344,
-      "Current": 0.01304,
-      "P/L %": -2.98,
-      "Trail Stop": 0.01284,
-      "Take Profit": 0.01464,
+      "Signal Bar": "2026-09-02 10:00 PM PKT",
+      "Signal Bar UTC": "2026-09-02 17:00:00",
+      "Bars Ago": 1,
+      "Entry": 0.14564,
+      "Current": 0.14406,
+      "P/L %": -1.08,
+      "Trail Stop": 0.13622,
+      "Take Profit": 0.16481,
       "Status": "OPEN"
-    },
-    {
-      "Coin": "USDP/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-02 06:00 PM PKT",
-      "Signal Bar UTC": "2026-09-02 13:00:00",
-      "Bars Ago": 2,
-      "Entry": 1.003,
-      "Current": 1.003,
-      "P/L %": 0.0,
-      "Trail Stop": 1.00665,
-      "Take Profit": 0.9957,
-      "Status": "STOPPED (trail)"
     }
   ]
 }
