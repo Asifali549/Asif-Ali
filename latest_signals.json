@@ -1,44 +1,18 @@
 {
-  "last_updated_utc": "2026-09-02T07:09:07.109997+00:00",
+  "last_updated_utc": "2026-09-02T08:09:50.247255+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
-    {
-      "Coin": "SUSHI/USDT",
-      "Timeframe": "1h",
-      "Combo": "Ichimoku+MarketStructure",
-      "Signal Bar": "2026-09-02 04:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.2087,
-      "Current": 0.2098,
-      "P/L %": 0.53,
-      "Trail Stop": 0.210475,
-      "Take Profit": 0.2274,
-      "Status": "STOPPED (trail)"
-    },
-    {
-      "Coin": "SUSHI/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-02 04:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.2087,
-      "Current": 0.2098,
-      "P/L %": 0.53,
-      "Trail Stop": 0.209075,
-      "Take Profit": 0.2274,
-      "Status": "STOPPED (trail)"
-    },
     {
       "Coin": "ETHFI/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-02 06:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.6001,
-      "Current": 0.6009,
-      "P/L %": 0.13,
-      "Trail Stop": 0.568925,
+      "Current": 0.5998,
+      "P/L %": -0.05,
+      "Trail Stop": 0.5776,
       "Take Profit": 0.66795,
       "Status": "OPEN"
     }
