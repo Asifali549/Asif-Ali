@@ -5,7 +5,7 @@ Config - Sab settings yahan se control hoti hain
 # ============================================================
 # EXCHANGE SETTINGS
 # ============================================================
-EXCHANGE_ID = "kucoin"          # ccxt exchange name
+EXCHANGE_ID = "kucoin"            # ccxt exchange name (Binance blocks cloud server IPs jaise Streamlit Cloud, is liye KuCoin istemal kar rahe hain)
 MARKET_TYPE = "spot"             # spot only (buy-side trading)
 
 # ============================================================
