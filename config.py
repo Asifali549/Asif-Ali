@@ -5,7 +5,7 @@ Config - Sab settings yahan se control hoti hain
 # ============================================================
 # EXCHANGE SETTINGS
 # ============================================================
-EXCHANGE_ID = "binance"          # ccxt exchange name
+EXCHANGE_ID = "kucoin"          # ccxt exchange name
 MARKET_TYPE = "spot"             # spot only (buy-side trading)
 
 # ============================================================
