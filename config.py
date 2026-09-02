@@ -13,7 +13,7 @@ MARKET_TYPE = "spot"             # spot only (buy-side trading)
 # ============================================================
 # Option A: manual list daalain
 # Option B: "AUTO" rakhain -> top N USDT spot pairs by volume khud fetch honge
-COIN_LIST_MODE = "MANUAL"          # "AUTO" ya "MANUAL" -> abhi FVG ka jaldi test, 25 coins par
+COIN_LIST_MODE = "AUTO"            # "AUTO" ya "MANUAL" -> ab 400 coins par CE(12) vs CE(16) confirm
 MANUAL_COIN_LIST = [
     "BTC/USDT", "ETH/USDT", "SOL/USDT", "BNB/USDT", "XRP/USDT",
     "ADA/USDT", "DOGE/USDT", "AVAX/USDT", "LINK/USDT", "DOT/USDT",
@@ -21,7 +21,7 @@ MANUAL_COIN_LIST = [
     "ATOM/USDT", "ETC/USDT", "XLM/USDT", "NEAR/USDT", "APT/USDT",
     "FIL/USDT", "ARB/USDT", "OP/USDT", "SUI/USDT", "INJ/USDT",
 ]
-AUTO_TOP_N_COINS = 5000            # AUTO mode mein kitne coins lene hain (5000 = practically "sab")
+AUTO_TOP_N_COINS = 400            # AUTO mode mein kitne coins lene hain
 
 # ============================================================
 # EXCLUDED COINS — Meme coins aur Binance leveraged/binary tokens
