@@ -1,21 +1,21 @@
 {
-  "last_updated_utc": "2026-09-02T19:08:24.207617+00:00",
+  "last_updated_utc": "2026-09-02T20:09:16.150004+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
     {
-      "Coin": "KITE/USDT",
+      "Coin": "SHARE/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-02 10:00 PM PKT",
-      "Signal Bar UTC": "2026-09-02 17:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.14564,
-      "Current": 0.13988,
-      "P/L %": -3.95,
-      "Trail Stop": 0.136055,
-      "Take Profit": 0.16481,
-      "Status": "OPEN"
+      "Signal Bar": "2026-09-03 12:00 AM PKT",
+      "Signal Bar UTC": "2026-09-02 19:00:00",
+      "Bars Ago": 1,
+      "Entry": 0.3881,
+      "Current": 0.3902,
+      "P/L %": 0.54,
+      "Trail Stop": 0.3849,
+      "Take Profit": 0.3945,
+      "Status": "STOPPED (trail)"
     }
   ]
 }
