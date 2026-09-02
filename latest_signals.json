@@ -1,33 +1,19 @@
 {
-  "last_updated_utc": "2026-09-02T18:09:56.543044+00:00",
+  "last_updated_utc": "2026-09-02T19:08:24.207617+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
-    {
-      "Coin": "ARB/USDT",
-      "Timeframe": "1h",
-      "Combo": "Ichimoku+MarketStructure",
-      "Signal Bar": "2026-09-02 09:00 PM PKT",
-      "Signal Bar UTC": "2026-09-02 16:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.1221,
-      "Current": 0.1242,
-      "P/L %": 1.72,
-      "Trail Stop": 0.113394,
-      "Take Profit": 0.139513,
-      "Status": "OPEN"
-    },
     {
       "Coin": "KITE/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-02 10:00 PM PKT",
       "Signal Bar UTC": "2026-09-02 17:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.14564,
-      "Current": 0.14406,
-      "P/L %": -1.08,
-      "Trail Stop": 0.13622,
+      "Current": 0.13988,
+      "P/L %": -3.95,
+      "Trail Stop": 0.136055,
       "Take Profit": 0.16481,
       "Status": "OPEN"
     }
