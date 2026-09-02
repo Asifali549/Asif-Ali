@@ -37,6 +37,14 @@ COMBOS = [
 TIMEFRAMES_TO_SCAN = ["15m", "1h", "4h"]
 
 
+def to_pkt_str(ts):
+    """Binance ka timestamp UTC hota hai - Pakistan Time (UTC+5) mein dikhate hain."""
+    ts_utc = pd.Timestamp(ts)
+    if ts_utc.tzinfo is None:
+        ts_utc = ts_utc.tz_localize("UTC")
+    return ts_utc.tz_convert("Asia/Karachi").strftime("%Y-%m-%d %I:%M %p PKT")
+
+
 def style_results(df_results):
     def color_status(val):
         if val == "OPEN":
@@ -178,7 +186,7 @@ def scan_symbol_timeframe(exchange, symbol, timeframe, lookback_bars, ce_mult, r
             "Coin": symbol,
             "Timeframe": timeframe,
             "Combo": combo_name,
-            "Signal Bar": signal_bar["timestamp"],
+            "Signal Bar": to_pkt_str(signal_bar["timestamp"]),
             "Bars Ago": bars_ago,
             "Entry": round(entry_price, 6),
             "Current": round(current_price, 6),
