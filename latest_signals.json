@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-02T09:08:02.849107+00:00",
+  "last_updated_utc": "2026-09-02T10:09:46.187610+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -8,12 +8,25 @@
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-02 08:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.01409,
-      "Current": 0.01421,
-      "P/L %": 0.85,
-      "Trail Stop": 0.013325,
+      "Current": 0.01376,
+      "P/L %": -2.34,
+      "Trail Stop": 0.013278,
       "Take Profit": 0.015715,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "SOPH/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-02 09:00:00",
+      "Bars Ago": 1,
+      "Entry": 0.00432,
+      "Current": 0.0043,
+      "P/L %": -0.46,
+      "Trail Stop": 0.004075,
+      "Take Profit": 0.00481,
       "Status": "OPEN"
     },
     {
@@ -21,11 +34,11 @@
       "Timeframe": "1h",
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-02 08:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.01294,
       "Current": 0.01298,
       "P/L %": 0.31,
-      "Trail Stop": 0.012764,
+      "Trail Stop": 0.012785,
       "Take Profit": 0.013295,
       "Status": "OPEN"
     }
