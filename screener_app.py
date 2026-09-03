@@ -285,4 +285,4 @@ else:
         - Har fresh signal ke liye Chandelier trailing stop aur Take Profit calculate hota hai
         - Jo trades abhi tak stop/target nahi hue, unhe **OPEN** dikhata hai
         """
-    )
+  
