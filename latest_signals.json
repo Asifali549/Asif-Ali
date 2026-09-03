@@ -1,63 +1,6 @@
 {
-  "last_updated_utc": "2026-09-02T23:07:30.753485+00:00",
+  "last_updated_utc": "2026-09-03T00:11:49.725327+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
-  "signals": [
-    {
-      "Coin": "CLO/USDT",
-      "Timeframe": "1h",
-      "Combo": "Ichimoku+MarketStructure",
-      "Signal Bar": "2026-09-03 02:00 AM PKT",
-      "Signal Bar UTC": "2026-09-02 21:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.18038,
-      "Current": 0.17664,
-      "P/L %": -2.07,
-      "Trail Stop": 0.209356,
-      "Take Profit": 0.122428,
-      "Status": "STOPPED (trail)"
-    },
-    {
-      "Coin": "MELANIA/USDT",
-      "Timeframe": "1h",
-      "Combo": "Ichimoku+MarketStructure",
-      "Signal Bar": "2026-09-03 02:00 AM PKT",
-      "Signal Bar UTC": "2026-09-02 21:00:00",
-      "Bars Ago": 1,
-      "Entry": 0.11172,
-      "Current": 0.11143,
-      "P/L %": -0.26,
-      "Trail Stop": 0.107777,
-      "Take Profit": 0.119805,
-      "Status": "OPEN"
-    },
-    {
-      "Coin": "MELANIA/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-03 02:00 AM PKT",
-      "Signal Bar UTC": "2026-09-02 21:00:00",
-      "Bars Ago": 1,
-      "Entry": 0.11172,
-      "Current": 0.11143,
-      "P/L %": -0.26,
-      "Trail Stop": 0.107475,
-      "Take Profit": 0.12021,
-      "Status": "OPEN"
-    },
-    {
-      "Coin": "CAP/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-03 02:00 AM PKT",
-      "Signal Bar UTC": "2026-09-02 21:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.071349,
-      "Current": 0.070999,
-      "P/L %": -0.49,
-      "Trail Stop": 0.070051,
-      "Take Profit": 0.073999,
-      "Status": "OPEN"
-    }
-  ]
+  "signals": []
 }
