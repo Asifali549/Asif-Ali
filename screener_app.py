@@ -40,7 +40,6 @@ TIMEFRAMES_TO_SCAN = ["15m", "1h", "4h"]
 
 
 def to_pkt_str(ts):
-    """Exchange ka timestamp UTC hota hai - Pakistan Time (UTC+5) mein dikhate hain."""
     ts_utc = pd.Timestamp(ts)
     if ts_utc.tzinfo is None:
         ts_utc = ts_utc.tz_localize("UTC")
@@ -63,9 +62,6 @@ def style_results(df_results):
     return df_results.style.map(color_status, subset=["Status"]).map(color_pnl, subset=["P/L %"])
 
 
-# ============================================================
-# SECTION 1: BACKGROUND AUTO-SCAN RESULT (foran, koi wait nahi)
-# ============================================================
 st.header("🔴 LIVE — Background Auto-Scan (har 1 ghanta, 400 coins, 1h)")
 
 if os.path.exists("latest_signals.json"):
@@ -96,10 +92,6 @@ else:
 
 st.markdown("---")
 
-
-# ============================================================
-# SECTION 2: MANUAL DEEP SCAN (sab coins x sab timeframes, waqt lagta hai)
-# ============================================================
 st.header("🔍 Manual Deep Scan (poora control, magar waqt lagta hai)")
 
 st.sidebar.header("Deep Scan Settings")
@@ -134,11 +126,7 @@ st.sidebar.warning(
 run_scan = st.sidebar.button("🔍 Deep Scan Chalayen", type="primary", use_container_width=True)
 
 
-# ============================================================
-# SCAN LOGIC
-# ============================================================
 def scan_symbol_timeframe(exchange, symbol, timeframe, lookback_bars, ce_mult, rr_multiple):
-    """Ek symbol/timeframe ka data ek dafa fetch karta hai, phir dono combos apne apne CE ke sath check karta hai."""
     df = fetch_ohlcv(exchange, symbol, timeframe, limit=max(config.CANDLE_LIMITS.get(timeframe, 500), 300))
     if df is None or len(df) < 220:
         return []
@@ -201,9 +189,6 @@ def scan_symbol_timeframe(exchange, symbol, timeframe, lookback_bars, ce_mult, r
     return found
 
 
-# ============================================================
-# MAIN
-# ============================================================
 if run_scan:
     if not timeframes_selected:
         st.error("Kam az kam ek timeframe select karein.")
@@ -254,7 +239,6 @@ if run_scan:
         open_trades = df_results[df_results["Status"] == "OPEN"]
         st.success(f"✅ {len(df_results)} fresh signals mile ({len(open_trades)} abhi bhi OPEN hain)")
 
-        # Filters
         col1, col2 = st.columns(2)
         with col1:
             filter_tf = st.multiselect("Timeframe filter", sorted(df_results["Timeframe"].unique()),
@@ -274,15 +258,9 @@ if run_scan:
 
 else:
     st.info("👈 Sidebar mein settings choose karein aur 'Scan Chalayen' dabayein.")
-    st.markdown(
-        """
-        ### Ye screener kya karta hai
-        - Default: **KuCoin ke sab USDT spot coins** (meme coins jaise DOGE/SHIB/PEPE, aur
-          leveraged/binary tokens jaise BTCUP/BTCDOWN automatically exclude)
-        - Har coin par **har timeframe** (15m, 1h, 4h) check hota hai
-        - Har timeframe par **dono combos** (Ichimoku+MarketStructure, EMA+Breakout) test hote hain
-          — koi combo kisi khaas timeframe tak mehdood nahi
-        - Har fresh signal ke liye Chandelier trailing stop aur Take Profit calculate hota hai
-        - Jo trades abhi tak stop/target nahi hue, unhe **OPEN** dikhata hai
-        """
-  
+    st.markdown("### Ye screener kya karta hai")
+    st.markdown("- Default: **KuCoin ke sab USDT spot coins** (meme coins jaise DOGE/SHIB/PEPE, aur leveraged/binary tokens jaise BTCUP/BTCDOWN automatically exclude)")
+    st.markdown("- Har coin par **har timeframe** (15m, 1h, 4h) check hota hai")
+    st.markdown("- Har timeframe par **teeno combos** (Ichimoku+MarketStructure, EMA+Breakout, MarketStructure+CVD) test hote hain")
+    st.markdown("- Har fresh signal ke liye Chandelier trailing stop aur Take Profit calculate hota hai")
+    st.markdown("- Jo trades abhi tak stop/target nahi hue, unhe **OPEN** dikhata hai")
