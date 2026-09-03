@@ -36,6 +36,7 @@ NTFY_TOPIC = "asifali549-crypto-alerts-8x2m9k"
 COMBOS = [
     ("ichimoku", "market_structure", "Ichimoku+MarketStructure", 16),
     ("ema_crossover", "breakout", "EMA+Breakout", 12),
+    ("market_structure", "cvd_proxy", "MarketStructure+CVD", 16),
 ]
 
 
@@ -75,7 +76,6 @@ def load_notified_keys():
 
 
 def save_notified_keys(keys_dict):
-    # 24 ghante se purane entries hata dein (file chhoti rahe)
     cutoff = datetime.now(timezone.utc) - timedelta(hours=24)
     pruned = {
         k: v for k, v in keys_dict.items()
@@ -133,7 +133,7 @@ def scan_symbol(exchange, symbol):
             "Timeframe": TIMEFRAME,
             "Combo": combo_name,
             "Signal Bar": to_pkt_str(signal_bar["timestamp"]),
-            "Signal Bar UTC": str(signal_bar["timestamp"]),  # unique-key ke liye (notification dedup)
+            "Signal Bar UTC": str(signal_bar["timestamp"]),
             "Bars Ago": int(bars_ago),
             "Entry": round(float(entry_price), 6),
             "Current": round(float(current_price), 6),
@@ -171,14 +171,13 @@ def main():
 
     print(f"\nDone. {len(all_results)} fresh signals saved to latest_signals.json")
 
-    # ---- NAYE signals par notification bhejein (purane repeat na hon) ----
     notified = load_notified_keys()
     new_count = 0
 
     for sig in all_results:
         key = f"{sig['Coin']}|{sig['Combo']}|{sig['Signal Bar UTC']}"
         if key in notified:
-            continue  # ye pehle hi bhej chuke hain
+            continue
 
         title = f"🚀 {sig['Coin']} - {sig['Combo']}"
         message = (
