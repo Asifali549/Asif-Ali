@@ -31,8 +31,10 @@ COMBOS = [
     # (strategy_a, strategy_b, display_name, ce_period)
     # 400-coin backtest se CONFIRM: Ichimoku+MS ke liye CE(16) bohot behtar (PF 1.41->2.94)
     #                                EMA+Breakout ke liye CE(12) hi behtar (CE16 se nuksan)
+    #                                MarketStructure+CVD-Proxy: overall PF 5.42! (400 coins par confirm)
     ("ichimoku", "market_structure", "Ichimoku+MarketStructure", 16),
     ("ema_crossover", "breakout", "EMA+Breakout", 12),
+    ("market_structure", "cvd_proxy", "MarketStructure+CVD", 16),
 ]
 TIMEFRAMES_TO_SCAN = ["15m", "1h", "4h"]
 
