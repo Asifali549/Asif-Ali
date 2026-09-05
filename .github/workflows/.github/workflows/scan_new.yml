@@ -1,0 +1,37 @@
+name: Scheduled Crypto Scan - NEW Advanced Confluence
+
+on:
+  schedule:
+    # Har 1 ghante baad (purane workflow se ALAG, 5 minute offset - taake
+    # dono ek sath GitHub ke resources par competition na karein)
+    - cron: '5 * * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run NEW scheduled scan
+        run: python scheduled_scan_new.py
+
+      - name: Commit and push results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add latest_signals_new.json notified_signals_new.json
+          git diff --staged --quiet || git commit -m "Auto-update NEW confluence signals ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+          git push
