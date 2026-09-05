@@ -65,6 +65,12 @@ def fetch_ohlcv(exchange, symbol, timeframe, limit):
     Ek symbol/timeframe ka OHLCV data laata hai aur pandas DataFrame return karta hai.
     Exchange ek call mein max ~1000-1500 candles deta hai, is liye zyada limit
     ke liye pagination (loop) ki zaroorat parti hai.
+
+    IMPORTANT: Abhi tak "band" (closed) NA hui aakhri candle ko hata dete hain -
+    warna signals "band hone se pehle" hi ban jayenge aur candle ke aakhir
+    tak badalte rahenge (repainting jaisa masla). Ye fix purane 3-combo
+    system aur naye AdvancedConfluence system, dono ke liye ek sath kaam
+    karta hai (kyunke dono isi function se data lete hain).
     """
     all_candles = []
     since = None
@@ -97,6 +103,16 @@ def fetch_ohlcv(exchange, symbol, timeframe, limit):
     df = pd.DataFrame(all_candles, columns=["timestamp", "open", "high", "low", "close", "volume"])
     df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms")
     df = df.drop_duplicates(subset="timestamp").sort_values("timestamp").reset_index(drop=True)
+
+    # ---- CANDLE CLOSE ONLY: agar aakhri candle abhi tak band nahi hui (uska
+    # close time abhi nahi aaya), to usay hata dete hain. Warna signal
+    # candle ke "beech mein" ban jayega aur band hone tak badalta rahega. ----
+    if len(df) > 0:
+        last_candle_close_time = df["timestamp"].iloc[-1] + pd.Timedelta(milliseconds=_timeframe_ms(timeframe))
+        now_utc = pd.Timestamp.now(tz="UTC").tz_localize(None)
+        if last_candle_close_time > now_utc:
+            df = df.iloc[:-1].reset_index(drop=True)
+
     return df.tail(limit).reset_index(drop=True)
 
 
