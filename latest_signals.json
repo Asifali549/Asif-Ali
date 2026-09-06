@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-06T19:07:33.852385+00:00",
+  "last_updated_utc": "2026-09-06T20:08:20.105882+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,10 +9,10 @@
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-06 10:00 PM PKT",
       "Signal Bar UTC": "2026-09-06 17:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.000127,
-      "Current": 0.000125,
-      "P/L %": -0.95,
+      "Current": 0.000127,
+      "P/L %": 0.32,
       "Trail Stop": 0.000123,
       "Take Profit": 0.000136,
       "Status": "OPEN"
@@ -23,12 +23,40 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-06 10:00 PM PKT",
       "Signal Bar UTC": "2026-09-06 17:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.000127,
-      "Current": 0.000125,
-      "P/L %": -0.95,
+      "Current": 0.000127,
+      "P/L %": 0.32,
       "Trail Stop": 0.000122,
       "Take Profit": 0.000137,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "FIDA/USDT",
+      "Timeframe": "1h",
+      "Combo": "Ichimoku+MarketStructure",
+      "Signal Bar": "2026-09-07 12:00 AM PKT",
+      "Signal Bar UTC": "2026-09-06 19:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.02133,
+      "Current": 0.02133,
+      "P/L %": 0.0,
+      "Trail Stop": 0.02034,
+      "Take Profit": 0.02331,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "FIDA/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-07 12:00 AM PKT",
+      "Signal Bar UTC": "2026-09-06 19:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.02133,
+      "Current": 0.02133,
+      "P/L %": 0.0,
+      "Trail Stop": 0.020165,
+      "Take Profit": 0.02366,
       "Status": "OPEN"
     }
   ]
