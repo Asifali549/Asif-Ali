@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-06T21:07:49.325930+00:00",
+  "last_updated_utc": "2026-09-06T22:07:36.373838+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,13 +9,27 @@
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-07 01:00 AM PKT",
       "Signal Bar UTC": "2026-09-06 20:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 13.0948,
-      "Current": 13.0948,
-      "P/L %": 0.0,
-      "Trail Stop": 12.604231,
+      "Current": 12.8817,
+      "P/L %": -1.63,
+      "Trail Stop": 12.760206,
       "Take Profit": 14.075937,
-      "Status": "STOPPED (trail)"
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "VIRTUAL/USDT",
+      "Timeframe": "1h",
+      "Combo": "Ichimoku+MarketStructure",
+      "Signal Bar": "2026-09-07 02:00 AM PKT",
+      "Signal Bar UTC": "2026-09-06 21:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.7234,
+      "Current": 0.7234,
+      "P/L %": 0.0,
+      "Trail Stop": 0.69565,
+      "Take Profit": 0.7789,
+      "Status": "OPEN"
     },
     {
       "Coin": "FIDA/USDT",
@@ -23,13 +37,13 @@
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-07 12:00 AM PKT",
       "Signal Bar UTC": "2026-09-06 19:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.02133,
-      "Current": 0.02357,
-      "P/L %": 10.5,
+      "Current": 0.02291,
+      "P/L %": 7.41,
       "Trail Stop": 0.022167,
       "Take Profit": 0.02331,
-      "Status": "STOPPED (trail)"
+      "Status": "TARGET HIT"
     },
     {
       "Coin": "FIDA/USDT",
@@ -37,13 +51,13 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-07 12:00 AM PKT",
       "Signal Bar UTC": "2026-09-06 19:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.02133,
-      "Current": 0.02357,
-      "P/L %": 10.5,
+      "Current": 0.02291,
+      "P/L %": 7.41,
       "Trail Stop": 0.02181,
       "Take Profit": 0.02366,
-      "Status": "STOPPED (trail)"
+      "Status": "TARGET HIT"
     }
   ]
 }
