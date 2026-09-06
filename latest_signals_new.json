@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-06T18:11:04.255988+00:00",
+  "last_updated_utc": "2026-09-06T18:16:15.812473+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -52,22 +52,6 @@
       "Status": "OPEN"
     },
     {
-      "Coin": "CLANKER/USDT",
-      "Timeframe": "1h",
-      "Combo": "NEW_AdvancedConfluence_v1",
-      "Structure": "BOS",
-      "Score": "6/10",
-      "Signal Bar": "2026-09-06 10:00 PM PKT",
-      "Signal Bar UTC": "2026-09-06 17:00:00",
-      "Bars Ago": 0,
-      "Entry": 13.488,
-      "Current": 13.488,
-      "P/L %": 0.0,
-      "Trail Stop": 13.0055,
-      "Take Profit": 14.453,
-      "Status": "OPEN"
-    },
-    {
       "Coin": "CAMP/USDT",
       "Timeframe": "1h",
       "Combo": "NEW_AdvancedConfluence_v1",
@@ -81,6 +65,22 @@
       "P/L %": 0.0,
       "Trail Stop": 0.000623,
       "Take Profit": 0.000128,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "CLANKER/USDT",
+      "Timeframe": "1h",
+      "Combo": "NEW_AdvancedConfluence_v1",
+      "Structure": "BOS",
+      "Score": "6/10",
+      "Signal Bar": "2026-09-06 10:00 PM PKT",
+      "Signal Bar UTC": "2026-09-06 17:00:00",
+      "Bars Ago": 0,
+      "Entry": 13.488,
+      "Current": 13.488,
+      "P/L %": 0.0,
+      "Trail Stop": 13.0055,
+      "Take Profit": 14.453,
       "Status": "OPEN"
     },
     {
