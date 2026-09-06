@@ -1,6 +1,35 @@
 {
-  "last_updated_utc": "2026-09-06T17:07:54.098390+00:00",
+  "last_updated_utc": "2026-09-06T19:07:33.852385+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
-  "signals": []
+  "signals": [
+    {
+      "Coin": "TOSHI/USDT",
+      "Timeframe": "1h",
+      "Combo": "Ichimoku+MarketStructure",
+      "Signal Bar": "2026-09-06 10:00 PM PKT",
+      "Signal Bar UTC": "2026-09-06 17:00:00",
+      "Bars Ago": 1,
+      "Entry": 0.000127,
+      "Current": 0.000125,
+      "P/L %": -0.95,
+      "Trail Stop": 0.000123,
+      "Take Profit": 0.000136,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "TOSHI/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-06 10:00 PM PKT",
+      "Signal Bar UTC": "2026-09-06 17:00:00",
+      "Bars Ago": 1,
+      "Entry": 0.000127,
+      "Current": 0.000125,
+      "P/L %": -0.95,
+      "Trail Stop": 0.000122,
+      "Take Profit": 0.000137,
+      "Status": "OPEN"
+    }
+  ]
 }
