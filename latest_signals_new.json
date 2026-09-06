@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-06T05:43:24.547613+00:00",
+  "last_updated_utc": "2026-09-06T05:48:53.226518+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -97,6 +97,22 @@
       "P/L %": -0.66,
       "Trail Stop": 7.661444,
       "Take Profit": 8.121212,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "RVV/USDT",
+      "Timeframe": "1h",
+      "Combo": "NEW_AdvancedConfluence_v1",
+      "Structure": "BOS",
+      "Score": "8/10",
+      "Signal Bar": "2026-09-06 09:00 AM PKT",
+      "Signal Bar UTC": "2026-09-06 04:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.000133,
+      "Current": 0.000133,
+      "P/L %": 0.0,
+      "Trail Stop": 0.000112,
+      "Take Profit": 0.000174,
       "Status": "OPEN"
     }
   ]
