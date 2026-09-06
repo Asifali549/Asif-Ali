@@ -25,18 +25,19 @@ from strategies import STRATEGY_FUNCTIONS, apply_cooldown
 from backtest_engine import compute_atr
 
 TOP_N_COINS = 400
-TIMEFRAME = "1h"   # backtest mein sab se behtareen (Ichimoku+MS PF 4.46, EMA+Breakout PF 2.41)
+TIMEFRAME = "1h"
 LOOKBACK_BARS = 3
 RR_MULTIPLE = 2.0
 CE_MULT = 3.0
 
-# ntfy.sh topic - isay apna unique naam dein (jo aap ne app mein subscribe kiya)
 NTFY_TOPIC = "asifali549-crypto-alerts-8x2m9k"
 
 COMBOS = [
+    # 400-coin FINAL confirm (Union AB test, 1h): Union AB (Ichimoku+MS
+    # + EMA+Breakout) PF 10.22 - MarketStructure+CVD NIKAL DI GAYI kyunke
+    # ise Union mein shamil karne se PF kam hota hai (10.22 -> 10.14)
     ("ichimoku", "market_structure", "Ichimoku+MarketStructure", 16),
     ("ema_crossover", "breakout", "EMA+Breakout", 12),
-    ("market_structure", "cvd_proxy", "MarketStructure+CVD", 16),
 ]
 
 
@@ -57,10 +58,6 @@ def send_notification(title, message):
 
 
 def to_pkt_str(ts):
-    """
-    Exchange ka timestamp UTC hota hai. Isay Pakistan Time (UTC+5) mein
-    convert kar ke insani-parhne-laiq banata hai.
-    """
     ts_utc = pd.Timestamp(ts)
     if ts_utc.tzinfo is None:
         ts_utc = ts_utc.tz_localize("UTC")
