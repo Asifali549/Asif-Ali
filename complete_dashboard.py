@@ -56,8 +56,17 @@ if show_whale:
     etherscan_key = st.sidebar.text_input("Etherscan API Key (whale ke liye)", type="password")
 
 st.sidebar.markdown("---")
+coin_source = st.sidebar.radio("Coin Kaise Chunein", ["Auto Scan (top N by volume)", "Manual Paste (jo signal coins hain)"])
+
+if coin_source.startswith("Manual"):
+    manual_coins_text = st.sidebar.text_area(
+        "Coins paste karein (comma-separated, jaise LUNC/USDT,PENDLE/USDT,KOMA/USDT)",
+        height=100,
+    )
+else:
+    n_coins = st.sidebar.slider("Kitne coins scan karein", 10, 400, 20)
+
 signal_timeframe = st.sidebar.selectbox("Signal Timeframe", ["15m", "1h", "4h"], index=1)
-n_coins = st.sidebar.slider("Kitne coins scan karein", 10, 50, 20)
 st.sidebar.caption("⚠️ Zyada toggles ON + zyada coins = zyada waqt.")
 
 
@@ -225,12 +234,18 @@ if st.button("📊 Dashboard Chalayen", type="primary"):
             st.info("Fear & Greed abhi nahi mil saka.")
         st.markdown("---")
 
-    try:
-        with st.spinner("Coin list le rahe hain..."):
-            coins = get_coin_list(exchange)[:n_coins]
-    except Exception as e:
-        st.error(f"Exchange se connect nahi ho paya: {e}")
-        st.stop()
+    if coin_source.startswith("Manual"):
+        coins = [c.strip() for c in manual_coins_text.split(",") if c.strip()]
+        if not coins:
+            st.error("Koi coin nahi likha gaya. Comma-separated symbols likhein (jaise LUNC/USDT,PENDLE/USDT).")
+            st.stop()
+    else:
+        try:
+            with st.spinner("Coin list le rahe hain..."):
+                coins = get_coin_list(exchange)[:n_coins]
+        except Exception as e:
+            st.error(f"Exchange se connect nahi ho paya: {e}")
+            st.stop()
 
     signal_coins = []
     progress = st.progress(0.0, text="Signals dhoond rahe hain...")
