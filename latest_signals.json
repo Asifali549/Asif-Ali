@@ -1,21 +1,35 @@
 {
-  "last_updated_utc": "2026-09-07T20:08:26.319188+00:00",
+  "last_updated_utc": "2026-09-07T21:08:58.418609+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
     {
-      "Coin": "NAKA/USDT",
+      "Coin": "SOPH/USDT",
       "Timeframe": "1h",
       "Combo": "Ichimoku+MarketStructure",
-      "Signal Bar": "2026-09-08 12:00 AM PKT",
-      "Signal Bar UTC": "2026-09-07 19:00:00",
+      "Signal Bar": "2026-09-08 01:00 AM PKT",
+      "Signal Bar UTC": "2026-09-07 20:00:00",
       "Bars Ago": 0,
-      "Entry": 0.05705,
-      "Current": 0.05705,
+      "Entry": 0.00563,
+      "Current": 0.00563,
       "P/L %": 0.0,
-      "Trail Stop": 0.055764,
-      "Take Profit": 0.059623,
-      "Status": "STOPPED (trail)"
+      "Trail Stop": 0.004785,
+      "Take Profit": 0.00732,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "SOPH/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-08 01:00 AM PKT",
+      "Signal Bar UTC": "2026-09-07 20:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.00563,
+      "Current": 0.00563,
+      "P/L %": 0.0,
+      "Trail Stop": 0.004775,
+      "Take Profit": 0.00734,
+      "Status": "OPEN"
     },
     {
       "Coin": "VVV/USDT",
@@ -23,12 +37,26 @@
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-08 12:00 AM PKT",
       "Signal Bar UTC": "2026-09-07 19:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 18.287,
-      "Current": 18.287,
-      "P/L %": 0.0,
-      "Trail Stop": 17.312188,
+      "Current": 18.547,
+      "P/L %": 1.42,
+      "Trail Stop": 17.825063,
       "Take Profit": 20.236625,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "NAKA/USDT",
+      "Timeframe": "1h",
+      "Combo": "Ichimoku+MarketStructure",
+      "Signal Bar": "2026-09-08 12:00 AM PKT",
+      "Signal Bar UTC": "2026-09-07 19:00:00",
+      "Bars Ago": 1,
+      "Entry": 0.05705,
+      "Current": 0.05857,
+      "P/L %": 2.66,
+      "Trail Stop": 0.055764,
+      "Take Profit": 0.059623,
       "Status": "OPEN"
     }
   ]
