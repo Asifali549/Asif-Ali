@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-08T04:08:28.600392+00:00",
+  "last_updated_utc": "2026-09-08T05:08:15.422553+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,13 +9,27 @@
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-08 08:00 AM PKT",
       "Signal Bar UTC": "2026-09-08 03:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.001062,
-      "Current": 0.001062,
-      "P/L %": 0.0,
-      "Trail Stop": 0.000945,
+      "Current": 0.001129,
+      "P/L %": 6.31,
+      "Trail Stop": 0.000997,
       "Take Profit": 0.001296,
       "Status": "OPEN"
+    },
+    {
+      "Coin": "WAVES/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-08 09:00 AM PKT",
+      "Signal Bar UTC": "2026-09-08 04:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.2486,
+      "Current": 0.2486,
+      "P/L %": 0.0,
+      "Trail Stop": 0.242525,
+      "Take Profit": 0.26075,
+      "Status": "STOPPED (trail)"
     },
     {
       "Coin": "KNC/USDT",
@@ -23,11 +37,11 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-08 08:00 AM PKT",
       "Signal Bar UTC": "2026-09-08 03:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.1269,
-      "Current": 0.1269,
-      "P/L %": 0.0,
-      "Trail Stop": 0.12265,
+      "Current": 0.1271,
+      "P/L %": 0.16,
+      "Trail Stop": 0.123,
       "Take Profit": 0.1354,
       "Status": "OPEN"
     }
