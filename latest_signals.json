@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-08T17:08:30.597777+00:00",
+  "last_updated_utc": "2026-09-08T18:09:53.832009+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,10 +9,10 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-08 08:00 PM PKT",
       "Signal Bar UTC": "2026-09-08 15:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 1.43439,
-      "Current": 1.43576,
-      "P/L %": 0.1,
+      "Current": 1.42721,
+      "P/L %": -0.5,
       "Trail Stop": 1.409365,
       "Take Profit": 1.50762,
       "Status": "OPEN"
@@ -23,27 +23,13 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-08 08:00 PM PKT",
       "Signal Bar UTC": "2026-09-08 15:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.2292,
-      "Current": 0.2263,
-      "P/L %": -1.27,
+      "Current": 0.2235,
+      "P/L %": -2.49,
       "Trail Stop": 0.220975,
       "Take Profit": 0.24675,
       "Status": "OPEN"
-    },
-    {
-      "Coin": "VVV/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-08 07:00 PM PKT",
-      "Signal Bar UTC": "2026-09-08 14:00:00",
-      "Bars Ago": 2,
-      "Entry": 22.964,
-      "Current": 23.336,
-      "P/L %": 1.62,
-      "Trail Stop": 22.36275,
-      "Take Profit": 24.9895,
-      "Status": "TARGET HIT"
     },
     {
       "Coin": "DOGS/USDT",
@@ -51,40 +37,12 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-08 08:00 PM PKT",
       "Signal Bar UTC": "2026-09-08 15:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 5.1e-05,
-      "Current": 5.5e-05,
-      "P/L %": 7.89,
-      "Trail Stop": 5.1e-05,
+      "Current": 5.3e-05,
+      "P/L %": 2.74,
+      "Trail Stop": 5.4e-05,
       "Take Profit": 5.6e-05,
-      "Status": "STOPPED (trail)"
-    },
-    {
-      "Coin": "NPC/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-08 07:00 PM PKT",
-      "Signal Bar UTC": "2026-09-08 14:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.02051,
-      "Current": 0.02194,
-      "P/L %": 6.97,
-      "Trail Stop": 0.01976,
-      "Take Profit": 0.02381,
-      "Status": "OPEN"
-    },
-    {
-      "Coin": "DCR/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-08 07:00 PM PKT",
-      "Signal Bar UTC": "2026-09-08 14:00:00",
-      "Bars Ago": 2,
-      "Entry": 17.52,
-      "Current": 16.58,
-      "P/L %": -5.37,
-      "Trail Stop": 17.3375,
-      "Take Profit": 17.885,
       "Status": "STOPPED (trail)"
     },
     {
@@ -93,10 +51,10 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-08 08:00 PM PKT",
       "Signal Bar UTC": "2026-09-08 15:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.081693,
-      "Current": 0.079631,
-      "P/L %": -2.52,
+      "Current": 0.079824,
+      "P/L %": -2.29,
       "Trail Stop": 0.078743,
       "Take Profit": 0.087592,
       "Status": "OPEN"
@@ -107,13 +65,13 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-08 08:00 PM PKT",
       "Signal Bar UTC": "2026-09-08 15:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.01106,
-      "Current": 0.011212,
-      "P/L %": 1.37,
+      "Current": 0.011357,
+      "P/L %": 2.69,
       "Trail Stop": 0.010702,
       "Take Profit": 0.011776,
-      "Status": "STOPPED (trail)"
+      "Status": "TARGET HIT"
     }
   ]
 }
