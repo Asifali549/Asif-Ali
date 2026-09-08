@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-08T02:08:13.384725+00:00",
+  "last_updated_utc": "2026-09-08T03:08:35.769219+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,10 +9,10 @@
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-08 05:00 AM PKT",
       "Signal Bar UTC": "2026-09-08 00:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.2355,
-      "Current": 0.2371,
-      "P/L %": 0.68,
+      "Current": 0.2376,
+      "P/L %": 0.89,
       "Trail Stop": 0.232187,
       "Take Profit": 0.242125,
       "Status": "OPEN"
