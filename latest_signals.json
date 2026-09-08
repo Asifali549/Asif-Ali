@@ -1,49 +1,35 @@
 {
-  "last_updated_utc": "2026-09-08T06:10:09.783785+00:00",
+  "last_updated_utc": "2026-09-08T07:10:34.801076+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
-    {
-      "Coin": "IOST/USDT",
-      "Timeframe": "1h",
-      "Combo": "Ichimoku+MarketStructure",
-      "Signal Bar": "2026-09-08 08:00 AM PKT",
-      "Signal Bar UTC": "2026-09-08 03:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.001062,
-      "Current": 0.001079,
-      "P/L %": 1.6,
-      "Trail Stop": 0.000997,
-      "Take Profit": 0.001296,
-      "Status": "OPEN"
-    },
     {
       "Coin": "WAVES/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-08 09:00 AM PKT",
       "Signal Bar UTC": "2026-09-08 04:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.2486,
-      "Current": 0.2598,
-      "P/L %": 4.51,
-      "Trail Stop": 0.244475,
+      "Current": 0.2793,
+      "P/L %": 12.35,
+      "Trail Stop": 0.259125,
       "Take Profit": 0.26075,
       "Status": "STOPPED (trail)"
     },
     {
-      "Coin": "KNC/USDT",
+      "Coin": "VANA/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-08 08:00 AM PKT",
-      "Signal Bar UTC": "2026-09-08 03:00:00",
+      "Signal Bar": "2026-09-08 09:00 AM PKT",
+      "Signal Bar UTC": "2026-09-08 04:00:00",
       "Bars Ago": 2,
-      "Entry": 0.1269,
-      "Current": 0.1262,
-      "P/L %": -0.55,
-      "Trail Stop": 0.123,
-      "Take Profit": 0.1354,
-      "Status": "OPEN"
+      "Entry": 0.958,
+      "Current": 0.99,
+      "P/L %": 3.34,
+      "Trail Stop": 0.985,
+      "Take Profit": 0.9825,
+      "Status": "STOPPED (trail)"
     }
   ]
 }
