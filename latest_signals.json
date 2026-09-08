@@ -1,35 +1,21 @@
 {
-  "last_updated_utc": "2026-09-08T21:08:01.838367+00:00",
+  "last_updated_utc": "2026-09-08T22:09:11.410433+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
     {
-      "Coin": "AIOZ/USDT",
+      "Coin": "DATA/USDT",
       "Timeframe": "1h",
       "Combo": "Ichimoku+MarketStructure",
-      "Signal Bar": "2026-09-08 11:00 PM PKT",
-      "Signal Bar UTC": "2026-09-08 18:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.07023,
-      "Current": 0.07969,
-      "P/L %": 13.47,
-      "Trail Stop": 0.071813,
-      "Take Profit": 0.072795,
-      "Status": "STOPPED (trail)"
-    },
-    {
-      "Coin": "AIOZ/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-08 11:00 PM PKT",
-      "Signal Bar UTC": "2026-09-08 18:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.07023,
-      "Current": 0.07969,
-      "P/L %": 13.47,
-      "Trail Stop": 0.070775,
-      "Take Profit": 0.0739,
-      "Status": "STOPPED (trail)"
+      "Signal Bar": "2026-09-09 02:00 AM PKT",
+      "Signal Bar UTC": "2026-09-08 21:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.1947,
+      "Current": 0.1947,
+      "P/L %": 0.0,
+      "Trail Stop": 0.192619,
+      "Take Profit": 0.198863,
+      "Status": "OPEN"
     }
   ]
 }
