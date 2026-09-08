@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-08T00:12:40.853084+00:00",
+  "last_updated_utc": "2026-09-08T01:09:28.076419+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,10 +9,10 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-08 03:00 AM PKT",
       "Signal Bar UTC": "2026-09-07 22:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 1.751,
-      "Current": 1.634,
-      "P/L %": -6.68,
+      "Current": 1.648,
+      "P/L %": -5.88,
       "Trail Stop": 1.62775,
       "Take Profit": 1.9975,
       "Status": "STOPPED (trail)"
