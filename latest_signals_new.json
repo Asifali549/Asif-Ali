@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-09T22:14:24.740503+00:00",
+  "last_updated_utc": "2026-09-09T23:14:16.868220+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -11,11 +11,11 @@
       "Score": "8/10",
       "Signal Bar": "2026-09-10 02:00 AM PKT",
       "Signal Bar UTC": "2026-09-09 21:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.1965,
-      "Current": 0.1965,
-      "P/L %": 0.0,
-      "Trail Stop": 0.191663,
+      "Current": 0.1951,
+      "P/L %": -0.71,
+      "Trail Stop": 0.194744,
       "Take Profit": 0.206175,
       "Status": "OPEN"
     },
@@ -27,10 +27,10 @@
       "Score": "6/10",
       "Signal Bar": "2026-09-10 02:00 AM PKT",
       "Signal Bar UTC": "2026-09-09 21:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.002992,
-      "Current": 0.002992,
-      "P/L %": 0.0,
+      "Current": 0.002998,
+      "P/L %": 0.2,
       "Trail Stop": 0.002937,
       "Take Profit": 0.003101,
       "Status": "OPEN"
