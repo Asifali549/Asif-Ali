@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-08T23:08:56.983209+00:00",
+  "last_updated_utc": "2026-09-09T00:13:10.095238+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,12 +9,26 @@
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-09 02:00 AM PKT",
       "Signal Bar UTC": "2026-09-08 21:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.1947,
-      "Current": 0.1938,
-      "P/L %": -0.46,
+      "Current": 0.1963,
+      "P/L %": 0.82,
       "Trail Stop": 0.192619,
       "Take Profit": 0.198863,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "EGLD/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-09 04:00 AM PKT",
+      "Signal Bar UTC": "2026-09-08 23:00:00",
+      "Bars Ago": 0,
+      "Entry": 5.05,
+      "Current": 5.05,
+      "P/L %": 0.0,
+      "Trail Stop": 4.8725,
+      "Take Profit": 5.405,
       "Status": "OPEN"
     }
   ]
