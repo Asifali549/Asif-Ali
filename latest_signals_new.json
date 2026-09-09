@@ -1,8 +1,40 @@
 {
-  "last_updated_utc": "2026-09-09T15:15:52.956034+00:00",
+  "last_updated_utc": "2026-09-09T16:15:18.151213+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
+    {
+      "Coin": "KLV/USDT",
+      "Timeframe": "1h",
+      "Combo": "NEW_AdvancedConfluence_v1",
+      "Structure": "BOS",
+      "Score": "8/10",
+      "Signal Bar": "2026-09-09 08:00 PM PKT",
+      "Signal Bar UTC": "2026-09-09 15:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.000655,
+      "Current": 0.000655,
+      "P/L %": 0.0,
+      "Trail Stop": 0.000621,
+      "Take Profit": 0.000724,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "PHA/USDT",
+      "Timeframe": "1h",
+      "Combo": "NEW_AdvancedConfluence_v1",
+      "Structure": "CHoCH",
+      "Score": "6/10",
+      "Signal Bar": "2026-09-09 08:00 PM PKT",
+      "Signal Bar UTC": "2026-09-09 15:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.0304,
+      "Current": 0.0304,
+      "P/L %": 0.0,
+      "Trail Stop": 0.028356,
+      "Take Profit": 0.034488,
+      "Status": "OPEN"
+    },
     {
       "Coin": "ICX/USDT",
       "Timeframe": "1h",
@@ -11,28 +43,12 @@
       "Score": "8/10",
       "Signal Bar": "2026-09-09 06:00 PM PKT",
       "Signal Bar UTC": "2026-09-09 13:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.01631,
-      "Current": 0.01789,
-      "P/L %": 9.69,
+      "Current": 0.01783,
+      "P/L %": 9.32,
       "Trail Stop": 0.021215,
       "Take Profit": 0.018785,
-      "Status": "OPEN"
-    },
-    {
-      "Coin": "DEEP/USDT",
-      "Timeframe": "1h",
-      "Combo": "NEW_AdvancedConfluence_v1",
-      "Structure": "BOS",
-      "Score": "6/10",
-      "Signal Bar": "2026-09-09 05:00 PM PKT",
-      "Signal Bar UTC": "2026-09-09 12:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.016522,
-      "Current": 0.016425,
-      "P/L %": -0.59,
-      "Trail Stop": 0.015953,
-      "Take Profit": 0.01766,
       "Status": "OPEN"
     }
   ]
