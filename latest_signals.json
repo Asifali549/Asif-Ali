@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-09T02:09:19.781635+00:00",
+  "last_updated_utc": "2026-09-09T03:09:03.942412+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,10 +9,10 @@
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-09 05:00 AM PKT",
       "Signal Bar UTC": "2026-09-09 00:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.3517,
-      "Current": 0.3268,
-      "P/L %": -7.08,
+      "Current": 0.3234,
+      "P/L %": -8.05,
       "Trail Stop": 0.307556,
       "Take Profit": 0.439987,
       "Status": "OPEN"
@@ -23,27 +23,13 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-09 05:00 AM PKT",
       "Signal Bar UTC": "2026-09-09 00:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.022952,
-      "Current": 0.021992,
-      "P/L %": -4.18,
+      "Current": 0.02293,
+      "P/L %": -0.1,
       "Trail Stop": 0.023006,
       "Take Profit": 0.025963,
       "Status": "STOPPED (trail)"
-    },
-    {
-      "Coin": "EGLD/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-09 04:00 AM PKT",
-      "Signal Bar UTC": "2026-09-08 23:00:00",
-      "Bars Ago": 2,
-      "Entry": 5.05,
-      "Current": 5.05,
-      "P/L %": 0.0,
-      "Trail Stop": 4.945,
-      "Take Profit": 5.405,
-      "Status": "OPEN"
     },
     {
       "Coin": "AZTEC/USDT",
@@ -51,11 +37,11 @@
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-09 05:00 AM PKT",
       "Signal Bar UTC": "2026-09-09 00:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.01534,
-      "Current": 0.01543,
-      "P/L %": 0.59,
-      "Trail Stop": 0.014915,
+      "Current": 0.01522,
+      "P/L %": -0.78,
+      "Trail Stop": 0.014956,
       "Take Profit": 0.016322,
       "Status": "OPEN"
     }
