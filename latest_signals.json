@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-09T17:09:15.796993+00:00",
+  "last_updated_utc": "2026-09-09T18:11:20.307276+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,10 +9,10 @@
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-09 09:00 PM PKT",
       "Signal Bar UTC": "2026-09-09 16:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.6087,
-      "Current": 0.6087,
-      "P/L %": 0.0,
+      "Current": 0.5984,
+      "P/L %": -1.69,
       "Trail Stop": 0.575913,
       "Take Profit": 0.674275,
       "Status": "OPEN"
@@ -23,41 +23,13 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-09 09:00 PM PKT",
       "Signal Bar UTC": "2026-09-09 16:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.6087,
-      "Current": 0.6087,
-      "P/L %": 0.0,
+      "Current": 0.5984,
+      "P/L %": -1.69,
       "Trail Stop": 0.5734,
       "Take Profit": 0.6793,
       "Status": "OPEN"
-    },
-    {
-      "Coin": "CTR/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-09 07:00 PM PKT",
-      "Signal Bar UTC": "2026-09-09 14:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.010491,
-      "Current": 0.01026,
-      "P/L %": -2.2,
-      "Trail Stop": 0.01016,
-      "Take Profit": 0.011154,
-      "Status": "OPEN"
-    },
-    {
-      "Coin": "GPS/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-09 07:00 PM PKT",
-      "Signal Bar UTC": "2026-09-09 14:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.01245,
-      "Current": 0.01192,
-      "P/L %": -4.26,
-      "Trail Stop": 0.011758,
-      "Take Profit": 0.014225,
-      "Status": "STOPPED (trail)"
     },
     {
       "Coin": "IOTX/USDT",
@@ -65,13 +37,13 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-09 09:00 PM PKT",
       "Signal Bar UTC": "2026-09-09 16:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.003328,
-      "Current": 0.003328,
-      "P/L %": 0.0,
+      "Current": 0.003246,
+      "P/L %": -2.46,
       "Trail Stop": 0.003209,
       "Take Profit": 0.003566,
-      "Status": "STOPPED (trail)"
+      "Status": "OPEN"
     }
   ]
 }
