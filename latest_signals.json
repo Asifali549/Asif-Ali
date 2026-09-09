@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-09T20:09:56.009541+00:00",
+  "last_updated_utc": "2026-09-09T21:08:41.128937+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,26 +9,12 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-09 11:00 PM PKT",
       "Signal Bar UTC": "2026-09-09 18:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 1.547,
-      "Current": 1.519,
-      "P/L %": -1.81,
+      "Current": 1.527,
+      "P/L %": -1.29,
       "Trail Stop": 1.49275,
       "Take Profit": 1.6555,
-      "Status": "OPEN"
-    },
-    {
-      "Coin": "DUSK/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-09 10:00 PM PKT",
-      "Signal Bar UTC": "2026-09-09 17:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.07973,
-      "Current": 0.07872,
-      "P/L %": -1.27,
-      "Trail Stop": 0.077528,
-      "Take Profit": 0.084135,
       "Status": "OPEN"
     }
   ]
