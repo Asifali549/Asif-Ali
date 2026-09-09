@@ -1,15 +1,29 @@
 {
-  "last_updated_utc": "2026-09-09T04:08:54.471519+00:00",
+  "last_updated_utc": "2026-09-09T05:08:41.852359+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
+    {
+      "Coin": "ZEC/USDT",
+      "Timeframe": "1h",
+      "Combo": "Ichimoku+MarketStructure",
+      "Signal Bar": "2026-09-09 09:00 AM PKT",
+      "Signal Bar UTC": "2026-09-09 04:00:00",
+      "Bars Ago": 0,
+      "Entry": 1243.192,
+      "Current": 1243.192,
+      "P/L %": 0.0,
+      "Trail Stop": 1193.116875,
+      "Take Profit": 1343.34225,
+      "Status": "STOPPED (trail)"
+    },
     {
       "Coin": "KAT/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-09 07:00 AM PKT",
       "Signal Bar UTC": "2026-09-09 02:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.00507,
       "Current": 0.006,
       "P/L %": 18.34,
