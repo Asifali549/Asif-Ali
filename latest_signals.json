@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-10T08:09:34.529852+00:00",
+  "last_updated_utc": "2026-09-10T09:08:52.761062+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,41 +9,41 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-10 11:00 AM PKT",
       "Signal Bar UTC": "2026-09-10 06:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.003295,
-      "Current": 0.003278,
-      "P/L %": -0.52,
+      "Current": 0.003104,
+      "P/L %": -5.8,
       "Trail Stop": 0.003687,
       "Take Profit": 0.003773,
       "Status": "STOPPED (trail)"
     },
     {
-      "Coin": "ARX/USDT",
-      "Timeframe": "1h",
-      "Combo": "Ichimoku+MarketStructure",
-      "Signal Bar": "2026-09-10 10:00 AM PKT",
-      "Signal Bar UTC": "2026-09-10 05:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.17399,
-      "Current": 0.15956,
-      "P/L %": -8.29,
-      "Trail Stop": 0.159239,
-      "Take Profit": 0.203492,
-      "Status": "STOPPED (trail)"
-    },
-    {
-      "Coin": "ARX/USDT",
+      "Coin": "EGLD/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-10 10:00 AM PKT",
-      "Signal Bar UTC": "2026-09-10 05:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.17399,
-      "Current": 0.15956,
-      "P/L %": -8.29,
-      "Trail Stop": 0.158172,
-      "Take Profit": 0.205625,
-      "Status": "STOPPED (trail)"
+      "Signal Bar": "2026-09-10 01:00 PM PKT",
+      "Signal Bar UTC": "2026-09-10 08:00:00",
+      "Bars Ago": 0,
+      "Entry": 5.46,
+      "Current": 5.46,
+      "P/L %": 0.0,
+      "Trail Stop": 5.1325,
+      "Take Profit": 6.115,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "BLEND/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-10 01:00 PM PKT",
+      "Signal Bar UTC": "2026-09-10 08:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.06751,
+      "Current": 0.06751,
+      "P/L %": 0.0,
+      "Trail Stop": 0.065047,
+      "Take Profit": 0.072435,
+      "Status": "OPEN"
     }
   ]
 }
