@@ -1,6 +1,35 @@
 {
-  "last_updated_utc": "2026-09-10T05:08:37.375248+00:00",
+  "last_updated_utc": "2026-09-10T06:10:41.903689+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
-  "signals": []
+  "signals": [
+    {
+      "Coin": "ARX/USDT",
+      "Timeframe": "1h",
+      "Combo": "Ichimoku+MarketStructure",
+      "Signal Bar": "2026-09-10 10:00 AM PKT",
+      "Signal Bar UTC": "2026-09-10 05:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.17399,
+      "Current": 0.17399,
+      "P/L %": 0.0,
+      "Trail Stop": 0.159239,
+      "Take Profit": 0.203492,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "ARX/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-10 10:00 AM PKT",
+      "Signal Bar UTC": "2026-09-10 05:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.17399,
+      "Current": 0.17399,
+      "P/L %": 0.0,
+      "Trail Stop": 0.158172,
+      "Take Profit": 0.205625,
+      "Status": "OPEN"
+    }
+  ]
 }
