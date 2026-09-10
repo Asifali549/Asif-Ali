@@ -1,49 +1,21 @@
 {
-  "last_updated_utc": "2026-09-10T03:08:19.761274+00:00",
+  "last_updated_utc": "2026-09-10T04:08:58.742104+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
-    {
-      "Coin": "RSR/USDT",
-      "Timeframe": "1h",
-      "Combo": "Ichimoku+MarketStructure",
-      "Signal Bar": "2026-09-10 05:00 AM PKT",
-      "Signal Bar UTC": "2026-09-10 00:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.001515,
-      "Current": 0.001411,
-      "P/L %": -6.86,
-      "Trail Stop": 0.001445,
-      "Take Profit": 0.001682,
-      "Status": "STOPPED (trail)"
-    },
-    {
-      "Coin": "VTHO/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-10 05:00 AM PKT",
-      "Signal Bar UTC": "2026-09-10 00:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.000588,
-      "Current": 0.000708,
-      "P/L %": 20.41,
-      "Trail Stop": 0.000777,
-      "Take Profit": 0.000697,
-      "Status": "STOPPED (trail)"
-    },
     {
       "Coin": "STABLE/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-10 06:00 AM PKT",
       "Signal Bar UTC": "2026-09-10 01:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.029551,
-      "Current": 0.028872,
-      "P/L %": -2.3,
+      "Current": 0.028936,
+      "P/L %": -2.08,
       "Trail Stop": 0.028657,
       "Take Profit": 0.031338,
-      "Status": "STOPPED (trail)"
+      "Status": "OPEN"
     }
   ]
 }
