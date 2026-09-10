@@ -1,21 +1,35 @@
 {
-  "last_updated_utc": "2026-09-10T00:11:34.075163+00:00",
+  "last_updated_utc": "2026-09-10T01:08:59.636276+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
     {
-      "Coin": "SAHARA/USDT",
+      "Coin": "RSR/USDT",
+      "Timeframe": "1h",
+      "Combo": "Ichimoku+MarketStructure",
+      "Signal Bar": "2026-09-10 05:00 AM PKT",
+      "Signal Bar UTC": "2026-09-10 00:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.001515,
+      "Current": 0.001515,
+      "P/L %": 0.0,
+      "Trail Stop": 0.001432,
+      "Take Profit": 0.001682,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "VTHO/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-10 02:00 AM PKT",
-      "Signal Bar UTC": "2026-09-09 21:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.01073,
-      "Current": 0.01042,
-      "P/L %": -2.89,
-      "Trail Stop": 0.010012,
-      "Take Profit": 0.012165,
-      "Status": "OPEN"
+      "Signal Bar": "2026-09-10 05:00 AM PKT",
+      "Signal Bar UTC": "2026-09-10 00:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.000588,
+      "Current": 0.000588,
+      "P/L %": 0.0,
+      "Trail Stop": 0.000534,
+      "Take Profit": 0.000697,
+      "Status": "STOPPED (trail)"
     }
   ]
 }
