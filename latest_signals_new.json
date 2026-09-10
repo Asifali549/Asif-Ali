@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-10T12:18:15.463554+00:00",
+  "last_updated_utc": "2026-09-10T13:14:14.174929+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -11,10 +11,10 @@
       "Score": "8/10",
       "Signal Bar": "2026-09-10 03:00 PM PKT",
       "Signal Bar UTC": "2026-09-10 10:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.4927,
-      "Current": 0.4974,
-      "P/L %": 0.95,
+      "Current": 0.4876,
+      "P/L %": -1.04,
       "Trail Stop": 0.5022,
       "Take Profit": 0.566163,
       "Status": "OPEN"
@@ -27,12 +27,28 @@
       "Score": "6/10",
       "Signal Bar": "2026-09-10 03:00 PM PKT",
       "Signal Bar UTC": "2026-09-10 10:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.4997,
-      "Current": 0.4943,
-      "P/L %": -1.08,
+      "Current": 0.4809,
+      "P/L %": -3.76,
       "Trail Stop": 0.482963,
       "Take Profit": 0.538737,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "KAVA/USDT",
+      "Timeframe": "1h",
+      "Combo": "NEW_AdvancedConfluence_v1",
+      "Structure": "BOS",
+      "Score": "6/10",
+      "Signal Bar": "2026-09-10 05:00 PM PKT",
+      "Signal Bar UTC": "2026-09-10 12:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.06259,
+      "Current": 0.06259,
+      "P/L %": 0.0,
+      "Trail Stop": 0.060721,
+      "Take Profit": 0.066329,
       "Status": "OPEN"
     }
   ]
