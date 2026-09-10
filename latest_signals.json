@@ -1,21 +1,6 @@
 {
-  "last_updated_utc": "2026-09-10T18:09:38.841362+00:00",
+  "last_updated_utc": "2026-09-10T19:07:45.875468+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
-  "signals": [
-    {
-      "Coin": "INIT/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-10 08:00 PM PKT",
-      "Signal Bar UTC": "2026-09-10 15:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.068321,
-      "Current": 0.068567,
-      "P/L %": 0.36,
-      "Trail Stop": 0.068201,
-      "Take Profit": 0.071387,
-      "Status": "STOPPED (trail)"
-    }
-  ]
+  "signals": []
 }
