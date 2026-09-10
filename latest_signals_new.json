@@ -1,23 +1,6 @@
 {
-  "last_updated_utc": "2026-09-10T18:17:25.868687+00:00",
+  "last_updated_utc": "2026-09-10T19:12:13.977027+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
-  "signals": [
-    {
-      "Coin": "FOLKS/USDT",
-      "Timeframe": "1h",
-      "Combo": "NEW_AdvancedConfluence_v1",
-      "Structure": "BOS",
-      "Score": "6/10",
-      "Signal Bar": "2026-09-10 08:00 PM PKT",
-      "Signal Bar UTC": "2026-09-10 15:00:00",
-      "Bars Ago": 2,
-      "Entry": 2.1562,
-      "Current": 2.2415,
-      "P/L %": 3.96,
-      "Trail Stop": 2.1083,
-      "Take Profit": 2.4098,
-      "Status": "OPEN"
-    }
-  ]
+  "signals": []
 }
