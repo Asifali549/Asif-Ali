@@ -1,49 +1,21 @@
 {
-  "last_updated_utc": "2026-09-10T17:08:28.088621+00:00",
+  "last_updated_utc": "2026-09-10T18:09:38.841362+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
     {
-      "Coin": "VET/USDT",
-      "Timeframe": "1h",
-      "Combo": "Ichimoku+MarketStructure",
-      "Signal Bar": "2026-09-10 07:00 PM PKT",
-      "Signal Bar UTC": "2026-09-10 14:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.008344,
-      "Current": 0.00798,
-      "P/L %": -4.36,
-      "Trail Stop": 0.007852,
-      "Take Profit": 0.009328,
-      "Status": "STOPPED (trail)"
-    },
-    {
-      "Coin": "VET/USDT",
+      "Coin": "INIT/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-10 07:00 PM PKT",
-      "Signal Bar UTC": "2026-09-10 14:00:00",
+      "Signal Bar": "2026-09-10 08:00 PM PKT",
+      "Signal Bar UTC": "2026-09-10 15:00:00",
       "Bars Ago": 2,
-      "Entry": 0.008344,
-      "Current": 0.00798,
-      "P/L %": -4.36,
-      "Trail Stop": 0.007813,
-      "Take Profit": 0.009425,
+      "Entry": 0.068321,
+      "Current": 0.068567,
+      "P/L %": 0.36,
+      "Trail Stop": 0.068201,
+      "Take Profit": 0.071387,
       "Status": "STOPPED (trail)"
-    },
-    {
-      "Coin": "ETHFI/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-10 07:00 PM PKT",
-      "Signal Bar UTC": "2026-09-10 14:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.6903,
-      "Current": 0.692,
-      "P/L %": 0.25,
-      "Trail Stop": 0.64635,
-      "Take Profit": 0.7782,
-      "Status": "OPEN"
     }
   ]
 }
