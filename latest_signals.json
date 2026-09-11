@@ -1,6 +1,35 @@
 {
-  "last_updated_utc": "2026-09-11T00:11:27.021896+00:00",
+  "last_updated_utc": "2026-09-11T01:07:59.385971+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
-  "signals": []
+  "signals": [
+    {
+      "Coin": "XCN/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-11 05:00 AM PKT",
+      "Signal Bar UTC": "2026-09-11 00:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.004105,
+      "Current": 0.004105,
+      "P/L %": 0.0,
+      "Trail Stop": 0.004253,
+      "Take Profit": 0.003809,
+      "Status": "STOPPED (trail)"
+    },
+    {
+      "Coin": "TFUEL/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-11 05:00 AM PKT",
+      "Signal Bar UTC": "2026-09-11 00:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.0126,
+      "Current": 0.0126,
+      "P/L %": 0.0,
+      "Trail Stop": 0.012518,
+      "Take Profit": 0.012765,
+      "Status": "STOPPED (trail)"
+    }
+  ]
 }
