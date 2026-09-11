@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-11T06:18:32.435221+00:00",
+  "last_updated_utc": "2026-09-11T07:15:24.158925+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -11,10 +11,10 @@
       "Score": "6/10",
       "Signal Bar": "2026-09-11 09:00 AM PKT",
       "Signal Bar UTC": "2026-09-11 04:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.02384,
-      "Current": 0.0214,
-      "P/L %": -10.23,
+      "Current": 0.02048,
+      "P/L %": -14.09,
       "Trail Stop": 0.021121,
       "Take Profit": 0.029277,
       "Status": "OPEN"
