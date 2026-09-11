@@ -137,4 +137,4 @@ if st.button("🎨 Manual Scan Chalayen", type="primary"):
         if not coins:
             st.error("Koi coin nahi likha gaya.")
             st.stop()
-    else:
+    else: 
