@@ -1,20 +1,20 @@
 {
-  "last_updated_utc": "2026-09-11T08:08:44.603500+00:00",
+  "last_updated_utc": "2026-09-11T09:08:03.064306+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
     {
-      "Coin": "RIO/USDT",
+      "Coin": "DIN/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-11 10:00 AM PKT",
-      "Signal Bar UTC": "2026-09-11 05:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.0518,
-      "Current": 0.0495,
-      "P/L %": -4.44,
-      "Trail Stop": 0.05006,
-      "Take Profit": 0.05531,
+      "Signal Bar": "2026-09-11 01:00 PM PKT",
+      "Signal Bar UTC": "2026-09-11 08:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.004293,
+      "Current": 0.004293,
+      "P/L %": 0.0,
+      "Trail Stop": 0.00463,
+      "Take Profit": 0.00362,
       "Status": "STOPPED (trail)"
     }
   ]
