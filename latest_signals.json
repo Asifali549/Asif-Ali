@@ -1,35 +1,21 @@
 {
-  "last_updated_utc": "2026-09-11T07:10:00.103193+00:00",
+  "last_updated_utc": "2026-09-11T08:08:44.603500+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
-    {
-      "Coin": "SOMI/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-11 09:00 AM PKT",
-      "Signal Bar UTC": "2026-09-11 04:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.1351,
-      "Current": 0.1329,
-      "P/L %": -1.63,
-      "Trail Stop": 0.132325,
-      "Take Profit": 0.14065,
-      "Status": "OPEN"
-    },
     {
       "Coin": "RIO/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-11 10:00 AM PKT",
       "Signal Bar UTC": "2026-09-11 05:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.0518,
-      "Current": 0.05133,
-      "P/L %": -0.91,
+      "Current": 0.0495,
+      "P/L %": -4.44,
       "Trail Stop": 0.05006,
       "Take Profit": 0.05531,
-      "Status": "OPEN"
+      "Status": "STOPPED (trail)"
     }
   ]
 }
