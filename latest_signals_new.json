@@ -1,23 +1,6 @@
 {
-  "last_updated_utc": "2026-09-11T10:14:43.731287+00:00",
+  "last_updated_utc": "2026-09-11T11:14:54.551915+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
-  "signals": [
-    {
-      "Coin": "KAVA/USDT",
-      "Timeframe": "1h",
-      "Combo": "NEW_AdvancedConfluence_v1",
-      "Structure": "BOS",
-      "Score": "6/10",
-      "Signal Bar": "2026-09-11 12:00 PM PKT",
-      "Signal Bar UTC": "2026-09-11 07:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.06438,
-      "Current": 0.06524,
-      "P/L %": 1.34,
-      "Trail Stop": 0.063938,
-      "Take Profit": 0.067436,
-      "Status": "OPEN"
-    }
-  ]
+  "signals": []
 }
