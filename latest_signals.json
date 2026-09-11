@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-11T15:08:52.241213+00:00",
+  "last_updated_utc": "2026-09-11T16:08:55.266562+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,27 +9,13 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-11 06:00 PM PKT",
       "Signal Bar UTC": "2026-09-11 13:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 2629.61,
-      "Current": 2607.58,
-      "P/L %": -0.84,
+      "Current": 2559.56,
+      "P/L %": -2.66,
       "Trail Stop": 2561.7925,
       "Take Profit": 2775.655,
-      "Status": "OPEN"
-    },
-    {
-      "Coin": "LTC/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-11 05:00 PM PKT",
-      "Signal Bar UTC": "2026-09-11 12:00:00",
-      "Bars Ago": 2,
-      "Entry": 53.35,
-      "Current": 53.74,
-      "P/L %": 0.73,
-      "Trail Stop": 52.595,
-      "Take Profit": 56.32,
-      "Status": "OPEN"
+      "Status": "STOPPED (trail)"
     },
     {
       "Coin": "DGAI/USDT",
@@ -37,13 +23,13 @@
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-11 06:00 PM PKT",
       "Signal Bar UTC": "2026-09-11 13:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.79218,
-      "Current": 0.77127,
-      "P/L %": -2.64,
+      "Current": 0.75502,
+      "P/L %": -4.69,
       "Trail Stop": 0.756984,
       "Take Profit": 0.87711,
-      "Status": "OPEN"
+      "Status": "STOPPED (trail)"
     },
     {
       "Coin": "LIT/USDT",
@@ -51,68 +37,12 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-11 06:00 PM PKT",
       "Signal Bar UTC": "2026-09-11 13:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 4.782,
-      "Current": 4.858,
-      "P/L %": 1.59,
+      "Current": 4.698,
+      "P/L %": -1.76,
       "Trail Stop": 4.595,
       "Take Profit": 5.313,
-      "Status": "OPEN"
-    },
-    {
-      "Coin": "AERO/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-11 05:00 PM PKT",
-      "Signal Bar UTC": "2026-09-11 12:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.573,
-      "Current": 0.596,
-      "P/L %": 4.01,
-      "Trail Stop": 0.5702,
-      "Take Profit": 0.62675,
-      "Status": "OPEN"
-    },
-    {
-      "Coin": "STORJ/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-11 05:00 PM PKT",
-      "Signal Bar UTC": "2026-09-11 12:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.0495,
-      "Current": 0.0443,
-      "P/L %": -10.51,
-      "Trail Stop": 0.0393,
-      "Take Profit": 0.0699,
-      "Status": "OPEN"
-    },
-    {
-      "Coin": "NPC/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-11 05:00 PM PKT",
-      "Signal Bar UTC": "2026-09-11 12:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.02064,
-      "Current": 0.02064,
-      "P/L %": 0.0,
-      "Trail Stop": 0.020357,
-      "Take Profit": 0.023055,
-      "Status": "OPEN"
-    },
-    {
-      "Coin": "PENDLE/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-11 05:00 PM PKT",
-      "Signal Bar UTC": "2026-09-11 12:00:00",
-      "Bars Ago": 2,
-      "Entry": 2.1004,
-      "Current": 2.1258,
-      "P/L %": 1.21,
-      "Trail Stop": 2.052575,
-      "Take Profit": 2.273,
       "Status": "OPEN"
     },
     {
@@ -121,13 +51,27 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-11 06:00 PM PKT",
       "Signal Bar UTC": "2026-09-11 13:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.0968,
-      "Current": 0.1056,
-      "P/L %": 9.09,
+      "Current": 0.1033,
+      "P/L %": 6.71,
       "Trail Stop": 0.0994,
       "Take Profit": 0.1081,
-      "Status": "STOPPED (trail)"
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "EDGE/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-11 08:00 PM PKT",
+      "Signal Bar UTC": "2026-09-11 15:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.6148,
+      "Current": 0.6148,
+      "P/L %": 0.0,
+      "Trail Stop": 0.5874,
+      "Take Profit": 0.6696,
+      "Status": "OPEN"
     }
   ]
 }
