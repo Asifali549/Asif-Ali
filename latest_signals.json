@@ -1,33 +1,19 @@
 {
-  "last_updated_utc": "2026-09-11T22:08:53.734404+00:00",
+  "last_updated_utc": "2026-09-11T23:07:43.836046+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
     {
       "Coin": "XCN/USDT",
       "Timeframe": "1h",
-      "Combo": "Ichimoku+MarketStructure",
-      "Signal Bar": "2026-09-12 12:00 AM PKT",
-      "Signal Bar UTC": "2026-09-11 19:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.00446,
-      "Current": 0.004696,
-      "P/L %": 5.28,
-      "Trail Stop": 0.00424,
-      "Take Profit": 0.0052,
-      "Status": "OPEN"
-    },
-    {
-      "Coin": "XCN/USDT",
-      "Timeframe": "1h",
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-12 02:00 AM PKT",
       "Signal Bar UTC": "2026-09-11 21:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.004696,
-      "Current": 0.004696,
-      "P/L %": 0.0,
-      "Trail Stop": 0.00416,
+      "Current": 0.004539,
+      "P/L %": -3.35,
+      "Trail Stop": 0.004165,
       "Take Profit": 0.005767,
       "Status": "OPEN"
     }
