@@ -1,24 +1,8 @@
 {
-  "last_updated_utc": "2026-09-11T18:17:04.412890+00:00",
+  "last_updated_utc": "2026-09-11T19:13:19.131602+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
-    {
-      "Coin": "GRVT/USDT",
-      "Timeframe": "1h",
-      "Combo": "NEW_AdvancedConfluence_v1",
-      "Structure": "BOS",
-      "Score": "6/10",
-      "Signal Bar": "2026-09-11 08:00 PM PKT",
-      "Signal Bar UTC": "2026-09-11 15:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.1754,
-      "Current": 0.173,
-      "P/L %": -1.37,
-      "Trail Stop": 0.17015,
-      "Take Profit": 0.18695,
-      "Status": "OPEN"
-    },
     {
       "Coin": "ETHFI/USDT",
       "Timeframe": "1h",
@@ -27,28 +11,12 @@
       "Score": "6/10",
       "Signal Bar": "2026-09-11 09:00 PM PKT",
       "Signal Bar UTC": "2026-09-11 16:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.7028,
-      "Current": 0.707,
-      "P/L %": 0.6,
+      "Current": 0.6731,
+      "P/L %": -4.23,
       "Trail Stop": 0.64705,
       "Take Profit": 0.831463,
-      "Status": "OPEN"
-    },
-    {
-      "Coin": "PYBOBO/USDT",
-      "Timeframe": "1h",
-      "Combo": "NEW_AdvancedConfluence_v1",
-      "Structure": "BOS",
-      "Score": "6/10",
-      "Signal Bar": "2026-09-11 08:00 PM PKT",
-      "Signal Bar UTC": "2026-09-11 15:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.000426,
-      "Current": 0.000422,
-      "P/L %": -0.85,
-      "Trail Stop": 0.00041,
-      "Take Profit": 0.000458,
       "Status": "OPEN"
     },
     {
@@ -59,11 +27,11 @@
       "Score": "6/10",
       "Signal Bar": "2026-09-11 09:00 PM PKT",
       "Signal Bar UTC": "2026-09-11 16:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.00843,
-      "Current": 0.00836,
-      "P/L %": -0.83,
-      "Trail Stop": 0.007979,
+      "Current": 0.00833,
+      "P/L %": -1.19,
+      "Trail Stop": 0.007984,
       "Take Profit": 0.009333,
       "Status": "OPEN"
     }
