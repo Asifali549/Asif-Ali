@@ -1,8 +1,24 @@
 {
-  "last_updated_utc": "2026-09-11T12:19:18.772056+00:00",
+  "last_updated_utc": "2026-09-11T13:15:17.432263+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
+    {
+      "Coin": "BABYSHARK/USDT",
+      "Timeframe": "1h",
+      "Combo": "NEW_AdvancedConfluence_v1",
+      "Structure": "BOS",
+      "Score": "8/10",
+      "Signal Bar": "2026-09-11 05:00 PM PKT",
+      "Signal Bar UTC": "2026-09-11 12:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.00546,
+      "Current": 0.00546,
+      "P/L %": 0.0,
+      "Trail Stop": 0.005325,
+      "Take Profit": 0.00573,
+      "Status": "OPEN"
+    },
     {
       "Coin": "SHR/USDT",
       "Timeframe": "1h",
@@ -11,10 +27,10 @@
       "Score": "6/10",
       "Signal Bar": "2026-09-11 04:00 PM PKT",
       "Signal Bar UTC": "2026-09-11 11:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.000313,
-      "Current": 0.000313,
-      "P/L %": 0.0,
+      "Current": 0.000314,
+      "P/L %": 0.32,
       "Trail Stop": 0.000308,
       "Take Profit": 0.000324,
       "Status": "OPEN"
