@@ -1,6 +1,23 @@
 {
-  "last_updated_utc": "2026-09-11T11:14:54.551915+00:00",
+  "last_updated_utc": "2026-09-11T12:19:18.772056+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
-  "signals": []
+  "signals": [
+    {
+      "Coin": "SHR/USDT",
+      "Timeframe": "1h",
+      "Combo": "NEW_AdvancedConfluence_v1",
+      "Structure": "CHoCH",
+      "Score": "6/10",
+      "Signal Bar": "2026-09-11 04:00 PM PKT",
+      "Signal Bar UTC": "2026-09-11 11:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.000313,
+      "Current": 0.000313,
+      "P/L %": 0.0,
+      "Trail Stop": 0.000308,
+      "Take Profit": 0.000324,
+      "Status": "OPEN"
+    }
+  ]
 }
