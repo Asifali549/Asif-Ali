@@ -1,6 +1,39 @@
 {
-  "last_updated_utc": "2026-09-11T00:20:41.015028+00:00",
+  "last_updated_utc": "2026-09-11T01:14:01.682828+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
-  "signals": []
+  "signals": [
+    {
+      "Coin": "TFUEL/USDT",
+      "Timeframe": "1h",
+      "Combo": "NEW_AdvancedConfluence_v1",
+      "Structure": "CHoCH",
+      "Score": "6/10",
+      "Signal Bar": "2026-09-11 05:00 AM PKT",
+      "Signal Bar UTC": "2026-09-11 00:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.0126,
+      "Current": 0.0126,
+      "P/L %": 0.0,
+      "Trail Stop": 0.012804,
+      "Take Profit": 0.012193,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "NUMI/USDT",
+      "Timeframe": "1h",
+      "Combo": "NEW_AdvancedConfluence_v1",
+      "Structure": "CHoCH",
+      "Score": "6/10",
+      "Signal Bar": "2026-09-11 05:00 AM PKT",
+      "Signal Bar UTC": "2026-09-11 00:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.0204,
+      "Current": 0.0204,
+      "P/L %": 0.0,
+      "Trail Stop": 0.019635,
+      "Take Profit": 0.02193,
+      "Status": "OPEN"
+    }
+  ]
 }
