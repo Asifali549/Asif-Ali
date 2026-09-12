@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-12T06:10:14.750717+00:00",
+  "last_updated_utc": "2026-09-12T07:07:19.636607+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,13 +9,13 @@
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-12 10:00 AM PKT",
       "Signal Bar UTC": "2026-09-12 05:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.000725,
-      "Current": 0.000725,
-      "P/L %": 0.0,
-      "Trail Stop": 0.000667,
+      "Current": 0.000734,
+      "P/L %": 1.24,
+      "Trail Stop": 0.0007,
       "Take Profit": 0.00084,
-      "Status": "STOPPED (trail)"
+      "Status": "OPEN"
     },
     {
       "Coin": "LRC/USDT",
@@ -23,10 +23,10 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-12 10:00 AM PKT",
       "Signal Bar UTC": "2026-09-12 05:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.00974,
-      "Current": 0.00974,
-      "P/L %": 0.0,
+      "Current": 0.00968,
+      "P/L %": -0.62,
       "Trail Stop": 0.009525,
       "Take Profit": 0.01017,
       "Status": "STOPPED (trail)"
