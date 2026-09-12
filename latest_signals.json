@@ -1,20 +1,20 @@
 {
-  "last_updated_utc": "2026-09-12T20:08:32.299162+00:00",
+  "last_updated_utc": "2026-09-12T21:07:39.388775+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
     {
-      "Coin": "ILV/USDT",
+      "Coin": "CSPR/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-12 10:00 PM PKT",
-      "Signal Bar UTC": "2026-09-12 17:00:00",
-      "Bars Ago": 2,
-      "Entry": 3.526,
-      "Current": 3.707,
-      "P/L %": 5.13,
-      "Trail Stop": 3.595,
-      "Take Profit": 3.709,
+      "Signal Bar": "2026-09-13 01:00 AM PKT",
+      "Signal Bar UTC": "2026-09-12 20:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.003119,
+      "Current": 0.003119,
+      "P/L %": 0.0,
+      "Trail Stop": 0.003033,
+      "Take Profit": 0.00329,
       "Status": "STOPPED (trail)"
     }
   ]
