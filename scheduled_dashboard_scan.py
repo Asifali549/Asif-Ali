@@ -20,6 +20,7 @@ import config
 from data_fetcher import get_exchange, get_coin_list, fetch_ohlcv
 from strategies import STRATEGY_FUNCTIONS, apply_cooldown
 from backtest_engine import compute_atr
+from confluence_engine import compute_confluence, DEFAULT_PARAMS as CONF_PARAMS
 from dashboard_helpers import (
     get_fear_greed, get_futures_exchange, get_funding_and_oi, get_orderbook_info,
     get_tf_volume_change, get_24h_range_distance, get_historical_performance,
@@ -59,6 +60,7 @@ TOP_N_COINS = 400
 SIGNAL_TIMEFRAME = "1h"
 CE_A = {"period": 16, "multiplier": 3.0}
 CE_B = {"period": 12, "multiplier": 3.0}
+CE_D = {"period": 16, "multiplier": 3.0}
 RR_MULTIPLE = 2.0
 
 COLORABLE_COLUMNS = (
@@ -73,6 +75,9 @@ def main():
     futures_exchange = get_futures_exchange()
 
     fg_value, fg_label = get_fear_greed()
+
+    print("BTC daily benchmark data fetch kar rahe hain (NEW system ke liye)...")
+    btc_daily = fetch_ohlcv(exchange, "BTC/USDT", "1d", limit=800)
 
     coins = get_coin_list(exchange)[:TOP_N_COINS]
     print(f"Scanning {len(coins)} coins on {SIGNAL_TIMEFRAME}...")
@@ -110,7 +115,31 @@ def main():
                         "_df": df, "_sig": combo_sig, "_ce": ce,
                     })
         except Exception as e:
-            print(f"  [SKIP] {symbol}: {e}")
+            print(f"  [SKIP-OLD] {symbol}: {e}")
+
+        # ---- NEW system: AdvancedConfluence_v1 ----
+        try:
+            result_new = compute_confluence(df, btc_daily, CONF_PARAMS, usdt_d_weak=None)
+            structure_signal = result_new["bos"] | result_new["choch"]
+            new_sig = apply_cooldown(structure_signal & (result_new["score"] >= 6), config.SIGNAL_COOLDOWN_BARS)
+
+            if new_sig.tail(3).any():
+                idx = new_sig.tail(3)[new_sig.tail(3)].index[-1]
+                atr = compute_atr(df, CE_D["period"])
+                highest_high = df["high"].rolling(CE_D["period"]).max()
+                chandelier = (highest_high - CE_D["multiplier"] * atr).loc[idx]
+                entry_price = df.loc[idx, "close"]
+                current_price = df["close"].iloc[-1]
+                risk = entry_price - chandelier
+                tp_price = entry_price + risk * RR_MULTIPLE
+                signal_coins.append({
+                    "Coin": symbol, "Combo": "NEW_AdvancedConfluence", "Bars Ago": int(len(df) - 1 - idx),
+                    "Entry": round(float(entry_price), 6), "Current": round(float(current_price), 6),
+                    "Trail Stop": round(float(chandelier), 6), "Take Profit": round(float(tp_price), 6),
+                    "_df": df, "_sig": new_sig, "_ce": CE_D,
+                })
+        except Exception as e:
+            print(f"  [SKIP-NEW] {symbol}: {e}")
 
     print(f"Found {len(signal_coins)} signals. Computing full context...")
 
