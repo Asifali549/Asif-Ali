@@ -1,21 +1,21 @@
 {
-  "last_updated_utc": "2026-09-12T14:08:32.327747+00:00",
+  "last_updated_utc": "2026-09-12T16:08:29.245359+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
     {
-      "Coin": "PENDLE/USDT",
+      "Coin": "LRC/USDT",
       "Timeframe": "1h",
       "Combo": "Ichimoku+MarketStructure",
-      "Signal Bar": "2026-09-12 05:00 PM PKT",
-      "Signal Bar UTC": "2026-09-12 12:00:00",
-      "Bars Ago": 1,
-      "Entry": 2.1821,
-      "Current": 2.1725,
-      "P/L %": -0.44,
-      "Trail Stop": 2.136369,
-      "Take Profit": 2.324262,
-      "Status": "OPEN"
+      "Signal Bar": "2026-09-12 08:00 PM PKT",
+      "Signal Bar UTC": "2026-09-12 15:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.01069,
+      "Current": 0.01069,
+      "P/L %": 0.0,
+      "Trail Stop": 0.009929,
+      "Take Profit": 0.012212,
+      "Status": "STOPPED (trail)"
     },
     {
       "Coin": "KOMA/USDT",
@@ -23,10 +23,10 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-12 06:00 PM PKT",
       "Signal Bar UTC": "2026-09-12 13:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 2,
       "Entry": 0.01602,
-      "Current": 0.01602,
-      "P/L %": 0.0,
+      "Current": 0.01518,
+      "P/L %": -5.24,
       "Trail Stop": 0.01515,
       "Take Profit": 0.01776,
       "Status": "STOPPED (trail)"
@@ -37,26 +37,12 @@
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-12 06:00 PM PKT",
       "Signal Bar UTC": "2026-09-12 13:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 2,
       "Entry": 0.0585,
       "Current": 0.0585,
       "P/L %": 0.0,
-      "Trail Stop": 0.05545,
+      "Trail Stop": 0.056088,
       "Take Profit": 0.0646,
-      "Status": "OPEN"
-    },
-    {
-      "Coin": "ARX/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-12 05:00 PM PKT",
-      "Signal Bar UTC": "2026-09-12 12:00:00",
-      "Bars Ago": 1,
-      "Entry": 0.14725,
-      "Current": 0.14674,
-      "P/L %": -0.35,
-      "Trail Stop": 0.142077,
-      "Take Profit": 0.15761,
       "Status": "OPEN"
     }
   ]
