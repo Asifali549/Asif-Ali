@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-12T16:08:29.245359+00:00",
+  "last_updated_utc": "2026-09-12T17:07:40.613532+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,41 +9,55 @@
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-12 08:00 PM PKT",
       "Signal Bar UTC": "2026-09-12 15:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.01069,
-      "Current": 0.01069,
-      "P/L %": 0.0,
-      "Trail Stop": 0.009929,
+      "Current": 0.01021,
+      "P/L %": -4.49,
+      "Trail Stop": 0.009934,
       "Take Profit": 0.012212,
-      "Status": "STOPPED (trail)"
+      "Status": "OPEN"
     },
     {
-      "Coin": "KOMA/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-12 06:00 PM PKT",
-      "Signal Bar UTC": "2026-09-12 13:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.01602,
-      "Current": 0.01518,
-      "P/L %": -5.24,
-      "Trail Stop": 0.01515,
-      "Take Profit": 0.01776,
-      "Status": "STOPPED (trail)"
-    },
-    {
-      "Coin": "PIN/USDT",
+      "Coin": "READY/USDT",
       "Timeframe": "1h",
       "Combo": "Ichimoku+MarketStructure",
-      "Signal Bar": "2026-09-12 06:00 PM PKT",
-      "Signal Bar UTC": "2026-09-12 13:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.0585,
-      "Current": 0.0585,
+      "Signal Bar": "2026-09-12 09:00 PM PKT",
+      "Signal Bar UTC": "2026-09-12 16:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.004602,
+      "Current": 0.004602,
       "P/L %": 0.0,
-      "Trail Stop": 0.056088,
-      "Take Profit": 0.0646,
-      "Status": "OPEN"
+      "Trail Stop": 0.00466,
+      "Take Profit": 0.004486,
+      "Status": "STOPPED (trail)"
+    },
+    {
+      "Coin": "CERE/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-12 09:00 PM PKT",
+      "Signal Bar UTC": "2026-09-12 16:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.000229,
+      "Current": 0.000229,
+      "P/L %": 0.0,
+      "Trail Stop": 0.00033,
+      "Take Profit": 2.7e-05,
+      "Status": "STOPPED (trail)"
+    },
+    {
+      "Coin": "NEXI/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-12 09:00 PM PKT",
+      "Signal Bar UTC": "2026-09-12 16:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.00191,
+      "Current": 0.00191,
+      "P/L %": 0.0,
+      "Trail Stop": 0.002263,
+      "Take Profit": 0.001205,
+      "Status": "STOPPED (trail)"
     }
   ]
 }
