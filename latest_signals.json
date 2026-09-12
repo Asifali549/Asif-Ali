@@ -1,34 +1,20 @@
 {
-  "last_updated_utc": "2026-09-12T08:08:29.306111+00:00",
+  "last_updated_utc": "2026-09-12T09:08:09.521259+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
     {
-      "Coin": "VTHO/USDT",
-      "Timeframe": "1h",
-      "Combo": "Ichimoku+MarketStructure",
-      "Signal Bar": "2026-09-12 10:00 AM PKT",
-      "Signal Bar UTC": "2026-09-12 05:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.000725,
-      "Current": 0.000727,
-      "P/L %": 0.28,
-      "Trail Stop": 0.0007,
-      "Take Profit": 0.00084,
-      "Status": "OPEN"
-    },
-    {
-      "Coin": "LRC/USDT",
+      "Coin": "KAVA/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-12 10:00 AM PKT",
-      "Signal Bar UTC": "2026-09-12 05:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.00974,
-      "Current": 0.00952,
-      "P/L %": -2.26,
-      "Trail Stop": 0.009525,
-      "Take Profit": 0.01017,
+      "Signal Bar": "2026-09-12 01:00 PM PKT",
+      "Signal Bar UTC": "2026-09-12 08:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.06862,
+      "Current": 0.06862,
+      "P/L %": 0.0,
+      "Trail Stop": 0.067857,
+      "Take Profit": 0.070145,
       "Status": "STOPPED (trail)"
     }
   ]
