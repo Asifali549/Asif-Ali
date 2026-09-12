@@ -1,49 +1,35 @@
 {
-  "last_updated_utc": "2026-09-12T11:07:17.480789+00:00",
+  "last_updated_utc": "2026-09-12T12:09:16.051831+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
-    {
-      "Coin": "QORPO/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-12 03:00 PM PKT",
-      "Signal Bar UTC": "2026-09-12 10:00:00",
-      "Bars Ago": 0,
-      "Entry": 0.001621,
-      "Current": 0.001621,
-      "P/L %": 0.0,
-      "Trail Stop": 0.001698,
-      "Take Profit": 0.001466,
-      "Status": "STOPPED (trail)"
-    },
     {
       "Coin": "SHARE/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-12 03:00 PM PKT",
       "Signal Bar UTC": "2026-09-12 10:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.4494,
-      "Current": 0.4494,
-      "P/L %": 0.0,
-      "Trail Stop": 0.4371,
+      "Current": 0.4928,
+      "P/L %": 9.66,
+      "Trail Stop": 0.491125,
       "Take Profit": 0.474,
       "Status": "STOPPED (trail)"
     },
     {
-      "Coin": "KAVA/USDT",
+      "Coin": "QORPO/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-12 01:00 PM PKT",
-      "Signal Bar UTC": "2026-09-12 08:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.06862,
-      "Current": 0.06845,
-      "P/L %": -0.25,
-      "Trail Stop": 0.067857,
-      "Take Profit": 0.070145,
-      "Status": "OPEN"
+      "Signal Bar": "2026-09-12 03:00 PM PKT",
+      "Signal Bar UTC": "2026-09-12 10:00:00",
+      "Bars Ago": 1,
+      "Entry": 0.001621,
+      "Current": 0.001543,
+      "P/L %": -4.81,
+      "Trail Stop": 0.001698,
+      "Take Profit": 0.001466,
+      "Status": "STOPPED (trail)"
     }
   ]
 }
