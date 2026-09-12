@@ -1,33 +1,19 @@
 {
-  "last_updated_utc": "2026-09-12T04:09:02.939173+00:00",
+  "last_updated_utc": "2026-09-12T05:08:09.502587+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
-    {
-      "Coin": "MUBARAK/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-12 06:00 AM PKT",
-      "Signal Bar UTC": "2026-09-12 01:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.03043,
-      "Current": 0.03039,
-      "P/L %": -0.13,
-      "Trail Stop": 0.029385,
-      "Take Profit": 0.033195,
-      "Status": "OPEN"
-    },
     {
       "Coin": "CHZ/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-12 07:00 AM PKT",
       "Signal Bar UTC": "2026-09-12 02:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.0146,
-      "Current": 0.01507,
-      "P/L %": 3.22,
-      "Trail Stop": 0.01443,
+      "Current": 0.01508,
+      "P/L %": 3.29,
+      "Trail Stop": 0.01467,
       "Take Profit": 0.015825,
       "Status": "OPEN"
     }
