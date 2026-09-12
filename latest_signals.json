@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-12T02:09:05.669120+00:00",
+  "last_updated_utc": "2026-09-12T03:08:47.124829+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,10 +9,10 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-12 05:00 AM PKT",
       "Signal Bar UTC": "2026-09-12 00:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.014465,
-      "Current": 0.014174,
-      "P/L %": -2.01,
+      "Current": 0.014229,
+      "P/L %": -1.63,
       "Trail Stop": 0.013863,
       "Take Profit": 0.015781,
       "Status": "OPEN"
@@ -23,11 +23,11 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-12 06:00 AM PKT",
       "Signal Bar UTC": "2026-09-12 01:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.03043,
-      "Current": 0.03043,
-      "P/L %": 0.0,
-      "Trail Stop": 0.029048,
+      "Current": 0.03021,
+      "P/L %": -0.72,
+      "Trail Stop": 0.02931,
       "Take Profit": 0.033195,
       "Status": "OPEN"
     },
@@ -51,13 +51,13 @@
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-12 05:00 AM PKT",
       "Signal Bar UTC": "2026-09-12 00:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.1615,
-      "Current": 0.166,
-      "P/L %": 2.79,
-      "Trail Stop": 0.154681,
+      "Current": 0.1862,
+      "P/L %": 15.29,
+      "Trail Stop": 0.161081,
       "Take Profit": 0.175138,
-      "Status": "STOPPED (trail)"
+      "Status": "TARGET HIT"
     },
     {
       "Coin": "LSK/USDT",
@@ -65,13 +65,41 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-12 05:00 AM PKT",
       "Signal Bar UTC": "2026-09-12 00:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.1615,
-      "Current": 0.166,
-      "P/L %": 2.79,
-      "Trail Stop": 0.15355,
+      "Current": 0.1862,
+      "P/L %": 15.29,
+      "Trail Stop": 0.156325,
       "Take Profit": 0.1774,
-      "Status": "STOPPED (trail)"
+      "Status": "TARGET HIT"
+    },
+    {
+      "Coin": "SWFTC/USDT",
+      "Timeframe": "1h",
+      "Combo": "Ichimoku+MarketStructure",
+      "Signal Bar": "2026-09-12 07:00 AM PKT",
+      "Signal Bar UTC": "2026-09-12 02:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.00257,
+      "Current": 0.00257,
+      "P/L %": 0.0,
+      "Trail Stop": 0.00245,
+      "Take Profit": 0.002808,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "CHZ/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-12 07:00 AM PKT",
+      "Signal Bar UTC": "2026-09-12 02:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.0146,
+      "Current": 0.0146,
+      "P/L %": 0.0,
+      "Trail Stop": 0.013987,
+      "Take Profit": 0.015825,
+      "Status": "OPEN"
     }
   ]
 }
