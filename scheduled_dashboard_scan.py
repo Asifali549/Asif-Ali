@@ -26,6 +26,7 @@ from dashboard_helpers import (
     get_tf_volume_change, get_24h_range_distance, get_historical_performance,
     get_btc_correlation, ALL_TIMEFRAMES, compute_overall_score,
 )
+from telegram_alert import send_telegram_alert
 
 NTFY_TOPIC_STRONG = "asifali549-strong-signals-9k3m7x"
 
@@ -215,6 +216,7 @@ def main():
             f"Trail Stop: {row['Trail Stop']}"
         )
         send_strong_notification(title, message)
+        send_telegram_alert(f"<b>{title}</b>\n{message}")
         notified[key] = datetime.now(timezone.utc).isoformat()
         new_count += 1
 
