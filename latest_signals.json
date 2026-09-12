@@ -1,21 +1,63 @@
 {
-  "last_updated_utc": "2026-09-12T00:11:12.403924+00:00",
+  "last_updated_utc": "2026-09-12T01:08:02.622218+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
     {
-      "Coin": "XCN/USDT",
+      "Coin": "TRUTH/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-12 02:00 AM PKT",
-      "Signal Bar UTC": "2026-09-11 21:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.004696,
-      "Current": 0.00454,
-      "P/L %": -3.32,
-      "Trail Stop": 0.004189,
-      "Take Profit": 0.005767,
+      "Signal Bar": "2026-09-12 05:00 AM PKT",
+      "Signal Bar UTC": "2026-09-12 00:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.014465,
+      "Current": 0.014465,
+      "P/L %": 0.0,
+      "Trail Stop": 0.013807,
+      "Take Profit": 0.015781,
+      "Status": "STOPPED (trail)"
+    },
+    {
+      "Coin": "AIN/USDT",
+      "Timeframe": "1h",
+      "Combo": "Ichimoku+MarketStructure",
+      "Signal Bar": "2026-09-12 05:00 AM PKT",
+      "Signal Bar UTC": "2026-09-12 00:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.07573,
+      "Current": 0.07573,
+      "P/L %": 0.0,
+      "Trail Stop": 0.073296,
+      "Take Profit": 0.080598,
       "Status": "OPEN"
+    },
+    {
+      "Coin": "LSK/USDT",
+      "Timeframe": "1h",
+      "Combo": "Ichimoku+MarketStructure",
+      "Signal Bar": "2026-09-12 05:00 AM PKT",
+      "Signal Bar UTC": "2026-09-12 00:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.1615,
+      "Current": 0.1615,
+      "P/L %": 0.0,
+      "Trail Stop": 0.154681,
+      "Take Profit": 0.175138,
+      "Status": "STOPPED (trail)"
+    },
+    {
+      "Coin": "LSK/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-12 05:00 AM PKT",
+      "Signal Bar UTC": "2026-09-12 00:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.1615,
+      "Current": 0.1615,
+      "P/L %": 0.0,
+      "Trail Stop": 0.15355,
+      "Take Profit": 0.1774,
+      "Status": "STOPPED (trail)"
     }
   ]
 }
