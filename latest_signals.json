@@ -1,20 +1,48 @@
 {
-  "last_updated_utc": "2026-09-13T09:33:14.606784+00:00",
+  "last_updated_utc": "2026-09-13T10:15:49.848645+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
+    {
+      "Coin": "THETA/USDT",
+      "Timeframe": "1h",
+      "Combo": "Ichimoku+MarketStructure",
+      "Signal Bar": "2026-09-13 02:00 PM PKT",
+      "Signal Bar UTC": "2026-09-13 09:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.2046,
+      "Current": 0.2046,
+      "P/L %": 0.0,
+      "Trail Stop": 0.194413,
+      "Take Profit": 0.224975,
+      "Status": "OPEN"
+    },
     {
       "Coin": "TRUTH/USDT",
       "Timeframe": "1h",
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-13 01:00 PM PKT",
       "Signal Bar UTC": "2026-09-13 08:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.014105,
-      "Current": 0.014105,
-      "P/L %": 0.0,
+      "Current": 0.014034,
+      "P/L %": -0.5,
       "Trail Stop": 0.013838,
       "Take Profit": 0.014639,
+      "Status": "STOPPED (trail)"
+    },
+    {
+      "Coin": "YGG/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-13 12:00 PM PKT",
+      "Signal Bar UTC": "2026-09-13 07:00:00",
+      "Bars Ago": 2,
+      "Entry": 0.02403,
+      "Current": 0.02374,
+      "P/L %": -1.21,
+      "Trail Stop": 0.023405,
+      "Take Profit": 0.025355,
       "Status": "OPEN"
     }
   ]
