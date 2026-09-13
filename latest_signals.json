@@ -1,19 +1,33 @@
 {
-  "last_updated_utc": "2026-09-13T20:09:05.304703+00:00",
+  "last_updated_utc": "2026-09-13T21:08:37.313742+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
+    {
+      "Coin": "NPC/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-14 01:00 AM PKT",
+      "Signal Bar UTC": "2026-09-13 20:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.02168,
+      "Current": 0.02168,
+      "P/L %": 0.0,
+      "Trail Stop": 0.020492,
+      "Take Profit": 0.024055,
+      "Status": "OPEN"
+    },
     {
       "Coin": "CAKE/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-13 11:00 PM PKT",
       "Signal Bar UTC": "2026-09-13 18:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 2.261,
-      "Current": 2.269,
-      "P/L %": 0.35,
-      "Trail Stop": 2.22,
+      "Current": 2.281,
+      "P/L %": 0.88,
+      "Trail Stop": 2.2295,
       "Take Profit": 2.3775,
       "Status": "OPEN"
     },
@@ -23,27 +37,13 @@
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-13 11:00 PM PKT",
       "Signal Bar UTC": "2026-09-13 18:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.00696,
-      "Current": 0.00708,
-      "P/L %": 1.72,
-      "Trail Stop": 0.006808,
+      "Current": 0.00706,
+      "P/L %": 1.44,
+      "Trail Stop": 0.006832,
       "Take Profit": 0.007264,
       "Status": "OPEN"
-    },
-    {
-      "Coin": "FLOW/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-13 10:00 PM PKT",
-      "Signal Bar UTC": "2026-09-13 17:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.0299,
-      "Current": 0.0301,
-      "P/L %": 0.67,
-      "Trail Stop": 0.0308,
-      "Take Profit": 0.0323,
-      "Status": "STOPPED (trail)"
     }
   ]
 }
