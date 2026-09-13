@@ -1,21 +1,21 @@
 {
-  "last_updated_utc": "2026-09-13T08:09:19.419394+00:00",
+  "last_updated_utc": "2026-09-13T09:33:14.606784+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
     {
-      "Coin": "LTC/USDT",
+      "Coin": "TRUTH/USDT",
       "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-13 10:00 AM PKT",
-      "Signal Bar UTC": "2026-09-13 05:00:00",
-      "Bars Ago": 2,
-      "Entry": 54.32,
-      "Current": 54.09,
-      "P/L %": -0.42,
-      "Trail Stop": 55.6225,
-      "Take Profit": 51.715,
-      "Status": "STOPPED (trail)"
+      "Combo": "Ichimoku+MarketStructure",
+      "Signal Bar": "2026-09-13 01:00 PM PKT",
+      "Signal Bar UTC": "2026-09-13 08:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.014105,
+      "Current": 0.014105,
+      "P/L %": 0.0,
+      "Trail Stop": 0.013838,
+      "Take Profit": 0.014639,
+      "Status": "OPEN"
     }
   ]
 }
