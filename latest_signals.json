@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-13T00:10:52.435510+00:00",
+  "last_updated_utc": "2026-09-13T01:08:14.745440+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,27 +9,55 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-13 04:00 AM PKT",
       "Signal Bar UTC": "2026-09-12 23:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.3277,
-      "Current": 0.3277,
-      "P/L %": 0.0,
-      "Trail Stop": 0.264875,
+      "Current": 0.4003,
+      "P/L %": 22.15,
+      "Trail Stop": 0.27945,
       "Take Profit": 0.45335,
       "Status": "OPEN"
     },
     {
-      "Coin": "CRO/USDT",
+      "Coin": "KNC/USDT",
+      "Timeframe": "1h",
+      "Combo": "Ichimoku+MarketStructure",
+      "Signal Bar": "2026-09-13 05:00 AM PKT",
+      "Signal Bar UTC": "2026-09-13 00:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.147,
+      "Current": 0.147,
+      "P/L %": 0.0,
+      "Trail Stop": 0.143294,
+      "Take Profit": 0.154413,
+      "Status": "STOPPED (trail)"
+    },
+    {
+      "Coin": "KNC/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-13 02:00 AM PKT",
-      "Signal Bar UTC": "2026-09-12 21:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.05969,
-      "Current": 0.06048,
-      "P/L %": 1.32,
-      "Trail Stop": 0.05889,
-      "Take Profit": 0.062495,
-      "Status": "OPEN"
+      "Signal Bar": "2026-09-13 05:00 AM PKT",
+      "Signal Bar UTC": "2026-09-13 00:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.147,
+      "Current": 0.147,
+      "P/L %": 0.0,
+      "Trail Stop": 0.14245,
+      "Take Profit": 0.1561,
+      "Status": "STOPPED (trail)"
+    },
+    {
+      "Coin": "POLYX/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-13 05:00 AM PKT",
+      "Signal Bar UTC": "2026-09-13 00:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.039,
+      "Current": 0.039,
+      "P/L %": 0.0,
+      "Trail Stop": 0.038275,
+      "Take Profit": 0.04045,
+      "Status": "STOPPED (trail)"
     }
   ]
 }
