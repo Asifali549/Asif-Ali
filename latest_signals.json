@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-13T11:07:49.581327+00:00",
+  "last_updated_utc": "2026-09-13T12:09:14.293035+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,27 +9,27 @@
       "Combo": "Ichimoku+MarketStructure",
       "Signal Bar": "2026-09-13 02:00 PM PKT",
       "Signal Bar UTC": "2026-09-13 09:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.2046,
-      "Current": 0.2082,
-      "P/L %": 1.76,
-      "Trail Stop": 0.198638,
+      "Current": 0.2098,
+      "P/L %": 2.54,
+      "Trail Stop": 0.201238,
       "Take Profit": 0.224975,
       "Status": "OPEN"
     },
     {
-      "Coin": "TRUTH/USDT",
+      "Coin": "IOTX/USDT",
       "Timeframe": "1h",
-      "Combo": "Ichimoku+MarketStructure",
-      "Signal Bar": "2026-09-13 01:00 PM PKT",
-      "Signal Bar UTC": "2026-09-13 08:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.014105,
-      "Current": 0.013896,
-      "P/L %": -1.48,
-      "Trail Stop": 0.013838,
-      "Take Profit": 0.014639,
-      "Status": "STOPPED (trail)"
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-13 04:00 PM PKT",
+      "Signal Bar UTC": "2026-09-13 11:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.003366,
+      "Current": 0.003366,
+      "P/L %": 0.0,
+      "Trail Stop": 0.003178,
+      "Take Profit": 0.003741,
+      "Status": "OPEN"
     }
   ]
 }
