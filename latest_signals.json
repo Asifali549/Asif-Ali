@@ -1,35 +1,35 @@
 {
-  "last_updated_utc": "2026-09-12T23:07:48.677813+00:00",
+  "last_updated_utc": "2026-09-13T00:10:52.435510+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
+    {
+      "Coin": "LSK/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-13 04:00 AM PKT",
+      "Signal Bar UTC": "2026-09-12 23:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.3277,
+      "Current": 0.3277,
+      "P/L %": 0.0,
+      "Trail Stop": 0.264875,
+      "Take Profit": 0.45335,
+      "Status": "OPEN"
+    },
     {
       "Coin": "CRO/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-13 02:00 AM PKT",
       "Signal Bar UTC": "2026-09-12 21:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.05969,
-      "Current": 0.05988,
-      "P/L %": 0.32,
-      "Trail Stop": 0.058405,
+      "Current": 0.06048,
+      "P/L %": 1.32,
+      "Trail Stop": 0.05889,
       "Take Profit": 0.062495,
       "Status": "OPEN"
-    },
-    {
-      "Coin": "CSPR/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-13 01:00 AM PKT",
-      "Signal Bar UTC": "2026-09-12 20:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.003119,
-      "Current": 0.003041,
-      "P/L %": -2.5,
-      "Trail Stop": 0.003056,
-      "Take Profit": 0.00329,
-      "Status": "STOPPED (trail)"
     }
   ]
 }
