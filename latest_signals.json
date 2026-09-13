@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-13T07:08:23.062456+00:00",
+  "last_updated_utc": "2026-09-13T08:09:19.419394+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -9,41 +9,13 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-13 10:00 AM PKT",
       "Signal Bar UTC": "2026-09-13 05:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 54.32,
-      "Current": 54.05,
-      "P/L %": -0.5,
+      "Current": 54.09,
+      "P/L %": -0.42,
       "Trail Stop": 55.6225,
       "Take Profit": 51.715,
       "Status": "STOPPED (trail)"
-    },
-    {
-      "Coin": "FORTH/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-13 09:00 AM PKT",
-      "Signal Bar UTC": "2026-09-13 04:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.2832,
-      "Current": 0.3229,
-      "P/L %": 14.02,
-      "Trail Stop": 0.294775,
-      "Take Profit": 0.30215,
-      "Status": "STOPPED (trail)"
-    },
-    {
-      "Coin": "MOCA/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-13 09:00 AM PKT",
-      "Signal Bar UTC": "2026-09-13 04:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.00945,
-      "Current": 0.00944,
-      "P/L %": -0.11,
-      "Trail Stop": 0.00931,
-      "Take Profit": 0.00973,
-      "Status": "OPEN"
     }
   ]
 }
