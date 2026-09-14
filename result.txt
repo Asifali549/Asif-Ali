@@ -1,0 +1,20 @@
+=== ETH Regime + Same-Coin 4h EMA Filter Test - 200 coins ===
+
+
+BASELINE (bina filter, Union AB 1h):
+  Trades: 907
+  Win Rate: 35.5%
+  Profit Factor: 1.86
+  Avg return/trade: 2.214%
+
++ ETH Regime Filter (ETH apni daily EMA200 se upar):
+  Trades: 472
+  Win Rate: 40.5%
+  Profit Factor: 2.50
+  Avg return/trade: 4.033%
+
++ Isi Coin ki 4h EMA(200) Filter:
+  Trades: 774
+  Win Rate: 36.2%
+  Profit Factor: 2.03
+  Avg return/trade: 2.689%
