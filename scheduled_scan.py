@@ -25,11 +25,12 @@ from strategies import STRATEGY_FUNCTIONS, apply_cooldown
 from backtest_engine import compute_atr
 
 TOP_N_COINS = 400
-TIMEFRAME = "1h"
+TIMEFRAME = "1h"   # backtest mein sab se behtareen (Ichimoku+MS PF 4.46, EMA+Breakout PF 2.41)
 LOOKBACK_BARS = 3
 RR_MULTIPLE = 2.0
-CE_MULT = 3.0
+CE_MULT = 4.5
 
+# ntfy.sh topic - isay apna unique naam dein (jo aap ne app mein subscribe kiya)
 NTFY_TOPIC = "asifali549-crypto-alerts-8x2m9k"
 
 COMBOS = [
@@ -58,6 +59,10 @@ def send_notification(title, message):
 
 
 def to_pkt_str(ts):
+    """
+    Exchange ka timestamp UTC hota hai. Isay Pakistan Time (UTC+5) mein
+    convert kar ke insani-parhne-laiq banata hai.
+    """
     ts_utc = pd.Timestamp(ts)
     if ts_utc.tzinfo is None:
         ts_utc = ts_utc.tz_localize("UTC")
@@ -73,6 +78,7 @@ def load_notified_keys():
 
 
 def save_notified_keys(keys_dict):
+    # 24 ghante se purane entries hata dein (file chhoti rahe)
     cutoff = datetime.now(timezone.utc) - timedelta(hours=24)
     pruned = {
         k: v for k, v in keys_dict.items()
@@ -82,7 +88,7 @@ def save_notified_keys(keys_dict):
         json.dump(pruned, f, indent=2)
 
 
-def scan_symbol(exchange, symbol):
+def scan_symbol(exchange, symbol, eth_regime_ok):
     df = fetch_ohlcv(exchange, symbol, TIMEFRAME, limit=max(config.CANDLE_LIMITS.get(TIMEFRAME, 500), 300))
     if df is None or len(df) < 220:
         return []
@@ -98,7 +104,7 @@ def scan_symbol(exchange, symbol):
         sig_a = apply_cooldown(sig_a, config.SIGNAL_COOLDOWN_BARS)
         sig_b = apply_cooldown(sig_b, config.SIGNAL_COOLDOWN_BARS)
 
-        combined = sig_a & sig_b
+        combined = (sig_a & sig_b) & eth_regime_ok
         recent = combined.tail(LOOKBACK_BARS)
         if not recent.any():
             continue
@@ -130,7 +136,7 @@ def scan_symbol(exchange, symbol):
             "Timeframe": TIMEFRAME,
             "Combo": combo_name,
             "Signal Bar": to_pkt_str(signal_bar["timestamp"]),
-            "Signal Bar UTC": str(signal_bar["timestamp"]),
+            "Signal Bar UTC": str(signal_bar["timestamp"]),  # unique-key ke liye (notification dedup)
             "Bars Ago": int(bars_ago),
             "Entry": round(float(entry_price), 6),
             "Current": round(float(current_price), 6),
@@ -145,13 +151,19 @@ def scan_symbol(exchange, symbol):
 
 def main():
     exchange = get_exchange()
+
+    eth_daily = fetch_ohlcv(exchange, "ETH/USDT", "1d", limit=800)
+    eth_ema200 = eth_daily["close"].ewm(span=200, adjust=False).mean()
+    eth_regime_ok = bool(eth_daily["close"].iloc[-1] > eth_ema200.iloc[-1])
+    print(f"ETH Regime: {'BULLISH (signals ON)' if eth_regime_ok else 'BEARISH (signals OFF)'}")
+
     coins = get_coin_list(exchange)[:TOP_N_COINS]
     print(f"Scanning {len(coins)} coins on {TIMEFRAME}...")
 
     all_results = []
     for symbol in coins:
         try:
-            r = scan_symbol(exchange, symbol)
+            r = scan_symbol(exchange, symbol, eth_regime_ok)
             all_results.extend(r)
         except Exception as e:
             print(f"  [SKIP] {symbol}: {e}")
@@ -160,6 +172,7 @@ def main():
         "last_updated_utc": datetime.now(timezone.utc).isoformat(),
         "coins_scanned": len(coins),
         "timeframe": TIMEFRAME,
+        "eth_regime_bullish": eth_regime_ok,
         "signals": all_results,
     }
 
@@ -168,13 +181,14 @@ def main():
 
     print(f"\nDone. {len(all_results)} fresh signals saved to latest_signals.json")
 
+    # ---- NAYE signals par notification bhejein (purane repeat na hon) ----
     notified = load_notified_keys()
     new_count = 0
 
     for sig in all_results:
         key = f"{sig['Coin']}|{sig['Combo']}|{sig['Signal Bar UTC']}"
         if key in notified:
-            continue
+            continue  # ye pehle hi bhej chuke hain
 
         title = f"🚀 {sig['Coin']} - {sig['Combo']}"
         message = (
