@@ -1,18 +1,32 @@
 {
-  "last_updated_utc": "2026-09-14T03:08:42.325063+00:00",
+  "last_updated_utc": "2026-09-14T04:09:32.484051+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
+    {
+      "Coin": "BR/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-14 08:00 AM PKT",
+      "Signal Bar UTC": "2026-09-14 03:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.38366,
+      "Current": 0.38366,
+      "P/L %": 0.0,
+      "Trail Stop": 0.340548,
+      "Take Profit": 0.469885,
+      "Status": "STOPPED (trail)"
+    },
     {
       "Coin": "AERO/USDT",
       "Timeframe": "1h",
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-14 07:00 AM PKT",
       "Signal Bar UTC": "2026-09-14 02:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.5729,
-      "Current": 0.5729,
-      "P/L %": 0.0,
+      "Current": 0.5709,
+      "P/L %": -0.35,
       "Trail Stop": 0.5592,
       "Take Profit": 0.6003,
       "Status": "OPEN"
@@ -23,12 +37,26 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-14 07:00 AM PKT",
       "Signal Bar UTC": "2026-09-14 02:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 2.2168,
-      "Current": 2.2168,
-      "P/L %": 0.0,
-      "Trail Stop": 2.1381,
+      "Current": 2.249,
+      "P/L %": 1.45,
+      "Trail Stop": 2.158825,
       "Take Profit": 2.3742,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "CPOOL/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-14 08:00 AM PKT",
+      "Signal Bar UTC": "2026-09-14 03:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.02504,
+      "Current": 0.02504,
+      "P/L %": 0.0,
+      "Trail Stop": 0.02362,
+      "Take Profit": 0.02788,
       "Status": "OPEN"
     }
   ]
