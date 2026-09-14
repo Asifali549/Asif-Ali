@@ -26,7 +26,6 @@ from dashboard_helpers import (
     get_tf_volume_change, get_24h_range_distance, get_historical_performance,
     get_btc_correlation, ALL_TIMEFRAMES, compute_overall_score,
 )
-from telegram_alert import send_telegram_alert
 
 NTFY_TOPIC_STRONG = "asifali549-strong-signals-9k3m7x"
 
@@ -59,9 +58,9 @@ def save_notified_keys(keys_dict):
 
 TOP_N_COINS = 400
 SIGNAL_TIMEFRAME = "1h"
-CE_A = {"period": 16, "multiplier": 3.0}
-CE_B = {"period": 12, "multiplier": 3.0}
-CE_D = {"period": 16, "multiplier": 3.0}
+CE_A = {"period": 16, "multiplier": 4.5}
+CE_B = {"period": 12, "multiplier": 4.5}
+CE_D = {"period": 16, "multiplier": 4.5}
 RR_MULTIPLE = 2.0
 
 COLORABLE_COLUMNS = (
@@ -76,6 +75,12 @@ def main():
     futures_exchange = get_futures_exchange()
 
     fg_value, fg_label = get_fear_greed()
+
+    print("ETH daily benchmark data fetch kar rahe hain (ETH Regime Filter ke liye)...")
+    eth_daily = fetch_ohlcv(exchange, "ETH/USDT", "1d", limit=800)
+    eth_ema200 = eth_daily["close"].ewm(span=200, adjust=False).mean()
+    eth_regime_ok = bool(eth_daily["close"].iloc[-1] > eth_ema200.iloc[-1])
+    print(f"ETH Regime: {'BULLISH (signals ON)' if eth_regime_ok else 'BEARISH (signals OFF)'}")
 
     print("BTC daily benchmark data fetch kar rahe hain (NEW system ke liye)...")
     btc_daily = fetch_ohlcv(exchange, "BTC/USDT", "1d", limit=800)
@@ -96,8 +101,8 @@ def main():
             ms_sig = apply_cooldown(STRATEGY_FUNCTIONS["market_structure"](df, config.STRATEGY_PARAMS["market_structure"]), config.SIGNAL_COOLDOWN_BARS)
             ema_sig = apply_cooldown(STRATEGY_FUNCTIONS["ema_crossover"](df, config.STRATEGY_PARAMS["ema_crossover"]), config.SIGNAL_COOLDOWN_BARS)
             breakout_sig = apply_cooldown(STRATEGY_FUNCTIONS["breakout"](df, config.STRATEGY_PARAMS["breakout"]), config.SIGNAL_COOLDOWN_BARS)
-            combo_a = ichi_sig & ms_sig
-            combo_b = ema_sig & breakout_sig
+            combo_a = (ichi_sig & ms_sig) & eth_regime_ok
+            combo_b = (ema_sig & breakout_sig) & eth_regime_ok
 
             for combo_sig, combo_name, ce in [(combo_a, "Ichimoku+MS", CE_A), (combo_b, "EMA+Breakout", CE_B)]:
                 if combo_sig.tail(3).any():
@@ -118,7 +123,7 @@ def main():
         except Exception as e:
             print(f"  [SKIP-OLD] {symbol}: {e}")
 
-        # ---- NEW system: AdvancedConfluence_v1 ----
+        # ---- NEW system: AdvancedConfluence_v1 (ETH Regime is NOT applied yahan) ----
         try:
             result_new = compute_confluence(df, btc_daily, CONF_PARAMS, usdt_d_weak=None)
             structure_signal = result_new["bos"] | result_new["choch"]
@@ -191,6 +196,7 @@ def main():
         "coins_scanned": len(coins),
         "fear_greed_value": fg_value,
         "fear_greed_label": fg_label,
+        "eth_regime_bullish": eth_regime_ok,
         "signals": final_rows,
     }
 
@@ -216,7 +222,6 @@ def main():
             f"Trail Stop: {row['Trail Stop']}"
         )
         send_strong_notification(title, message)
-        send_telegram_alert(f"<b>{title}</b>\n{message}")
         notified[key] = datetime.now(timezone.utc).isoformat()
         new_count += 1
 
