@@ -1,0 +1,10 @@
+=== Market Breadth Filter Test - 400 coins ===
+
+
+BASELINE (bina filter, Union AB 1h):
+  Trades: 1884
+  Win Rate: 34.9%
+  Profit Factor: 1.40
+  Avg return/trade: 1.085%
+
++ Market Breadth Filter (>= 50.0% coins apni EMA200 se upar): koi trades nahi
