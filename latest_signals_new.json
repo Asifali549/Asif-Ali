@@ -1,22 +1,22 @@
 {
-  "last_updated_utc": "2026-09-14T22:14:52.571007+00:00",
+  "last_updated_utc": "2026-09-14T23:14:01.053133+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
     {
-      "Coin": "GPS/USDT",
+      "Coin": "2Z/USDT",
       "Timeframe": "1h",
       "Combo": "NEW_AdvancedConfluence_v1",
       "Structure": "BOS",
       "Score": "6/10",
-      "Signal Bar": "2026-09-15 01:00 AM PKT",
-      "Signal Bar UTC": "2026-09-14 20:00:00",
-      "Bars Ago": 1,
-      "Entry": 0.01069,
-      "Current": 0.0107,
-      "P/L %": 0.09,
-      "Trail Stop": 0.010426,
-      "Take Profit": 0.011221,
+      "Signal Bar": "2026-09-15 03:00 AM PKT",
+      "Signal Bar UTC": "2026-09-14 22:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.04859,
+      "Current": 0.04859,
+      "P/L %": 0.0,
+      "Trail Stop": 0.047448,
+      "Take Profit": 0.050874,
       "Status": "OPEN"
     }
   ]
