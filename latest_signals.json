@@ -1,6 +1,35 @@
 {
-  "last_updated_utc": "2026-09-14T02:09:21.648785+00:00",
+  "last_updated_utc": "2026-09-14T03:08:42.325063+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
-  "signals": []
+  "signals": [
+    {
+      "Coin": "AERO/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-14 07:00 AM PKT",
+      "Signal Bar UTC": "2026-09-14 02:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.5729,
+      "Current": 0.5729,
+      "P/L %": 0.0,
+      "Trail Stop": 0.5592,
+      "Take Profit": 0.6003,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "PENDLE/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-14 07:00 AM PKT",
+      "Signal Bar UTC": "2026-09-14 02:00:00",
+      "Bars Ago": 0,
+      "Entry": 2.2168,
+      "Current": 2.2168,
+      "P/L %": 0.0,
+      "Trail Stop": 2.1381,
+      "Take Profit": 2.3742,
+      "Status": "OPEN"
+    }
+  ]
 }
