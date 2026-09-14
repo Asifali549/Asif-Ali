@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-14T16:09:30.613119+00:00",
+  "last_updated_utc": "2026-09-14T17:07:09.465518+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "eth_regime_bullish": true,
@@ -10,13 +10,27 @@
       "Combo": "EMA+Breakout",
       "Signal Bar": "2026-09-14 08:00 PM PKT",
       "Signal Bar UTC": "2026-09-14 15:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.0586,
-      "Current": 0.0586,
-      "P/L %": 0.0,
+      "Current": 0.0573,
+      "P/L %": -2.22,
       "Trail Stop": 0.054975,
       "Take Profit": 0.06585,
       "Status": "OPEN"
+    },
+    {
+      "Coin": "BLUAI/USDT",
+      "Timeframe": "1h",
+      "Combo": "EMA+Breakout",
+      "Signal Bar": "2026-09-14 07:00 PM PKT",
+      "Signal Bar UTC": "2026-09-14 14:00:00",
+      "Bars Ago": 2,
+      "Entry": 0.012025,
+      "Current": 0.011887,
+      "P/L %": -1.15,
+      "Trail Stop": 0.011977,
+      "Take Profit": 0.01212,
+      "Status": "STOPPED (trail)"
     }
   ]
 }
