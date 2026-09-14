@@ -1,21 +1,6 @@
 {
-  "last_updated_utc": "2026-09-13T23:08:18.004462+00:00",
+  "last_updated_utc": "2026-09-14T00:11:52.146174+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
-  "signals": [
-    {
-      "Coin": "NPC/USDT",
-      "Timeframe": "1h",
-      "Combo": "EMA+Breakout",
-      "Signal Bar": "2026-09-14 01:00 AM PKT",
-      "Signal Bar UTC": "2026-09-13 20:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.02168,
-      "Current": 0.02056,
-      "P/L %": -5.17,
-      "Trail Stop": 0.020737,
-      "Take Profit": 0.024055,
-      "Status": "STOPPED (trail)"
-    }
-  ]
+  "signals": []
 }
