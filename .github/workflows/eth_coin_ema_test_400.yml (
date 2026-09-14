@@ -23,4 +23,4 @@ jobs:
           git add result_400.txt
           git diff --staged --quiet || git commit -m "ETH and coin EMA filter test 400 result"
           git pull --rebase origin main
-          git push
+          git push 
