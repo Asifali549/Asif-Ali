@@ -152,11 +152,7 @@ else:
         "1 ghante mein pehla result aa jayega."
     )
 
-st.markdown("---")
-
-
-# ============================================================
-# SECTION 2: MANUAL (on-demand, apni marzi ke toggles ke sath)
+st.markdown("---")# SECTION 2: MANUAL (on-demand, apni marzi ke toggles ke sath)
 # ============================================================
 st.header("🔍 Manual Scan (apni marzi ke toggles)")
 
@@ -358,4 +354,4 @@ if os.path.exists("trade_journal.csv"):
     journal_csv = df_journal.to_csv(index=False).encode("utf-8")
     st.download_button("📥 Journal CSV Download Karein", journal_csv, "trade_journal.csv", "text/csv")
 else:
-    st.info("Abhi tak koi journal entry nahi — pehla background scan chalne ke baad yahan record nazar aayega."          
+    st.info("Abhi tak koi journal entry nahi — pehla background scan chalne ke baad yahan record nazar aayega.") 
