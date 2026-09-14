@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-14T20:15:43.769527+00:00",
+  "last_updated_utc": "2026-09-14T21:13:59.766795+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -11,28 +11,12 @@
       "Score": "6/10",
       "Signal Bar": "2026-09-14 11:00 PM PKT",
       "Signal Bar UTC": "2026-09-14 18:00:00",
-      "Bars Ago": 1,
-      "Entry": 0.2138,
-      "Current": 0.2124,
-      "P/L %": -0.65,
-      "Trail Stop": 0.207963,
-      "Take Profit": 0.225475,
-      "Status": "OPEN"
-    },
-    {
-      "Coin": "SPX/USDT",
-      "Timeframe": "1h",
-      "Combo": "NEW_AdvancedConfluence_v1",
-      "Structure": "CHoCH",
-      "Score": "6/10",
-      "Signal Bar": "2026-09-14 10:00 PM PKT",
-      "Signal Bar UTC": "2026-09-14 17:00:00",
       "Bars Ago": 2,
-      "Entry": 0.5162,
-      "Current": 0.512,
-      "P/L %": -0.81,
-      "Trail Stop": 0.499475,
-      "Take Profit": 0.556837,
+      "Entry": 0.2138,
+      "Current": 0.213,
+      "P/L %": -0.37,
+      "Trail Stop": 0.208281,
+      "Take Profit": 0.225475,
       "Status": "OPEN"
     },
     {
@@ -43,12 +27,28 @@
       "Score": "6/10",
       "Signal Bar": "2026-09-14 11:00 PM PKT",
       "Signal Bar UTC": "2026-09-14 18:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.12778,
       "Current": 0.12772,
       "P/L %": -0.05,
       "Trail Stop": 0.124874,
       "Take Profit": 0.133868,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "GPS/USDT",
+      "Timeframe": "1h",
+      "Combo": "NEW_AdvancedConfluence_v1",
+      "Structure": "BOS",
+      "Score": "6/10",
+      "Signal Bar": "2026-09-15 01:00 AM PKT",
+      "Signal Bar UTC": "2026-09-14 20:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.01069,
+      "Current": 0.01069,
+      "P/L %": 0.0,
+      "Trail Stop": 0.010424,
+      "Take Profit": 0.011221,
       "Status": "OPEN"
     }
   ]
