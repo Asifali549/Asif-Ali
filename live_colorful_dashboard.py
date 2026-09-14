@@ -32,6 +32,12 @@ st.warning(
     "gaya. 🟢 Green = signal ke HAQ mein, 🔴 Red = KHILAF."
 )
 
+st.sidebar.markdown("---")
+st.sidebar.header("💰 Position Sizing Calculator")
+total_capital = st.sidebar.number_input("Total Capital ($)", min_value=0.0, value=1000.0, step=100.0)
+risk_pct_per_trade = st.sidebar.number_input("Risk % per Trade", min_value=0.1, max_value=100.0, value=1.0, step=0.5)
+st.sidebar.caption("Har trade mein Entry aur Trail Stop ke farq ke mutabiq, khud-kar position size calculate hoga.")
+
 CE_A = {"period": 16, "multiplier": 4.5}
 CE_B = {"period": 12, "multiplier": 4.5}
 RR_MULTIPLE = 2.0
@@ -42,7 +48,7 @@ COLORABLE_COLUMNS = (
     + [f"Chg {tf}" for tf in ALL_TIMEFRAMES]
 )
 
-COMPACT_COLUMNS = ["Rank", "Coin", "Combo", "Overall Score %", "Verdict", "Entry", "Trail Stop", "Take Profit"]
+COMPACT_COLUMNS = ["Rank", "Coin", "Signal Time (PKT)", "Combo", "Overall Score %", "Verdict", "Entry", "Trail Stop", "Take Profit"]
 
 
 def style_and_show(df, compact):
@@ -54,6 +60,59 @@ def style_and_show(df, compact):
         return [color_value(col, row[col]) if col in df.columns else "" for col in df.columns]
 
     st.dataframe(df.style.apply(apply_row_colors, axis=1), use_container_width=True, hide_index=True)
+
+
+def to_pkt_str(ts):
+    ts_utc = pd.Timestamp(ts)
+    if ts_utc.tzinfo is None:
+        ts_utc = ts_utc.tz_localize("UTC")
+    ts_pkt = ts_utc.tz_convert("Asia/Karachi")
+    return ts_pkt.strftime("%Y-%m-%d %I:%M %p PKT")
+
+
+def tradingview_url(coin):
+    base = coin.split("/")[0]
+    return f"https://www.tradingview.com/chart/?symbol=KUCOIN:{base}USDT"
+
+
+def show_charts_and_copy(df, key_prefix):
+    """Har coin ke liye TradingView chart link + poora trade setup copy karne ka option."""
+    if df is None or len(df) == 0:
+        return
+    st.markdown("**📊 Chart dekhein / Trade setup copy karein:**")
+    coin_options = [f"{row['Coin']} — {row.get('Combo', '')}" for _, row in df.iterrows()]
+    picked = st.selectbox("Coin chunein", coin_options, key=f"{key_prefix}_pick")
+    picked_idx = coin_options.index(picked)
+    row = df.iloc[picked_idx]
+
+    tv_url = tradingview_url(row["Coin"])
+    st.markdown(f"[📈 {row['Coin']} ka TradingView chart kholein]({tv_url})")
+
+    entry_val = row.get("Entry")
+    stop_val = row.get("Trail Stop")
+    position_line = ""
+    if entry_val and stop_val and entry_val > stop_val:
+        risk_per_unit = entry_val - stop_val
+        risk_dollars = total_capital * (risk_pct_per_trade / 100)
+        position_size_units = risk_dollars / risk_per_unit
+        position_value = position_size_units * entry_val
+        st.info(
+            f"💰 **Position Size** (Capital ${total_capital:,.0f}, Risk {risk_pct_per_trade}%): "
+            f"**{position_size_units:.4f} {row['Coin'].split('/')[0]}** "
+            f"(~${position_value:,.2f}, agar SL laga to nuksan ~${risk_dollars:,.2f})"
+        )
+        position_line = f"Position Size: {position_size_units:.4f} {row['Coin'].split('/')[0]} (~${position_value:,.2f})\n"
+
+    setup_text = (
+        f"Coin: {row['Coin']}\n"
+        f"Combo: {row.get('Combo', '')}\n"
+        f"Signal Time: {row.get('Signal Time (PKT)', 'N/A')}\n"
+        f"Entry: {row.get('Entry', 'N/A')}\n"
+        f"Trail Stop: {row.get('Trail Stop', 'N/A')}\n"
+        f"Take Profit: {row.get('Take Profit', 'N/A')}\n"
+        f"{position_line}"
+    )
+    st.code(setup_text, language=None)
 
 
 # ============================================================
@@ -83,6 +142,7 @@ if os.path.exists("dashboard_signals.json"):
     if live_data["signals"]:
         df_live = pd.DataFrame(live_data["signals"])
         style_and_show(df_live, compact_live)
+        show_charts_and_copy(df_live, "live")
     else:
         st.info("Is waqt koi fresh signal nahi (last scan mein).")
 else:
@@ -133,9 +193,13 @@ if st.button("🎨 Manual Scan Chalayen", type="primary"):
     futures_exchange = get_futures_exchange() if (show_funding or show_oi or show_long_short) else None
 
     with st.spinner("ETH Regime check kar rahe hain..."):
-        eth_daily = fetch_ohlcv(exchange, "ETH/USDT", "1d", limit=800)
-        eth_ema200 = eth_daily["close"].ewm(span=200, adjust=False).mean()
-        eth_regime_ok = bool(eth_daily["close"].iloc[-1] > eth_ema200.iloc[-1])
+        try:
+            eth_daily = fetch_ohlcv(exchange, "ETH/USDT", "1d", limit=800)
+            eth_ema200 = eth_daily["close"].ewm(span=200, adjust=False).mean()
+            eth_regime_ok = bool(eth_daily["close"].iloc[-1] > eth_ema200.iloc[-1])
+        except Exception as e:
+            st.warning(f"⚠️ ETH Regime check nahi ho saka ({e}) — is dafa BINA filter ke scan chalega.")
+            eth_regime_ok = True
     if eth_regime_ok:
         st.success("✅ ETH Regime: BULLISH (signals ON)")
     else:
@@ -182,6 +246,7 @@ if st.button("🎨 Manual Scan Chalayen", type="primary"):
                         tp_price = entry_price + risk * RR_MULTIPLE
                         signal_coins.append({
                             "Coin": symbol, "Combo": combo_name, "Bars Ago": len(df) - 1 - idx,
+                            "Signal Time (PKT)": to_pkt_str(df.loc[idx, "timestamp"]),
                             "Entry": round(entry_price, 6), "Current": round(current_price, 6),
                             "Trail Stop": round(chandelier, 6), "Take Profit": round(tp_price, 6),
                             "_df": df, "_sig": combo_sig, "_ce": ce,
@@ -265,6 +330,7 @@ if st.button("🎨 Manual Scan Chalayen", type="primary"):
 
     df_final = pd.DataFrame(final_rows)
     style_and_show(df_final, compact_manual)
+    show_charts_and_copy(df_final, "manual")
 
     csv = df_final.to_csv(index=False).encode("utf-8")
     st.download_button("📥 CSV Download Karein", csv, "manual_dashboard.csv", "text/csv")
@@ -273,3 +339,23 @@ st.caption(
     "🟢 Green = signal ke HAQ mein. 🔴 Red = KHILAF. Rank 1 = sab se zyada "
     "'Overall Score' wala (best) trade. Compact View se sirf zaroori columns dikhte hain."
 )
+
+st.markdown("---")
+st.header("📔 Trade Journal (Khud-kaar Record)")
+if os.path.exists("trade_journal.csv"):
+    df_journal = pd.read_csv("trade_journal.csv")
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Total Signals Logged", len(df_journal))
+    if "Verdict" in df_journal.columns:
+        strong_count = df_journal["Verdict"].astype(str).str.contains("Strong", na=False).sum()
+        col2.metric("Strong Signals", strong_count)
+        col3.metric("Normal Signals", len(df_journal) - strong_count)
+
+    show_journal = st.checkbox("Poora Journal Dikhayein", value=False)
+    if show_journal:
+        st.dataframe(df_journal.sort_values("Logged At (UTC)", ascending=False), use_container_width=True, hide_index=True)
+
+    journal_csv = df_journal.to_csv(index=False).encode("utf-8")
+    st.download_button("📥 Journal CSV Download Karein", journal_csv, "trade_journal.csv", "text/csv")
+else:
+    st.info("Abhi tak koi journal entry nahi — pehla background scan chalne ke baad yahan record nazar aayega.")
