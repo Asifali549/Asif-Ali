@@ -21,6 +21,9 @@ from strategies import STRATEGY_FUNCTIONS, apply_cooldown
 from backtest_engine import compute_atr
 
 
+# ============================================================
+# PAGE CONFIG
+# ============================================================
 st.set_page_config(page_title="Crypto Confluence Screener", layout="wide")
 st.title("📊 Crypto Confluence Screener")
 
@@ -36,6 +39,7 @@ TIMEFRAMES_TO_SCAN = ["15m", "1h", "4h"]
 
 
 def to_pkt_str(ts):
+    """Exchange ka timestamp UTC hota hai - Pakistan Time (UTC+5) mein dikhate hain."""
     ts_utc = pd.Timestamp(ts)
     if ts_utc.tzinfo is None:
         ts_utc = ts_utc.tz_localize("UTC")
@@ -58,6 +62,9 @@ def style_results(df_results):
     return df_results.style.map(color_status, subset=["Status"]).map(color_pnl, subset=["P/L %"])
 
 
+# ============================================================
+# SECTION 1: BACKGROUND AUTO-SCAN RESULT (foran, koi wait nahi)
+# ============================================================
 st.header("🔴 LIVE — Background Auto-Scan (har 1 ghanta, 400 coins, 1h)")
 
 if os.path.exists("latest_signals.json"):
@@ -89,6 +96,9 @@ else:
 st.markdown("---")
 
 
+# ============================================================
+# SECTION 2: MANUAL DEEP SCAN (sab coins x sab timeframes, waqt lagta hai)
+# ============================================================
 st.header("🔍 Manual Deep Scan (poora control, magar waqt lagta hai)")
 
 st.sidebar.header("Deep Scan Settings")
@@ -112,7 +122,7 @@ lookback_bars = st.sidebar.slider(
 )
 
 rr_multiple = st.sidebar.number_input("Take Profit = Risk x", value=2.0, step=0.5)
-ce_mult = st.sidebar.number_input("Chandelier ATR Multiplier", value=3.0, step=0.5)
+ce_mult = st.sidebar.number_input("Chandelier ATR Multiplier", value=4.5, step=0.5)
 st.sidebar.caption("Chandelier Period har combo apna alag, tasdeeq-shuda (16 ya 12) khud istemal karta hai.")
 
 st.sidebar.markdown("---")
@@ -123,7 +133,11 @@ st.sidebar.warning(
 run_scan = st.sidebar.button("🔍 Deep Scan Chalayen", type="primary", use_container_width=True)
 
 
-def scan_symbol_timeframe(exchange, symbol, timeframe, lookback_bars, ce_mult, rr_multiple):
+# ============================================================
+# SCAN LOGIC
+# ============================================================
+def scan_symbol_timeframe(exchange, symbol, timeframe, lookback_bars, ce_mult, rr_multiple, eth_regime_ok):
+    """Ek symbol/timeframe ka data ek dafa fetch karta hai, phir dono combos apne apne CE ke sath check karta hai."""
     df = fetch_ohlcv(exchange, symbol, timeframe, limit=max(config.CANDLE_LIMITS.get(timeframe, 500), 300))
     if df is None or len(df) < 220:
         return []
@@ -142,7 +156,7 @@ def scan_symbol_timeframe(exchange, symbol, timeframe, lookback_bars, ce_mult, r
         sig_a = apply_cooldown(sig_a, config.SIGNAL_COOLDOWN_BARS)
         sig_b = apply_cooldown(sig_b, config.SIGNAL_COOLDOWN_BARS)
 
-        combined = sig_a & sig_b
+        combined = (sig_a & sig_b) & eth_regime_ok
         recent = combined.tail(lookback_bars)
         if not recent.any():
             continue
@@ -186,12 +200,24 @@ def scan_symbol_timeframe(exchange, symbol, timeframe, lookback_bars, ce_mult, r
     return found
 
 
+# ============================================================
+# MAIN
+# ============================================================
 if run_scan:
     if not timeframes_selected:
         st.error("Kam az kam ek timeframe select karein.")
         st.stop()
 
     exchange = get_exchange()
+
+    with st.spinner("ETH Regime check kar rahe hain..."):
+        eth_daily = fetch_ohlcv(exchange, "ETH/USDT", "1d", limit=800)
+        eth_ema200 = eth_daily["close"].ewm(span=200, adjust=False).mean()
+        eth_regime_ok = bool(eth_daily["close"].iloc[-1] > eth_ema200.iloc[-1])
+    if eth_regime_ok:
+        st.success("✅ ETH Regime: BULLISH (signals ON)")
+    else:
+        st.warning("⚠️ ETH Regime: BEARISH — koi naya signal nahi milega (ETH apni EMA200 se neeche hai)")
 
     try:
         if coin_mode.startswith("KuCoin"):
@@ -222,7 +248,7 @@ if run_scan:
         for tf in timeframes_selected:
             call_count += 1
             try:
-                r = scan_symbol_timeframe(exchange, symbol, tf, lookback_bars, ce_mult, rr_multiple)
+                r = scan_symbol_timeframe(exchange, symbol, tf, lookback_bars, ce_mult, rr_multiple, eth_regime_ok)
                 results.extend(r)
             except Exception as e:
                 st.sidebar.warning(f"{symbol} {tf}: {e}")
@@ -236,6 +262,7 @@ if run_scan:
         open_trades = df_results[df_results["Status"] == "OPEN"]
         st.success(f"✅ {len(df_results)} fresh signals mile ({len(open_trades)} abhi bhi OPEN hain)")
 
+        # Filters
         col1, col2 = st.columns(2)
         with col1:
             filter_tf = st.multiselect("Timeframe filter", sorted(df_results["Timeframe"].unique()),
@@ -255,19 +282,31 @@ if run_scan:
 
 else:
     st.info("👈 Sidebar mein settings choose karein aur 'Scan Chalayen' dabayein.")
-    st.markdown("### Ye screener kya karta hai")
-    st.markdown("- Default: **KuCoin ke sab USDT spot coins** (meme/leveraged automatically exclude)")
-    st.markdown("- Har coin par **har timeframe** (15m, 1h, 4h) check hota hai")
-    st.markdown("- **Dono combos** (Ichimoku+MarketStructure, EMA+Breakout) test hote hain")
-    st.markdown("- Har fresh signal ke liye Chandelier trailing stop aur Take Profit calculate hota hai")
-    st.markdown("- Jo trades abhi tak stop/target nahi hue, unhe **OPEN** dikhata hai")
+    st.markdown(
+        """
+        ### Ye screener kya karta hai
+        - Default: **KuCoin ke sab USDT spot coins** (meme coins jaise DOGE/SHIB/PEPE, aur
+          leveraged/binary tokens jaise BTCUP/BTCDOWN automatically exclude)
+        - Har coin par **har timeframe** (15m, 1h, 4h) check hota hai
+        - Har timeframe par **teeno combos** (Ichimoku+MarketStructure, EMA+Breakout, MarketStructure+CVD) test hote hain
+          — koi combo kisi khaas timeframe tak mehdood nahi
+        - Har fresh signal ke liye Chandelier trailing stop aur Take Profit calculate hota hai
+        - Jo trades abhi tak stop/target nahi hue, unhe **OPEN** dikhata hai
+        """
+    )
 
 
+# ============================================================
+# SECTION 3: VOLATILITY SQUEEZE SCANNER (watch-list tool, trading signal NAHI)
+# ============================================================
 st.markdown("---")
 st.header("🔭 Volatility Squeeze Scanner (Watch-List)")
 st.caption(
     "⚠️ Ye trading SIGNAL nahi hai — sirf ye batata hai ke kis coin ki volatility "
-    "ghair-mamooli tor par kam ho gayi hai. Sirf watch-list ke liye istemal karein."
+    "ghair-mamooli tor par kam ho gayi hai (Bollinger Bands, Keltner Channel ke andar "
+    "aa gaye hain). Squeeze = 'koi bari harkat aane wali hai', lekin **direction "
+    "(upar ya neeche) pata nahi**. Sirf watch-list ke liye istemal karein, akele "
+    "entry ki wajah na banayein."
 )
 
 col1, col2, col3 = st.columns(3)
@@ -294,11 +333,13 @@ if st.button("🔍 Squeeze Scan Chalayen", type="primary", key="sq_btn"):
         if df is not None and len(df) >= sq_bb_period + 5:
             close, high, low = df["close"], df["high"], df["low"]
 
+            # Bollinger Bands (2 std dev)
             bb_mid = close.rolling(sq_bb_period).mean()
             bb_std = close.rolling(sq_bb_period).std()
             bb_upper = bb_mid + 2 * bb_std
             bb_lower = bb_mid - 2 * bb_std
 
+            # Keltner Channel (1.5x ATR)
             tr = pd.concat([
                 high - low, (high - close.shift(1)).abs(), (low - close.shift(1)).abs()
             ], axis=1).max(axis=1)
@@ -309,6 +350,7 @@ if st.button("🔍 Squeeze Scan Chalayen", type="primary", key="sq_btn"):
             is_squeeze = (bb_upper.iloc[-1] < kc_upper.iloc[-1]) and (bb_lower.iloc[-1] > kc_lower.iloc[-1])
 
             if is_squeeze:
+                # Kitne bars se squeeze mein hai (consecutive count)
                 squeeze_series = (bb_upper < kc_upper) & (bb_lower > kc_lower)
                 bars_in_squeeze = 0
                 for val in squeeze_series.iloc[::-1]:
@@ -335,6 +377,9 @@ if st.button("🔍 Squeeze Scan Chalayen", type="primary", key="sq_btn"):
         st.info("Is waqt koi coin squeeze mein nahi mila.")
 
 
+# ============================================================
+# SECTION 4: NEW ADVANCED CONFLUENCE SYSTEM (bilkul ALAG, purana chhua nahi)
+# ============================================================
 st.markdown("---")
 st.header("🎯 NEW — Advanced Confluence System (Alag/Independent)")
 st.caption(
@@ -367,4 +412,4 @@ else:
     st.info(
         "NEW system ka background scan abhi setup nahi hua ya pehli baar chalne ka wait ho raha hai. "
         "GitHub repo mein '.github/workflows/scan_new.yml' hona chahiye — 1 ghante mein pehla result aa jayega."
-    
+    )
