@@ -367,4 +367,4 @@ else:
     st.info(
         "NEW system ka background scan abhi setup nahi hua ya pehli baar chalne ka wait ho raha hai. "
         "GitHub repo mein '.github/workflows/scan_new.yml' hona chahiye — 1 ghante mein pehla result aa jayega."
-    )
+    
