@@ -30,6 +30,15 @@ from dashboard_helpers import (
 NTFY_TOPIC_STRONG = "asifali549-strong-signals-9k3m7x"
 
 
+def to_pkt_str(ts):
+    """Exchange ka timestamp UTC hota hai - Pakistan Time (UTC+5) mein badal dete hain."""
+    ts_utc = pd.Timestamp(ts)
+    if ts_utc.tzinfo is None:
+        ts_utc = ts_utc.tz_localize("UTC")
+    ts_pkt = ts_utc.tz_convert("Asia/Karachi")
+    return ts_pkt.strftime("%Y-%m-%d %I:%M %p PKT")
+
+
 def send_strong_notification(title, message):
     try:
         requests.post(
@@ -56,6 +65,57 @@ def save_notified_keys(keys_dict):
         json.dump(pruned, f, indent=2)
 
 
+JOURNAL_FILE = "trade_journal.csv"
+JOURNAL_COLUMNS = [
+    "Logged At (UTC)", "Coin", "Combo", "Verdict", "Overall Score %",
+    "Signal Time (PKT)", "Entry", "Trail Stop", "Take Profit",
+]
+
+
+def load_journal_keys():
+    """Pehle se journal mein maujood signals ki unique keys wapas karta hai
+    (dobara na likhein)."""
+    if not os.path.exists(JOURNAL_FILE):
+        return set()
+    try:
+        df = pd.read_csv(JOURNAL_FILE)
+        return set(zip(df["Coin"], df["Combo"], df["Entry"].astype(str), df["Trail Stop"].astype(str)))
+    except Exception:
+        return set()
+
+
+def append_to_journal(final_rows):
+    """Naye signals (jo pehle journal mein nahi the) ko journal file mein
+    JOROD (append) karta hai - purana record kabhi nahi mitta."""
+    existing_keys = load_journal_keys()
+    new_rows = []
+    logged_at = datetime.now(timezone.utc).isoformat()
+
+    for row in final_rows:
+        key = (row.get("Coin"), row.get("Combo"), str(row.get("Entry")), str(row.get("Trail Stop")))
+        if key in existing_keys:
+            continue
+        new_rows.append({
+            "Logged At (UTC)": logged_at,
+            "Coin": row.get("Coin"), "Combo": row.get("Combo"),
+            "Verdict": row.get("Verdict"), "Overall Score %": row.get("Overall Score %"),
+            "Signal Time (PKT)": row.get("Signal Time (PKT)"),
+            "Entry": row.get("Entry"), "Trail Stop": row.get("Trail Stop"),
+            "Take Profit": row.get("Take Profit"),
+        })
+
+    if not new_rows:
+        print("Journal: koi naya signal nahi (sab pehle se maujood hain)")
+        return
+
+    df_new = pd.DataFrame(new_rows)
+    if os.path.exists(JOURNAL_FILE):
+        df_new.to_csv(JOURNAL_FILE, mode="a", header=False, index=False)
+    else:
+        df_new.to_csv(JOURNAL_FILE, mode="w", header=True, index=False)
+    print(f"Journal: {len(new_rows)} naye signals record kiye")
+
+
 TOP_N_COINS = 400
 SIGNAL_TIMEFRAME = "1h"
 CE_A = {"period": 16, "multiplier": 4.5}
@@ -77,9 +137,13 @@ def main():
     fg_value, fg_label = get_fear_greed()
 
     print("ETH daily benchmark data fetch kar rahe hain (ETH Regime Filter ke liye)...")
-    eth_daily = fetch_ohlcv(exchange, "ETH/USDT", "1d", limit=800)
-    eth_ema200 = eth_daily["close"].ewm(span=200, adjust=False).mean()
-    eth_regime_ok = bool(eth_daily["close"].iloc[-1] > eth_ema200.iloc[-1])
+    try:
+        eth_daily = fetch_ohlcv(exchange, "ETH/USDT", "1d", limit=800)
+        eth_ema200 = eth_daily["close"].ewm(span=200, adjust=False).mean()
+        eth_regime_ok = bool(eth_daily["close"].iloc[-1] > eth_ema200.iloc[-1])
+    except Exception as e:
+        print(f"  [ETH REGIME FAILED] {e} - is dafa BINA filter ke chalega")
+        eth_regime_ok = True
     print(f"ETH Regime: {'BULLISH (signals ON)' if eth_regime_ok else 'BEARISH (signals OFF)'}")
 
     print("BTC daily benchmark data fetch kar rahe hain (NEW system ke liye)...")
@@ -116,6 +180,7 @@ def main():
                     tp_price = entry_price + risk * RR_MULTIPLE
                     signal_coins.append({
                         "Coin": symbol, "Combo": combo_name, "Bars Ago": int(len(df) - 1 - idx),
+                        "Signal Time (PKT)": to_pkt_str(df.loc[idx, "timestamp"]),
                         "Entry": round(float(entry_price), 6), "Current": round(float(current_price), 6),
                         "Trail Stop": round(float(chandelier), 6), "Take Profit": round(float(tp_price), 6),
                         "_df": df, "_sig": combo_sig, "_ce": ce,
@@ -140,6 +205,7 @@ def main():
                 tp_price = entry_price + risk * RR_MULTIPLE
                 signal_coins.append({
                     "Coin": symbol, "Combo": "NEW_AdvancedConfluence", "Bars Ago": int(len(df) - 1 - idx),
+                    "Signal Time (PKT)": to_pkt_str(df.loc[idx, "timestamp"]),
                     "Entry": round(float(entry_price), 6), "Current": round(float(current_price), 6),
                     "Trail Stop": round(float(chandelier), 6), "Take Profit": round(float(tp_price), 6),
                     "_df": df, "_sig": new_sig, "_ce": CE_D,
@@ -204,6 +270,8 @@ def main():
         json.dump(output, f, indent=2)
 
     print(f"\nDone. {len(final_rows)} signals with full context saved to dashboard_signals.json")
+
+    append_to_journal(final_rows)
 
     # Sirf "Strong" verdict wale signals ki notification bhejte hain
     notified = load_notified_keys()
