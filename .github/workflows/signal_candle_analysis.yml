@@ -1,0 +1,37 @@
+name: Signal Candle Pattern Analysis
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Repo checkout karo
+        uses: actions/checkout@v4
+
+      - name: Python setup karo
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Libraries install karo
+        run: pip install ccxt pandas numpy
+
+      - name: Logic tests chalao
+        run: python test_signal_candle_features.py
+
+      - name: Asli analysis chalao
+        run: python analyze_signal_candles.py
+
+      - name: Result file ko repo mein commit karo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add signal_candle_analysis_result.txt signal_candle_analysis_ERROR.txt 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "Signal candle analysis result - $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
