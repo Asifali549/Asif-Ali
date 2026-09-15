@@ -1,39 +1,6 @@
 {
-  "last_updated_utc": "2026-09-15T09:16:29.296848+00:00",
+  "last_updated_utc": "2026-09-15T10:16:22.984259+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
-  "signals": [
-    {
-      "Coin": "YOM/USDT",
-      "Timeframe": "1h",
-      "Combo": "NEW_AdvancedConfluence_v1",
-      "Structure": "BOS",
-      "Score": "6/10",
-      "Signal Bar": "2026-09-15 11:00 AM PKT",
-      "Signal Bar UTC": "2026-09-15 06:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.01365,
-      "Current": 0.01387,
-      "P/L %": 1.61,
-      "Trail Stop": 0.013646,
-      "Take Profit": 0.014016,
-      "Status": "OPEN"
-    },
-    {
-      "Coin": "ACE/USDT",
-      "Timeframe": "1h",
-      "Combo": "NEW_AdvancedConfluence_v1",
-      "Structure": "CHoCH",
-      "Score": "6/10",
-      "Signal Bar": "2026-09-15 11:00 AM PKT",
-      "Signal Bar UTC": "2026-09-15 06:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.15985,
-      "Current": 0.17105,
-      "P/L %": 7.01,
-      "Trail Stop": 0.209126,
-      "Take Profit": 0.167141,
-      "Status": "OPEN"
-    }
-  ]
+  "signals": []
 }
