@@ -1,0 +1,34 @@
+Scanning 200 coins on 1h... (partial target = 1.5%)
+
+  processed 20/200 coins...
+  processed 40/200 coins...
+  processed 60/200 coins...
+  processed 80/200 coins...
+  processed 100/200 coins...
+  processed 120/200 coins...
+  processed 140/200 coins...
+  processed 160/200 coins...
+  processed 180/200 coins...
+  processed 200/200 coins...
+
+=================================================================
+NATIJA: Partial Profit Filter Comparison
+=================================================================
+
+--- Ichimoku+MS ---
+  BASELINE       : Trades= 201  Win%=35.32  PF=0.961
+  +PARTIAL_PROFIT: Trades= 201  Win%=70.15  PF=1.417
+
+--- EMA+Breakout ---
+  BASELINE       : Trades= 729  Win%=36.76  PF=1.197
+  +PARTIAL_PROFIT: Trades= 729  Win%=61.59  PF=1.181
+
+--- UNION AB (dono combos milakar) ---
+  BASELINE       : Trades= 930  Win%=36.45  PF=1.153  Total Return=243.25%
+  +PARTIAL_PROFIT: Trades= 930  Win%=63.44  PF=1.214  Total Return=185.63%
+
+Partial target hit hua: 488/930 trades mein (52.5%)
+
+NOTE: Trades ki tadaad dono taraf barabar honi chahiye (yahan signal
+reject nahi hota, sirf exit tareeqa badalta hai). Faisla Win% aur PF
+dono dekh kar karein.
