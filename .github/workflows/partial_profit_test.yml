@@ -1,0 +1,38 @@
+name: Partial Profit Filter Test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Repo checkout karo
+        uses: actions/checkout@v4
+
+      - name: Python setup karo
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Libraries install karo
+        run: pip install ccxt pandas numpy
+
+      - name: Logic tests chalao
+        run: python test_partial_profit_filter.py
+
+      - name: Asli comparison chalao
+        run: python compare_partial_profit.py
+
+      - name: Result file ko repo mein commit karo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add partial_profit_result.txt 2>/dev/null || true
+          if [ -f partial_profit_ERROR.txt ]; then git add partial_profit_ERROR.txt; fi
+          git diff --staged --quiet || git commit -m "Partial profit filter result - $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
