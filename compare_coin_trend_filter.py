@@ -173,4 +173,4 @@ if __name__ == "__main__":
             print("\n[SAVED] Error tafseel 'coin_trend_filter_ERROR.txt' mein save ho gayi.")
         except Exception:
             pass
-        raise SystemExit(1)
+        raise SystemExit(1) 
