@@ -13,16 +13,16 @@ NATIJA: Per-Coin 4h Trend Alignment Filter Comparison
 =================================================================
 
 --- Ichimoku+MS ---
-  BASELINE          : Trades= 160  Win%=33.12  PF=0.736
-  +COIN_4H_TREND    : Trades= 159  Win%=33.33  PF=0.741
+  BASELINE          : Trades= 151  Win%=33.11  PF=0.741
+  +COIN_4H_TREND    : Trades= 150  Win%=33.33  PF=0.746
 
 --- EMA+Breakout ---
-  BASELINE          : Trades= 541  Win%=36.23  PF=1.009
-  +COIN_4H_TREND    : Trades= 540  Win%=36.11  PF=1.006
+  BASELINE          : Trades= 528  Win%=36.17  PF=1.027
+  +COIN_4H_TREND    : Trades= 526  Win%=36.12  PF=1.025
 
 --- UNION AB (dono combos milakar) ---
-  BASELINE          : Trades= 701  Win%=35.52  PF=0.955  Total Return=-53.9%
-  +COIN_4H_TREND    : Trades= 699  Win%=35.48  PF=0.955  Total Return=-54.46%
+  BASELINE          : Trades= 679  Win%=35.49  PF=0.971  Total Return=-33.56%
+  +COIN_4H_TREND    : Trades= 676  Win%=35.5  PF=0.971  Total Return=-33.92%
 
 NOTE: Agar 'COIN_4H_TREND' wala PF zyada hai, to filter madad kar
 raha hai. Trades ki tadaad kam hone ko akele nuksan na samjhein -
