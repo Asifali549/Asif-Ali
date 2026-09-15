@@ -1,0 +1,37 @@
+name: Confirmation Candle Filter Test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Repo checkout karo
+        uses: actions/checkout@v4
+
+      - name: Python setup karo
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Libraries install karo
+        run: pip install ccxt pandas numpy
+
+      - name: Logic tests chalao
+        run: python test_confirmation_candle_filter.py
+
+      - name: Asli comparison chalao
+        run: python compare_confirmation_candle.py
+
+      - name: Result file ko repo mein commit karo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add confirmation_candle_result.txt confirmation_candle_ERROR.txt 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "Confirmation candle filter result - $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
