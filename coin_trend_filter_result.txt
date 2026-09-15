@@ -1,0 +1,29 @@
+Scanning 150 coins on 1h (+ har coin ka apna 4h trend)...
+
+  processed 20/150 coins...
+  processed 40/150 coins...
+  processed 60/150 coins...
+  processed 80/150 coins...
+  processed 100/150 coins...
+  processed 120/150 coins...
+  processed 140/150 coins...
+
+=================================================================
+NATIJA: Per-Coin 4h Trend Alignment Filter Comparison
+=================================================================
+
+--- Ichimoku+MS ---
+  BASELINE          : Trades= 160  Win%=33.12  PF=0.736
+  +COIN_4H_TREND    : Trades= 159  Win%=33.33  PF=0.741
+
+--- EMA+Breakout ---
+  BASELINE          : Trades= 541  Win%=36.23  PF=1.009
+  +COIN_4H_TREND    : Trades= 540  Win%=36.11  PF=1.006
+
+--- UNION AB (dono combos milakar) ---
+  BASELINE          : Trades= 701  Win%=35.52  PF=0.955  Total Return=-53.9%
+  +COIN_4H_TREND    : Trades= 699  Win%=35.48  PF=0.955  Total Return=-54.46%
+
+NOTE: Agar 'COIN_4H_TREND' wala PF zyada hai, to filter madad kar
+raha hai. Trades ki tadaad kam hone ko akele nuksan na samjhein -
+PF aur Total Return dono dekh kar faisla karein.
