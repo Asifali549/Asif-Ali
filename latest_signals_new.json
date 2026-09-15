@@ -1,6 +1,39 @@
 {
-  "last_updated_utc": "2026-09-15T10:16:22.984259+00:00",
+  "last_updated_utc": "2026-09-15T11:15:08.517591+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
-  "signals": []
+  "signals": [
+    {
+      "Coin": "ZEST/USDT",
+      "Timeframe": "1h",
+      "Combo": "NEW_AdvancedConfluence_v1",
+      "Structure": "BOS",
+      "Score": "6/10",
+      "Signal Bar": "2026-09-15 03:00 PM PKT",
+      "Signal Bar UTC": "2026-09-15 10:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.12873,
+      "Current": 0.12873,
+      "P/L %": 0.0,
+      "Trail Stop": 0.127032,
+      "Take Profit": 0.132125,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "TLOS/USDT",
+      "Timeframe": "1h",
+      "Combo": "NEW_AdvancedConfluence_v1",
+      "Structure": "CHoCH",
+      "Score": "8/10",
+      "Signal Bar": "2026-09-15 03:00 PM PKT",
+      "Signal Bar UTC": "2026-09-15 10:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.01637,
+      "Current": 0.01637,
+      "P/L %": 0.0,
+      "Trail Stop": 0.016007,
+      "Take Profit": 0.017096,
+      "Status": "OPEN"
+    }
+  ]
 }
