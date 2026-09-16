@@ -29,12 +29,14 @@ from walk_forward_splitter import make_period_boundaries, assign_trades_to_perio
 
 DURATION_DAYS = 270
 N_PERIODS = 3
-TEST_N_COINS = 150
+TEST_N_COINS = 300  # zyada rakha hai kyunke kai coins short-history ki wajah se exclude ho jayenge
 SIGNAL_TIMEFRAME = "1h"
-CANDLE_LIMIT = DURATION_DAYS * 24 + 300
+CANDLE_LIMIT = DURATION_DAYS * 24 + 300  # thoda extra buffer indicator warmup ke liye
+MIN_BARS_REQUIRED = (DURATION_DAYS - 5) * 24  # coin ka data kam az kam ~265 din purana hona chahiye
 
-CE_A = {"period": 16, "multiplier": 4.5}
-CE_B = {"period": 12, "multiplier": 4.5}
+# ---- LIVE SYSTEM SETTINGS (jaisa abhi active hai) ----
+CE_A = {"period": 16, "multiplier": 4.5}  # Ichimoku+MS
+CE_B = {"period": 12, "multiplier": 4.5}  # EMA+Breakout
 ETH_EMA_PERIOD = 200
 
 BT_PARAMS = dict(config.BACKTEST_PARAMS)
@@ -69,6 +71,11 @@ def get_combo_signal(df, combo_name):
 
 
 def simulate_live_system_trades(df, signal, ce_params, eth_regime):
+    """
+    Live system jaisa hi: signal + ETH regime filter + chandelier exit
+    (multiplier 4.5). Har trade ke sath initial risk (R) bhi record
+    karta hai, taake R-multiple based stats bhi mil sakein.
+    """
     atr = compute_atr(df, BT_PARAMS["atr_period"])
     ce_stop = compute_chandelier_long_stop(df, ce_params["period"], ce_params["multiplier"]).values
     fee = BT_PARAMS["fee_pct"] / 100
@@ -89,7 +96,7 @@ def simulate_live_system_trades(df, signal, ce_params, eth_regime):
 
         sig_ts = pd.Timestamp(timestamps[i])
         if not is_eth_bullish_at(eth_regime, sig_ts):
-            continue
+            continue  # ETH regime filter reject
 
         entry_bar = i + 1
         entry_price = o[entry_bar] * (1 + slip)
@@ -168,18 +175,24 @@ def main():
 
     coins = get_coin_list(exchange)[:TEST_N_COINS]
     log(f"Scanning {len(coins)} coins on {SIGNAL_TIMEFRAME} ({DURATION_DAYS} din ka data)...\n")
+    log(f"[FILTER] Sirf wo coins shamil honge jinka data kam az kam {DURATION_DAYS-5} din purana ho")
+    log(f"[FILTER] (taake har period mein barabar coins hon, fair comparison ke liye)\n")
 
     all_trades = []
     overall_start_ts = None
     overall_end_ts = None
+    coins_included = 0
+    coins_excluded_short_history = 0
 
     for n, symbol in enumerate(coins):
         try:
             df = fetch_ohlcv(exchange, symbol, SIGNAL_TIMEFRAME, limit=CANDLE_LIMIT)
         except Exception:
             df = None
-        if df is None or len(df) < 250:
+        if df is None or len(df) < MIN_BARS_REQUIRED:
+            coins_excluded_short_history += 1
             continue
+        coins_included += 1
 
         ts_min = pd.Timestamp(df["timestamp"].iloc[0])
         ts_max = pd.Timestamp(df["timestamp"].iloc[-1])
@@ -197,7 +210,11 @@ def main():
                 log(f"  [SKIP] {symbol} {combo_name}: {e}")
 
         if (n + 1) % 20 == 0:
-            log(f"  processed {n + 1}/{len(coins)} coins... (trades so far: {len(all_trades)})")
+            log(f"  processed {n + 1}/{len(coins)} coins... (included: {coins_included}, "
+                f"excluded-short-history: {coins_excluded_short_history}, trades so far: {len(all_trades)})")
+
+    log(f"\n[FILTER RESULT] {coins_included} coins ka poora {DURATION_DAYS}-din history mila, "
+        f"{coins_excluded_short_history} coins excluded (naye/chhota history)")
 
     log("\n" + "=" * 65)
     log("NATIJA: Live System Long-Term Walk-Forward Test")
