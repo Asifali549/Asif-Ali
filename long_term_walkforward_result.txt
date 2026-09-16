@@ -1,36 +1,45 @@
 Live system settings: Chandelier Multiplier=4.5, ETH Regime Filter=ON
-Duration: 270 din, 3 periods mein baant kar, 150 coins
+Duration: 270 din, 3 periods mein baant kar, 300 coins
 
 ETH daily data + 200 EMA regime nikal rahe hain...
   ETH bullish regime: 235/519 din
 
-Scanning 150 coins on 1h (270 din ka data)...
+Scanning 300 coins on 1h (270 din ka data)...
 
-  processed 20/150 coins... (trades so far: 43)
-  processed 40/150 coins... (trades so far: 94)
-  processed 60/150 coins... (trades so far: 131)
-  processed 80/150 coins... (trades so far: 152)
-  processed 100/150 coins... (trades so far: 218)
-  processed 120/150 coins... (trades so far: 283)
-  processed 140/150 coins... (trades so far: 350)
+[FILTER] Sirf wo coins shamil honge jinka data kam az kam 265 din purana ho
+[FILTER] (taake har period mein barabar coins hon, fair comparison ke liye)
+
+  processed 40/300 coins... (included: 24, excluded-short-history: 16, trades so far: 68)
+  processed 80/300 coins... (included: 42, excluded-short-history: 38, trades so far: 122)
+  processed 100/300 coins... (included: 55, excluded-short-history: 45, trades so far: 174)
+  processed 120/300 coins... (included: 72, excluded-short-history: 48, trades so far: 243)
+  processed 140/300 coins... (included: 83, excluded-short-history: 57, trades so far: 295)
+  processed 160/300 coins... (included: 99, excluded-short-history: 61, trades so far: 361)
+  processed 180/300 coins... (included: 115, excluded-short-history: 65, trades so far: 412)
+  processed 220/300 coins... (included: 153, excluded-short-history: 67, trades so far: 517)
+  processed 240/300 coins... (included: 171, excluded-short-history: 69, trades so far: 580)
+  processed 260/300 coins... (included: 188, excluded-short-history: 72, trades so far: 637)
+  processed 300/300 coins... (included: 220, excluded-short-history: 80, trades so far: 747)
+
+[FILTER RESULT] 220 coins ka poora 270-din history mila, 80 coins excluded (naye/chhota history)
 
 =================================================================
 NATIJA: Live System Long-Term Walk-Forward Test
 =================================================================
 
 --- OVERALL (270 din, sab coins milakar) ---
-  Trades=392  Win%=39.29  PF=2.397  Total Return=1524.62%  Avg R-multiple=0.384
+  Trades=747  Win%=37.48  PF=1.729  Total Return=1658.51%  Avg R-multiple=0.29
 
 --- PER-PERIOD BREAKDOWN (3 barabar hisse) ---
 
 Period 1: 2025-11-28 se 2026-03-06
-  Trades=57  Win%=35.09  PF=0.768  Total Return=-30.9%  Avg R-multiple=0.006
+  Trades=145  Win%=42.07  PF=0.927  Total Return=-23.66%  Avg R-multiple=0.096
 
 Period 2: 2026-03-06 se 2026-06-11
   Trades=0  Win%=None  PF=None  Total Return=None%  Avg R-multiple=None
 
 Period 3: 2026-06-11 se 2026-09-16
-  Trades=335  Win%=40.0  PF=2.623  Total Return=1555.51%  Avg R-multiple=0.449
+  Trades=602  Win%=36.38  PF=1.862  Total Return=1682.17%  Avg R-multiple=0.337
 
 -----------------------------------------------------------------
 KAISE SAMJHEIN:
