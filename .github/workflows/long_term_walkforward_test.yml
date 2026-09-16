@@ -35,4 +35,5 @@ jobs:
           git add long_term_walkforward_result.txt 2>/dev/null || true
           if [ -f long_term_walkforward_ERROR.txt ]; then git add long_term_walkforward_ERROR.txt; fi
           git diff --staged --quiet || git commit -m "Long-term walk-forward result - $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git pull --rebase origin main
           git push
