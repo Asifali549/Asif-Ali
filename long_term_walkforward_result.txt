@@ -1,0 +1,48 @@
+Live system settings: Chandelier Multiplier=4.5, ETH Regime Filter=ON
+Duration: 270 din, 3 periods mein baant kar, 150 coins
+
+ETH daily data + 200 EMA regime nikal rahe hain...
+  ETH bullish regime: 235/519 din
+
+Scanning 150 coins on 1h (270 din ka data)...
+
+  processed 20/150 coins... (trades so far: 42)
+  processed 40/150 coins... (trades so far: 87)
+  processed 60/150 coins... (trades so far: 127)
+  processed 80/150 coins... (trades so far: 163)
+  processed 100/150 coins... (trades so far: 233)
+  processed 120/150 coins... (trades so far: 288)
+  processed 140/150 coins... (trades so far: 365)
+
+=================================================================
+NATIJA: Live System Long-Term Walk-Forward Test
+=================================================================
+
+--- OVERALL (270 din, sab coins milakar) ---
+  Trades=403  Win%=39.21  PF=2.434  Total Return=1570.07%  Avg R-multiple=0.394
+
+--- PER-PERIOD BREAKDOWN (3 barabar hisse) ---
+
+Period 1: 2025-11-28 se 2026-03-05
+  Trades=56  Win%=32.14  PF=0.395  Total Return=-83.84%  Avg R-multiple=-0.121
+
+Period 2: 2026-03-05 se 2026-06-11
+  Trades=0  Win%=None  PF=None  Total Return=None%  Avg R-multiple=None
+
+Period 3: 2026-06-11 se 2026-09-16
+  Trades=347  Win%=40.35  PF=2.729  Total Return=1653.9%  Avg R-multiple=0.479
+
+-----------------------------------------------------------------
+KAISE SAMJHEIN:
+-----------------------------------------------------------------
+- Agar teeno periods ka PF mustaqil taur par >1 hai, to system
+  consistent hai (sirf ek acche dor ka asar nahi).
+- Agar kisi period mein PF bohot kam/manfi ho, wo dikhata hai ke
+  system us waqt ki market condition (jaise bear ya sideways)
+  mein kamzor hai.
+- Avg R-multiple: agar ye 0 se upar hai, matlab average trade
+  apne risk se zyada wapas de raha hai (mustaqil taur par).
+- Win% is system ki nature ke mutabiq 30-40% ke qareeb rehna
+  normal hai (trend-following, chhote losses + kabhi kabhar
+  bara winner) - is number ko akele 'bura' na samjhein, PF aur
+  R-multiple ke sath milakar dekhein.
