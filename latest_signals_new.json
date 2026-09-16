@@ -1,24 +1,8 @@
 {
-  "last_updated_utc": "2026-09-16T08:15:51.358538+00:00",
+  "last_updated_utc": "2026-09-16T09:15:21.023753+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
-    {
-      "Coin": "SYN/USDT",
-      "Timeframe": "1h",
-      "Combo": "NEW_AdvancedConfluence_v1",
-      "Structure": "BOS",
-      "Score": "6/10",
-      "Signal Bar": "2026-09-16 10:00 AM PKT",
-      "Signal Bar UTC": "2026-09-16 05:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.1123,
-      "Current": 0.2063,
-      "P/L %": 83.7,
-      "Trail Stop": 0.175256,
-      "Take Profit": 0.141587,
-      "Status": "OPEN"
-    },
     {
       "Coin": "BTR/USDT",
       "Timeframe": "1h",
@@ -27,12 +11,28 @@
       "Score": "6/10",
       "Signal Bar": "2026-09-16 11:00 AM PKT",
       "Signal Bar UTC": "2026-09-16 06:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.05178,
-      "Current": 0.05274,
-      "P/L %": 1.85,
+      "Current": 0.05385,
+      "P/L %": 4.0,
       "Trail Stop": 0.054535,
       "Take Profit": 0.056456,
+      "Status": "OPEN"
+    },
+    {
+      "Coin": "NFT/USDT",
+      "Timeframe": "1h",
+      "Combo": "NEW_AdvancedConfluence_v1",
+      "Structure": "BOS",
+      "Score": "6/10",
+      "Signal Bar": "2026-09-16 01:00 PM PKT",
+      "Signal Bar UTC": "2026-09-16 08:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.0,
+      "Current": 0.0,
+      "P/L %": 0.0,
+      "Trail Stop": 0.0,
+      "Take Profit": 0.0,
       "Status": "OPEN"
     }
   ]
