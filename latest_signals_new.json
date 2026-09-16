@@ -1,22 +1,22 @@
 {
-  "last_updated_utc": "2026-09-16T20:16:00.986002+00:00",
+  "last_updated_utc": "2026-09-16T21:15:24.713077+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
     {
-      "Coin": "COTI/USDT",
+      "Coin": "TEA/USDT",
       "Timeframe": "1h",
       "Combo": "NEW_AdvancedConfluence_v1",
-      "Structure": "CHoCH",
+      "Structure": "BOS",
       "Score": "6/10",
-      "Signal Bar": "2026-09-16 10:00 PM PKT",
-      "Signal Bar UTC": "2026-09-16 17:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.01859,
-      "Current": 0.01726,
-      "P/L %": -7.15,
-      "Trail Stop": 0.01808,
-      "Take Profit": 0.020015,
+      "Signal Bar": "2026-09-17 01:00 AM PKT",
+      "Signal Bar UTC": "2026-09-16 20:00:00",
+      "Bars Ago": 0,
+      "Entry": 4.2e-05,
+      "Current": 4.2e-05,
+      "P/L %": 0.0,
+      "Trail Stop": 4.4e-05,
+      "Take Profit": 3.9e-05,
       "Status": "OPEN"
     }
   ]
