@@ -1,8 +1,24 @@
 {
-  "last_updated_utc": "2026-09-16T05:14:20.580262+00:00",
+  "last_updated_utc": "2026-09-16T06:18:28.593642+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
+    {
+      "Coin": "SYN/USDT",
+      "Timeframe": "1h",
+      "Combo": "NEW_AdvancedConfluence_v1",
+      "Structure": "BOS",
+      "Score": "6/10",
+      "Signal Bar": "2026-09-16 10:00 AM PKT",
+      "Signal Bar UTC": "2026-09-16 05:00:00",
+      "Bars Ago": 0,
+      "Entry": 0.1123,
+      "Current": 0.1123,
+      "P/L %": 0.0,
+      "Trail Stop": 0.097656,
+      "Take Profit": 0.141587,
+      "Status": "OPEN"
+    },
     {
       "Coin": "SOMI/USDT",
       "Timeframe": "1h",
@@ -11,11 +27,11 @@
       "Score": "6/10",
       "Signal Bar": "2026-09-16 08:00 AM PKT",
       "Signal Bar UTC": "2026-09-16 03:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.1542,
-      "Current": 0.1546,
-      "P/L %": 0.26,
-      "Trail Stop": 0.148725,
+      "Current": 0.1557,
+      "P/L %": 0.97,
+      "Trail Stop": 0.149631,
       "Take Profit": 0.166288,
       "Status": "OPEN"
     }
