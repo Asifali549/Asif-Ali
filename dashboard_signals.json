@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-16T23:25:26.617058+00:00",
+  "last_updated_utc": "2026-09-16T23:28:41.167777+00:00",
   "coins_scanned": 400,
   "fear_greed_value": 51,
   "fear_greed_label": "Neutral",
@@ -14,8 +14,8 @@
       "Take Profit": 3.9e-05,
       "Funding Rate": "N/A",
       "Open Interest": "N/A",
-      "Liquidity Up ($)": "$2,346",
-      "Liquidity Down ($)": "$2,049",
+      "Liquidity Up ($)": "$2,696",
+      "Liquidity Down ($)": "$2,339",
       "Liquidity Compare": "Resistance > Support",
       "OrderBook Bid/Ask": "0.87x",
       "Vol 15m": "1.49x",
