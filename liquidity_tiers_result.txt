@@ -1,0 +1,59 @@
+Live settings: Chandelier Multiplier=4.5, ETH Regime Filter=ON
+Tiers: [60, 100, 150, 200], 270 din, 3 periods
+
+ETH daily data + 200 EMA regime nikal rahe hain...
+  ETH bullish regime: 239/519 din
+
+Scanning 350 coins (volume order) - pehle 200 full-history coins tak scan honge...
+
+  rank 20/200 tak coins mil chuke (scan kiye: 37)
+  rank 40/200 tak coins mil chuke (scan kiye: 74)
+  rank 60/200 tak coins mil chuke (scan kiye: 104)
+  rank 80/200 tak coins mil chuke (scan kiye: 132)
+  rank 100/200 tak coins mil chuke (scan kiye: 160)
+  rank 120/200 tak coins mil chuke (scan kiye: 184)
+  rank 140/200 tak coins mil chuke (scan kiye: 208)
+  rank 160/200 tak coins mil chuke (scan kiye: 233)
+  rank 180/200 tak coins mil chuke (scan kiye: 258)
+  rank 200/200 tak coins mil chuke (scan kiye: 282)
+
+[INFO] Total 200 full-history coins mile aur rank ke hisab se tiers mein baante gaye
+
+=================================================================
+NATIJA: Liquidity Tiers Comparison (ETH Filter ON)
+=================================================================
+
+--- TOP 60 LIQUID COINS ---
+  OVERALL: Trades=190  Win%=45.79  PF=4.036  Total Return=1752.19%
+  Period 1 (2025-11-29 se 2026-03-07): Trades=33  Win%=45.45  PF=1.395
+  Period 2 (2026-03-07 se 2026-06-12): Trades=0  Win%=None  PF=None
+  Period 3 (2026-06-12 se 2026-09-17): Trades=157  Win%=45.86  PF=4.307
+
+--- TOP 100 LIQUID COINS ---
+  OVERALL: Trades=371  Win%=41.78  PF=2.776  Total Return=1847.84%
+  Period 1 (2025-11-29 se 2026-03-07): Trades=62  Win%=46.77  PF=1.243
+  Period 2 (2026-03-07 se 2026-06-12): Trades=0  Win%=None  PF=None
+  Period 3 (2026-06-12 se 2026-09-17): Trades=309  Win%=40.78  PF=2.952
+
+--- TOP 150 LIQUID COINS ---
+  OVERALL: Trades=493  Win%=37.53  PF=1.979  Total Return=1575.05%
+  Period 1 (2025-11-29 se 2026-03-07): Trades=94  Win%=39.36  PF=0.749
+  Period 2 (2026-03-07 se 2026-06-12): Trades=0  Win%=None  PF=None
+  Period 3 (2026-06-12 se 2026-09-17): Trades=399  Win%=37.09  PF=2.152
+
+--- TOP 200 LIQUID COINS ---
+  OVERALL: Trades=650  Win%=38.77  PF=1.834  Total Return=1701.9%
+  Period 1 (2025-11-29 se 2026-03-07): Trades=130  Win%=41.54  PF=1.098
+  Period 2 (2026-03-07 se 2026-06-12): Trades=0  Win%=None  PF=None
+  Period 3 (2026-06-12 se 2026-09-17): Trades=520  Win%=38.08  PF=1.942
+
+-----------------------------------------------------------------
+KAISE SAMJHEIN:
+-----------------------------------------------------------------
+- Jis tier ka Win% aur PF sab se zyada consistent (teeno periods
+  mein achha) ho, wahi liquidity had behtareen hai.
+- Zyada coins (jaise 200) zyada trades denge (roz-marra trading
+  ke liye behtar), lekin shayad Win%/PF thoda kam ho (kam liquid
+  coins shamil hone ki wajah se) - ye trade-off dekhna hai.
+- Agar kisi tier ke kisi period mein Trades bohot kam (<15) hon,
+  us number par zyada bharosa na karein.
