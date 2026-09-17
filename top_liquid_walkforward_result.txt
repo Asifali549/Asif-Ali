@@ -1,0 +1,43 @@
+Live settings: Chandelier Multiplier=4.5, ETH Regime Filter=ON
+Sirf TOP 60 liquid coins, 270 din, 3 periods
+
+ETH daily data + 200 EMA regime nikal rahe hain...
+  ETH bullish regime: 239/519 din
+
+Scanning 300 coins (volume order) - sirf pehle 60 'TOP_LIQUID' shamil honge...
+
+  top-liquid coins mile: 10/60 (scan kiye: 17, trades so far: 16)
+  top-liquid coins mile: 20/60 (scan kiye: 36, trades so far: 65)
+  top-liquid coins mile: 30/60 (scan kiye: 52, trades so far: 92)
+  top-liquid coins mile: 40/60 (scan kiye: 74, trades so far: 118)
+  top-liquid coins mile: 50/60 (scan kiye: 94, trades so far: 155)
+  top-liquid coins mile: 60/60 (scan kiye: 104, trades so far: 202)
+
+[INFO] Total 60 top-liquid coins shamil hue (poora 270-din history ke sath)
+
+=================================================================
+NATIJA: Top Liquid Coins - Long-Term Walk-Forward Test
+=================================================================
+
+--- OVERALL (270 din, top 60 liquid coins) ---
+  Trades=202  Win%=46.53  PF=4.073  Total Return=1791.18%
+
+--- PER-PERIOD BREAKDOWN (3 barabar hisse) ---
+
+Period 1: 2025-11-29 se 2026-03-06
+  Trades=34  Win%=47.06  PF=1.344  Total Return=19.29%
+
+Period 2: 2026-03-06 se 2026-06-12
+  Trades=0  Win%=None  PF=None  Total Return=None%
+
+Period 3: 2026-06-12 se 2026-09-17
+  Trades=168  Win%=46.43  PF=4.363  Total Return=1771.89%
+
+-----------------------------------------------------------------
+KAISE SAMJHEIN:
+-----------------------------------------------------------------
+- Agar teeno periods ka Win% consistently 45%+ aur PF >1.5 hai,
+  to 'top liquid coins' wali behtari mustaqil hai - sirf ek
+  chhote acche dor ka asar nahi.
+- Agar kisi period mein Trades bohot kam (jaise <15) hon, us
+  period ke PF/Win% par zyada bharosa na karein - chota sample.
