@@ -1,0 +1,41 @@
+ETH daily data + 200 EMA regime nikal rahe hain...
+BTC daily data nikal rahe hain...
+Scanning coins - sirf TOP 60 liquid, full-history wale shamil honge...
+
+  10/60 top-liquid coins mile (baseline trades: 13, choch-only: 3)
+  20/60 top-liquid coins mile (baseline trades: 29, choch-only: 6)
+  30/60 top-liquid coins mile (baseline trades: 46, choch-only: 11)
+  40/60 top-liquid coins mile (baseline trades: 71, choch-only: 20)
+  50/60 top-liquid coins mile (baseline trades: 95, choch-only: 27)
+  60/60 top-liquid coins mile (baseline trades: 109, choch-only: 32)
+
+[INFO] Total 60 coins shamil hue
+
+=================================================================
+NATIJA: CHoCH-Only Test (BOS hataya gaya)
+=================================================================
+
+BASELINE (BOS+CHoCH)  : Trades=109  Win%=35.78  PF=1.003
+CHOCH_ONLY (bina BOS) : Trades=32  Win%=43.75  PF=2.064
+
+--- CHOCH_ONLY ka SCORE ke hisab se breakdown ---
+  Score=6: Trades=31  Win%=41.94  PF=2.046
+  Score=7: Trades=0  Win%=None  PF=None
+  Score=8: Trades=1  Win%=100.0  PF=None
+  Score=9: Trades=0  Win%=None  PF=None
+  Score=10: Trades=0  Win%=None  PF=None
+
+--- BASELINE ka SCORE ke hisab se breakdown (moqabla ke liye) ---
+  Score=6: Trades=100  Win%=34.0  PF=0.966
+  Score=7: Trades=0  Win%=None  PF=None
+  Score=8: Trades=9  Win%=55.56  PF=2.381
+  Score=9: Trades=0  Win%=None  PF=None
+  Score=10: Trades=0  Win%=None  PF=None
+
+-----------------------------------------------------------------
+KAISE SAMJHEIN:
+-----------------------------------------------------------------
+- Agar CHOCH_ONLY ka PF BASELINE se saaf behtar hai, to BOS ko
+  hamesha ke liye hata dena chahiye.
+- Score breakdown mein 0 Trades wale levels dikhate hain ke wo
+  score is dorania mein kabhi bana hi nahi.
