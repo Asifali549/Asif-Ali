@@ -1,0 +1,33 @@
+CHoCH-Only test: Tiers=[100, 150, 200], 180 din (6 mahine)
+
+ETH daily data + 200 EMA regime nikal rahe hain...
+  ETH bullish regime: 137/429 din
+
+BTC daily data nikal rahe hain...
+Scanning coins - pehle 200 full-history coins tak...
+
+  rank 20/200 tak coins mil chuke (scan kiye: 20)
+  rank 40/200 tak coins mil chuke (scan kiye: 55)
+  rank 60/200 tak coins mil chuke (scan kiye: 92)
+  rank 80/200 tak coins mil chuke (scan kiye: 119)
+  rank 100/200 tak coins mil chuke (scan kiye: 141)
+  rank 120/200 tak coins mil chuke (scan kiye: 168)
+  rank 140/200 tak coins mil chuke (scan kiye: 193)
+  rank 160/200 tak coins mil chuke (scan kiye: 218)
+  rank 180/200 tak coins mil chuke (scan kiye: 240)
+  rank 200/200 tak coins mil chuke (scan kiye: 264)
+
+[INFO] Total 200 full-history coins mile
+
+=================================================================
+NATIJA: CHoCH-Only Liquidity Tiers (6 Mahine)
+=================================================================
+
+TOP 100: Trades=51  Win%=43.14  PF=1.767  Total Return=61.36%
+
+TOP 150: Trades=70  Win%=31.43  PF=1.176  Total Return=21.11%
+
+TOP 200: Trades=95  Win%=29.47  PF=1.007  Total Return=1.34%
+
+NOTE: Chhota sample (jaise <30 trades) par PF/Win% ka number
+bohot utaar-chadhaav wala ho sakta hai - ehtiyat se dekhein.
