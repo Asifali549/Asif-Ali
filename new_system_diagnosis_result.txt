@@ -1,0 +1,44 @@
+ETH daily data + 200 EMA regime nikal rahe hain...
+BTC daily data nikal rahe hain...
+Scanning coins - sirf TOP 60 liquid, full-history wale shamil honge...
+
+  10/60 top-liquid coins mile (trades so far: 13)
+  20/60 top-liquid coins mile (trades so far: 29)
+  30/60 top-liquid coins mile (trades so far: 46)
+  40/60 top-liquid coins mile (trades so far: 71)
+  50/60 top-liquid coins mile (trades so far: 95)
+  60/60 top-liquid coins mile (trades so far: 109)
+
+[INFO] Total 60 coins shamil, 109 trades mile
+
+=================================================================
+NATIJA: NEW System Weakness Diagnosis
+=================================================================
+
+OVERALL: Trades=109  Win%=34.86  PF=1.008
+
+--- SCORE ke hisab se breakdown ---
+  Score=6: Trades=100  Win%=34.0  PF=0.975
+  Score=8: Trades=9  Win%=44.44  PF=2.194
+
+--- Signal Type (BOS vs CHoCH vs BOTH) ke hisab se ---
+  BOS: Trades=77  Win%=32.47  PF=0.728
+  CHOCH: Trades=32  Win%=40.62  PF=2.147
+  BOTH: Trades=0  Win%=None  PF=None
+
+--- Exit Reason ke hisab se ---
+  CE_STOP: Trades=103  Win%=33.98  PF=1.044
+  TIME: Trades=6  Win%=50.0  PF=0.22
+
+--- Fauri (3 bars ke andar) SL trades ---
+  Count: 29 / 109 (26.6%)
+
+-----------------------------------------------------------------
+KAISE SAMJHEIN:
+-----------------------------------------------------------------
+- Agar zyada Score (8-10) wale trades ka Win%/PF kam Score (6)
+  se behtar nahi hai, to Score system khud kaam nahi kar raha.
+- Agar BOS aur CHoCH mein bara farq hai, to ek type ko hata kar
+  sirf behtar wala rakhna faida mand ho sakta hai.
+- Agar zyada tar trades CE_STOP se aur jaldi (3 bars ke andar)
+  nuksan mein jaate hain, to entry timing ka masla hai.
