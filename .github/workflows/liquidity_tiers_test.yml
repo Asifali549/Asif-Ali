@@ -1,0 +1,44 @@
+name: Liquidity Tiers Test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    steps:
+      - name: Repo checkout karo
+        uses: actions/checkout@v4
+
+      - name: Python setup karo
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Libraries install karo
+        run: pip install ccxt pandas numpy
+
+      - name: Asli test chalao
+        run: python compare_liquidity_tiers.py
+
+      - name: Result file ko repo mein commit karo (retry ke sath)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add liquidity_tiers_result.txt 2>/dev/null || true
+          if [ -f liquidity_tiers_ERROR.txt ]; then git add liquidity_tiers_ERROR.txt; fi
+          git diff --staged --quiet || git commit -m "Liquidity tiers result - $(date -u +'%Y-%m-%d %H:%M UTC')"
+
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main
+            if git push; then
+              echo "Push kamyab (attempt $i)"
+              break
+            fi
+            echo "Push nakaam (attempt $i), 10 second ruk kar dobara koshish..."
+            sleep 10
+          done
