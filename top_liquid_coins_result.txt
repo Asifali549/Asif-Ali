@@ -1,0 +1,33 @@
+ETH daily data + 200 EMA regime nikal rahe hain...
+  ETH bullish regime: 30/369 din
+
+Total 300 coins (24h volume ke hisab se sorted) scan honge
+Inmein se pehle 60 'TOP_LIQUID' mane jayenge
+
+  processed 20/300 coins... (included so far: 20)
+  processed 40/300 coins... (included so far: 31)
+  processed 60/300 coins... (included so far: 45)
+  processed 80/300 coins... (included so far: 53)
+  processed 100/300 coins... (included so far: 69)
+  processed 120/300 coins... (included so far: 87)
+  processed 140/300 coins... (included so far: 106)
+  processed 180/300 coins... (included so far: 142)
+  processed 200/300 coins... (included so far: 162)
+  processed 220/300 coins... (included so far: 181)
+  processed 240/300 coins... (included so far: 199)
+  processed 260/300 coins... (included so far: 218)
+  processed 280/300 coins... (included so far: 236)
+  processed 300/300 coins... (included so far: 255)
+
+[INFO] 255 coins ka poora 120-din history mila aur shamil hua
+
+=================================================================
+NATIJA: Top Liquid Coins Filter Comparison
+=================================================================
+
+ALL_COINS (255 coins)   : Trades=611  Win%=38.3  PF=1.81  Total Return=1665.91%
+TOP_LIQUID (top 60)   : Trades=102  Win%=51.96  PF=6.566  Total Return=1589.36%
+
+NOTE: Agar TOP_LIQUID ka PF ALL_COINS se behtar hai, to sirf bade/
+zyada liquid coins tak mehdood rehna faida mand hai. Trades kam
+honge (chhote coins ke mauqe chhootenge) - ye trade-off hai.
