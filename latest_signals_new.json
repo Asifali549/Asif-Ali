@@ -1,23 +1,6 @@
 {
-  "last_updated_utc": "2026-09-16T23:13:30.110475+00:00",
+  "last_updated_utc": "2026-09-17T00:18:49.234471+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
-  "signals": [
-    {
-      "Coin": "TEA/USDT",
-      "Timeframe": "1h",
-      "Combo": "NEW_AdvancedConfluence_v1",
-      "Structure": "BOS",
-      "Score": "6/10",
-      "Signal Bar": "2026-09-17 01:00 AM PKT",
-      "Signal Bar UTC": "2026-09-16 20:00:00",
-      "Bars Ago": 2,
-      "Entry": 4.2e-05,
-      "Current": 4.2e-05,
-      "P/L %": -0.71,
-      "Trail Stop": 4.4e-05,
-      "Take Profit": 3.9e-05,
-      "Status": "OPEN"
-    }
-  ]
+  "signals": []
 }
