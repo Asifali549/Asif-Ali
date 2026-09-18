@@ -1,0 +1,46 @@
+ETH daily data + 200 EMA regime nikal rahe hain...
+BTC daily data nikal rahe hain...
+Scanning - sirf TOP 100 liquid, full-history wale (365 din)...
+
+  10/100 coins mile (trades so far: 28)
+  20/100 coins mile (trades so far: 50)
+  30/100 coins mile (trades so far: 68)
+  40/100 coins mile (trades so far: 88)
+  50/100 coins mile (trades so far: 102)
+  60/100 coins mile (trades so far: 113)
+  70/100 coins mile (trades so far: 144)
+  80/100 coins mile (trades so far: 149)
+  90/100 coins mile (trades so far: 157)
+  100/100 coins mile (trades so far: 171)
+
+[INFO] Total 100 coins, 171 trades
+
+=================================================================
+NATIJA: 52-Week High Momentum aur VWAP Deviation
+=================================================================
+
+OVERALL (baseline population): Trades=171  Win%=49.12  PF=4.14
+
+
+### 1. DIST FROM 365-DAY (52-WEEK) HIGH ###
+  0% - 5% (52w high ke bilkul qareeb): Trades=58  Win%=56.9  PF=3.315
+  5% - 15%: Trades=25  Win%=68.0  PF=5.533
+  15% - 30%: Trades=9  Win%=44.44  PF=14.373
+  30% - 50%: Trades=16  Win%=31.25  PF=0.592
+  50%+ (52w high se bohot door): Trades=63  Win%=39.68  PF=4.126
+
+
+### 2. VWAP DEVIATION (7-din weekly VWAP se) ###
+  -5% se kam (VWAP se bohot neeche): Trades=2  Win%=0.0  PF=0.0
+  -5% se -1%: Trades=0  Win%=None  PF=None
+  -1% se +1% (VWAP ke qareeb): Trades=6  Win%=66.67  PF=4.285
+  +1% se +5%: Trades=26  Win%=50.0  PF=1.732
+  +5%+ (VWAP se bohot upar): Trades=137  Win%=48.91  PF=4.428
+
+-----------------------------------------------------------------
+KAISE SAMJHEIN:
+-----------------------------------------------------------------
+- 52-Week High: agar '0-5%' bucket sab se behtar PF de, to
+  academic momentum-effect ki tasdeeq hui.
+- VWAP: dekhein kaunsi range (upar/neeche/qareeb) behtar hai.
+- Chhote sample (<15 trades) wale buckets par kam bharosa karein.
