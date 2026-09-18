@@ -1,0 +1,27 @@
+ETH daily data + 200 EMA regime nikal rahe hain...
+BTC daily data nikal rahe hain...
+Scanning - sirf TOP 100 liquid, full-history wale (365 din)...
+
+  10/100 coins mile (baseline: 44, +RS_PCT95: 28)
+  20/100 coins mile (baseline: 88, +RS_PCT95: 50)
+  30/100 coins mile (baseline: 126, +RS_PCT95: 63)
+  40/100 coins mile (baseline: 179, +RS_PCT95: 93)
+  50/100 coins mile (baseline: 222, +RS_PCT95: 109)
+  60/100 coins mile (baseline: 250, +RS_PCT95: 120)
+  70/100 coins mile (baseline: 297, +RS_PCT95: 149)
+  80/100 coins mile (baseline: 342, +RS_PCT95: 154)
+  90/100 coins mile (baseline: 375, +RS_PCT95: 162)
+  100/100 coins mile (baseline: 426, +RS_PCT95: 178)
+
+[INFO] Total 100 coins shamil hue
+
+=================================================================
+NATIJA: RS Percentile>=95.0 Filter - Bara Sample Tasdeeq
+=================================================================
+
+BASELINE (Top 100 + ETH + RS trend) : Trades=426  Win%=40.85  PF=2.568  Total Return=2191.53%
++RS_PERCENTILE>=95.0                : Trades=178  Win%=48.88  PF=4.454  Total Return=2057.04%
+
+NOTE: Agar +RS_PERCENTILE ka PF baseline se saaf behtar hai (aur
+sample bhi kaafi bara hai), to ye filter tasdeeq shuda hai aur live
+system mein shamil karne ke qabil hai.
