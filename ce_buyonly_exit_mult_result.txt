@@ -1,0 +1,34 @@
+ETH daily data + 200 EMA regime nikal rahe hain...
+  ETH bullish regime: 238/519 din
+
+BTC daily data nikal rahe hain (strategy ke apne BTC filter ke liye)...
+Scanning coins - pehle 60 full-history coins tak (Top 60 Liquid + ETH Filter)...
+
+  10/60 coins mile (scan kiye: 17)
+  20/60 coins mile (scan kiye: 39)
+  30/60 coins mile (scan kiye: 59)
+  40/60 coins mile (scan kiye: 79)
+  50/60 coins mile (scan kiye: 94)
+  60/60 coins mile (scan kiye: 109)
+
+[INFO] Total 60 full-history coins mile
+
+=================================================================
+NATIJA: CE Buy-Only - Exit Chandelier Multiplier Tuning
+=================================================================
+
+Exit Multiplier=3.0: Trades=485  Win%=32.16  PF=0.988  Total Return=-9.4%
+
+Exit Multiplier=4.0: Trades=485  Win%=35.05  PF=1.251  Total Return=237.93%
+
+Exit Multiplier=4.5: Trades=485  Win%=35.46  PF=1.445  Total Return=465.89%
+
+Exit Multiplier=5.0: Trades=485  Win%=36.7  PF=1.642  Total Return=707.98%
+
+Exit Multiplier=6.0: Trades=485  Win%=35.88  PF=1.647  Total Return=805.82%
+
+>>> Sab se behtar Exit Multiplier: 6.0 (PF=1.647) <<<
+
+NOTE: Agar kisi bhi multiplier par PF 1.5+ nahi aata, to sirf exit
+stop door karna is strategy ko nahi bacha sakta - masla entry
+signal ki apni quality mein hai, exit mechanism mein nahi.
