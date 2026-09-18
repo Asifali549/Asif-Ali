@@ -1,0 +1,32 @@
+ETH daily data + 200 EMA regime nikal rahe hain...
+Scanning - sirf TOP 60 liquid, full-history wale (Union AB, live settings)...
+
+  10/60 coins mile (trades so far: 17)
+  20/60 coins mile (trades so far: 58)
+  30/60 coins mile (trades so far: 89)
+  40/60 coins mile (trades so far: 132)
+  50/60 coins mile (trades so far: 181)
+  60/60 coins mile (trades so far: 219)
+
+[INFO] Total 60 coins, 219 trades
+
+=================================================================
+NATIJA: Quality Score Applied to Union AB (Top 60 + ETH)
+=================================================================
+
+OVERALL: Trades=219  Win%=43.38  PF=3.628
+
+--- QUALITY SCORE ke buckets ---
+  0-30 (kam quality): Trades=0  Win%=None  PF=None
+  30-50: Trades=6  Win%=33.33  PF=0.158
+  50-70: Trades=135  Win%=45.19  PF=2.825
+  70-85: Trades=72  Win%=41.67  PF=5.788
+  85-100 (zyada quality): Trades=6  Win%=33.33  PF=0.631
+
+-----------------------------------------------------------------
+KAISE SAMJHEIN:
+-----------------------------------------------------------------
+- Agar upar wale buckets (85-100) ka PF neeche wale (0-30) se
+  saaf zyada hai, to Quality Score waqai kaam ki cheez hai -
+  ranking ke liye (ya halke filter ke liye) istemal ho sakta hai.
+- Chhote sample wale buckets par kam bharosa karein.
