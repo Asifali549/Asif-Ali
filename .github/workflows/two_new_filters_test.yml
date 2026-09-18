@@ -1,4 +1,4 @@
-name: Two New Filters Test
+ name: Two New Filters Test
 
 on:
   workflow_dispatch:
@@ -41,4 +41,4 @@ jobs:
             fi
             echo "Push nakaam (attempt $i), 10 second ruk kar dobara koshish..."
             sleep 10
-          done
+          done  
