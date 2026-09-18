@@ -1,0 +1,49 @@
+ETH daily data + 200 EMA regime nikal rahe hain...
+Scanning - sirf TOP 60 liquid, full-history wale...
+
+  10/60 coins mile (trades so far: 17)
+  20/60 coins mile (trades so far: 59)
+  30/60 coins mile (trades so far: 99)
+  40/60 coins mile (trades so far: 132)
+  50/60 coins mile (trades so far: 171)
+  60/60 coins mile (trades so far: 219)
+
+[INFO] Total 60 coins, 219 trades
+
+=================================================================
+NATIJA: Score Thresholds Data-Driven Analysis
+=================================================================
+
+OVERALL: Trades=219  Win%=43.38  PF=3.791
+
+--- VOL RATIO ke buckets (abhi ka threshold: >=1.2 green, <0.8 red) ---
+  0.0x - 0.8x (abhi RED): Trades=0  Win%=None  PF=None
+  0.8x - 1.2x (abhi NEUTRAL): Trades=0  Win%=None  PF=None
+  1.2x - 2.0x (abhi GREEN): Trades=2  Win%=100.0  PF=None
+  2.0x - 5.0x (abhi GREEN): Trades=119  Win%=46.22  PF=5.704
+  5.0x+ (abhi GREEN): Trades=98  Win%=38.78  PF=1.849
+
+--- CHG% ke buckets (abhi ka threshold: >0 green, <0 red) ---
+  -2% se kam (bara manfi): Trades=0  Win%=None  PF=None
+  -2% se 0% (chhota manfi, abhi RED): Trades=2  Win%=100.0  PF=None
+  0% se 2% (chhota musbat, abhi GREEN): Trades=83  Win%=42.17  PF=1.414
+  2% se 5%: Trades=74  Win%=45.95  PF=2.125
+  5%+ (bara musbat): Trades=60  Win%=40.0  PF=5.606
+
+--- DIST FROM 24H HIGH ke buckets (abhi ka threshold: <1% red, >3% green) ---
+  0% - 1% (abhi RED, high ke bilkul qareeb): Trades=128  Win%=44.53  PF=2.337
+  1% - 3% (abhi NEUTRAL): Trades=62  Win%=40.32  PF=0.947
+  3% - 6% (abhi GREEN): Trades=14  Win%=35.71  PF=0.205
+  6% - 15%: Trades=15  Win%=53.33  PF=28.516
+  15%+ (high se bohot door): Trades=0  Win%=None  PF=None
+
+-----------------------------------------------------------------
+KAISE SAMJHEIN:
+-----------------------------------------------------------------
+- Har feature ke buckets ka PF dekhein. Agar 'abhi GREEN' wale
+  bucket ka PF waqai baqi buckets se zyada hai, to threshold
+  sahi jagah par hai.
+- Agar koi 'abhi RED' bucket ka PF acha nikle, ya 'abhi GREEN'
+  ka PF kamzor nikle, to us threshold ko badalna faida mand
+  ho sakta hai.
+- Chhote sample (<15 trades) wale buckets par kam bharosa karein.
