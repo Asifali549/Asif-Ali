@@ -1,0 +1,26 @@
+ETH daily data + 200 EMA regime nikal rahe hain...
+BTC daily data nikal rahe hain...
+Scanning - sirf TOP 150 liquid, full-history wale (365 din)...
+
+  15/150 coins mile (baseline: 33, +52W_HIGH: 26)
+  30/150 coins mile (baseline: 68, +52W_HIGH: 45)
+  45/150 coins mile (baseline: 92, +52W_HIGH: 60)
+  60/150 coins mile (baseline: 113, +52W_HIGH: 65)
+  75/150 coins mile (baseline: 147, +52W_HIGH: 74)
+  90/150 coins mile (baseline: 157, +52W_HIGH: 77)
+  105/150 coins mile (baseline: 175, +52W_HIGH: 85)
+  120/150 coins mile (baseline: 200, +52W_HIGH: 91)
+  135/150 coins mile (baseline: 219, +52W_HIGH: 97)
+  150/150 coins mile (baseline: 227, +52W_HIGH: 101)
+
+[INFO] Total 150 coins shamil hue
+
+=================================================================
+NATIJA: 52-Week High<=15.0% Filter - Bara Sample Tasdeeq
+=================================================================
+
+BASELINE (Top 150+ETH+RS+RS%95) : Trades=227  Win%=48.46  PF=4.059  Total Return=2203.54%
++52W_HIGH<=15.0%              : Trades=101  Win%=57.43  PF=4.758  Total Return=800.92%
+
+NOTE: Agar +52W_HIGH filter ka PF/Win% baseline se saaf behtar
+hai (aur sample kaafi bara hai), to ye filter tasdeeq shuda hai.
