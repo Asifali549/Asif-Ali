@@ -1,0 +1,23 @@
+ETH daily data + 200 EMA regime nikal rahe hain...
+BTC daily data nikal rahe hain (RS ratio ke liye)...
+Scanning - sirf TOP 60 liquid, full-history wale...
+
+  10/60 coins mile (baseline: 17, +RS: 13)
+  20/60 coins mile (baseline: 58, +RS: 42)
+  30/60 coins mile (baseline: 89, +RS: 61)
+  40/60 coins mile (baseline: 133, +RS: 93)
+  50/60 coins mile (baseline: 175, +RS: 119)
+  60/60 coins mile (baseline: 218, +RS: 140)
+
+[INFO] Total 60 coins shamil hue
+
+=================================================================
+NATIJA: Relative Strength (vs BTC) Filter on Union AB
+=================================================================
+
+BASELINE (Top 60 + ETH filter) : Trades=218  Win%=42.66  PF=3.534  Total Return=1528.64%
++RS_FILTER (vs BTC)            : Trades=140  Win%=43.57  PF=4.337  Total Return=1485.4%
+
+NOTE: Agar '+RS_FILTER' ka PF BASELINE se behtar hai, to Relative
+Strength filter waqai faida mand hai - hamare live system mein
+shamil karne ke qabil. Trades kam hone ko akele nuksan na samjhein.
