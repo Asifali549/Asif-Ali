@@ -1,0 +1,51 @@
+ETH daily data + 200 EMA regime nikal rahe hain...
+Scanning - sirf TOP 100 liquid, full-history wale...
+
+  10/100 coins mile (trades so far: 44)
+  20/100 coins mile (trades so far: 99)
+  30/100 coins mile (trades so far: 147)
+  40/100 coins mile (trades so far: 218)
+  50/100 coins mile (trades so far: 281)
+  60/100 coins mile (trades so far: 351)
+  70/100 coins mile (trades so far: 422)
+  80/100 coins mile (trades so far: 489)
+  90/100 coins mile (trades so far: 540)
+  100/100 coins mile (trades so far: 593)
+
+[INFO] Total 100 coins, 593 trades
+
+=================================================================
+NATIJA: Score Thresholds Data-Driven Analysis
+=================================================================
+
+OVERALL: Trades=593  Win%=36.76  PF=2.189
+
+--- DIST FROM 24H HIGH: FINER BUCKETS (tasdeeq ke liye, bara sample) ---
+  0% - 0.5% (high ke bilkul qareeb): Trades=246  Win%=39.84  PF=1.569
+  0.5% - 1%: Trades=107  Win%=29.91  PF=1.689
+  1% - 2%: Trades=116  Win%=37.07  PF=1.31
+  2% - 3%: Trades=46  Win%=34.78  PF=0.671
+  3% - 4.5%: Trades=42  Win%=28.57  PF=0.436
+  4.5% - 6%: Trades=13  Win%=38.46  PF=1.9
+  6% - 10%: Trades=19  Win%=57.89  PF=21.262
+  10%+ (high se bohot door): Trades=4  Win%=25.0  PF=19.931
+
+--- COMPARISON: Moujoda direction vs Ulti (reversed) direction ---
+
+MOUJODA LOGIC (High ke qareeb = RED, door = GREEN):
+  'RED' zone (<1%)  : Trades=353  Win%=36.83  PF=1.613
+  'GREEN' zone (>3%): Trades=78  Win%=37.18  PF=5.382
+
+ULTI (REVERSED) LOGIC (High ke qareeb = GREEN, door = RED):
+  'GREEN' zone (<1%): Trades=353  Win%=36.83  PF=1.613
+  'RED' zone (>3%)  : Trades=78  Win%=37.18  PF=5.382
+
+-----------------------------------------------------------------
+KAISE SAMJHEIN:
+-----------------------------------------------------------------
+- Agar 'ULTI LOGIC' mein GREEN zone ka PF, RED zone se saaf
+  zyada hai (aur ye pehle chhote test se bhi match karta hai),
+  to direction ulti karna sahi hai - is dorania mein bhi
+  tasdeeq ho gayi.
+- Bara sample (Top 100, 365 din) chhote sample (Top 60, 270
+  din) se zyada qabil-e-bharosa hai.
