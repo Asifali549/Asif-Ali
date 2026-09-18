@@ -1,0 +1,36 @@
+ETH daily data + 200 EMA regime nikal rahe hain...
+  ETH bullish regime: 238/519 din
+
+BTC daily data nikal rahe hain (strategy ke apne BTC filter ke liye)...
+Scanning coins - pehle 150 full-history coins tak...
+
+  rank 20/150 tak coins mil chuke (scan kiye: 38)
+  rank 40/150 tak coins mil chuke (scan kiye: 79)
+  rank 60/150 tak coins mil chuke (scan kiye: 109)
+  rank 80/150 tak coins mil chuke (scan kiye: 132)
+  rank 100/150 tak coins mil chuke (scan kiye: 161)
+  rank 120/150 tak coins mil chuke (scan kiye: 189)
+  rank 140/150 tak coins mil chuke (scan kiye: 220)
+
+[INFO] Total 150 full-history coins mile
+
+=================================================================
+NATIJA: CE Buy-Only - Liquidity Tiers + ETH Filter
+=================================================================
+
+--- TOP 60 LIQUID ---
+  Bina ETH filter : Trades=1396  Win%=31.23  PF=0.8  Total Return=-377.11%
+  ETH filter sath : Trades=483  Win%=31.68  PF=0.986  Total Return=-10.8%
+
+--- TOP 100 LIQUID ---
+  Bina ETH filter : Trades=2329  Win%=31.82  PF=0.816  Total Return=-602.08%
+  ETH filter sath : Trades=798  Win%=31.58  PF=0.863  Total Return=-188.09%
+
+--- TOP 150 LIQUID ---
+  Bina ETH filter : Trades=3433  Win%=31.31  PF=0.853  Total Return=-705.79%
+  ETH filter sath : Trades=1163  Win%=30.7  PF=0.793  Total Return=-420.6%
+
+NOTE: Pehle chhote/mukhtasar test mein is strategy ka PF 0.91 tha
+(poore coin universe par, bina liquidity restriction ke). Agar
+yahan kisi tier ka PF 1.5+ aata hai, to liquidity+ETH recipe ne
+isay waqai bacha liya - warna ye strategy khud hi kamzor hai.
