@@ -1,0 +1,52 @@
+ETH daily data + 200 EMA regime nikal rahe hain...
+BTC daily data nikal rahe hain (RS ke liye)...
+Scanning - sirf TOP 60 liquid, full-history wale...
+
+  10/60 coins mile (trades so far: 15)
+  20/60 coins mile (trades so far: 40)
+  30/60 coins mile (trades so far: 67)
+  40/60 coins mile (trades so far: 89)
+  50/60 coins mile (trades so far: 120)
+  60/60 coins mile (trades so far: 139)
+
+[INFO] Total 60 coins, 139 trades
+
+=================================================================
+NATIJA: Teen Naye Filters (ek hi test mein, alag alag)
+=================================================================
+
+OVERALL (baseline population): Trades=139  Win%=46.04  PF=4.343
+
+
+### 1. TREND QUALITY (R²) ###
+  0.0 - 0.3 (bikhra hua): Trades=52  Win%=32.69  PF=6.441
+  0.3 - 0.5: Trades=25  Win%=40.0  PF=0.639
+  0.5 - 0.7: Trades=36  Win%=63.89  PF=7.142
+  0.7 - 0.85: Trades=18  Win%=50.0  PF=1.784
+  0.85 - 1.0 (bilkul saaf trend): Trades=8  Win%=62.5  PF=1.81
+
+
+### 2. RS PERCENTILE (apni 180-din history mein) ###
+  0 - 50 (kamzor RS): Trades=26  Win%=57.69  PF=3.437
+  50 - 70: Trades=15  Win%=33.33  PF=1.173
+  70 - 85: Trades=25  Win%=64.0  PF=2.962
+  85 - 95: Trades=23  Win%=30.43  PF=2.586
+  95 - 100 (sab se mazboot RS): Trades=50  Win%=42.0  PF=5.971
+
+
+### 3. VOLATILITY PERCENTILE (ATR ki apni 90-din history mein) ###
+  0 - 25 (kam volatility): Trades=4  Win%=75.0  PF=2.199
+  25 - 50: Trades=16  Win%=68.75  PF=17.061
+  50 - 75: Trades=15  Win%=40.0  PF=2.628
+  75 - 90: Trades=36  Win%=44.44  PF=2.07
+  90 - 100 (ghair-mamool volatility): Trades=68  Win%=41.18  PF=4.786
+
+-----------------------------------------------------------------
+KAISE SAMJHEIN:
+-----------------------------------------------------------------
+- Har feature ke sab se behtar bucket ka PF dekhein - agar
+  wazeh farq hai, to wo filter kaam ka hai.
+- Chhote sample (<15 trades) wale buckets par kam bharosa karein.
+- Teeno alag alag test hue hain (ek doosre se mila kar nahi) -
+  agar koi acha nikle, use alag se filter ke tor par phir test
+  karna hoga.
