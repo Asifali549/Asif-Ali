@@ -1,0 +1,29 @@
+ETH daily data + 200 EMA regime nikal rahe hain...
+  ETH bullish regime: 238/519 din
+
+Scanning coins - pehle 150 full-history coins tak...
+
+  rank 20/150 tak coins mil chuke (scan kiye: 41)
+  rank 40/150 tak coins mil chuke (scan kiye: 80)
+  rank 60/150 tak coins mil chuke (scan kiye: 109)
+  rank 80/150 tak coins mil chuke (scan kiye: 130)
+  rank 100/150 tak coins mil chuke (scan kiye: 157)
+  rank 120/150 tak coins mil chuke (scan kiye: 182)
+  rank 140/150 tak coins mil chuke (scan kiye: 209)
+
+[INFO] Total 150 full-history coins mile
+
+=================================================================
+NATIJA: HARD V9 - Liquidity Tiers + ETH Filter
+=================================================================
+
+TOP 60: Trades=167  Win%=39.52  PF=1.145  Total Return=44.98%
+
+TOP 100: Trades=239  Win%=38.49  PF=1.053  Total Return=25.1%
+
+TOP 150: Trades=323  Win%=39.63  PF=1.174  Total Return=105.89%
+
+NOTE: Pehle chhote test mein is strategy ka avg PF 1.83 tha magar
+73% coins nuksan mein the (kuch outliers ne average khींच liya tha).
+Agar yahan kisi tier ka PF consistently 1.5+ aata hai, to
+liquidity+ETH recipe ne behtari di hai.
