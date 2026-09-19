@@ -118,8 +118,14 @@ def show_charts_and_copy(df, key_prefix):
 # ============================================================
 # SECTION 1: LIVE (khud-b-khud, GitHub Actions se)
 # ============================================================
-st.header("🔴 LIVE — Auto-Updated (har 1 ghanta)")
-compact_live = st.checkbox("Compact View (sirf zaroori columns)", value=True, key="compact_live")
+st.header("🔴 LIVE — Auto-Updated (har scan ke 5 min baad agla)")
+col_a, col_b = st.columns(2)
+compact_live = col_a.checkbox("Compact View (sirf zaroori columns)", value=True, key="compact_live")
+pass_only_live = col_b.checkbox(
+    "✅ Sirf Pass (Strong/Good) Dikhayen", value=True, key="pass_only_live",
+    help="ON hone par sirf 🟢🟢🟢 Strong aur 🟢 Good verdict wale signals dikhenge. "
+         "🟡 Mixed aur 🔴 Weak (failure) signals screen se hat jayenge.",
+)
 
 if os.path.exists("dashboard_signals.json"):
     with open("dashboard_signals.json") as f:
@@ -141,15 +147,26 @@ if os.path.exists("dashboard_signals.json"):
 
     if live_data["signals"]:
         df_live = pd.DataFrame(live_data["signals"])
-        style_and_show(df_live, compact_live)
-        show_charts_and_copy(df_live, "live")
+        total_count = len(df_live)
+
+        if pass_only_live and "Verdict" in df_live.columns:
+            df_live = df_live[df_live["Verdict"].astype(str).str.contains("Strong|Good", na=False)]
+            hidden_count = total_count - len(df_live)
+            if hidden_count > 0:
+                st.caption(f"🔴🟡 {hidden_count} kamzor (Mixed/Weak) signal chupaye gaye. Sab dekhne ke liye upar wala checkbox OFF karein.")
+
+        if len(df_live) > 0:
+            style_and_show(df_live, compact_live)
+            show_charts_and_copy(df_live, "live")
+        else:
+            st.info("Is waqt koi Pass (Strong/Good) signal nahi — sirf kamzor signals mile, jo chupaye gaye hain.")
     else:
         st.info("Is waqt koi fresh signal nahi (last scan mein).")
 else:
     st.info(
         "Live scan abhi setup nahi hua ya pehli baar chalne ka wait ho raha hai. "
         "GitHub repo mein '.github/workflows/scan_dashboard.yml' hona chahiye — "
-        "1 ghante mein pehla result aa jayega."
+        "thodi der mein pehla result aa jayega (har scan khatam hone ke 5 minute baad agla shuru hota hai)."
     )
 
 st.markdown("---")# SECTION 2: MANUAL (on-demand, apni marzi ke toggles ke sath)
