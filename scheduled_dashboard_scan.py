@@ -257,8 +257,13 @@ def main():
         # ---- NEW system: AdvancedConfluence_v1 (bina kisi naye filter ke, jaisa pehle tha) ----
         try:
             result_new = compute_confluence(df, btc_daily, CONF_PARAMS, usdt_d_weak=None)
-            structure_signal = result_new["bos"] | result_new["choch"]
-            new_sig = apply_cooldown(structure_signal & (result_new["score"] >= 6), config.SIGNAL_COOLDOWN_BARS)
+            # CHoCH-Only: bara-sample confirmation test se tasdeeq shuda
+            # (Top 300 coins, period-split consistent) - BOS wale signals
+            # hata diye gaye, kyunke BOS wale weak the (PF 0.728) aur CHoCH
+            # akela mazboot tha (poora sample PF 1.215->1.708, Period 1 PF
+            # 1.763, Period 2 PF 1.687 - dono consistent).
+            choch_signal = result_new["choch"]
+            new_sig = apply_cooldown(choch_signal & (result_new["score"] >= 6), config.SIGNAL_COOLDOWN_BARS)
 
             if new_sig.tail(3).any():
                 idx = new_sig.tail(3)[new_sig.tail(3)].index[-1]
@@ -270,7 +275,7 @@ def main():
                 risk = entry_price - chandelier
                 tp_price = entry_price + risk * RR_MULTIPLE
                 signal_coins.append({
-                    "Coin": symbol, "Combo": "NEW_AdvancedConfluence", "Tier": "N/A", "Bars Ago": int(len(df) - 1 - idx),
+                    "Coin": symbol, "Combo": "NEW_AdvancedConfluence (CHoCH)", "Tier": "N/A", "Bars Ago": int(len(df) - 1 - idx),
                     "Entry": round(float(entry_price), 6), "Current": round(float(current_price), 6),
                     "Trail Stop": round(float(chandelier), 6), "Take Profit": round(float(tp_price), 6),
                     "_df": df, "_sig": new_sig, "_ce": CE_D,
