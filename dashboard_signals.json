@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-19T21:25:51.910298+00:00",
+  "last_updated_utc": "2026-09-19T21:32:51.945064+00:00",
   "coins_scanned": 150,
   "fear_greed_value": 71,
   "fear_greed_label": "Greed",
@@ -14,13 +14,13 @@
       "Trail Stop": 0.337738,
       "Take Profit": 0.343025,
       "Funding Rate": "0.010%",
-      "Open Interest": "$260,295",
-      "Liquidity Up ($)": "$131,569",
-      "Liquidity Down ($)": "$148,029",
-      "Liquidity Compare": "Support > Resistance",
-      "OrderBook Bid/Ask": "1.13x",
-      "Vol 15m": "0.31x",
-      "Chg 15m": "+0.00%",
+      "Open Interest": "$253,901",
+      "Liquidity Up ($)": "$139,072",
+      "Liquidity Down ($)": "$128,472",
+      "Liquidity Compare": "Resistance > Support",
+      "OrderBook Bid/Ask": "0.92x",
+      "Vol 15m": "0.39x",
+      "Chg 15m": "+0.03%",
       "Vol 1h": "0.82x",
       "Chg 1h": "-0.03%",
       "Vol 4h": "1.09x",
@@ -32,8 +32,8 @@
       "Coin's Own Win%": "0.0%",
       "Coin's Own PF": "N/A",
       "BTC Correlation": "0.4",
-      "Overall Score %": 62.5,
-      "Verdict": "\ud83d\udfe2 Good",
+      "Overall Score %": 44.4,
+      "Verdict": "\ud83d\udfe1 Mixed",
       "Rank": 1
     }
   ]
