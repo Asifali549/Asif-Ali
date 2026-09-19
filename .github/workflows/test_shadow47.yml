@@ -1,0 +1,30 @@
+name: Test SHADOW47 AI Structure Engine PRO v2.1
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run SHADOW47 test
+        run: python test_shadow47.py
+
+      - name: Show results file
+        if: always()
+        run: cat test_shadow47_RESULTS.txt || echo "Results file nahi mili"
