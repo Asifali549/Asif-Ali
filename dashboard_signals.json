@@ -1,7 +1,40 @@
 {
-  "last_updated_utc": "2026-09-19T04:59:59.239185+00:00",
+  "last_updated_utc": "2026-09-19T05:06:29.497362+00:00",
   "coins_scanned": 150,
   "fear_greed_value": 71,
   "fear_greed_label": "Greed",
-  "signals": []
+  "signals": [
+    {
+      "Coin": "XDC/USDT",
+      "Combo": "NEW_AdvancedConfluence",
+      "Tier": "N/A",
+      "Bars Ago": 0,
+      "Entry": 0.02825,
+      "Current": 0.02825,
+      "Trail Stop": 0.027455,
+      "Take Profit": 0.02984,
+      "Funding Rate": "0.005%",
+      "Open Interest": "$36,280",
+      "Liquidity Up ($)": "$61,711",
+      "Liquidity Down ($)": "$111,155",
+      "Liquidity Compare": "Support > Resistance",
+      "OrderBook Bid/Ask": "1.80x",
+      "Vol 15m": "9.18x",
+      "Chg 15m": "+1.15%",
+      "Vol 1h": "3.42x",
+      "Chg 1h": "+1.33%",
+      "Vol 4h": "1.68x",
+      "Chg 4h": "-0.96%",
+      "Vol 1d": "1.69x",
+      "Chg 1d": "+3.80%",
+      "Dist from 24h High": "0.21%",
+      "Dist from 24h Low": "4.97%",
+      "Coin's Own Win%": "50.0%",
+      "Coin's Own PF": "0.77",
+      "BTC Correlation": "0.38",
+      "Overall Score %": 76.9,
+      "Verdict": "\ud83d\udfe2\ud83d\udfe2\ud83d\udfe2 Strong",
+      "Rank": 1
+    }
+  ]
 }
