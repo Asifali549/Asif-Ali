@@ -1,8 +1,8 @@
 name: Scheduled Dashboard Scan
 
 on:
-  schedule:
-    - cron: '10 * * * *'
+  # Hourly cron hata diya gaya - ab sirf neeche wala self-loop
+  # (scan khatam -> 5 min wait -> agla scan khud shuru) chalta hai.
   workflow_dispatch: {}
 
 permissions:
