@@ -1,7 +1,42 @@
 {
-  "last_updated_utc": "2026-09-19T10:56:47.671373+00:00",
+  "last_updated_utc": "2026-09-19T11:03:43.099821+00:00",
   "coins_scanned": 150,
   "fear_greed_value": 71,
   "fear_greed_label": "Greed",
-  "signals": []
+  "signals": [
+    {
+      "Coin": "STX/USDT",
+      "Combo": "EMA+Breakout",
+      "Tier": "Baseline",
+      "Bars Ago": 0,
+      "Entry": 0.2996,
+      "Current": 0.2996,
+      "Trail Stop": 0.27825,
+      "Take Profit": 0.3423,
+      "RS Percentile": 100.0,
+      "Dist from 52W High": "57.37%",
+      "Funding Rate": "0.010%",
+      "Open Interest": "$5,830,042",
+      "Liquidity Up ($)": "$4,061",
+      "Liquidity Down ($)": "$8,647",
+      "Liquidity Compare": "Support > Resistance",
+      "OrderBook Bid/Ask": "2.13x",
+      "Vol 15m": "3.55x",
+      "Chg 15m": "+0.74%",
+      "Vol 1h": "4.43x",
+      "Chg 1h": "+2.96%",
+      "Vol 4h": "1.09x",
+      "Chg 4h": "+1.09%",
+      "Vol 1d": "0.87x",
+      "Chg 1d": "+13.05%",
+      "Dist from 24h High": "2.29%",
+      "Dist from 24h Low": "12.07%",
+      "Coin's Own Win%": "20.0%",
+      "Coin's Own PF": "1.24",
+      "BTC Correlation": "0.39",
+      "Overall Score %": 100.0,
+      "Verdict": "\ud83d\udfe2\ud83d\udfe2\ud83d\udfe2 Strong",
+      "Rank": 1
+    }
+  ]
 }
