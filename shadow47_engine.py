@@ -417,4 +417,15 @@ def compute_shadow47(df, htf_dfs, btc_df, params=None):
         "structureBias": pd.Series(struct["structureBias"], index=df.index),
         "inDiscount": pd.Series(inDiscount, index=df.index),
         "bullMTFCount": pd.Series(bull_counts, index=df.index),
+        "volRatio": volRatio,
     }
+
+
+def build_signal_with_threshold(longScoreFinal, shortScoreFinal, volRatio, threshold, min_score_edge, min_vol_ratio):
+    """SHADOW47 ke signal ko alag threshold/edge ke sath dobara banane ke
+    liye - poora engine dobara chalaye bina (score pehle se ready hai)."""
+    raw = ((longScoreFinal >= threshold)
+           & ((longScoreFinal - shortScoreFinal) >= min_score_edge)
+           & (volRatio >= min_vol_ratio))
+    buy = raw & (~raw.shift(1).fillna(False))
+    return buy.fillna(False)
