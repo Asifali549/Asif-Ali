@@ -48,7 +48,21 @@ COLORABLE_COLUMNS = (
     + [f"Chg {tf}" for tf in ALL_TIMEFRAMES]
 )
 
-COMPACT_COLUMNS = ["Rank", "Coin", "Signal Time (PKT)", "Combo", "Overall Score %", "Verdict", "Entry", "Trail Stop", "Take Profit"]
+COMPACT_COLUMNS = ["Rank", "System", "Category", "Coin", "Signal Time (PKT)", "Combo", "Overall Score %", "Verdict", "Entry", "Current", "P/L %", "Trail Stop", "Take Profit"]
+
+SYSTEM_ORDER = ["Union AB", "NEW AdvancedConfluence", "Union AB Backup Tier", "CE Buy-Only"]
+SYSTEM_BADGE = {
+    "Union AB": "🥇 Union AB",
+    "NEW AdvancedConfluence": "🧭 NEW AdvancedConfluence",
+    "Union AB Backup Tier": "🛡️ Union AB Backup Tier",
+    "CE Buy-Only": "⚡ CE Buy-Only",
+}
+SYSTEM_CAPTION = {
+    "Union AB": "Sab se zyada tasdeeq-shuda system (ETH+RS+RS%95, +52W tier).",
+    "NEW AdvancedConfluence": "CHoCH-based confluence score, koi extra filter nahi.",
+    "Union AB Backup Tier": "Union AB jaisa combo, sirf RS+RS%95 (ETH check NAHI) — hamesha active rehta hai.",
+    "CE Buy-Only": "⚠️ Sirf 1 indicator (Chandelier cross) par mabni — koi tasdeeqi filter nahi. Ehtiyaat se capital lagayein.",
+}
 
 
 def style_and_show(df, compact):
@@ -146,20 +160,73 @@ if os.path.exists("dashboard_signals.json"):
         st.warning("⚠️ Ye data 90 minute se purana hai — background scan delay ho sakta hai.")
 
     if live_data["signals"]:
-        df_live = pd.DataFrame(live_data["signals"])
-        total_count = len(df_live)
+        df_all = pd.DataFrame(live_data["signals"])
 
-        if pass_only_live and "Verdict" in df_live.columns:
-            df_live = df_live[df_live["Verdict"].astype(str).str.contains("Strong|Good", na=False)]
-            hidden_count = total_count - len(df_live)
-            if hidden_count > 0:
-                st.caption(f"🔴🟡 {hidden_count} kamzor (Mixed/Weak) signal chupaye gaye. Sab dekhne ke liye upar wala checkbox OFF karein.")
-
-        if len(df_live) > 0:
-            style_and_show(df_live, compact_live)
-            show_charts_and_copy(df_live, "live")
+        present_systems = [s for s in SYSTEM_ORDER if "System" in df_all.columns and s in df_all["System"].unique()]
+        if present_systems:
+            selected_systems = st.multiselect(
+                "🗂️ Systems Dikhayen", present_systems, default=present_systems, key="system_filter_live",
+            )
         else:
-            st.info("Is waqt koi Pass (Strong/Good) signal nahi — sirf kamzor signals mile, jo chupaye gaye hain.")
+            selected_systems = []
+
+        st.caption(
+            "ℹ️ 'Pass (Strong/Good)' filter sirf un systems par lagu hota hai jinka Overall Score/Verdict "
+            "calculate hota hai (Union AB, NEW AdvancedConfluence). Union AB Backup Tier aur CE Buy-Only "
+            "hamesha dikhte hain (in par Verdict N/A hai) — ye filter unhein kabhi nahi chupata."
+        )
+
+        any_shown = False
+        for system_name in SYSTEM_ORDER:
+            if "System" not in df_all.columns or system_name not in selected_systems:
+                continue
+            df_sys = df_all[df_all["System"] == system_name]
+            if len(df_sys) == 0:
+                continue
+
+            st.markdown(f"#### {SYSTEM_BADGE.get(system_name, system_name)}")
+            st.caption(SYSTEM_CAPTION.get(system_name, ""))
+
+            df_sys_show = df_sys
+            if pass_only_live and "Verdict" in df_sys_show.columns:
+                verdict_str = df_sys_show["Verdict"].astype(str)
+                is_na = verdict_str == "N/A"
+                is_pass = verdict_str.str.contains("Strong|Good", na=False)
+                total_count = len(df_sys_show)
+                df_sys_show = df_sys_show[is_na | is_pass]
+                hidden_count = total_count - len(df_sys_show)
+                if hidden_count > 0:
+                    st.caption(f"🔴🟡 {hidden_count} kamzor (Mixed/Weak) signal chupaye gaye.")
+
+            if len(df_sys_show) == 0:
+                st.info("Is waqt is system ka koi signal nahi (filter ke baad).")
+                st.markdown("---")
+                continue
+
+            key_slug = system_name.replace(" ", "_")
+
+            if "Category" in df_sys_show.columns:
+                new_df = df_sys_show[df_sys_show["Category"] == "New Signal"]
+                open_df = df_sys_show[df_sys_show["Category"] == "Open Trade"]
+            else:
+                new_df, open_df = df_sys_show, pd.DataFrame()
+
+            if len(new_df) > 0:
+                st.markdown(f"**🟢 Naye Signals ({len(new_df)})**")
+                style_and_show(new_df, compact_live)
+                show_charts_and_copy(new_df, f"live_{key_slug}_new")
+                any_shown = True
+
+            if len(open_df) > 0:
+                st.markdown(f"**🔵 Chal Rahi Trades — Open ({len(open_df)})**")
+                style_and_show(open_df, compact_live)
+                show_charts_and_copy(open_df, f"live_{key_slug}_open")
+                any_shown = True
+
+            st.markdown("---")
+
+        if not any_shown:
+            st.info("Is waqt koi signal nahi (selected systems/filter ke mutabiq).")
     else:
         st.info("Is waqt koi fresh signal nahi (last scan mein).")
 else:
