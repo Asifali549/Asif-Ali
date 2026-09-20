@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-20T12:16:28.899083+00:00",
+  "last_updated_utc": "2026-09-20T13:13:23.308151+00:00",
   "coins_scanned": 400,
   "timeframe": "1h",
   "signals": [
@@ -11,11 +11,11 @@
       "Score": "6/10",
       "Signal Bar": "2026-09-20 03:00 PM PKT",
       "Signal Bar UTC": "2026-09-20 10:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 1.23336,
-      "Current": 1.18237,
-      "P/L %": -4.13,
-      "Trail Stop": 1.111104,
+      "Current": 1.21279,
+      "P/L %": -1.67,
+      "Trail Stop": 1.151038,
       "Take Profit": 1.477872,
       "Status": "OPEN"
     },
@@ -27,10 +27,10 @@
       "Score": "6/10",
       "Signal Bar": "2026-09-20 03:00 PM PKT",
       "Signal Bar UTC": "2026-09-20 10:00:00",
-      "Bars Ago": 1,
+      "Bars Ago": 2,
       "Entry": 0.2689,
-      "Current": 0.24,
-      "P/L %": -10.75,
+      "Current": 0.2453,
+      "P/L %": -8.78,
       "Trail Stop": 0.259825,
       "Take Profit": 0.28705,
       "Status": "OPEN"
@@ -43,28 +43,12 @@
       "Score": "6/10",
       "Signal Bar": "2026-09-20 04:00 PM PKT",
       "Signal Bar UTC": "2026-09-20 11:00:00",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 0.000823,
-      "Current": 0.000823,
-      "P/L %": 0.0,
+      "Current": 0.0008,
+      "P/L %": -2.79,
       "Trail Stop": 0.000819,
       "Take Profit": 0.000831,
-      "Status": "OPEN"
-    },
-    {
-      "Coin": "ICNT/USDT",
-      "Timeframe": "1h",
-      "Combo": "NEW_AdvancedConfluence_v1",
-      "Structure": "CHoCH",
-      "Score": "6/10",
-      "Signal Bar": "2026-09-20 02:00 PM PKT",
-      "Signal Bar UTC": "2026-09-20 09:00:00",
-      "Bars Ago": 2,
-      "Entry": 0.09389,
-      "Current": 0.09321,
-      "P/L %": -0.72,
-      "Trail Stop": 0.091462,
-      "Take Profit": 0.100115,
       "Status": "OPEN"
     }
   ]
