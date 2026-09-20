@@ -3,6 +3,9 @@ name: Confluence Score Improvements Test
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   run-test:
     runs-on: ubuntu-latest
