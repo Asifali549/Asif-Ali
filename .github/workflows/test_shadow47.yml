@@ -1,4 +1,4 @@
-name: Test SHADOW47 AI Structure Engine PRO v2.1
+name: Test SHADOW47 Standalone Screener (v2 - Exit/Filter variants)
 
 on:
   workflow_dispatch: {}
@@ -22,9 +22,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run SHADOW47 test
-        run: python test_shadow47.py
+      - name: Run SHADOW47 v2 test
+        run: python test_shadow47_v2.py
 
       - name: Show results file
         if: always()
-        run: cat test_shadow47_RESULTS.txt || echo "Results file nahi mili"
+        run: cat test_shadow47_v2_RESULTS.txt || echo "Results file nahi mili"
