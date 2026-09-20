@@ -419,7 +419,7 @@ def main():
         try:
             result_new = compute_confluence(df, btc_daily, CONF_PARAMS, usdt_d_weak=None)
             choch_signal = result_new["choch"]
-            new_sig = apply_cooldown(choch_signal & (result_new["score"] >= 6), config.SIGNAL_COOLDOWN_BARS)
+            new_sig = apply_cooldown(choch_signal & (result_new["score"] >= CONF_PARAMS["score_threshold"]), config.SIGNAL_COOLDOWN_BARS)
 
             found = find_latest_open_or_new(df, new_sig, CE_D["period"], CE_D["multiplier"])
             if found is not None:
