@@ -234,7 +234,8 @@ def evaluate_union_ab_tier(symbol, df, idx, eth_regime, rs_bullish, rs_ratio_ser
 
 
 # ---------------- Trade progress / status (SAB systems ke liye saanjha) ----------------
-def compute_trade_progress(df, signal_idx, ce_period, ce_multiplier, rr_multiple=RR_MULTIPLE):
+def compute_trade_progress(df, signal_idx, ce_period, ce_multiplier, rr_multiple=RR_MULTIPLE,
+                            entry_ce_period=None, entry_ce_multiplier=None):
     """
     Ek signal (signal_idx par bani) ka AAJ TAK ka poora safar dobara,
     taaza data se calculate karta hai - koi state file ki zaroorat nahi.
@@ -247,14 +248,35 @@ def compute_trade_progress(df, signal_idx, ce_period, ce_multiplier, rr_multiple
     to conservative tareeqe se SL ko pehle mana jata hai. Agar aakhri bar
     tak kuch hit na ho -> abhi tak OPEN hai.
 
+    entry_ce_period/entry_ce_multiplier: JAB signal khud chandelier-cross
+    se bana ho aur uske apne (entry) params trailing/exit params
+    (ce_period, ce_multiplier) se ALAG hon (jaise CE Buy-Only: entry
+    11/4.5, exit 16/3.0) - to "initial stop < entry price" wali validity
+    check ENTRY params se honi chahiye (kyunke wahi cross ko guarantee
+    deti hai), warna EXIT params ka zyada tight (chhota multiplier)
+    stop is check ko GHALAT taur par fail kar deta hai aur bilkul theek
+    signal bhi "invalid" keh kar chupa deta hai. Trailing phir bhi
+    exit params (ce_period, ce_multiplier) se hi hoti hai - sirf shuruati
+    validity check ka reference alag hai. Agar ye do params nahi diye
+    jayen, purana rawaiyya (dono ek hi) barqarar rehta hai.
+
     Returns None agar setup invalid ho (chandelier NaN ya stop>=entry).
     """
     atr = compute_atr(df, ce_period)
     highest_high = df["high"].rolling(ce_period).max()
     chandelier_series = highest_high - ce_multiplier * atr
 
+    entry_p = entry_ce_period if entry_ce_period is not None else ce_period
+    entry_m = entry_ce_multiplier if entry_ce_multiplier is not None else ce_multiplier
+    if entry_p == ce_period and entry_m == ce_multiplier:
+        entry_stop_series = chandelier_series
+    else:
+        entry_atr = compute_atr(df, entry_p)
+        entry_highest_high = df["high"].rolling(entry_p).max()
+        entry_stop_series = entry_highest_high - entry_m * entry_atr
+
     entry_price = float(df["close"].iloc[signal_idx])
-    initial_stop = chandelier_series.iloc[signal_idx]
+    initial_stop = entry_stop_series.iloc[signal_idx]
     if pd.isna(initial_stop) or initial_stop >= entry_price:
         return None
 
@@ -299,7 +321,8 @@ def compute_trade_progress(df, signal_idx, ce_period, ce_multiplier, rr_multiple
     }
 
 
-def find_latest_open_or_new(df, signal_series, ce_period, ce_multiplier, lookback_bars=OPEN_TRADE_LOOKBACK_BARS):
+def find_latest_open_or_new(df, signal_series, ce_period, ce_multiplier, lookback_bars=OPEN_TRADE_LOOKBACK_BARS,
+                             entry_ce_period=None, entry_ce_multiplier=None):
     """
     signal_series mein sab se AAKHRI (most recent) True index dhoondta
     hai (sirf pichli `lookback_bars` candles ke andar), phir uska trade
@@ -307,6 +330,9 @@ def find_latest_open_or_new(df, signal_series, ce_period, ce_multiplier, lookbac
     hua), to use return karta hai (category = NEW ya OPEN, bars-ago ke
     hisab se). Agar CLOSED ho chuka hai to None (kuch bhi dikhane ki
     zaroorat nahi - purani trade khatam ho chuki).
+
+    entry_ce_period/entry_ce_multiplier: compute_trade_progress ko
+    aage forward - dekho waha ke docstring mein wajah.
     """
     n = len(signal_series)
     start = max(0, n - lookback_bars)
@@ -316,7 +342,10 @@ def find_latest_open_or_new(df, signal_series, ce_period, ce_multiplier, lookbac
         return None
 
     signal_idx = true_idxs[-1]
-    progress = compute_trade_progress(df, signal_idx, ce_period, ce_multiplier)
+    progress = compute_trade_progress(
+        df, signal_idx, ce_period, ce_multiplier,
+        entry_ce_period=entry_ce_period, entry_ce_multiplier=entry_ce_multiplier,
+    )
     if progress is None or progress["status"] != "OPEN":
         return None
 
@@ -443,7 +472,10 @@ def main():
             cross_above = (close > entry_stop) & (close.shift(1) <= entry_stop.shift(1))
             ce_sig = apply_cooldown(cross_above.fillna(False), config.SIGNAL_COOLDOWN_BARS)
 
-            found = find_latest_open_or_new(df, ce_sig, CE_BUYONLY_EXIT["period"], CE_BUYONLY_EXIT["multiplier"])
+            found = find_latest_open_or_new(
+                df, ce_sig, CE_BUYONLY_EXIT["period"], CE_BUYONLY_EXIT["multiplier"],
+                entry_ce_period=CE_BUYONLY_ENTRY["period"], entry_ce_multiplier=CE_BUYONLY_ENTRY["multiplier"],
+            )
             if found is not None:
                 light_rows.append({
                     "System": "CE Buy-Only", "Coin": symbol, "Combo": "Chandelier Cross", "Tier": "N/A",
