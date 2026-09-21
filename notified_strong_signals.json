@@ -1,5 +1,4 @@
 {
-  "SYN/USDT|CE Buy-Only|Chandelier Cross|0.2221|N/A": "2026-09-20T15:03:20.616498+00:00",
   "WLD/USDT|NEW AdvancedConfluence|CHoCH|0.4519|N/A": "2026-09-20T17:04:39.709358+00:00",
   "ZEN/USDT|Union AB|EMA+Breakout|8.116|Baseline": "2026-09-20T20:06:45.685228+00:00",
   "ZEN/USDT|Union AB Backup Tier|EMA+Breakout|8.116|N/A": "2026-09-20T20:06:46.082641+00:00",
@@ -22,5 +21,6 @@
   "SUPER/USDT|Union AB|EMA+Breakout|0.1489|Baseline": "2026-09-21T14:49:15.143016+00:00",
   "SUPER/USDT|Union AB|Ichimoku+MS|0.1489|Baseline": "2026-09-21T14:49:15.885638+00:00",
   "SUPER/USDT|Union AB Backup Tier|Ichimoku+MS|0.1489|N/A": "2026-09-21T14:49:16.659811+00:00",
-  "SUPER/USDT|Union AB Backup Tier|EMA+Breakout|0.1489|N/A": "2026-09-21T14:49:17.413943+00:00"
+  "SUPER/USDT|Union AB Backup Tier|EMA+Breakout|0.1489|N/A": "2026-09-21T14:49:17.413943+00:00",
+  "YOM/USDT|CE Buy-Only|Chandelier Cross|0.01601|N/A": "2026-09-21T15:05:32.767531+00:00"
 }
