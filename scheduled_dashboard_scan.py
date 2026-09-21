@@ -235,7 +235,7 @@ def evaluate_union_ab_tier(symbol, df, idx, eth_regime, rs_bullish, rs_ratio_ser
 
 # ---------------- Trade progress / status (SAB systems ke liye saanjha) ----------------
 def compute_trade_progress(df, signal_idx, ce_period, ce_multiplier, rr_multiple=RR_MULTIPLE,
-                            entry_ce_period=None, entry_ce_multiplier=None):
+                            entry_ce_period=None, entry_ce_multiplier=None, use_fixed_tp=True):
     """
     Ek signal (signal_idx par bani) ka AAJ TAK ka poora safar dobara,
     taaza data se calculate karta hai - koi state file ki zaroorat nahi.
@@ -260,6 +260,16 @@ def compute_trade_progress(df, signal_idx, ce_period, ce_multiplier, rr_multiple
     validity check ka reference alag hai. Agar ye do params nahi diye
     jayen, purana rawaiyya (dono ek hi) barqarar rehta hai.
 
+    use_fixed_tp: False karne par fixed (Entry + Risk*RR) Take Profit
+    bilkul check NAHI hota - trade sirf apni trailing stop line hit hone
+    par CLOSED hoti hai (jaisa "chandelier" exit-mode backtest mein hota
+    hai, jahan trend ke sath chalte rehne diya jata hai). CE Buy-Only ke
+    liye ye False rakha gaya hai kyunke uska walk-forward tasdeeq isi
+    khalis-trailing-stop tareeqe se hua tha (Win Rate 93%, PF 45) - fixed
+    RR TP us backtest mein tha hi nahi, aur live data mein dekha gaya ke
+    tight (16,3.0) trailing stop hamesha fixed TP se pehle hi lag jati
+    hai - isliye wo number gumrah-kun (misleading) tha.
+
     Returns None agar setup invalid ho (chandelier NaN ya stop>=entry).
     """
     atr = compute_atr(df, ce_period)
@@ -281,7 +291,7 @@ def compute_trade_progress(df, signal_idx, ce_period, ce_multiplier, rr_multiple
         return None
 
     risk = entry_price - float(initial_stop)
-    tp_price = entry_price + risk * rr_multiple
+    tp_price = (entry_price + risk * rr_multiple) if use_fixed_tp else None
 
     running_stop = float(initial_stop)
     status = "OPEN"
@@ -296,7 +306,7 @@ def compute_trade_progress(df, signal_idx, ce_period, ce_multiplier, rr_multiple
         low_i = df["low"].iloc[i]
         high_i = df["high"].iloc[i]
         stop_hit = low_i <= running_stop
-        tp_hit = high_i >= tp_price
+        tp_hit = use_fixed_tp and high_i >= tp_price
 
         if stop_hit:
             exit_idx, exit_reason, status = i, "STOPPED", "CLOSED"
@@ -315,14 +325,14 @@ def compute_trade_progress(df, signal_idx, ce_period, ce_multiplier, rr_multiple
         "entry_price": round(entry_price, 6),
         "current_price": round(current_price, 6),
         "trail_stop": round(running_stop, 6),
-        "tp_price": round(tp_price, 6),
+        "tp_price": round(tp_price, 6) if tp_price is not None else None,
         "pnl_pct": round(pnl_pct, 2),
         "bars_since_entry": int(len(df) - 1 - signal_idx),
     }
 
 
 def find_latest_open_or_new(df, signal_series, ce_period, ce_multiplier, lookback_bars=OPEN_TRADE_LOOKBACK_BARS,
-                             entry_ce_period=None, entry_ce_multiplier=None):
+                             entry_ce_period=None, entry_ce_multiplier=None, use_fixed_tp=True):
     """
     signal_series mein sab se AAKHRI (most recent) True index dhoondta
     hai (sirf pichli `lookback_bars` candles ke andar), phir uska trade
@@ -345,6 +355,7 @@ def find_latest_open_or_new(df, signal_series, ce_period, ce_multiplier, lookbac
     progress = compute_trade_progress(
         df, signal_idx, ce_period, ce_multiplier,
         entry_ce_period=entry_ce_period, entry_ce_multiplier=entry_ce_multiplier,
+        use_fixed_tp=use_fixed_tp,
     )
     if progress is None or progress["status"] != "OPEN":
         return None
@@ -475,6 +486,7 @@ def main():
             found = find_latest_open_or_new(
                 df, ce_sig, CE_BUYONLY_EXIT["period"], CE_BUYONLY_EXIT["multiplier"],
                 entry_ce_period=CE_BUYONLY_ENTRY["period"], entry_ce_multiplier=CE_BUYONLY_ENTRY["multiplier"],
+                use_fixed_tp=False,   # backtest (Period=11, Win%93, PF=45) khalis trailing-stop tha, fixed TP nahi
             )
             if found is not None:
                 light_rows.append({
@@ -484,7 +496,7 @@ def main():
                     "Bars Ago": found["bars_since_entry"],
                     "Entry": found["entry_price"], "Current": found["current_price"],
                     "P/L %": found["pnl_pct"],
-                    "Trail Stop": found["trail_stop"], "Take Profit": found["tp_price"],
+                    "Trail Stop": found["trail_stop"], "Take Profit": "N/A (trailing stop hi asal exit hai)",
                 })
         except Exception as e:
             print(f"  [SKIP-CE] {symbol}: {e}")
@@ -610,4 +622,3 @@ def main():
 
 if __name__ == "__main__":
     main()
- 
