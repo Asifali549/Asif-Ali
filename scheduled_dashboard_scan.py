@@ -112,9 +112,14 @@ ETH_EMA_PERIOD = 200
 RS_EMA_PERIOD = 50
 RS_PERCENTILE_LOOKBACK_DAYS = 180
 RS_PERCENTILE_CUTOFF = 95.0
-HIGH_52W_LOOKBACK_BARS = 365 * 24
+HIGH_52W_LOOKBACK_DAYS = 365
 HIGH_52W_CUTOFF_PCT = 15.0
-EXTENDED_1H_LIMIT = HIGH_52W_LOOKBACK_BARS + 50  # 52-week high nikalne ke liye poora saal ka data
+# Daily data ek hi baar (coin-level) itni lambi fetch ki jati hai ke RS
+# (180 din) aur 52-week high (365 din) DONO isi se nikal jayein - 52-week
+# high ab ALAG se ghante-wale (~8800 candles) data ki mohtaj nahi, jo
+# pehle bohot slow tha aur notification mein 1-3 ghante ki deri ki sab
+# se badi wajah thi. Daily resolution se sirf 1 hi API call lagti hai.
+DAILY_FETCH_LIMIT = max(RS_PERCENTILE_LOOKBACK_DAYS, HIGH_52W_LOOKBACK_DAYS) + 60
 
 # "Open trade" dhoondne ke liye kitni purani candles tak peeche dekhein
 OPEN_TRADE_LOOKBACK_BARS = 500     # ~20 din (1h par) - is se zyada purani trade ab tak khud-b-khud band ho chuki hogi
@@ -171,14 +176,22 @@ def percentile_rank_of_last(values):
     return float((values <= last).sum()) / len(values) * 100
 
 
-def compute_dist_from_52w_high(high_arr, close_arr, idx, lookback):
-    window = high_arr[max(0, idx - lookback + 1):idx + 1]
-    if len(window) == 0:
+def compute_dist_from_52w_high_daily(coin_daily_df, sig_ts, current_close, lookback_days=HIGH_52W_LOOKBACK_DAYS):
+    """
+    52-week high ab DAILY data se nikalta hai (jo RS ke liye pehle se
+    fetch ho chuka hota hai - koi extra API call nahi). Ghante-wale data
+    ke muqable mein farq nagany hai (52-week filter ka maqsad hi mota-
+    mota "sालाना bulandi ke qareeb hai ya nahi" dekhna hai).
+    """
+    ts = pd.to_datetime(coin_daily_df["timestamp"])
+    valid = coin_daily_df.loc[ts <= sig_ts]
+    if len(valid) == 0:
         return None
-    hi = window.max()
-    if hi <= 0:
+    window = valid.iloc[-lookback_days:]
+    hi = window["high"].max()
+    if pd.isna(hi) or hi <= 0:
         return None
-    return (hi - close_arr[idx]) / hi * 100
+    return (hi - current_close) / hi * 100
 
 
 def passes_rs_filters(sig_ts, rs_bullish_series, rs_ratio_series):
@@ -195,11 +208,13 @@ def passes_rs_filters(sig_ts, rs_bullish_series, rs_ratio_series):
     return True, round(rs_pct, 1)
 
 
-def evaluate_union_ab_tier(symbol, df, idx, eth_regime, rs_bullish, rs_ratio_series, exchange):
+def evaluate_union_ab_tier(symbol, df, idx, eth_regime, rs_bullish, rs_ratio_series, coin_daily):
     """
-    Union AB Baseline/Baseline+52W tier decide karta hai. rs_bullish aur
-    rs_ratio_series pehle se (ek hi baar, coin-level par) compute ki hui
-    di jati hain - taake har combo ke liye dobara fetch na karna pade.
+    Union AB Baseline/Baseline+52W tier decide karta hai. rs_bullish,
+    rs_ratio_series aur coin_daily pehle se (ek hi baar, coin-level par)
+    compute/fetch ki hui di jati hain - taake har combo ke liye dobara
+    fetch na karna pade (coin_daily RS ke liye pehle se maujood hota hai,
+    ab isi se 52-week high bhi nikalta hai - koi extra API call nahi).
     """
     sig_ts = pd.Timestamp(df["timestamp"].iloc[idx])
 
@@ -213,20 +228,12 @@ def evaluate_union_ab_tier(symbol, df, idx, eth_regime, rs_bullish, rs_ratio_ser
     extra_info = {"RS Percentile": rs_pct}
 
     try:
-        df_extended = fetch_ohlcv(exchange, symbol, SIGNAL_TIMEFRAME, limit=EXTENDED_1H_LIMIT)
-        if df_extended is not None and len(df_extended) >= 30:
-            ext_ts = pd.to_datetime(df_extended["timestamp"])
-            matches = df_extended.index[ext_ts == sig_ts]
-            if len(matches) > 0:
-                ext_idx = matches[0]
-                dist_52w = compute_dist_from_52w_high(
-                    df_extended["high"].values, df_extended["close"].values,
-                    ext_idx, HIGH_52W_LOOKBACK_BARS,
-                )
-                if dist_52w is not None:
-                    extra_info["Dist from 52W High"] = f"{round(dist_52w, 2)}%"
-                    if dist_52w <= HIGH_52W_CUTOFF_PCT:
-                        return "Baseline+52W", extra_info
+        current_close = float(df["close"].iloc[idx])
+        dist_52w = compute_dist_from_52w_high_daily(coin_daily, sig_ts, current_close)
+        if dist_52w is not None:
+            extra_info["Dist from 52W High"] = f"{round(dist_52w, 2)}%"
+            if dist_52w <= HIGH_52W_CUTOFF_PCT:
+                return "Baseline+52W", extra_info
     except Exception:
         pass
 
@@ -369,6 +376,70 @@ def find_latest_open_or_new(df, signal_series, ce_period, ce_multiplier, lookbac
     }
 
 
+def notify_new_signals(rows, notified):
+    """
+    "New Signal" category wali rows par turant notification bhejta hai -
+    kisi bhi heavy enrichment (funding/OI/orderbook/multi-TF volume/BTC
+    correlation/Overall Score) ka MOHTAJ nahi, isliye ise raw scan ke
+    FORAN baad, us sust enrichment stage se PEHLE call kiya jata hai -
+    taake signal apne bante hi (150-coin raw scan jitni jaldi ho sakti
+    hai) mil jaye, na ke poore scan cycle ke aakhir mein.
+
+    Eligibility ab sirf "Category == New Signal" hai - har system apne
+    entry filters (RS%95+ETH regime Union AB ke liye, score>=7/12 NEW
+    AdvancedConfluence ke liye) pehle hi khud laga chuka hota hai row
+    list mein aane se pehle, isliye alag se "Strong/Weak" verdict ki
+    shart ki zaroorat nahi (aur wo abhi is stage par maujood bhi nahi
+    hoti - Overall Score sirf baad ki heavy enrichment mein banta hai).
+
+    `notified` dict isi call ke andar update hota hai (in-place) - CALLER
+    isay save_notified_keys() se save kare.
+    Returns: kitni nayi notifications bheji gayin.
+    """
+    new_count = 0
+    for row in rows:
+        if row.get("Category") != "New Signal":
+            continue
+
+        system = row.get("System", "")
+        tier = row.get("Tier", "N/A")
+        key = f"{row['Coin']}|{system}|{row['Combo']}|{row.get('Entry')}|{tier}"
+        if key in notified:
+            continue
+
+        if tier == "Baseline+52W":
+            emoji = "🏆"
+        elif tier == "Baseline":
+            emoji = "📊"
+        elif system == "Union AB Backup Tier":
+            emoji = "🛡️"
+        elif system == "CE Buy-Only":
+            emoji = "⚡"
+        else:
+            emoji = "⭐"
+
+        title = f"{emoji} {system}: {row['Coin']} - {row['Combo']}"
+        message = (
+            f"Signal Time: {row.get('Signal Time (PKT)', 'N/A')}\n"
+            f"Entry: {row['Entry']}\n"
+            f"Take Profit: {row['Take Profit']}\n"
+            f"Trail Stop: {row['Trail Stop']}"
+        )
+        if "RS Percentile" in row:
+            message += f"\nRS Percentile: {row['RS Percentile']}"
+        if "Dist from 52W High" in row:
+            message += f"\nDist from 52W High: {row['Dist from 52W High']}"
+        if system == "CE Buy-Only":
+            message += "\n⚠️ Sirf 1 indicator par mabni signal - احتیاط سے capital lagayein."
+
+        send_strong_notification(title, message)
+        send_telegram_alert(f"<b>{title}</b>\n{message}")
+        notified[key] = datetime.now(timezone.utc).isoformat()
+        new_count += 1
+
+    return new_count
+
+
 def main():
     exchange = get_exchange()
     futures_exchange = get_futures_exchange()
@@ -396,10 +467,10 @@ def main():
         if df is None or len(df) < 220:
             continue
 
-        # ---- Ek hi baar, coin-level par RS data nikal lete hain (Union AB + Backup Tier dono isay istemal karenge) ----
-        rs_bullish, rs_ratio_series = None, None
+        # ---- Ek hi baar, coin-level par daily data nikal lete hain (RS + 52-week high, Union AB/Backup Tier dono isay istemal karenge) ----
+        rs_bullish, rs_ratio_series, coin_daily = None, None, None
         try:
-            coin_daily = fetch_ohlcv(exchange, symbol, "1d", limit=RS_PERCENTILE_LOOKBACK_DAYS + 60)
+            coin_daily = fetch_ohlcv(exchange, symbol, "1d", limit=DAILY_FETCH_LIMIT)
             rs_bullish, rs_ratio_series = compute_rs_trend_and_ratio(coin_daily, btc_daily, ema_period=RS_EMA_PERIOD)
         except Exception as e:
             print(f"  [RS-FAIL] {symbol}: {e}")
@@ -421,7 +492,7 @@ def main():
                     idx = found["signal_idx"]
                     tier, extra_info = (None, {})
                     if rs_bullish is not None:
-                        tier, extra_info = evaluate_union_ab_tier(symbol, df, idx, eth_regime, rs_bullish, rs_ratio_series, exchange)
+                        tier, extra_info = evaluate_union_ab_tier(symbol, df, idx, eth_regime, rs_bullish, rs_ratio_series, coin_daily)
                     if tier is not None:
                         row = {
                             "System": "Union AB", "Coin": symbol, "Combo": combo_name, "Tier": tier,
@@ -501,8 +572,17 @@ def main():
         except Exception as e:
             print(f"  [SKIP-CE] {symbol}: {e}")
 
-    print(f"Found: Union AB/NEW={len(heavy_rows)}, Backup Tier/CE Buy-Only={len(light_rows)}. Computing full context (heavy rows)...")
+    print(f"Found: Union AB/NEW={len(heavy_rows)}, Backup Tier/CE Buy-Only={len(light_rows)}.")
 
+    # ---- Notifications: raw scan ke FORAN baad, heavy enrichment se PEHLE ----
+    # (dekho notify_new_signals() ka docstring - yahi sab se badi wajah thi
+    # ke pehle signal aur notification mein 1-3 ghante ka farq aata tha)
+    notified = load_notified_keys()
+    new_count = notify_new_signals(heavy_rows + light_rows, notified)
+    save_notified_keys(notified)
+    print(f"Notifications bheji: {new_count}")
+
+    print("Computing full context (heavy rows, dashboard ke liye)...")
     final_rows = []
     for row in heavy_rows:
         symbol = row["Coin"]
@@ -564,62 +644,6 @@ def main():
 
     print(f"\nDone. {len(final_rows)} signals with context saved to dashboard_signals.json")
 
-    # ---- Notifications: sirf "New Signal" category par (Open Trade dobara notify nahi hoti) ----
-    notified = load_notified_keys()
-    new_count = 0
-    for row in final_rows:
-        if row.get("Category") != "New Signal":
-            continue
-
-        system = row.get("System", "")
-        tier = row.get("Tier", "N/A")
-        is_new_strong = "Strong" in str(row.get("Verdict", ""))
-        is_union_ab_tier = tier in ("Baseline", "Baseline+52W")
-        is_new_system = ("CE Buy-Only" in system) or ("Backup Tier" in system)
-
-        if not (is_new_strong or is_union_ab_tier or is_new_system):
-            continue
-
-        key = f"{row['Coin']}|{system}|{row['Combo']}|{row.get('Entry')}|{tier}"
-        if key in notified:
-            continue
-
-        if tier == "Baseline+52W":
-            emoji = "🏆"
-        elif tier == "Baseline":
-            emoji = "📊"
-        elif system == "Union AB Backup Tier":
-            emoji = "🛡️"
-        elif system == "CE Buy-Only":
-            emoji = "⚡"
-        else:
-            emoji = "⭐"
-
-        title = f"{emoji} {system}: {row['Coin']} - {row['Combo']}"
-        message = (
-            f"Signal Time: {row.get('Signal Time (PKT)', 'N/A')}\n"
-            f"Entry: {row['Entry']}\n"
-            f"Take Profit: {row['Take Profit']}\n"
-            f"Trail Stop: {row['Trail Stop']}"
-        )
-        if row.get("Overall Score %") not in (None, "N/A"):
-            message = f"Overall Score: {row['Overall Score %']}% ({row['Verdict']})\n" + message
-        if "RS Percentile" in row:
-            message += f"\nRS Percentile: {row['RS Percentile']}"
-        if "Dist from 52W High" in row:
-            message += f"\nDist from 52W High: {row['Dist from 52W High']}"
-        if system == "CE Buy-Only":
-            message += "\n⚠️ Sirf 1 indicator par mabni signal - احتیاط سے capital lagayein."
-
-        send_strong_notification(title, message)
-        send_telegram_alert(f"<b>{title}</b>\n{message}")
-        notified[key] = datetime.now(timezone.utc).isoformat()
-        new_count += 1
-
-    save_notified_keys(notified)
-    print(f"Notifications bheji: {new_count}")
-
 
 if __name__ == "__main__":
     main()
- 
