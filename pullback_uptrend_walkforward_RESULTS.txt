@@ -1,0 +1,21 @@
+
+
+########## PULLBACK-IN-UPTREND - WALK-FORWARD RESULTS ##########
+(Top 150 coins, 1h, 8760 candles, 4 sequential folds)
+
+Variant | Fold1 PF (trades, win%) | Fold2 PF (trades, win%) | Fold3 PF (trades, win%) | Fold4 PF (trades, win%)
+---------------------------------------------------------------------------------------------------------------
+1) EMA20 Baseline
+    0.68 (3491, 24%) | 0.87 (4638, 31%) | 0.79 (5241, 28%) | 1.13 (5658, 32%)
+2) EMA20 + Filters (ETH+RS+RS%95)
+    2.06 (217, 41%) | 1.87 (14, 43%) | 1.48 (23, 43%) | 1.76 (545, 41%)
+3) EMA50 Baseline
+    0.75 (2834, 24%) | 0.79 (3695, 29%) | 0.83 (4338, 27%) | 0.93 (4482, 29%)
+4) EMA50 + Filters
+    3.89 (149, 46%) | 3.25 (10, 60%) | 0.90 (16, 31%) | 2.23 (377, 39%)
+
+----- Har variant ka poore saal (4 folds combined) ka overall result -----
+1) EMA20 Baseline: Trades=19028, Win Rate=29.16%, PF=0.875
+2) EMA20 + Filters (ETH+RS+RS%95): Trades=799, Win Rate=40.93%, PF=1.831
+3) EMA50 Baseline: Trades=15349, Win Rate=27.48%, PF=0.831
+4) EMA50 + Filters: Trades=552, Win Rate=40.94%, PF=2.559
