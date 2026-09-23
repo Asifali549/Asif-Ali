@@ -1,0 +1,30 @@
+name: Test S/R Bounce Filters Individual (ETH, RS Trend, RS%95, 52W separately)
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run S/R bounce individual-filter test
+        run: python test_sr_bounce_filters_individual.py
+
+      - name: Show results file
+        if: always()
+        run: cat test_sr_bounce_filters_individual_RESULTS.txt || echo "Results file nahi mili"
