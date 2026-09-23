@@ -1,0 +1,27 @@
+
+
+########## CE BUY-ONLY - ETH REGIME + LIQUIDITY - WALK-FORWARD RESULTS ##########
+(Entry 11/4.5, Exit 16/3.0, High-based, top 150 coins pool, 1h, 8760 candles, 4 sequential folds)
+
+Variant | Fold1 PF (trades, win%) | Fold2 PF (trades, win%) | Fold3 PF (trades, win%) | Fold4 PF (trades, win%)
+---------------------------------------------------------------------------------------------------------------
+1) Baseline (Top-150, koi filter nahi)
+    61.63 (2832, 91%) | 40.71 (2865, 90%) | 32.67 (2869, 89%) | 40.66 (2424, 86%)
+2) + ETH Regime Filter (Top-150)
+    104.20 (1024, 94%) | 528.93 (16, 94%) | 26.94 (42, 93%) | 101.44 (716, 91%)
+3) Top-60 sirf (liquidity)
+    94.35 (928, 94%) | 43.85 (916, 91%) | 49.82 (844, 93%) | 38.86 (720, 88%)
+4) Top-100 sirf (liquidity)
+    62.83 (1799, 93%) | 45.49 (1807, 90%) | 38.74 (1732, 91%) | 42.39 (1496, 87%)
+5) Top-60 + ETH Regime
+    266.57 (354, 95%) | N/A (1, 100%) | N/A (4, 100%) | 147.69 (195, 92%)
+6) Top-100 + ETH Regime
+    89.87 (696, 94%) | N/A (10, 100%) | 18.81 (20, 95%) | 130.05 (443, 92%)
+
+----- Har variant ka poore saal (4 folds combined) ka overall result -----
+1) Baseline (Top-150, koi filter nahi): Trades=10990, Win Rate=88.87%, PF=43.633
+2) + ETH Regime Filter (Top-150): Trades=1798, Win Rate=92.44%, PF=95.031
+3) Top-60 sirf (liquidity): Trades=3408, Win Rate=91.67%, PF=55.921
+4) Top-100 sirf (liquidity): Trades=6834, Win Rate=90.46%, PF=47.902
+5) Top-60 + ETH Regime: Trades=554, Win Rate=94.40%, PF=217.185
+6) Top-100 + ETH Regime: Trades=1169, Win Rate=93.41%, PF=89.862
