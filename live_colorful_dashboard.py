@@ -236,6 +236,56 @@ else:
         "thodi der mein pehla result aa jayega (har scan khatam hone ke 5 minute baad agla shuru hota hai)."
     )
 
+st.markdown("---")
+st.header("📊 System Performance — Closed Trades (Har System Alag Alag)")
+st.caption(
+    "Jab bhi koi signal SL ya trailing-stop/TP par CLOSE hota hai, wo yahan permanently "
+    "record ho jata hai (koi live signal is se nahi hatai jaati) — taake waqt ke sath pata "
+    "chal sake konsa system asal mein behtar (high Win Rate/PF) hai aur konsa kamzor."
+)
+if os.path.exists("closed_trades_log.csv"):
+    df_closed = pd.read_csv("closed_trades_log.csv")
+    if len(df_closed) > 0 and "System" in df_closed.columns:
+        for system_name in SYSTEM_ORDER:
+            df_sys_closed = df_closed[df_closed["System"] == system_name]
+            st.markdown(f"**{SYSTEM_BADGE.get(system_name, system_name)}**")
+            if len(df_sys_closed) == 0:
+                st.caption("Abhi tak is system ki koi closed trade record nahi hui.")
+                continue
+
+            total = len(df_sys_closed)
+            wins = df_sys_closed[df_sys_closed["P/L %"] > 0]
+            losses = df_sys_closed[df_sys_closed["P/L %"] <= 0]
+            win_rate = len(wins) / total * 100
+            gross_win = wins["P/L %"].sum()
+            gross_loss = abs(losses["P/L %"].sum())
+            pf = (gross_win / gross_loss) if gross_loss > 0 else None
+
+            c1, c2, c3, c4 = st.columns(4)
+            c1.metric("Total Closed", total)
+            c2.metric("Wins / Losses", f"{len(wins)} / {len(losses)}")
+            c3.metric("Win Rate", f"{win_rate:.1f}%")
+            c4.metric("Profit Factor", f"{pf:.2f}" if pf is not None else "N/A (abhi koi loss nahi)")
+
+        st.markdown("---")
+        show_closed = st.checkbox("Poora Closed-Trades Log Dikhayein", value=False, key="show_closed_log")
+        if show_closed:
+            system_filter_closed = st.multiselect(
+                "System(s)", SYSTEM_ORDER, default=SYSTEM_ORDER, key="closed_log_system_filter",
+            )
+            df_closed_show = df_closed[df_closed["System"].isin(system_filter_closed)]
+            st.dataframe(df_closed_show.sort_values("Logged At (UTC)", ascending=False), use_container_width=True, hide_index=True)
+
+        closed_csv = df_closed.to_csv(index=False).encode("utf-8")
+        st.download_button("📥 Closed Trades CSV Download Karein", closed_csv, "closed_trades_log.csv", "text/csv", key="dl_closed_trades")
+    else:
+        st.info("Abhi tak koi closed trade record nahi.")
+else:
+    st.info(
+        "Abhi tak koi closed trade record nahi — pehli baar koi signal SL/trailing-stop par "
+        "band hone ke baad (background scan ke agle cycle mein) yahan record banna shuru hoga."
+    )
+
 st.markdown("---")# SECTION 2: MANUAL (on-demand, apni marzi ke toggles ke sath)
 # ============================================================
 st.header("🔍 Manual Scan (apni marzi ke toggles)")
