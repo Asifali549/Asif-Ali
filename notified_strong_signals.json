@@ -1,6 +1,4 @@
 {
-  "TRX/USDT|CE Buy-Only|Chandelier Cross|0.3416|N/A": "2026-09-22T22:04:35.306327+00:00",
-  "YOM/USDT|CE Buy-Only|Chandelier Cross|0.01562|N/A": "2026-09-22T22:04:36.004325+00:00",
   "ARB/USDT|Union AB|EMA+Breakout|0.2354|Baseline": "2026-09-23T00:04:58.850555+00:00",
   "MET/USDT|Union AB|EMA+Breakout|0.3316|Baseline": "2026-09-23T00:04:59.390476+00:00",
   "ARB/USDT|Union AB Backup Tier|EMA+Breakout|0.2354|N/A": "2026-09-23T00:04:59.934301+00:00",
@@ -44,5 +42,11 @@
   "PIPEDOG/USDT|CE Buy-Only|Chandelier Cross|0.002077|Base+ETH": "2026-09-23T19:05:36.704700+00:00",
   "SPX/USDT|CE Buy-Only|Chandelier Cross|0.4295|Base+ETH": "2026-09-23T21:04:31.625736+00:00",
   "VET/USDT|CE Buy-Only|Chandelier Cross|0.008792|Base+ETH": "2026-09-23T21:04:32.382048+00:00",
-  "ALIGN/USDT|CE Buy-Only|Chandelier Cross|0.00626|Base+ETH": "2026-09-23T21:04:33.100037+00:00"
+  "ALIGN/USDT|CE Buy-Only|Chandelier Cross|0.00626|Base+ETH": "2026-09-23T21:04:33.100037+00:00",
+  "HBAR/USDT|CE Buy-Only|Chandelier Cross|0.09031|Base+ETH": "2026-09-23T22:06:48.982407+00:00",
+  "XDC/USDT|CE Buy-Only|Chandelier Cross|0.02975|Base+ETH": "2026-09-23T22:06:49.363478+00:00",
+  "POL/USDT|CE Buy-Only|Chandelier Cross|0.101|Base+ETH": "2026-09-23T22:06:49.796177+00:00",
+  "OPEN/USDT|CE Buy-Only|Chandelier Cross|0.13177|Base+ETH": "2026-09-23T22:06:50.182278+00:00",
+  "AKT/USDT|CE Buy-Only|Chandelier Cross|0.6858|Base+ETH": "2026-09-23T22:06:50.594821+00:00",
+  "CP/USDT|CE Buy-Only|Chandelier Cross|0.01278|Base+ETH": "2026-09-23T22:06:51.001277+00:00"
 }
