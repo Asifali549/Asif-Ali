@@ -1,0 +1,28 @@
+
+
+########## CE BUY-ONLY - FILTER COMPARISON - RESULTS ##########
+(Entry 11/4.5, Exit 16/3.0, High-based, top 150 coins, 1h, 4380 candles)
+
+1) Baseline (koi filter nahi):
+   Trades = 5710
+   Win Rate = 87.43%
+   Profit Factor = 37.525
+   Avg Bars Held = 0.3
+
+2) + ETH Regime Filter:
+   Trades = 721
+   Win Rate = 90.15%
+   Profit Factor = 88.075
+   Avg Bars Held = 0.1
+
+3) + RS Filter:
+   Trades = 344
+   Win Rate = 85.47%
+   Profit Factor = 48.198
+   Avg Bars Held = 0.5
+
+4) + ETH Regime + RS (dono):
+   Trades = 72
+   Win Rate = 94.44%
+   Profit Factor = 216.797
+   Avg Bars Held = 0.0
