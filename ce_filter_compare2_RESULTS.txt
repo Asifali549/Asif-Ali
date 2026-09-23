@@ -1,0 +1,40 @@
+
+
+########## CE BUY-ONLY - 4 NAYE FILTERS (ALAG ALAG) - RESULTS ##########
+(Entry 11/4.5, Exit 16/3.0, High-based, top 150 coins (liquidity order), 1h, 4380 candles)
+
+1) Baseline (koi filter nahi):
+   Trades = 4842
+   Win Rate = 88.76%
+   Profit Factor = 44.327
+   Avg Bars Held = 0.3
+
+2) + Higher-Timeframe Alignment (4h EMA50):
+   Trades = 1333
+   Win Rate = 87.10%
+   Profit Factor = 44.367
+   Avg Bars Held = 0.4
+
+3) + Volume Confirmation:
+   Trades = 1941
+   Win Rate = 84.96%
+   Profit Factor = 24.972
+   Avg Bars Held = 0.5
+
+4) + 52-Week-High Filter (<=15%):
+   Trades = 162
+   Win Rate = 69.14%
+   Profit Factor = 8.223
+   Avg Bars Held = 0.7
+
+5) + Liquidity: Top-60 sirf:
+   Trades = 1681
+   Win Rate = 89.77%
+   Profit Factor = 50.720
+   Avg Bars Held = 0.2
+
+6) + Liquidity: Top-100 sirf:
+   Trades = 3327
+   Win Rate = 89.45%
+   Profit Factor = 46.416
+   Avg Bars Held = 0.3
