@@ -1,0 +1,35 @@
+name: CE Walk-Forward (ETH Regime + Liquidity)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-walkforward:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - name: Repo checkout karo
+        uses: actions/checkout@v4
+
+      - name: Python setup karo
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Dependencies install karo
+        run: pip install -r requirements.txt
+
+      - name: CE walk-forward (ETH + liquidity) chalayen
+        run: python ce_walkforward_eth_liquidity.py
+
+      - name: Results commit + push karo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add ce_walkforward_eth_liquidity_RESULTS.txt
+          git commit -m "CE Buy-Only walk-forward (ETH regime + liquidity) report" || echo "Koi naya result nahi (pehle jaisa hi)"
+          git pull --rebase --autostash origin main
+          git push
