@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-23T17:05:56.998460+00:00",
+  "last_updated_utc": "2026-09-23T17:12:14.936210+00:00",
   "coins_scanned": 150,
   "fear_greed_value": 71,
   "fear_greed_label": "Greed",
@@ -56,7 +56,7 @@
       "Trail Stop": 1.097318,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#10 / 150",
+      "Liquidity Rank": "#9 / 150",
       "Overall Score %": "N/A",
       "Verdict": "N/A",
       "Rank": 3
@@ -227,7 +227,7 @@
       "Trail Stop": 0.123077,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#74 / 150",
+      "Liquidity Rank": "#73 / 150",
       "Overall Score %": "N/A",
       "Verdict": "N/A",
       "Rank": 12
@@ -246,7 +246,7 @@
       "Trail Stop": 0.328441,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#97 / 150",
+      "Liquidity Rank": "#99 / 150",
       "Overall Score %": "N/A",
       "Verdict": "N/A",
       "Rank": 13
@@ -265,7 +265,7 @@
       "Trail Stop": 0.107495,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#144 / 150",
+      "Liquidity Rank": "#143 / 150",
       "Overall Score %": "N/A",
       "Verdict": "N/A",
       "Rank": 14
