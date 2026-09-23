@@ -1,6 +1,4 @@
 {
-  "DASH/USDT|NEW AdvancedConfluence|CHoCH|61.04|N/A": "2026-09-22T17:01:37.255184+00:00",
-  "SKR/USDT|CE Buy-Only|Chandelier Cross|0.021315|N/A": "2026-09-22T17:01:37.667314+00:00",
   "USELESS/USDT|Union AB|EMA+Breakout|0.32381|Baseline": "2026-09-22T19:01:02.060154+00:00",
   "USELESS/USDT|Union AB Backup Tier|EMA+Breakout|0.32381|N/A": "2026-09-22T19:01:02.805121+00:00",
   "LAPTOP/USDT|CE Buy-Only|Chandelier Cross|0.0723|N/A": "2026-09-22T19:01:03.497771+00:00",
@@ -25,5 +23,19 @@
   "DATA/USDT|CE Buy-Only|Chandelier Cross|0.2256|Base+ETH": "2026-09-23T13:06:38.243646+00:00",
   "FOLKS/USDT|CE Buy-Only|Chandelier Cross|2.3866|Base+ETH": "2026-09-23T14:03:11.739583+00:00",
   "MUBARAK/USDT|CE Buy-Only|Chandelier Cross|0.05279|Base+ETH": "2026-09-23T16:02:46.627128+00:00",
-  "CAKE/USDT|CE Buy-Only|Chandelier Cross|2.543|Base+ETH": "2026-09-23T16:02:47.383762+00:00"
+  "CAKE/USDT|CE Buy-Only|Chandelier Cross|2.543|Base+ETH": "2026-09-23T16:02:47.383762+00:00",
+  "BTC/USDT|CE Buy-Only|Chandelier Cross|84033.2|Base+ETH": "2026-09-23T17:05:46.483303+00:00",
+  "ETH/USDT|CE Buy-Only|Chandelier Cross|2660.94|Base+ETH": "2026-09-23T17:05:47.616125+00:00",
+  "DOT/USDT|CE Buy-Only|Chandelier Cross|1.1047|Base+ETH": "2026-09-23T17:05:48.421620+00:00",
+  "ARB/USDT|CE Buy-Only|Chandelier Cross|0.224|Base+ETH": "2026-09-23T17:05:49.177528+00:00",
+  "AAVE/USDT|CE Buy-Only|Chandelier Cross|139.874|Base+ETH": "2026-09-23T17:05:49.919341+00:00",
+  "LINK/USDT|CE Buy-Only|Chandelier Cross|12.2634|Base+ETH": "2026-09-23T17:05:50.701661+00:00",
+  "BNB/USDT|CE Buy-Only|Chandelier Cross|765.509|Base+ETH": "2026-09-23T17:05:51.530117+00:00",
+  "ADA/USDT|CE Buy-Only|Chandelier Cross|0.2387|Base+ETH": "2026-09-23T17:05:52.357822+00:00",
+  "PUMP/USDT|CE Buy-Only|Chandelier Cross|0.004037|Base+ETH": "2026-09-23T17:05:53.139120+00:00",
+  "FIL/USDT|CE Buy-Only|Chandelier Cross|0.9409|Base+ETH": "2026-09-23T17:05:53.907408+00:00",
+  "WLD/USDT|CE Buy-Only|Chandelier Cross|0.4142|Base+ETH": "2026-09-23T17:05:54.642596+00:00",
+  "OP/USDT|CE Buy-Only|Chandelier Cross|0.125|Base+ETH": "2026-09-23T17:05:55.391258+00:00",
+  "CRV/USDT|CE Buy-Only|Chandelier Cross|0.3293|Base+ETH": "2026-09-23T17:05:56.257971+00:00",
+  "CC/USDT|CE Buy-Only|Chandelier Cross|0.10809|Base+ETH": "2026-09-23T17:05:56.997810+00:00"
 }
