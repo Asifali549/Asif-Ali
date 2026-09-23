@@ -1,0 +1,35 @@
+name: CE Extremum Compare (High vs Close)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Repo checkout karo
+        uses: actions/checkout@v4
+
+      - name: Python setup karo
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Dependencies install karo
+        run: pip install -r requirements.txt
+
+      - name: CE extremum compare chalayen
+        run: python ce_extremum_compare.py
+
+      - name: Results commit + push karo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add ce_extremum_compare_RESULTS.txt
+          git commit -m "CE extremum compare (high vs close) report" || echo "Koi naya result nahi (pehle jaisa hi)"
+          git pull --rebase --autostash origin main
+          git push
