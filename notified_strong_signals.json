@@ -25,5 +25,7 @@
   "ARB/USDT|Union AB|EMA+Breakout|0.2354|Baseline": "2026-09-23T00:04:58.850555+00:00",
   "MET/USDT|Union AB|EMA+Breakout|0.3316|Baseline": "2026-09-23T00:04:59.390476+00:00",
   "ARB/USDT|Union AB Backup Tier|EMA+Breakout|0.2354|N/A": "2026-09-23T00:04:59.934301+00:00",
-  "MET/USDT|Union AB Backup Tier|EMA+Breakout|0.3316|N/A": "2026-09-23T00:05:00.450307+00:00"
+  "MET/USDT|Union AB Backup Tier|EMA+Breakout|0.3316|N/A": "2026-09-23T00:05:00.450307+00:00",
+  "CAKE/USDT|Union AB|EMA+Breakout|2.687|Baseline": "2026-09-23T02:09:28.599371+00:00",
+  "CAKE/USDT|Union AB Backup Tier|EMA+Breakout|2.687|N/A": "2026-09-23T02:09:29.138496+00:00"
 }
