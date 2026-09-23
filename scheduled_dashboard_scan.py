@@ -376,6 +376,105 @@ def find_latest_open_or_new(df, signal_series, ce_period, ce_multiplier, lookbac
     }
 
 
+CLOSED_TRADES_LOG_FILE = "closed_trades_log.csv"
+CLOSED_TRADES_KEYS_FILE = "closed_trades_logged_keys.json"
+
+
+def load_logged_closed_keys():
+    if os.path.exists(CLOSED_TRADES_KEYS_FILE):
+        try:
+            with open(CLOSED_TRADES_KEYS_FILE) as f:
+                return set(json.load(f))
+        except Exception:
+            return set()
+    return set()
+
+
+def save_logged_closed_keys(keys):
+    """
+    Purani (45 din se zyada) keys chhant deta hai - OPEN_TRADE_LOOKBACK_BARS
+    (~20 din) se zyada purana signal kabhi dobara check hi nahi hoga, is
+    liye uski dedupe-key ko hamesha ke liye rakhna faltu hai (file barhti
+    hi rahegi warna).
+    """
+    cutoff = datetime.now(timezone.utc) - timedelta(days=45)
+    pruned = set()
+    for k in keys:
+        try:
+            ts = datetime.fromisoformat(k.rsplit("|", 1)[-1])
+            if ts.tzinfo is None:
+                ts = ts.replace(tzinfo=timezone.utc)
+            if ts > cutoff:
+                pruned.add(k)
+        except Exception:
+            pruned.add(k)   # format samajh na aaye to ehtiyatan rakh lo
+    with open(CLOSED_TRADES_KEYS_FILE, "w") as f:
+        json.dump(sorted(pruned), f)
+
+
+def log_closed_trades(df, signal_series, ce_period, ce_multiplier, system, symbol, combo,
+                       logged_keys, new_rows_out, entry_ce_period=None, entry_ce_multiplier=None,
+                       use_fixed_tp=True, lookback_bars=OPEN_TRADE_LOOKBACK_BARS, extra_filter=None):
+    """
+    Har SYSTEM ka permanent "closed trades" record banata hai - taake waqt
+    ke sath pata chal sake konsa system asal mein behtar (high Win Rate/PF)
+    hai aur konsa kamzor. Ye sirf record rakhta hai, live signal list ko
+    bilkul NAHI chhedta.
+
+    lookback window (pichli ~500 candles, ~20 din) ke andar jitne bhi
+    signals hain, un sab ka progress dobara nikalte hain - jo CLOSED
+    (STOPPED ya TARGET) mil jayen aur pehle se logged na hon (`logged_keys`
+    se dedupe, taake ek hi trade dobara scan cycle mein dobara na gin
+    jaye), unhe `new_rows_out` mein add kar dete hain (caller inhe CSV
+    mein ek sath likh dega).
+
+    extra_filter(signal_idx) -> bool: diya jaye to sirf un signals ko log
+    karta hai jo us waqt asal mein "valid entry" the (Union AB ka tier
+    check, ya Backup Tier ka RS filter) - taake sirf wahi trades count hon
+    jo live dashboard mein waqai dikhti thin, nahi to har system ka number
+    ghair-munsifana (unfair) ho jayega.
+    """
+    n = len(signal_series)
+    start = max(0, n - lookback_bars)
+    recent_window = signal_series.iloc[start:]
+    true_idxs = recent_window[recent_window].index
+
+    count = 0
+    for signal_idx in true_idxs:
+        if extra_filter is not None and not extra_filter(signal_idx):
+            continue
+
+        progress = compute_trade_progress(
+            df, signal_idx, ce_period, ce_multiplier,
+            entry_ce_period=entry_ce_period, entry_ce_multiplier=entry_ce_multiplier,
+            use_fixed_tp=use_fixed_tp,
+        )
+        if progress is None or progress["status"] != "CLOSED":
+            continue
+
+        sig_ts = pd.Timestamp(df["timestamp"].iloc[signal_idx])
+        key = f"{system}|{symbol}|{combo}|{sig_ts.isoformat()}"
+        if key in logged_keys:
+            continue
+
+        exit_price = progress["tp_price"] if progress["exit_reason"] == "TARGET" else progress["trail_stop"]
+        pnl_pct = (exit_price - progress["entry_price"]) / progress["entry_price"] * 100
+
+        new_rows_out.append({
+            "System": system, "Coin": symbol, "Combo": combo,
+            "Signal Time (PKT)": to_pkt_str(sig_ts),
+            "Entry": progress["entry_price"],
+            "Exit Reason": progress["exit_reason"],
+            "Exit Price": round(exit_price, 6),
+            "P/L %": round(pnl_pct, 2),
+            "Logged At (UTC)": datetime.now(timezone.utc).isoformat(),
+        })
+        logged_keys.add(key)
+        count += 1
+
+    return count
+
+
 def notify_new_signals(rows, notified):
     """
     "New Signal" category wali rows par turant notification bhejta hai -
@@ -465,6 +564,11 @@ def main():
     heavy_rows = []      # Union AB + NEW system - poora context milega
     light_rows = []      # Union AB Backup Tier + CE Buy-Only - halka rakha gaya
 
+    # Har system ka alag-alag "closed trades" permanent record (dashboard
+    # ke per-system Win Rate/PF summary ke liye) - dekho log_closed_trades()
+    closed_logged_keys = load_logged_closed_keys()
+    new_closed_rows = []
+
     for rank, symbol in enumerate(coins):
         try:
             df = fetch_ohlcv(exchange, symbol, SIGNAL_TIMEFRAME, limit=max(config.CANDLE_LIMITS.get(SIGNAL_TIMEFRAME, 500), 300))
@@ -492,6 +596,23 @@ def main():
             combo_b = ema_sig & breakout_sig
 
             for combo_sig, combo_name, ce in [(combo_a, "Ichimoku+MS", CE_A), (combo_b, "EMA+Breakout", CE_B)]:
+                # --- Closed-trades record (Union AB + Union AB Backup Tier, alag alag) ---
+                if rs_bullish is not None:
+                    log_closed_trades(
+                        df, combo_sig, ce["period"], ce["multiplier"], "Union AB", symbol, combo_name,
+                        closed_logged_keys, new_closed_rows,
+                        extra_filter=lambda idx: evaluate_union_ab_tier(
+                            symbol, df, idx, eth_regime, rs_bullish, rs_ratio_series, coin_daily
+                        )[0] is not None,
+                    )
+                    log_closed_trades(
+                        df, combo_sig, ce["period"], ce["multiplier"], "Union AB Backup Tier", symbol, combo_name,
+                        closed_logged_keys, new_closed_rows,
+                        extra_filter=lambda idx: passes_rs_filters(
+                            pd.Timestamp(df["timestamp"].iloc[idx]), rs_bullish, rs_ratio_series
+                        )[0],
+                    )
+
                 # --- Union AB Baseline/Baseline+52W: sirf sab se aakhri open/new signal ---
                 found = find_latest_open_or_new(df, combo_sig, ce["period"], ce["multiplier"])
                 if found is not None:
@@ -538,6 +659,11 @@ def main():
             choch_signal = result_new["choch"]
             new_sig = apply_cooldown(choch_signal & (result_new["score"] >= CONF_PARAMS["score_threshold"]), config.SIGNAL_COOLDOWN_BARS)
 
+            log_closed_trades(
+                df, new_sig, CE_D["period"], CE_D["multiplier"], "NEW AdvancedConfluence", symbol, "CHoCH",
+                closed_logged_keys, new_closed_rows,
+            )
+
             found = find_latest_open_or_new(df, new_sig, CE_D["period"], CE_D["multiplier"])
             if found is not None:
                 heavy_rows.append({
@@ -559,6 +685,13 @@ def main():
             close = df["close"]
             cross_above = (close > entry_stop) & (close.shift(1) <= entry_stop.shift(1))
             ce_sig = apply_cooldown(cross_above.fillna(False), config.SIGNAL_COOLDOWN_BARS)
+
+            log_closed_trades(
+                df, ce_sig, CE_BUYONLY_EXIT["period"], CE_BUYONLY_EXIT["multiplier"], "CE Buy-Only", symbol, "Chandelier Cross",
+                closed_logged_keys, new_closed_rows,
+                entry_ce_period=CE_BUYONLY_ENTRY["period"], entry_ce_multiplier=CE_BUYONLY_ENTRY["multiplier"],
+                use_fixed_tp=False,
+            )
 
             found = find_latest_open_or_new(
                 df, ce_sig, CE_BUYONLY_EXIT["period"], CE_BUYONLY_EXIT["multiplier"],
@@ -588,6 +721,14 @@ def main():
             print(f"  [SKIP-CE] {symbol}: {e}")
 
     print(f"Found: Union AB/NEW={len(heavy_rows)}, Backup Tier/CE Buy-Only={len(light_rows)}.")
+
+    # ---- Closed-trades record save karein (har system ka permanent, alag alag track record) ----
+    if new_closed_rows:
+        df_new_closed = pd.DataFrame(new_closed_rows)
+        file_exists = os.path.exists(CLOSED_TRADES_LOG_FILE)
+        df_new_closed.to_csv(CLOSED_TRADES_LOG_FILE, mode="a", header=not file_exists, index=False)
+    save_logged_closed_keys(closed_logged_keys)
+    print(f"Closed trades is scan mein record hui: {len(new_closed_rows)}")
 
     # ---- Notifications: raw scan ke FORAN baad, heavy enrichment se PEHLE ----
     # (dekho notify_new_signals() ka docstring - yahi sab se badi wajah thi
