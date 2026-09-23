@@ -1,0 +1,16 @@
+
+
+########## CE BUY-ONLY - HIGH vs CLOSE Extremum - RESULTS ##########
+(Entry 11/4.5, Exit 16/3.0, top 150 coins, 1h, 4380 candles)
+
+HIGH (hamara maujooda tareeqa):
+   Trades = 5710
+   Win Rate = 87.57%
+   Profit Factor = 37.862
+   Avg Bars Held = 0.3
+
+CLOSE (indicator ka 'Use Close Price for Extremums'):
+   Trades = 3303
+   Win Rate = 84.98%
+   Profit Factor = 25.627
+   Avg Bars Held = 0.6
