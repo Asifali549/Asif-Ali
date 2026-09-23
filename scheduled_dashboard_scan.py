@@ -413,6 +413,8 @@ def notify_new_signals(rows, notified):
             emoji = "📊"
         elif system == "Union AB Backup Tier":
             emoji = "🛡️"
+        elif system == "CE Buy-Only" and tier == "Base+ETH":
+            emoji = "⚡✅"
         elif system == "CE Buy-Only":
             emoji = "⚡"
         else:
@@ -429,6 +431,10 @@ def notify_new_signals(rows, notified):
             message += f"\nRS Percentile: {row['RS Percentile']}"
         if "Dist from 52W High" in row:
             message += f"\nDist from 52W High: {row['Dist from 52W High']}"
+        if "ETH Regime" in row:
+            message += f"\nETH Regime: {row['ETH Regime']}"
+        if "Liquidity Rank" in row:
+            message += f"\nLiquidity Rank: {row['Liquidity Rank']}"
         if system == "CE Buy-Only":
             message += "\n⚠️ Sirf 1 indicator par mabni signal - احتیاط سے capital lagayein."
 
@@ -459,7 +465,7 @@ def main():
     heavy_rows = []      # Union AB + NEW system - poora context milega
     light_rows = []      # Union AB Backup Tier + CE Buy-Only - halka rakha gaya
 
-    for symbol in coins:
+    for rank, symbol in enumerate(coins):
         try:
             df = fetch_ohlcv(exchange, symbol, SIGNAL_TIMEFRAME, limit=max(config.CANDLE_LIMITS.get(SIGNAL_TIMEFRAME, 500), 300))
         except Exception:
@@ -560,14 +566,23 @@ def main():
                 use_fixed_tp=False,   # backtest (Period=11, Win%93, PF=45) khalis trailing-stop tha, fixed TP nahi
             )
             if found is not None:
+                # ETH Regime yahan FILTER nahi karta (signal kabhi chupaya nahi jata,
+                # taake ETH/market down hone par bhi CE Buy-Only ke signals bilkul
+                # khatam na ho jayein) - sirf INFO ke taur par bataya jata hai, taake
+                # trade lete waqt pata ho ke ETH us waqt bullish tha ya nahi.
+                ce_sig_ts = pd.Timestamp(df["timestamp"].iloc[found["signal_idx"]])
+                eth_ok = is_bullish_at(eth_regime, ce_sig_ts)
                 light_rows.append({
-                    "System": "CE Buy-Only", "Coin": symbol, "Combo": "Chandelier Cross", "Tier": "N/A",
+                    "System": "CE Buy-Only", "Coin": symbol, "Combo": "Chandelier Cross",
+                    "Tier": "Base+ETH" if eth_ok else "Base",
                     "Category": found["category"],
                     "Signal Time (PKT)": to_pkt_str(found["signal_timestamp"]),
                     "Bars Ago": found["bars_since_entry"],
                     "Entry": found["entry_price"], "Current": found["current_price"],
                     "P/L %": found["pnl_pct"],
                     "Trail Stop": found["trail_stop"], "Take Profit": "N/A (trailing stop hi asal exit hai)",
+                    "ETH Regime": "Bullish ✅" if eth_ok else "Bearish ⚠️",
+                    "Liquidity Rank": f"#{rank + 1} / {TOP_N_COINS}",
                 })
         except Exception as e:
             print(f"  [SKIP-CE] {symbol}: {e}")
