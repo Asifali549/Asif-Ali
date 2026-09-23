@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-23T18:02:43.471071+00:00",
+  "last_updated_utc": "2026-09-23T18:09:02.164127+00:00",
   "coins_scanned": 150,
   "fear_greed_value": 71,
   "fear_greed_label": "Greed",
@@ -75,7 +75,7 @@
       "Trail Stop": 0.339227,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#38 / 150",
+      "Liquidity Rank": "#37 / 150",
       "Overall Score %": "N/A",
       "Verdict": "N/A",
       "Rank": 4
