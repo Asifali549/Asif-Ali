@@ -1,7 +1,27 @@
 {
-  "last_updated_utc": "2026-09-24T04:35:44.868248+00:00",
+  "last_updated_utc": "2026-09-24T04:42:20.116918+00:00",
   "coins_scanned": 150,
   "fear_greed_value": 71,
   "fear_greed_label": "Greed",
-  "signals": []
+  "signals": [
+    {
+      "System": "CE Buy-Only",
+      "Coin": "UB/USDT",
+      "Combo": "Chandelier Cross",
+      "Tier": "Base+ETH",
+      "Category": "New Signal",
+      "Signal Time (PKT)": "2026-09-24 08:00 AM PKT",
+      "Bars Ago": 0,
+      "Entry": 0.143946,
+      "Current": 0.143946,
+      "P/L %": 0.0,
+      "Trail Stop": 0.141654,
+      "Take Profit": "N/A (trailing stop hi asal exit hai)",
+      "ETH Regime": "Bullish \u2705",
+      "Liquidity Rank": "#149 / 150",
+      "Overall Score %": "N/A",
+      "Verdict": "N/A",
+      "Rank": 1
+    }
+  ]
 }
