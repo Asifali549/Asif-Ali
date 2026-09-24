@@ -83,10 +83,17 @@ def save_state(state):
 
 def load_watchlist():
     """
-    manual_watchlist.json: simple list of coin symbols, misaal:
+    manual_watchlist.json - do tareeqon se likh sakte hain:
+
+    1) Sirf symbol (default $100 lagega):
         ["MCAT/USDT", "DOGE/USDT"]
-    Agar file mojood nahi to khali list. Har symbol ko normalize karte
-    hain (upper-case, "/USDT" agar na diya ho to khud laga dete hain).
+
+    2) Symbol + khud ki manzoor-shuda amount (manual control):
+        [{"symbol": "MCAT/USDT", "amount": 250}, "DOGE/USDT"]
+
+    Dono ek hi list mein mix bhi ho sakte hain. Agar file mojood nahi to
+    khali list. Har symbol normalize hota hai (upper-case, agar "/USDT"
+    na diya ho to khud laga dete hain). Return: list of (symbol, amount_or_None) tuples.
     """
     if not os.path.exists(WATCHLIST_FILE):
         return []
@@ -97,19 +104,36 @@ def load_watchlist():
         return []
 
     cleaned = []
-    for s in raw:
-        s = str(s).strip().upper()
+    for entry in raw:
+        amount = None
+        if isinstance(entry, dict):
+            s = str(entry.get("symbol", "")).strip().upper()
+            if entry.get("amount") is not None:
+                try:
+                    amount = float(entry["amount"])
+                except (TypeError, ValueError):
+                    amount = None
+        else:
+            s = str(entry).strip().upper()
+
         if not s:
             continue
         if "/" not in s:
             s = f"{s}/USDT"
-        cleaned.append(s)
+        cleaned.append((s, amount))
     return cleaned
 
 
-def save_watchlist(symbols):
+def save_watchlist(entries):
+    """entries: list of (symbol, amount_or_None) tuples - wapis watchlist format mein likhte hain."""
+    raw = []
+    for symbol, amount in entries:
+        if amount is not None:
+            raw.append({"symbol": symbol, "amount": amount})
+        else:
+            raw.append(symbol)
     with open(WATCHLIST_FILE, "w") as f:
-        json.dump(symbols, f, indent=2)
+        json.dump(raw, f, indent=2)
 
 
 def append_closed_trade(row):
@@ -197,11 +221,19 @@ def update_open_position(symbol, pos, exchange):
 
 
 # ============================= MANUAL ENTRY (jo watchlist mein daala gaya) =============================
-def open_manual_position(symbol, exchange, cash, open_count):
+def open_manual_position(symbol, exchange, cash, open_count, amount=None):
+    """
+    amount: agar watchlist mein us coin ke sath khud ki amount di gayi ho
+    to wo istemal hoti hai, warna default POSITION_SIZE_USD ($100).
+    """
+    position_size = amount if amount is not None else POSITION_SIZE_USD
+
     if open_count >= MAX_CONCURRENT_POSITIONS:
         return None, "MAX_POSITIONS"
-    if cash < POSITION_SIZE_USD:
+    if cash < position_size:
         return None, "NO_CASH"
+    if position_size <= 0:
+        return None, "INVALID_AMOUNT"
 
     df = fetch_ohlcv(exchange, symbol, SIGNAL_TIMEFRAME, limit=max(config.CANDLE_LIMITS.get(SIGNAL_TIMEFRAME, 500), 300))
     if df is None or len(df) < CE_BUYONLY_EXIT["period"] + 5:
@@ -222,7 +254,7 @@ def open_manual_position(symbol, exchange, cash, open_count):
         "entry_price": round(entry_price, 8),
         "initial_stop": round(float(initial_stop), 8),
         "trail_stop": round(float(initial_stop), 8),
-        "capital_allocated": POSITION_SIZE_USD,
+        "capital_allocated": position_size,
         "current_price": round(entry_price, 8),
         "unrealized_pnl_pct": 0.0,
         "source": "manual",
@@ -231,7 +263,7 @@ def open_manual_position(symbol, exchange, cash, open_count):
     send_telegram_alert(
         f"🤖 Manual Bot Trade OPENED: {symbol}\n"
         f"Entry: {entry_price:.6f} | Initial SL (CE 16,3.0): {float(initial_stop):.6f}\n"
-        f"Capital Allocated: ${POSITION_SIZE_USD:.2f} (virtual)"
+        f"Capital Allocated: ${position_size:.2f} (virtual)"
     )
 
     return pos, "OPENED"
@@ -269,24 +301,24 @@ def main():
     watchlist = load_watchlist()
     remaining_watchlist = []
 
-    for symbol in watchlist:
+    for symbol, amount in watchlist:
         if symbol in positions:
             print(f"  [SKIP] {symbol}: pehle se hi ek open position mojood hai")
             continue
         try:
-            pos, reason = open_manual_position(symbol, exchange, cash, len(positions))
+            pos, reason = open_manual_position(symbol, exchange, cash, len(positions), amount=amount)
         except Exception as e:
             print(f"  [ERROR] {symbol}: {e}")
-            remaining_watchlist.append(symbol)   # error par dobara try karne ke liye rakh lo
+            remaining_watchlist.append((symbol, amount))   # error par dobara try karne ke liye rakh lo
             continue
 
         if pos is not None:
             positions[symbol] = pos
             cash -= pos["capital_allocated"]
-            print(f"  [OPENED] {symbol}: entry={pos['entry_price']}, SL={pos['initial_stop']}")
+            print(f"  [OPENED] {symbol}: entry={pos['entry_price']}, SL={pos['initial_stop']}, amount=${pos['capital_allocated']}")
         elif reason in ("MAX_POSITIONS", "NO_CASH", "NO_DATA"):
             print(f"  [QUEUED] {symbol}: abhi nahi ({reason}), agli baar phir koshish hogi")
-            remaining_watchlist.append(symbol)
+            remaining_watchlist.append((symbol, amount))
         else:
             print(f"  [REJECTED] {symbol}: {reason} - watchlist se hata diya")
 
