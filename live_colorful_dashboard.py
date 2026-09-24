@@ -27,6 +27,16 @@ from dashboard_helpers import (
     color_value, compute_overall_score, ALL_TIMEFRAMES,
 )
 
+def _safe_json_load(path):
+    """JSON file ko parhta hai; agar file corrupt/invalid JSON ho to poori app crash
+    karne ke bajaye None wapas karta hai (taake baaki dashboard sections chalte rahein)."""
+    try:
+        with open(path) as f:
+            return json.load(f)
+    except Exception:
+        return None
+
+
 st.set_page_config(page_title="Live Colorful Dashboard", layout="wide")
 st.title("🎨 Live + Manual Colorful Dashboard")
 st.warning(
@@ -744,9 +754,18 @@ with st.expander("➕ Coin Yahan Daalein (Har System Ka Alag Khana)", expanded=F
                 st.code(json.dumps(merged, indent=2), language="json")
 
 if os.path.exists("manual_watchlist.json"):
-    with open("manual_watchlist.json") as f:
-        pending_watchlist = json.load(f)
-    if len(pending_watchlist) > 0:
+    try:
+        with open("manual_watchlist.json") as f:
+            pending_watchlist = json.load(f)
+    except Exception:
+        pending_watchlist = None
+        st.error(
+            "⚠️ 'manual_watchlist.json' file mein JSON theek nahi hai (koi extra bracket/comma reh gaya "
+            "hoga), isliye is file ko padha nahi ja saka. Upar wale form se 'Save Watchlist' dabayein — "
+            "woh khud file ko sahi format mein dobara likh dega. Ya GitHub par file kholkar poori "
+            "content mita kar sirf `[]` likh dein aur commit kar dein."
+        )
+    if pending_watchlist:
         pending_labels = []
         for e in pending_watchlist:
             if isinstance(e, dict):
@@ -755,9 +774,11 @@ if os.path.exists("manual_watchlist.json"):
                 pending_labels.append(f"{e} (CE Buy-Only)")
         st.caption(f"⏳ Pending (agle run mein process hongi): {', '.join(pending_labels)}")
 
-if os.path.exists("manual_bot_state.json"):
-    with open("manual_bot_state.json") as f:
-        mb_state = json.load(f)
+_mb_state_loaded = _safe_json_load("manual_bot_state.json") if os.path.exists("manual_bot_state.json") else None
+if os.path.exists("manual_bot_state.json") and _mb_state_loaded is None:
+    st.error("⚠️ 'manual_bot_state.json' file corrupt ho gayi hai — bot ke agle run par yeh khud theek ho jayegi.")
+if _mb_state_loaded is not None:
+    mb_state = _mb_state_loaded
 
     cash = mb_state.get("cash", 0)
     open_positions = mb_state.get("positions", {})
@@ -833,9 +854,11 @@ st.caption(
     "ka fresh signal bane, khud hi wahi (paper/virtual) trade le leta hai — koi manual feed ki zaroorat "
     "nahi. Capital/ledger manual bot se BILKUL ALAG hai. Asal paisa yahan bhi risk mein nahi (paper)."
 )
-if os.path.exists("auto_bot_state.json"):
-    with open("auto_bot_state.json") as f:
-        ab_state = json.load(f)
+_ab_state_loaded = _safe_json_load("auto_bot_state.json") if os.path.exists("auto_bot_state.json") else None
+if os.path.exists("auto_bot_state.json") and _ab_state_loaded is None:
+    st.error("⚠️ 'auto_bot_state.json' file corrupt ho gayi hai — bot ke agle run par yeh khud theek ho jayegi.")
+if _ab_state_loaded is not None:
+    ab_state = _ab_state_loaded
 
     cash = ab_state.get("cash", 0)
     open_positions = ab_state.get("positions", {})
