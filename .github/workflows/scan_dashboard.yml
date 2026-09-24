@@ -1,20 +1,17 @@
 name: Scheduled Dashboard Scan
 
 on:
+  # Hourly cron hata diya gaya - ab sirf neeche wala self-loop
+  # (scan khatam -> 5 min wait -> agla scan khud shuru) chalta hai.
   workflow_dispatch: {}
 
 permissions:
   contents: write
   actions: write
 
-concurrency:
-  group: scheduled-dashboard-scan
-  cancel-in-progress: false
-
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 350
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -23,51 +20,35 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip'
 
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Scan loop (isi ek hi run ke andar baar baar, ~5.3 ghante tak)
+      - name: Run dashboard scan
+        run: python scheduled_dashboard_scan.py
+
+      - name: Commit and push results
         run: |
-          BUDGET_SECONDS=19000   # ~5.3 ghante - GitHub ki 6-ghante had se pehle khud rok dete hain
-          START_TS=$(date +%s)
-          while true; do
-            echo "=== Scan shuru: $(date -u) ==="
-            python scheduled_dashboard_scan.py
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dashboard_signals.json notified_strong_signals.json
+          if [ -f trade_journal.csv ]; then git add trade_journal.csv; fi
+          if [ -f closed_trades_log.csv ]; then git add closed_trades_log.csv; fi
+          if [ -f closed_trades_logged_keys.json ]; then git add closed_trades_logged_keys.json; fi
+          git diff --staged --quiet || git commit -m "Auto-update dashboard signals ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+          git pull --rebase origin main
+          git push
 
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add dashboard_signals.json notified_strong_signals.json
-            if [ -f trade_journal.csv ]; then git add trade_journal.csv; fi
-            git diff --staged --quiet || git commit -m "Auto-update dashboard signals ($(date -u +'%Y-%m-%d %H:%M UTC'))"
-            git pull --rebase origin main
-            git push
+      - name: Wait 5 minutes (hifazati waqfa)
+        run: sleep 300
 
-            NOW_TS=$(date +%s)
-            ELAPSED=$((NOW_TS - START_TS))
-            if [ $ELAPSED -ge $BUDGET_SECONDS ]; then
-              echo "Waqt khatam ho raha hai (${ELAPSED}s guzar chuke) - loop rok kar agli run shuru karte hain."
-              break
-            fi
-
-            echo "5 minute wait kar rahe hain..."
-            sleep 300
-          done
-
-      - name: Agla run khud shuru karein (aur agar fail ho to SAAF pata chale)
+      - name: Agla scan khud shuru karein
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          HTTP_CODE=$(curl -s -o /tmp/dispatch_response.txt -w "%{http_code}" -X POST \
+          curl -X POST \
             -H "Authorization: token $GH_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/${{ github.repository }}/actions/workflows/scan_dashboard.yml/dispatches \
-            -d '{"ref":"main"}')
-          echo "Dispatch response code: $HTTP_CODE"
-          cat /tmp/dispatch_response.txt
-          if [ "$HTTP_CODE" != "204" ]; then
-            echo "::error::Agli run trigger NAHI ho saki (HTTP $HTTP_CODE) - GitHub Actions tab mein jaake manually 'Run workflow' dabana pare ga!"
-            exit 1
-          fi
-          echo "Agli run kamyabi se trigger ho gayi."
+            -d '{"ref":"main"}'
+ 
