@@ -1,34 +1,45 @@
 """
-Manual Paper-Trading Bot (CE Buy-Only) - sirf UNHI coins par kaam karta
-hai jo AAP khud "manual_watchlist.json" mein daalein. Koi auto-scan nahi
-karta, koi khud se coin nahi chunta - bilkul "manual" jaisa maanga gaya
-tha.
+Manual Paper-Trading Bot - sirf UNHI coins par kaam karta hai jo AAP khud
+"manual_watchlist.json" mein daalein. Koi auto-scan nahi karta, koi khud
+se coin nahi chunta - bilkul "manual" jaisa maanga gaya tha.
 
-TAREEQA-E-ISTEMAL (bohot simple):
-    1) GitHub par "manual_watchlist.json" file kholein, aur us coin ka
-       symbol daal dein jo aap ne dashboard par CE Buy-Only signal mein
-       dekha (misaal: ["MCAT/USDT"]).
-    2) Bot ka agla run (max 5 minute ke andar, self-loop ki wajah se) us
-       coin ko utha kar "professional tareeqe se" ek asal (virtual) trade
-       le lega:
+AB YE SIRF CE Buy-Only TAK MEHDOOD NAHI - jis bhi LIVE SYSTEM (CE
+Buy-Only, Union AB, NEW AdvancedConfluence, Pullback-in-Uptrend, Donchian
+Breakout) ka signal aap dashboard par dekhein, wahi "system" watchlist
+mein bata sakte hain - bot us system ke apne SL/TP rules (Chandelier
+period/multiplier + fixed-TP ya trailing-only) ke sath hoobahoo trade
+manage karega, jaisa us system ka backtest/live-tracking mein hai.
+
+TAREEQA-E-ISTEMAL:
+    1) GitHub par "manual_watchlist.json" file kholein, coin symbol +
+       (agar CE Buy-Only se alag system hai to) "system" naam daal dein:
+
+           ["MCAT/USDT"]                                    -> CE Buy-Only (default)
+           [{"symbol": "BTC/USDT", "system": "NEW AdvancedConfluence"}]
+           [{"symbol": "ETH/USDT", "system": "Union AB", "combo": "Ichimoku+MS"}]
+           [{"symbol": "SOL/USDT", "system": "Pullback-in-Uptrend", "amount": 200}]
+
+       "combo" sirf "Union AB" / "Union AB Backup Tier" ke liye zaroori
+       hai (dashboard par "Combo" column mein "Ichimoku+MS" ya
+       "EMA+Breakout" likha hota hai - wahi yahan likh dein). Baqi sab
+       systems ke liye "combo" ki zaroorat nahi.
+
+    2) Bot ka agla run (max 5 min) us coin ko uthata hai:
          - Entry = us waqt ka current (aakhri band hui candle ka) price.
-         - Stop/SL = CE Buy-Only ka wahi exit Chandelier (period=16,
-           multiplier=3.0), jaisa poore live system mein hai - koi fixed
-           % nahi, ATR-based dynamic stop.
-         - Koi fixed Take Profit NAHI (jaisa CE Buy-Only ka tasdeeq-shuda
-           tareeqa hai) - trade sirf apni trailing stop hit hone par band
-           hogi, jab tak price upar jati rahegi stop bhi upar trail hoga.
-       Watchlist se wo coin turant hata diya jata hai (ek baar process ho
-       gaya, dobara khud nahi khulega jab tak aap dobara na daalein).
-    3) Dashboard par "Manual Trade Bot" section mein aapko us coin ki
-       LIVE progress (current price, trail stop, unrealized P/L%) aur
-       phir close hone par uska final result dikhta rahega.
+         - SL = us SYSTEM ke apne Chandelier params se (misaal: CE
+           Buy-Only = 16/3.0, Union AB Ichimoku+MS = 16/4.5, Union AB
+           EMA+Breakout = 12/4.5, NEW AdvancedConfluence = 16/3.0,
+           Pullback/Donchian = 16/4.5).
+         - TP: CE Buy-Only/Pullback/Donchian mein koi fixed TP nahi
+           (khalis trailing-stop, jaisa in ka tasdeeq-shuda tareeqa
+           hai). Union AB aur NEW AdvancedConfluence mein fixed TP hai
+           (Risk x 2.0 RR), jaisa un ka apna tasdeeq-shuda tareeqa hai.
+       Watchlist se wo coin turant hata diya jata hai.
+    3) Dashboard ke "Manual Trade Bot" section mein progress + final
+       result dikhta hai (System column bhi dikhega).
 
-YE ASAL PAISON SE TRADE NAHI KARTA - paper/virtual hai (koi API trade-key
-nahi chahiye). Jab aap dono (manual selection + CE-based SL) ka tareeqa
-kaafi dinon tak dekh kar mutmain ho jayein, isi file ka "entry/exit"
-hissa asal KuCoin order calls (ccxt create_order) mein badla ja sakta
-hai.
+YE ASAL PAISON SE TRADE NAHI KARTA - paper/virtual hai (koi API
+trade-key nahi chahiye).
 """
 
 import json
@@ -50,10 +61,25 @@ except Exception:
 
 # ============================= SETTINGS =============================
 SIGNAL_TIMEFRAME = "1h"
-CE_BUYONLY_EXIT = {"period": 16, "multiplier": 3.0}   # SL/trailing-stop isi se calculate hota hai
+
+# Har live system ke apne SL/TP rules - dashboard/scheduled_dashboard_scan.py
+# mein jo constants tasdeeq-shuda hain, wahi hoobahoo yahan bhi:
+SYSTEM_PRESETS = {
+    "CE Buy-Only":              {"ce_period": 16, "ce_multiplier": 3.0, "use_fixed_tp": False, "rr_multiple": None},
+    "NEW AdvancedConfluence":   {"ce_period": 16, "ce_multiplier": 3.0, "use_fixed_tp": True,  "rr_multiple": 2.0},
+    "Pullback-in-Uptrend":      {"ce_period": 16, "ce_multiplier": 4.5, "use_fixed_tp": False, "rr_multiple": None},
+    "Donchian Breakout":        {"ce_period": 16, "ce_multiplier": 4.5, "use_fixed_tp": False, "rr_multiple": None},
+    # Union AB / Backup Tier: combo ke hisaab se params alag hain
+    ("Union AB", "Ichimoku+MS"):        {"ce_period": 16, "ce_multiplier": 4.5, "use_fixed_tp": True, "rr_multiple": 2.0},
+    ("Union AB", "EMA+Breakout"):       {"ce_period": 12, "ce_multiplier": 4.5, "use_fixed_tp": True, "rr_multiple": 2.0},
+    ("Union AB Backup Tier", "Ichimoku+MS"):  {"ce_period": 16, "ce_multiplier": 4.5, "use_fixed_tp": True, "rr_multiple": 2.0},
+    ("Union AB Backup Tier", "EMA+Breakout"): {"ce_period": 12, "ce_multiplier": 4.5, "use_fixed_tp": True, "rr_multiple": 2.0},
+}
+DEFAULT_SYSTEM = "CE Buy-Only"
+DEFAULT_COMBO = "Ichimoku+MS"   # sirf Union AB variants ke liye, jab combo na diya jaye
 
 STARTING_CAPITAL = 1000.0
-POSITION_SIZE_USD = 100.0      # har manually-feed ki gayi coin ke liye fixed $100
+POSITION_SIZE_USD = 100.0      # har manually-feed ki gayi coin ke liye default $100 (ya watchlist mein "amount")
 MAX_CONCURRENT_POSITIONS = 8
 FEE_PCT = config.BACKTEST_PARAMS["fee_pct"] / 100   # 0.1% per side, backtest/live jaisa hoobahoo
 
@@ -62,6 +88,19 @@ POSITION_DATA_LIMIT = 700
 STATE_FILE = "manual_bot_state.json"
 CLOSED_TRADES_FILE = "manual_bot_closed_trades.csv"
 WATCHLIST_FILE = "manual_watchlist.json"
+
+
+def resolve_preset(system, combo):
+    system = system or DEFAULT_SYSTEM
+    if system in ("Union AB", "Union AB Backup Tier"):
+        combo = combo or DEFAULT_COMBO
+        key = (system, combo)
+        if key not in SYSTEM_PRESETS:
+            return None, f"Combo '{combo}' pehchana nahi gaya (Ichimoku+MS ya EMA+Breakout likhein)"
+        return SYSTEM_PRESETS[key], None
+    if system not in SYSTEM_PRESETS:
+        return None, f"System '{system}' pehchana nahi gaya"
+    return SYSTEM_PRESETS[system], None
 
 
 # ============================= STATE / WATCHLIST I/O =============================
@@ -83,17 +122,12 @@ def save_state(state):
 
 def load_watchlist():
     """
-    manual_watchlist.json - do tareeqon se likh sakte hain:
+    manual_watchlist.json - entries plain symbol ya dict ho sakte hain:
 
-    1) Sirf symbol (default $100 lagega):
-        ["MCAT/USDT", "DOGE/USDT"]
+        ["MCAT/USDT", {"symbol": "BTC/USDT", "system": "Union AB",
+                        "combo": "Ichimoku+MS", "amount": 200}]
 
-    2) Symbol + khud ki manzoor-shuda amount (manual control):
-        [{"symbol": "MCAT/USDT", "amount": 250}, "DOGE/USDT"]
-
-    Dono ek hi list mein mix bhi ho sakte hain. Agar file mojood nahi to
-    khali list. Har symbol normalize hota hai (upper-case, agar "/USDT"
-    na diya ho to khud laga dete hain). Return: list of (symbol, amount_or_None) tuples.
+    Return: list of dicts {symbol, amount, system, combo}.
     """
     if not os.path.exists(WATCHLIST_FILE):
         return []
@@ -105,33 +139,40 @@ def load_watchlist():
 
     cleaned = []
     for entry in raw:
-        amount = None
         if isinstance(entry, dict):
             s = str(entry.get("symbol", "")).strip().upper()
-            if entry.get("amount") is not None:
-                try:
-                    amount = float(entry["amount"])
-                except (TypeError, ValueError):
-                    amount = None
+            amount = entry.get("amount")
+            try:
+                amount = float(amount) if amount is not None else None
+            except (TypeError, ValueError):
+                amount = None
+            system = entry.get("system") or DEFAULT_SYSTEM
+            combo = entry.get("combo")
         else:
             s = str(entry).strip().upper()
+            amount, system, combo = None, DEFAULT_SYSTEM, None
 
         if not s:
             continue
         if "/" not in s:
             s = f"{s}/USDT"
-        cleaned.append((s, amount))
+        cleaned.append({"symbol": s, "amount": amount, "system": system, "combo": combo})
     return cleaned
 
 
 def save_watchlist(entries):
-    """entries: list of (symbol, amount_or_None) tuples - wapis watchlist format mein likhte hain."""
+    """entries: list of dicts {symbol, amount, system, combo} - wapis watchlist format mein likhte hain."""
     raw = []
-    for symbol, amount in entries:
-        if amount is not None:
-            raw.append({"symbol": symbol, "amount": amount})
+    for e in entries:
+        if e["amount"] is None and e["system"] == DEFAULT_SYSTEM and not e.get("combo"):
+            raw.append(e["symbol"])
         else:
-            raw.append(symbol)
+            item = {"symbol": e["symbol"], "system": e["system"]}
+            if e.get("combo"):
+                item["combo"] = e["combo"]
+            if e["amount"] is not None:
+                item["amount"] = e["amount"]
+            raw.append(item)
     with open(WATCHLIST_FILE, "w") as f:
         json.dump(raw, f, indent=2)
 
@@ -151,10 +192,15 @@ def to_pkt_str(ts):
     return ts.tz_convert("Asia/Karachi").strftime("%Y-%m-%d %I:%M %p PKT")
 
 
-# ============================= OPEN POSITION UPDATE (close if SL hit) =============================
+# ============================= OPEN POSITION UPDATE (close if SL/TP hit) =============================
 def update_open_position(symbol, pos, exchange):
+    ce_period = pos.get("ce_period", 16)
+    ce_multiplier = pos.get("ce_multiplier", 3.0)
+    use_fixed_tp = pos.get("use_fixed_tp", False)
+    tp_price = pos.get("tp_price")
+
     df = fetch_ohlcv(exchange, symbol, SIGNAL_TIMEFRAME, limit=POSITION_DATA_LIMIT)
-    if df is None or len(df) < CE_BUYONLY_EXIT["period"] + 5:
+    if df is None or len(df) < ce_period + 5:
         return True, pos, None
 
     entry_time = pd.Timestamp(pos["entry_time"])
@@ -167,23 +213,31 @@ def update_open_position(symbol, pos, exchange):
     matches = df.index[ts_series == entry_time]
     signal_idx = matches[0] if len(matches) else 0
 
-    atr = compute_atr(df, CE_BUYONLY_EXIT["period"])
-    highest_high = df["high"].rolling(CE_BUYONLY_EXIT["period"]).max()
-    chandelier_series = highest_high - CE_BUYONLY_EXIT["multiplier"] * atr
+    atr = compute_atr(df, ce_period)
+    highest_high = df["high"].rolling(ce_period).max()
+    chandelier_series = highest_high - ce_multiplier * atr
 
     running_stop = float(pos["initial_stop"])
     status = "OPEN"
     exit_price = None
     exit_time = None
+    exit_reason = None
 
     for i in range(signal_idx + 1, len(df)):
         bar_stop = chandelier_series.iloc[i]
         if not pd.isna(bar_stop) and bar_stop > running_stop:
             running_stop = float(bar_stop)
-        if df["low"].iloc[i] <= running_stop:
-            status = "CLOSED"
-            exit_price = running_stop
-            exit_time = df["timestamp"].iloc[i]
+
+        low_i = df["low"].iloc[i]
+        high_i = df["high"].iloc[i]
+        stop_hit = low_i <= running_stop
+        tp_hit = use_fixed_tp and tp_price is not None and high_i >= tp_price
+
+        if stop_hit:
+            status, exit_price, exit_time, exit_reason = "CLOSED", running_stop, df["timestamp"].iloc[i], "SL"
+            break
+        elif tp_hit:
+            status, exit_price, exit_time, exit_reason = "CLOSED", tp_price, df["timestamp"].iloc[i], "TP"
             break
 
     if status == "OPEN":
@@ -200,10 +254,12 @@ def update_open_position(symbol, pos, exchange):
 
     closed_row = {
         "symbol": symbol,
+        "system": pos.get("system", DEFAULT_SYSTEM),
         "entry_time_pkt": to_pkt_str(pos["entry_time"]),
         "exit_time_pkt": to_pkt_str(exit_time),
         "entry_price": round(entry_price, 8),
         "exit_price": round(exit_price, 8),
+        "exit_reason": exit_reason,
         "capital_allocated_usd": pos["capital_allocated"],
         "gross_return_pct": round(gross_return * 100, 3),
         "net_return_pct": round(net_return * 100, 3),
@@ -212,8 +268,8 @@ def update_open_position(symbol, pos, exchange):
     }
 
     send_telegram_alert(
-        f"🤖 Manual Bot Trade CLOSED: {symbol}\n"
-        f"Entry: {entry_price:.6f} -> Exit: {exit_price:.6f}\n"
+        f"🤖 Manual Bot Trade CLOSED ({closed_row['system']}): {symbol}\n"
+        f"Entry: {entry_price:.6f} -> Exit: {exit_price:.6f} ({exit_reason})\n"
         f"Net Return: {net_return*100:.2f}% | P&L: ${realized_pnl:.2f} ({closed_row['result']})"
     )
 
@@ -221,10 +277,11 @@ def update_open_position(symbol, pos, exchange):
 
 
 # ============================= MANUAL ENTRY (jo watchlist mein daala gaya) =============================
-def open_manual_position(symbol, exchange, cash, open_count, amount=None):
+def open_manual_position(symbol, exchange, cash, open_count, amount=None, system=DEFAULT_SYSTEM, combo=None):
     """
     amount: agar watchlist mein us coin ke sath khud ki amount di gayi ho
     to wo istemal hoti hai, warna default POSITION_SIZE_USD ($100).
+    system/combo: kaunse live system ke SL/TP rules follow karne hain.
     """
     position_size = amount if amount is not None else POSITION_SIZE_USD
 
@@ -235,11 +292,18 @@ def open_manual_position(symbol, exchange, cash, open_count, amount=None):
     if position_size <= 0:
         return None, "INVALID_AMOUNT"
 
+    preset, err = resolve_preset(system, combo)
+    if preset is None:
+        return None, f"UNKNOWN_SYSTEM: {err}"
+
+    ce_period, ce_multiplier = preset["ce_period"], preset["ce_multiplier"]
+    use_fixed_tp, rr_multiple = preset["use_fixed_tp"], preset["rr_multiple"]
+
     df = fetch_ohlcv(exchange, symbol, SIGNAL_TIMEFRAME, limit=max(config.CANDLE_LIMITS.get(SIGNAL_TIMEFRAME, 500), 300))
-    if df is None or len(df) < CE_BUYONLY_EXIT["period"] + 5:
+    if df is None or len(df) < ce_period + 5:
         return None, "NO_DATA"
 
-    exit_stop_series = compute_chandelier_long_stop(df, CE_BUYONLY_EXIT["period"], CE_BUYONLY_EXIT["multiplier"])
+    exit_stop_series = compute_chandelier_long_stop(df, ce_period, ce_multiplier)
     entry_price = float(df["close"].iloc[-1])
     initial_stop = exit_stop_series.iloc[-1]
 
@@ -249,20 +313,30 @@ def open_manual_position(symbol, exchange, cash, open_count, amount=None):
         # khud CE indicator ke apne rule ke khilaf hoga - isliye safe taur par skip.
         return None, "INVALID_STOP"
 
+    risk = entry_price - float(initial_stop)
+    tp_price = (entry_price + risk * rr_multiple) if use_fixed_tp else None
+
     pos = {
         "entry_time": df["timestamp"].iloc[-1].isoformat(),
         "entry_price": round(entry_price, 8),
         "initial_stop": round(float(initial_stop), 8),
         "trail_stop": round(float(initial_stop), 8),
+        "tp_price": round(tp_price, 8) if tp_price is not None else None,
         "capital_allocated": position_size,
         "current_price": round(entry_price, 8),
         "unrealized_pnl_pct": 0.0,
         "source": "manual",
+        "system": system,
+        "combo": combo,
+        "ce_period": ce_period,
+        "ce_multiplier": ce_multiplier,
+        "use_fixed_tp": use_fixed_tp,
     }
 
+    tp_str = f"{tp_price:.6f}" if tp_price is not None else "N/A (trailing-stop hi exit hai)"
     send_telegram_alert(
-        f"🤖 Manual Bot Trade OPENED: {symbol}\n"
-        f"Entry: {entry_price:.6f} | Initial SL (CE 16,3.0): {float(initial_stop):.6f}\n"
+        f"🤖 Manual Bot Trade OPENED ({system}{' - ' + combo if combo else ''}): {symbol}\n"
+        f"Entry: {entry_price:.6f} | SL (CE {ce_period},{ce_multiplier}): {float(initial_stop):.6f} | TP: {tp_str}\n"
         f"Capital Allocated: ${position_size:.2f} (virtual)"
     )
 
@@ -293,7 +367,7 @@ def main():
         else:
             cash += result["capital_allocated"] + result["realized_pnl"]
             append_closed_trade(closed_row)
-            print(f"  [CLOSED] {symbol}: {closed_row['result']} ${closed_row['realized_pnl_usd']:.2f}")
+            print(f"  [CLOSED] {symbol}: {closed_row['result']} ${closed_row['realized_pnl_usd']:.2f} ({closed_row['exit_reason']})")
 
     positions = still_open
 
@@ -301,24 +375,26 @@ def main():
     watchlist = load_watchlist()
     remaining_watchlist = []
 
-    for symbol, amount in watchlist:
+    for entry in watchlist:
+        symbol, amount, system, combo = entry["symbol"], entry["amount"], entry["system"], entry["combo"]
         if symbol in positions:
             print(f"  [SKIP] {symbol}: pehle se hi ek open position mojood hai")
             continue
         try:
-            pos, reason = open_manual_position(symbol, exchange, cash, len(positions), amount=amount)
+            pos, reason = open_manual_position(symbol, exchange, cash, len(positions), amount=amount, system=system, combo=combo)
         except Exception as e:
             print(f"  [ERROR] {symbol}: {e}")
-            remaining_watchlist.append((symbol, amount))   # error par dobara try karne ke liye rakh lo
+            remaining_watchlist.append(entry)   # error par dobara try karne ke liye rakh lo
             continue
 
         if pos is not None:
             positions[symbol] = pos
             cash -= pos["capital_allocated"]
-            print(f"  [OPENED] {symbol}: entry={pos['entry_price']}, SL={pos['initial_stop']}, amount=${pos['capital_allocated']}")
+            print(f"  [OPENED] {symbol} ({system}): entry={pos['entry_price']}, SL={pos['initial_stop']}, "
+                  f"TP={pos['tp_price']}, amount=${pos['capital_allocated']}")
         elif reason in ("MAX_POSITIONS", "NO_CASH", "NO_DATA"):
             print(f"  [QUEUED] {symbol}: abhi nahi ({reason}), agli baar phir koshish hogi")
-            remaining_watchlist.append((symbol, amount))
+            remaining_watchlist.append(entry)
         else:
             print(f"  [REJECTED] {symbol}: {reason} - watchlist se hata diya")
 
