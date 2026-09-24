@@ -1,65 +1,27 @@
 {
-  "last_updated_utc": "2026-09-24T00:00:34.584974+00:00",
+  "last_updated_utc": "2026-09-24T00:07:17.299609+00:00",
   "coins_scanned": 150,
   "fear_greed_value": 71,
   "fear_greed_label": "Greed",
   "signals": [
     {
       "System": "CE Buy-Only",
-      "Coin": "TRUMP/USDT",
+      "Coin": "MET/USDT",
       "Combo": "Chandelier Cross",
       "Tier": "Base+ETH",
       "Category": "New Signal",
-      "Signal Time (PKT)": "2026-09-24 03:00 AM PKT",
+      "Signal Time (PKT)": "2026-09-24 04:00 AM PKT",
       "Bars Ago": 0,
-      "Entry": 1.959,
-      "Current": 1.959,
+      "Entry": 0.3429,
+      "Current": 0.3429,
       "P/L %": 0.0,
-      "Trail Stop": 1.955818,
+      "Trail Stop": 0.329023,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#25 / 150",
+      "Liquidity Rank": "#47 / 150",
       "Overall Score %": "N/A",
       "Verdict": "N/A",
       "Rank": 1
-    },
-    {
-      "System": "CE Buy-Only",
-      "Coin": "GALA/USDT",
-      "Combo": "Chandelier Cross",
-      "Tier": "Base+ETH",
-      "Category": "New Signal",
-      "Signal Time (PKT)": "2026-09-24 03:00 AM PKT",
-      "Bars Ago": 0,
-      "Entry": 0.001903,
-      "Current": 0.001903,
-      "P/L %": 0.0,
-      "Trail Stop": 0.001892,
-      "Take Profit": "N/A (trailing stop hi asal exit hai)",
-      "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#29 / 150",
-      "Overall Score %": "N/A",
-      "Verdict": "N/A",
-      "Rank": 2
-    },
-    {
-      "System": "CE Buy-Only",
-      "Coin": "TIA/USDT",
-      "Combo": "Chandelier Cross",
-      "Tier": "Base+ETH",
-      "Category": "New Signal",
-      "Signal Time (PKT)": "2026-09-24 03:00 AM PKT",
-      "Bars Ago": 0,
-      "Entry": 0.4608,
-      "Current": 0.4608,
-      "P/L %": 0.0,
-      "Trail Stop": 0.459314,
-      "Take Profit": "N/A (trailing stop hi asal exit hai)",
-      "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#78 / 150",
-      "Overall Score %": "N/A",
-      "Verdict": "N/A",
-      "Rank": 3
     },
     {
       "System": "CE Buy-Only",
@@ -78,7 +40,7 @@
       "Liquidity Rank": "#122 / 150",
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 4
+      "Rank": 2
     }
   ]
 }
