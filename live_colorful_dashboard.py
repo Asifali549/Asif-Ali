@@ -293,6 +293,101 @@ else:
         "band hone ke baad (background scan ke agle cycle mein) yahan record banna shuru hoga."
     )
 
+st.markdown("---")
+st.header("🕐 Trading Session Analysis (Pakistan Time — PKT)")
+st.caption(
+    "Har closed trade ka ENTRY waqt dekh kar us waqt kaunsa major market session "
+    "'khula' tha — sab kuch **Pakistan Time (PKT)** mein, koi UTC confusion nahi — "
+    "taake pata chale kis session mein li gayi trades zyada TP/Win par band hoti hain "
+    "aur kis mein zyada SL/Loss par."
+)
+
+
+def classify_session(hour_pkt):
+    """Sab boundaries Pakistan Time (PKT) mein - UTC se koi lena dena nahi."""
+    if 5 <= hour_pkt < 12:
+        return "🌏 Asian (05:00 AM–12:00 PM PKT)"
+    elif 12 <= hour_pkt < 17:
+        return "🇬🇧 London (12:00 PM–05:00 PM PKT)"
+    elif 17 <= hour_pkt < 21:
+        return "🇬🇧+🇺🇸 London+NY Overlap (05:00 PM–09:00 PM PKT)"
+    elif hour_pkt >= 21 or hour_pkt < 2:
+        return "🇺🇸 New York (09:00 PM–02:00 AM PKT)"
+    else:
+        return "🌙 Late NY / Off-Hours (02:00 AM–05:00 AM PKT)"
+
+
+def parse_pkt_hour(pkt_str):
+    """'2026-09-24 05:00 PM PKT' jaisi string se PKT hour (0-23) nikalta hai - koi conversion nahi."""
+    try:
+        clean = str(pkt_str).replace(" PKT", "").strip()
+        dt = datetime.strptime(clean, "%Y-%m-%d %I:%M %p")
+        return dt.hour
+    except Exception:
+        return None
+
+
+session_sources = []
+if os.path.exists("closed_trades_log.csv"):
+    _df = pd.read_csv("closed_trades_log.csv")
+    if len(_df) > 0 and "Signal Time (PKT)" in _df.columns:
+        _df = _df.rename(columns={"Signal Time (PKT)": "entry_time_pkt"})
+        _df["is_win"] = _df["Exit Reason"] == "TARGET"
+        session_sources.append(("Live Screener (sab systems)", _df[["entry_time_pkt", "is_win"]]))
+if os.path.exists("manual_bot_closed_trades.csv"):
+    _df = pd.read_csv("manual_bot_closed_trades.csv")
+    if len(_df) > 0:
+        _df["is_win"] = _df["result"] == "WIN"
+        session_sources.append(("Manual Trade Bot", _df[["entry_time_pkt", "is_win"]]))
+if os.path.exists("auto_bot_closed_trades.csv"):
+    _df = pd.read_csv("auto_bot_closed_trades.csv")
+    if len(_df) > 0:
+        _df["is_win"] = _df["result"] == "WIN"
+        session_sources.append(("Auto-Scan Bot", _df[["entry_time_pkt", "is_win"]]))
+
+if len(session_sources) == 0:
+    st.info("Abhi tak koi closed trade record nahi mila — session analysis ke liye pehle kuch trades band honi chahiye.")
+else:
+    source_names = [s[0] for s in session_sources]
+    picked = st.multiselect("Kaunse record(s) shamil karein", source_names, default=source_names, key="session_source_pick")
+    combined = pd.concat([df for name, df in session_sources if name in picked], ignore_index=True) if picked else pd.DataFrame()
+
+    if len(combined) == 0:
+        st.caption("Koi record select nahi kiya gaya.")
+    else:
+        combined["pkt_hour"] = combined["entry_time_pkt"].apply(parse_pkt_hour)
+        combined = combined.dropna(subset=["pkt_hour"])
+        combined["session"] = combined["pkt_hour"].apply(classify_session)
+
+        session_order = [
+            "🌏 Asian (05:00 AM–12:00 PM PKT)", "🇬🇧 London (12:00 PM–05:00 PM PKT)",
+            "🇬🇧+🇺🇸 London+NY Overlap (05:00 PM–09:00 PM PKT)", "🇺🇸 New York (09:00 PM–02:00 AM PKT)",
+            "🌙 Late NY / Off-Hours (02:00 AM–05:00 AM PKT)",
+        ]
+        rows = []
+        for sess in session_order:
+            sub = combined[combined["session"] == sess]
+            if len(sub) == 0:
+                continue
+            wins = int(sub["is_win"].sum())
+            total = len(sub)
+            rows.append({
+                "Session": sess, "Total Trades": total, "TP/Win": wins, "SL/Loss": total - wins,
+                "Win Rate %": round(wins / total * 100, 1),
+            })
+
+        if rows:
+            st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+            best = max(rows, key=lambda r: r["Win Rate %"])
+            worst = min(rows, key=lambda r: r["Win Rate %"])
+            st.caption(
+                f"✅ Sab se behtar: **{best['Session']}** ({best['Win Rate %']}% Win Rate, {best['Total Trades']} trades) — "
+                f"⚠️ Sab se kamzor: **{worst['Session']}** ({worst['Win Rate %']}% Win Rate, {worst['Total Trades']} trades). "
+                f"Note: chhota sample (~10-15 se kam trades) size wale sessions ka number abhi bharosemand nahi."
+            )
+        else:
+            st.caption("Session classify nahi ho saka.")
+
 st.markdown("---")# SECTION 2: MANUAL (on-demand, apni marzi ke toggles ke sath)
 # ============================================================
 st.header("🔍 Manual Scan (apni marzi ke toggles)")
@@ -498,19 +593,26 @@ else:
     st.info("Abhi tak koi journal entry nahi — pehla background scan chalne ke baad yahan record nazar aayega.")
 
 st.markdown("---")
-st.header("🤖 Manual Trade Bot (CE Buy-Only — Coin Aap Daalein)")
+st.header("🤖 Manual Trade Bot (Coin Aap Daalein)")
 st.caption(
     "Yeh koi auto-scan nahi karta — SIRF unhi coins par kaam karta hai jo aap khud "
-    "'manual_watchlist.json' (GitHub par) mein daalein. Feed karne ke agle run (max 5 min) mein "
-    "bot us coin par virtual $100 ki trade le leta hai — Entry = us waqt ka current price, "
-    "SL = CE Buy-Only ka wahi exit Chandelier (16, 3.0) trailing-stop (koi fixed % ya fixed TP nahi). "
+    "'manual_watchlist.json' (GitHub par) mein daalein — chahe wo CE Buy-Only, Union AB, "
+    "NEW AdvancedConfluence, Pullback-in-Uptrend ya Donchian Breakout, jis bhi system ka signal ho. "
+    "Feed karne ke agle run (max 5 min) mein bot us coin par virtual trade le leta hai, us SYSTEM ke "
+    "apne tasdeeq-shuda SL/TP rules ke sath (default $100, watchlist mein amount badal sakte hain). "
     "Asal paisa is mein bilkul risk mein nahi hai (paper/virtual)."
 )
 if os.path.exists("manual_watchlist.json"):
     with open("manual_watchlist.json") as f:
         pending_watchlist = json.load(f)
     if len(pending_watchlist) > 0:
-        st.caption(f"⏳ Pending (agle run mein process hongi): {', '.join(pending_watchlist)}")
+        pending_labels = []
+        for e in pending_watchlist:
+            if isinstance(e, dict):
+                pending_labels.append(f"{e.get('symbol')} ({e.get('system', 'CE Buy-Only')})")
+            else:
+                pending_labels.append(f"{e} (CE Buy-Only)")
+        st.caption(f"⏳ Pending (agle run mein process hongi): {', '.join(pending_labels)}")
 
 if os.path.exists("manual_bot_state.json"):
     with open("manual_bot_state.json") as f:
@@ -533,11 +635,16 @@ if os.path.exists("manual_bot_state.json"):
         st.markdown("**🟢 Abhi Khuli Hui Manual Trades**")
         rows = []
         for symbol, pos in open_positions.items():
+            system_label = pos.get("system", "CE Buy-Only")
+            if pos.get("combo"):
+                system_label += f" ({pos['combo']})"
             rows.append({
                 "Coin": symbol,
+                "System": system_label,
                 "Entry": pos.get("entry_price"),
                 "Current": pos.get("current_price"),
                 "Trail Stop (SL)": pos.get("trail_stop"),
+                "TP": pos.get("tp_price") if pos.get("tp_price") is not None else "N/A (trailing)",
                 "Unrealized P/L %": pos.get("unrealized_pnl_pct"),
                 "Capital ($)": pos.get("capital_allocated"),
             })
@@ -575,4 +682,91 @@ else:
         "Manual trade bot abhi tak nahi chala — GitHub repo mein "
         "'.github/workflows/manual_trade_bot.yml' hona chahiye, chalne ke thodi der baad yahan "
         "result nazar aayega."
-    ) 
+    )
+
+st.markdown("---")
+st.header("🎲 Auto-Scan Trade Bot (Dummy/Paper — Sab 5 Systems Khud Scan Karta Hai)")
+st.caption(
+    "Yeh manual bot ka 'auto' sāthi hai — khud 150 coins scan karta hai aur jaise hi kisi bhi "
+    "system (Union AB, NEW AdvancedConfluence, CE Buy-Only, Pullback-in-Uptrend, Donchian Breakout) "
+    "ka fresh signal bane, khud hi wahi (paper/virtual) trade le leta hai — koi manual feed ki zaroorat "
+    "nahi. Capital/ledger manual bot se BILKUL ALAG hai. Asal paisa yahan bhi risk mein nahi (paper)."
+)
+if os.path.exists("auto_bot_state.json"):
+    with open("auto_bot_state.json") as f:
+        ab_state = json.load(f)
+
+    cash = ab_state.get("cash", 0)
+    open_positions = ab_state.get("positions", {})
+    total_equity = ab_state.get("total_equity_usd", cash)
+    starting_capital = ab_state.get("starting_capital_usd", 2000.0)
+    overall_pnl = total_equity - starting_capital
+    overall_pnl_pct = (overall_pnl / starting_capital * 100) if starting_capital else 0
+
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Total Equity", f"${total_equity:,.2f}", f"{overall_pnl_pct:+.2f}%")
+    c2.metric("Free Cash", f"${cash:,.2f}")
+    c3.metric("Open Positions", f"{len(open_positions)} / {ab_state.get('max_concurrent_positions', 15)}")
+    c4.metric("Per-Trade Size", f"${ab_state.get('position_size_usd', 100):,.2f}")
+
+    if len(open_positions) > 0:
+        st.markdown("**🟢 Abhi Khuli Hui Auto Trades**")
+        rows = []
+        for key, pos in open_positions.items():
+            system_label = pos.get("system", "CE Buy-Only")
+            if pos.get("combo"):
+                system_label += f" ({pos['combo']})"
+            rows.append({
+                "Coin": pos.get("symbol", key.split("|")[0]),
+                "System": system_label,
+                "Entry": pos.get("entry_price"),
+                "Current": pos.get("current_price"),
+                "Trail Stop (SL)": pos.get("trail_stop"),
+                "TP": pos.get("tp_price") if pos.get("tp_price") is not None else "N/A (trailing)",
+                "Unrealized P/L %": pos.get("unrealized_pnl_pct"),
+                "Capital ($)": pos.get("capital_allocated"),
+            })
+        st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+    else:
+        st.caption("Abhi koi auto trade khuli nahi hai.")
+
+    if os.path.exists("auto_bot_closed_trades.csv"):
+        df_ab_closed = pd.read_csv("auto_bot_closed_trades.csv")
+        if len(df_ab_closed) > 0:
+            wins = df_ab_closed[df_ab_closed["result"] == "WIN"]
+            losses = df_ab_closed[df_ab_closed["result"] == "LOSS"]
+            win_rate = len(wins) / len(df_ab_closed) * 100
+            gross_win = wins["realized_pnl_usd"].sum()
+            gross_loss = abs(losses["realized_pnl_usd"].sum())
+            pf = (gross_win / gross_loss) if gross_loss > 0 else None
+
+            st.markdown("**📒 Band Ho Chuki Auto Trades**")
+            c1, c2, c3, c4 = st.columns(4)
+            c1.metric("Total Closed", len(df_ab_closed))
+            c2.metric("Win Rate", f"{win_rate:.1f}%")
+            c3.metric("Profit Factor", f"{pf:.2f}" if pf is not None else "N/A")
+            c4.metric("Realized P&L", f"${df_ab_closed['realized_pnl_usd'].sum():,.2f}")
+
+            if "system" in df_ab_closed.columns:
+                st.markdown("**System ke hisaab se breakdown**")
+                for sys_name in df_ab_closed["system"].unique():
+                    sub = df_ab_closed[df_ab_closed["system"] == sys_name]
+                    sub_wins = sub[sub["result"] == "WIN"]
+                    sub_wr = len(sub_wins) / len(sub) * 100
+                    st.caption(f"**{sys_name}**: {len(sub)} closed, Win Rate {sub_wr:.1f}%, "
+                               f"P&L ${sub['realized_pnl_usd'].sum():,.2f}")
+
+            show_ab = st.checkbox("Poori Auto-Trade History Dikhayein", value=False, key="show_auto_bot_log")
+            if show_ab:
+                st.dataframe(df_ab_closed.sort_values("exit_time_pkt", ascending=False), use_container_width=True, hide_index=True)
+
+            ab_csv = df_ab_closed.to_csv(index=False).encode("utf-8")
+            st.download_button("📥 Auto Trades CSV Download Karein", ab_csv, "auto_bot_closed_trades.csv", "text/csv", key="dl_auto_bot")
+        else:
+            st.caption("Abhi tak koi auto trade band nahi hui.")
+else:
+    st.info(
+        "Auto-scan trade bot abhi tak nahi chala — GitHub repo mein "
+        "'.github/workflows/auto_scan_trade_bot.yml' hona chahiye, chalne ke thodi der baad yahan "
+        "result nazar aayega."
+    )
