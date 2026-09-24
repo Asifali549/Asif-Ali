@@ -1,0 +1,30 @@
+name: Test Donchian Channel Breakout (new strategy)
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run donchian-channel-breakout test
+        run: python test_donchian_channel_breakout.py
+
+      - name: Show results file
+        if: always()
+        run: cat test_donchian_channel_breakout_RESULTS.txt || echo "Results file nahi mili"
