@@ -1,9 +1,28 @@
 {
-  "last_updated_utc": "2026-09-24T02:01:01.927469+00:00",
+  "last_updated_utc": "2026-09-24T02:07:44.574724+00:00",
   "coins_scanned": 150,
   "fear_greed_value": 71,
   "fear_greed_label": "Greed",
   "signals": [
+    {
+      "System": "CE Buy-Only",
+      "Coin": "DASH/USDT",
+      "Combo": "Chandelier Cross",
+      "Tier": "Base+ETH",
+      "Category": "New Signal",
+      "Signal Time (PKT)": "2026-09-24 06:00 AM PKT",
+      "Bars Ago": 0,
+      "Entry": 57.28,
+      "Current": 57.28,
+      "P/L %": 0.0,
+      "Trail Stop": 56.2,
+      "Take Profit": "N/A (trailing stop hi asal exit hai)",
+      "ETH Regime": "Bullish \u2705",
+      "Liquidity Rank": "#36 / 150",
+      "Overall Score %": "N/A",
+      "Verdict": "N/A",
+      "Rank": 1
+    },
     {
       "System": "CE Buy-Only",
       "Coin": "ZEN/USDT",
@@ -18,10 +37,10 @@
       "Trail Stop": 7.087455,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#99 / 150",
+      "Liquidity Rank": "#98 / 150",
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 1
+      "Rank": 2
     },
     {
       "System": "CE Buy-Only",
@@ -37,10 +56,10 @@
       "Trail Stop": 0.043415,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#135 / 150",
+      "Liquidity Rank": "#136 / 150",
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 2
+      "Rank": 3
     }
   ]
 }
