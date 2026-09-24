@@ -64,5 +64,10 @@
   "LIT/USDT|Pullback-in-Uptrend|EMA20 Pullback|5.289|N/A": "2026-09-24T18:05:29.972663+00:00",
   "UNI/USDT|Pullback-in-Uptrend|EMA20 Pullback|9.265|N/A": "2026-09-24T19:03:49.211764+00:00",
   "INJ/USDT|Pullback-in-Uptrend|EMA20 Pullback|8.319|N/A": "2026-09-24T19:03:49.793535+00:00",
-  "RAY/USDT|Donchian Breakout|20-period High|2.213|N/A": "2026-09-24T19:03:50.382319+00:00"
+  "RAY/USDT|Donchian Breakout|20-period High|2.213|N/A": "2026-09-24T19:03:50.382319+00:00",
+  "PENDLE/USDT|Union AB|Ichimoku+MS|2.6119|Baseline": "2026-09-24T20:01:06.959334+00:00",
+  "PENDLE/USDT|Union AB|EMA+Breakout|2.6119|Baseline": "2026-09-24T20:01:07.337321+00:00",
+  "PENDLE/USDT|NEW AdvancedConfluence|CHoCH|2.6119|N/A": "2026-09-24T20:01:07.811105+00:00",
+  "PENDLE/USDT|Union AB Backup Tier|Ichimoku+MS|2.6119|N/A": "2026-09-24T20:01:08.223628+00:00",
+  "PENDLE/USDT|Union AB Backup Tier|EMA+Breakout|2.6119|N/A": "2026-09-24T20:01:08.607478+00:00"
 }
