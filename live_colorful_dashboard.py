@@ -50,18 +50,25 @@ COLORABLE_COLUMNS = (
 
 COMPACT_COLUMNS = ["Rank", "System", "Category", "Coin", "Signal Time (PKT)", "Combo", "Overall Score %", "Verdict", "Entry", "Current", "P/L %", "Trail Stop", "Take Profit"]
 
-SYSTEM_ORDER = ["Union AB", "NEW AdvancedConfluence", "Union AB Backup Tier", "CE Buy-Only"]
+SYSTEM_ORDER = [
+    "Union AB", "NEW AdvancedConfluence", "Union AB Backup Tier", "CE Buy-Only",
+    "Pullback-in-Uptrend", "Donchian Breakout",
+]
 SYSTEM_BADGE = {
     "Union AB": "🥇 Union AB",
     "NEW AdvancedConfluence": "🧭 NEW AdvancedConfluence",
     "Union AB Backup Tier": "🛡️ Union AB Backup Tier",
     "CE Buy-Only": "⚡ CE Buy-Only",
+    "Pullback-in-Uptrend": "🔁 Pullback-in-Uptrend",
+    "Donchian Breakout": "📈 Donchian Breakout",
 }
 SYSTEM_CAPTION = {
     "Union AB": "Sab se zyada tasdeeq-shuda system (ETH+RS+RS%95, +52W tier).",
     "NEW AdvancedConfluence": "CHoCH-based confluence score, koi extra filter nahi.",
     "Union AB Backup Tier": "Union AB jaisa combo, sirf RS+RS%95 (ETH check NAHI) — hamesha active rehta hai.",
     "CE Buy-Only": "⚠️ Sirf 1 indicator (Chandelier cross) par mabni — koi tasdeeqi filter nahi. Ehtiyaat se capital lagayein.",
+    "Pullback-in-Uptrend": "EMA20 pullback (rising EMA + uptrend) + ETH/RS/RS%95 filters. Poore saal ke walk-forward se tasdeeq-shuda (799 trades, PF 1.831, har fold consistent).",
+    "Donchian Breakout": "20-period Donchian high breakout + ETH/RS/RS%95 filters. Poore saal ke walk-forward se tasdeeq-shuda (552 trades, PF 2.171, har fold consistent) — is session ka sab se mazboot nateeja.",
 }
 
 
