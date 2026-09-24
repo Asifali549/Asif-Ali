@@ -1,27 +1,46 @@
 {
-  "last_updated_utc": "2026-09-24T01:54:28.513838+00:00",
+  "last_updated_utc": "2026-09-24T02:01:01.927469+00:00",
   "coins_scanned": 150,
   "fear_greed_value": 71,
   "fear_greed_label": "Greed",
   "signals": [
     {
       "System": "CE Buy-Only",
-      "Coin": "STRK/USDT",
+      "Coin": "ZEN/USDT",
       "Combo": "Chandelier Cross",
       "Tier": "Base+ETH",
       "Category": "New Signal",
-      "Signal Time (PKT)": "2026-09-24 05:00 AM PKT",
+      "Signal Time (PKT)": "2026-09-24 06:00 AM PKT",
       "Bars Ago": 0,
-      "Entry": 0.03825,
-      "Current": 0.03825,
+      "Entry": 7.153,
+      "Current": 7.153,
       "P/L %": 0.0,
-      "Trail Stop": 0.038171,
+      "Trail Stop": 7.087455,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#134 / 150",
+      "Liquidity Rank": "#99 / 150",
       "Overall Score %": "N/A",
       "Verdict": "N/A",
       "Rank": 1
+    },
+    {
+      "System": "CE Buy-Only",
+      "Coin": "MEGA/USDT",
+      "Combo": "Chandelier Cross",
+      "Tier": "Base+ETH",
+      "Category": "New Signal",
+      "Signal Time (PKT)": "2026-09-24 06:00 AM PKT",
+      "Bars Ago": 0,
+      "Entry": 0.04388,
+      "Current": 0.04388,
+      "P/L %": 0.0,
+      "Trail Stop": 0.043415,
+      "Take Profit": "N/A (trailing stop hi asal exit hai)",
+      "ETH Regime": "Bullish \u2705",
+      "Liquidity Rank": "#135 / 150",
+      "Overall Score %": "N/A",
+      "Verdict": "N/A",
+      "Rank": 2
     }
   ]
 }
