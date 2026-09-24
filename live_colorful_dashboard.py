@@ -7,11 +7,13 @@ View available hai.
 Chalayen: streamlit run live_colorful_dashboard.py
 """
 
+import base64
 import json
 import os
 from datetime import datetime, timezone
 
 import pandas as pd
+import requests
 import streamlit as st
 
 import config
@@ -602,6 +604,145 @@ st.caption(
     "apne tasdeeq-shuda SL/TP rules ke sath (default $100, watchlist mein amount badal sakte hain). "
     "Asal paisa is mein bilkul risk mein nahi hai (paper/virtual)."
 )
+GITHUB_REPO = "Asifali549/Asif-Ali"
+GITHUB_BRANCH = "main"
+GITHUB_WATCHLIST_PATH = "manual_watchlist.json"
+
+
+def push_watchlist_to_github(merged_list):
+    """manual_watchlist.json ko seedha GitHub repo mein commit karta hai
+    (GitHub Contents API ke zariye), taake GitHub Actions bot ko turant
+    nazar aaye — koi manual GitHub-app editing na karni pare.
+    Requires: Streamlit Cloud app Settings -> Secrets mein GITHUB_TOKEN
+    (repo-write access wala Personal Access Token) set hona chahiye.
+    Returns (success: bool, message: str).
+    """
+    token = st.secrets.get("GITHUB_TOKEN") if hasattr(st, "secrets") else None
+    if not token:
+        return False, "NO_TOKEN"
+
+    api_url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_WATCHLIST_PATH}"
+    headers = {"Authorization": f"token {token}", "Accept": "application/vnd.github.v3+json"}
+    try:
+        get_resp = requests.get(api_url, headers=headers, params={"ref": GITHUB_BRANCH}, timeout=15)
+        sha = get_resp.json().get("sha") if get_resp.status_code == 200 else None
+
+        new_content = json.dumps(merged_list, indent=2)
+        payload = {
+            "message": "Update manual watchlist (dashboard se)",
+            "content": base64.b64encode(new_content.encode("utf-8")).decode("utf-8"),
+            "branch": GITHUB_BRANCH,
+        }
+        if sha:
+            payload["sha"] = sha
+
+        put_resp = requests.put(api_url, headers=headers, json=payload, timeout=15)
+        if put_resp.status_code in (200, 201):
+            return True, "OK"
+        return False, f"GitHub API error {put_resp.status_code}: {put_resp.text[:200]}"
+    except Exception as exc:
+        return False, f"Error: {exc}"
+
+
+MANUAL_SYSTEM_BOXES = [
+    ("CE Buy-Only", "CE Buy-Only", None),
+    ("NEW AdvancedConfluence", "NEW AdvancedConfluence", None),
+    ("Union AB — Ichimoku+MS", "Union AB", "Ichimoku+MS"),
+    ("Union AB — EMA+Breakout", "Union AB", "EMA+Breakout"),
+    ("Union AB Backup Tier — Ichimoku+MS", "Union AB Backup Tier", "Ichimoku+MS"),
+    ("Union AB Backup Tier — EMA+Breakout", "Union AB Backup Tier", "EMA+Breakout"),
+    ("Pullback-in-Uptrend", "Pullback-in-Uptrend", None),
+    ("Donchian Breakout", "Donchian Breakout", None),
+]
+
+with st.expander("➕ Coin Yahan Daalein (Har System Ka Alag Khana)", expanded=False):
+    st.caption(
+        "Jis system ka signal mila hai usi khane mein coin ka naam likhein (ek line mein ek coin, "
+        "jaise BTC/USDT). Custom amount dena ho to ':' laga kar likhein — jaise BTC/USDT:200 "
+        "(warna default $100 lagega). 'Save Watchlist' dabate hi yeh seedha manual_watchlist.json "
+        "mein chali jayengi — koi JSON likhne ki zaroorat nahi."
+    )
+    with st.form("manual_watchlist_form"):
+        box_values = {}
+        for label, system_name, combo_name in MANUAL_SYSTEM_BOXES:
+            box_values[label] = st.text_area(label, value="", height=70, key=f"wl_box_{label}")
+        submitted = st.form_submit_button("💾 Save Watchlist")
+
+    if submitted:
+        existing = []
+        if os.path.exists("manual_watchlist.json"):
+            with open("manual_watchlist.json") as f:
+                try:
+                    existing = json.load(f)
+                except Exception:
+                    existing = []
+
+        new_entries = []
+        for label, system_name, combo_name in MANUAL_SYSTEM_BOXES:
+            raw_text = box_values[label]
+            for line in raw_text.splitlines():
+                line = line.strip()
+                if not line:
+                    continue
+                amount = None
+                if ":" in line:
+                    sym_part, amt_part = line.rsplit(":", 1)
+                    sym_part = sym_part.strip()
+                    try:
+                        amount = float(amt_part.strip())
+                    except ValueError:
+                        sym_part = line
+                        amount = None
+                else:
+                    sym_part = line
+                symbol = sym_part.upper().replace(" ", "")
+                if "/" not in symbol:
+                    symbol = f"{symbol}/USDT"
+                entry = {"symbol": symbol, "amount": amount, "system": system_name, "combo": combo_name}
+                new_entries.append(entry)
+
+        def _entry_key(e):
+            if isinstance(e, dict):
+                return (e.get("symbol"), e.get("system", "CE Buy-Only"), e.get("combo"))
+            return (e, "CE Buy-Only", None)
+
+        existing_keys = {_entry_key(e) for e in existing}
+        merged = list(existing)
+        added_count = 0
+        for e in new_entries:
+            k = _entry_key(e)
+            if k not in existing_keys:
+                merged.append(e)
+                existing_keys.add(k)
+                added_count += 1
+
+        if added_count == 0:
+            st.info("Koi nayi entry nahi mili (ya pehle se watchlist mein maujood hai).")
+        else:
+            pushed, msg = push_watchlist_to_github(merged)
+            if pushed:
+                # local copy bhi update kar dein taake yahan turant nazar aaye
+                with open("manual_watchlist.json", "w") as f:
+                    json.dump(merged, f, indent=2)
+                st.success(f"✅ {added_count} nayi coin(s) seedha GitHub par save ho gayin. GitHub Actions ke "
+                           f"agle run (max 5 min) mein bot inhein process karega.")
+                st.rerun()
+            elif msg == "NO_TOKEN":
+                with open("manual_watchlist.json", "w") as f:
+                    json.dump(merged, f, indent=2)
+                st.warning(
+                    "⚠️ Yeh sirf is app ke local copy mein save hui hai — GitHub par NAHI gayi, isliye bot "
+                    "ko nazar nahi aayegi. GitHub se seedha auto-save karne ke liye ek baar "
+                    "'GITHUB_TOKEN' Streamlit app Settings → Secrets mein add karwana hoga (mujhe bata dein, "
+                    "main step-by-step bata deta hoon). Filhal neeche di gayi JSON copy kar ke khud "
+                    "GitHub app mein 'manual_watchlist.json' file mein paste kar dein:"
+                )
+                st.code(json.dumps(merged, indent=2), language="json")
+            else:
+                st.error(f"❌ GitHub par save nahi ho saki: {msg}\n\nNeeche di JSON copy kar ke khud GitHub "
+                          f"app mein 'manual_watchlist.json' mein paste kar dein:")
+                st.code(json.dumps(merged, indent=2), language="json")
+
 if os.path.exists("manual_watchlist.json"):
     with open("manual_watchlist.json") as f:
         pending_watchlist = json.load(f)
