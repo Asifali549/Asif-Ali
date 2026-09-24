@@ -1,0 +1,10 @@
+{
+  "cash": 1000.0,
+  "positions": {},
+  "total_equity_usd": 1000.0,
+  "starting_capital_usd": 1000.0,
+  "open_position_count": 0,
+  "max_concurrent_positions": 8,
+  "position_size_usd": 100.0,
+  "last_updated": "2026-09-24T21:39:47.829790+00:00"
+}
