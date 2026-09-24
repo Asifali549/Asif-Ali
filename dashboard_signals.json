@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-24T15:24:47.851449+00:00",
+  "last_updated_utc": "2026-09-24T15:32:21.358004+00:00",
   "coins_scanned": 150,
   "fear_greed_value": 71,
   "fear_greed_label": "Greed",
@@ -21,12 +21,12 @@
       "Dist from 52W High": "32.56%",
       "Funding Rate": "N/A",
       "Open Interest": "N/A",
-      "Liquidity Up ($)": "$927",
-      "Liquidity Down ($)": "$807",
-      "Liquidity Compare": "Resistance > Support",
-      "OrderBook Bid/Ask": "0.87x",
-      "Vol 15m": "0.15x",
-      "Chg 15m": "+5.75%",
+      "Liquidity Up ($)": "$472",
+      "Liquidity Down ($)": "$1,704",
+      "Liquidity Compare": "Support > Resistance",
+      "OrderBook Bid/Ask": "3.61x",
+      "Vol 15m": "0.64x",
+      "Chg 15m": "-4.58%",
       "Vol 1h": "0.52x",
       "Chg 1h": "-7.82%",
       "Vol 4h": "2.52x",
@@ -38,7 +38,7 @@
       "Coin's Own Win%": "100.0%",
       "Coin's Own PF": "N/A",
       "BTC Correlation": "0.02",
-      "Overall Score %": 54.5,
+      "Overall Score %": 63.6,
       "Verdict": "\ud83d\udfe2 Good",
       "Rank": 1
     },
@@ -420,24 +420,6 @@
       "Overall Score %": "N/A",
       "Verdict": "N/A",
       "Rank": 22
-    },
-    {
-      "System": "Pullback-in-Uptrend",
-      "Coin": "AR/USDT",
-      "Combo": "EMA20 Pullback",
-      "Tier": "N/A",
-      "Category": "New Signal",
-      "Signal Time (PKT)": "2026-09-24 06:00 PM PKT",
-      "Bars Ago": 1,
-      "Entry": 4.449,
-      "Current": 4.52,
-      "P/L %": 1.6,
-      "Trail Stop": 4.270562,
-      "Take Profit": "N/A (trailing stop hi asal exit hai)",
-      "RS Percentile": 97.8,
-      "Overall Score %": "N/A",
-      "Verdict": "N/A",
-      "Rank": 23
     }
   ]
 }
