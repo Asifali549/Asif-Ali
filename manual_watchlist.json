@@ -1,14 +1,3 @@
-[[
-  {
-    "symbol": "LSK/USDT",
-    "amount": null,
-    "system": "NEW AdvancedConfluence",
-    "combo": null
-  },
-  {
-    "symbol": "\ud83d\udcca/USDT",
-    "amount": null,
-    "system": "Union AB",
-    "combo": "EMA+Breakout"
-  }
-]]
+[
+  "[{'SYMBOL': 'LSK/USDT', 'AMOUNT': NONE, 'SYSTEM': 'NEW ADVANCEDCONFLUENCE', 'COMBO': NONE}, {'SYMBOL': '\ud83d\udcca/USDT', 'AMOUNT': NONE, 'SYSTEM': 'UNION AB', 'COMBO': 'EMA+BREAKOUT'}]"
+]
