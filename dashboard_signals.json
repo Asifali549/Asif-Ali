@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-24T11:45:15.445994+00:00",
+  "last_updated_utc": "2026-09-24T11:52:34.055698+00:00",
   "coins_scanned": 150,
   "fear_greed_value": 71,
   "fear_greed_label": "Greed",
@@ -188,24 +188,6 @@
     },
     {
       "System": "Pullback-in-Uptrend",
-      "Coin": "ZAMA/USDT",
-      "Combo": "EMA20 Pullback",
-      "Tier": "N/A",
-      "Category": "Open Trade",
-      "Signal Time (PKT)": "2026-09-24 09:00 AM PKT",
-      "Bars Ago": 6,
-      "Entry": 0.09495,
-      "Current": 0.09032,
-      "P/L %": -4.88,
-      "Trail Stop": 0.088273,
-      "Take Profit": "N/A (trailing stop hi asal exit hai)",
-      "RS Percentile": 98.9,
-      "Overall Score %": "N/A",
-      "Verdict": "N/A",
-      "Rank": 11
-    },
-    {
-      "System": "Pullback-in-Uptrend",
       "Coin": "NEON/USDT",
       "Combo": "EMA20 Pullback",
       "Tier": "N/A",
@@ -220,7 +202,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 12
+      "Rank": 11
     },
     {
       "System": "Donchian Breakout",
@@ -236,6 +218,24 @@
       "Trail Stop": 0.042553,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "RS Percentile": 100.0,
+      "Overall Score %": "N/A",
+      "Verdict": "N/A",
+      "Rank": 12
+    },
+    {
+      "System": "Pullback-in-Uptrend",
+      "Coin": "ZAMA/USDT",
+      "Combo": "EMA20 Pullback",
+      "Tier": "N/A",
+      "Category": "Open Trade",
+      "Signal Time (PKT)": "2026-09-24 09:00 AM PKT",
+      "Bars Ago": 6,
+      "Entry": 0.09495,
+      "Current": 0.09032,
+      "P/L %": -4.88,
+      "Trail Stop": 0.088273,
+      "Take Profit": "N/A (trailing stop hi asal exit hai)",
+      "RS Percentile": 98.9,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
       "Rank": 13
