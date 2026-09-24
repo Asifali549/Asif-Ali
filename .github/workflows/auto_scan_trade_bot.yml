@@ -1,0 +1,49 @@
+name: Auto-Scan Trade Bot (Dummy/Paper - 5 Systems)
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  auto_scan_bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run auto-scan trade bot
+        run: python auto_scan_trade_bot.py
+
+      - name: Commit and push results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add auto_bot_state.json
+          if [ -f auto_bot_closed_trades.csv ]; then git add auto_bot_closed_trades.csv; fi
+          git diff --staged --quiet || git commit -m "Auto-scan trade bot update ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+          git pull --rebase origin main
+          git push
+
+      - name: Wait 5 minutes (hifazati waqfa)
+        run: sleep 300
+
+      - name: Agla scan khud shuru karein
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -X POST \
+            -H "Authorization: token $GH_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/auto_scan_trade_bot.yml/dispatches \
+            -d '{"ref":"main"}'
