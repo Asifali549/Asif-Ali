@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-24T07:27:27.608282+00:00",
+  "last_updated_utc": "2026-09-24T07:34:06.649165+00:00",
   "coins_scanned": 150,
   "fear_greed_value": 71,
   "fear_greed_label": "Greed",
@@ -205,6 +205,24 @@
       "Rank": 11
     },
     {
+      "System": "Donchian Breakout",
+      "Coin": "LSK/USDT",
+      "Combo": "20-period High",
+      "Tier": "N/A",
+      "Category": "Open Trade",
+      "Signal Time (PKT)": "2026-09-24 02:00 AM PKT",
+      "Bars Ago": 9,
+      "Entry": 0.3409,
+      "Current": 0.3897,
+      "P/L %": 14.32,
+      "Trail Stop": 0.321866,
+      "Take Profit": "N/A (trailing stop hi asal exit hai)",
+      "RS Percentile": 95.0,
+      "Overall Score %": "N/A",
+      "Verdict": "N/A",
+      "Rank": 12
+    },
+    {
       "System": "Pullback-in-Uptrend",
       "Coin": "NEON/USDT",
       "Combo": "EMA20 Pullback",
@@ -220,7 +238,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 12
+      "Rank": 13
     },
     {
       "System": "Donchian Breakout",
@@ -236,24 +254,6 @@
       "Trail Stop": 0.042553,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "RS Percentile": 100.0,
-      "Overall Score %": "N/A",
-      "Verdict": "N/A",
-      "Rank": 13
-    },
-    {
-      "System": "Donchian Breakout",
-      "Coin": "LSK/USDT",
-      "Combo": "20-period High",
-      "Tier": "N/A",
-      "Category": "Open Trade",
-      "Signal Time (PKT)": "2026-09-24 02:00 AM PKT",
-      "Bars Ago": 9,
-      "Entry": 0.3409,
-      "Current": 0.3897,
-      "P/L %": 14.32,
-      "Trail Stop": 0.321866,
-      "Take Profit": "N/A (trailing stop hi asal exit hai)",
-      "RS Percentile": 95.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
       "Rank": 14
