@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-24T20:01:19.530626+00:00",
+  "last_updated_utc": "2026-09-24T20:08:18.396240+00:00",
   "coins_scanned": 150,
   "fear_greed_value": 71,
   "fear_greed_label": "Greed",
@@ -18,11 +18,11 @@
       "Trail Stop": 0.129906,
       "Take Profit": 0.14185,
       "Funding Rate": "0.010%",
-      "Open Interest": "$20,081,242",
-      "Liquidity Up ($)": "$41,611",
-      "Liquidity Down ($)": "$59,031",
+      "Open Interest": "$20,292,903",
+      "Liquidity Up ($)": "$60,044",
+      "Liquidity Down ($)": "$77,992",
       "Liquidity Compare": "Support > Resistance",
-      "OrderBook Bid/Ask": "1.42x",
+      "OrderBook Bid/Ask": "1.30x",
       "Vol 15m": "1.71x",
       "Chg 15m": "+0.08%",
       "Vol 1h": "1.15x",
@@ -55,12 +55,12 @@
       "Take Profit": 3.09855,
       "RS Percentile": 96.1,
       "Dist from 52W High": "49.39%",
-      "Funding Rate": "0.003%",
-      "Open Interest": "$429,764",
-      "Liquidity Up ($)": "$20,293",
-      "Liquidity Down ($)": "$13,414",
+      "Funding Rate": "0.004%",
+      "Open Interest": "$454,752",
+      "Liquidity Up ($)": "$22,788",
+      "Liquidity Down ($)": "$18,788",
       "Liquidity Compare": "Resistance > Support",
-      "OrderBook Bid/Ask": "0.66x",
+      "OrderBook Bid/Ask": "0.82x",
       "Vol 15m": "1.24x",
       "Chg 15m": "+0.42%",
       "Vol 1h": "4.25x",
@@ -91,12 +91,12 @@
       "P/L %": 0.0,
       "Trail Stop": 2.477063,
       "Take Profit": 2.881575,
-      "Funding Rate": "0.003%",
-      "Open Interest": "$429,764",
-      "Liquidity Up ($)": "$20,622",
-      "Liquidity Down ($)": "$13,345",
+      "Funding Rate": "0.004%",
+      "Open Interest": "$454,752",
+      "Liquidity Up ($)": "$22,788",
+      "Liquidity Down ($)": "$18,788",
       "Liquidity Compare": "Resistance > Support",
-      "OrderBook Bid/Ask": "0.65x",
+      "OrderBook Bid/Ask": "0.82x",
       "Vol 15m": "1.24x",
       "Chg 15m": "+0.42%",
       "Vol 1h": "4.25x",
@@ -129,12 +129,12 @@
       "Take Profit": 3.034012,
       "RS Percentile": 96.1,
       "Dist from 52W High": "49.39%",
-      "Funding Rate": "0.003%",
-      "Open Interest": "$429,764",
-      "Liquidity Up ($)": "$25,037",
-      "Liquidity Down ($)": "$15,625",
+      "Funding Rate": "0.004%",
+      "Open Interest": "$454,752",
+      "Liquidity Up ($)": "$22,625",
+      "Liquidity Down ($)": "$18,793",
       "Liquidity Compare": "Resistance > Support",
-      "OrderBook Bid/Ask": "0.62x",
+      "OrderBook Bid/Ask": "0.83x",
       "Vol 15m": "1.24x",
       "Chg 15m": "+0.42%",
       "Vol 1h": "4.25x",
@@ -166,11 +166,11 @@
       "Trail Stop": 2.679125,
       "Take Profit": 3.007625,
       "Funding Rate": "0.005%",
-      "Open Interest": "$1,153,440",
-      "Liquidity Up ($)": "$8,863",
-      "Liquidity Down ($)": "$8,326",
+      "Open Interest": "$965,117",
+      "Liquidity Up ($)": "$10,158",
+      "Liquidity Down ($)": "$8,899",
       "Liquidity Compare": "Resistance > Support",
-      "OrderBook Bid/Ask": "0.94x",
+      "OrderBook Bid/Ask": "0.88x",
       "Vol 15m": "0.54x",
       "Chg 15m": "-0.22%",
       "Vol 1h": "0.99x",
@@ -190,21 +190,39 @@
     },
     {
       "System": "Donchian Breakout",
+      "Coin": "NEAR/USDT",
+      "Combo": "20-period High",
+      "Tier": "N/A",
+      "Category": "New Signal",
+      "Signal Time (PKT)": "2026-09-25 12:00 AM PKT",
+      "Bars Ago": 0,
+      "Entry": 4.7632,
+      "Current": 4.7632,
+      "P/L %": 0.0,
+      "Trail Stop": 4.070078,
+      "Take Profit": "N/A (trailing stop hi asal exit hai)",
+      "RS Percentile": 99.4,
+      "Overall Score %": "N/A",
+      "Verdict": "N/A",
+      "Rank": 6
+    },
+    {
+      "System": "Donchian Breakout",
       "Coin": "ZEC/USDT",
       "Combo": "20-period High",
       "Tier": "N/A",
       "Category": "New Signal",
       "Signal Time (PKT)": "2026-09-24 09:00 PM PKT",
-      "Bars Ago": 2,
+      "Bars Ago": 3,
       "Entry": 1543.056,
-      "Current": 1557.103,
-      "P/L %": 0.91,
-      "Trail Stop": 1437.144281,
+      "Current": 1555.802,
+      "P/L %": 0.83,
+      "Trail Stop": 1437.289969,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "RS Percentile": 97.2,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 6
+      "Rank": 7
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -213,16 +231,16 @@
       "Tier": "N/A",
       "Category": "New Signal",
       "Signal Time (PKT)": "2026-09-24 11:00 PM PKT",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 9.265,
-      "Current": 9.265,
-      "P/L %": 0.0,
-      "Trail Stop": 8.594544,
+      "Current": 9.3354,
+      "P/L %": 0.76,
+      "Trail Stop": 8.624497,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "RS Percentile": 98.9,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 7
+      "Rank": 8
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -231,16 +249,16 @@
       "Tier": "N/A",
       "Category": "New Signal",
       "Signal Time (PKT)": "2026-09-24 09:00 PM PKT",
-      "Bars Ago": 2,
+      "Bars Ago": 3,
       "Entry": 117.09,
-      "Current": 117.38,
-      "P/L %": 0.25,
-      "Trail Stop": 111.737187,
+      "Current": 117.31,
+      "P/L %": 0.19,
+      "Trail Stop": 111.889062,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "RS Percentile": 97.2,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 8
+      "Rank": 9
     },
     {
       "System": "Donchian Breakout",
@@ -249,16 +267,16 @@
       "Tier": "N/A",
       "Category": "New Signal",
       "Signal Time (PKT)": "2026-09-24 09:00 PM PKT",
-      "Bars Ago": 2,
+      "Bars Ago": 3,
       "Entry": 117.09,
-      "Current": 117.38,
-      "P/L %": 0.25,
-      "Trail Stop": 111.737187,
+      "Current": 117.31,
+      "P/L %": 0.19,
+      "Trail Stop": 111.889062,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "RS Percentile": 97.2,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 9
+      "Rank": 10
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -267,28 +285,10 @@
       "Tier": "N/A",
       "Category": "Open Trade",
       "Signal Time (PKT)": "2026-09-24 11:00 AM PKT",
-      "Bars Ago": 12,
+      "Bars Ago": 13,
       "Entry": 0.2096,
-      "Current": 0.2171,
-      "P/L %": 3.58,
-      "Trail Stop": 0.202966,
-      "Take Profit": "N/A (trailing stop hi asal exit hai)",
-      "RS Percentile": 97.8,
-      "Overall Score %": "N/A",
-      "Verdict": "N/A",
-      "Rank": 10
-    },
-    {
-      "System": "Donchian Breakout",
-      "Coin": "ENA/USDT",
-      "Combo": "20-period High",
-      "Tier": "N/A",
-      "Category": "Open Trade",
-      "Signal Time (PKT)": "2026-09-24 06:00 PM PKT",
-      "Bars Ago": 5,
-      "Entry": 0.2188,
-      "Current": 0.2171,
-      "P/L %": -0.78,
+      "Current": 0.2227,
+      "P/L %": 6.25,
       "Trail Stop": 0.202966,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "RS Percentile": 97.8,
@@ -297,22 +297,58 @@
       "Rank": 11
     },
     {
+      "System": "Donchian Breakout",
+      "Coin": "ENA/USDT",
+      "Combo": "20-period High",
+      "Tier": "N/A",
+      "Category": "Open Trade",
+      "Signal Time (PKT)": "2026-09-24 06:00 PM PKT",
+      "Bars Ago": 6,
+      "Entry": 0.2188,
+      "Current": 0.2227,
+      "P/L %": 1.78,
+      "Trail Stop": 0.202966,
+      "Take Profit": "N/A (trailing stop hi asal exit hai)",
+      "RS Percentile": 97.8,
+      "Overall Score %": "N/A",
+      "Verdict": "N/A",
+      "Rank": 12
+    },
+    {
+      "System": "Pullback-in-Uptrend",
+      "Coin": "ARB/USDT",
+      "Combo": "EMA20 Pullback",
+      "Tier": "N/A",
+      "Category": "New Signal",
+      "Signal Time (PKT)": "2026-09-25 12:00 AM PKT",
+      "Bars Ago": 0,
+      "Entry": 0.2209,
+      "Current": 0.2209,
+      "P/L %": 0.0,
+      "Trail Stop": 0.203547,
+      "Take Profit": "N/A (trailing stop hi asal exit hai)",
+      "RS Percentile": 97.8,
+      "Overall Score %": "N/A",
+      "Verdict": "N/A",
+      "Rank": 13
+    },
+    {
       "System": "Pullback-in-Uptrend",
       "Coin": "HYPE/USDT",
       "Combo": "EMA20 Pullback",
       "Tier": "N/A",
       "Category": "New Signal",
       "Signal Time (PKT)": "2026-09-24 09:00 PM PKT",
-      "Bars Ago": 2,
+      "Bars Ago": 3,
       "Entry": 93.972,
-      "Current": 94.148,
-      "P/L %": 0.19,
+      "Current": 94.535,
+      "P/L %": 0.6,
       "Trail Stop": 88.395094,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "RS Percentile": 95.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 12
+      "Rank": 14
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -321,52 +357,52 @@
       "Tier": "N/A",
       "Category": "New Signal",
       "Signal Time (PKT)": "2026-09-24 11:00 PM PKT",
-      "Bars Ago": 0,
+      "Bars Ago": 1,
       "Entry": 8.319,
-      "Current": 8.319,
-      "P/L %": 0.0,
-      "Trail Stop": 7.520031,
+      "Current": 8.261,
+      "P/L %": -0.7,
+      "Trail Stop": 7.527063,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "RS Percentile": 97.2,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 13
+      "Rank": 15
     },
     {
       "System": "Donchian Breakout",
       "Coin": "INJ/USDT",
       "Combo": "20-period High",
       "Tier": "N/A",
-      "Category": "New Signal",
+      "Category": "Open Trade",
       "Signal Time (PKT)": "2026-09-24 08:00 PM PKT",
-      "Bars Ago": 3,
+      "Bars Ago": 4,
       "Entry": 8.495,
-      "Current": 8.319,
-      "P/L %": -2.07,
+      "Current": 8.261,
+      "P/L %": -2.75,
       "Trail Stop": 7.575594,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "RS Percentile": 97.2,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 14
+      "Rank": 16
     },
     {
       "System": "Pullback-in-Uptrend",
       "Coin": "BSV/USDT",
       "Combo": "EMA20 Pullback",
       "Tier": "N/A",
-      "Category": "New Signal",
+      "Category": "Open Trade",
       "Signal Time (PKT)": "2026-09-24 08:00 PM PKT",
-      "Bars Ago": 3,
+      "Bars Ago": 4,
       "Entry": 21.895,
-      "Current": 21.615,
-      "P/L %": -1.28,
-      "Trail Stop": 20.636688,
+      "Current": 21.638,
+      "P/L %": -1.17,
+      "Trail Stop": 20.665937,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 15
+      "Rank": 17
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -384,7 +420,7 @@
       "RS Percentile": 95.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 16
+      "Rank": 18
     },
     {
       "System": "Donchian Breakout",
@@ -402,7 +438,7 @@
       "RS Percentile": 95.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 17
+      "Rank": 19
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -420,7 +456,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 18
+      "Rank": 20
     },
     {
       "System": "Donchian Breakout",
@@ -438,7 +474,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 19
+      "Rank": 21
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -456,7 +492,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 20
+      "Rank": 22
     },
     {
       "System": "Donchian Breakout",
@@ -474,7 +510,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 21
+      "Rank": 23
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -492,7 +528,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 22
+      "Rank": 24
     },
     {
       "System": "Donchian Breakout",
@@ -510,7 +546,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 23
+      "Rank": 25
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -528,7 +564,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 24
+      "Rank": 26
     },
     {
       "System": "Donchian Breakout",
@@ -546,7 +582,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 25
+      "Rank": 27
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -564,7 +600,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 26
+      "Rank": 28
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -582,7 +618,7 @@
       "RS Percentile": 98.3,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 27
+      "Rank": 29
     },
     {
       "System": "Donchian Breakout",
@@ -600,7 +636,7 @@
       "RS Percentile": 98.3,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 28
+      "Rank": 30
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -618,7 +654,7 @@
       "RS Percentile": 98.9,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 29
+      "Rank": 31
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -636,7 +672,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 30
+      "Rank": 32
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -652,42 +688,6 @@
       "Trail Stop": 0.165172,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "RS Percentile": 100.0,
-      "Overall Score %": "N/A",
-      "Verdict": "N/A",
-      "Rank": 31
-    },
-    {
-      "System": "Pullback-in-Uptrend",
-      "Coin": "VET/USDT",
-      "Combo": "EMA20 Pullback",
-      "Tier": "N/A",
-      "Category": "Open Trade",
-      "Signal Time (PKT)": "2026-09-24 11:00 AM PKT",
-      "Bars Ago": 13,
-      "Entry": 0.009143,
-      "Current": 0.009267,
-      "P/L %": 1.36,
-      "Trail Stop": 0.008777,
-      "Take Profit": "N/A (trailing stop hi asal exit hai)",
-      "RS Percentile": 96.1,
-      "Overall Score %": "N/A",
-      "Verdict": "N/A",
-      "Rank": 32
-    },
-    {
-      "System": "Donchian Breakout",
-      "Coin": "VET/USDT",
-      "Combo": "20-period High",
-      "Tier": "N/A",
-      "Category": "Open Trade",
-      "Signal Time (PKT)": "2026-09-24 06:00 PM PKT",
-      "Bars Ago": 6,
-      "Entry": 0.009298,
-      "Current": 0.009267,
-      "P/L %": -0.33,
-      "Trail Stop": 0.008777,
-      "Take Profit": "N/A (trailing stop hi asal exit hai)",
-      "RS Percentile": 96.1,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
       "Rank": 33
@@ -763,6 +763,42 @@
       "Overall Score %": "N/A",
       "Verdict": "N/A",
       "Rank": 37
+    },
+    {
+      "System": "Pullback-in-Uptrend",
+      "Coin": "VET/USDT",
+      "Combo": "EMA20 Pullback",
+      "Tier": "N/A",
+      "Category": "Open Trade",
+      "Signal Time (PKT)": "2026-09-24 11:00 AM PKT",
+      "Bars Ago": 13,
+      "Entry": 0.009143,
+      "Current": 0.009267,
+      "P/L %": 1.36,
+      "Trail Stop": 0.008777,
+      "Take Profit": "N/A (trailing stop hi asal exit hai)",
+      "RS Percentile": 96.1,
+      "Overall Score %": "N/A",
+      "Verdict": "N/A",
+      "Rank": 38
+    },
+    {
+      "System": "Donchian Breakout",
+      "Coin": "VET/USDT",
+      "Combo": "20-period High",
+      "Tier": "N/A",
+      "Category": "Open Trade",
+      "Signal Time (PKT)": "2026-09-24 06:00 PM PKT",
+      "Bars Ago": 6,
+      "Entry": 0.009298,
+      "Current": 0.009267,
+      "P/L %": -0.33,
+      "Trail Stop": 0.008777,
+      "Take Profit": "N/A (trailing stop hi asal exit hai)",
+      "RS Percentile": 96.1,
+      "Overall Score %": "N/A",
+      "Verdict": "N/A",
+      "Rank": 39
     }
   ]
 }
