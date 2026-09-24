@@ -1,6 +1,4 @@
 {
-  "LAPTOP/USDT|CE Buy-Only|Chandelier Cross|0.0702|Base+ETH": "2026-09-23T12:02:56.628819+00:00",
-  "PAXG/USDT|CE Buy-Only|Chandelier Cross|4311.93|Base+ETH": "2026-09-23T12:02:57.036001+00:00",
   "XAUT/USDT|CE Buy-Only|Chandelier Cross|4312.36|Base+ETH": "2026-09-23T13:06:37.662092+00:00",
   "DATA/USDT|CE Buy-Only|Chandelier Cross|0.2256|Base+ETH": "2026-09-23T13:06:38.243646+00:00",
   "FOLKS/USDT|CE Buy-Only|Chandelier Cross|2.3866|Base+ETH": "2026-09-23T14:03:11.739583+00:00",
@@ -62,5 +60,9 @@
   "LAPTOP/USDT|CE Buy-Only|Chandelier Cross|0.0665|Base+ETH": "2026-09-24T08:03:13.787725+00:00",
   "ONE/USDT|CE Buy-Only|Chandelier Cross|0.002073|Base+ETH": "2026-09-24T09:08:15.016800+00:00",
   "LONGXIA/USDT|CE Buy-Only|Chandelier Cross|0.1253|Base+ETH": "2026-09-24T11:03:06.449522+00:00",
-  "TRX/USDT|CE Buy-Only|Chandelier Cross|0.3399|Base+ETH": "2026-09-24T11:03:07.162793+00:00"
+  "TRX/USDT|CE Buy-Only|Chandelier Cross|0.3399|Base+ETH": "2026-09-24T11:03:07.162793+00:00",
+  "NEON/USDT|Union AB|Ichimoku+MS|0.0957|Baseline": "2026-09-24T12:07:22.923314+00:00",
+  "NEON/USDT|Union AB Backup Tier|Ichimoku+MS|0.0957|N/A": "2026-09-24T12:07:23.575963+00:00",
+  "AEON/USDT|CE Buy-Only|Chandelier Cross|0.05597|Base+ETH": "2026-09-24T12:07:24.261962+00:00",
+  "CARDS/USDT|CE Buy-Only|Chandelier Cross|0.1557|Base+ETH": "2026-09-24T12:07:24.945109+00:00"
 }
