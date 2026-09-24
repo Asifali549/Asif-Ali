@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-24T09:15:29.900724+00:00",
+  "last_updated_utc": "2026-09-24T09:22:22.249517+00:00",
   "coins_scanned": 150,
   "fear_greed_value": 71,
   "fear_greed_label": "Greed",
@@ -54,10 +54,28 @@
       "Trail Stop": 0.001718,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#34 / 150",
+      "Liquidity Rank": "#33 / 150",
       "Overall Score %": "N/A",
       "Verdict": "N/A",
       "Rank": 3
+    },
+    {
+      "System": "Pullback-in-Uptrend",
+      "Coin": "VVV/USDT",
+      "Combo": "EMA20 Pullback",
+      "Tier": "N/A",
+      "Category": "New Signal",
+      "Signal Time (PKT)": "2026-09-24 12:00 PM PKT",
+      "Bars Ago": 1,
+      "Entry": 31.253,
+      "Current": 30.102,
+      "P/L %": -3.68,
+      "Trail Stop": 28.840937,
+      "Take Profit": "N/A (trailing stop hi asal exit hai)",
+      "RS Percentile": 98.3,
+      "Overall Score %": "N/A",
+      "Verdict": "N/A",
+      "Rank": 4
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -75,7 +93,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 4
+      "Rank": 5
     },
     {
       "System": "Donchian Breakout",
@@ -93,7 +111,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 5
+      "Rank": 6
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -109,24 +127,6 @@
       "Trail Stop": 0.315409,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "RS Percentile": 100.0,
-      "Overall Score %": "N/A",
-      "Verdict": "N/A",
-      "Rank": 6
-    },
-    {
-      "System": "Pullback-in-Uptrend",
-      "Coin": "VVV/USDT",
-      "Combo": "EMA20 Pullback",
-      "Tier": "N/A",
-      "Category": "New Signal",
-      "Signal Time (PKT)": "2026-09-24 12:00 PM PKT",
-      "Bars Ago": 1,
-      "Entry": 31.253,
-      "Current": 30.102,
-      "P/L %": -3.68,
-      "Trail Stop": 28.840937,
-      "Take Profit": "N/A (trailing stop hi asal exit hai)",
-      "RS Percentile": 98.3,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
       "Rank": 7
