@@ -495,4 +495,84 @@ if os.path.exists("trade_journal.csv"):
     journal_csv = df_journal.to_csv(index=False).encode("utf-8")
     st.download_button("📥 Journal CSV Download Karein", journal_csv, "trade_journal.csv", "text/csv")
 else:
-    st.info("Abhi tak koi journal entry nahi — pehla background scan chalne ke baad yahan record nazar aayega.") 
+    st.info("Abhi tak koi journal entry nahi — pehla background scan chalne ke baad yahan record nazar aayega.")
+
+st.markdown("---")
+st.header("🤖 Manual Trade Bot (CE Buy-Only — Coin Aap Daalein)")
+st.caption(
+    "Yeh koi auto-scan nahi karta — SIRF unhi coins par kaam karta hai jo aap khud "
+    "'manual_watchlist.json' (GitHub par) mein daalein. Feed karne ke agle run (max 5 min) mein "
+    "bot us coin par virtual $100 ki trade le leta hai — Entry = us waqt ka current price, "
+    "SL = CE Buy-Only ka wahi exit Chandelier (16, 3.0) trailing-stop (koi fixed % ya fixed TP nahi). "
+    "Asal paisa is mein bilkul risk mein nahi hai (paper/virtual)."
+)
+if os.path.exists("manual_watchlist.json"):
+    with open("manual_watchlist.json") as f:
+        pending_watchlist = json.load(f)
+    if len(pending_watchlist) > 0:
+        st.caption(f"⏳ Pending (agle run mein process hongi): {', '.join(pending_watchlist)}")
+
+if os.path.exists("manual_bot_state.json"):
+    with open("manual_bot_state.json") as f:
+        mb_state = json.load(f)
+
+    cash = mb_state.get("cash", 0)
+    open_positions = mb_state.get("positions", {})
+    total_equity = mb_state.get("total_equity_usd", cash)
+    starting_capital = mb_state.get("starting_capital_usd", 1000.0)
+    overall_pnl = total_equity - starting_capital
+    overall_pnl_pct = (overall_pnl / starting_capital * 100) if starting_capital else 0
+
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Total Equity", f"${total_equity:,.2f}", f"{overall_pnl_pct:+.2f}%")
+    c2.metric("Free Cash", f"${cash:,.2f}")
+    c3.metric("Open Positions", f"{len(open_positions)} / {mb_state.get('max_concurrent_positions', 8)}")
+    c4.metric("Per-Trade Size", f"${mb_state.get('position_size_usd', 100):,.2f}")
+
+    if len(open_positions) > 0:
+        st.markdown("**🟢 Abhi Khuli Hui Manual Trades**")
+        rows = []
+        for symbol, pos in open_positions.items():
+            rows.append({
+                "Coin": symbol,
+                "Entry": pos.get("entry_price"),
+                "Current": pos.get("current_price"),
+                "Trail Stop (SL)": pos.get("trail_stop"),
+                "Unrealized P/L %": pos.get("unrealized_pnl_pct"),
+                "Capital ($)": pos.get("capital_allocated"),
+            })
+        st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+    else:
+        st.caption("Abhi koi manual trade khuli nahi hai — coin 'manual_watchlist.json' mein daal kar feed karein.")
+
+    if os.path.exists("manual_bot_closed_trades.csv"):
+        df_mb_closed = pd.read_csv("manual_bot_closed_trades.csv")
+        if len(df_mb_closed) > 0:
+            wins = df_mb_closed[df_mb_closed["result"] == "WIN"]
+            losses = df_mb_closed[df_mb_closed["result"] == "LOSS"]
+            win_rate = len(wins) / len(df_mb_closed) * 100
+            gross_win = wins["realized_pnl_usd"].sum()
+            gross_loss = abs(losses["realized_pnl_usd"].sum())
+            pf = (gross_win / gross_loss) if gross_loss > 0 else None
+
+            st.markdown("**📒 Band Ho Chuki Manual Trades**")
+            c1, c2, c3, c4 = st.columns(4)
+            c1.metric("Total Closed", len(df_mb_closed))
+            c2.metric("Win Rate", f"{win_rate:.1f}%")
+            c3.metric("Profit Factor", f"{pf:.2f}" if pf is not None else "N/A")
+            c4.metric("Realized P&L", f"${df_mb_closed['realized_pnl_usd'].sum():,.2f}")
+
+            show_mb = st.checkbox("Poori Manual-Trade History Dikhayein", value=False, key="show_manual_bot_log")
+            if show_mb:
+                st.dataframe(df_mb_closed.sort_values("exit_time_pkt", ascending=False), use_container_width=True, hide_index=True)
+
+            mb_csv = df_mb_closed.to_csv(index=False).encode("utf-8")
+            st.download_button("📥 Manual Trades CSV Download Karein", mb_csv, "manual_bot_closed_trades.csv", "text/csv", key="dl_manual_bot")
+        else:
+            st.caption("Abhi tak koi manual trade band nahi hui.")
+else:
+    st.info(
+        "Manual trade bot abhi tak nahi chala — GitHub repo mein "
+        "'.github/workflows/manual_trade_bot.yml' hona chahiye, chalne ke thodi der baad yahan "
+        "result nazar aayega."
+    ) 
