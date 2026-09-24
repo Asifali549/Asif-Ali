@@ -1,0 +1,33 @@
+
+
+########## SQUEEZE + DONCHIAN - WALK-FORWARD RESULTS ##########
+(Top 150 coins, 1h, 8760 candles, 4 sequential folds)
+
+Variant | Fold1 PF (trades, win%) | Fold2 PF (trades, win%) | Fold3 PF (trades, win%) | Fold4 PF (trades, win%)
+---------------------------------------------------------------------------------------------------------------
+1) Squeeze range=20 - Baseline
+    0.51 (911, 23%) | 0.99 (1081, 32%) | 0.73 (1163, 28%) | 1.06 (1206, 30%)
+2) Squeeze range=20 - + Filters (ETH+RS+RS%95)
+    1.61 (29, 52%) | 2.55 (5, 60%) | 1.05 (3, 33%) | 2.50 (92, 41%)
+3) Squeeze range=10 - Baseline
+    0.55 (1370, 24%) | 0.90 (1544, 31%) | 0.73 (1709, 28%) | 0.98 (1734, 28%)
+4) Squeeze range=10 - + Filters
+    1.69 (40, 45%) | 2.78 (5, 60%) | 9.34 (3, 67%) | 2.48 (116, 44%)
+5) Donchian 20-period - Baseline
+    0.67 (4103, 26%) | 0.96 (4177, 33%) | 0.81 (4442, 30%) | 1.23 (4554, 35%)
+6) Donchian 20-period - + Filters
+    1.97 (150, 44%) | 3.09 (13, 62%) | 1.64 (23, 48%) | 2.32 (366, 46%)
+7) Donchian 55-period - Baseline
+    0.72 (1800, 28%) | 1.06 (2134, 35%) | 0.80 (2343, 30%) | 1.33 (2519, 37%)
+8) Donchian 55-period - + Filters
+    1.83 (97, 48%) | 3.72 (11, 64%) | 2.26 (13, 62%) | 2.03 (250, 47%)
+
+----- Har variant ka poore saal (4 folds combined) ka overall result -----
+1) Squeeze range=20 - Baseline: Trades=4361, Win Rate=28.46%, PF=0.807
+2) Squeeze range=20 - + Filters (ETH+RS+RS%95): Trades=129, Win Rate=44.19%, PF=2.247
+3) Squeeze range=10 - Baseline: Trades=6357, Win Rate=27.84%, PF=0.780
+4) Squeeze range=10 - + Filters: Trades=164, Win Rate=45.12%, PF=2.300
+5) Donchian 20-period - Baseline: Trades=17276, Win Rate=31.16%, PF=0.903
+6) Donchian 20-period - + Filters: Trades=552, Win Rate=46.20%, PF=2.171
+7) Donchian 55-period - Baseline: Trades=8796, Win Rate=32.79%, PF=0.973
+8) Donchian 55-period - + Filters: Trades=371, Win Rate=48.25%, PF=2.006
