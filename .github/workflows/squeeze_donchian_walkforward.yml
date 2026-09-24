@@ -1,0 +1,39 @@
+name: Squeeze + Donchian Walk-Forward (EK SATH, 4 folds)
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  run-walkforward:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - name: Repo checkout karo
+        uses: actions/checkout@v4
+
+      - name: Python setup karo
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Dependencies install karo
+        run: pip install -r requirements.txt
+
+      - name: Squeeze + Donchian walk-forward chalayen
+        run: python squeeze_donchian_walkforward.py
+
+      - name: Show results file
+        if: always()
+        run: cat squeeze_donchian_walkforward_RESULTS.txt || echo "Results file nahi mili"
+
+      - name: Results commit + push karo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add squeeze_donchian_walkforward_RESULTS.txt
+          git commit -m "Squeeze + Donchian walk-forward report" || echo "Koi naya result nahi (pehle jaisa hi)"
+          git pull --rebase --autostash origin main
+          git push
