@@ -28,6 +28,25 @@ apne signals khud detect karta hai aur dashboard par ALAG dikhta hai:
        mabni hai, Union AB jitna "mehfooz" nahi - isi liye alag/halka
        system ke tor par rakha gaya hai.
 
+    5) Pullback-in-Uptrend (NAYA)
+       Close > EMA200 (uptrend) + EMA20 khud rising + qeemat EMA20 ke
+       qareeb pullback kar ke bullish candle se wapas upar band ho, +
+       ETH Regime + RS Trend + RS Percentile>=95 filters. Poore saal ke
+       walk-forward (4 folds) se tasdeeq-shuda: har fold mein mustaqil
+       PF>1, 799 trades, overall PF=1.831.
+
+    6) Donchian Channel Breakout (NAYA)
+       Close > pichli 20-candle ki highest high (classic turtle-trading
+       breakout), + ETH Regime + RS Trend + RS Percentile>=95 filters.
+       Poore saal ke walk-forward (4 folds) se tasdeeq-shuda: har fold
+       mein mustaqil PF>1, 552 trades (sab se bara filtered sample is
+       session ka), overall PF=2.171.
+
+    NOTE (5 aur 6 dono ke liye): backtest mein exit_mode="chandelier"
+    tha (koi fixed RR Take Profit nahi, sirf trailing stop) - isi liye
+    live mein bhi use_fixed_tp=False rakha gaya hai (CE Buy-Only jaisa),
+    taake live progress backtest se hoobahoo match kare.
+
 HAR system ke signals mein do "Category" hoti hain:
     - "New Signal"  -> abhi (pichle 3 candles mein) bana
     - "Open Trade"  -> pehle bana tha, abhi tak SL/TP hit nahi hua
@@ -105,6 +124,15 @@ CE_D = {"period": 16, "multiplier": 3.0}   # NEW system (CHoCH) - jaisa pehle th
 
 CE_BUYONLY_ENTRY = {"period": 11, "multiplier": 4.5}   # Tasdeeq-shuda: walk-forward, Period=11 sab se mustahkam
 CE_BUYONLY_EXIT = {"period": 16, "multiplier": 3.0}
+
+CE_PB = {"period": 16, "multiplier": 4.5}   # Pullback-in-Uptrend + Donchian Breakout dono isi par tasdeeq-shuda
+
+TREND_EMA_PERIOD = 200
+PULLBACK_EMA_PERIOD = 20        # tasdeeq-shuda (walk-forward): EMA20+Filters, 799 trades, PF=1.831, har fold PF>1
+PULLBACK_TOLERANCE_PCT = 1.0
+EMA_RISING_LOOKBACK = 5
+
+DONCHIAN_PERIOD = 20            # tasdeeq-shuda (walk-forward): 552 trades, PF=2.171, har fold PF>1
 
 RR_MULTIPLE = 2.0
 
@@ -206,6 +234,52 @@ def passes_rs_filters(sig_ts, rs_bullish_series, rs_ratio_series):
     if rs_pct < RS_PERCENTILE_CUTOFF:
         return False, None
     return True, round(rs_pct, 1)
+
+
+def passes_full_filters(sig_ts, eth_regime, rs_bullish_series, rs_ratio_series):
+    """ETH Regime + RS Trend + RS Percentile>=95 - Pullback-in-Uptrend aur
+    Donchian Breakout dono isi combo se tasdeeq-shuda hain (52W-High
+    jaan-boojh kar shamil nahi - established sabaq: chhoti-muddat trades
+    ko harm karta hai)."""
+    if not is_bullish_at(eth_regime, sig_ts):
+        return False, None
+    ok, rs_pct = passes_rs_filters(sig_ts, rs_bullish_series, rs_ratio_series)
+    return ok, rs_pct
+
+
+# ---------------- Strategy: Pullback-in-Uptrend (walk-forward tasdeeq-shuda) ----------------
+def pullback_uptrend_entry(df, pullback_ema_period=PULLBACK_EMA_PERIOD, tolerance_pct=PULLBACK_TOLERANCE_PCT,
+                            trend_ema_period=TREND_EMA_PERIOD, rising_lookback=EMA_RISING_LOOKBACK):
+    close = df["close"]
+    open_ = df["open"]
+    low = df["low"]
+
+    pullback_ema = close.ewm(span=pullback_ema_period, adjust=False).mean()
+    trend_ema = close.ewm(span=trend_ema_period, adjust=False).mean()
+
+    ema_rising = pullback_ema > pullback_ema.shift(rising_lookback)
+    uptrend = close > trend_ema
+
+    touched_ema = low <= pullback_ema * (1 + tolerance_pct / 100)
+    bullish_candle = close > open_
+    held_above = close > pullback_ema
+
+    raw = (
+        touched_ema & bullish_candle & held_above & uptrend & ema_rising
+        & pullback_ema.notna() & trend_ema.notna()
+    )
+    fresh = raw.fillna(False) & (~raw.shift(1).fillna(False))
+    return fresh
+
+
+# ---------------- Strategy: Donchian Channel Breakout (walk-forward tasdeeq-shuda) ----------------
+def donchian_channel_breakout(df, channel_period=DONCHIAN_PERIOD):
+    high = df["high"]
+    close = df["close"]
+    donchian_high = high.rolling(channel_period).max().shift(1)
+    raw = (close > donchian_high) & donchian_high.notna()
+    fresh = raw.fillna(False) & (~raw.shift(1).fillna(False))
+    return fresh
 
 
 def evaluate_union_ab_tier(symbol, df, idx, eth_regime, rs_bullish, rs_ratio_series, coin_daily):
@@ -516,6 +590,10 @@ def notify_new_signals(rows, notified):
             emoji = "⚡✅"
         elif system == "CE Buy-Only":
             emoji = "⚡"
+        elif system == "Pullback-in-Uptrend":
+            emoji = "🔁"
+        elif system == "Donchian Breakout":
+            emoji = "📈"
         else:
             emoji = "⭐"
 
@@ -720,7 +798,73 @@ def main():
         except Exception as e:
             print(f"  [SKIP-CE] {symbol}: {e}")
 
-    print(f"Found: Union AB/NEW={len(heavy_rows)}, Backup Tier/CE Buy-Only={len(light_rows)}.")
+        # ================= SYSTEM 5: Pullback-in-Uptrend (ETH+RS+RS%95 filters) =================
+        try:
+            pb_sig = apply_cooldown(pullback_uptrend_entry(df), config.SIGNAL_COOLDOWN_BARS)
+
+            if rs_bullish is not None:
+                log_closed_trades(
+                    df, pb_sig, CE_PB["period"], CE_PB["multiplier"], "Pullback-in-Uptrend", symbol, "EMA20 Pullback",
+                    closed_logged_keys, new_closed_rows,
+                    use_fixed_tp=False,
+                    extra_filter=lambda idx: passes_full_filters(
+                        pd.Timestamp(df["timestamp"].iloc[idx]), eth_regime, rs_bullish, rs_ratio_series
+                    )[0],
+                )
+
+            found = find_latest_open_or_new(df, pb_sig, CE_PB["period"], CE_PB["multiplier"], use_fixed_tp=False)
+            if found is not None and rs_bullish is not None:
+                idx = found["signal_idx"]
+                sig_ts = pd.Timestamp(df["timestamp"].iloc[idx])
+                pb_ok, rs_pct = passes_full_filters(sig_ts, eth_regime, rs_bullish, rs_ratio_series)
+                if pb_ok:
+                    light_rows.append({
+                        "System": "Pullback-in-Uptrend", "Coin": symbol, "Combo": "EMA20 Pullback", "Tier": "N/A",
+                        "Category": found["category"],
+                        "Signal Time (PKT)": to_pkt_str(found["signal_timestamp"]),
+                        "Bars Ago": found["bars_since_entry"],
+                        "Entry": found["entry_price"], "Current": found["current_price"],
+                        "P/L %": found["pnl_pct"],
+                        "Trail Stop": found["trail_stop"], "Take Profit": "N/A (trailing stop hi asal exit hai)",
+                        "RS Percentile": rs_pct,
+                    })
+        except Exception as e:
+            print(f"  [SKIP-PULLBACK] {symbol}: {e}")
+
+        # ================= SYSTEM 6: Donchian Channel Breakout (ETH+RS+RS%95 filters) =================
+        try:
+            dc_sig = apply_cooldown(donchian_channel_breakout(df), config.SIGNAL_COOLDOWN_BARS)
+
+            if rs_bullish is not None:
+                log_closed_trades(
+                    df, dc_sig, CE_PB["period"], CE_PB["multiplier"], "Donchian Breakout", symbol, "20-period High",
+                    closed_logged_keys, new_closed_rows,
+                    use_fixed_tp=False,
+                    extra_filter=lambda idx: passes_full_filters(
+                        pd.Timestamp(df["timestamp"].iloc[idx]), eth_regime, rs_bullish, rs_ratio_series
+                    )[0],
+                )
+
+            found = find_latest_open_or_new(df, dc_sig, CE_PB["period"], CE_PB["multiplier"], use_fixed_tp=False)
+            if found is not None and rs_bullish is not None:
+                idx = found["signal_idx"]
+                sig_ts = pd.Timestamp(df["timestamp"].iloc[idx])
+                dc_ok, rs_pct = passes_full_filters(sig_ts, eth_regime, rs_bullish, rs_ratio_series)
+                if dc_ok:
+                    light_rows.append({
+                        "System": "Donchian Breakout", "Coin": symbol, "Combo": "20-period High", "Tier": "N/A",
+                        "Category": found["category"],
+                        "Signal Time (PKT)": to_pkt_str(found["signal_timestamp"]),
+                        "Bars Ago": found["bars_since_entry"],
+                        "Entry": found["entry_price"], "Current": found["current_price"],
+                        "P/L %": found["pnl_pct"],
+                        "Trail Stop": found["trail_stop"], "Take Profit": "N/A (trailing stop hi asal exit hai)",
+                        "RS Percentile": rs_pct,
+                    })
+        except Exception as e:
+            print(f"  [SKIP-DONCHIAN] {symbol}: {e}")
+
+    print(f"Found: Union AB/NEW={len(heavy_rows)}, Backup Tier/CE Buy-Only/Pullback/Donchian={len(light_rows)}.")
 
     # ---- Closed-trades record save karein (har system ka permanent, alag alag track record) ----
     if new_closed_rows:
