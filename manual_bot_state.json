@@ -8,8 +8,8 @@
       "trail_stop": 0.04057625,
       "tp_price": 0.0446375,
       "capital_allocated": 100.0,
-      "current_price": 0.04193,
-      "unrealized_pnl_pct": 0.0,
+      "current_price": 0.04156,
+      "unrealized_pnl_pct": -0.882,
       "source": "manual",
       "system": "NEW AdvancedConfluence",
       "combo": null,
@@ -23,5 +23,5 @@
   "open_position_count": 1,
   "max_concurrent_positions": 8,
   "position_size_usd": 100.0,
-  "last_updated": "2026-09-25T15:59:26.415921+00:00"
+  "last_updated": "2026-09-25T16:05:02.733513+00:00"
 }
