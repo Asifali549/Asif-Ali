@@ -52,5 +52,11 @@
     "amount": null,
     "system": "Pullback-in-Uptrend",
     "combo": null
+  },
+  {
+    "symbol": "KMNO/USDT",
+    "amount": null,
+    "system": "Donchian Breakout",
+    "combo": null
   }
 ]
