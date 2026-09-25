@@ -74,5 +74,13 @@
   "AR/USDT|Donchian Breakout|20-period High|4.747|N/A": "2026-09-25T13:32:12.166012+00:00",
   "NEAR/USDT|Donchian Breakout|20-period High|5.1722|N/A": "2026-09-25T14:02:05.879124+00:00",
   "PLUME/USDT|Donchian Breakout|20-period High|0.019311|N/A": "2026-09-25T14:02:06.538519+00:00",
-  "MUBARAK/USDT|Donchian Breakout|20-period High|0.04711|N/A": "2026-09-25T14:02:07.202182+00:00"
+  "MUBARAK/USDT|Donchian Breakout|20-period High|0.04711|N/A": "2026-09-25T14:02:07.202182+00:00",
+  "MUBARAK/USDT|Union AB|EMA+Breakout|0.05134|Baseline": "2026-09-25T15:01:21.093057+00:00",
+  "ARB/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.2229|N/A": "2026-09-25T15:01:21.761150+00:00",
+  "PIEVERSE/USDT|Pullback-in-Uptrend|EMA20 Pullback|1.6417|N/A": "2026-09-25T15:01:22.458054+00:00",
+  "PIEVERSE/USDT|Donchian Breakout|20-period High|1.6417|N/A": "2026-09-25T15:01:23.130383+00:00",
+  "TMX/USDT|CE Buy-Only|Chandelier Cross|0.01263|Base+ETH": "2026-09-25T15:01:23.795794+00:00",
+  "RAY/USDT|Pullback-in-Uptrend|EMA20 Pullback|2.0856|N/A": "2026-09-25T15:01:24.445825+00:00",
+  "TSLAX/USDT|CE Buy-Only|Chandelier Cross|371.41|Base+ETH": "2026-09-25T15:01:25.162325+00:00",
+  "MUBARAK/USDT|Union AB Backup Tier|EMA+Breakout|0.05134|N/A": "2026-09-25T15:01:25.881683+00:00"
 }
