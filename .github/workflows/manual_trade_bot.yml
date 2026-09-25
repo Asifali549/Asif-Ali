@@ -1,4 +1,4 @@
-name: Manual Trade Bot (CE Buy-Only, Coin Aap Daalein)
+name: Manual Trade Bot (Coin Aap Daalein - Sab Systems)
 
 on:
   workflow_dispatch: {}
@@ -6,6 +6,11 @@ on:
 permissions:
   contents: write
   actions: write
+
+# Ek waqt mein sirf EK manual-bot run chale (do zanjeerein na banein).
+concurrency:
+  group: manual-trade-bot
+  cancel-in-progress: false
 
 jobs:
   manual_bot:
@@ -22,27 +27,97 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      # Bot chalne se PEHLE watchlist ki copy - taake baad mein pata chale
+      # bot ne kaunse coins process kar ke hataye.
+      - name: Watchlist ki pehli copy
+        run: |
+          if [ -f manual_watchlist.json ]; then cp manual_watchlist.json /tmp/wl_before.json; else echo "[]" > /tmp/wl_before.json; fi
+
       - name: Run manual trade bot
         run: python manual_trade_bot.py
 
-      - name: Commit and push results
+      # DASHBOARD aur BOT dono manual_watchlist.json likhte hain. Agar bot ke
+      # chalne ke dauran aap ne dashboard se naya coin daala, to seedha
+      # overwrite karne se wo coin mit jata (ya git conflict se push fail).
+      # Is liye: GitHub ki TAAZA watchlist lete hain, us mein se SIRF wo
+      # coins hatate hain jo bot ne abhi process kiye - baaqi (aap ke naye
+      # daale hue) coins mehfooz rehte hain.
+      - name: Commit and push results (watchlist merge ke sath)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add manual_bot_state.json manual_watchlist.json
-          if [ -f manual_bot_closed_trades.csv ]; then git add manual_bot_closed_trades.csv; fi
-          git diff --staged --quiet || git commit -m "Auto manual-trade-bot update ($(date -u +'%Y-%m-%d %H:%M UTC'))"
-          git pull --rebase origin main
-          git push
 
+          cp manual_watchlist.json /tmp/wl_after.json 2>/dev/null || echo "[]" > /tmp/wl_after.json
+          cp manual_bot_state.json /tmp/state.json
+          HAS_CSV=0
+          if [ -f manual_bot_closed_trades.csv ]; then cp manual_bot_closed_trades.csv /tmp/closed.csv; HAS_CSV=1; fi
+
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+
+            # State/CSV sirf yahi bot likhta hai - apni taaza copy wapis rakh do
+            cp /tmp/state.json manual_bot_state.json
+            if [ "$HAS_CSV" = "1" ]; then cp /tmp/closed.csv manual_bot_closed_trades.csv; fi
+
+            python3 - <<'EOF'
+          import json
+
+          def load(path):
+              try:
+                  with open(path) as f:
+                      data = json.load(f)
+                  return data if isinstance(data, list) else []
+              except Exception:
+                  return []
+
+          def key(e):
+              if isinstance(e, dict):
+                  s = str(e.get("symbol", "")).strip().upper()
+                  system = e.get("system") or "CE Buy-Only"
+                  combo = e.get("combo") or None
+              else:
+                  s, system, combo = str(e).strip().upper(), "CE Buy-Only", None
+              if s and "/" not in s:
+                  s = f"{s}/USDT"
+              return (s, system, combo)
+
+          before = load("/tmp/wl_before.json")
+          after = load("/tmp/wl_after.json")
+          remote = load("manual_watchlist.json")
+
+          after_keys = {key(e) for e in after}
+          processed = {key(e) for e in before} - after_keys
+
+          merged = [e for e in remote if key(e) not in processed]
+          with open("manual_watchlist.json", "w") as f:
+              json.dump(merged, f, indent=2)
+          print(f"Watchlist merge: GitHub={len(remote)}, bot ne process kiye={len(processed)}, baqi={len(merged)}")
+          EOF
+
+            git add manual_bot_state.json manual_watchlist.json
+            if [ "$HAS_CSV" = "1" ]; then git add manual_bot_closed_trades.csv; fi
+            if git diff --staged --quiet; then echo "Koi tabdeeli nahi"; exit 0; fi
+            git commit -m "Auto manual-trade-bot update ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+
+            if git push origin HEAD:main; then
+              echo "Push kamyab (koshish $i)"; exit 0
+            fi
+            echo "Push nakam, dobara koshish..."; sleep $((i * 5))
+          done
+          echo "Push 5 dafa nakam raha"; exit 1
+
+      # ERROR aaye tab bhi chalega (zanjeer na toote); sirf aap ke "Cancel" par ruke ga.
       - name: Wait 5 minutes (hifazati waqfa)
+        if: ${{ !cancelled() }}
         run: sleep 300
 
       - name: Agla scan khud shuru karein
+        if: ${{ !cancelled() }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -X POST \
+          curl --fail --retry 3 --retry-delay 10 -X POST \
             -H "Authorization: token $GH_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/${{ github.repository }}/actions/workflows/manual_trade_bot.yml/dispatches \
