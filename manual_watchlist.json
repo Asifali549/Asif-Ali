@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "symbol": "MUBARAK/USDT",
+    "amount": null,
+    "system": "Union AB",
+    "combo": "EMA+Breakout"
+  }
+]
