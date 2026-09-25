@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-25T15:38:50.779786+00:00",
+  "last_updated_utc": "2026-09-25T15:46:34.767636+00:00",
   "coins_scanned": 150,
   "fear_greed_value": 71,
   "fear_greed_label": "Greed",
@@ -20,13 +20,13 @@
       "RS Percentile": 99.4,
       "Dist from 52W High": "49.18%",
       "Funding Rate": "0.010%",
-      "Open Interest": "$11,497,709",
-      "Liquidity Up ($)": "$215,055",
-      "Liquidity Down ($)": "$323,150",
+      "Open Interest": "$11,554,733",
+      "Liquidity Up ($)": "$179,272",
+      "Liquidity Down ($)": "$214,256",
       "Liquidity Compare": "Support > Resistance",
-      "OrderBook Bid/Ask": "1.50x",
-      "Vol 15m": "0.95x",
-      "Chg 15m": "-0.83%",
+      "OrderBook Bid/Ask": "1.20x",
+      "Vol 15m": "0.56x",
+      "Chg 15m": "-0.67%",
       "Vol 1h": "1.80x",
       "Chg 1h": "+0.74%",
       "Vol 4h": "1.99x",
@@ -38,47 +38,9 @@
       "Coin's Own Win%": "30.0%",
       "Coin's Own PF": "1.78",
       "BTC Correlation": "0.76",
-      "Overall Score %": 81.8,
+      "Overall Score %": 75.0,
       "Verdict": "\ud83d\udfe2\ud83d\udfe2\ud83d\udfe2 Strong",
       "Rank": 1
-    },
-    {
-      "System": "Union AB",
-      "Coin": "PEAQ/USDT",
-      "Combo": "EMA+Breakout",
-      "Tier": "Baseline",
-      "Category": "Open Trade",
-      "Signal Time (PKT)": "2026-09-24 05:00 PM PKT",
-      "Bars Ago": 26,
-      "Entry": 0.03942,
-      "Current": 0.0414,
-      "P/L %": 5.02,
-      "Trail Stop": 0.039876,
-      "Take Profit": 0.049107,
-      "RS Percentile": 100.0,
-      "Dist from 52W High": "73.44%",
-      "Funding Rate": "N/A",
-      "Open Interest": "N/A",
-      "Liquidity Up ($)": "$8,051",
-      "Liquidity Down ($)": "$8,623",
-      "Liquidity Compare": "Support > Resistance",
-      "OrderBook Bid/Ask": "1.07x",
-      "Vol 15m": "0.55x",
-      "Chg 15m": "+0.17%",
-      "Vol 1h": "1.08x",
-      "Chg 1h": "-3.27%",
-      "Vol 4h": "1.18x",
-      "Chg 4h": "+1.73%",
-      "Vol 1d": "1.97x",
-      "Chg 1d": "+23.44%",
-      "Dist from 24h High": "11.95%",
-      "Dist from 24h Low": "19.69%",
-      "Coin's Own Win%": "80.0%",
-      "Coin's Own PF": "3.78",
-      "BTC Correlation": "0.38",
-      "Overall Score %": 80.0,
-      "Verdict": "\ud83d\udfe2\ud83d\udfe2\ud83d\udfe2 Strong",
-      "Rank": 2
     },
     {
       "System": "NEW AdvancedConfluence",
@@ -94,13 +56,13 @@
       "Trail Stop": 1.8845,
       "Take Profit": 2.163125,
       "Funding Rate": "0.005%",
-      "Open Interest": "$20,697,447",
-      "Liquidity Up ($)": "$16,696",
-      "Liquidity Down ($)": "$21,762",
+      "Open Interest": "$25,530,260",
+      "Liquidity Up ($)": "$13,356",
+      "Liquidity Down ($)": "$23,619",
       "Liquidity Compare": "Support > Resistance",
-      "OrderBook Bid/Ask": "1.30x",
-      "Vol 15m": "0.45x",
-      "Chg 15m": "-0.57%",
+      "OrderBook Bid/Ask": "1.77x",
+      "Vol 15m": "0.29x",
+      "Chg 15m": "-0.78%",
       "Vol 1h": "0.49x",
       "Chg 1h": "+0.21%",
       "Vol 4h": "2.16x",
@@ -114,7 +76,7 @@
       "BTC Correlation": "0.49",
       "Overall Score %": 75.0,
       "Verdict": "\ud83d\udfe2\ud83d\udfe2\ud83d\udfe2 Strong",
-      "Rank": 3
+      "Rank": 2
     },
     {
       "System": "Union AB",
@@ -132,13 +94,13 @@
       "RS Percentile": 100.0,
       "Dist from 52W High": "-2.03%",
       "Funding Rate": "0.010%",
-      "Open Interest": "$128,156,276",
-      "Liquidity Up ($)": "$11,927",
-      "Liquidity Down ($)": "$29,489",
+      "Open Interest": "$130,029,216",
+      "Liquidity Up ($)": "$17,078",
+      "Liquidity Down ($)": "$25,101",
       "Liquidity Compare": "Support > Resistance",
-      "OrderBook Bid/Ask": "2.47x",
-      "Vol 15m": "0.68x",
-      "Chg 15m": "-0.68%",
+      "OrderBook Bid/Ask": "1.47x",
+      "Vol 15m": "0.63x",
+      "Chg 15m": "-0.12%",
       "Vol 1h": "1.33x",
       "Chg 1h": "-1.02%",
       "Vol 4h": "1.49x",
@@ -152,42 +114,82 @@
       "BTC Correlation": "0.27",
       "Overall Score %": 72.7,
       "Verdict": "\ud83d\udfe2\ud83d\udfe2\ud83d\udfe2 Strong",
+      "Rank": 3
+    },
+    {
+      "System": "Union AB",
+      "Coin": "PENDLE/USDT",
+      "Combo": "EMA+Breakout",
+      "Tier": "Baseline",
+      "Category": "Open Trade",
+      "Signal Time (PKT)": "2026-09-25 12:00 AM PKT",
+      "Bars Ago": 19,
+      "Entry": 2.6119,
+      "Current": 2.5642,
+      "P/L %": -1.83,
+      "Trail Stop": 2.4748,
+      "Take Profit": 3.09855,
+      "RS Percentile": 97.8,
+      "Dist from 52W High": "49.39%",
+      "Funding Rate": "0.010%",
+      "Open Interest": "$429,908",
+      "Liquidity Up ($)": "$4,111",
+      "Liquidity Down ($)": "$6,142",
+      "Liquidity Compare": "Support > Resistance",
+      "OrderBook Bid/Ask": "1.49x",
+      "Vol 15m": "0.79x",
+      "Chg 15m": "-1.50%",
+      "Vol 1h": "1.93x",
+      "Chg 1h": "-1.57%",
+      "Vol 4h": "1.21x",
+      "Chg 4h": "+2.42%",
+      "Vol 1d": "1.06x",
+      "Chg 1d": "+4.89%",
+      "Dist from 24h High": "1.45%",
+      "Dist from 24h Low": "9.47%",
+      "Coin's Own Win%": "25.0%",
+      "Coin's Own PF": "1.49",
+      "BTC Correlation": "0.32",
+      "Overall Score %": 72.7,
+      "Verdict": "\ud83d\udfe2\ud83d\udfe2\ud83d\udfe2 Strong",
       "Rank": 4
     },
     {
-      "System": "NEW AdvancedConfluence",
-      "Coin": "KAS/USDT",
-      "Combo": "CHoCH",
-      "Tier": "N/A",
-      "Category": "Open Trade",
-      "Signal Time (PKT)": "2026-09-25 01:00 PM PKT",
-      "Bars Ago": 6,
-      "Entry": 0.04144,
-      "Current": 0.04193,
-      "P/L %": 1.18,
-      "Trail Stop": 0.040906,
-      "Take Profit": 0.04462,
-      "Funding Rate": "0.005%",
-      "Open Interest": "$1,059,879",
-      "Liquidity Up ($)": "$12,662",
-      "Liquidity Down ($)": "$13,293",
-      "Liquidity Compare": "Support > Resistance",
-      "OrderBook Bid/Ask": "1.05x",
-      "Vol 15m": "0.17x",
-      "Chg 15m": "-0.93%",
-      "Vol 1h": "0.95x",
-      "Chg 1h": "+0.10%",
-      "Vol 4h": "3.91x",
-      "Chg 4h": "+4.71%",
-      "Vol 1d": "0.79x",
-      "Chg 1d": "+3.58%",
-      "Dist from 24h High": "2.23%",
-      "Dist from 24h Low": "4.59%",
-      "Coin's Own Win%": "100.0%",
-      "Coin's Own PF": "N/A",
-      "BTC Correlation": "0.59",
-      "Overall Score %": 70.0,
-      "Verdict": "\ud83d\udfe2\ud83d\udfe2\ud83d\udfe2 Strong",
+      "System": "Union AB",
+      "Coin": "STX/USDT",
+      "Combo": "EMA+Breakout",
+      "Tier": "Baseline",
+      "Category": "New Signal",
+      "Signal Time (PKT)": "2026-09-25 04:00 PM PKT",
+      "Bars Ago": 3,
+      "Entry": 0.3269,
+      "Current": 0.324,
+      "P/L %": -0.89,
+      "Trail Stop": 0.311937,
+      "Take Profit": 0.366275,
+      "RS Percentile": 97.8,
+      "Dist from 52W High": "51.51%",
+      "Funding Rate": "0.010%",
+      "Open Interest": "$4,728,548",
+      "Liquidity Up ($)": "$8,166",
+      "Liquidity Down ($)": "$7,705",
+      "Liquidity Compare": "Resistance > Support",
+      "OrderBook Bid/Ask": "0.94x",
+      "Vol 15m": "2.29x",
+      "Chg 15m": "-1.09%",
+      "Vol 1h": "2.63x",
+      "Chg 1h": "+0.19%",
+      "Vol 4h": "1.93x",
+      "Chg 4h": "+3.88%",
+      "Vol 1d": "0.76x",
+      "Chg 1d": "+1.98%",
+      "Dist from 24h High": "1.59%",
+      "Dist from 24h Low": "4.4%",
+      "Coin's Own Win%": "28.6%",
+      "Coin's Own PF": "1.62",
+      "BTC Correlation": "0.34",
+      "Overall Score %": 66.7,
+      "Verdict": "\ud83d\udfe2 Good",
       "Rank": 5
     },
     {
@@ -206,13 +208,13 @@
       "RS Percentile": 98.9,
       "Dist from 52W High": "41.33%",
       "Funding Rate": "0.005%",
-      "Open Interest": "$8,282,784",
-      "Liquidity Up ($)": "$4,182",
-      "Liquidity Down ($)": "$1,994",
+      "Open Interest": "$8,292,183",
+      "Liquidity Up ($)": "$4,705",
+      "Liquidity Down ($)": "$1,629",
       "Liquidity Compare": "Resistance > Support",
-      "OrderBook Bid/Ask": "0.48x",
-      "Vol 15m": "2.88x",
-      "Chg 15m": "+1.63%",
+      "OrderBook Bid/Ask": "0.35x",
+      "Vol 15m": "3.79x",
+      "Chg 15m": "-2.30%",
       "Vol 1h": "5.87x",
       "Chg 1h": "+8.75%",
       "Vol 4h": "0.37x",
@@ -224,85 +226,121 @@
       "Coin's Own Win%": "50.0%",
       "Coin's Own PF": "3.0",
       "BTC Correlation": "0.08",
-      "Overall Score %": 69.2,
+      "Overall Score %": 61.5,
       "Verdict": "\ud83d\udfe2 Good",
       "Rank": 6
     },
     {
       "System": "Union AB",
-      "Coin": "STX/USDT",
+      "Coin": "AR/USDT",
       "Combo": "EMA+Breakout",
       "Tier": "Baseline",
-      "Category": "New Signal",
-      "Signal Time (PKT)": "2026-09-25 04:00 PM PKT",
-      "Bars Ago": 3,
-      "Entry": 0.3269,
-      "Current": 0.324,
-      "P/L %": -0.89,
-      "Trail Stop": 0.311937,
-      "Take Profit": 0.366275,
-      "RS Percentile": 97.8,
-      "Dist from 52W High": "51.51%",
+      "Category": "Open Trade",
+      "Signal Time (PKT)": "2026-09-25 02:00 PM PKT",
+      "Bars Ago": 5,
+      "Entry": 4.747,
+      "Current": 4.722,
+      "P/L %": -0.53,
+      "Trail Stop": 4.485,
+      "Take Profit": 5.42475,
+      "RS Percentile": 98.3,
+      "Dist from 52W High": "45.66%",
       "Funding Rate": "0.010%",
-      "Open Interest": "$5,365,412",
-      "Liquidity Up ($)": "$7,462",
-      "Liquidity Down ($)": "$6,358",
+      "Open Interest": "$2,363,031",
+      "Liquidity Up ($)": "$6,816",
+      "Liquidity Down ($)": "$4,679",
       "Liquidity Compare": "Resistance > Support",
-      "OrderBook Bid/Ask": "0.85x",
-      "Vol 15m": "0.25x",
-      "Chg 15m": "-0.71%",
-      "Vol 1h": "2.63x",
-      "Chg 1h": "+0.19%",
-      "Vol 4h": "1.93x",
-      "Chg 4h": "+3.88%",
-      "Vol 1d": "0.76x",
-      "Chg 1d": "+1.98%",
-      "Dist from 24h High": "1.59%",
-      "Dist from 24h Low": "4.4%",
-      "Coin's Own Win%": "28.6%",
-      "Coin's Own PF": "1.62",
-      "BTC Correlation": "0.34",
+      "OrderBook Bid/Ask": "0.69x",
+      "Vol 15m": "8.10x",
+      "Chg 15m": "-1.30%",
+      "Vol 1h": "0.94x",
+      "Chg 1h": "-0.02%",
+      "Vol 4h": "2.15x",
+      "Chg 4h": "+3.55%",
+      "Vol 1d": "0.50x",
+      "Chg 1d": "+4.51%",
+      "Dist from 24h High": "4.14%",
+      "Dist from 24h Low": "6.25%",
+      "Coin's Own Win%": "50.0%",
+      "Coin's Own PF": "9.49",
+      "BTC Correlation": "0.17",
       "Overall Score %": 58.3,
       "Verdict": "\ud83d\udfe2 Good",
       "Rank": 7
     },
     {
+      "System": "NEW AdvancedConfluence",
+      "Coin": "KAS/USDT",
+      "Combo": "CHoCH",
+      "Tier": "N/A",
+      "Category": "Open Trade",
+      "Signal Time (PKT)": "2026-09-25 01:00 PM PKT",
+      "Bars Ago": 6,
+      "Entry": 0.04144,
+      "Current": 0.04193,
+      "P/L %": 1.18,
+      "Trail Stop": 0.040906,
+      "Take Profit": 0.04462,
+      "Funding Rate": "0.005%",
+      "Open Interest": "$892,704",
+      "Liquidity Up ($)": "$12,582",
+      "Liquidity Down ($)": "$10,753",
+      "Liquidity Compare": "Resistance > Support",
+      "OrderBook Bid/Ask": "0.85x",
+      "Vol 15m": "0.46x",
+      "Chg 15m": "-0.70%",
+      "Vol 1h": "0.95x",
+      "Chg 1h": "+0.10%",
+      "Vol 4h": "3.91x",
+      "Chg 4h": "+4.71%",
+      "Vol 1d": "0.79x",
+      "Chg 1d": "+3.58%",
+      "Dist from 24h High": "2.23%",
+      "Dist from 24h Low": "4.59%",
+      "Coin's Own Win%": "100.0%",
+      "Coin's Own PF": "N/A",
+      "BTC Correlation": "0.59",
+      "Overall Score %": 50.0,
+      "Verdict": "\ud83d\udfe2 Good",
+      "Rank": 8
+    },
+    {
       "System": "Union AB",
-      "Coin": "PENDLE/USDT",
+      "Coin": "PEAQ/USDT",
       "Combo": "EMA+Breakout",
       "Tier": "Baseline",
       "Category": "Open Trade",
-      "Signal Time (PKT)": "2026-09-25 12:00 AM PKT",
-      "Bars Ago": 19,
-      "Entry": 2.6119,
-      "Current": 2.5642,
-      "P/L %": -1.83,
-      "Trail Stop": 2.4748,
-      "Take Profit": 3.09855,
-      "RS Percentile": 97.8,
-      "Dist from 52W High": "49.39%",
-      "Funding Rate": "0.010%",
-      "Open Interest": "$427,028",
-      "Liquidity Up ($)": "$4,822",
-      "Liquidity Down ($)": "$4,403",
+      "Signal Time (PKT)": "2026-09-24 05:00 PM PKT",
+      "Bars Ago": 26,
+      "Entry": 0.03942,
+      "Current": 0.0414,
+      "P/L %": 5.02,
+      "Trail Stop": 0.039876,
+      "Take Profit": 0.049107,
+      "RS Percentile": 100.0,
+      "Dist from 52W High": "73.44%",
+      "Funding Rate": "N/A",
+      "Open Interest": "N/A",
+      "Liquidity Up ($)": "$26,100",
+      "Liquidity Down ($)": "$8,765",
       "Liquidity Compare": "Resistance > Support",
-      "OrderBook Bid/Ask": "0.91x",
-      "Vol 15m": "0.70x",
-      "Chg 15m": "-0.79%",
-      "Vol 1h": "1.93x",
-      "Chg 1h": "-1.57%",
-      "Vol 4h": "1.21x",
-      "Chg 4h": "+2.42%",
-      "Vol 1d": "1.06x",
-      "Chg 1d": "+4.89%",
-      "Dist from 24h High": "1.45%",
-      "Dist from 24h Low": "9.47%",
-      "Coin's Own Win%": "25.0%",
-      "Coin's Own PF": "1.49",
-      "BTC Correlation": "0.32",
-      "Overall Score %": 54.5,
+      "OrderBook Bid/Ask": "0.34x",
+      "Vol 15m": "0.79x",
+      "Chg 15m": "-0.87%",
+      "Vol 1h": "1.08x",
+      "Chg 1h": "-3.27%",
+      "Vol 4h": "1.18x",
+      "Chg 4h": "+1.73%",
+      "Vol 1d": "1.97x",
+      "Chg 1d": "+23.44%",
+      "Dist from 24h High": "11.95%",
+      "Dist from 24h Low": "19.69%",
+      "Coin's Own Win%": "80.0%",
+      "Coin's Own PF": "3.78",
+      "BTC Correlation": "0.38",
+      "Overall Score %": 50.0,
       "Verdict": "\ud83d\udfe2 Good",
-      "Rank": 8
+      "Rank": 9
     },
     {
       "System": "Union AB Backup Tier",
@@ -320,7 +358,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 9
+      "Rank": 10
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -338,7 +376,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 10
+      "Rank": 11
     },
     {
       "System": "Donchian Breakout",
@@ -356,7 +394,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 11
+      "Rank": 12
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -374,7 +412,7 @@
       "RS Percentile": 97.8,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 12
+      "Rank": 13
     },
     {
       "System": "Donchian Breakout",
@@ -392,7 +430,7 @@
       "RS Percentile": 97.8,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 13
+      "Rank": 14
     },
     {
       "System": "Union AB Backup Tier",
@@ -410,7 +448,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 14
+      "Rank": 15
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -428,7 +466,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 15
+      "Rank": 16
     },
     {
       "System": "Donchian Breakout",
@@ -446,7 +484,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 16
+      "Rank": 17
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -464,7 +502,7 @@
       "RS Percentile": 98.3,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 17
+      "Rank": 18
     },
     {
       "System": "Donchian Breakout",
@@ -482,7 +520,7 @@
       "RS Percentile": 98.3,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 18
+      "Rank": 19
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -500,7 +538,7 @@
       "RS Percentile": 98.3,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 19
+      "Rank": 20
     },
     {
       "System": "Donchian Breakout",
@@ -518,7 +556,7 @@
       "RS Percentile": 98.3,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 20
+      "Rank": 21
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -536,7 +574,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 21
+      "Rank": 22
     },
     {
       "System": "Donchian Breakout",
@@ -554,7 +592,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 22
+      "Rank": 23
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -572,7 +610,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 23
+      "Rank": 24
     },
     {
       "System": "Donchian Breakout",
@@ -590,7 +628,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 24
+      "Rank": 25
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -608,7 +646,7 @@
       "RS Percentile": 97.8,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 25
+      "Rank": 26
     },
     {
       "System": "Donchian Breakout",
@@ -626,7 +664,7 @@
       "RS Percentile": 97.8,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 26
+      "Rank": 27
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -644,7 +682,7 @@
       "RS Percentile": 96.1,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 27
+      "Rank": 28
     },
     {
       "System": "Donchian Breakout",
@@ -662,7 +700,7 @@
       "RS Percentile": 96.1,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 28
+      "Rank": 29
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -680,7 +718,7 @@
       "RS Percentile": 95.2,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 29
+      "Rank": 30
     },
     {
       "System": "Donchian Breakout",
@@ -698,7 +736,7 @@
       "RS Percentile": 95.2,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 30
+      "Rank": 31
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -716,7 +754,7 @@
       "RS Percentile": 97.2,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 31
+      "Rank": 32
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -734,7 +772,7 @@
       "RS Percentile": 96.1,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 32
+      "Rank": 33
     },
     {
       "System": "Donchian Breakout",
@@ -752,7 +790,7 @@
       "RS Percentile": 96.1,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 33
+      "Rank": 34
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -770,7 +808,7 @@
       "RS Percentile": 98.9,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 34
+      "Rank": 35
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -788,7 +826,7 @@
       "RS Percentile": 97.2,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 35
+      "Rank": 36
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -806,7 +844,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 36
+      "Rank": 37
     },
     {
       "System": "Donchian Breakout",
@@ -824,7 +862,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 37
+      "Rank": 38
     },
     {
       "System": "Donchian Breakout",
@@ -842,7 +880,26 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 38
+      "Rank": 39
+    },
+    {
+      "System": "CE Buy-Only",
+      "Coin": "TMX/USDT",
+      "Combo": "Chandelier Cross",
+      "Tier": "Base+ETH",
+      "Category": "New Signal",
+      "Signal Time (PKT)": "2026-09-25 07:00 PM PKT",
+      "Bars Ago": 0,
+      "Entry": 0.01263,
+      "Current": 0.01263,
+      "P/L %": 0.0,
+      "Trail Stop": 0.011936,
+      "Take Profit": "N/A (trailing stop hi asal exit hai)",
+      "ETH Regime": "Bullish \u2705",
+      "Liquidity Rank": "#71 / 150",
+      "Overall Score %": "N/A",
+      "Verdict": "N/A",
+      "Rank": 40
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -860,7 +917,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 39
+      "Rank": 41
     },
     {
       "System": "Donchian Breakout",
@@ -878,26 +935,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 40
-    },
-    {
-      "System": "CE Buy-Only",
-      "Coin": "TMX/USDT",
-      "Combo": "Chandelier Cross",
-      "Tier": "Base+ETH",
-      "Category": "New Signal",
-      "Signal Time (PKT)": "2026-09-25 07:00 PM PKT",
-      "Bars Ago": 0,
-      "Entry": 0.01263,
-      "Current": 0.01263,
-      "P/L %": 0.0,
-      "Trail Stop": 0.011936,
-      "Take Profit": "N/A (trailing stop hi asal exit hai)",
-      "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#72 / 150",
-      "Overall Score %": "N/A",
-      "Verdict": "N/A",
-      "Rank": 41
+      "Rank": 42
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -915,7 +953,7 @@
       "RS Percentile": 98.9,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 42
+      "Rank": 43
     },
     {
       "System": "Donchian Breakout",
@@ -933,7 +971,7 @@
       "RS Percentile": 98.9,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 43
+      "Rank": 44
     },
     {
       "System": "Union AB Backup Tier",
@@ -951,7 +989,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 44
+      "Rank": 45
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -969,7 +1007,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 45
+      "Rank": 46
     },
     {
       "System": "Donchian Breakout",
@@ -987,7 +1025,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 46
+      "Rank": 47
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -1005,7 +1043,7 @@
       "RS Percentile": 97.8,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 47
+      "Rank": 48
     },
     {
       "System": "Donchian Breakout",
@@ -1023,7 +1061,7 @@
       "RS Percentile": 97.8,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 48
+      "Rank": 49
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -1041,7 +1079,7 @@
       "RS Percentile": 100.0,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 49
+      "Rank": 50
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -1059,7 +1097,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 50
+      "Rank": 51
     },
     {
       "System": "CE Buy-Only",
@@ -1078,7 +1116,7 @@
       "Liquidity Rank": "#113 / 150",
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 51
+      "Rank": 52
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -1096,7 +1134,7 @@
       "RS Percentile": 96.9,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 52
+      "Rank": 53
     },
     {
       "System": "Union AB Backup Tier",
@@ -1114,7 +1152,7 @@
       "RS Percentile": 98.9,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 53
+      "Rank": 54
     },
     {
       "System": "Donchian Breakout",
@@ -1132,7 +1170,7 @@
       "RS Percentile": 98.9,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 54
+      "Rank": 55
     },
     {
       "System": "Union AB Backup Tier",
@@ -1150,7 +1188,7 @@
       "RS Percentile": 97.8,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 55
+      "Rank": 56
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -1168,7 +1206,7 @@
       "RS Percentile": 97.8,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 56
+      "Rank": 57
     },
     {
       "System": "Donchian Breakout",
@@ -1186,7 +1224,7 @@
       "RS Percentile": 97.8,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 57
+      "Rank": 58
     },
     {
       "System": "Union AB Backup Tier",
@@ -1204,7 +1242,7 @@
       "RS Percentile": 97.8,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 58
+      "Rank": 59
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -1222,7 +1260,7 @@
       "RS Percentile": 97.8,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 59
+      "Rank": 60
     },
     {
       "System": "Donchian Breakout",
@@ -1240,7 +1278,61 @@
       "RS Percentile": 97.8,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 60
+      "Rank": 61
+    },
+    {
+      "System": "Union AB Backup Tier",
+      "Coin": "AR/USDT",
+      "Combo": "EMA+Breakout",
+      "Tier": "N/A",
+      "Category": "Open Trade",
+      "Signal Time (PKT)": "2026-09-25 02:00 PM PKT",
+      "Bars Ago": 5,
+      "Entry": 4.747,
+      "Current": 4.722,
+      "P/L %": -0.53,
+      "Trail Stop": 4.485,
+      "Take Profit": 5.42475,
+      "RS Percentile": 98.3,
+      "Overall Score %": "N/A",
+      "Verdict": "N/A",
+      "Rank": 62
+    },
+    {
+      "System": "Pullback-in-Uptrend",
+      "Coin": "AR/USDT",
+      "Combo": "EMA20 Pullback",
+      "Tier": "N/A",
+      "Category": "Open Trade",
+      "Signal Time (PKT)": "2026-09-25 11:00 AM PKT",
+      "Bars Ago": 8,
+      "Entry": 4.504,
+      "Current": 4.722,
+      "P/L %": 4.84,
+      "Trail Stop": 4.491469,
+      "Take Profit": "N/A (trailing stop hi asal exit hai)",
+      "RS Percentile": 98.3,
+      "Overall Score %": "N/A",
+      "Verdict": "N/A",
+      "Rank": 63
+    },
+    {
+      "System": "Donchian Breakout",
+      "Coin": "AR/USDT",
+      "Combo": "20-period High",
+      "Tier": "N/A",
+      "Category": "Open Trade",
+      "Signal Time (PKT)": "2026-09-25 02:00 PM PKT",
+      "Bars Ago": 5,
+      "Entry": 4.747,
+      "Current": 4.722,
+      "P/L %": -0.53,
+      "Trail Stop": 4.491469,
+      "Take Profit": "N/A (trailing stop hi asal exit hai)",
+      "RS Percentile": 98.3,
+      "Overall Score %": "N/A",
+      "Verdict": "N/A",
+      "Rank": 64
     }
   ]
 }
