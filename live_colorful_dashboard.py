@@ -10,6 +10,7 @@ Chalayen: streamlit run live_colorful_dashboard.py
 import base64
 import json
 import os
+import time
 from datetime import datetime, timezone
 
 import pandas as pd
@@ -84,7 +85,9 @@ SYSTEM_CAPTION = {
 }
 
 
-def style_and_show(df, compact):
+def style_and_show(df, compact, select_key=None):
+    """Table dikhata hai. select_key diya jaye to lines select (tap) ho sakti
+    hain - return: select ki gayi lines ki positions (list)."""
     if compact:
         show_cols = [c for c in COMPACT_COLUMNS if c in df.columns]
         df = df[show_cols]
@@ -92,7 +95,186 @@ def style_and_show(df, compact):
     def apply_row_colors(row):
         return [color_value(col, row[col]) if col in df.columns else "" for col in df.columns]
 
-    st.dataframe(df.style.apply(apply_row_colors, axis=1), use_container_width=True, hide_index=True)
+    styled = df.style.apply(apply_row_colors, axis=1)
+    if select_key:
+        try:
+            event = st.dataframe(
+                styled, use_container_width=True, hide_index=True,
+                on_select="rerun", selection_mode="multi-row", key=select_key,
+            )
+            return list(event.selection.rows)
+        except TypeError:
+            pass   # purana Streamlit version - selection support nahi, sirf table dikhao
+    st.dataframe(styled, use_container_width=True, hide_index=True)
+    return []
+
+
+# ============================================================
+# MANUAL BOT WATCHLIST - GitHub par seedha save (Live table + form dono isi ko istemal karte hain)
+# ============================================================
+GITHUB_REPO = "Asifali549/Asif-Ali"
+GITHUB_BRANCH = "main"
+GITHUB_WATCHLIST_PATH = "manual_watchlist.json"
+DEFAULT_MANUAL_SYSTEM = "CE Buy-Only"
+UNION_SYSTEMS = ("Union AB", "Union AB Backup Tier")
+MANUAL_BOT_SYSTEMS = (
+    "CE Buy-Only", "NEW AdvancedConfluence", "Union AB", "Union AB Backup Tier",
+    "Pullback-in-Uptrend", "Donchian Breakout",
+)
+UNION_COMBOS = ("Ichimoku+MS", "EMA+Breakout")
+
+
+def _norm_symbol(sym):
+    s = str(sym or "").upper().replace(" ", "").strip()
+    if s and "/" not in s:
+        s = f"{s}/USDT"
+    return s
+
+
+def _wl_key(e):
+    """Watchlist entry (dict ya plain string) ki pehchan: (symbol, system, combo)."""
+    if isinstance(e, dict):
+        system = e.get("system") or DEFAULT_MANUAL_SYSTEM
+        combo = e.get("combo") if system in UNION_SYSTEMS else None
+        return (_norm_symbol(e.get("symbol")), system, combo or None)
+    return (_norm_symbol(e), DEFAULT_MANUAL_SYSTEM, None)
+
+
+def _read_local_watchlist():
+    try:
+        with open("manual_watchlist.json") as f:
+            data = json.load(f)
+        return data if isinstance(data, list) else []
+    except Exception:
+        return []
+
+
+def add_entries_to_github_watchlist(new_entries):
+    """
+    Nayi entries ko GitHub wali manual_watchlist.json mein jorta hai.
+    Hamesha GitHub ki TAAZA file parh kar merge karta hai (app ki purani
+    local copy par bharosa nahi) - taake bot ki beech mein ki gayi
+    tabdeeli mite nahi. Takraao (409/422) par 3 dafa dobara koshish.
+    Returns (status, added_count, message); status = OK / NO_TOKEN / ERROR.
+    """
+    token = None
+    try:
+        token = st.secrets.get("GITHUB_TOKEN")
+    except Exception:
+        token = None
+    if not token:
+        return "NO_TOKEN", 0, ""
+
+    api_url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_WATCHLIST_PATH}"
+    headers = {"Authorization": f"token {token}", "Accept": "application/vnd.github.v3+json"}
+
+    for attempt in range(3):
+        try:
+            get_resp = requests.get(api_url, headers=headers, params={"ref": GITHUB_BRANCH}, timeout=15)
+            if get_resp.status_code == 200:
+                data = get_resp.json()
+                sha = data.get("sha")
+                try:
+                    text = base64.b64decode(data.get("content", "")).decode("utf-8").strip()
+                    existing = json.loads(text) if text else []
+                    if not isinstance(existing, list):
+                        existing = []
+                except Exception:
+                    existing = []   # kharab file - saaf list se shuru
+            elif get_resp.status_code == 404:
+                existing, sha = [], None
+            else:
+                return "ERROR", 0, f"GitHub API error {get_resp.status_code}: {get_resp.text[:200]}"
+
+            keys = {_wl_key(e) for e in existing}
+            merged = list(existing)
+            added = 0
+            for e in new_entries:
+                k = _wl_key(e)
+                if k[0] and k not in keys:
+                    merged.append(e)
+                    keys.add(k)
+                    added += 1
+
+            if added == 0:
+                return "OK", 0, "ALREADY"
+
+            payload = {
+                "message": "Update manual watchlist (dashboard se)",
+                "content": base64.b64encode(json.dumps(merged, indent=2).encode("utf-8")).decode("utf-8"),
+                "branch": GITHUB_BRANCH,
+            }
+            if sha:
+                payload["sha"] = sha
+
+            put_resp = requests.put(api_url, headers=headers, json=payload, timeout=15)
+            if put_resp.status_code in (200, 201):
+                try:
+                    with open("manual_watchlist.json", "w") as f:
+                        json.dump(merged, f, indent=2)   # local copy, taake "Pending" foran nazar aaye
+                except Exception:
+                    pass
+                return "OK", added, ""
+            if put_resp.status_code in (409, 422):
+                time.sleep(1.5)   # file beech mein badal gayi (bot ne likha) - dobara taaza parh kar koshish
+                continue
+            return "ERROR", 0, f"GitHub API error {put_resp.status_code}: {put_resp.text[:200]}"
+        except Exception as exc:
+            return "ERROR", 0, f"Error: {exc}"
+
+    return "ERROR", 0, "File baar baar badal rahi thi - thori der baad dobara koshish karein"
+
+
+def live_row_to_watchlist_entry(row, amount=None):
+    """Live screener ki line -> manual bot watchlist entry (sahi system/combo ke sath)."""
+    system = row.get("System")
+    if system not in MANUAL_BOT_SYSTEMS:
+        return None
+    combo = row.get("Combo") if system in UNION_SYSTEMS else None
+    if system in UNION_SYSTEMS and combo not in UNION_COMBOS:
+        return None
+    symbol = _norm_symbol(row.get("Coin"))
+    if not symbol:
+        return None
+    return {"symbol": symbol, "amount": amount, "system": system, "combo": combo}
+
+
+def send_selected_to_manual_bot(df_rows, selected_positions, key):
+    """Select ki gayi live lines ke neeche 'Manual Bot mein bhejein' button."""
+    if not selected_positions:
+        st.caption("👆 Kisi coin ki line ke bayen (left) khane par tap karein — "
+                   "'🤖 Manual Bot mein bhejein' button aa jayega.")
+        return
+
+    picked = df_rows.iloc[[p for p in selected_positions if p < len(df_rows)]]
+    entries, labels = [], []
+    for _, r in picked.iterrows():
+        e = live_row_to_watchlist_entry(r)
+        if e is not None:
+            entries.append(e)
+            labels.append(f"{e['symbol']} ({e['system']}{' — ' + e['combo'] if e['combo'] else ''})")
+
+    if not entries:
+        st.warning("Is line ka system Manual Bot mein pehchana nahi gaya.")
+        return
+
+    st.markdown("**Chuni gayi:** " + ", ".join(labels))
+    c1, c2 = st.columns([1, 2])
+    amount = c1.number_input("Amount ($, virtual)", min_value=10.0, value=100.0, step=10.0, key=f"{key}_amt")
+    if c2.button(f"🤖 Manual Bot mein bhejein ({len(entries)})", type="primary", key=f"{key}_send"):
+        amt = None if amount == 100.0 else float(amount)   # $100 = bot ka default
+        for e in entries:
+            e["amount"] = amt
+        status, added, msg = add_entries_to_github_watchlist(entries)
+        if status == "OK" and added > 0:
+            st.success(f"✅ {added} coin(s) Manual Bot ki watchlist mein apne apne system ke khane mein chali gayin. "
+                       f"Bot ke agle run (max ~5-10 min) mein trade khul jayegi.")
+        elif status == "OK":
+            st.info("Ye coin(s) pehle se watchlist mein maujood hain — bot agle run mein utha lega.")
+        elif status == "NO_TOKEN":
+            st.error("⚠️ GITHUB_TOKEN Streamlit Secrets mein nahi mila — coin GitHub par nahi gaya.")
+        else:
+            st.error(f"❌ GitHub par save nahi ho saka: {msg}")
 
 
 def to_pkt_str(ts):
@@ -232,13 +414,15 @@ if os.path.exists("dashboard_signals.json"):
 
             if len(new_df) > 0:
                 st.markdown(f"**🟢 Naye Signals ({len(new_df)})**")
-                style_and_show(new_df, compact_live)
+                sel_new = style_and_show(new_df, compact_live, select_key=f"sel_{key_slug}_new")
+                send_selected_to_manual_bot(new_df, sel_new, f"mb_{key_slug}_new")
                 show_charts_and_copy(new_df, f"live_{key_slug}_new")
                 any_shown = True
 
             if len(open_df) > 0:
                 st.markdown(f"**🔵 Chal Rahi Trades — Open ({len(open_df)})**")
-                style_and_show(open_df, compact_live)
+                sel_open = style_and_show(open_df, compact_live, select_key=f"sel_{key_slug}_open")
+                send_selected_to_manual_bot(open_df, sel_open, f"mb_{key_slug}_open")
                 show_charts_and_copy(open_df, f"live_{key_slug}_open")
                 any_shown = True
 
@@ -614,45 +798,10 @@ st.caption(
     "apne tasdeeq-shuda SL/TP rules ke sath (default $100, watchlist mein amount badal sakte hain). "
     "Asal paisa is mein bilkul risk mein nahi hai (paper/virtual)."
 )
-GITHUB_REPO = "Asifali549/Asif-Ali"
-GITHUB_BRANCH = "main"
-GITHUB_WATCHLIST_PATH = "manual_watchlist.json"
-
-
-def push_watchlist_to_github(merged_list):
-    """manual_watchlist.json ko seedha GitHub repo mein commit karta hai
-    (GitHub Contents API ke zariye), taake GitHub Actions bot ko turant
-    nazar aaye — koi manual GitHub-app editing na karni pare.
-    Requires: Streamlit Cloud app Settings -> Secrets mein GITHUB_TOKEN
-    (repo-write access wala Personal Access Token) set hona chahiye.
-    Returns (success: bool, message: str).
-    """
-    token = st.secrets.get("GITHUB_TOKEN") if hasattr(st, "secrets") else None
-    if not token:
-        return False, "NO_TOKEN"
-
-    api_url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_WATCHLIST_PATH}"
-    headers = {"Authorization": f"token {token}", "Accept": "application/vnd.github.v3+json"}
-    try:
-        get_resp = requests.get(api_url, headers=headers, params={"ref": GITHUB_BRANCH}, timeout=15)
-        sha = get_resp.json().get("sha") if get_resp.status_code == 200 else None
-
-        new_content = json.dumps(merged_list, indent=2)
-        payload = {
-            "message": "Update manual watchlist (dashboard se)",
-            "content": base64.b64encode(new_content.encode("utf-8")).decode("utf-8"),
-            "branch": GITHUB_BRANCH,
-        }
-        if sha:
-            payload["sha"] = sha
-
-        put_resp = requests.put(api_url, headers=headers, json=payload, timeout=15)
-        if put_resp.status_code in (200, 201):
-            return True, "OK"
-        return False, f"GitHub API error {put_resp.status_code}: {put_resp.text[:200]}"
-    except Exception as exc:
-        return False, f"Error: {exc}"
-
+st.info(
+    "💡 **Aasan tareeqa:** Upar LIVE table mein kisi coin ki line par tap karein aur "
+    "'🤖 Manual Bot mein bhejein' dabayein — coin khud apne system/combo ke khane mein aa jayega."
+)
 
 MANUAL_SYSTEM_BOXES = [
     ("CE Buy-Only", "CE Buy-Only", None),
@@ -679,14 +828,6 @@ with st.expander("➕ Coin Yahan Daalein (Har System Ka Alag Khana)", expanded=F
         submitted = st.form_submit_button("💾 Save Watchlist")
 
     if submitted:
-        existing = []
-        if os.path.exists("manual_watchlist.json"):
-            with open("manual_watchlist.json") as f:
-                try:
-                    existing = json.load(f)
-                except Exception:
-                    existing = []
-
         new_entries = []
         for label, system_name, combo_name in MANUAL_SYSTEM_BOXES:
             raw_text = box_values[label]
@@ -705,39 +846,30 @@ with st.expander("➕ Coin Yahan Daalein (Har System Ka Alag Khana)", expanded=F
                         amount = None
                 else:
                     sym_part = line
-                symbol = sym_part.upper().replace(" ", "")
-                if "/" not in symbol:
-                    symbol = f"{symbol}/USDT"
+                symbol = _norm_symbol(sym_part)
+                # Sirf asal coin naam (harf/number) - ghalti se paste hue emoji/nishan rad
+                if not symbol or not symbol.replace("/", "").isalnum() or not symbol.isascii():
+                    st.warning(f"⚠️ '{line}' coin ka sahi naam nahi lagta — chhor diya gaya.")
+                    continue
                 entry = {"symbol": symbol, "amount": amount, "system": system_name, "combo": combo_name}
                 new_entries.append(entry)
 
-        def _entry_key(e):
-            if isinstance(e, dict):
-                return (e.get("symbol"), e.get("system", "CE Buy-Only"), e.get("combo"))
-            return (e, "CE Buy-Only", None)
-
-        existing_keys = {_entry_key(e) for e in existing}
-        merged = list(existing)
-        added_count = 0
-        for e in new_entries:
-            k = _entry_key(e)
-            if k not in existing_keys:
-                merged.append(e)
-                existing_keys.add(k)
-                added_count += 1
-
-        if added_count == 0:
-            st.info("Koi nayi entry nahi mili (ya pehle se watchlist mein maujood hai).")
+        if not new_entries:
+            st.info("Koi nayi entry nahi mili.")
         else:
-            pushed, msg = push_watchlist_to_github(merged)
-            if pushed:
-                # local copy bhi update kar dein taake yahan turant nazar aaye
-                with open("manual_watchlist.json", "w") as f:
-                    json.dump(merged, f, indent=2)
+            status, added_count, msg = add_entries_to_github_watchlist(new_entries)
+            if status == "OK" and added_count > 0:
                 st.success(f"✅ {added_count} nayi coin(s) seedha GitHub par save ho gayin. GitHub Actions ke "
                            f"agle run (max 5 min) mein bot inhein process karega.")
-                st.rerun()
-            elif msg == "NO_TOKEN":
+            elif status == "OK":
+                st.info("Ye coin(s) pehle se watchlist mein maujood hain.")
+            elif status == "NO_TOKEN":
+                merged = _read_local_watchlist()
+                keys = {_wl_key(e) for e in merged}
+                for e in new_entries:
+                    if _wl_key(e) not in keys:
+                        merged.append(e)
+                        keys.add(_wl_key(e))
                 with open("manual_watchlist.json", "w") as f:
                     json.dump(merged, f, indent=2)
                 st.warning(
@@ -749,9 +881,9 @@ with st.expander("➕ Coin Yahan Daalein (Har System Ka Alag Khana)", expanded=F
                 )
                 st.code(json.dumps(merged, indent=2), language="json")
             else:
-                st.error(f"❌ GitHub par save nahi ho saki: {msg}\n\nNeeche di JSON copy kar ke khud GitHub "
-                          f"app mein 'manual_watchlist.json' mein paste kar dein:")
-                st.code(json.dumps(merged, indent=2), language="json")
+                st.error(f"❌ GitHub par save nahi ho saki: {msg}\n\nNeeche di JSON (nayi entries) copy kar ke "
+                          f"khud GitHub app mein 'manual_watchlist.json' ki list mein shamil kar dein:")
+                st.code(json.dumps(new_entries, indent=2), language="json")
 
 if os.path.exists("manual_watchlist.json"):
     try:
