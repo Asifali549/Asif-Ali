@@ -1,0 +1,2 @@
+symbol,system,entry_time_pkt,exit_time_pkt,entry_price,exit_price,exit_reason,capital_allocated_usd,gross_return_pct,net_return_pct,realized_pnl_usd,result
+INJ/USDT,Pullback-in-Uptrend,2026-09-25 12:00 AM PKT,2026-09-25 12:00 PM PKT,8.261,7.87553125,SL,100.0,-4.666,-4.866,-4.8661,LOSS
