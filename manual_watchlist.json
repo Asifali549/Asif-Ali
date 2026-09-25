@@ -4,5 +4,11 @@
     "amount": null,
     "system": "Union AB",
     "combo": "EMA+Breakout"
+  },
+  {
+    "symbol": "NEAR/USDT",
+    "amount": null,
+    "system": "Union AB",
+    "combo": "Ichimoku+MS"
   }
 ]
