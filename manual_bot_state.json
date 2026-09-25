@@ -1,5 +1,5 @@
 {
-  "cash": 900.0,
+  "cash": 800.0,
   "positions": {
     "KAS/USDT": {
       "entry_time": "2026-09-25T14:00:00",
@@ -16,12 +16,28 @@
       "ce_period": 16,
       "ce_multiplier": 3.0,
       "use_fixed_tp": true
+    },
+    "MUBARAK/USDT": {
+      "entry_time": "2026-09-25T15:00:00",
+      "entry_price": 0.05306,
+      "initial_stop": 0.04370875,
+      "trail_stop": 0.04370875,
+      "tp_price": 0.0717625,
+      "capital_allocated": 100.0,
+      "current_price": 0.05306,
+      "unrealized_pnl_pct": 0.0,
+      "source": "manual",
+      "system": "Union AB",
+      "combo": "EMA+Breakout",
+      "ce_period": 12,
+      "ce_multiplier": 4.5,
+      "use_fixed_tp": true
     }
   },
   "total_equity_usd": 1000.0,
   "starting_capital_usd": 1000.0,
-  "open_position_count": 1,
+  "open_position_count": 2,
   "max_concurrent_positions": 8,
   "position_size_usd": 100.0,
-  "last_updated": "2026-09-25T16:05:02.733513+00:00"
+  "last_updated": "2026-09-25T16:10:38.459437+00:00"
 }
