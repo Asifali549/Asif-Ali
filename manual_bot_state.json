@@ -1,10 +1,27 @@
 {
-  "cash": 1000.0,
-  "positions": {},
+  "cash": 900.0,
+  "positions": {
+    "KAS/USDT": {
+      "entry_time": "2026-09-25T14:00:00",
+      "entry_price": 0.04193,
+      "initial_stop": 0.04057625,
+      "trail_stop": 0.04057625,
+      "tp_price": 0.0446375,
+      "capital_allocated": 100.0,
+      "current_price": 0.04193,
+      "unrealized_pnl_pct": 0.0,
+      "source": "manual",
+      "system": "NEW AdvancedConfluence",
+      "combo": null,
+      "ce_period": 16,
+      "ce_multiplier": 3.0,
+      "use_fixed_tp": true
+    }
+  },
   "total_equity_usd": 1000.0,
   "starting_capital_usd": 1000.0,
-  "open_position_count": 0,
+  "open_position_count": 1,
   "max_concurrent_positions": 8,
   "position_size_usd": 100.0,
-  "last_updated": "2026-09-25T15:13:46.592844+00:00"
+  "last_updated": "2026-09-25T15:19:27.606971+00:00"
 }
