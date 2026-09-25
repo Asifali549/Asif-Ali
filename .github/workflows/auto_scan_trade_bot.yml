@@ -7,6 +7,11 @@ permissions:
   contents: write
   actions: write
 
+# Ek waqt mein sirf EK auto-bot run chale (do zanjeerein na banein).
+concurrency:
+  group: auto-scan-trade-bot
+  cancel-in-progress: false
+
 jobs:
   auto_scan_bot:
     runs-on: ubuntu-latest
@@ -31,18 +36,28 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add auto_bot_state.json
           if [ -f auto_bot_closed_trades.csv ]; then git add auto_bot_closed_trades.csv; fi
-          git diff --staged --quiet || git commit -m "Auto-scan trade bot update ($(date -u +'%Y-%m-%d %H:%M UTC'))"
-          git pull --rebase origin main
-          git push
+          git diff --staged --quiet && exit 0
+          git commit -m "Auto-scan trade bot update ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+          for i in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              echo "Push kamyab (koshish $i)"; exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            echo "Push nakam, dobara koshish..."; sleep $((i * 5))
+          done
+          echo "Push 5 dafa nakam raha"; exit 1
 
+      # ERROR aaye tab bhi chalega (zanjeer na toote); sirf aap ke "Cancel" par ruke ga.
       - name: Wait 5 minutes (hifazati waqfa)
+        if: ${{ !cancelled() }}
         run: sleep 300
 
       - name: Agla scan khud shuru karein
+        if: ${{ !cancelled() }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -X POST \
+          curl --fail --retry 3 --retry-delay 10 -X POST \
             -H "Authorization: token $GH_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/${{ github.repository }}/actions/workflows/auto_scan_trade_bot.yml/dispatches \
