@@ -34,5 +34,23 @@
     "amount": null,
     "system": "Pullback-in-Uptrend",
     "combo": null
+  },
+  {
+    "symbol": "UNI/USDT",
+    "amount": null,
+    "system": "Pullback-in-Uptrend",
+    "combo": null
+  },
+  {
+    "symbol": "INJ/USDT",
+    "amount": null,
+    "system": "Pullback-in-Uptrend",
+    "combo": null
+  },
+  {
+    "symbol": "DASH/USDT",
+    "amount": null,
+    "system": "Pullback-in-Uptrend",
+    "combo": null
   }
 ]
