@@ -1,53 +1,5 @@
 [
   {
-    "symbol": "MUBARAK/USDT",
-    "amount": null,
-    "system": "Union AB",
-    "combo": "EMA+Breakout"
-  },
-  {
-    "symbol": "NEAR/USDT",
-    "amount": null,
-    "system": "Union AB",
-    "combo": "Ichimoku+MS"
-  },
-  {
-    "symbol": "RENDER/USDT",
-    "amount": null,
-    "system": "NEW AdvancedConfluence",
-    "combo": null
-  },
-  {
-    "symbol": "NEAR/USDT",
-    "amount": null,
-    "system": "Union AB Backup Tier",
-    "combo": "Ichimoku+MS"
-  },
-  {
-    "symbol": "SOL/USDT",
-    "amount": null,
-    "system": "Union AB Backup Tier",
-    "combo": "EMA+Breakout"
-  },
-  {
-    "symbol": "ARB/USDT",
-    "amount": null,
-    "system": "Pullback-in-Uptrend",
-    "combo": null
-  },
-  {
-    "symbol": "UNI/USDT",
-    "amount": null,
-    "system": "Pullback-in-Uptrend",
-    "combo": null
-  },
-  {
-    "symbol": "INJ/USDT",
-    "amount": null,
-    "system": "Pullback-in-Uptrend",
-    "combo": null
-  },
-  {
     "symbol": "DASH/USDT",
     "amount": null,
     "system": "Pullback-in-Uptrend",
