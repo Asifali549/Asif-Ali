@@ -1,7 +1,4 @@
 {
-  "INJ/USDT|Donchian Breakout|20-period High|8.495|N/A": "2026-09-24T16:08:00.887118+00:00",
-  "BSV/USDT|Pullback-in-Uptrend|EMA20 Pullback|21.895|N/A": "2026-09-24T16:08:01.425468+00:00",
-  "LSK/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.3897|N/A": "2026-09-24T16:08:01.923196+00:00",
   "ZEC/USDT|Donchian Breakout|20-period High|1543.056|N/A": "2026-09-24T17:07:27.380803+00:00",
   "SOL/USDT|Pullback-in-Uptrend|EMA20 Pullback|117.09|N/A": "2026-09-24T17:07:27.776281+00:00",
   "SOL/USDT|Donchian Breakout|20-period High|117.09|N/A": "2026-09-24T17:07:28.198123+00:00",
@@ -73,5 +70,6 @@
   "TMX/USDT|CE Buy-Only|Chandelier Cross|0.01263|Base+ETH": "2026-09-25T15:01:23.795794+00:00",
   "RAY/USDT|Pullback-in-Uptrend|EMA20 Pullback|2.0856|N/A": "2026-09-25T15:01:24.445825+00:00",
   "TSLAX/USDT|CE Buy-Only|Chandelier Cross|371.41|Base+ETH": "2026-09-25T15:01:25.162325+00:00",
-  "MUBARAK/USDT|Union AB Backup Tier|EMA+Breakout|0.05134|N/A": "2026-09-25T15:01:25.881683+00:00"
+  "MUBARAK/USDT|Union AB Backup Tier|EMA+Breakout|0.05134|N/A": "2026-09-25T15:01:25.881683+00:00",
+  "KMNO/USDT|Donchian Breakout|20-period High|0.041865|N/A": "2026-09-25T16:09:24.365025+00:00"
 }
