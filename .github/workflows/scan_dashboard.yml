@@ -9,6 +9,12 @@ permissions:
   contents: write
   actions: write
 
+# Ek waqt mein sirf EK scan chale. Agar ghalti se do zanjeerein ban jayen
+# (misaal: aap ne khud "Run workflow" daba diya), to ye khud ek hi reh jati hai.
+concurrency:
+  group: scan-dashboard
+  cancel-in-progress: false
+
 jobs:
   scan:
     runs-on: ubuntu-latest
@@ -35,20 +41,32 @@ jobs:
           if [ -f trade_journal.csv ]; then git add trade_journal.csv; fi
           if [ -f closed_trades_log.csv ]; then git add closed_trades_log.csv; fi
           if [ -f closed_trades_logged_keys.json ]; then git add closed_trades_logged_keys.json; fi
-          git diff --staged --quiet || git commit -m "Auto-update dashboard signals ($(date -u +'%Y-%m-%d %H:%M UTC'))"
-          git pull --rebase origin main
-          git push
+          git diff --staged --quiet && exit 0
+          git commit -m "Auto-update dashboard signals ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+          # Push kabhi dusre bot ke commit ki wajah se reh jaye to 5 dafa dobara koshish
+          for i in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              echo "Push kamyab (koshish $i)"; exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            echo "Push nakam, dobara koshish..."; sleep $((i * 5))
+          done
+          echo "Push 5 dafa nakam raha"; exit 1
 
+      # "!cancelled()" = pichle kisi qadam mein ERROR aaye tab bhi ye chalega,
+      # taake zanjeer kabhi na toote. Sirf tab nahi chalega jab aap khud
+      # GitHub par "Cancel" dabayein (yani rokna aap ke haath mein rahe).
       - name: Wait 5 minutes (hifazati waqfa)
+        if: ${{ !cancelled() }}
         run: sleep 300
 
       - name: Agla scan khud shuru karein
+        if: ${{ !cancelled() }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -X POST \
+          curl --fail --retry 3 --retry-delay 10 -X POST \
             -H "Authorization: token $GH_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/${{ github.repository }}/actions/workflows/scan_dashboard.yml/dispatches \
             -d '{"ref":"main"}'
- 
