@@ -10,5 +10,11 @@
     "amount": null,
     "system": "Union AB",
     "combo": "Ichimoku+MS"
+  },
+  {
+    "symbol": "RENDER/USDT",
+    "amount": null,
+    "system": "NEW AdvancedConfluence",
+    "combo": null
   }
 ]
