@@ -28,5 +28,11 @@
     "amount": null,
     "system": "Union AB Backup Tier",
     "combo": "EMA+Breakout"
+  },
+  {
+    "symbol": "ARB/USDT",
+    "amount": null,
+    "system": "Pullback-in-Uptrend",
+    "combo": null
   }
 ]
