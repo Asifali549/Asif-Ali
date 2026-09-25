@@ -16,5 +16,17 @@
     "amount": null,
     "system": "NEW AdvancedConfluence",
     "combo": null
+  },
+  {
+    "symbol": "NEAR/USDT",
+    "amount": null,
+    "system": "Union AB Backup Tier",
+    "combo": "Ichimoku+MS"
+  },
+  {
+    "symbol": "SOL/USDT",
+    "amount": null,
+    "system": "Union AB Backup Tier",
+    "combo": "EMA+Breakout"
   }
 ]
