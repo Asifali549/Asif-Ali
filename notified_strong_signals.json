@@ -87,5 +87,13 @@
   "AAVE/USDT|Pullback-in-Uptrend|EMA20 Pullback|153.894|N/A": "2026-09-26T07:08:00.879373+00:00",
   "NIL/USDT|CE Buy-Only|Chandelier Cross|0.10929|Base+ETH": "2026-09-26T07:08:01.272960+00:00",
   "ZBCN/USDT|CE Buy-Only|Chandelier Cross|0.002104|Base+ETH": "2026-09-26T07:08:01.649104+00:00",
-  "PEAQ/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.04198|N/A": "2026-09-26T07:08:02.029386+00:00"
+  "PEAQ/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.04198|N/A": "2026-09-26T07:08:02.029386+00:00",
+  "STX/USDT|Union AB|Ichimoku+MS|0.3461|Baseline": "2026-09-26T08:02:40.695922+00:00",
+  "STX/USDT|Union AB|EMA+Breakout|0.3461|Baseline": "2026-09-26T08:02:41.107516+00:00",
+  "SUI/USDT|Pullback-in-Uptrend|EMA20 Pullback|1.1627|N/A": "2026-09-26T08:02:41.504924+00:00",
+  "STX/USDT|Union AB Backup Tier|Ichimoku+MS|0.3461|N/A": "2026-09-26T08:02:41.905429+00:00",
+  "STX/USDT|Union AB Backup Tier|EMA+Breakout|0.3461|N/A": "2026-09-26T08:02:42.299577+00:00",
+  "STX/USDT|Donchian Breakout|20-period High|0.3461|N/A": "2026-09-26T08:02:42.699255+00:00",
+  "SENT/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.02338|N/A": "2026-09-26T08:02:43.097751+00:00",
+  "KMNO/USDT|Donchian Breakout|20-period High|0.044138|N/A": "2026-09-26T08:02:43.514684+00:00"
 }
