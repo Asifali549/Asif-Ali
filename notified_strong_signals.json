@@ -95,5 +95,13 @@
   "SOMI/USDT|Donchian Breakout|20-period High|0.2248|N/A": "2026-09-26T18:04:52.764792+00:00",
   "SUPER/USDT|Donchian Breakout|20-period High|0.1913|N/A": "2026-09-26T18:45:17.576594+00:00",
   "ENA/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.272|N/A": "2026-09-26T19:08:33.440442+00:00",
-  "SOL/USDT|Pullback-in-Uptrend|EMA20 Pullback|121.14|N/A": "2026-09-26T20:02:43.126519+00:00"
+  "SOL/USDT|Pullback-in-Uptrend|EMA20 Pullback|121.14|N/A": "2026-09-26T20:02:43.126519+00:00",
+  "ZEC/USDT|Union AB|Ichimoku+MS|1682.704|Baseline+52W": "2026-09-26T22:04:12.731447+00:00",
+  "ZEC/USDT|Union AB|EMA+Breakout|1682.704|Baseline+52W": "2026-09-26T22:04:13.137251+00:00",
+  "NEAR/USDT|Pullback-in-Uptrend|EMA20 Pullback|5.0413|N/A": "2026-09-26T22:04:13.532273+00:00",
+  "NEAR/USDT|Donchian Breakout|20-period High|5.0413|N/A": "2026-09-26T22:04:13.926131+00:00",
+  "ZEC/USDT|Union AB Backup Tier|Ichimoku+MS|1682.704|N/A": "2026-09-26T22:04:14.326358+00:00",
+  "ZEC/USDT|Union AB Backup Tier|EMA+Breakout|1682.704|N/A": "2026-09-26T22:04:14.791137+00:00",
+  "ZEN/USDT|Pullback-in-Uptrend|EMA20 Pullback|8.102|N/A": "2026-09-26T22:04:16.289217+00:00",
+  "SOMI/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.2184|N/A": "2026-09-26T22:04:16.663803+00:00"
 }
