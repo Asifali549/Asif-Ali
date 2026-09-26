@@ -104,5 +104,20 @@
   "SOMI/USDT|Union AB|EMA+Breakout|0.2166|Baseline": "2026-09-26T09:11:20.517083+00:00",
   "SOMI/USDT|Union AB Backup Tier|EMA+Breakout|0.2166|N/A": "2026-09-26T09:11:21.049936+00:00",
   "ONDO/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.54939|N/A": "2026-09-26T10:05:05.615358+00:00",
-  "QNT/USDT|Donchian Breakout|20-period High|107.758|N/A": "2026-09-26T10:05:06.028891+00:00"
+  "QNT/USDT|Donchian Breakout|20-period High|107.758|N/A": "2026-09-26T10:05:06.028891+00:00",
+  "DASH/USDT|Union AB|Ichimoku+MS|65.89|Baseline": "2026-09-26T11:06:15.052517+00:00",
+  "DASH/USDT|Union AB|EMA+Breakout|65.89|Baseline": "2026-09-26T11:06:15.586894+00:00",
+  "DASH/USDT|NEW AdvancedConfluence|CHoCH|65.89|N/A": "2026-09-26T11:06:16.150816+00:00",
+  "LINK/USDT|Pullback-in-Uptrend|EMA20 Pullback|14.2547|N/A": "2026-09-26T11:06:16.683300+00:00",
+  "LINK/USDT|Donchian Breakout|20-period High|14.2547|N/A": "2026-09-26T11:06:17.320125+00:00",
+  "LONGXIA/USDT|CE Buy-Only|Chandelier Cross|0.10489|Base+ETH": "2026-09-26T11:06:17.846745+00:00",
+  "PIEVERSE/USDT|CE Buy-Only|Chandelier Cross|1.561|Base+ETH": "2026-09-26T11:06:18.382441+00:00",
+  "BR/USDT|Donchian Breakout|20-period High|1.00172|N/A": "2026-09-26T11:06:18.901382+00:00",
+  "BSV/USDT|Pullback-in-Uptrend|EMA20 Pullback|21.648|N/A": "2026-09-26T11:06:19.488345+00:00",
+  "DASH/USDT|Union AB Backup Tier|Ichimoku+MS|65.89|N/A": "2026-09-26T11:06:20.081014+00:00",
+  "DASH/USDT|Union AB Backup Tier|EMA+Breakout|65.89|N/A": "2026-09-26T11:06:20.607960+00:00",
+  "DASH/USDT|Donchian Breakout|20-period High|65.89|N/A": "2026-09-26T11:06:21.154771+00:00",
+  "RAY/USDT|CE Buy-Only|Chandelier Cross|2.0103|Base+ETH": "2026-09-26T11:06:21.683485+00:00",
+  "PYTH/USDT|Donchian Breakout|20-period High|0.07623|N/A": "2026-09-26T11:06:22.222086+00:00",
+  "AR/USDT|Pullback-in-Uptrend|EMA20 Pullback|4.636|N/A": "2026-09-26T11:06:22.746682+00:00"
 }
