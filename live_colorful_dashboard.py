@@ -92,6 +92,80 @@ def add_live_price_columns(df):
     df["Live P/L %"] = ((df["Live Price"] - entry) / entry * 100).round(2)
     return df, True
 
+
+def _pkt_to_dt(series):
+    """'2026-09-25 12:00 PM PKT' jaisi strings ko asal waqt mein badalta hai (sahi tarteeb ke liye)."""
+    return pd.to_datetime(series.astype(str).str.replace(" PKT", "", regex=False),
+                          format="%Y-%m-%d %I:%M %p", errors="coerce")
+
+
+def show_bot_heartbeat(state, bot_name, max_minutes=60):
+    """Bot aakhri dafa kab chala - zyada der ho jaye to khabardar karta hai (loop toot gaya ho sakta hai)."""
+    last = state.get("last_updated")
+    if not last:
+        return
+    try:
+        mins = (pd.Timestamp.now(tz="UTC") - pd.Timestamp(last)).total_seconds() / 60
+    except Exception:
+        return
+    if mins > max_minutes:
+        st.warning(f"⚠️ {bot_name} aakhri dafa **{mins/60:.1f} ghante** pehle chala tha — shayad ruk gaya hai. "
+                   f"GitHub → Actions mein check karein aur zaroorat ho to 'Run workflow' dabayein.")
+    else:
+        st.caption(f"🕐 {bot_name} aakhri dafa {mins:.0f} min pehle chala.")
+
+
+def show_bot_open_trades(open_positions, title, key_is_symbol, cash):
+    """Bot ki khuli trades - live qeemat, live P/L, SL tak faasla aur Live Equity ke sath."""
+    rows = []
+    for key, pos in open_positions.items():
+        coin = key if key_is_symbol else pos.get("symbol", key.split("|")[0])
+        system_label = pos.get("system", "CE Buy-Only")
+        if pos.get("combo"):
+            system_label += f" ({pos['combo']})"
+        rows.append({
+            "Coin": coin,
+            "System": system_label,
+            "Entry": pos.get("entry_price"),
+            "Trail Stop (SL)": pos.get("trail_stop"),
+            "TP": f"{pos.get('tp_price')}" if pos.get("tp_price") is not None else "N/A (trailing)",
+            "Capital ($)": pos.get("capital_allocated"),
+            "Last Run Price": pos.get("current_price"),
+            "Last Run P/L %": pos.get("unrealized_pnl_pct"),
+        })
+    df = pd.DataFrame(rows)
+    st.markdown(f"**🟢 {title}**")
+
+    prices = fetch_live_prices(tuple(sorted(df["Coin"].dropna().unique())))
+    if prices:
+        entry = pd.to_numeric(df["Entry"], errors="coerce")
+        sl = pd.to_numeric(df["Trail Stop (SL)"], errors="coerce")
+        cap = pd.to_numeric(df["Capital ($)"], errors="coerce")
+        live_px = df["Coin"].map(prices)
+        df["Live Price"] = live_px
+        df["Live P/L %"] = ((live_px - entry) / entry * 100).round(2)
+        df["Live P/L ($)"] = (cap * (live_px - entry) / entry).round(2)
+        df["SL tak faasla %"] = ((live_px - sl) / live_px * 100).round(2)
+        df["Halat"] = [
+            "—" if pd.isna(p) else ("⚠️ SL se neeche — agle run mein band" if p <= s else ("🟢 Nafa" if p >= e else "🔴 Nuqsan"))
+            for p, s, e in zip(live_px, sl, entry)
+        ]
+        order = ["Coin", "System", "Halat", "Entry", "Live Price", "Live P/L %", "Live P/L ($)",
+                 "Trail Stop (SL)", "SL tak faasla %", "TP", "Capital ($)"]
+        st.dataframe(df[order], use_container_width=True, hide_index=True)
+
+        live_open_value = (cap * live_px / entry).where(live_px.notna(), cap).sum()
+        open_pnl = df["Live P/L ($)"].fillna(0).sum()
+        live_equity = cash + live_open_value
+        st.caption(
+            f"💹 **Live:** khuli trades ka majmooi nafa/nuqsan **${open_pnl:+,.2f}** · "
+            f"**Live Equity ${live_equity:,.2f}** (Total Equity mein khuli trades ka nafa/nuqsan shamil nahi hota). "
+            f"Qeemat {pd.Timestamp.now(tz='Asia/Karachi').strftime('%I:%M %p')} PKT ki — fees shamil nahi."
+        )
+    else:
+        st.dataframe(df, use_container_width=True, hide_index=True)
+        st.caption("⚠️ Live qeemat is waqt nahi mil saki — 'Last Run Price' bot ke pichle run ki qeemat hai.")
+
 SYSTEM_ORDER = [
     "Union AB", "NEW AdvancedConfluence", "Union AB Backup Tier", "CE Buy-Only",
     "Pullback-in-Uptrend", "Donchian Breakout",
@@ -632,7 +706,13 @@ if os.path.exists("closed_trades_log.csv"):
     _df = pd.read_csv("closed_trades_log.csv")
     if len(_df) > 0 and "Signal Time (PKT)" in _df.columns:
         _df = _df.rename(columns={"Signal Time (PKT)": "entry_time_pkt"})
-        _df["is_win"] = _df["Exit Reason"] == "TARGET"
+        # Win = nafa par band (P/L % > 0). Pehle sirf "TARGET" ko win gina jata tha - is se CE/Pullback/
+        # Donchian (jin mein TP hota hi nahi, trailing stop par nafa mein band hoti hain) ki jeet bhi
+        # ghalti se LOSS gini jati thi.
+        if "P/L %" in _df.columns:
+            _df["is_win"] = pd.to_numeric(_df["P/L %"], errors="coerce") > 0
+        else:
+            _df["is_win"] = _df["Exit Reason"] == "TARGET"
         session_sources.append(("Live Screener (sab systems)", _df[["entry_time_pkt", "is_win"]]))
 if os.path.exists("manual_bot_closed_trades.csv"):
     _df = pd.read_csv("manual_bot_closed_trades.csv")
@@ -1028,25 +1108,10 @@ if _mb_state_loaded is not None:
     c2.metric("Free Cash", f"${cash:,.2f}")
     c3.metric("Open Positions", f"{len(open_positions)} / {mb_state.get('max_concurrent_positions', 8)}")
     c4.metric("Per-Trade Size", f"${mb_state.get('position_size_usd', 100):,.2f}")
+    show_bot_heartbeat(mb_state, "Manual Bot")
 
     if len(open_positions) > 0:
-        st.markdown("**🟢 Abhi Khuli Hui Manual Trades**")
-        rows = []
-        for symbol, pos in open_positions.items():
-            system_label = pos.get("system", "CE Buy-Only")
-            if pos.get("combo"):
-                system_label += f" ({pos['combo']})"
-            rows.append({
-                "Coin": symbol,
-                "System": system_label,
-                "Entry": pos.get("entry_price"),
-                "Current": pos.get("current_price"),
-                "Trail Stop (SL)": pos.get("trail_stop"),
-                "TP": f"{pos.get('tp_price')}" if pos.get("tp_price") is not None else "N/A (trailing)",
-                "Unrealized P/L %": pos.get("unrealized_pnl_pct"),
-                "Capital ($)": pos.get("capital_allocated"),
-            })
-        st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+        show_bot_open_trades(open_positions, "Abhi Khuli Hui Manual Trades", key_is_symbol=True, cash=cash)
     else:
         st.caption("Abhi koi manual trade khuli nahi hai — coin 'manual_watchlist.json' mein daal kar feed karein.")
 
@@ -1069,7 +1134,8 @@ if _mb_state_loaded is not None:
 
             show_mb = st.checkbox("Poori Manual-Trade History Dikhayein", value=False, key="show_manual_bot_log")
             if show_mb:
-                st.dataframe(df_mb_closed.sort_values("exit_time_pkt", ascending=False), use_container_width=True, hide_index=True)
+                _mb_sorted = df_mb_closed.assign(_t=_pkt_to_dt(df_mb_closed["exit_time_pkt"])).sort_values("_t", ascending=False).drop(columns="_t")
+                st.dataframe(_mb_sorted, use_container_width=True, hide_index=True)
 
             mb_csv = df_mb_closed.to_csv(index=False).encode("utf-8")
             st.download_button("📥 Manual Trades CSV Download Karein", mb_csv, "manual_bot_closed_trades.csv", "text/csv", key="dl_manual_bot")
@@ -1085,10 +1151,11 @@ else:
 st.markdown("---")
 st.header("🎲 Auto-Scan Trade Bot (Dummy/Paper — Sab 5 Systems Khud Scan Karta Hai)")
 st.caption(
-    "Yeh manual bot ka 'auto' sāthi hai — khud 150 coins scan karta hai aur jaise hi kisi bhi "
-    "system (Union AB, NEW AdvancedConfluence, CE Buy-Only, Pullback-in-Uptrend, Donchian Breakout) "
-    "ka fresh signal bane, khud hi wahi (paper/virtual) trade le leta hai — koi manual feed ki zaroorat "
-    "nahi. Capital/ledger manual bot se BILKUL ALAG hai. Asal paisa yahan bhi risk mein nahi (paper)."
+    "Yeh manual bot ka 'auto' sāthi hai — khud 150 coins scan karta hai (Union AB, NEW AdvancedConfluence, "
+    "CE Buy-Only, Pullback-in-Uptrend, Donchian Breakout) aur sirf MAZBOOT signal par foran paper trade leta hai: "
+    "Union AB/NEW sirf 'Strong' verdict, CE sirf ETH bullish, sirf taaza (aakhri band candle ka) signal, "
+    "ek coin par ek trade. BTC/ETH girne par, ya lagatar SL par, nayi entry khud ruk jati hai. "
+    "Capital/ledger manual bot se BILKUL ALAG hai. Asal paisa risk mein nahi (paper)."
 )
 
 # ---- ⏸️ / ▶️ Auto Bot ko rokne / chalane ka button ----
@@ -1155,24 +1222,10 @@ if _ab_state_loaded is not None:
     elif _mlevel == "OK":
         st.caption(f"✅ Market normal — bot nayi entry le sakta hai. ({_minfo})")
 
+    show_bot_heartbeat(ab_state, "Auto Bot")
+
     if len(open_positions) > 0:
-        st.markdown("**🟢 Abhi Khuli Hui Auto Trades**")
-        rows = []
-        for key, pos in open_positions.items():
-            system_label = pos.get("system", "CE Buy-Only")
-            if pos.get("combo"):
-                system_label += f" ({pos['combo']})"
-            rows.append({
-                "Coin": pos.get("symbol", key.split("|")[0]),
-                "System": system_label,
-                "Entry": pos.get("entry_price"),
-                "Current": pos.get("current_price"),
-                "Trail Stop (SL)": pos.get("trail_stop"),
-                "TP": f"{pos.get('tp_price')}" if pos.get("tp_price") is not None else "N/A (trailing)",
-                "Unrealized P/L %": pos.get("unrealized_pnl_pct"),
-                "Capital ($)": pos.get("capital_allocated"),
-            })
-        st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+        show_bot_open_trades(open_positions, "Abhi Khuli Hui Auto Trades", key_is_symbol=False, cash=cash)
     else:
         st.caption("Abhi koi auto trade khuli nahi hai.")
 
@@ -1204,7 +1257,8 @@ if _ab_state_loaded is not None:
 
             show_ab = st.checkbox("Poori Auto-Trade History Dikhayein", value=False, key="show_auto_bot_log")
             if show_ab:
-                st.dataframe(df_ab_closed.sort_values("exit_time_pkt", ascending=False), use_container_width=True, hide_index=True)
+                _ab_sorted = df_ab_closed.assign(_t=_pkt_to_dt(df_ab_closed["exit_time_pkt"])).sort_values("_t", ascending=False).drop(columns="_t")
+                st.dataframe(_ab_sorted, use_container_width=True, hide_index=True)
 
             ab_csv = df_ab_closed.to_csv(index=False).encode("utf-8")
             st.download_button("📥 Auto Trades CSV Download Karein", ab_csv, "auto_bot_closed_trades.csv", "text/csv", key="dl_auto_bot")
@@ -1216,4 +1270,3 @@ else:
         "'.github/workflows/auto_scan_trade_bot.yml' hona chahiye, chalne ke thodi der baad yahan "
         "result nazar aayega."
     )
- 
