@@ -28,6 +28,9 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run auto-scan trade bot
+        env:
+          # Dashboard ke "Rokein / Chalayein" button ki taaza halat GitHub se parhne ke liye
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python auto_scan_trade_bot.py
 
       - name: Commit and push results
