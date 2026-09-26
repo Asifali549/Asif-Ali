@@ -96,5 +96,11 @@
   "LTC/USDT|Pullback-in-Uptrend|EMA20 Pullback|72.93|N/A": "2026-09-26T15:04:57.577423+00:00",
   "ARB/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.2257|N/A": "2026-09-26T15:04:57.959508+00:00",
   "KMNO/USDT|Union AB Backup Tier|EMA+Breakout|0.05065|N/A": "2026-09-26T15:04:58.319771+00:00",
-  "PEAQ/USDT|Donchian Breakout|20-period High|0.04348|N/A": "2026-09-26T15:04:58.707542+00:00"
+  "PEAQ/USDT|Donchian Breakout|20-period High|0.04348|N/A": "2026-09-26T15:04:58.707542+00:00",
+  "WLD/USDT|NEW AdvancedConfluence|CHoCH|0.541|N/A": "2026-09-26T16:06:18.088854+00:00",
+  "BSV/USDT|Donchian Breakout|20-period High|21.881|N/A": "2026-09-26T16:06:18.701061+00:00",
+  "POL/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.12|N/A": "2026-09-26T16:06:19.291424+00:00",
+  "DGAI/USDT|CE Buy-Only|Chandelier Cross|1.01724|Base+ETH": "2026-09-26T16:06:19.894692+00:00",
+  "H/USDT|CE Buy-Only|Chandelier Cross|0.070762|Base+ETH": "2026-09-26T16:06:20.549261+00:00",
+  "RAY/USDT|Pullback-in-Uptrend|EMA20 Pullback|2.0485|N/A": "2026-09-26T16:06:21.165164+00:00"
 }
