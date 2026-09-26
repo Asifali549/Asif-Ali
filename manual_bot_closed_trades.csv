@@ -1,3 +1,4 @@
 symbol,system,entry_time_pkt,exit_time_pkt,entry_price,exit_price,exit_reason,capital_allocated_usd,gross_return_pct,net_return_pct,realized_pnl_usd,result
 RENDER/USDT,NEW AdvancedConfluence,2026-09-25 08:00 PM PKT,2026-09-26 02:00 PM PKT,1.913,2.00075,TP,100.0,4.587,4.387,4.387,WIN
 KAS/USDT,NEW AdvancedConfluence,2026-09-25 07:00 PM PKT,2026-09-26 03:00 PM PKT,0.04193,0.0446375,TP,100.0,6.457,6.257,6.2572,WIN
+INJ/USDT,Pullback-in-Uptrend,2026-09-25 08:00 PM PKT,2026-09-26 06:00 PM PKT,8.165,7.71903125,SL,100.0,-5.462,-5.662,-5.662,LOSS
