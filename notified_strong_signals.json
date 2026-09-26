@@ -1,5 +1,4 @@
 {
-  "ZEN/USDT|NEW AdvancedConfluence|CHoCH|7.748|N/A": "2026-09-25T19:03:00.141445+00:00",
   "CP/USDT|NEW AdvancedConfluence|CHoCH|0.01343|N/A": "2026-09-25T20:01:57.314321+00:00",
   "AXL/USDT|CE Buy-Only|Chandelier Cross|0.05359|Base+ETH": "2026-09-25T20:01:57.705176+00:00",
   "OP/USDT|NEW AdvancedConfluence|CHoCH|0.1441|N/A": "2026-09-25T21:00:22.176948+00:00",
@@ -98,5 +97,6 @@
   "ZEC/USDT|Donchian Breakout|20-period High|1569.102|N/A": "2026-09-26T17:02:33.368828+00:00",
   "AERO/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.8864|N/A": "2026-09-26T18:04:52.329018+00:00",
   "SOMI/USDT|Donchian Breakout|20-period High|0.2248|N/A": "2026-09-26T18:04:52.764792+00:00",
-  "SUPER/USDT|Donchian Breakout|20-period High|0.1913|N/A": "2026-09-26T18:45:17.576594+00:00"
+  "SUPER/USDT|Donchian Breakout|20-period High|0.1913|N/A": "2026-09-26T18:45:17.576594+00:00",
+  "ENA/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.272|N/A": "2026-09-26T19:08:33.440442+00:00"
 }
