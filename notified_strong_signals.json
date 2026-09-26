@@ -1,5 +1,4 @@
 {
-  "ZK/USDT|CE Buy-Only|Chandelier Cross|0.01197|Base+ETH": "2026-09-25T02:00:43.744614+00:00",
   "ADI/USDT|CE Buy-Only|Chandelier Cross|8.4214|Base+ETH": "2026-09-25T02:07:44.934737+00:00",
   "AKE/USDT|CE Buy-Only|Chandelier Cross|0.0389|Base+ETH": "2026-09-25T04:03:50.474740+00:00",
   "DASH/USDT|Pullback-in-Uptrend|EMA20 Pullback|62.84|N/A": "2026-09-25T04:03:51.034625+00:00",
@@ -73,5 +72,9 @@
   "QI/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.003556|N/A": "2026-09-26T00:01:05.496152+00:00",
   "BR/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.96402|N/A": "2026-09-26T01:00:56.300720+00:00",
   "CRCLX/USDT|CE Buy-Only|Chandelier Cross|87.54|Base+ETH": "2026-09-26T01:00:57.033502+00:00",
-  "STX/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.3287|N/A": "2026-09-26T01:00:57.751316+00:00"
+  "STX/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.3287|N/A": "2026-09-26T01:00:57.751316+00:00",
+  "SOL/USDT|Pullback-in-Uptrend|EMA20 Pullback|122.05|N/A": "2026-09-26T02:03:40.659965+00:00",
+  "KAS/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.04249|N/A": "2026-09-26T02:03:41.477760+00:00",
+  "ZEN/USDT|Pullback-in-Uptrend|EMA20 Pullback|7.662|N/A": "2026-09-26T02:03:42.236453+00:00",
+  "KMNO/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.041511|N/A": "2026-09-26T02:03:43.043384+00:00"
 }
