@@ -1,0 +1,2 @@
+symbol,system,entry_time_pkt,exit_time_pkt,entry_price,exit_price,exit_reason,capital_allocated_usd,gross_return_pct,net_return_pct,realized_pnl_usd,result
+RENDER/USDT,NEW AdvancedConfluence,2026-09-25 08:00 PM PKT,2026-09-26 02:00 PM PKT,1.913,2.00075,TP,100.0,4.587,4.387,4.387,WIN
