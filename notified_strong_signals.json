@@ -1,12 +1,4 @@
 {
-  "MUBARAK/USDT|Union AB|EMA+Breakout|0.05134|Baseline": "2026-09-25T15:01:21.093057+00:00",
-  "ARB/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.2229|N/A": "2026-09-25T15:01:21.761150+00:00",
-  "PIEVERSE/USDT|Pullback-in-Uptrend|EMA20 Pullback|1.6417|N/A": "2026-09-25T15:01:22.458054+00:00",
-  "PIEVERSE/USDT|Donchian Breakout|20-period High|1.6417|N/A": "2026-09-25T15:01:23.130383+00:00",
-  "TMX/USDT|CE Buy-Only|Chandelier Cross|0.01263|Base+ETH": "2026-09-25T15:01:23.795794+00:00",
-  "RAY/USDT|Pullback-in-Uptrend|EMA20 Pullback|2.0856|N/A": "2026-09-25T15:01:24.445825+00:00",
-  "TSLAX/USDT|CE Buy-Only|Chandelier Cross|371.41|Base+ETH": "2026-09-25T15:01:25.162325+00:00",
-  "MUBARAK/USDT|Union AB Backup Tier|EMA+Breakout|0.05134|N/A": "2026-09-25T15:01:25.881683+00:00",
   "KMNO/USDT|Donchian Breakout|20-period High|0.041865|N/A": "2026-09-25T16:09:24.365025+00:00",
   "ONDO/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.53456|N/A": "2026-09-25T17:02:14.981714+00:00",
   "SYN/USDT|CE Buy-Only|Chandelier Cross|0.1875|Base+ETH": "2026-09-25T17:02:15.469050+00:00",
@@ -97,5 +89,12 @@
   "LDO/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.491|N/A": "2026-09-26T14:04:05.674533+00:00",
   "ZEN/USDT|Union AB Backup Tier|EMA+Breakout|7.958|N/A": "2026-09-26T14:04:06.478665+00:00",
   "ZEN/USDT|Donchian Breakout|20-period High|7.958|N/A": "2026-09-26T14:04:07.262518+00:00",
-  "AR/USDT|Donchian Breakout|20-period High|4.822|N/A": "2026-09-26T14:04:08.013060+00:00"
+  "AR/USDT|Donchian Breakout|20-period High|4.822|N/A": "2026-09-26T14:04:08.013060+00:00",
+  "MARSCOIN/USDT|NEW AdvancedConfluence|CHoCH|0.1267|N/A": "2026-09-26T15:04:56.216604+00:00",
+  "KMNO/USDT|Union AB|EMA+Breakout|0.05065|Baseline": "2026-09-26T15:04:56.607590+00:00",
+  "ZEC/USDT|Pullback-in-Uptrend|EMA20 Pullback|1549.619|N/A": "2026-09-26T15:04:56.953683+00:00",
+  "LTC/USDT|Pullback-in-Uptrend|EMA20 Pullback|72.93|N/A": "2026-09-26T15:04:57.577423+00:00",
+  "ARB/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.2257|N/A": "2026-09-26T15:04:57.959508+00:00",
+  "KMNO/USDT|Union AB Backup Tier|EMA+Breakout|0.05065|N/A": "2026-09-26T15:04:58.319771+00:00",
+  "PEAQ/USDT|Donchian Breakout|20-period High|0.04348|N/A": "2026-09-26T15:04:58.707542+00:00"
 }
