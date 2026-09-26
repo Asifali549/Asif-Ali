@@ -143,5 +143,20 @@
   "open_position_count": 8,
   "max_concurrent_positions": 15,
   "position_size_usd": 100.0,
-  "last_updated": "2026-09-26T13:41:48.807125+00:00"
+  "taken_signals": {},
+  "recent_losses": [],
+  "pause_until": null,
+  "crash_until": null,
+  "market_level": "OK",
+  "market_info": "BTC 4h:-0.3% 24h:-0.8%, ETH 4h:-0.3% 24h:-1.3%",
+  "manual_pause": false,
+  "rules": {
+    "strong_only": true,
+    "strong_verdicts": [
+      "Strong"
+    ],
+    "max_signal_age_bars": 1,
+    "one_position_per_coin": true
+  },
+  "last_updated": "2026-09-26T13:49:15.306514+00:00"
 }
