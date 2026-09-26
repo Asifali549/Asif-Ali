@@ -61,7 +61,36 @@ COLORABLE_COLUMNS = (
     + [f"Chg {tf}" for tf in ALL_TIMEFRAMES]
 )
 
-COMPACT_COLUMNS = ["Rank", "System", "Category", "Coin", "Signal Time (PKT)", "Combo", "Overall Score %", "Verdict", "Entry", "Current", "P/L %", "Trail Stop", "Take Profit"]
+COMPACT_COLUMNS = ["Rank", "System", "Category", "Coin", "Signal Time (PKT)", "Combo", "Overall Score %", "Verdict", "Entry", "Live Price", "Live P/L %", "Current", "P/L %", "Trail Stop", "Take Profit"]
+
+
+@st.cache_data(ttl=60, show_spinner=False)
+def fetch_live_prices(symbols):
+    """Exchange (KuCoin) se abhi ki taaza qeemat - ek hi API call, 60 second cache."""
+    symbols = list(symbols)
+    if not symbols:
+        return {}
+    try:
+        ex = get_exchange()
+        tickers = ex.fetch_tickers(symbols)
+        return {s: float(t["last"]) for s, t in tickers.items() if t and t.get("last")}
+    except Exception:
+        return {}
+
+
+def add_live_price_columns(df):
+    """'Live Price' (abhi ki qeemat) aur 'Live P/L %' (Entry ke muqable) columns jorta hai.
+    'Current' = scan ke waqt ki qeemat (kuch minute purani ho sakti hai)."""
+    if df is None or len(df) == 0 or "Coin" not in df.columns:
+        return df, False
+    prices = fetch_live_prices(tuple(sorted(df["Coin"].dropna().unique())))
+    if not prices:
+        return df, False
+    df = df.copy()
+    df["Live Price"] = df["Coin"].map(prices)
+    entry = pd.to_numeric(df.get("Entry"), errors="coerce")
+    df["Live P/L %"] = ((df["Live Price"] - entry) / entry * 100).round(2)
+    return df, True
 
 SYSTEM_ORDER = [
     "Union AB", "NEW AdvancedConfluence", "Union AB Backup Tier", "CE Buy-Only",
@@ -225,6 +254,68 @@ def add_entries_to_github_watchlist(new_entries):
     return "ERROR", 0, "File baar baar badal rahi thi - thori der baad dobara koshish karein"
 
 
+AUTO_CONTROL_PATH = "auto_bot_control.json"
+
+
+def read_auto_control():
+    """Auto Bot button ki halat (app ki local copy). File na ho = chal raha hai."""
+    try:
+        with open(AUTO_CONTROL_PATH) as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else {"paused": False}
+    except Exception:
+        return {"paused": False}
+
+
+def write_auto_control(paused):
+    """auto_bot_control.json ko GitHub par likhta hai. Returns (ok, message)."""
+    try:
+        token = st.secrets.get("GITHUB_TOKEN")
+    except Exception:
+        token = None
+    if not token:
+        return False, "GITHUB_TOKEN Streamlit Secrets mein nahi mila"
+
+    api_url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{AUTO_CONTROL_PATH}"
+    headers = {"Authorization": f"token {token}", "Accept": "application/vnd.github.v3+json"}
+    body_obj = {
+        "paused": bool(paused),
+        "updated_utc": datetime.now(timezone.utc).isoformat(),
+        "by": "dashboard",
+    }
+    for attempt in range(3):
+        try:
+            get_resp = requests.get(api_url, headers=headers, params={"ref": GITHUB_BRANCH}, timeout=15)
+            if get_resp.status_code == 200:
+                sha = get_resp.json().get("sha")
+            elif get_resp.status_code == 404:
+                sha = None
+            else:
+                return False, f"GitHub API error {get_resp.status_code}: {get_resp.text[:200]}"
+            payload = {
+                "message": ("Auto Bot ROKA gaya" if paused else "Auto Bot dobara CHALAYA gaya") + " (dashboard se)",
+                "content": base64.b64encode(json.dumps(body_obj, indent=2).encode("utf-8")).decode("utf-8"),
+                "branch": GITHUB_BRANCH,
+            }
+            if sha:
+                payload["sha"] = sha
+            put_resp = requests.put(api_url, headers=headers, json=payload, timeout=15)
+            if put_resp.status_code in (200, 201):
+                try:
+                    with open(AUTO_CONTROL_PATH, "w") as f:
+                        json.dump(body_obj, f, indent=2)
+                except Exception:
+                    pass
+                return True, ""
+            if put_resp.status_code in (409, 422):
+                time.sleep(1.5)
+                continue
+            return False, f"GitHub API error {put_resp.status_code}: {put_resp.text[:200]}"
+        except Exception as exc:
+            return False, f"Error: {exc}"
+    return False, "GitHub par file baar baar badal rahi thi - dobara koshish karein"
+
+
 def live_row_to_watchlist_entry(row, amount=None):
     """Live screener ki line -> manual bot watchlist entry (sahi system/combo ke sath)."""
     system = row.get("System")
@@ -362,6 +453,19 @@ if os.path.exists("dashboard_signals.json"):
 
     if live_data["signals"]:
         df_all = pd.DataFrame(live_data["signals"])
+
+        lp1, lp2 = st.columns([3, 1])
+        if lp2.button("🔄 Live Qeemat Taaza", key="refresh_live_prices"):
+            fetch_live_prices.clear()
+        df_all, live_ok = add_live_price_columns(df_all)
+        if live_ok:
+            lp1.caption(
+                f"💹 **Live Price** = abhi ki qeemat ({pd.Timestamp.now(tz='Asia/Karachi').strftime('%I:%M %p')} PKT tak, "
+                "har minute taaza) · **Live P/L %** = Entry se abhi tak ka farq · "
+                "**Current** = scan ke waqt ki qeemat (thori purani)."
+            )
+        else:
+            lp1.caption("⚠️ Live qeemat is waqt exchange se nahi mil saki — 'Current' scan ke waqt ki qeemat hai.")
 
         present_systems = [s for s in SYSTEM_ORDER if "System" in df_all.columns and s in df_all["System"].unique()]
         if present_systems:
@@ -938,7 +1042,7 @@ if _mb_state_loaded is not None:
                 "Entry": pos.get("entry_price"),
                 "Current": pos.get("current_price"),
                 "Trail Stop (SL)": pos.get("trail_stop"),
-                "TP": pos.get("tp_price") if pos.get("tp_price") is not None else "N/A (trailing)",
+                "TP": f"{pos.get('tp_price')}" if pos.get("tp_price") is not None else "N/A (trailing)",
                 "Unrealized P/L %": pos.get("unrealized_pnl_pct"),
                 "Capital ($)": pos.get("capital_allocated"),
             })
@@ -986,6 +1090,32 @@ st.caption(
     "ka fresh signal bane, khud hi wahi (paper/virtual) trade le leta hai — koi manual feed ki zaroorat "
     "nahi. Capital/ledger manual bot se BILKUL ALAG hai. Asal paisa yahan bhi risk mein nahi (paper)."
 )
+
+# ---- ⏸️ / ▶️ Auto Bot ko rokne / chalane ka button ----
+_ctrl = read_auto_control()
+_is_paused = bool(_ctrl.get("paused"))
+_bc1, _bc2 = st.columns([3, 2])
+if _is_paused:
+    _bc1.error("⏸️ **Auto Bot ROKA HUA hai** — koi nayi trade nahi lega. "
+               "Khuli trades ka SL/TP barabar chalta rahega.")
+    _btn = _bc2.button("▶️ Bot Dobara Chalayein", type="primary", key="auto_bot_resume", use_container_width=True)
+else:
+    _bc1.success("▶️ **Auto Bot chal raha hai** — naye signal par trade le sakta hai.")
+    _btn = _bc2.button("⏸️ Nayi Entry Rokein", key="auto_bot_pause", use_container_width=True)
+if _btn:
+    _ok, _msg = write_auto_control(not _is_paused)
+    if _ok:
+        st.session_state["auto_ctrl_msg"] = (
+            "⏸️ Bot roka gaya — agle check par (aam taur par chand minute) nayi trade lena band kar dega."
+            if not _is_paused else
+            "▶️ Bot dobara chalaya gaya — agle run se naye signal par trade lena shuru karega."
+        )
+        st.rerun()
+    else:
+        st.error(f"❌ Button ki halat GitHub par save nahi ho saki: {_msg}")
+if st.session_state.get("auto_ctrl_msg"):
+    st.info(st.session_state.pop("auto_ctrl_msg"))
+
 _ab_state_loaded = _safe_json_load("auto_bot_state.json") if os.path.exists("auto_bot_state.json") else None
 if os.path.exists("auto_bot_state.json") and _ab_state_loaded is None:
     st.error("⚠️ 'auto_bot_state.json' file corrupt ho gayi hai — bot ke agle run par yeh khud theek ho jayegi.")
@@ -1005,6 +1135,26 @@ if _ab_state_loaded is not None:
     c3.metric("Open Positions", f"{len(open_positions)} / {ab_state.get('max_concurrent_positions', 15)}")
     c4.metric("Per-Trade Size", f"${ab_state.get('position_size_usd', 100):,.2f}")
 
+    def _pkt(iso):
+        try:
+            return pd.Timestamp(iso).tz_convert("Asia/Karachi").strftime("%d %b %I:%M %p PKT")
+        except Exception:
+            return str(iso)
+
+    _now = pd.Timestamp.now(tz="UTC")
+    _crash = ab_state.get("crash_until")
+    _pause = ab_state.get("pause_until")
+    _mlevel = ab_state.get("market_level")
+    _minfo = ab_state.get("market_info", "")
+    if _crash and pd.Timestamp(_crash) > _now:
+        st.error(f"🚨 **Market Crash Guard:** BTC/ETH mein bari giravat — nayi entry **{_pkt(_crash)}** tak band (khuli trades apne SL par chal rahi hain). ({_minfo})")
+    elif _pause and pd.Timestamp(_pause) > _now:
+        st.warning(f"⏸️ **Loss-streak break:** lagatar SL ki wajah se nayi entry **{_pkt(_pause)}** tak band.")
+    elif _mlevel == "CAUTION":
+        st.warning(f"⚠️ **Ehtiyat:** BTC/ETH tezi se gir rahe hain — nayi entry abhi ruki hui hai. ({_minfo})")
+    elif _mlevel == "OK":
+        st.caption(f"✅ Market normal — bot nayi entry le sakta hai. ({_minfo})")
+
     if len(open_positions) > 0:
         st.markdown("**🟢 Abhi Khuli Hui Auto Trades**")
         rows = []
@@ -1018,7 +1168,7 @@ if _ab_state_loaded is not None:
                 "Entry": pos.get("entry_price"),
                 "Current": pos.get("current_price"),
                 "Trail Stop (SL)": pos.get("trail_stop"),
-                "TP": pos.get("tp_price") if pos.get("tp_price") is not None else "N/A (trailing)",
+                "TP": f"{pos.get('tp_price')}" if pos.get("tp_price") is not None else "N/A (trailing)",
                 "Unrealized P/L %": pos.get("unrealized_pnl_pct"),
                 "Capital ($)": pos.get("capital_allocated"),
             })
