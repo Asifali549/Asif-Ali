@@ -1,10 +1,4 @@
 {
-  "ZEN/USDT|Union AB|EMA+Breakout|7.958|Baseline": "2026-09-26T14:04:04.102057+00:00",
-  "PHA/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.0821|N/A": "2026-09-26T14:04:04.885563+00:00",
-  "LDO/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.491|N/A": "2026-09-26T14:04:05.674533+00:00",
-  "ZEN/USDT|Union AB Backup Tier|EMA+Breakout|7.958|N/A": "2026-09-26T14:04:06.478665+00:00",
-  "ZEN/USDT|Donchian Breakout|20-period High|7.958|N/A": "2026-09-26T14:04:07.262518+00:00",
-  "AR/USDT|Donchian Breakout|20-period High|4.822|N/A": "2026-09-26T14:04:08.013060+00:00",
   "MARSCOIN/USDT|NEW AdvancedConfluence|CHoCH|0.1267|N/A": "2026-09-26T15:04:56.216604+00:00",
   "KMNO/USDT|Union AB|EMA+Breakout|0.05065|Baseline": "2026-09-26T15:04:56.607590+00:00",
   "ZEC/USDT|Pullback-in-Uptrend|EMA20 Pullback|1549.619|N/A": "2026-09-26T15:04:56.953683+00:00",
@@ -92,5 +86,9 @@
   "PLUME/USDT|Donchian Breakout|20-period High|0.018971|N/A": "2026-09-27T11:05:11.039993+00:00",
   "QI/USDT|Union AB|EMA+Breakout|0.003775|Baseline": "2026-09-27T12:05:32.696903+00:00",
   "QI/USDT|Union AB Backup Tier|EMA+Breakout|0.003775|N/A": "2026-09-27T12:05:33.320938+00:00",
-  "PHA/USDT|CE Buy-Only|Chandelier Cross|0.0716|Base+ETH": "2026-09-27T12:05:33.854125+00:00"
+  "PHA/USDT|CE Buy-Only|Chandelier Cross|0.0716|Base+ETH": "2026-09-27T12:05:33.854125+00:00",
+  "NEAR/USDT|Pullback-in-Uptrend|EMA20 Pullback|5.2546|N/A": "2026-09-27T14:05:13.352355+00:00",
+  "QNT/USDT|Pullback-in-Uptrend|EMA20 Pullback|162.281|N/A": "2026-09-27T14:05:13.851806+00:00",
+  "ONDO/USDT|Donchian Breakout|20-period High|0.5506|N/A": "2026-09-27T14:05:14.257975+00:00",
+  "MET/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.3588|N/A": "2026-09-27T14:05:14.666437+00:00"
 }
