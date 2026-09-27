@@ -1,8 +1,4 @@
 {
-  "KAS/USDT|Union AB|EMA+Breakout|0.04422|Baseline": "2026-09-26T09:03:39.965569+00:00",
-  "KAS/USDT|Union AB Backup Tier|EMA+Breakout|0.04422|N/A": "2026-09-26T09:03:40.630057+00:00",
-  "MUBARAK/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.05371|N/A": "2026-09-26T09:03:41.262417+00:00",
-  "CARDS/USDT|CE Buy-Only|Chandelier Cross|0.18|Base+ETH": "2026-09-26T09:03:41.933010+00:00",
   "SOMI/USDT|Union AB|EMA+Breakout|0.2166|Baseline": "2026-09-26T09:11:20.517083+00:00",
   "SOMI/USDT|Union AB Backup Tier|EMA+Breakout|0.2166|N/A": "2026-09-26T09:11:21.049936+00:00",
   "ONDO/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.54939|N/A": "2026-09-26T10:05:05.615358+00:00",
@@ -101,5 +97,12 @@
   "VVV/USDT|Donchian Breakout|20-period High|30.656|N/A": "2026-09-27T08:04:11.337571+00:00",
   "POL/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.1213|N/A": "2026-09-27T08:04:11.890287+00:00",
   "POL/USDT|Donchian Breakout|20-period High|0.1213|N/A": "2026-09-27T08:04:12.479019+00:00",
-  "SUPER/USDT|Donchian Breakout|20-period High|0.2139|N/A": "2026-09-27T08:04:13.067024+00:00"
+  "SUPER/USDT|Donchian Breakout|20-period High|0.2139|N/A": "2026-09-27T08:04:13.067024+00:00",
+  "VELO/USDT|NEW AdvancedConfluence|CHoCH|0.005002|N/A": "2026-09-27T09:04:26.085052+00:00",
+  "ZIG/USDT|NEW AdvancedConfluence|CHoCH|0.05293|N/A": "2026-09-27T09:04:26.598052+00:00",
+  "ONDO/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.54629|N/A": "2026-09-27T09:04:27.103588+00:00",
+  "BSV/USDT|Pullback-in-Uptrend|EMA20 Pullback|21.777|N/A": "2026-09-27T09:04:27.605259+00:00",
+  "CARDS/USDT|CE Buy-Only|Chandelier Cross|0.1808|Base+ETH": "2026-09-27T09:04:28.096808+00:00",
+  "AURORA/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.07346|N/A": "2026-09-27T09:04:28.620777+00:00",
+  "PLUME/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.0185|N/A": "2026-09-27T09:04:29.131743+00:00"
 }
