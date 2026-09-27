@@ -1,0 +1,34 @@
+name: CE Diagnostic Trades Test
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run CE diagnostic trades dump
+        run: python ce_diagnostic_trades.py
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add ce_diagnostic_trades.csv ce_diagnostic_summary.txt
+          git diff --staged --quiet && exit 0
+          git commit -m "CE diagnostic trade-level dump"
+          git push origin HEAD:main
