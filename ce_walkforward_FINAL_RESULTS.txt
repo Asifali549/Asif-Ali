@@ -1,0 +1,35 @@
+
+
+########## CE BUY-ONLY - FINAL WALK-FORWARD (order-fixed + outlier-sensitivity) ##########
+(Entry 11/4.5, Exit 16/3.0, top 150 coins pool, 1h, 8760 candles)
+
+
+1) Baseline (Top-150, koi filter nahi)
+  POORA: Trades=9919, Win Rate=58.42%, PF=5.411
+  Top-10 outlier trades NIKAAL KAR: Trades=9909, Win Rate=58.38%, PF=4.894
+  -> In 10 trades ka PF mein hissa: 5.41 -> 4.89
+
+2) + ETH Regime Filter (Top-150)
+  POORA: Trades=1754, Win Rate=56.44%, PF=4.801
+  Top-10 outlier trades NIKAAL KAR: Trades=1744, Win Rate=56.19%, PF=3.743
+  -> In 10 trades ka PF mein hissa: 4.80 -> 3.74
+
+3) Top-60 sirf (liquidity)
+  POORA: Trades=3395, Win Rate=56.29%, PF=4.615
+  Top-10 outlier trades NIKAAL KAR: Trades=3385, Win Rate=56.16%, PF=3.872
+  -> In 10 trades ka PF mein hissa: 4.61 -> 3.87
+
+4) Top-100 sirf (liquidity)
+  POORA: Trades=5717, Win Rate=57.22%, PF=4.955
+  Top-10 outlier trades NIKAAL KAR: Trades=5707, Win Rate=57.14%, PF=4.253
+  -> In 10 trades ka PF mein hissa: 4.95 -> 4.25
+
+5) Top-60 + ETH Regime
+  POORA: Trades=589, Win Rate=56.20%, PF=3.908
+  Top-10 outlier trades NIKAAL KAR: Trades=579, Win Rate=55.44%, PF=2.615
+  -> In 10 trades ka PF mein hissa: 3.91 -> 2.62
+
+6) Top-100 + ETH Regime
+  POORA: Trades=1060, Win Rate=55.57%, PF=4.765
+  Top-10 outlier trades NIKAAL KAR: Trades=1050, Win Rate=55.14%, PF=3.405
+  -> In 10 trades ka PF mein hissa: 4.77 -> 3.41
