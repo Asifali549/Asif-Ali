@@ -191,6 +191,25 @@ def main():
         emit(f"Trades={len(df_all)}, Win Rate={win_rate:.2f}%, PF={pf:.3f}" if pf else f"Trades={len(df_all)}, Win Rate={win_rate:.2f}%, PF=N/A")
         emit(f"Avg bars held (sab trades): {df_all['bars_held'].mean():.1f}")
 
+    if len(df_all) > 0:
+        emit("\n----- TOP 15 sab se zyada return wali trades (outlier check ke liye) -----")
+        top15 = df_all.sort_values("return_pct", ascending=False).head(15)
+        for _, r in top15.iterrows():
+            emit(
+                f"{r['symbol']:>12} | signal={r['signal_time']} entry={r['entry_time']} "
+                f"exit={r['exit_time']} | entry_px={r['entry_price']} exit_px={r['exit_price']} "
+                f"| bars={r['bars_held']} | return={r['return_pct']}%"
+            )
+
+        emit("\n----- 15 sab se zyada NUQSAN wali trades (outlier check ke liye) -----")
+        bottom15 = df_all.sort_values("return_pct", ascending=True).head(15)
+        for _, r in bottom15.iterrows():
+            emit(
+                f"{r['symbol']:>12} | signal={r['signal_time']} entry={r['entry_time']} "
+                f"exit={r['exit_time']} | entry_px={r['entry_price']} exit_px={r['exit_price']} "
+                f"| bars={r['bars_held']} | return={r['return_pct']}%"
+            )
+
     with open("ce_diagnostic_v2_summary.txt", "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
     print("\n[SAVE] ce_diagnostic_v2_summary.txt bhi ban gayi.")
