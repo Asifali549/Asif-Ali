@@ -1,12 +1,4 @@
 {
-  "STX/USDT|Union AB|Ichimoku+MS|0.3461|Baseline": "2026-09-26T08:02:40.695922+00:00",
-  "STX/USDT|Union AB|EMA+Breakout|0.3461|Baseline": "2026-09-26T08:02:41.107516+00:00",
-  "SUI/USDT|Pullback-in-Uptrend|EMA20 Pullback|1.1627|N/A": "2026-09-26T08:02:41.504924+00:00",
-  "STX/USDT|Union AB Backup Tier|Ichimoku+MS|0.3461|N/A": "2026-09-26T08:02:41.905429+00:00",
-  "STX/USDT|Union AB Backup Tier|EMA+Breakout|0.3461|N/A": "2026-09-26T08:02:42.299577+00:00",
-  "STX/USDT|Donchian Breakout|20-period High|0.3461|N/A": "2026-09-26T08:02:42.699255+00:00",
-  "SENT/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.02338|N/A": "2026-09-26T08:02:43.097751+00:00",
-  "KMNO/USDT|Donchian Breakout|20-period High|0.044138|N/A": "2026-09-26T08:02:43.514684+00:00",
   "PYTH/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.07393|N/A": "2026-09-26T08:41:03.892791+00:00",
   "KAS/USDT|Union AB|EMA+Breakout|0.04422|Baseline": "2026-09-26T09:03:39.965569+00:00",
   "KAS/USDT|Union AB Backup Tier|EMA+Breakout|0.04422|N/A": "2026-09-26T09:03:40.630057+00:00",
@@ -98,5 +90,17 @@
   "UNI/USDT|Donchian Breakout|20-period High|9.9884|N/A": "2026-09-27T07:04:27.198185+00:00",
   "KONET/USDT|CE Buy-Only|Chandelier Cross|0.01803|Base+ETH": "2026-09-27T07:04:27.583380+00:00",
   "PAXG/USDT|CE Buy-Only|Chandelier Cross|4279.01|Base+ETH": "2026-09-27T07:04:27.991894+00:00",
-  "QI/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.003196|N/A": "2026-09-27T07:04:28.410631+00:00"
+  "QI/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.003196|N/A": "2026-09-27T07:04:28.410631+00:00",
+  "SOL/USDT|Union AB|Ichimoku+MS|124.11|Baseline": "2026-09-27T08:04:06.973038+00:00",
+  "SOL/USDT|Union AB|EMA+Breakout|124.11|Baseline": "2026-09-27T08:04:07.515560+00:00",
+  "SOL/USDT|Union AB Backup Tier|Ichimoku+MS|124.11|N/A": "2026-09-27T08:04:08.080488+00:00",
+  "SOL/USDT|Union AB Backup Tier|EMA+Breakout|124.11|N/A": "2026-09-27T08:04:08.610800+00:00",
+  "SOL/USDT|Donchian Breakout|20-period High|124.11|N/A": "2026-09-27T08:04:09.152266+00:00",
+  "ARB/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.2347|N/A": "2026-09-27T08:04:09.690300+00:00",
+  "ARB/USDT|Donchian Breakout|20-period High|0.2347|N/A": "2026-09-27T08:04:10.215406+00:00",
+  "VVV/USDT|Pullback-in-Uptrend|EMA20 Pullback|30.656|N/A": "2026-09-27T08:04:10.745784+00:00",
+  "VVV/USDT|Donchian Breakout|20-period High|30.656|N/A": "2026-09-27T08:04:11.337571+00:00",
+  "POL/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.1213|N/A": "2026-09-27T08:04:11.890287+00:00",
+  "POL/USDT|Donchian Breakout|20-period High|0.1213|N/A": "2026-09-27T08:04:12.479019+00:00",
+  "SUPER/USDT|Donchian Breakout|20-period High|0.2139|N/A": "2026-09-27T08:04:13.067024+00:00"
 }
