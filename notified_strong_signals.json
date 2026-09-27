@@ -1,6 +1,4 @@
 {
-  "AERO/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.8864|N/A": "2026-09-26T18:04:52.329018+00:00",
-  "SOMI/USDT|Donchian Breakout|20-period High|0.2248|N/A": "2026-09-26T18:04:52.764792+00:00",
   "SUPER/USDT|Donchian Breakout|20-period High|0.1913|N/A": "2026-09-26T18:45:17.576594+00:00",
   "ENA/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.272|N/A": "2026-09-26T19:08:33.440442+00:00",
   "SOL/USDT|Pullback-in-Uptrend|EMA20 Pullback|121.14|N/A": "2026-09-26T20:02:43.126519+00:00",
@@ -82,5 +80,9 @@
   "AERO/USDT|CE Buy-Only|Chandelier Cross|0.8279|Base+ETH": "2026-09-27T17:05:55.370759+00:00",
   "PYTH/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.08428|N/A": "2026-09-27T17:05:55.767650+00:00",
   "ZAMA/USDT|CE Buy-Only|Chandelier Cross|0.08192|Base+ETH": "2026-09-27T17:05:56.193556+00:00",
-  "AR/USDT|Donchian Breakout|20-period High|4.887|N/A": "2026-09-27T17:43:05.513538+00:00"
+  "AR/USDT|Donchian Breakout|20-period High|4.887|N/A": "2026-09-27T17:43:05.513538+00:00",
+  "ENA/USDT|Donchian Breakout|20-period High|0.2795|N/A": "2026-09-27T18:05:53.228983+00:00",
+  "YOM/USDT|CE Buy-Only|Chandelier Cross|0.01504|Base+ETH": "2026-09-27T18:05:53.616076+00:00",
+  "INJ/USDT|Pullback-in-Uptrend|EMA20 Pullback|7.952|N/A": "2026-09-27T18:05:54.022966+00:00",
+  "CHIP/USDT|CE Buy-Only|Chandelier Cross|0.047265|Base+ETH": "2026-09-27T18:05:54.406933+00:00"
 }
