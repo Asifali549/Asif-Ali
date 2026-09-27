@@ -1,5 +1,5 @@
 {
-  "cash": 511.5382,
+  "cash": 617.1435,
   "positions": {
     "NEAR/USDT": {
       "entry_time": "2026-09-25T15:00:00",
@@ -8,8 +8,8 @@
       "trail_stop": 4.9558875,
       "tp_price": 6.156475,
       "capital_allocated": 100.0,
-      "current_price": 5.235,
-      "unrealized_pnl_pct": 2.645,
+      "current_price": 5.1972,
+      "unrealized_pnl_pct": 1.904,
       "source": "manual",
       "system": "Union AB",
       "combo": "Ichimoku+MS",
@@ -24,8 +24,8 @@
       "trail_stop": 120.395,
       "tp_price": 131.0975,
       "capital_allocated": 100.0,
-      "current_price": 121.75,
-      "unrealized_pnl_pct": 1.365,
+      "current_price": 121.79,
+      "unrealized_pnl_pct": 1.399,
       "source": "manual",
       "system": "Union AB Backup Tier",
       "combo": "EMA+Breakout",
@@ -56,24 +56,8 @@
       "trail_stop": 9.5252625,
       "tp_price": null,
       "capital_allocated": 100.0,
-      "current_price": 9.6869,
-      "unrealized_pnl_pct": 1.027,
-      "source": "manual",
-      "system": "Pullback-in-Uptrend",
-      "combo": null,
-      "ce_period": 16,
-      "ce_multiplier": 4.5,
-      "use_fixed_tp": false
-    },
-    "DASH/USDT": {
-      "entry_time": "2026-09-26T09:00:00",
-      "entry_price": 63.11,
-      "initial_stop": 60.35375,
-      "trail_stop": 66.77375,
-      "tp_price": null,
-      "capital_allocated": 100.0,
-      "current_price": 67.23,
-      "unrealized_pnl_pct": 6.528,
+      "current_price": 9.6324,
+      "unrealized_pnl_pct": 0.459,
       "source": "manual",
       "system": "Pullback-in-Uptrend",
       "combo": null,
@@ -82,10 +66,10 @@
       "use_fixed_tp": false
     }
   },
-  "total_equity_usd": 1011.5382,
+  "total_equity_usd": 1017.1435,
   "starting_capital_usd": 1000.0,
-  "open_position_count": 5,
+  "open_position_count": 4,
   "max_concurrent_positions": 8,
   "position_size_usd": 100.0,
-  "last_updated": "2026-09-27T15:55:12.208299+00:00"
+  "last_updated": "2026-09-27T16:00:55.243814+00:00"
 }
