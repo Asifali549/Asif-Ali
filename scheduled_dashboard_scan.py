@@ -329,6 +329,16 @@ def compute_trade_progress(df, signal_idx, ce_period, ce_multiplier, rr_multiple
     to conservative tareeqe se SL ko pehle mana jata hai. Agar aakhri bar
     tak kuch hit na ho -> abhi tak OPEN hai.
 
+    FIX (order-of-operations bug): PEHLE current bar (i) ka low/high,
+    PICHLI maloom trail_stop se check karte hain, US KE BAAD current bar
+    ke chandelier value se AGLI bar ke liye trail_stop update karte hain.
+    Pehle (update-pehle-check) tarteeb mein current bar ki apni high se
+    stop upar utha kar usi bar ke low ko turant check kiya ja raha tha -
+    ek hi candle ka data khud ke khilaf istemal ho raha tha (future
+    leakage andar-e-candle), jo backtest audit mein Win%93/PF45 jaisi
+    ghair-mumkin numbers ki asal wajah nikli. Ab dono (backtest aur yahan
+    live) ek hi, sahi tarteeb par hain.
+
     entry_ce_period/entry_ce_multiplier: JAB signal khud chandelier-cross
     se bana ho aur uske apne (entry) params trailing/exit params
     (ce_period, ce_multiplier) se ALAG hon (jaise CE Buy-Only: entry
@@ -346,10 +356,10 @@ def compute_trade_progress(df, signal_idx, ce_period, ce_multiplier, rr_multiple
     par CLOSED hoti hai (jaisa "chandelier" exit-mode backtest mein hota
     hai, jahan trend ke sath chalte rehne diya jata hai). CE Buy-Only ke
     liye ye False rakha gaya hai kyunke uska walk-forward tasdeeq isi
-    khalis-trailing-stop tareeqe se hua tha (Win Rate 93%, PF 45) - fixed
-    RR TP us backtest mein tha hi nahi, aur live data mein dekha gaya ke
-    tight (16,3.0) trailing stop hamesha fixed TP se pehle hi lag jati
-    hai - isliye wo number gumrah-kun (misleading) tha.
+    khalis-trailing-stop tareeqe se hua tha - fixed RR TP us backtest
+    mein tha hi nahi, aur live data mein dekha gaya ke tight (16,3.0)
+    trailing stop hamesha fixed TP se pehle hi lag jati hai - isliye wo
+    number gumrah-kun (misleading) tha.
 
     Returns None agar setup invalid ho (chandelier NaN ya stop>=entry).
     """
@@ -380,10 +390,9 @@ def compute_trade_progress(df, signal_idx, ce_period, ce_multiplier, rr_multiple
     exit_idx = None
 
     for i in range(signal_idx + 1, len(df)):
-        bar_stop = chandelier_series.iloc[i]
-        if not pd.isna(bar_stop) and bar_stop > running_stop:
-            running_stop = float(bar_stop)
-
+        # FIX: pehle current bar ka low/high, PICHLI maloom stop se check
+        # karte hain, phir US ke BAAD current bar ke data se agli bar ke
+        # liye trail_stop update karte hain (dekho function docstring).
         low_i = df["low"].iloc[i]
         high_i = df["high"].iloc[i]
         stop_hit = low_i <= running_stop
@@ -395,6 +404,10 @@ def compute_trade_progress(df, signal_idx, ce_period, ce_multiplier, rr_multiple
         elif tp_hit:
             exit_idx, exit_reason, status = i, "TARGET", "CLOSED"
             break
+
+        bar_stop = chandelier_series.iloc[i]
+        if not pd.isna(bar_stop) and bar_stop > running_stop:
+            running_stop = float(bar_stop)
 
     current_price = float(df["close"].iloc[-1])
     pnl_pct = (current_price - entry_price) / entry_price * 100
