@@ -668,6 +668,85 @@ else:
     )
 
 st.markdown("---")
+st.header("📈 Performance Report — Drawdown, Expectancy, Equity Curve, Backtest vs Live")
+st.caption(
+    "Har system ki closed trades se Expectancy, Max Drawdown aur Equity Curve nikalte "
+    "hain, aur jahan available ho wahan audit-shuda backtest numbers se moazna karte "
+    "hain - taake pata chale konsa system waqai apne backtest jaisa perform kar raha hai."
+)
+
+# NOTE: Sirf CE Buy-Only ka backtest order-fix bug ke baad dobara audit hua hai
+# (ce_walkforward_FINAL.py, Top-150 Baseline variant). Baqi teeno abhi purane,
+# GHAIR-AUDIT-SHUDA backtest numbers hain (jo isi order bug ke sath bane the) -
+# inhe bhi isi tareeqe se dobara audit karna baaki hai.
+BACKTEST_REFERENCE = {
+    "CE Buy-Only": {"win_rate": 58.42, "pf": 5.411, "note": "Walk-forward FINAL, order-fix ke baad audit shuda"},
+    "Union AB Backup Tier": {"win_rate": None, "pf": 3.04, "note": "Purana backtest - abhi order-fix se dobara audit NAHI hua"},
+    "Pullback-in-Uptrend": {"win_rate": None, "pf": 1.831, "note": "Purana backtest - abhi order-fix se dobara audit NAHI hua"},
+    "Donchian Breakout": {"win_rate": None, "pf": 2.171, "note": "Purana backtest - abhi order-fix se dobara audit NAHI hua"},
+}
+
+if os.path.exists("closed_trades_log.csv"):
+    df_closed_all = pd.read_csv("closed_trades_log.csv")
+    if len(df_closed_all) > 0 and "System" in df_closed_all.columns:
+        for system_name in SYSTEM_ORDER:
+            df_sys = df_closed_all[df_closed_all["System"] == system_name].copy()
+            st.markdown(f"**{SYSTEM_BADGE.get(system_name, system_name)}**")
+            if len(df_sys) < 2:
+                st.caption("Itni closed trades nahi (kam az kam 2 chahiye) - abhi report nahi ban sakti.")
+                st.markdown("---")
+                continue
+
+            if "Signal Time (PKT)" in df_sys.columns:
+                df_sys["_t"] = _pkt_to_dt(df_sys["Signal Time (PKT)"])
+            else:
+                df_sys["_t"] = pd.to_datetime(df_sys["Logged At (UTC)"], errors="coerce")
+            df_sys = df_sys.sort_values("_t")
+
+            pnl = pd.to_numeric(df_sys["P/L %"], errors="coerce").dropna()
+            if len(pnl) < 2:
+                st.caption("P/L % data saaf nahi - report nahi ban sakti.")
+                st.markdown("---")
+                continue
+
+            equity_curve = pnl.cumsum()
+            running_max = equity_curve.cummax()
+            drawdown = equity_curve - running_max
+            max_dd = drawdown.min()
+            expectancy = pnl.mean()
+
+            c1, c2, c3 = st.columns(3)
+            c1.metric("Expectancy (avg P/L / trade)", f"{expectancy:+.2f}%")
+            c2.metric("Max Drawdown (cumulative %)", f"{max_dd:.2f}%")
+            c3.metric("Total Closed Trades", len(pnl))
+
+            st.line_chart(equity_curve.reset_index(drop=True), height=200)
+            st.caption("📊 Equity Curve: har trade ke P/L% ka cumulative jama (fixed-size farz kar ke, compounding nahi).")
+
+            wins = pnl[pnl > 0]
+            losses = pnl[pnl <= 0]
+            live_wr = len(wins) / len(pnl) * 100
+            live_pf = (wins.sum() / abs(losses.sum())) if len(losses) and losses.sum() != 0 else None
+            live_pf_s = f"{live_pf:.2f}" if live_pf is not None else "N/A"
+
+            ref = BACKTEST_REFERENCE.get(system_name)
+            if ref:
+                bt_wr = f"{ref['win_rate']:.1f}%" if ref["win_rate"] is not None else "N/A"
+                bt_pf = f"{ref['pf']:.2f}" if ref["pf"] is not None else "N/A"
+                st.info(
+                    f"**Backtest** (Win {bt_wr}, PF {bt_pf} — {ref['note']}) vs "
+                    f"**Live** (Win {live_wr:.1f}%, PF {live_pf_s})"
+                )
+            else:
+                st.caption(f"Live: Win {live_wr:.1f}%, PF {live_pf_s} (is system ka audit-shuda backtest reference abhi nahi hai)")
+
+            st.markdown("---")
+    else:
+        st.info("Abhi tak koi closed trade record nahi.")
+else:
+    st.info("Abhi tak koi closed trade record nahi - performance report ke liye pehle kuch trades band honi chahiye.")
+
+st.markdown("---")
 st.header("🕐 Trading Session Analysis (Pakistan Time — PKT)")
 st.caption(
     "Har closed trade ka ENTRY waqt dekh kar us waqt kaunsa major market session "
@@ -768,7 +847,9 @@ else:
         else:
             st.caption("Session classify nahi ho saka.")
 
-st.markdown("---")# SECTION 2: MANUAL (on-demand, apni marzi ke toggles ke sath)
+st.markdown("---")
+# ============================================================
+# SECTION 2: MANUAL (on-demand, apni marzi ke toggles ke sath)
 # ============================================================
 st.header("🔍 Manual Scan (apni marzi ke toggles)")
 
