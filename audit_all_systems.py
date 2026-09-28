@@ -17,6 +17,9 @@ Simulation (sab ke liye ek jaisi):
   - har bar: PEHLE low (aur TP) PICHLI maloom stop se check, PHIR stop update
   - trailing = EXIT chandelier; Union AB / NEW mein fixed TP (RR 2.0), baqi trailing-only
   - max hold = 500 bars (live ki lookback jitni; purana 50-bar cap live se mel nahi khata tha)
+  - GAP FILL: agar bar ka open stop se neeche ho to exit open par (stop ki qeemat par nahi).
+    Pehle version yahan ghalat tha: CE Buy-Only ke Win58%/PF5.3 aur 93% trades 1 bar mein
+    band hona isi ki alamat thi (zero-edge random data par bhi Win61%/PF7 aata hai).
 
 Result 'audit_all_systems_RESULTS.txt' mein save hota hai (aur log mein bhi).
 """
@@ -83,9 +86,12 @@ def simulate(df, positions, entry_p, entry_m, exit_p, exit_m, use_tp, rr):
         trail = init
         exit_px, exit_bar = None, None
         last = min(eb + AUDIT_MAX_HOLD_BARS, n)
+        gapped = False
         for j in range(eb, last):
             if lo[j] <= trail:
-                exit_px, exit_bar = trail, j
+                # GAP FILL: bar stop se neeche khule to fill open par (stop ki bulandar qeemat par nahi)
+                gapped = op[j] < trail
+                exit_px, exit_bar = min(trail, op[j]), j
                 break
             if use_tp and hi[j] >= tp:
                 exit_px, exit_bar = tp, j
@@ -97,7 +103,7 @@ def simulate(df, positions, entry_p, entry_m, exit_p, exit_m, use_tp, rr):
             exit_px = cl[exit_bar]
         exit_px *= (1 - SLIP)
         ret = ((exit_px - entry) / entry - 2 * FEE) * 100
-        out.append({"i": i, "ret": ret, "bars": exit_bar - eb})
+        out.append({"i": i, "ret": ret, "bars": exit_bar - eb, "gap": gapped})
     return out
 
 
@@ -132,7 +138,7 @@ def main():
 
     def add(system, trades, symbol, n):
         for t in trades:
-            res[system].append({"ret": t["ret"], "bars": t["bars"], "fold": fold_of(t["i"], n), "symbol": symbol})
+            res[system].append({"ret": t["ret"], "bars": t["bars"], "fold": fold_of(t["i"], n), "symbol": symbol, "gap": t["gap"]})
 
     for k, symbol in enumerate(coins, 1):
         try:
@@ -253,6 +259,8 @@ def main():
 
         quick = np.mean([t["bars"] <= 1 for t in trades]) * 100
         emit(f"  1 bar ke andar band hone wali trades: {quick:.1f}%")
+        gap_share = np.mean([t["gap"] for t in trades]) * 100
+        emit(f"  Gap-through exits (bar stop se neeche khula, fill open par): {gap_share:.1f}%")
 
     with open("audit_all_systems_RESULTS.txt", "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
