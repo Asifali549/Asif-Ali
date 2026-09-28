@@ -5,14 +5,14 @@
       "entry_time": "2026-09-28T01:00:00",
       "entry_price": 0.3122,
       "initial_stop": 0.26504063,
-      "trail_stop": 0.26852813,
+      "trail_stop": 0.2686125,
       "tp_price": null,
       "capital_allocated": 129.79,
       "risk_usd": 19.865,
       "risk_pct_of_equity": 1.0,
       "stop_distance_pct": 15.106,
-      "current_price": 0.3076,
-      "unrealized_pnl_pct": -1.473,
+      "current_price": 0.3176,
+      "unrealized_pnl_pct": 1.73,
       "source": "manual",
       "system": "Pullback-in-Uptrend",
       "combo": null,
@@ -43,7 +43,7 @@
   "pause_until": "2026-09-28T16:04:37.011569+00:00",
   "crash_until": null,
   "market_level": "OK",
-  "market_info": "BTC 4h:-0.1% 24h:-1.9%, ETH 4h:-0.1% 24h:-1.0%",
+  "market_info": "BTC 4h:-0.2% 24h:-1.8%, ETH 4h:-0.3% 24h:-0.9%",
   "manual_pause": false,
   "rules": {
     "strong_only": true,
@@ -53,5 +53,5 @@
     "max_signal_age_bars": 1,
     "one_position_per_coin": true
   },
-  "last_updated": "2026-09-28T13:54:29.875421+00:00"
+  "last_updated": "2026-09-28T14:00:08.811224+00:00"
 }
