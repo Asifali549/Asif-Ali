@@ -16,6 +16,10 @@ FIX (audit ke baad): exit_mode="chandelier" ki simulation mein do ghaltiyan thee
      current bar ka low PICHLI maloom stop se check hota hai, US ke baad stop update.
   2) INVALID SETUP: agar signal bar ka initial stop entry price se upar/barabar ho to
      wo trade ab skip hoti hai (jaisa production compute_trade_progress karta hai).
+  3) GAP FILL: jab bar stop se neeche khule (open < stop), fill open par hota hai,
+     stop ki qeemat par nahi. Purana engine hamesha stop ki (kabhi kabhi bazaar se UPAR
+     wali) qeemat par fill deta tha - zero-edge random data par bhi Win60%/PF7 aur 93%
+     trades 1 bar mein band. Yahi CE Buy-Only ke Win58%/PF5.3 ki asal wajah nikli.
 """
 
 import numpy as np
@@ -65,6 +69,7 @@ def simulate_trades(df, signal, bt_params, ce_params=None):
 
     trades = []
     close = df["close"].values
+    open_ = df["open"].values
     high = df["high"].values
     low = df["low"].values
     atr_vals = atr.values
@@ -94,7 +99,9 @@ def simulate_trades(df, signal, bt_params, ce_params=None):
             for j in range(entry_bar, min(entry_bar + max_hold, n)):
                 # FIX: PEHLE current bar ka low, PICHLI maloom stop se check ...
                 if low[j] <= trail_stop:
-                    exit_price = trail_stop
+                    # FIX 3 (GAP FILL): agar bar ka open pehle hi stop se neeche khula (gap) to
+                    # asal mein fill open par hota hai, stop ki (bulandar) qeemat par nahi.
+                    exit_price = min(trail_stop, open_[j])
                     exit_bar = j
                     exit_reason = "CE_STOP"
                     break
