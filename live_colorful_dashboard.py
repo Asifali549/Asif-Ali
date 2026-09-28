@@ -93,6 +93,26 @@ def add_live_price_columns(df):
     return df, True
 
 
+def trigger_github_workflow(workflow_file):
+    """Dashboard se seedha GitHub Actions ko 'workflow_dispatch' bhejta hai — taake
+    agar koi self-loop (Live Scan / Manual Bot / Auto Bot / Watchdog) ruk jaye,
+    to GitHub app/site khole bina, yahin se 'Chala Do' button se dobara chala saken.
+    Same GITHUB_TOKEN istemal karta hai jo watchlist save karne ke liye pehle se
+    Streamlit Secrets mein maujood hai."""
+    token = st.secrets.get("GITHUB_TOKEN")
+    if not token:
+        return False, "GITHUB_TOKEN Streamlit Secrets mein nahi mila."
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/actions/workflows/{workflow_file}/dispatches"
+    headers = {"Authorization": f"token {token}", "Accept": "application/vnd.github.v3+json"}
+    try:
+        resp = requests.post(url, headers=headers, json={"ref": GITHUB_BRANCH}, timeout=15)
+        if resp.status_code in (204, 201):
+            return True, ""
+        return False, f"HTTP {resp.status_code}: {resp.text[:200]}"
+    except Exception as e:
+        return False, str(e)
+
+
 def _pkt_to_dt(series):
     """'2026-09-25 12:00 PM PKT' jaisi strings ko asal waqt mein badalta hai (sahi tarteeb ke liye)."""
     return pd.to_datetime(series.astype(str).str.replace(" PKT", "", regex=False),
@@ -530,6 +550,32 @@ if os.path.exists("dashboard_signals.json"):
 
     if age_minutes > 90:
         st.warning("⚠️ Ye data 90 minute se purana hai — background scan delay ho sakta hai.")
+        if st.button("🔁 Live Scan Ko Abhi Chala Do", key="restart_scan_dashboard"):
+            ok, msg = trigger_github_workflow("scan_dashboard.yml")
+            if ok:
+                st.success("✅ GitHub ko command bhej di gayi hai — 1-2 minute mein naya scan shuru ho jayega (page thodi der baad refresh karein).")
+            else:
+                st.error(f"❌ Restart nakam raha: {msg}")
+
+    with st.expander("🛠️ Koi bhi self-loop system ruk jaye — yahan se manually dobara chalayen"):
+        st.caption(
+            "Agar 'Last Updated' bahut purana ho ja raha hai aur watchdog khud restart nahi kar saka "
+            "(misaal: GITHUB_TOKEN expire ho gaya ho, ya GitHub ki taraf se koi masla ho), to neeche "
+            "wale button se GitHub Actions mein jaye bina, seedha yahin se us workflow ko dobara chala sakte hain."
+        )
+        rc1, rc2, rc3, rc4 = st.columns(4)
+        for col, label, wf in [
+            (rc1, "🔴 Live Scan", "scan_dashboard.yml"),
+            (rc2, "🤖 Manual Bot", "manual_trade_bot.yml"),
+            (rc3, "🔎 Auto Bot", "auto_scan_trade_bot.yml"),
+            (rc4, "🐕 Watchdog", "watchdog.yml"),
+        ]:
+            if col.button(f"Chala Do — {label}", key=f"restart_{wf}"):
+                ok, msg = trigger_github_workflow(wf)
+                if ok:
+                    col.success("✅ Bhej diya!")
+                else:
+                    col.error(f"❌ {msg}")
 
     if live_data["signals"]:
         df_all = pd.DataFrame(live_data["signals"])
