@@ -8,8 +8,8 @@
       "trail_stop": 5.0816875,
       "tp_price": 6.156475,
       "capital_allocated": 100.0,
-      "current_price": 5.3045,
-      "unrealized_pnl_pct": 4.008,
+      "current_price": 5.2504,
+      "unrealized_pnl_pct": 2.947,
       "source": "manual",
       "system": "Union AB",
       "combo": "Ichimoku+MS",
@@ -24,8 +24,8 @@
       "trail_stop": 0.21698125,
       "tp_price": null,
       "capital_allocated": 100.0,
-      "current_price": 0.2235,
-      "unrealized_pnl_pct": 1.223,
+      "current_price": 0.2196,
+      "unrealized_pnl_pct": -0.543,
       "source": "manual",
       "system": "Pullback-in-Uptrend",
       "combo": null,
@@ -43,5 +43,5 @@
   "risk_pct_per_trade": 1.0,
   "open_risk_usd": 0.0,
   "max_total_open_risk_pct": 8.0,
-  "last_updated": "2026-09-28T02:54:37.502567+00:00"
+  "last_updated": "2026-09-28T03:00:11.371260+00:00"
 }
