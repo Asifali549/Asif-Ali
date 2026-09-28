@@ -388,6 +388,7 @@ def compute_trade_progress(df, signal_idx, ce_period, ce_multiplier, rr_multiple
     status = "OPEN"
     exit_reason = None
     exit_idx = None
+    exit_fill = None
 
     for i in range(signal_idx + 1, len(df)):
         # FIX: pehle current bar ka low/high, PICHLI maloom stop se check
@@ -400,6 +401,9 @@ def compute_trade_progress(df, signal_idx, ce_period, ce_multiplier, rr_multiple
 
         if stop_hit:
             exit_idx, exit_reason, status = i, "STOPPED", "CLOSED"
+            # GAP FILL: bar stop se neeche khule to asal fill open par hota hai, stop ki
+            # (bazaar se bulandar) qeemat par nahi.
+            exit_fill = min(running_stop, float(df["open"].iloc[i]))
             break
         elif tp_hit:
             exit_idx, exit_reason, status = i, "TARGET", "CLOSED"
@@ -416,6 +420,7 @@ def compute_trade_progress(df, signal_idx, ce_period, ce_multiplier, rr_multiple
         "status": status,
         "exit_reason": exit_reason,
         "exit_idx": exit_idx,
+        "exit_price": round(exit_fill, 6) if exit_fill is not None else None,
         "entry_price": round(entry_price, 6),
         "current_price": round(current_price, 6),
         "trail_stop": round(running_stop, 6),
@@ -544,7 +549,10 @@ def log_closed_trades(df, signal_series, ce_period, ce_multiplier, system, symbo
         if key in logged_keys:
             continue
 
-        exit_price = progress["tp_price"] if progress["exit_reason"] == "TARGET" else progress["trail_stop"]
+        if progress["exit_reason"] == "TARGET":
+            exit_price = progress["tp_price"]
+        else:
+            exit_price = progress.get("exit_price") or progress["trail_stop"]
         pnl_pct = (exit_price - progress["entry_price"]) / progress["entry_price"] * 100
 
         new_rows_out.append({
