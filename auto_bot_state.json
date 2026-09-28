@@ -1,5 +1,5 @@
 {
-  "cash": 1346.0465,
+  "cash": 1534.9074,
   "positions": {
     "NEAR/USDT|Donchian Breakout|": {
       "entry_time": "2026-09-24T19:00:00",
@@ -8,8 +8,8 @@
       "trail_stop": 5.0816875,
       "tp_price": null,
       "capital_allocated": 100.0,
-      "current_price": 5.2504,
-      "unrealized_pnl_pct": 10.228,
+      "current_price": 5.2211,
+      "unrealized_pnl_pct": 9.613,
       "source": "manual",
       "system": "Donchian Breakout",
       "combo": null,
@@ -18,23 +18,6 @@
       "use_fixed_tp": false,
       "symbol": "NEAR/USDT"
     },
-    "ARB/USDT|Pullback-in-Uptrend|": {
-      "entry_time": "2026-09-24T19:00:00",
-      "entry_price": 0.2209,
-      "initial_stop": 0.20354688,
-      "trail_stop": 0.21698125,
-      "tp_price": null,
-      "capital_allocated": 100.0,
-      "current_price": 0.2196,
-      "unrealized_pnl_pct": -0.589,
-      "source": "manual",
-      "system": "Pullback-in-Uptrend",
-      "combo": null,
-      "ce_period": 16,
-      "ce_multiplier": 4.5,
-      "use_fixed_tp": false,
-      "symbol": "ARB/USDT"
-    },
     "LINK/USDT|Pullback-in-Uptrend|": {
       "entry_time": "2026-09-25T17:00:00",
       "entry_price": 13.7885,
@@ -42,8 +25,8 @@
       "trail_stop": 13.88720312,
       "tp_price": null,
       "capital_allocated": 100.0,
-      "current_price": 14.1132,
-      "unrealized_pnl_pct": 2.355,
+      "current_price": 13.8967,
+      "unrealized_pnl_pct": 0.785,
       "source": "manual",
       "system": "Pullback-in-Uptrend",
       "combo": null,
@@ -59,8 +42,8 @@
       "trail_stop": 0.54114875,
       "tp_price": null,
       "capital_allocated": 100.0,
-      "current_price": 0.56765,
-      "unrealized_pnl_pct": 4.175,
+      "current_price": 0.57006,
+      "unrealized_pnl_pct": 4.617,
       "source": "manual",
       "system": "Pullback-in-Uptrend",
       "combo": null,
@@ -80,8 +63,8 @@
       "risk_usd": 19.865,
       "risk_pct_of_equity": 1.0,
       "stop_distance_pct": 15.106,
-      "current_price": 0.3091,
-      "unrealized_pnl_pct": -0.993,
+      "current_price": 0.3168,
+      "unrealized_pnl_pct": 1.473,
       "source": "manual",
       "system": "Pullback-in-Uptrend",
       "combo": null,
@@ -90,50 +73,27 @@
       "use_fixed_tp": false,
       "symbol": "SOON/USDT",
       "signal_time": "2026-09-28T00:00:00+00:00"
-    },
-    "QI/USDT|CE Buy-Only|": {
-      "entry_time": "2026-09-28T01:00:00",
-      "entry_price": 0.003768,
-      "initial_stop": 0.00309937,
-      "trail_stop": 0.00309937,
-      "tp_price": null,
-      "capital_allocated": 110.7,
-      "risk_usd": 19.8649,
-      "risk_pct_of_equity": 1.0,
-      "stop_distance_pct": 17.745,
-      "current_price": 0.003224,
-      "unrealized_pnl_pct": -14.437,
-      "source": "manual",
-      "system": "CE Buy-Only",
-      "combo": null,
-      "ce_period": 16,
-      "ce_multiplier": 3.0,
-      "use_fixed_tp": false,
-      "symbol": "QI/USDT",
-      "signal_time": "2026-09-28T00:00:00+00:00"
     }
   },
-  "total_equity_usd": 1986.5365,
+  "total_equity_usd": 1964.6974,
   "starting_capital_usd": 2000.0,
-  "open_position_count": 6,
+  "open_position_count": 4,
   "max_concurrent_positions": 15,
-  "position_size_usd": 106.75,
+  "position_size_usd": 107.45,
   "risk_based_sizing": true,
   "risk_pct_per_trade": 1.0,
-  "open_risk_usd": 39.7299,
+  "open_risk_usd": 19.865,
   "max_total_open_risk_pct": 8.0,
   "taken_signals": {
     "ONDO/USDT|Pullback-in-Uptrend||2026-09-27T08:00:00+00:00": "2026-09-27T10:00:00.520173+00:00",
     "SOON/USDT|Pullback-in-Uptrend||2026-09-28T00:00:00+00:00": "2026-09-28T02:02:45.444439+00:00",
     "QI/USDT|CE Buy-Only||2026-09-28T00:00:00+00:00": "2026-09-28T02:02:45.444439+00:00"
   },
-  "recent_losses": [
-    "2026-09-27T10:00:00.520173+00:00"
-  ],
-  "pause_until": null,
+  "recent_losses": [],
+  "pause_until": "2026-09-28T16:04:37.011569+00:00",
   "crash_until": null,
   "market_level": "OK",
-  "market_info": "BTC 4h:-1.9% 24h:-2.0%, ETH 4h:-1.9% 24h:-2.6%",
+  "market_info": "BTC 4h:-1.9% 24h:-2.1%, ETH 4h:-1.9% 24h:-2.6%",
   "manual_pause": false,
   "rules": {
     "strong_only": true,
@@ -143,5 +103,5 @@
     "max_signal_age_bars": 1,
     "one_position_per_coin": true
   },
-  "last_updated": "2026-09-28T03:58:57.113771+00:00"
+  "last_updated": "2026-09-28T04:04:41.089100+00:00"
 }
