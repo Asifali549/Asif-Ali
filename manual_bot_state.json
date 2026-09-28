@@ -1,5 +1,5 @@
 {
-  "cash": 617.1435,
+  "cash": 816.7361,
   "positions": {
     "NEAR/USDT": {
       "entry_time": "2026-09-25T15:00:00",
@@ -8,28 +8,12 @@
       "trail_stop": 5.0816875,
       "tp_price": 6.156475,
       "capital_allocated": 100.0,
-      "current_price": 5.3102,
-      "unrealized_pnl_pct": 4.12,
+      "current_price": 5.3045,
+      "unrealized_pnl_pct": 4.008,
       "source": "manual",
       "system": "Union AB",
       "combo": "Ichimoku+MS",
       "ce_period": 16,
-      "ce_multiplier": 4.5,
-      "use_fixed_tp": true
-    },
-    "SOL/USDT": {
-      "entry_time": "2026-09-25T15:00:00",
-      "entry_price": 120.11,
-      "initial_stop": 114.61625,
-      "trail_stop": 120.73625,
-      "tp_price": 131.0975,
-      "capital_allocated": 100.0,
-      "current_price": 121.73,
-      "unrealized_pnl_pct": 1.349,
-      "source": "manual",
-      "system": "Union AB Backup Tier",
-      "combo": "EMA+Breakout",
-      "ce_period": 12,
       "ce_multiplier": 4.5,
       "use_fixed_tp": true
     },
@@ -40,24 +24,8 @@
       "trail_stop": 0.21698125,
       "tp_price": null,
       "capital_allocated": 100.0,
-      "current_price": 0.2243,
-      "unrealized_pnl_pct": 1.585,
-      "source": "manual",
-      "system": "Pullback-in-Uptrend",
-      "combo": null,
-      "ce_period": 16,
-      "ce_multiplier": 4.5,
-      "use_fixed_tp": false
-    },
-    "UNI/USDT": {
-      "entry_time": "2026-09-25T15:00:00",
-      "entry_price": 9.5884,
-      "initial_stop": 9.07842812,
-      "trail_stop": 9.53769375,
-      "tp_price": null,
-      "capital_allocated": 100.0,
-      "current_price": 9.6641,
-      "unrealized_pnl_pct": 0.789,
+      "current_price": 0.2235,
+      "unrealized_pnl_pct": 1.223,
       "source": "manual",
       "system": "Pullback-in-Uptrend",
       "combo": null,
@@ -66,14 +34,14 @@
       "use_fixed_tp": false
     }
   },
-  "total_equity_usd": 1017.1435,
+  "total_equity_usd": 1016.7361,
   "starting_capital_usd": 1000.0,
-  "open_position_count": 4,
+  "open_position_count": 2,
   "max_concurrent_positions": 8,
   "position_size_usd": 100.0,
   "risk_based_sizing": true,
   "risk_pct_per_trade": 1.0,
   "open_risk_usd": 0.0,
   "max_total_open_risk_pct": 8.0,
-  "last_updated": "2026-09-28T01:58:37.963214+00:00"
+  "last_updated": "2026-09-28T02:04:19.898489+00:00"
 }
