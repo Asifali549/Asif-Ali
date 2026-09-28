@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-28T14:31:44.391429+00:00",
+  "last_updated_utc": "2026-09-28T14:39:17.014775+00:00",
   "coins_scanned": 150,
   "fear_greed_value": 74,
   "fear_greed_label": "Greed",
@@ -20,9 +20,9 @@
       "RS Percentile": 97.8,
       "Dist from 52W High": "36.61%",
       "Funding Rate": "0.005%",
-      "Open Interest": "$5,611,508",
-      "Liquidity Up ($)": "$41,232",
-      "Liquidity Down ($)": "$44,497",
+      "Open Interest": "$5,106,567",
+      "Liquidity Up ($)": "$45,435",
+      "Liquidity Down ($)": "$48,987",
       "Liquidity Compare": "Support > Resistance",
       "OrderBook Bid/Ask": "1.08x",
       "Vol 15m": "1.43x",
@@ -188,6 +188,25 @@
       "Rank": 9
     },
     {
+      "System": "CE Buy-Only",
+      "Coin": "FARTCOIN/USDT",
+      "Combo": "Chandelier Cross",
+      "Tier": "Base+ETH",
+      "Category": "New Signal",
+      "Signal Time (PKT)": "2026-09-28 05:00 PM PKT",
+      "Bars Ago": 1,
+      "Entry": 0.1751,
+      "Current": 0.1723,
+      "P/L %": -1.6,
+      "Trail Stop": 0.182737,
+      "Take Profit": "N/A (trailing stop hi asal exit hai)",
+      "ETH Regime": "Bullish \u2705",
+      "Liquidity Rank": "#83 / 150",
+      "Overall Score %": "N/A",
+      "Verdict": "N/A",
+      "Rank": 10
+    },
+    {
       "System": "Pullback-in-Uptrend",
       "Coin": "SOON/USDT",
       "Combo": "EMA20 Pullback",
@@ -203,7 +222,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 10
+      "Rank": 11
     },
     {
       "System": "Donchian Breakout",
@@ -219,25 +238,6 @@
       "Trail Stop": 0.268613,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "RS Percentile": 99.4,
-      "Overall Score %": "N/A",
-      "Verdict": "N/A",
-      "Rank": 11
-    },
-    {
-      "System": "CE Buy-Only",
-      "Coin": "FARTCOIN/USDT",
-      "Combo": "Chandelier Cross",
-      "Tier": "Base+ETH",
-      "Category": "New Signal",
-      "Signal Time (PKT)": "2026-09-28 05:00 PM PKT",
-      "Bars Ago": 1,
-      "Entry": 0.1751,
-      "Current": 0.1723,
-      "P/L %": -1.6,
-      "Trail Stop": 0.182737,
-      "Take Profit": "N/A (trailing stop hi asal exit hai)",
-      "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#84 / 150",
       "Overall Score %": "N/A",
       "Verdict": "N/A",
       "Rank": 12
@@ -275,7 +275,7 @@
       "Trail Stop": 0.238188,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#88 / 150",
+      "Liquidity Rank": "#89 / 150",
       "Overall Score %": "N/A",
       "Verdict": "N/A",
       "Rank": 14
