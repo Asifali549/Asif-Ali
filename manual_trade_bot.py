@@ -268,7 +268,9 @@ def update_open_position(symbol, pos, exchange):
         tp_hit = use_fixed_tp and tp_price is not None and high_i >= tp_price
 
         if stop_hit:
-            status, exit_price, exit_time, exit_reason = "CLOSED", running_stop, df["timestamp"].iloc[i], "SL"
+            # GAP FILL: bar stop se neeche khule to fill open par (stop ki bulandar qeemat par nahi)
+            fill = min(running_stop, float(df["open"].iloc[i]))
+            status, exit_price, exit_time, exit_reason = "CLOSED", fill, df["timestamp"].iloc[i], "SL"
             break
         elif tp_hit:
             status, exit_price, exit_time, exit_reason = "CLOSED", tp_price, df["timestamp"].iloc[i], "TP"
