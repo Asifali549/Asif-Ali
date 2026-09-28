@@ -170,6 +170,12 @@ SYSTEM_ORDER = [
     "Union AB", "NEW AdvancedConfluence", "Union AB Backup Tier", "CE Buy-Only",
     "Pullback-in-Uptrend", "Donchian Breakout",
 ]
+
+# Ye systems background mein scan/compute hote rehte hain (data collection jaari,
+# CE Buy-Only v2 research aur AdvancedConfluence ke liye), lekin LIVE screen
+# (naye signals ka table) par filhal NAHI dikhaye jate — audit mein koi mustaqil
+# edge sabit na hone tak. Bad mein re-enable karne ke liye bas is set se hata dein.
+HIDDEN_FROM_LIVE_SCREEN = {"CE Buy-Only", "NEW AdvancedConfluence"}
 SYSTEM_BADGE = {
     "Union AB": "🥇 Union AB",
     "NEW AdvancedConfluence": "🧭 NEW AdvancedConfluence",
@@ -179,12 +185,12 @@ SYSTEM_BADGE = {
     "Donchian Breakout": "📈 Donchian Breakout",
 }
 SYSTEM_CAPTION = {
-    "Union AB": "Sab se zyada tasdeeq-shuda system (ETH+RS+RS%95, +52W tier).",
-    "NEW AdvancedConfluence": "CHoCH-based confluence score, koi extra filter nahi.",
-    "Union AB Backup Tier": "Union AB jaisa combo, sirf RS+RS%95 (ETH check NAHI) — hamesha active rehta hai.",
-    "CE Buy-Only": "⚠️ Sirf 1 indicator (Chandelier cross) par mabni — koi tasdeeqi filter nahi. Ehtiyaat se capital lagayein.",
-    "Pullback-in-Uptrend": "EMA20 pullback (rising EMA + uptrend) + ETH/RS/RS%95 filters. Poore saal ke walk-forward se tasdeeq-shuda (799 trades, PF 1.831, har fold consistent).",
-    "Donchian Breakout": "20-period Donchian high breakout + ETH/RS/RS%95 filters. Poore saal ke walk-forward se tasdeeq-shuda (552 trades, PF 2.171, har fold consistent) — is session ka sab se mazboot nateeja.",
+    "Union AB": "ETH+RS+RS%95 filters, +52W tier. Audit (order-fix ke baad): PF ~1.75, Top-10 trades nikal kar ~1.2 — moatadil edge, trades zyada tar bullish daur mein.",
+    "NEW AdvancedConfluence": "CHoCH-based confluence score, koi extra filter nahi. Audit: PF ~1.30, Top-10 nikal kar ~1.04 — koi pukhta edge nahi. Auto bot mein filhal band.",
+    "Union AB Backup Tier": "Union AB jaisa combo, sirf RS+RS%95 (ETH check NAHI). Audit: PF ~1.42 (aik fold mein <1) — kamzor edge; purana PF 3.04 ghalat tha.",
+    "CE Buy-Only": "⚠️ Purana Win93%/PF45 aur baad ka Win58%/PF5 dono exit-fill bug ki wajah se ghalat sabit hue. Dobara audit hone tak GHAIR-TASDEEQ-SHUDA. Auto bot mein filhal band.",
+    "Pullback-in-Uptrend": "EMA20 pullback (rising EMA + uptrend) + ETH/RS/RS%95 filters. Audit: PF ~1.9, Top-10 nikal kar ~1.45 — zyada tar trades pichle fold mein.",
+    "Donchian Breakout": "20-period Donchian high breakout + ETH/RS/RS%95 filters. Audit: PF ~2.9, Top-10 nikal kar ~1.7 — sab se mazboot nateeja, lekin survivorship bias ka khatra.",
 }
 
 
@@ -218,7 +224,7 @@ def style_and_show(df, compact, select_key=None):
 GITHUB_REPO = "Asifali549/Asif-Ali"
 GITHUB_BRANCH = "main"
 GITHUB_WATCHLIST_PATH = "manual_watchlist.json"
-DEFAULT_MANUAL_SYSTEM = "CE Buy-Only"
+DEFAULT_MANUAL_SYSTEM = "Union AB"
 UNION_SYSTEMS = ("Union AB", "Union AB Backup Tier")
 MANUAL_BOT_SYSTEMS = (
     "CE Buy-Only", "NEW AdvancedConfluence", "Union AB", "Union AB Backup Tier",
@@ -541,7 +547,11 @@ if os.path.exists("dashboard_signals.json"):
         else:
             lp1.caption("⚠️ Live qeemat is waqt exchange se nahi mil saki — 'Current' scan ke waqt ki qeemat hai.")
 
-        present_systems = [s for s in SYSTEM_ORDER if "System" in df_all.columns and s in df_all["System"].unique()]
+        present_systems = [
+            s for s in SYSTEM_ORDER
+            if "System" in df_all.columns and s in df_all["System"].unique()
+            and s not in HIDDEN_FROM_LIVE_SCREEN
+        ]
         if present_systems:
             selected_systems = st.multiselect(
                 "🗂️ Systems Dikhayen", present_systems, default=present_systems, key="system_filter_live",
@@ -551,8 +561,11 @@ if os.path.exists("dashboard_signals.json"):
 
         st.caption(
             "ℹ️ 'Pass (Strong/Good)' filter sirf un systems par lagu hota hai jinka Overall Score/Verdict "
-            "calculate hota hai (Union AB, NEW AdvancedConfluence). Union AB Backup Tier aur CE Buy-Only "
-            "hamesha dikhte hain (in par Verdict N/A hai) — ye filter unhein kabhi nahi chupata."
+            "calculate hota hai (Union AB). Union AB Backup Tier hamesha dikhta hai (Verdict N/A) — ye "
+            "filter usay kabhi nahi chupata. "
+            "⚠️ CE Buy-Only aur NEW AdvancedConfluence filhal is screen se hataye gaye hain (koi mustaqil "
+            "edge sabit nahi hua) — background mein data collect hoti rehti hai, CE Buy-Only v2 test result "
+            "aane ke baad dobara dekha jayega."
         )
 
         any_shown = False
@@ -675,15 +688,17 @@ st.caption(
     "hain - taake pata chale konsa system waqai apne backtest jaisa perform kar raha hai."
 )
 
-# NOTE: Sirf CE Buy-Only ka backtest order-fix bug ke baad dobara audit hua hai
-# (ce_walkforward_FINAL.py, Top-150 Baseline variant). Baqi teeno abhi purane,
-# GHAIR-AUDIT-SHUDA backtest numbers hain (jo isi order bug ke sath bane the) -
-# inhe bhi isi tareeqe se dobara audit karna baaki hai.
+# NOTE: Ye numbers audit_all_systems.py se hain (order-fix ke baad, production filters).
+# Ye "exit-fill" (gap) fix se PEHLE ke hain - trailing-only lambi trades par asar chhota
+# hona chahiye, lekin nateeja audit dobara chalane par yahan update karna hai.
+# CE Buy-Only ka koi bharosemand backtest number abhi nahi (fill bug ki wajah se).
 BACKTEST_REFERENCE = {
-    "CE Buy-Only": {"win_rate": 58.42, "pf": 5.411, "note": "Walk-forward FINAL, order-fix ke baad audit shuda"},
-    "Union AB Backup Tier": {"win_rate": None, "pf": 3.04, "note": "Purana backtest - abhi order-fix se dobara audit NAHI hua"},
-    "Pullback-in-Uptrend": {"win_rate": None, "pf": 1.831, "note": "Purana backtest - abhi order-fix se dobara audit NAHI hua"},
-    "Donchian Breakout": {"win_rate": None, "pf": 2.171, "note": "Purana backtest - abhi order-fix se dobara audit NAHI hua"},
+    "Union AB": {"win_rate": 45.4, "pf": 1.754, "note": "Audit (order-fix ke baad, 194 trades; Top-10 nikal kar PF 1.21)"},
+    "Union AB Backup Tier": {"win_rate": 40.4, "pf": 1.422, "note": "Audit (order-fix ke baad, 500 trades; Top-10 nikal kar PF 1.14)"},
+    "CE Buy-Only": {"win_rate": None, "pf": None, "note": "Purana nateeja (Win58%/PF5.3) exit-fill bug ki wajah se ghalat; dobara audit baaqi"},
+    "Pullback-in-Uptrend": {"win_rate": 40.0, "pf": 1.929, "note": "Audit (order-fix ke baad, 862 trades; Top-10 nikal kar PF 1.45)"},
+    "Donchian Breakout": {"win_rate": 44.3, "pf": 2.909, "note": "Audit (order-fix ke baad, 648 trades; Top-10 nikal kar PF 1.73)"},
+    "NEW AdvancedConfluence": {"win_rate": 40.3, "pf": 1.304, "note": "Audit (order-fix ke baad, 404 trades; Top-10 nikal kar PF 1.04)"},
 }
 
 if os.path.exists("closed_trades_log.csv"):
