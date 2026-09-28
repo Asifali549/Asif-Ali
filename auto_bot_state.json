@@ -1,5 +1,5 @@
 {
-  "cash": 1534.9074,
+  "cash": 1635.4232,
   "positions": {
     "NEAR/USDT|Donchian Breakout|": {
       "entry_time": "2026-09-24T19:00:00",
@@ -8,8 +8,8 @@
       "trail_stop": 5.0816875,
       "tp_price": null,
       "capital_allocated": 100.0,
-      "current_price": 5.2211,
-      "unrealized_pnl_pct": 9.613,
+      "current_price": 5.2752,
+      "unrealized_pnl_pct": 10.749,
       "source": "manual",
       "system": "Donchian Breakout",
       "combo": null,
@@ -18,23 +18,6 @@
       "use_fixed_tp": false,
       "symbol": "NEAR/USDT"
     },
-    "LINK/USDT|Pullback-in-Uptrend|": {
-      "entry_time": "2026-09-25T17:00:00",
-      "entry_price": 13.7885,
-      "initial_stop": 13.02486562,
-      "trail_stop": 13.88720312,
-      "tp_price": null,
-      "capital_allocated": 100.0,
-      "current_price": 13.8967,
-      "unrealized_pnl_pct": 0.785,
-      "source": "manual",
-      "system": "Pullback-in-Uptrend",
-      "combo": null,
-      "ce_period": 16,
-      "ce_multiplier": 4.5,
-      "use_fixed_tp": false,
-      "symbol": "LINK/USDT"
-    },
     "ONDO/USDT|Pullback-in-Uptrend|": {
       "entry_time": "2026-09-27T09:00:00",
       "entry_price": 0.5449,
@@ -42,8 +25,8 @@
       "trail_stop": 0.54114875,
       "tp_price": null,
       "capital_allocated": 100.0,
-      "current_price": 0.57006,
-      "unrealized_pnl_pct": 4.617,
+      "current_price": 0.595,
+      "unrealized_pnl_pct": 9.194,
       "source": "manual",
       "system": "Pullback-in-Uptrend",
       "combo": null,
@@ -63,8 +46,8 @@
       "risk_usd": 19.865,
       "risk_pct_of_equity": 1.0,
       "stop_distance_pct": 15.106,
-      "current_price": 0.3168,
-      "unrealized_pnl_pct": 1.473,
+      "current_price": 0.3501,
+      "unrealized_pnl_pct": 12.14,
       "source": "manual",
       "system": "Pullback-in-Uptrend",
       "combo": null,
@@ -75,11 +58,11 @@
       "signal_time": "2026-09-28T00:00:00+00:00"
     }
   },
-  "total_equity_usd": 1964.6974,
+  "total_equity_usd": 1965.2132,
   "starting_capital_usd": 2000.0,
-  "open_position_count": 4,
+  "open_position_count": 3,
   "max_concurrent_positions": 15,
-  "position_size_usd": 107.45,
+  "position_size_usd": 109.93,
   "risk_based_sizing": true,
   "risk_pct_per_trade": 1.0,
   "open_risk_usd": 19.865,
@@ -93,7 +76,7 @@
   "pause_until": "2026-09-28T16:04:37.011569+00:00",
   "crash_until": null,
   "market_level": "OK",
-  "market_info": "BTC 4h:-1.9% 24h:-2.1%, ETH 4h:-1.9% 24h:-2.6%",
+  "market_info": "BTC 4h:-1.8% 24h:-1.9%, ETH 4h:-1.6% 24h:-2.4%",
   "manual_pause": false,
   "rules": {
     "strong_only": true,
@@ -103,5 +86,5 @@
     "max_signal_age_bars": 1,
     "one_position_per_coin": true
   },
-  "last_updated": "2026-09-28T04:55:17.878808+00:00"
+  "last_updated": "2026-09-28T05:00:53.934202+00:00"
 }
