@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-28T10:01:11.209664+00:00",
+  "last_updated_utc": "2026-09-28T10:08:48.413067+00:00",
   "coins_scanned": 150,
   "fear_greed_value": 74,
   "fear_greed_label": "Greed",
@@ -18,11 +18,11 @@
       "Trail Stop": 0.118181,
       "Take Profit": 0.135587,
       "Funding Rate": "0.010%",
-      "Open Interest": "$77,779,508",
-      "Liquidity Up ($)": "$30,127",
-      "Liquidity Down ($)": "$50,647",
+      "Open Interest": "$78,177,447",
+      "Liquidity Up ($)": "$28,281",
+      "Liquidity Down ($)": "$52,827",
       "Liquidity Compare": "Support > Resistance",
-      "OrderBook Bid/Ask": "1.68x",
+      "OrderBook Bid/Ask": "1.87x",
       "Vol 15m": "2.49x",
       "Chg 15m": "+2.58%",
       "Vol 1h": "7.15x",
@@ -56,11 +56,11 @@
       "RS Percentile": 98.3,
       "Dist from 52W High": "31.34%",
       "Funding Rate": "0.005%",
-      "Open Interest": "$5,640,471",
-      "Liquidity Up ($)": "$11,190",
-      "Liquidity Down ($)": "$15,538",
+      "Open Interest": "$7,910,813",
+      "Liquidity Up ($)": "$10,275",
+      "Liquidity Down ($)": "$15,743",
       "Liquidity Compare": "Support > Resistance",
-      "OrderBook Bid/Ask": "1.39x",
+      "OrderBook Bid/Ask": "1.53x",
       "Vol 15m": "1.22x",
       "Chg 15m": "-3.19%",
       "Vol 1h": "32.85x",
@@ -85,20 +85,20 @@
       "Tier": "Baseline",
       "Category": "Open Trade",
       "Signal Time (PKT)": "2026-09-27 07:00 PM PKT",
-      "Bars Ago": 18,
+      "Bars Ago": 19,
       "Entry": 0.004771,
-      "Current": 0.004882,
-      "P/L %": 2.33,
+      "Current": 0.004761,
+      "P/L %": -0.21,
       "Trail Stop": 0.004573,
       "Take Profit": 0.005534,
       "RS Percentile": 97.8,
       "Dist from 52W High": "36.61%",
       "Funding Rate": "0.005%",
-      "Open Interest": "$5,611,508",
-      "Liquidity Up ($)": "$44,508",
-      "Liquidity Down ($)": "$60,472",
+      "Open Interest": "$5,035,805",
+      "Liquidity Up ($)": "$50,898",
+      "Liquidity Down ($)": "$52,541",
       "Liquidity Compare": "Support > Resistance",
-      "OrderBook Bid/Ask": "1.36x",
+      "OrderBook Bid/Ask": "1.03x",
       "Vol 15m": "0.84x",
       "Chg 15m": "-0.63%",
       "Vol 1h": "0.58x",
@@ -109,67 +109,12 @@
       "Chg 1d": "+17.43%",
       "Dist from 24h High": "1.18%",
       "Dist from 24h Low": "16.41%",
-      "Coin's Own Win%": "41.7%",
-      "Coin's Own PF": "2.62",
+      "Coin's Own Win%": "33.3%",
+      "Coin's Own PF": "2.48",
       "BTC Correlation": "0.44",
       "Overall Score %": 63.6,
       "Verdict": "\ud83d\udfe2 Good",
       "Rank": 3
-    },
-    {
-      "System": "Pullback-in-Uptrend",
-      "Coin": "SEI/USDT",
-      "Combo": "EMA20 Pullback",
-      "Tier": "N/A",
-      "Category": "Open Trade",
-      "Signal Time (PKT)": "2026-09-27 10:00 AM PKT",
-      "Bars Ago": 27,
-      "Entry": 0.07347,
-      "Current": 0.07913,
-      "P/L %": 7.7,
-      "Trail Stop": 0.078162,
-      "Take Profit": "N/A (trailing stop hi asal exit hai)",
-      "RS Percentile": 98.3,
-      "Overall Score %": "N/A",
-      "Verdict": "N/A",
-      "Rank": 4
-    },
-    {
-      "System": "Donchian Breakout",
-      "Coin": "SEI/USDT",
-      "Combo": "20-period High",
-      "Tier": "N/A",
-      "Category": "Open Trade",
-      "Signal Time (PKT)": "2026-09-28 04:00 AM PKT",
-      "Bars Ago": 9,
-      "Entry": 0.07902,
-      "Current": 0.07913,
-      "P/L %": 0.14,
-      "Trail Stop": 0.078162,
-      "Take Profit": "N/A (trailing stop hi asal exit hai)",
-      "RS Percentile": 98.3,
-      "Overall Score %": "N/A",
-      "Verdict": "N/A",
-      "Rank": 5
-    },
-    {
-      "System": "CE Buy-Only",
-      "Coin": "TAO/USDT",
-      "Combo": "Chandelier Cross",
-      "Tier": "Base+ETH",
-      "Category": "New Signal",
-      "Signal Time (PKT)": "2026-09-28 01:00 PM PKT",
-      "Bars Ago": 0,
-      "Entry": 303.85,
-      "Current": 303.85,
-      "P/L %": 0.0,
-      "Trail Stop": 302.390455,
-      "Take Profit": "N/A (trailing stop hi asal exit hai)",
-      "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#10 / 150",
-      "Overall Score %": "N/A",
-      "Verdict": "N/A",
-      "Rank": 6
     },
     {
       "System": "Union AB Backup Tier",
@@ -178,16 +123,16 @@
       "Tier": "N/A",
       "Category": "Open Trade",
       "Signal Time (PKT)": "2026-09-27 07:00 PM PKT",
-      "Bars Ago": 18,
+      "Bars Ago": 19,
       "Entry": 0.004771,
-      "Current": 0.004882,
-      "P/L %": 2.33,
+      "Current": 0.004761,
+      "P/L %": -0.21,
       "Trail Stop": 0.004573,
       "Take Profit": 0.005534,
       "RS Percentile": 97.8,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 7
+      "Rank": 4
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -196,16 +141,16 @@
       "Tier": "N/A",
       "Category": "Open Trade",
       "Signal Time (PKT)": "2026-09-27 12:00 PM PKT",
-      "Bars Ago": 25,
+      "Bars Ago": 26,
       "Entry": 0.004472,
-      "Current": 0.004882,
-      "P/L %": 9.17,
+      "Current": 0.004761,
+      "P/L %": 6.46,
       "Trail Stop": 0.004663,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "RS Percentile": 97.8,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 8
+      "Rank": 5
     },
     {
       "System": "Donchian Breakout",
@@ -214,16 +159,35 @@
       "Tier": "N/A",
       "Category": "Open Trade",
       "Signal Time (PKT)": "2026-09-27 06:00 PM PKT",
-      "Bars Ago": 19,
+      "Bars Ago": 20,
       "Entry": 0.004639,
-      "Current": 0.004882,
-      "P/L %": 5.24,
+      "Current": 0.004761,
+      "P/L %": 2.63,
       "Trail Stop": 0.004663,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "RS Percentile": 97.8,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 9
+      "Rank": 6
+    },
+    {
+      "System": "CE Buy-Only",
+      "Coin": "AXL/USDT",
+      "Combo": "Chandelier Cross",
+      "Tier": "Base+ETH",
+      "Category": "New Signal",
+      "Signal Time (PKT)": "2026-09-28 02:00 PM PKT",
+      "Bars Ago": 0,
+      "Entry": 0.05124,
+      "Current": 0.05124,
+      "P/L %": 0.0,
+      "Trail Stop": 0.051172,
+      "Take Profit": "N/A (trailing stop hi asal exit hai)",
+      "ETH Regime": "Bullish \u2705",
+      "Liquidity Rank": "#33 / 150",
+      "Overall Score %": "N/A",
+      "Verdict": "N/A",
+      "Rank": 7
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -241,7 +205,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 10
+      "Rank": 8
     },
     {
       "System": "Donchian Breakout",
@@ -259,7 +223,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 11
+      "Rank": 9
     },
     {
       "System": "CE Buy-Only",
@@ -278,7 +242,7 @@
       "Liquidity Rank": "#102 / 150",
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 12
+      "Rank": 10
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -296,7 +260,7 @@
       "RS Percentile": 98.9,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 13
+      "Rank": 11
     },
     {
       "System": "Union AB Backup Tier",
@@ -314,7 +278,7 @@
       "RS Percentile": 98.3,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 14
+      "Rank": 12
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -332,7 +296,7 @@
       "RS Percentile": 98.3,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 15
+      "Rank": 13
     },
     {
       "System": "Pullback-in-Uptrend",
@@ -350,7 +314,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 16
+      "Rank": 14
     },
     {
       "System": "Donchian Breakout",
@@ -368,7 +332,7 @@
       "RS Percentile": 99.4,
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 17
+      "Rank": 15
     },
     {
       "System": "CE Buy-Only",
@@ -384,10 +348,10 @@
       "Trail Stop": 0.044029,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#142 / 150",
+      "Liquidity Rank": "#143 / 150",
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 18
+      "Rank": 16
     },
     {
       "System": "CE Buy-Only",
@@ -403,10 +367,10 @@
       "Trail Stop": 0.002039,
       "Take Profit": "N/A (trailing stop hi asal exit hai)",
       "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#146 / 150",
+      "Liquidity Rank": "#147 / 150",
       "Overall Score %": "N/A",
       "Verdict": "N/A",
-      "Rank": 19
+      "Rank": 17
     }
   ]
 }

@@ -1,7 +1,4 @@
 {
-  "RAY/USDT|Union AB|EMA+Breakout|2.3208|Baseline": "2026-09-27T10:05:16.443358+00:00",
-  "RAY/USDT|Union AB Backup Tier|EMA+Breakout|2.3208|N/A": "2026-09-27T10:05:17.140871+00:00",
-  "NIL/USDT|Donchian Breakout|20-period High|0.11139|N/A": "2026-09-27T10:05:17.781491+00:00",
   "ENA/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.2718|N/A": "2026-09-27T11:05:10.173346+00:00",
   "QI/USDT|Donchian Breakout|20-period High|0.003491|N/A": "2026-09-27T11:05:10.645052+00:00",
   "PLUME/USDT|Donchian Breakout|20-period High|0.018971|N/A": "2026-09-27T11:05:11.039993+00:00",
@@ -69,5 +66,6 @@
   "CARDS/USDT|CE Buy-Only|Chandelier Cross|0.1834|Base+ETH": "2026-09-28T10:01:03.126146+00:00",
   "MUBARAK/USDT|Union AB Backup Tier|EMA+Breakout|0.06008|N/A": "2026-09-28T10:01:03.647701+00:00",
   "CHIP/USDT|CE Buy-Only|Chandelier Cross|0.044086|Base+ETH": "2026-09-28T10:01:04.181034+00:00",
-  "NOM/USDT|CE Buy-Only|Chandelier Cross|0.00205|Base+ETH": "2026-09-28T10:01:04.669640+00:00"
+  "NOM/USDT|CE Buy-Only|Chandelier Cross|0.00205|Base+ETH": "2026-09-28T10:01:04.669640+00:00",
+  "AXL/USDT|CE Buy-Only|Chandelier Cross|0.05124|Base+ETH": "2026-09-28T10:08:41.592065+00:00"
 }
