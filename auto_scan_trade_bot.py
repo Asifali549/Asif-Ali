@@ -107,10 +107,14 @@ CRASH_DROP_24H_PCT = 8.0         # ya 24 ghante mein itna % -> saari trades band
 CRASH_CLOSE_ALL = False          # True = crash par saari khuli trades foran band. False (behtar): CE trailing SL khud nikalta hai, sirf nayi entry band
 CRASH_COOLDOWN_HOURS = 6         # crash ke baad itne ghante nayi entry band
 
+# NOTE (audit ke baad): CE Buy-Only ka Win58%/PF5 nateeja exit-fill bug ki wajah se ghalat nikla
+# (zero-edge random data par bhi wahi nateeja), aur NEW AdvancedConfluence ka PF Top-10 trades
+# nikalne par 1.04 reh jata hai (koi pukhta edge nahi). Dono nayi entry ke liye filhal BAND hain;
+# khuli purani trades apne SL par chalti rahengi. Dobara audit ke baad True kiya ja sakta hai.
 SYSTEMS_ENABLED = {
     "Union AB": True,
-    "NEW AdvancedConfluence": True,
-    "CE Buy-Only": True,
+    "NEW AdvancedConfluence": False,
+    "CE Buy-Only": False,
     "Pullback-in-Uptrend": True,
     "Donchian Breakout": True,
 }
