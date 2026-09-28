@@ -7,6 +7,15 @@ Exit rules:
   - Take Profit= entry + (ATR * take_profit_atr_mult)
   - Time exit  = max_hold_bars ke baad, jo bhi pehle aaye
 Fees + slippage dono taraf (entry aur exit) par lagte hain.
+
+FIX (audit ke baad): exit_mode="chandelier" ki simulation mein do ghaltiyan theek ki gayin:
+  1) ORDER BUG: pehle har bar par PEHLE usi bar ki apni high se trailing stop upar
+     uthaya jata tha, PHIR usi bar ka low us stop se check hota tha. Ek hi candle ka
+     data khud ke khilaf istemal ho raha tha (future leakage), jis se trades turant
+     "nafay" mein band dikhti thin (Win%93/PF45 jaisi ghair-mumkin numbers). Ab pehle
+     current bar ka low PICHLI maloom stop se check hota hai, US ke baad stop update.
+  2) INVALID SETUP: agar signal bar ka initial stop entry price se upar/barabar ho to
+     wo trade ab skip hoti hai (jaisa production compute_trade_progress karta hai).
 """
 
 import numpy as np
@@ -75,20 +84,23 @@ def simulate_trades(df, signal, bt_params, ce_params=None):
         exit_reason = None
 
         if exit_mode == "chandelier":
-            # Trailing stop: shuru mein entry bar ka CE stop, phir sirf upar trail hoga
+            # Trailing stop: shuru mein signal-bar ka CE stop, phir sirf upar trail hoga
             if np.isnan(ce_stop[i]):
                 continue
-            trail_stop = ce_stop[i]
+            trail_stop = float(ce_stop[i])
+            if trail_stop >= entry_price:
+                continue   # FIX: invalid setup skip (production jaisa)
 
             for j in range(entry_bar, min(entry_bar + max_hold, n)):
-                if not np.isnan(ce_stop[j]):
-                    trail_stop = max(trail_stop, ce_stop[j])  # sirf upar trail ho, neeche nahi
-
+                # FIX: PEHLE current bar ka low, PICHLI maloom stop se check ...
                 if low[j] <= trail_stop:
                     exit_price = trail_stop
                     exit_bar = j
                     exit_reason = "CE_STOP"
                     break
+                # ... US ke BAAD current bar ke data se agli bar ke liye stop update
+                if not np.isnan(ce_stop[j]):
+                    trail_stop = max(trail_stop, ce_stop[j])  # sirf upar trail ho, neeche nahi
 
             if exit_price is None:
                 last_bar = min(entry_bar + max_hold - 1, n - 1)
