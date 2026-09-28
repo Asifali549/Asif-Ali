@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-28T17:12:19.916461+00:00",
+  "last_updated_utc": "2026-09-28T17:19:05.052030+00:00",
   "coins_scanned": 150,
   "fear_greed_value": 74,
   "fear_greed_label": "Greed",
@@ -183,25 +183,6 @@
       "Overall Score %": "N/A",
       "Verdict": "N/A",
       "Rank": 10
-    },
-    {
-      "System": "CE Buy-Only",
-      "Coin": "AURORA/USDT",
-      "Combo": "Chandelier Cross",
-      "Tier": "Base+ETH",
-      "Category": "New Signal",
-      "Signal Time (PKT)": "2026-09-28 09:00 PM PKT",
-      "Bars Ago": 0,
-      "Entry": 0.06321,
-      "Current": 0.06321,
-      "P/L %": 0.0,
-      "Trail Stop": 0.058389,
-      "Take Profit": "N/A (trailing stop hi asal exit hai)",
-      "ETH Regime": "Bullish \u2705",
-      "Liquidity Rank": "#150 / 150",
-      "Overall Score %": "N/A",
-      "Verdict": "N/A",
-      "Rank": 11
     }
   ]
 }
