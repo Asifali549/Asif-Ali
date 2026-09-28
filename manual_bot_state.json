@@ -1,31 +1,14 @@
 {
-  "cash": 914.8066,
-  "positions": {
-    "NEAR/USDT": {
-      "entry_time": "2026-09-25T15:00:00",
-      "entry_price": 5.1001,
-      "initial_stop": 4.5719125,
-      "trail_stop": 5.0816875,
-      "tp_price": 6.156475,
-      "capital_allocated": 100.0,
-      "current_price": 5.1625,
-      "unrealized_pnl_pct": 1.224,
-      "source": "manual",
-      "system": "Union AB",
-      "combo": "Ichimoku+MS",
-      "ce_period": 16,
-      "ce_multiplier": 4.5,
-      "use_fixed_tp": true
-    }
-  },
-  "total_equity_usd": 1014.8066,
+  "cash": 1014.2456,
+  "positions": {},
+  "total_equity_usd": 1014.2456,
   "starting_capital_usd": 1000.0,
-  "open_position_count": 1,
+  "open_position_count": 0,
   "max_concurrent_positions": 8,
   "position_size_usd": 100.0,
   "risk_based_sizing": true,
   "risk_pct_per_trade": 1.0,
-  "open_risk_usd": 0.0,
+  "open_risk_usd": 0,
   "max_total_open_risk_pct": 8.0,
-  "last_updated": "2026-09-28T07:54:42.990704+00:00"
+  "last_updated": "2026-09-28T08:00:24.207151+00:00"
 }
