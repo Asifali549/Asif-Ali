@@ -56,6 +56,12 @@ ON/OFF ho sakte hain:
     trades ka SL/TP barabar check karta rehta hai. Bot ye file GitHub se
     taaza parhta hai (run ke shuru mein aur scan ke dauran bhi).
 
+ 8) RISK-BASED SIZING (Step 4): har trade ka size fixed $100 nahi - SL ke
+    faasle se nikalta hai taake SL lagne par nuqsan hamesha Equity ka
+    RISK_PCT_PER_TRADE % ho (settings manual_trade_bot.py mein hain, dono
+    bots ke liye ek hi jagah). Sab khuli trades ka kul risk bhi
+    MAX_TOTAL_OPEN_RISK_PCT tak mehdood hai.
+
 NOTE: "Union AB Backup Tier" is auto-scan mein SHAAMIL NAHI - wo Union
 AB ke usi signal par ban sakti hai (dohri trade ka khatra).
 =====================================================================
@@ -81,7 +87,7 @@ CONTROL_FILE = "auto_bot_control.json"      # dashboard ka "Rokein / Chalayein" 
 CONTROL_RECHECK_EVERY_COINS = 30            # scan ke dauran har itne coins baad button dobara check
 
 STARTING_CAPITAL = 2000.0
-POSITION_SIZE_USD = 100.0
+POSITION_SIZE_USD = 100.0                   # sirf FALLBACK (dekho manual_trade_bot.RISK_BASED_SIZING)
 MAX_CONCURRENT_POSITIONS = 15
 
 # ============================= NAYI SETTINGS =============================
@@ -360,7 +366,8 @@ def main():
     manual_pause = is_manually_paused()
 
     def finish():
-        total_equity = cash + sum(p["capital_allocated"] for p in positions.values())
+        total_equity = mbot.current_equity(cash, positions)
+        avg_size = (sum(p["capital_allocated"] for p in positions.values()) / len(positions)) if positions else POSITION_SIZE_USD
         save_state({
             "cash": round(cash, 4),
             "positions": positions,
@@ -368,7 +375,11 @@ def main():
             "starting_capital_usd": STARTING_CAPITAL,
             "open_position_count": len(positions),
             "max_concurrent_positions": MAX_CONCURRENT_POSITIONS,
-            "position_size_usd": POSITION_SIZE_USD,
+            "position_size_usd": round(avg_size, 2),   # dashboard ka "Per-Trade Size" - ab khuli trades ka AUSAT size
+            "risk_based_sizing": mbot.RISK_BASED_SIZING,
+            "risk_pct_per_trade": mbot.RISK_PCT_PER_TRADE,
+            "open_risk_usd": round(mbot.current_open_risk(positions), 4),
+            "max_total_open_risk_pct": mbot.MAX_TOTAL_OPEN_RISK_PCT,
             "taken_signals": taken_signals,
             "recent_losses": recent_losses,
             "pause_until": pause_until,
@@ -409,9 +420,11 @@ def main():
 
     coins = live.get_coin_list(exchange)[:live.TOP_N_COINS]
     print(f"Scanning {len(coins)} coins (strong_only={STRONG_ONLY}, max_age={MAX_SIGNAL_AGE_BARS} candle, "
-          f"one_per_coin={ONE_POSITION_PER_COIN})...")
+          f"one_per_coin={ONE_POSITION_PER_COIN}, risk_sizing={mbot.RISK_BASED_SIZING} "
+          f"{mbot.RISK_PCT_PER_TRADE}%/trade)...")
 
-    skipped = {"weak": 0, "old": 0, "coin_busy": 0, "already_taken": 0}
+    skipped = {"weak": 0, "old": 0, "coin_busy": 0, "already_taken": 0, "risk_cap": 0}
+    flags = {"risk_full": False}
 
     def fresh(found):
         if found is None:
@@ -435,11 +448,14 @@ def main():
         if skey in taken_signals:
             skipped["already_taken"] += 1
             return
-        if len(positions) >= MAX_CONCURRENT_POSITIONS or cash < POSITION_SIZE_USD:
+        if len(positions) >= MAX_CONCURRENT_POSITIONS or cash < mbot.MIN_POSITION_USD:
             return
         try:
-            pos, reason = mbot.open_manual_position(symbol, exchange, cash, len(positions),
-                                                   amount=POSITION_SIZE_USD, system=system, combo=combo)
+            # amount=None -> size RISK-BASED nikalta hai (manual_trade_bot.open_manual_position)
+            pos, reason = mbot.open_manual_position(
+                symbol, exchange, cash, len(positions), amount=None, system=system, combo=combo,
+                equity=mbot.current_equity(cash, positions), open_risk_usd=mbot.current_open_risk(positions),
+            )
         except Exception as e:
             print(f"  [ERROR] {symbol}/{system}: {e}")
             return
@@ -450,7 +466,11 @@ def main():
             cash -= pos["capital_allocated"]
             taken_signals[skey] = now_utc.isoformat()
             print(f"  [AUTO-OPENED] {symbol} ({system}{'/' + combo if combo else ''}): "
-                  f"entry={pos['entry_price']}, SL={pos['initial_stop']}, TP={pos['tp_price']}")
+                  f"entry={pos['entry_price']}, SL={pos['initial_stop']} ({pos['stop_distance_pct']}% door), "
+                  f"TP={pos['tp_price']}, size=${pos['capital_allocated']}, risk=${pos['risk_usd']}")
+        elif reason == "MAX_TOTAL_RISK":
+            skipped["risk_cap"] += 1
+            flags["risk_full"] = True
 
     for coin_i, symbol in enumerate(coins):
         if coin_i > 0 and coin_i % CONTROL_RECHECK_EVERY_COINS == 0 and is_manually_paused():
@@ -552,12 +572,16 @@ def main():
                 except Exception as e:
                     print(f"  [SKIP-{sys_name}] {symbol}: {e}")
 
-        if len(positions) >= MAX_CONCURRENT_POSITIONS or cash < POSITION_SIZE_USD:
+        if flags["risk_full"]:
+            print("  Kul khula risk hadd tak pahunch gaya - baaqi coins ka scan agli baar.")
+            break
+        if len(positions) >= MAX_CONCURRENT_POSITIONS or cash < mbot.MIN_POSITION_USD:
             print("  Capital/positions full - baaqi coins ka scan agli baar.")
             break
 
     print(f"  Chhor diye: kamzor(weak)={skipped['weak']}, purane(late)={skipped['old']}, "
-          f"coin pehle se khula={skipped['coin_busy']}, signal pehle le chuke={skipped['already_taken']}")
+          f"coin pehle se khula={skipped['coin_busy']}, signal pehle le chuke={skipped['already_taken']}, "
+          f"kul-risk hadd={skipped['risk_cap']}")
     finish()
 
 
