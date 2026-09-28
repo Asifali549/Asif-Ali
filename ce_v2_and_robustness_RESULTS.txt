@@ -1,0 +1,65 @@
+
+
+########## CE BUY-ONLY v2 (FILTERED) + PARAMETER SENSITIVITY + BOOTSTRAP CI ##########
+Filter: ETH Regime + RS Trend + RS Percentile>=95 (Donchian/Pullback jaisa)
+Exit (trailing): period=16, mult=3.0 (sabit)
+(150 coins, 1h, 8760 candles, fee 0.10%/side, slip 0.05%)
+
+
+=== Entry period=9, multiplier=3.5 ===
+  [unfiltered] trades=17378, win=20.8%, PF=0.492, 90% CI: [0.454, 0.534]
+    Folds: F1: 0.51 (4404) | F2: 0.45 (4570) | F3: 0.54 (4414) | F4: 0.46 (3990)
+  [filtered  ] trades=307, win=26.4%, PF=1.147, 90% CI: [0.568, 1.969]
+    Folds: F1: 2.26 (79) | F2: 0.36 (2) | F3: 2.04 (7) | F4: 0.70 (219)
+
+=== Entry period=9, multiplier=4.5 ===
+  [unfiltered] trades=6783, win=24.5%, PF=0.445, 90% CI: [0.392, 0.505]
+    Folds: F1: 0.40 (1762) | F2: 0.46 (1836) | F3: 0.50 (1717) | F4: 0.46 (1468)
+  [filtered  ] trades=91, win=28.6%, PF=0.391, 90% CI: [0.208, 0.698]
+    Folds: F1: 0.78 (37) | F2: 0.00 (2) | F3: N/A (0) | F4: 0.31 (52)
+
+=== Entry period=9, multiplier=5.5 ===
+  [unfiltered] trades=2044, win=24.5%, PF=0.611, 90% CI: [0.485, 0.768]
+    Folds: F1: 0.66 (525) | F2: 0.38 (574) | F3: 0.49 (504) | F4: 0.97 (441)
+  [filtered  ] trades=27, win=29.6%, PF=0.372, 90% CI: [0.079, 1.232]
+    Folds: F1: 2.04 (18) | F2: N/A (0) | F3: N/A (0) | F4: 0.00 (9)
+
+=== Entry period=11, multiplier=3.5 ===
+  [unfiltered] trades=20008, win=19.1%, PF=0.457, 90% CI: [0.422, 0.494]
+    Folds: F1: 0.49 (5149) | F2: 0.39 (5217) | F3: 0.46 (4994) | F4: 0.49 (4648)
+  [filtered  ] trades=382, win=21.5%, PF=1.005, 90% CI: [0.513, 1.662]
+    Folds: F1: 2.30 (91) | F2: 0.04 (4) | F3: 4.88 (6) | F4: 0.60 (281)
+
+=== Entry period=11, multiplier=4.5 ===
+  [unfiltered] trades=10085, win=22.6%, PF=0.429, 90% CI: [0.384, 0.48]
+    Folds: F1: 0.40 (2630) | F2: 0.39 (2765) | F3: 0.44 (2583) | F4: 0.51 (2107)
+  [filtered  ] trades=142, win=28.9%, PF=0.464, 90% CI: [0.229, 0.83]
+    Folds: F1: 0.68 (42) | F2: 0.00 (2) | F3: 16.53 (3) | F4: 0.26 (95)
+
+=== Entry period=11, multiplier=5.5 ===
+  [unfiltered] trades=3817, win=25.8%, PF=0.577, 90% CI: [0.476, 0.691]
+    Folds: F1: 0.47 (1012) | F2: 0.56 (1049) | F3: 0.46 (973) | F4: 0.92 (783)
+  [filtered  ] trades=48, win=29.2%, PF=0.469, 90% CI: [0.182, 1.121]
+    Folds: F1: 1.79 (24) | F2: 0.00 (1) | F3: 0.00 (1) | F4: 0.18 (22)
+
+=== Entry period=13, multiplier=3.5 ===
+  [unfiltered] trades=21540, win=17.5%, PF=0.465, 90% CI: [0.43, 0.503]
+    Folds: F1: 0.47 (5545) | F2: 0.43 (5585) | F3: 0.48 (5364) | F4: 0.48 (5046)
+  [filtered  ] trades=420, win=21.2%, PF=0.910, 90% CI: [0.493, 1.484]
+    Folds: F1: 1.87 (101) | F2: 0.00 (4) | F3: 3.22 (8) | F4: 0.57 (307)
+
+=== Entry period=13, multiplier=4.5 ===
+  [unfiltered] trades=12371, win=22.9%, PF=0.434, 90% CI: [0.397, 0.473]
+    Folds: F1: 0.45 (3263) | F2: 0.43 (3318) | F3: 0.43 (3143) | F4: 0.41 (2647)
+  [filtered  ] trades=195, win=29.2%, PF=0.785, 90% CI: [0.418, 1.312]
+    Folds: F1: 0.65 (55) | F2: 0.00 (2) | F3: N/A (3) | F4: 0.72 (135)
+
+=== Entry period=13, multiplier=5.5 ===
+  [unfiltered] trades=5607, win=24.6%, PF=0.474, 90% CI: [0.406, 0.549]
+    Folds: F1: 0.39 (1503) | F2: 0.44 (1544) | F3: 0.48 (1430) | F4: 0.67 (1130)
+  [filtered  ] trades=74, win=20.3%, PF=0.330, 90% CI: [0.135, 0.659]
+    Folds: F1: 0.71 (27) | F2: 0.00 (1) | F3: 0.17 (2) | F4: 0.30 (44)
+
+
+----- ACCEPTANCE CHECK (Phase C criteria) -----
+Koi filtered combo mein sab 4 folds PF>1 nahi mile - CE Buy-Only (chahe filter ke sath) abhi tak koi mustaqil edge nahi dikha raha.
