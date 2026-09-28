@@ -8,8 +8,8 @@
       "trail_stop": 5.0816875,
       "tp_price": 6.156475,
       "capital_allocated": 100.0,
-      "current_price": 5.2752,
-      "unrealized_pnl_pct": 3.433,
+      "current_price": 5.1598,
+      "unrealized_pnl_pct": 1.171,
       "source": "manual",
       "system": "Union AB",
       "combo": "Ichimoku+MS",
@@ -27,5 +27,5 @@
   "risk_pct_per_trade": 1.0,
   "open_risk_usd": 0.0,
   "max_total_open_risk_pct": 8.0,
-  "last_updated": "2026-09-28T05:56:00.233618+00:00"
+  "last_updated": "2026-09-28T06:01:36.821513+00:00"
 }
