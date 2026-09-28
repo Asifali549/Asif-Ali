@@ -1,8 +1,4 @@
 {
-  "UNI/USDT|Donchian Breakout|20-period High|9.9884|N/A": "2026-09-27T07:04:27.198185+00:00",
-  "KONET/USDT|CE Buy-Only|Chandelier Cross|0.01803|Base+ETH": "2026-09-27T07:04:27.583380+00:00",
-  "PAXG/USDT|CE Buy-Only|Chandelier Cross|4279.01|Base+ETH": "2026-09-27T07:04:27.991894+00:00",
-  "QI/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.003196|N/A": "2026-09-27T07:04:28.410631+00:00",
   "SOL/USDT|Union AB|Ichimoku+MS|124.11|Baseline": "2026-09-27T08:04:06.973038+00:00",
   "SOL/USDT|Union AB|EMA+Breakout|124.11|Baseline": "2026-09-27T08:04:07.515560+00:00",
   "SOL/USDT|Union AB Backup Tier|Ichimoku+MS|124.11|N/A": "2026-09-27T08:04:08.080488+00:00",
@@ -79,5 +75,7 @@
   "QI/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.003276|N/A": "2026-09-28T05:02:32.636053+00:00",
   "PLUME/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.018771|N/A": "2026-09-28T05:02:33.306001+00:00",
   "SUPER/USDT|CE Buy-Only|Chandelier Cross|0.197|Base+ETH": "2026-09-28T05:02:33.957704+00:00",
-  "NIL/USDT|CE Buy-Only|Chandelier Cross|0.08916|Base+ETH": "2026-09-28T06:00:47.094430+00:00"
+  "NIL/USDT|CE Buy-Only|Chandelier Cross|0.08916|Base+ETH": "2026-09-28T06:00:47.094430+00:00",
+  "COTI/USDT|CE Buy-Only|Chandelier Cross|0.01359|Base+ETH": "2026-09-28T07:05:47.362463+00:00",
+  "AR/USDT|CE Buy-Only|Chandelier Cross|4.387|Base+ETH": "2026-09-28T07:05:48.140460+00:00"
 }
