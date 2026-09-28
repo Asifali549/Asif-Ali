@@ -1,7 +1,4 @@
 {
-  "QI/USDT|Union AB|EMA+Breakout|0.003775|Baseline": "2026-09-27T12:05:32.696903+00:00",
-  "QI/USDT|Union AB Backup Tier|EMA+Breakout|0.003775|N/A": "2026-09-27T12:05:33.320938+00:00",
-  "PHA/USDT|CE Buy-Only|Chandelier Cross|0.0716|Base+ETH": "2026-09-27T12:05:33.854125+00:00",
   "NEAR/USDT|Pullback-in-Uptrend|EMA20 Pullback|5.2546|N/A": "2026-09-27T14:05:13.352355+00:00",
   "QNT/USDT|Pullback-in-Uptrend|EMA20 Pullback|162.281|N/A": "2026-09-27T14:05:13.851806+00:00",
   "ONDO/USDT|Donchian Breakout|20-period High|0.5506|N/A": "2026-09-27T14:05:14.257975+00:00",
@@ -74,5 +71,13 @@
   "W/USDT|CE Buy-Only|Chandelier Cross|0.01407|Base+ETH": "2026-09-28T11:07:16.160442+00:00",
   "OPEN/USDT|CE Buy-Only|Chandelier Cross|0.12956|Base+ETH": "2026-09-28T11:07:16.835552+00:00",
   "CRCLX/USDT|CE Buy-Only|Chandelier Cross|86.05|Base+ETH": "2026-09-28T11:07:17.503958+00:00",
-  "PIPEDOG/USDT|CE Buy-Only|Chandelier Cross|0.001821|Base+ETH": "2026-09-28T11:07:18.151394+00:00"
+  "PIPEDOG/USDT|CE Buy-Only|Chandelier Cross|0.001821|Base+ETH": "2026-09-28T11:07:18.151394+00:00",
+  "BTC/USDT|CE Buy-Only|Chandelier Cross|83087.0|Base+ETH": "2026-09-28T12:05:35.078646+00:00",
+  "QNT/USDT|Pullback-in-Uptrend|EMA20 Pullback|236.892|N/A": "2026-09-28T12:05:35.808411+00:00",
+  "USELESS/USDT|CE Buy-Only|Chandelier Cross|0.24916|Base+ETH": "2026-09-28T12:05:36.604049+00:00",
+  "FIL/USDT|CE Buy-Only|Chandelier Cross|1.0484|Base+ETH": "2026-09-28T12:05:37.389532+00:00",
+  "DOS/USDT|CE Buy-Only|Chandelier Cross|0.2107|Base+ETH": "2026-09-28T12:05:38.182866+00:00",
+  "BILL/USDT|CE Buy-Only|Chandelier Cross|0.01122|Base+ETH": "2026-09-28T12:05:38.963512+00:00",
+  "STX/USDT|CE Buy-Only|Chandelier Cross|0.3166|Base+ETH": "2026-09-28T12:05:39.732698+00:00",
+  "MEGA/USDT|CE Buy-Only|Chandelier Cross|0.04145|Base+ETH": "2026-09-28T12:05:40.514603+00:00"
 }
