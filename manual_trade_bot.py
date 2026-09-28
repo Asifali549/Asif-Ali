@@ -38,6 +38,20 @@ TAREEQA-E-ISTEMAL:
     3) Dashboard ke "Manual Trade Bot" section mein progress + final
        result dikhta hai (System column bhi dikhega).
 
+TRADE KA SIZE (Step 4 - RISK-BASED SIZING):
+    Pehle har trade par fixed $100 lagta tha - is se har trade ka asal
+    RISK barabar nahi tha (kisi ka SL 1.4% door, kisi ka 4.9%). Ab:
+
+        size = (Total Equity x RISK_PCT_PER_TRADE) / (SL faasla % + fees)
+
+    yani SL lagne par nuqsan HAMESHA Equity ka tay-shuda % (default 1%)
+    rehta hai - chahe SL qareeb ho ya door. Do hifazati hadein:
+      - MAX_POSITION_PCT_OF_EQUITY: koi ek trade Equity ke is % se bari nahi
+      - MAX_TOTAL_OPEN_RISK_PCT: sab khuli trades ka kul (initial) risk
+        Equity ke is % se zyada nahi (kyunke sab buy hain aur BTC ke sath
+        chalti hain - 15 trades asal mein ek hi bet hain)
+    Agar watchlist mein khud "amount" likha ho to wahi (fixed) istemal hoti hai.
+
 YE ASAL PAISON SE TRADE NAHI KARTA - paper/virtual hai (koi API
 trade-key nahi chahiye).
 """
@@ -79,9 +93,16 @@ DEFAULT_SYSTEM = "CE Buy-Only"
 DEFAULT_COMBO = "Ichimoku+MS"   # sirf Union AB variants ke liye, jab combo na diya jaye
 
 STARTING_CAPITAL = 1000.0
-POSITION_SIZE_USD = 100.0      # har manually-feed ki gayi coin ke liye default $100 (ya watchlist mein "amount")
+POSITION_SIZE_USD = 100.0      # sirf FALLBACK (RISK_BASED_SIZING=False hone par) ya jab size nikalna mumkin na ho
 MAX_CONCURRENT_POSITIONS = 8
 FEE_PCT = config.BACKTEST_PARAMS["fee_pct"] / 100   # 0.1% per side, backtest/live jaisa hoobahoo
+
+# ---- RISK-BASED POSITION SIZING (Step 4) ----
+RISK_BASED_SIZING = True            # False = purana fixed $100 (POSITION_SIZE_USD)
+RISK_PCT_PER_TRADE = 1.0            # har trade par SL lagne se Equity ka itna % nuqsan
+MAX_POSITION_PCT_OF_EQUITY = 20.0   # koi ek trade Equity ke is % se bari nahi
+MAX_TOTAL_OPEN_RISK_PCT = 8.0       # sab khuli trades ka kul initial risk Equity ke is % se zyada nahi
+MIN_POSITION_USD = 10.0             # is se chhoti trade ka faida nahi (fees kha jati hain)
 
 POSITION_DATA_LIMIT = 700
 
@@ -101,6 +122,18 @@ def resolve_preset(system, combo):
     if system not in SYSTEM_PRESETS:
         return None, f"System '{system}' pehchana nahi gaya"
     return SYSTEM_PRESETS[system], None
+
+
+# ============================= EQUITY / RISK HELPERS =============================
+def current_equity(cash, positions):
+    """Cash + khuli trades mein lagi hui raqam (cost basis par, jaisa dashboard ka Total Equity)."""
+    return cash + sum(p.get("capital_allocated", 0) for p in positions.values())
+
+
+def current_open_risk(positions):
+    """Sab khuli trades ka shuruati (initial) risk $ mein. Purani trades jin mein risk_usd
+    darj nahi, unhe 0 ginte hain (naye sizing ke baad se hi ginti shuru)."""
+    return sum(float(p.get("risk_usd") or 0) for p in positions.values())
 
 
 # ============================= STATE / WATCHLIST I/O =============================
@@ -224,10 +257,11 @@ def update_open_position(symbol, pos, exchange):
     exit_reason = None
 
     for i in range(signal_idx + 1, len(df)):
-        bar_stop = chandelier_series.iloc[i]
-        if not pd.isna(bar_stop) and bar_stop > running_stop:
-            running_stop = float(bar_stop)
-
+        # FIX (order-of-operations bug): PEHLE current bar ka low/high, PICHLI
+        # maloom stop se check; US KE BAAD current bar ke data se agli bar ke
+        # liye stop update. Pehle update-pehle-check tha - ek hi candle ki apni
+        # high se stop upar utha kar usi candle ka low check ho raha tha
+        # (future leakage), jo backtest audit mein Win%93/PF45 ki asal wajah nikli.
         low_i = df["low"].iloc[i]
         high_i = df["high"].iloc[i]
         stop_hit = low_i <= running_stop
@@ -239,6 +273,10 @@ def update_open_position(symbol, pos, exchange):
         elif tp_hit:
             status, exit_price, exit_time, exit_reason = "CLOSED", tp_price, df["timestamp"].iloc[i], "TP"
             break
+
+        bar_stop = chandelier_series.iloc[i]
+        if not pd.isna(bar_stop) and bar_stop > running_stop:
+            running_stop = float(bar_stop)
 
     if status == "OPEN":
         current_price = float(df["close"].iloc[-1])
@@ -277,20 +315,22 @@ def update_open_position(symbol, pos, exchange):
 
 
 # ============================= MANUAL ENTRY (jo watchlist mein daala gaya) =============================
-def open_manual_position(symbol, exchange, cash, open_count, amount=None, system=DEFAULT_SYSTEM, combo=None):
+def open_manual_position(symbol, exchange, cash, open_count, amount=None, system=DEFAULT_SYSTEM, combo=None,
+                          equity=None, open_risk_usd=0.0):
     """
-    amount: agar watchlist mein us coin ke sath khud ki amount di gayi ho
-    to wo istemal hoti hai, warna default POSITION_SIZE_USD ($100).
+    amount: agar watchlist mein us coin ke sath khud ki amount di gayi ho to
+        wahi FIXED raqam istemal hoti hai (risk-sizing bypass). None ho to
+        RISK_BASED_SIZING ke mutabiq size nikalta hai.
     system/combo: kaunse live system ke SL/TP rules follow karne hain.
+    equity: is bot ki maujooda Total Equity (cash + khuli trades). Na di jaye to cash.
+    open_risk_usd: is waqt khuli sab trades ka kul initial risk ($) - kul-risk hadd ke liye.
     """
-    position_size = amount if amount is not None else POSITION_SIZE_USD
-
     if open_count >= MAX_CONCURRENT_POSITIONS:
         return None, "MAX_POSITIONS"
-    if cash < position_size:
-        return None, "NO_CASH"
-    if position_size <= 0:
+    if amount is not None and amount <= 0:
         return None, "INVALID_AMOUNT"
+    if cash < MIN_POSITION_USD:
+        return None, "NO_CASH"
 
     preset, err = resolve_preset(system, combo)
     if preset is None:
@@ -313,9 +353,37 @@ def open_manual_position(symbol, exchange, cash, open_count, amount=None, system
         # khud CE indicator ke apne rule ke khilaf hoga - isliye safe taur par skip.
         return None, "INVALID_STOP"
 
+    # ---- SIZE nikalna ----
+    stop_dist_frac = (entry_price - float(initial_stop)) / entry_price   # SL entry se kitna % neeche
+    loss_frac_at_stop = stop_dist_frac + 2 * FEE_PCT                      # SL par asal nuqsan (fees samet)
+    risk_usd = None
+
+    if amount is not None:
+        position_size = amount                       # khud di gayi FIXED raqam
+        if cash < position_size:
+            return None, "NO_CASH"
+        risk_usd = position_size * loss_frac_at_stop
+    elif RISK_BASED_SIZING:
+        eq = equity if equity is not None else cash
+        risk_budget = eq * RISK_PCT_PER_TRADE / 100
+        if open_risk_usd + risk_budget > eq * MAX_TOTAL_OPEN_RISK_PCT / 100 + 1e-9:
+            return None, "MAX_TOTAL_RISK"
+        position_size = risk_budget / loss_frac_at_stop
+        position_size = min(position_size, eq * MAX_POSITION_PCT_OF_EQUITY / 100, cash)
+        if position_size < MIN_POSITION_USD:
+            return None, "TOO_SMALL"
+        position_size = round(position_size, 2)
+        risk_usd = position_size * loss_frac_at_stop
+    else:
+        position_size = POSITION_SIZE_USD
+        if cash < position_size:
+            return None, "NO_CASH"
+        risk_usd = position_size * loss_frac_at_stop
+
     risk = entry_price - float(initial_stop)
     tp_price = (entry_price + risk * rr_multiple) if use_fixed_tp else None
 
+    eq_for_pct = equity if equity is not None else cash
     pos = {
         "entry_time": df["timestamp"].iloc[-1].isoformat(),
         "entry_price": round(entry_price, 8),
@@ -323,6 +391,9 @@ def open_manual_position(symbol, exchange, cash, open_count, amount=None, system
         "trail_stop": round(float(initial_stop), 8),
         "tp_price": round(tp_price, 8) if tp_price is not None else None,
         "capital_allocated": position_size,
+        "risk_usd": round(risk_usd, 4),
+        "risk_pct_of_equity": round(risk_usd / eq_for_pct * 100, 3) if eq_for_pct else None,
+        "stop_distance_pct": round(stop_dist_frac * 100, 3),
         "current_price": round(entry_price, 8),
         "unrealized_pnl_pct": 0.0,
         "source": "manual",
@@ -336,8 +407,9 @@ def open_manual_position(symbol, exchange, cash, open_count, amount=None, system
     tp_str = f"{tp_price:.6f}" if tp_price is not None else "N/A (trailing-stop hi exit hai)"
     send_telegram_alert(
         f"🤖 Manual Bot Trade OPENED ({system}{' - ' + combo if combo else ''}): {symbol}\n"
-        f"Entry: {entry_price:.6f} | SL (CE {ce_period},{ce_multiplier}): {float(initial_stop):.6f} | TP: {tp_str}\n"
-        f"Capital Allocated: ${position_size:.2f} (virtual)"
+        f"Entry: {entry_price:.6f} | SL (CE {ce_period},{ce_multiplier}): {float(initial_stop):.6f} "
+        f"({stop_dist_frac*100:.2f}% door) | TP: {tp_str}\n"
+        f"Size: ${position_size:.2f} (virtual) | SL par nuqsan ~${risk_usd:.2f}"
     )
 
     return pos, "OPENED"
@@ -381,7 +453,10 @@ def main():
             print(f"  [SKIP] {symbol}: pehle se hi ek open position mojood hai")
             continue
         try:
-            pos, reason = open_manual_position(symbol, exchange, cash, len(positions), amount=amount, system=system, combo=combo)
+            pos, reason = open_manual_position(
+                symbol, exchange, cash, len(positions), amount=amount, system=system, combo=combo,
+                equity=current_equity(cash, positions), open_risk_usd=current_open_risk(positions),
+            )
         except Exception as e:
             print(f"  [ERROR] {symbol}: {e}")
             remaining_watchlist.append(entry)   # error par dobara try karne ke liye rakh lo
@@ -390,9 +465,10 @@ def main():
         if pos is not None:
             positions[symbol] = pos
             cash -= pos["capital_allocated"]
-            print(f"  [OPENED] {symbol} ({system}): entry={pos['entry_price']}, SL={pos['initial_stop']}, "
-                  f"TP={pos['tp_price']}, amount=${pos['capital_allocated']}")
-        elif reason in ("MAX_POSITIONS", "NO_CASH", "NO_DATA"):
+            print(f"  [OPENED] {symbol} ({system}): entry={pos['entry_price']}, SL={pos['initial_stop']} "
+                  f"({pos['stop_distance_pct']}% door), TP={pos['tp_price']}, size=${pos['capital_allocated']}, "
+                  f"risk=${pos['risk_usd']}")
+        elif reason in ("MAX_POSITIONS", "NO_CASH", "NO_DATA", "MAX_TOTAL_RISK"):
             print(f"  [QUEUED] {symbol}: abhi nahi ({reason}), agli baar phir koshish hogi")
             remaining_watchlist.append(entry)
         else:
@@ -401,7 +477,8 @@ def main():
     save_watchlist(remaining_watchlist)
 
     # ---- STEP 3: state save ----
-    total_equity = cash + sum(p["capital_allocated"] for p in positions.values())
+    total_equity = current_equity(cash, positions)
+    avg_size = (sum(p["capital_allocated"] for p in positions.values()) / len(positions)) if positions else POSITION_SIZE_USD
     state = {
         "cash": round(cash, 4),
         "positions": positions,
@@ -409,7 +486,11 @@ def main():
         "starting_capital_usd": STARTING_CAPITAL,
         "open_position_count": len(positions),
         "max_concurrent_positions": MAX_CONCURRENT_POSITIONS,
-        "position_size_usd": POSITION_SIZE_USD,
+        "position_size_usd": round(avg_size, 2),   # dashboard ka "Per-Trade Size" - ab khuli trades ka AUSAT size
+        "risk_based_sizing": RISK_BASED_SIZING,
+        "risk_pct_per_trade": RISK_PCT_PER_TRADE,
+        "open_risk_usd": round(current_open_risk(positions), 4),
+        "max_total_open_risk_pct": MAX_TOTAL_OPEN_RISK_PCT,
     }
     save_state(state)
 
