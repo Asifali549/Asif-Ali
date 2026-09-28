@@ -79,5 +79,13 @@
   "DOS/USDT|CE Buy-Only|Chandelier Cross|0.2107|Base+ETH": "2026-09-28T12:05:38.182866+00:00",
   "BILL/USDT|CE Buy-Only|Chandelier Cross|0.01122|Base+ETH": "2026-09-28T12:05:38.963512+00:00",
   "STX/USDT|CE Buy-Only|Chandelier Cross|0.3166|Base+ETH": "2026-09-28T12:05:39.732698+00:00",
-  "MEGA/USDT|CE Buy-Only|Chandelier Cross|0.04145|Base+ETH": "2026-09-28T12:05:40.514603+00:00"
+  "MEGA/USDT|CE Buy-Only|Chandelier Cross|0.04145|Base+ETH": "2026-09-28T12:05:40.514603+00:00",
+  "LINK/USDT|Pullback-in-Uptrend|EMA20 Pullback|14.7558|N/A": "2026-09-28T13:03:39.459617+00:00",
+  "LINK/USDT|Donchian Breakout|20-period High|14.7558|N/A": "2026-09-28T13:03:40.198776+00:00",
+  "PUMP/USDT|Donchian Breakout|20-period High|0.00532|N/A": "2026-09-28T13:03:40.954980+00:00",
+  "PAXG/USDT|CE Buy-Only|Chandelier Cross|4162.68|Base+ETH": "2026-09-28T13:03:41.671119+00:00",
+  "FARTCOIN/USDT|CE Buy-Only|Chandelier Cross|0.1751|Base+ETH": "2026-09-28T13:03:42.429953+00:00",
+  "DATA/USDT|CE Buy-Only|Chandelier Cross|0.2213|Base+ETH": "2026-09-28T13:03:43.202122+00:00",
+  "MET/USDT|CE Buy-Only|Chandelier Cross|0.3301|Base+ETH": "2026-09-28T13:03:43.934015+00:00",
+  "CAKE/USDT|CE Buy-Only|Chandelier Cross|2.663|Base+ETH": "2026-09-28T13:03:44.671262+00:00"
 }
