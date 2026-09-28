@@ -8,8 +8,8 @@
       "trail_stop": 5.0816875,
       "tp_price": null,
       "capital_allocated": 100.0,
-      "current_price": 5.1598,
-      "unrealized_pnl_pct": 8.326,
+      "current_price": 5.1625,
+      "unrealized_pnl_pct": 8.383,
       "source": "manual",
       "system": "Donchian Breakout",
       "combo": null,
@@ -25,8 +25,8 @@
       "trail_stop": 0.54114875,
       "tp_price": null,
       "capital_allocated": 100.0,
-      "current_price": 0.58111,
-      "unrealized_pnl_pct": 6.645,
+      "current_price": 0.56999,
+      "unrealized_pnl_pct": 4.605,
       "source": "manual",
       "system": "Pullback-in-Uptrend",
       "combo": null,
@@ -46,8 +46,8 @@
       "risk_usd": 19.865,
       "risk_pct_of_equity": 1.0,
       "stop_distance_pct": 15.106,
-      "current_price": 0.3396,
-      "unrealized_pnl_pct": 8.776,
+      "current_price": 0.3348,
+      "unrealized_pnl_pct": 7.239,
       "source": "manual",
       "system": "Pullback-in-Uptrend",
       "combo": null,
@@ -76,7 +76,7 @@
   "pause_until": "2026-09-28T16:04:37.011569+00:00",
   "crash_until": null,
   "market_level": "OK",
-  "market_info": "BTC 4h:-1.2% 24h:-2.3%, ETH 4h:-1.0% 24h:-2.6%",
+  "market_info": "BTC 4h:-0.7% 24h:-2.3%, ETH 4h:-0.5% 24h:-2.7%",
   "manual_pause": false,
   "rules": {
     "strong_only": true,
@@ -86,5 +86,5 @@
     "max_signal_age_bars": 1,
     "one_position_per_coin": true
   },
-  "last_updated": "2026-09-28T06:59:25.355605+00:00"
+  "last_updated": "2026-09-28T07:04:58.956889+00:00"
 }
