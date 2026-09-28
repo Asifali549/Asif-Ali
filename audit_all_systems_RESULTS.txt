@@ -1,0 +1,47 @@
+
+
+########## AUDIT - SAB SYSTEMS (order-fixed engine, production filters) ##########
+(150 coins pool, 1h, 8760 candles, fee 0.10%/side, slip 0.05%, max hold 500 bars)
+
+
+=== Union AB ===
+  POORA: trades=194, win=45.4%, PF=1.754, expectancy=+2.647%/trade, avg bars=21.6
+  Top-10 trades nikal kar: PF=1.208 (in 10 trades ka gross-profit mein hissa 31.1%)
+  Folds: F1: 2.91 (54, 57%) | F2: N/A (1, 100%) | F3: 1.59 (3, 33%) | F4: 1.30 (136, 40%)
+  1 bar ke andar band hone wali trades: 6.2%
+
+=== Union AB Backup Tier ===   [purana: PF 3.04]
+  POORA: trades=500, win=40.4%, PF=1.422, expectancy=+1.231%/trade, avg bars=21.7
+  Top-10 trades nikal kar: PF=1.144 (in 10 trades ka gross-profit mein hissa 19.6%)
+  Folds: F1: 2.19 (103, 51%) | F2: 1.89 (106, 43%) | F3: 0.87 (107, 30%) | F4: 1.32 (184, 39%)
+  1 bar ke andar band hone wali trades: 7.4%
+
+=== CE Buy-Only (baseline) ===
+  POORA: trades=10427, win=58.1%, PF=5.346, expectancy=+1.515%/trade, avg bars=1.2
+  Top-10 trades nikal kar: PF=4.917 (in 10 trades ka gross-profit mein hissa 8.0%)
+  Folds: F1: 5.70 (2685, 58%) | F2: 4.91 (2892, 57%) | F3: 4.92 (2648, 60%) | F4: 5.86 (2202, 58%)
+  1 bar ke andar band hone wali trades: 93.1%
+
+=== CE Buy-Only (+ETH bullish) ===
+  POORA: trades=1845, win=57.1%, PF=5.186, expectancy=+2.149%/trade, avg bars=1.0
+  Top-10 trades nikal kar: PF=4.135 (in 10 trades ka gross-profit mein hissa 20.3%)
+  Folds: F1: 4.37 (925, 57%) | F2: 4.07 (37, 59%) | F3: 10.84 (47, 62%) | F4: 6.41 (836, 56%)
+  1 bar ke andar band hone wali trades: 95.5%
+
+=== Pullback-in-Uptrend ===   [purana: 799 trades, PF 1.831]
+  POORA: trades=862, win=40.0%, PF=1.929, expectancy=+2.576%/trade, avg bars=30.1
+  Top-10 trades nikal kar: PF=1.450 (in 10 trades ka gross-profit mein hissa 24.9%)
+  Folds: F1: 2.60 (200, 42%) | F2: 0.77 (14, 36%) | F3: 2.42 (25, 48%) | F4: 1.66 (623, 39%)
+  1 bar ke andar band hone wali trades: 2.6%
+
+=== Donchian Breakout ===   [purana: 552 trades, PF 2.171]
+  POORA: trades=648, win=44.3%, PF=2.909, expectancy=+6.039%/trade, avg bars=32.9
+  Top-10 trades nikal kar: PF=1.727 (in 10 trades ka gross-profit mein hissa 40.6%)
+  Folds: F1: 2.40 (156, 46%) | F2: 2.00 (14, 50%) | F3: 2.18 (22, 41%) | F4: 3.26 (456, 44%)
+  1 bar ke andar band hone wali trades: 3.1%
+
+=== NEW AdvancedConfluence ===
+  POORA: trades=404, win=40.3%, PF=1.304, expectancy=+0.402%/trade, avg bars=10.4
+  Top-10 trades nikal kar: PF=1.044 (in 10 trades ka gross-profit mein hissa 19.9%)
+  Folds: F1: 1.83 (40, 45%) | F2: 1.55 (81, 52%) | F3: 1.09 (138, 35%) | F4: 1.24 (145, 38%)
+  1 bar ke andar band hone wali trades: 9.7%
