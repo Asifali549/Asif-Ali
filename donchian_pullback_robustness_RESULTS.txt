@@ -1,0 +1,80 @@
+
+
+########## DONCHIAN BREAKOUT — PARAMETER SENSITIVITY + BOOTSTRAP CI ##########
+Exit (trailing, fixed): period=16, mult=4.5
+Filter: ETH Regime + RS Trend + RS Percentile>=95 (production jaisa)
+
+
+=== channel_period=15 ===
+  trades=700, win=43.0%, PF=2.656, 90% CI: [2.021, 3.43]
+  Top-10 nikal kar: PF=1.754 (690 trades)
+  Folds: F1: 2.60 (174) | F2: 3.04 (41) | F3: 1.53 (67) | F4: 2.95 (418)
+
+=== channel_period=20 ===
+  trades=631, win=44.1%, PF=2.815, 90% CI: [2.125, 3.668]
+  Top-10 nikal kar: PF=1.811 (621 trades)
+  Folds: F1: 2.65 (157) | F2: 2.21 (38) | F3: 1.70 (59) | F4: 3.24 (377)
+
+=== channel_period=25 ===
+  trades=585, win=43.8%, PF=2.757, 90% CI: [2.042, 3.683]
+  Top-10 nikal kar: PF=1.719 (575 trades)
+  Folds: F1: 2.61 (146) | F2: 2.04 (37) | F3: 1.60 (52) | F4: 3.17 (350)
+
+----- ACCEPTANCE CHECK (DONCHIAN BREAKOUT) -----
+Sab se mazboot combo: channel_period=20 (bootstrap 5th percentile PF = 2.125)
+-> ACCEPTANCE CRITERIA POORE: har fold PF>1 aur bootstrap ki nichli hadd bhi >1.2 hai.
+
+
+########## PULLBACK-IN-UPTREND — PARAMETER SENSITIVITY + BOOTSTRAP CI ##########
+Exit (trailing, fixed): period=16, mult=4.5
+Filter: ETH Regime + RS Trend + RS Percentile>=95 (production jaisa)
+
+
+=== ema_period=15, tolerance_pct=0.5 ===
+  trades=856, win=39.7%, PF=2.254, 90% CI: [1.792, 2.814]
+  Top-10 nikal kar: PF=1.571 (846 trades)
+  Folds: F1: 3.11 (194) | F2: 1.54 (57) | F3: 1.62 (76) | F4: 2.06 (529)
+
+=== ema_period=15, tolerance_pct=1.0 ===
+  trades=936, win=41.9%, PF=2.334, 90% CI: [1.884, 2.861]
+  Top-10 nikal kar: PF=1.696 (926 trades)
+  Folds: F1: 3.23 (217) | F2: 1.32 (64) | F3: 1.88 (83) | F4: 2.13 (572)
+
+=== ema_period=15, tolerance_pct=1.5 ===
+  trades=975, win=42.2%, PF=2.308, 90% CI: [1.869, 2.811]
+  Top-10 nikal kar: PF=1.695 (965 trades)
+  Folds: F1: 3.17 (228) | F2: 1.27 (68) | F3: 1.73 (89) | F4: 2.16 (590)
+
+=== ema_period=20, tolerance_pct=0.5 ===
+  trades=797, win=40.3%, PF=2.096, 90% CI: [1.693, 2.563]
+  Top-10 nikal kar: PF=1.562 (787 trades)
+  Folds: F1: 2.81 (191) | F2: 1.77 (54) | F3: 1.56 (73) | F4: 1.88 (479)
+
+=== ema_period=20, tolerance_pct=1.0 ===
+  trades=867, win=39.7%, PF=2.142, 90% CI: [1.751, 2.59]
+  Top-10 nikal kar: PF=1.623 (857 trades)
+  Folds: F1: 2.92 (208) | F2: 1.60 (57) | F3: 1.73 (75) | F4: 1.88 (527)
+
+=== ema_period=20, tolerance_pct=1.5 ===
+  trades=920, win=39.9%, PF=2.220, 90% CI: [1.824, 2.68]
+  Top-10 nikal kar: PF=1.673 (910 trades)
+  Folds: F1: 3.11 (216) | F2: 1.50 (62) | F3: 1.74 (81) | F4: 1.96 (561)
+
+=== ema_period=25, tolerance_pct=0.5 ===
+  trades=709, win=38.2%, PF=1.945, 90% CI: [1.554, 2.403]
+  Top-10 nikal kar: PF=1.407 (699 trades)
+  Folds: F1: 2.83 (173) | F2: 2.41 (52) | F3: 1.36 (64) | F4: 1.54 (420)
+
+=== ema_period=25, tolerance_pct=1.0 ===
+  trades=805, win=40.4%, PF=2.107, 90% CI: [1.736, 2.572]
+  Top-10 nikal kar: PF=1.590 (795 trades)
+  Folds: F1: 2.93 (193) | F2: 2.18 (53) | F3: 1.87 (75) | F4: 1.72 (484)
+
+=== ema_period=25, tolerance_pct=1.5 ===
+  trades=860, win=39.5%, PF=2.114, 90% CI: [1.725, 2.556]
+  Top-10 nikal kar: PF=1.582 (850 trades)
+  Folds: F1: 2.80 (201) | F2: 1.95 (56) | F3: 1.70 (82) | F4: 1.87 (521)
+
+----- ACCEPTANCE CHECK (PULLBACK-IN-UPTREND) -----
+Sab se mazboot combo: ema_period=15, tolerance_pct=1.0 (bootstrap 5th percentile PF = 1.884)
+-> ACCEPTANCE CRITERIA POORE: har fold PF>1 aur bootstrap ki nichli hadd bhi >1.2 hai.
