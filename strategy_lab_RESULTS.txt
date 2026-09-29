@@ -1,0 +1,153 @@
+==========================================================================================
+STRATEGY LAB - DAILY / 4H SPOT STRATEGIES (lookahead-free)
+==========================================================================================
+Fee 0.10% + slippage 0.05% har taraf | fetch errors: 0/150
+
+----- DATA COMPLETENESS -----
+DAILY (1d): coins=114 | candles median=999 min=130 max=1499 | poori history (>= 1470) wale coins=32 | sab se purani tareekh=2021-04-09 | aakhri tareekh=2026-09-28
+4H: coins=124 | candles median=4379 min=324 max=4379 | poori history (>= 4292) wale coins=69 | sab se purani tareekh=2024-06-18 | aakhri tareekh=2026-09-29
+NOTE: coin list AAJ ki top-liquid list hai (survivorship bias) - asal natija thora kamzor ho sakta hai.
+
+
+##########################################################################################
+HISSA A - MOMENTUM ROTATION (har hafte top-K strongest coins, point-in-time top-100 liquid)
+##########################################################################################
+Period: 2021-08-06 -> 2026-09-28  (4 folds = waqt ke 4 barabar hisse)
+
+--- Benchmarks ---
+BTC buy&hold                                 total=    +107% CAGR= +15.2% MaxDD= -71.9% Sharpe=0.56 | Folds: -49% / +263% / +41% / -21%
+BTC + EMA50 regime                           total=     +39% CAGR=  +6.7% MaxDD= -53.7% Sharpe=0.43 | Folds: -23% / +23% / +34% / +10%
+Equal-weight top100 (koi selection nahi)     total=     +58% CAGR=  +9.3% MaxDD= -81.0% Sharpe=0.54 | Folds: -54% / +177% / +12% / +10%
+
+--- Rotation grid ---
+L=30 K= 5 raw    regime=none                 total=   +1673% CAGR= +74.9% MaxDD= -85.1% Sharpe=0.80 | Folds: -67% / +1418% / +207% / +16%
+L=30 K=10 raw    regime=none                 total=    +833% CAGR= +54.3% MaxDD= -77.8% Sharpe=0.85 | Folds: -36% / +396% / +145% / +19%
+L=60 K= 5 raw    regime=none                 total=   +1483% CAGR= +71.1% MaxDD= -84.7% Sharpe=1.22 | Folds: -4% / +77% / +159% / +259%
+L=60 K=10 raw    regime=none                 total=    +403% CAGR= +36.9% MaxDD= -77.5% Sharpe=0.93 | Folds: -20% / +25% / +128% / +121%
+L=90 K= 5 raw    regime=none                 total=    +109% CAGR= +15.4% MaxDD= -81.2% Sharpe=0.67 | Folds: -39% / -3% / +18% / +203%
+L=90 K=10 raw    regime=none                 total=     +15% CAGR=  +2.8% MaxDD= -74.8% Sharpe=0.43 | Folds: -35% / -15% / +26% / +66%
+L=30 K= 5 voladj regime=none                 total=   +2764% CAGR= +92.0% MaxDD= -83.0% Sharpe=0.83 | Folds: -43% / +1091% / +133% / +81%
+L=30 K=10 voladj regime=none                 total=    +812% CAGR= +53.7% MaxDD= -78.1% Sharpe=0.84 | Folds: -45% / +524% / +144% / +9%
+L=60 K= 5 voladj regime=none                 total=   +1769% CAGR= +76.7% MaxDD= -82.9% Sharpe=1.28 | Folds: -46% / +51% / +239% / +582%
+L=60 K=10 voladj regime=none                 total=    +377% CAGR= +35.5% MaxDD= -77.1% Sharpe=0.93 | Folds: -32% / +5% / +159% / +159%
+L=90 K= 5 voladj regime=none                 total=    +410% CAGR= +37.3% MaxDD= -81.4% Sharpe=0.92 | Folds: -24% / -13% / +155% / +202%
+L=90 K=10 voladj regime=none                 total=     +46% CAGR=  +7.7% MaxDD= -76.4% Sharpe=0.49 | Folds: -26% / -25% / +39% / +90%
+L=30 K= 5 raw    regime=BTC>EMA50            total=   +1056% CAGR= +60.9% MaxDD= -61.8% Sharpe=1.22 | Folds: +18% / -5% / +400% / +105%
+L=30 K=10 raw    regime=BTC>EMA50            total=    +521% CAGR= +42.6% MaxDD= -65.5% Sharpe=1.07 | Folds: +62% / -27% / +200% / +76%
+L=60 K= 5 raw    regime=BTC>EMA50            total=   +1511% CAGR= +71.6% MaxDD= -60.0% Sharpe=1.32 | Folds: +195% / -36% / +232% / +157%
+L=60 K=10 raw    regime=BTC>EMA50            total=    +393% CAGR= +36.3% MaxDD= -63.0% Sharpe=0.98 | Folds: +108% / -45% / +142% / +78%
+L=90 K= 5 raw    regime=BTC>EMA50            total=    +338% CAGR= +33.3% MaxDD= -63.7% Sharpe=0.91 | Folds: +66% / -48% / +113% / +140%
+L=90 K=10 raw    regime=BTC>EMA50            total=     +96% CAGR= +14.0% MaxDD= -63.4% Sharpe=0.59 | Folds: +51% / -51% / +55% / +71%
+L=30 K= 5 voladj regime=BTC>EMA50            total=   +1304% CAGR= +67.1% MaxDD= -59.8% Sharpe=1.33 | Folds: +55% / -16% / +361% / +136%
+L=30 K=10 voladj regime=BTC>EMA50            total=    +661% CAGR= +48.4% MaxDD= -58.4% Sharpe=1.21 | Folds: +45% / -9% / +237% / +71%
+L=60 K= 5 voladj regime=BTC>EMA50            total=   +1705% CAGR= +75.5% MaxDD= -58.7% Sharpe=1.42 | Folds: +52% / -37% / +286% / +388%
+L=60 K=10 voladj regime=BTC>EMA50            total=    +522% CAGR= +42.7% MaxDD= -62.9% Sharpe=1.12 | Folds: +65% / -47% / +192% / +142%
+L=90 K= 5 voladj regime=BTC>EMA50            total=    +795% CAGR= +53.1% MaxDD= -63.0% Sharpe=1.22 | Folds: +88% / -50% / +279% / +153%
+L=90 K=10 voladj regime=BTC>EMA50            total=    +147% CAGR= +19.2% MaxDD= -65.2% Sharpe=0.71 | Folds: +60% / -55% / +73% / +100%
+
+--- RANDOM CONTROL: har hafte K random liquid coins (30 alag seeds) ---
+Random K= 5 regime=none     : Sharpe median=0.11  95th-pct=0.58
+Random K=10 regime=none     : Sharpe median=0.43  95th-pct=0.64
+Random K= 5 regime=BTC>EMA50: Sharpe median=0.33  95th-pct=0.75
+Random K=10 regime=BTC>EMA50: Sharpe median=0.44  95th-pct=0.75
+(Strategy ka Sharpe random ke 95th-percentile se ooper hona chahiye - warna ye qismat ho sakti hai)
+
+--- Rotation PASS shart: har fold return > 0, Sharpe > random 95th-pct, Sharpe > BTC+EMA50, MaxDD > -50% ---
+Koi rotation combo PASS nahi hua.
+(BTC buy&hold Sharpe=0.56, BTC+EMA50 Sharpe=0.43)
+
+
+##########################################################################################
+HISSA B - DAILY TREND FOLLOWING
+##########################################################################################
+Folds: F1: 2021-04-09 | F2: 2022-08-21 | F3: 2024-01-03 | F4: 2025-05-16 -> 2026-09-28
+(fold se pehle ki trades F1 mein gini gayi hain)
+Donchian 20   | exit CE22x3  | none        n= 1766 win=34.7% PF=1.14 p5=1.00 Top10-hata=0.98 RandomPF=0.85 Exp=+1.00% hold~7bars | 1.34(270) / N/A(0) / 1.03(680) / 1.15(816)
+Donchian 20   | exit CE22x3  | BTC>EMA50   n= 1431 win=36.8% PF=1.32 p5=1.14 Top10-hata=1.11 RandomPF=1.03 Exp=+2.17% hold~7bars | 1.99(189) / N/A(0) / 1.08(625) / 1.40(617)
+Donchian 20   | exit CE22x3  | BTC>EMA200  n= 1232 win=36.4% PF=1.21 p5=1.04 Top10-hata=1.01 RandomPF=0.85 Exp=+1.51% hold~7bars | 1.25(140) / N/A(0) / 1.01(676) / 1.63(416)
+Donchian 20   | exit CE22x3  | coin>EMA200 n=  939 win=35.5% PF=1.14 p5=0.95 Top10-hata=0.90 RandomPF=0.89 Exp=+1.12% hold~6bars | 1.14(151) / N/A(0) / 1.07(397) / 1.22(391)
+Donchian 20   | exit CE22x4  | none        n= 1453 win=34.6% PF=1.24 p5=1.08 Top10-hata=1.07 RandomPF=0.95 Exp=+2.28% hold~14bars | 1.28(227) / N/A(0) / 1.11(542) / 1.35(684)
+Donchian 20   | exit CE22x4  | BTC>EMA50   n= 1177 win=37.0% PF=1.45 p5=1.24 Top10-hata=1.21 RandomPF=0.95 Exp=+3.89% hold~14bars | 1.73(166) / N/A(0) / 1.15(500) / 1.73(511)
+Donchian 20   | exit CE22x4  | BTC>EMA200  n=  999 win=36.9% PF=1.42 p5=1.21 Top10-hata=1.17 RandomPF=1.02 Exp=+3.78% hold~14bars | 1.27(119) / N/A(0) / 1.10(542) / 2.33(338)
+Donchian 20   | exit CE22x4  | coin>EMA200 n=  783 win=34.0% PF=1.22 p5=0.99 Top10-hata=0.94 RandomPF=0.71 Exp=+2.28% hold~14bars | 1.04(132) / N/A(0) / 1.05(325) / 1.52(326)
+Donchian 20   | exit signal  | none        n= 1378 win=34.6% PF=1.76 p5=1.42 Top10-hata=1.29 RandomPF=1.51 Exp=+7.16% hold~19bars | 2.24(223) / N/A(0) / 1.66(507) / 1.63(648)
+Donchian 20   | exit signal  | BTC>EMA50   n= 1126 win=36.4% PF=1.98 p5=1.60 Top10-hata=1.49 RandomPF=1.63 Exp=+8.44% hold~19bars | 2.96(161) / N/A(0) / 1.76(467) / 1.83(498)
+Donchian 20   | exit signal  | BTC>EMA200  n=  945 win=37.1% PF=1.85 p5=1.53 Top10-hata=1.45 RandomPF=1.23 Exp=+7.59% hold~19bars | 1.38(114) / N/A(0) / 1.64(507) / 2.56(324)
+Donchian 20   | exit signal  | coin>EMA200 n=  735 win=34.8% PF=1.55 p5=1.19 Top10-hata=1.05 RandomPF=0.91 Exp=+5.86% hold~19bars | 1.16(123) / N/A(0) / 1.54(296) / 1.76(316)
+Donchian 40   | exit CE22x3  | none        n= 1132 win=35.4% PF=1.17 p5=0.99 Top10-hata=0.96 RandomPF=1.03 Exp=+1.21% hold~6bars | 1.17(165) / N/A(0) / 1.14(455) / 1.19(512)
+Donchian 40   | exit CE22x3  | BTC>EMA50   n=  976 win=35.8% PF=1.23 p5=1.03 Top10-hata=0.98 RandomPF=0.97 Exp=+1.58% hold~6bars | 1.47(132) / N/A(0) / 1.15(432) / 1.25(412)
+Donchian 40   | exit CE22x3  | BTC>EMA200  n=  860 win=35.7% PF=1.22 p5=1.00 Top10-hata=0.94 RandomPF=1.03 Exp=+1.55% hold~6bars | 1.27(102) / N/A(0) / 1.11(455) / 1.39(303)
+Donchian 40   | exit CE22x3  | coin>EMA200 n=  760 win=36.8% PF=1.17 p5=0.96 Top10-hata=0.90 RandomPF=0.71 Exp=+1.25% hold~6bars | 0.84(103) / N/A(0) / 1.19(322) / 1.26(335)
+Donchian 40   | exit CE22x4  | none        n=  946 win=35.3% PF=1.19 p5=1.00 Top10-hata=0.96 RandomPF=0.89 Exp=+1.87% hold~12bars | 1.13(142) / N/A(0) / 1.10(371) / 1.31(433)
+Donchian 40   | exit CE22x4  | BTC>EMA50   n=  813 win=36.2% PF=1.27 p5=1.06 Top10-hata=1.00 RandomPF=1.19 Exp=+2.51% hold~12bars | 1.48(114) / N/A(0) / 1.12(352) / 1.39(347)
+Donchian 40   | exit CE22x4  | BTC>EMA200  n=  702 win=37.7% PF=1.35 p5=1.10 Top10-hata=1.03 RandomPF=0.93 Exp=+3.17% hold~13bars | 1.47(85) / N/A(0) / 1.08(373) / 1.87(244)
+Donchian 40   | exit CE22x4  | coin>EMA200 n=  643 win=34.4% PF=1.17 p5=0.95 Top10-hata=0.86 RandomPF=0.72 Exp=+1.73% hold~13bars | 0.91(89) / N/A(0) / 1.04(271) / 1.42(283)
+Donchian 40   | exit signal  | none        n=  732 win=37.2% PF=2.17 p5=1.38 Top10-hata=1.15 RandomPF=1.07 Exp=+14.73% hold~35bars | 2.17(122) / N/A(0) / 1.73(264) / 2.46(346)
+Donchian 40   | exit signal  | BTC>EMA50   n=  651 win=37.8% PF=1.82 p5=1.37 Top10-hata=1.20 RandomPF=1.51 Exp=+9.55% hold~35bars | 2.54(101) / N/A(0) / 1.82(255) / 1.51(295)
+Donchian 40   | exit signal  | BTC>EMA200  n=  544 win=40.1% PF=1.85 p5=1.46 Top10-hata=1.32 RandomPF=1.28 Exp=+9.47% hold~37bars | 1.45(71) / N/A(0) / 1.70(272) / 2.30(201)
+Donchian 40   | exit signal  | coin>EMA200 n=  506 win=36.6% PF=1.97 p5=1.08 Top10-hata=0.92 RandomPF=1.31 Exp=+12.80% hold~34bars | 1.10(70) / N/A(0) / 1.38(199) / 2.74(237)
+Donchian 55   | exit CE22x3  | none        n=  907 win=34.7% PF=1.01 p5=0.85 Top10-hata=0.81 RandomPF=1.01 Exp=+0.11% hold~5bars | 0.72(134) / N/A(0) / 1.00(372) / 1.15(401)
+Donchian 55   | exit CE22x3  | BTC>EMA50   n=  794 win=34.6% PF=1.05 p5=0.87 Top10-hata=0.81 RandomPF=0.99 Exp=+0.38% hold~6bars | 0.91(109) / N/A(0) / 1.01(355) / 1.16(330)
+Donchian 55   | exit CE22x3  | BTC>EMA200  n=  721 win=35.1% PF=1.04 p5=0.84 Top10-hata=0.77 RandomPF=0.87 Exp=+0.29% hold~6bars | 0.84(89) / N/A(0) / 0.97(372) / 1.23(260)
+Donchian 55   | exit CE22x3  | coin>EMA200 n=  683 win=36.5% PF=1.06 p5=0.86 Top10-hata=0.79 RandomPF=0.94 Exp=+0.43% hold~6bars | 0.49(98) / N/A(0) / 1.16(286) / 1.18(299)
+Donchian 55   | exit CE22x4  | none        n=  762 win=33.3% PF=1.07 p5=0.87 Top10-hata=0.82 RandomPF=0.94 Exp=+0.73% hold~12bars | 0.85(112) / N/A(0) / 0.90(312) / 1.37(338)
+Donchian 55   | exit CE22x4  | BTC>EMA50   n=  667 win=33.9% PF=1.11 p5=0.89 Top10-hata=0.83 RandomPF=1.02 Exp=+1.09% hold~12bars | 1.12(91) / N/A(0) / 0.92(299) / 1.40(277)
+Donchian 55   | exit CE22x4  | BTC>EMA200  n=  593 win=35.1% PF=1.17 p5=0.93 Top10-hata=0.84 RandomPF=1.04 Exp=+1.69% hold~13bars | 1.27(71) / N/A(0) / 0.88(313) / 1.81(209)
+Donchian 55   | exit CE22x4  | coin>EMA200 n=  575 win=33.4% PF=1.10 p5=0.87 Top10-hata=0.78 RandomPF=0.57 Exp=+1.04% hold~13bars | 0.72(82) / N/A(0) / 0.98(242) / 1.43(251)
+Donchian 55   | exit signal  | none        n=  561 win=37.3% PF=2.02 p5=1.17 Top10-hata=0.94 RandomPF=1.52 Exp=+14.91% hold~39bars | 2.00(93) / N/A(0) / 1.16(211) / 2.78(257)
+Donchian 55   | exit signal  | BTC>EMA50   n=  513 win=38.4% PF=1.53 p5=1.10 Top10-hata=0.93 RandomPF=1.26 Exp=+7.38% hold~38bars | 2.09(80) / N/A(0) / 1.16(208) / 1.62(225)
+Donchian 55   | exit signal  | BTC>EMA200  n=  441 win=40.1% PF=1.49 p5=1.16 Top10-hata=0.99 RandomPF=0.98 Exp=+6.56% hold~39bars | 0.99(58) / N/A(0) / 1.13(222) / 2.55(161)
+Donchian 55   | exit signal  | coin>EMA200 n=  432 win=35.9% PF=1.85 p5=0.94 Top10-hata=0.75 RandomPF=0.78 Exp=+12.52% hold~40bars | 0.87(63) / N/A(0) / 1.05(175) / 3.11(194)
+EMA 10/30     | exit CE22x3  | none        n= 1556 win=31.6% PF=1.15 p5=0.98 Top10-hata=0.94 RandomPF=0.86 Exp=+0.97% hold~7bars | 1.52(260) / N/A(0) / 1.04(563) / 1.10(733)
+EMA 10/30     | exit CE22x3  | BTC>EMA50   n= 1175 win=33.4% PF=1.34 p5=1.11 Top10-hata=1.04 RandomPF=0.85 Exp=+2.00% hold~7bars | 2.44(166) / N/A(0) / 1.03(475) / 1.36(534)
+EMA 10/30     | exit CE22x3  | BTC>EMA200  n=  939 win=31.0% PF=1.13 p5=0.92 Top10-hata=0.83 RandomPF=0.80 Exp=+0.81% hold~6bars | 1.00(60) / N/A(0) / 0.98(523) / 1.46(356)
+EMA 10/30     | exit CE22x3  | coin>EMA200 n=  484 win=27.5% PF=0.92 p5=0.69 Top10-hata=0.57 RandomPF=0.62 Exp=-0.55% hold~6bars | 1.11(89) / N/A(0) / 0.83(210) / 0.91(185)
+EMA 10/30     | exit CE22x4  | none        n= 1473 win=30.9% PF=1.24 p5=1.07 Top10-hata=1.03 RandomPF=0.67 Exp=+2.21% hold~13bars | 1.26(253) / N/A(0) / 1.17(519) / 1.29(701)
+EMA 10/30     | exit CE22x4  | BTC>EMA50   n= 1119 win=32.4% PF=1.42 p5=1.19 Top10-hata=1.13 RandomPF=1.06 Exp=+3.57% hold~13bars | 1.76(165) / N/A(0) / 1.22(443) / 1.50(511)
+EMA 10/30     | exit CE22x4  | BTC>EMA200  n=  890 win=31.3% PF=1.39 p5=1.15 Top10-hata=1.06 RandomPF=0.72 Exp=+3.48% hold~13bars | 1.79(58) / N/A(0) / 1.13(490) / 1.78(342)
+EMA 10/30     | exit CE22x4  | coin>EMA200 n=  468 win=26.5% PF=1.17 p5=0.84 Top10-hata=0.63 RandomPF=0.70 Exp=+1.78% hold~14bars | 1.34(89) / N/A(0) / 0.75(197) / 1.55(182)
+EMA 10/30     | exit signal  | none        n= 1722 win=27.5% PF=1.89 p5=1.47 Top10-hata=1.32 RandomPF=1.55 Exp=+7.99% hold~16bars | 1.99(330) / N/A(0) / 1.85(593) / 1.87(799)
+EMA 10/30     | exit signal  | BTC>EMA50   n= 1279 win=29.9% PF=2.08 p5=1.65 Top10-hata=1.51 RandomPF=1.12 Exp=+8.87% hold~16bars | 2.94(218) / N/A(0) / 1.94(498) / 1.79(563)
+EMA 10/30     | exit signal  | BTC>EMA200  n= 1035 win=30.0% PF=1.82 p5=1.51 Top10-hata=1.43 RandomPF=1.20 Exp=+6.77% hold~15bars | 1.36(101) / N/A(0) / 1.76(554) / 2.08(380)
+EMA 10/30     | exit signal  | coin>EMA200 n=  607 win=24.7% PF=1.94 p5=1.22 Top10-hata=0.95 RandomPF=0.98 Exp=+9.95% hold~14bars | 1.32(149) / N/A(0) / 1.46(243) / 2.86(215)
+EMA 20/50     | exit CE22x3  | none        n=  874 win=29.2% PF=1.05 p5=0.86 Top10-hata=0.75 RandomPF=0.85 Exp=+0.35% hold~6bars | 1.14(158) / N/A(0) / 1.11(323) / 0.95(393)
+EMA 20/50     | exit CE22x3  | BTC>EMA50   n=  730 win=28.6% PF=1.07 p5=0.84 Top10-hata=0.71 RandomPF=0.93 Exp=+0.49% hold~6bars | 1.29(118) / N/A(0) / 1.07(295) / 0.99(317)
+EMA 20/50     | exit CE22x3  | BTC>EMA200  n=  596 win=28.4% PF=1.02 p5=0.79 Top10-hata=0.67 RandomPF=0.79 Exp=+0.16% hold~6bars | 1.28(67) / N/A(0) / 1.04(311) / 0.90(218)
+EMA 20/50     | exit CE22x3  | coin>EMA200 n=  334 win=34.7% PF=1.28 p5=0.91 Top10-hata=0.73 RandomPF=0.65 Exp=+1.87% hold~6bars | 1.47(51) / N/A(0) / 1.01(149) / 1.51(134)
+EMA 20/50     | exit CE22x4  | none        n=  885 win=28.9% PF=1.15 p5=0.94 Top10-hata=0.87 RandomPF=0.73 Exp=+1.43% hold~12bars | 0.67(159) / N/A(0) / 1.11(318) / 1.47(408)
+EMA 20/50     | exit CE22x4  | BTC>EMA50   n=  737 win=29.4% PF=1.18 p5=0.95 Top10-hata=0.88 RandomPF=0.92 Exp=+1.68% hold~11bars | 0.79(120) / N/A(0) / 1.13(290) / 1.45(327)
+EMA 20/50     | exit CE22x4  | BTC>EMA200  n=  603 win=29.5% PF=1.24 p5=0.98 Top10-hata=0.90 RandomPF=0.85 Exp=+2.26% hold~12bars | 0.86(68) / N/A(0) / 1.10(307) / 1.61(228)
+EMA 20/50     | exit CE22x4  | coin>EMA200 n=  340 win=32.1% PF=1.40 p5=1.00 Top10-hata=0.74 RandomPF=0.48 Exp=+3.74% hold~13bars | 0.73(53) / N/A(0) / 0.98(148) / 2.40(139)
+EMA 20/50     | exit signal  | none        n= 1023 win=29.4% PF=1.88 p5=1.38 Top10-hata=1.15 RandomPF=1.32 Exp=+10.48% hold~27bars | 1.94(214) / N/A(0) / 1.52(355) / 2.11(454)
+EMA 20/50     | exit signal  | BTC>EMA50   n=  832 win=29.8% PF=1.70 p5=1.30 Top10-hata=1.15 RandomPF=0.92 Exp=+7.96% hold~27bars | 2.38(164) / N/A(0) / 1.51(321) / 1.43(347)
+EMA 20/50     | exit signal  | BTC>EMA200  n=  703 win=31.3% PF=1.65 p5=1.27 Top10-hata=1.09 RandomPF=0.87 Exp=+7.28% hold~27bars | 1.58(109) / N/A(0) / 1.44(348) / 2.04(246)
+EMA 20/50     | exit signal  | coin>EMA200 n=  450 win=32.0% PF=2.19 p5=1.31 Top10-hata=0.94 RandomPF=0.55 Exp=+15.58% hold~32bars | 1.73(102) / N/A(0) / 1.46(185) / 3.29(163)
+
+HISSA B - DAILY TREND FOLLOWING - PASS: 0
+
+
+##########################################################################################
+HISSA C - 4H TREND FOLLOWING
+##########################################################################################
+Folds: F1: 2024-06-18 | F2: 2025-01-12 | F3: 2025-08-08 | F4: 2026-03-05 -> 2026-09-29
+(fold se pehle ki trades F1 mein gini gayi hain)
+Donchian 20   | exit CE22x3  | none        n= 6854 win=31.0% PF=1.01 p5=0.93 Top10-hata=0.91 RandomPF=0.89 Exp=+0.03% hold~9bars | 2.40(645) / 0.88(1789) / 0.61(1905) / 1.10(2515)
+Donchian 20   | exit CE22x3  | BTC>EMA50   n= 3750 win=32.3% PF=1.00 p5=0.91 Top10-hata=0.91 RandomPF=0.90 Exp=+0.00% hold~8bars | 0.77(412) / 1.03(1276) / 0.38(528) / 1.32(1534)
+Donchian 20   | exit CE22x4  | none        n= 5704 win=30.5% PF=1.11 p5=0.99 Top10-hata=0.96 RandomPF=0.96 Exp=+0.50% hold~16bars | 3.13(513) / 1.02(1504) / 0.55(1658) / 1.27(2029)
+Donchian 20   | exit CE22x4  | BTC>EMA50   n= 3161 win=32.6% PF=1.14 p5=0.96 Top10-hata=0.95 RandomPF=0.85 Exp=+0.58% hold~15bars | 0.89(344) / 1.23(1090) / 0.34(471) / 1.58(1256)
+Donchian 20   | exit signal  | none        n= 5696 win=32.0% PF=1.29 p5=1.15 Top10-hata=1.11 RandomPF=1.11 Exp=+1.24% hold~18bars | 4.00(536) / 1.03(1520) / 0.59(1660) / 1.62(1980)
+Donchian 20   | exit signal  | BTC>EMA50   n= 3135 win=34.7% PF=1.35 p5=1.20 Top10-hata=1.17 RandomPF=1.16 Exp=+1.35% hold~18bars | 1.49(347) / 1.28(1086) / 0.45(488) / 1.91(1214)
+Donchian 55   | exit CE22x3  | none        n= 3599 win=32.1% PF=1.01 p5=0.91 Top10-hata=0.90 RandomPF=0.85 Exp=+0.04% hold~8bars | 1.75(367) / 0.95(900) / 0.69(922) / 1.12(1410)
+Donchian 55   | exit CE22x3  | BTC>EMA50   n= 2359 win=32.5% PF=0.95 p5=0.85 Top10-hata=0.84 RandomPF=0.97 Exp=-0.16% hold~9bars | 0.79(279) / 1.07(707) / 0.30(397) / 1.25(976)
+Donchian 55   | exit CE22x4  | none        n= 3050 win=32.1% PF=1.12 p5=0.98 Top10-hata=0.92 RandomPF=0.88 Exp=+0.56% hold~16bars | 2.76(285) / 1.13(757) / 0.66(808) / 1.20(1200)
+Donchian 55   | exit CE22x4  | BTC>EMA50   n= 2016 win=32.5% PF=1.09 p5=0.90 Top10-hata=0.88 RandomPF=0.81 Exp=+0.37% hold~15bars | 1.09(224) / 1.30(603) / 0.29(361) / 1.43(828)
+Donchian 55   | exit signal  | none        n= 2341 win=32.6% PF=1.60 p5=1.12 Top10-hata=1.03 RandomPF=1.17 Exp=+3.80% hold~44bars | 2.68(243) / 1.18(567) / 0.60(642) / 2.60(889)
+Donchian 55   | exit signal  | BTC>EMA50   n= 1571 win=33.5% PF=1.35 p5=1.11 Top10-hata=1.03 RandomPF=1.04 Exp=+2.13% hold~44bars | 0.75(197) / 1.45(444) / 0.39(298) / 2.19(632)
+EMA 20/50     | exit CE22x3  | none        n= 3879 win=28.4% PF=1.01 p5=0.89 Top10-hata=0.85 RandomPF=0.71 Exp=+0.02% hold~8bars | 2.35(392) / 0.85(1012) / 0.58(1100) / 1.16(1375)
+EMA 20/50     | exit CE22x3  | BTC>EMA50   n= 1895 win=29.8% PF=0.90 p5=0.79 Top10-hata=0.79 RandomPF=0.80 Exp=-0.30% hold~8bars | 0.51(208) / 0.90(663) / 0.24(304) / 1.46(720)
+EMA 20/50     | exit CE22x4  | none        n= 3852 win=29.6% PF=1.13 p5=0.96 Top10-hata=0.90 RandomPF=1.01 Exp=+0.51% hold~16bars | 3.07(381) / 1.14(1001) / 0.52(1119) / 1.25(1351)
+EMA 20/50     | exit CE22x4  | BTC>EMA50   n= 1901 win=30.9% PF=1.13 p5=0.87 Top10-hata=0.82 RandomPF=0.84 Exp=+0.51% hold~15bars | 0.76(204) / 1.30(658) / 0.27(319) / 1.69(720)
+EMA 20/50     | exit signal  | none        n= 4121 win=24.6% PF=1.29 p5=1.10 Top10-hata=1.03 RandomPF=0.91 Exp=+1.49% hold~29bars | 1.85(477) / 1.34(1038) / 0.59(1166) / 1.82(1440)
+EMA 20/50     | exit signal  | BTC>EMA50   n= 1978 win=26.1% PF=1.40 p5=1.08 Top10-hata=1.00 RandomPF=0.92 Exp=+2.04% hold~30bars | 0.37(219) / 1.53(680) / 0.25(324) / 2.78(755)
+
+HISSA C - 4H TREND FOLLOWING - PASS: 0
