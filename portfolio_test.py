@@ -283,7 +283,9 @@ def main():
     emit("COMBINED - 50% Strategy A (Donchian 20, M=10, 1%) + 50% Strategy B (K=10, regime none)")
     emit("#" * 100)
     a = pd.Series(eqA[("Donchian 20", 10, 0.01)], index=sub).pct_change().fillna(0)
-    b = pd.Series(eqB[(10, "none")], index=sub).pct_change().fillna(0)
+    # run_rotation ki equity OPEN par hai (eq[t] = open t), A ki CLOSE par - ek din aage kheench kar
+    # dono ko ek hi waqt (close t ~ open t+1) par milate hain
+    b = pd.Series(eqB[(10, "none")], index=sub).shift(-1).ffill().pct_change().fillna(0)
     comb = (1 + 0.5 * a + 0.5 * b).cumprod().values
     emit(line("Combined 50/50", stats(comb, sub)))
     emit(f"A aur B ke rozana returns ka correlation: {a.corr(b):.2f} (kam = behtar diversification)")
