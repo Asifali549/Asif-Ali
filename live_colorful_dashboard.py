@@ -577,6 +577,26 @@ if os.path.exists("dashboard_signals.json"):
                 else:
                     col.error(f"❌ {msg}")
 
+    with st.expander("🧪 Robustness Test workflows (lamba chalne wale, ek-dafa test) — yahan se chalayen"):
+        st.caption(
+            "GitHub mobile app mein 'workflow_dispatch'-only workflows ka 'Run workflow' button kabhi "
+            "kabhi nazar nahi aata (ye mobile app ki apni kami hai). Neeche button se seedha yahin se "
+            "chala sakte hain — result file (RESULTS.txt) 5 ghante tak mein commit ho jayegi, dobara "
+            "check kar lein."
+        )
+        tc1, tc2, tc3 = st.columns(3)
+        for col, label, wf in [
+            (tc1, "CE Buy-Only v2", "ce_v2_robustness_test.yml"),
+            (tc2, "Donchian+Pullback", "donchian_pullback_robustness_test.yml"),
+            (tc3, "Union AB", "union_ab_robustness_test.yml"),
+        ]:
+            if col.button(f"Test Chalayen — {label}", key=f"restart_{wf}"):
+                ok, msg = trigger_github_workflow(wf)
+                if ok:
+                    col.success("✅ Bhej diya! Kuch ghante mein result file aa jayegi.")
+                else:
+                    col.error(f"❌ {msg}")
+
     if live_data["signals"]:
         df_all = pd.DataFrame(live_data["signals"])
 
