@@ -1,9 +1,4 @@
 {
-  "MUBARAK/USDT|Union AB|EMA+Breakout|0.06008|Baseline": "2026-09-28T10:01:02.611912+00:00",
-  "CARDS/USDT|CE Buy-Only|Chandelier Cross|0.1834|Base+ETH": "2026-09-28T10:01:03.126146+00:00",
-  "MUBARAK/USDT|Union AB Backup Tier|EMA+Breakout|0.06008|N/A": "2026-09-28T10:01:03.647701+00:00",
-  "CHIP/USDT|CE Buy-Only|Chandelier Cross|0.044086|Base+ETH": "2026-09-28T10:01:04.181034+00:00",
-  "NOM/USDT|CE Buy-Only|Chandelier Cross|0.00205|Base+ETH": "2026-09-28T10:01:04.669640+00:00",
   "AXL/USDT|CE Buy-Only|Chandelier Cross|0.05124|Base+ETH": "2026-09-28T10:08:41.592065+00:00",
   "TIA/USDT|CE Buy-Only|Chandelier Cross|0.4639|Base+ETH": "2026-09-28T11:00:15.712749+00:00",
   "ORDI/USDT|CE Buy-Only|Chandelier Cross|4.536|Base+ETH": "2026-09-28T11:00:16.245745+00:00",
@@ -69,5 +64,10 @@
   "QNT/USDT|Donchian Breakout|20-period High|263.402|N/A": "2026-09-29T08:07:37.243708+00:00",
   "KAS/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.0469|N/A": "2026-09-29T08:07:38.042349+00:00",
   "RUNE/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.7764|N/A": "2026-09-29T09:06:40.044626+00:00",
-  "PLUME/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.01829|N/A": "2026-09-29T09:06:40.578139+00:00"
+  "PLUME/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.01829|N/A": "2026-09-29T09:06:40.578139+00:00",
+  "SOL/USDT|Pullback-in-Uptrend|EMA20 Pullback|119.94|N/A": "2026-09-29T10:07:22.938395+00:00",
+  "ONDO/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.52748|N/A": "2026-09-29T10:07:23.307832+00:00",
+  "BSV/USDT|Pullback-in-Uptrend|EMA20 Pullback|20.53|N/A": "2026-09-29T10:07:23.722297+00:00",
+  "BSV/USDT|Donchian Breakout|20-period High|20.53|N/A": "2026-09-29T10:07:24.107618+00:00",
+  "POL/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.1165|N/A": "2026-09-29T10:07:24.495572+00:00"
 }
