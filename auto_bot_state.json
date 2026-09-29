@@ -1,5 +1,5 @@
 {
-  "cash": 1182.8112,
+  "cash": 981.2512,
   "positions": {
     "SOON/USDT|Pullback-in-Uptrend|": {
       "entry_time": "2026-09-28T01:00:00",
@@ -105,16 +105,37 @@
       "use_fixed_tp": false,
       "symbol": "AERO/USDT",
       "signal_time": "2026-09-28T18:00:00+00:00"
+    },
+    "CRV/USDT|Union AB|EMA+Breakout": {
+      "entry_time": "2026-09-28T23:00:00",
+      "entry_price": 0.3794,
+      "initial_stop": 0.3430625,
+      "trail_stop": 0.3430625,
+      "tp_price": 0.452075,
+      "capital_allocated": 201.56,
+      "risk_usd": 19.7078,
+      "risk_pct_of_equity": 1.0,
+      "stop_distance_pct": 9.578,
+      "current_price": 0.3794,
+      "unrealized_pnl_pct": 0.0,
+      "source": "manual",
+      "system": "Union AB",
+      "combo": "EMA+Breakout",
+      "ce_period": 12,
+      "ce_multiplier": 4.5,
+      "use_fixed_tp": true,
+      "symbol": "CRV/USDT",
+      "signal_time": "2026-09-28T23:00:00+00:00"
     }
   },
   "total_equity_usd": 1970.8112,
   "starting_capital_usd": 2000.0,
-  "open_position_count": 5,
+  "open_position_count": 6,
   "max_concurrent_positions": 15,
-  "position_size_usd": 157.6,
+  "position_size_usd": 164.93,
   "risk_based_sizing": true,
   "risk_pct_per_trade": 1.0,
-  "open_risk_usd": 98.6985,
+  "open_risk_usd": 118.4063,
   "max_total_open_risk_pct": 8.0,
   "taken_signals": {
     "ONDO/USDT|Pullback-in-Uptrend||2026-09-27T08:00:00+00:00": "2026-09-27T10:00:00.520173+00:00",
@@ -123,7 +144,8 @@
     "PUMP/USDT|Pullback-in-Uptrend||2026-09-28T15:00:00+00:00": "2026-09-28T16:06:08.889666+00:00",
     "RUNE/USDT|Pullback-in-Uptrend||2026-09-28T16:00:00+00:00": "2026-09-28T17:03:27.486650+00:00",
     "AKE/USDT|Donchian Breakout||2026-09-28T17:00:00+00:00": "2026-09-28T18:01:32.330437+00:00",
-    "AERO/USDT|Pullback-in-Uptrend||2026-09-28T18:00:00+00:00": "2026-09-28T19:06:16.165803+00:00"
+    "AERO/USDT|Pullback-in-Uptrend||2026-09-28T18:00:00+00:00": "2026-09-28T19:06:16.165803+00:00",
+    "CRV/USDT|Union AB|EMA+Breakout|2026-09-28T23:00:00+00:00": "2026-09-29T00:09:56.451906+00:00"
   },
   "recent_losses": [
     "2026-09-28T08:00:58.935934+00:00"
@@ -141,5 +163,5 @@
     "max_signal_age_bars": 1,
     "one_position_per_coin": true
   },
-  "last_updated": "2026-09-29T00:04:18.952705+00:00"
+  "last_updated": "2026-09-29T00:11:39.956384+00:00"
 }
