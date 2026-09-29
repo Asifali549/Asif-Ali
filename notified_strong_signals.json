@@ -1,6 +1,4 @@
 {
-  "RUNE/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.7467|N/A": "2026-09-28T17:04:45.647760+00:00",
-  "AURORA/USDT|CE Buy-Only|Chandelier Cross|0.06321|Base+ETH": "2026-09-28T17:04:46.113076+00:00",
   "RUNE/USDT|Union AB|Ichimoku+MS|0.7789|Baseline": "2026-09-28T18:03:28.811186+00:00",
   "RUNE/USDT|Union AB|EMA+Breakout|0.7789|Baseline": "2026-09-28T18:03:29.278034+00:00",
   "AKE/USDT|Donchian Breakout|20-period High|0.032557|N/A": "2026-09-28T18:03:29.679893+00:00",
@@ -62,5 +60,7 @@
   "SOON/USDT|Union AB|Ichimoku+MS|0.3878|Baseline": "2026-09-29T16:01:35.334181+00:00",
   "SOON/USDT|NEW AdvancedConfluence|CHoCH|0.3878|N/A": "2026-09-29T16:01:35.715802+00:00",
   "SOON/USDT|Union AB Backup Tier|Ichimoku+MS|0.3878|N/A": "2026-09-29T16:01:36.099246+00:00",
-  "SOON/USDT|Donchian Breakout|20-period High|0.3878|N/A": "2026-09-29T16:01:36.517588+00:00"
+  "SOON/USDT|Donchian Breakout|20-period High|0.3878|N/A": "2026-09-29T16:01:36.517588+00:00",
+  "BLESS/USDT|NEW AdvancedConfluence|CHoCH|0.0088|N/A": "2026-09-29T17:08:24.236453+00:00",
+  "CARDS/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.2207|N/A": "2026-09-29T17:08:24.854578+00:00"
 }
