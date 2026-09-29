@@ -59,5 +59,9 @@
   "POL/USDT|Union AB Backup Tier|EMA+Breakout|0.124|N/A": "2026-09-29T13:02:33.805049+00:00",
   "SOON/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.3357|N/A": "2026-09-29T13:02:34.474558+00:00",
   "NEAR/USDT|Pullback-in-Uptrend|EMA20 Pullback|4.9973|N/A": "2026-09-29T14:02:37.405246+00:00",
-  "CRV/USDT|Donchian Breakout|20-period High|0.408|N/A": "2026-09-29T15:01:24.087205+00:00"
+  "CRV/USDT|Donchian Breakout|20-period High|0.408|N/A": "2026-09-29T15:01:24.087205+00:00",
+  "SOON/USDT|Union AB|Ichimoku+MS|0.3878|Baseline": "2026-09-29T16:01:35.334181+00:00",
+  "SOON/USDT|NEW AdvancedConfluence|CHoCH|0.3878|N/A": "2026-09-29T16:01:35.715802+00:00",
+  "SOON/USDT|Union AB Backup Tier|Ichimoku+MS|0.3878|N/A": "2026-09-29T16:01:36.099246+00:00",
+  "SOON/USDT|Donchian Breakout|20-period High|0.3878|N/A": "2026-09-29T16:01:36.517588+00:00"
 }
