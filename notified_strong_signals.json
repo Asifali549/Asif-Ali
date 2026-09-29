@@ -1,7 +1,4 @@
 {
-  "ALGO/USDT|NEW AdvancedConfluence|CHoCH|0.1222|N/A": "2026-09-28T09:02:20.164910+00:00",
-  "TAO/USDT|CE Buy-Only|Chandelier Cross|303.85|Base+ETH": "2026-09-28T09:02:20.579112+00:00",
-  "RAY/USDT|CE Buy-Only|Chandelier Cross|2.0276|Base+ETH": "2026-09-28T09:02:20.998583+00:00",
   "MUBARAK/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.05473|N/A": "2026-09-28T09:31:22.600220+00:00",
   "MUBARAK/USDT|Union AB|EMA+Breakout|0.06008|Baseline": "2026-09-28T10:01:02.611912+00:00",
   "CARDS/USDT|CE Buy-Only|Chandelier Cross|0.1834|Base+ETH": "2026-09-28T10:01:03.126146+00:00",
@@ -71,5 +68,7 @@
   "QNT/USDT|Pullback-in-Uptrend|EMA20 Pullback|249.629|N/A": "2026-09-29T07:03:22.326331+00:00",
   "ETH/USDT|Pullback-in-Uptrend|EMA20 Pullback|2712.31|N/A": "2026-09-29T08:07:36.445569+00:00",
   "QNT/USDT|Donchian Breakout|20-period High|263.402|N/A": "2026-09-29T08:07:37.243708+00:00",
-  "KAS/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.0469|N/A": "2026-09-29T08:07:38.042349+00:00"
+  "KAS/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.0469|N/A": "2026-09-29T08:07:38.042349+00:00",
+  "RUNE/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.7764|N/A": "2026-09-29T09:06:40.044626+00:00",
+  "PLUME/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.01829|N/A": "2026-09-29T09:06:40.578139+00:00"
 }
