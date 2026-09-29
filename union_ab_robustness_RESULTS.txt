@@ -1,0 +1,205 @@
+
+
+########## UNION AB — Ichimoku+MS — Baseline (ETH+RS) ##########
+
+=== period=12, multiplier=3.5 ===
+  trades=35, win=48.6%, PF=2.444, 90% CI: [1.231, 4.814]
+  Top-10 nikal kar: PF=0.409 (25 trades)
+  Folds: F1: 2.86 (10) | F2: N/A (0) | F3: N/A (0) | F4: 2.20 (25)
+
+=== period=12, multiplier=4.5 ===
+  trades=35, win=42.9%, PF=1.831, 90% CI: [0.861, 3.674]
+  Top-10 nikal kar: PF=0.184 (25 trades)
+  Folds: F1: 2.97 (10) | F2: N/A (0) | F3: N/A (0) | F4: 1.23 (25)
+
+=== period=12, multiplier=5.5 ===
+  trades=35, win=45.7%, PF=1.898, 90% CI: [0.88, 3.889]
+  Top-10 nikal kar: PF=0.187 (25 trades)
+  Folds: F1: 2.71 (10) | F2: N/A (0) | F3: N/A (0) | F4: 1.49 (25)
+
+=== period=16, multiplier=3.5 ===
+  trades=35, win=42.9%, PF=1.604, 90% CI: [0.807, 3.087]
+  Top-10 nikal kar: PF=0.223 (25 trades)
+  Folds: F1: 1.51 (10) | F2: N/A (0) | F3: N/A (0) | F4: 1.66 (25)
+
+=== period=16, multiplier=4.5 ===
+  trades=35, win=48.6%, PF=2.206, 90% CI: [1.061, 4.546]
+  Top-10 nikal kar: PF=0.358 (25 trades)
+  Folds: F1: 2.29 (10) | F2: N/A (0) | F3: N/A (0) | F4: 2.14 (25)
+
+=== period=16, multiplier=5.5 ===
+  trades=35, win=42.9%, PF=1.923, 90% CI: [0.894, 3.846]
+  Top-10 nikal kar: PF=0.182 (25 trades)
+  Folds: F1: 3.12 (10) | F2: N/A (0) | F3: N/A (0) | F4: 1.34 (25)
+
+=== period=20, multiplier=3.5 ===
+  trades=35, win=42.9%, PF=1.840, 90% CI: [0.924, 3.507]
+  Top-10 nikal kar: PF=0.274 (25 trades)
+  Folds: F1: 1.51 (10) | F2: N/A (0) | F3: N/A (0) | F4: 2.02 (25)
+
+=== period=20, multiplier=4.5 ===
+  trades=35, win=48.6%, PF=2.470, 90% CI: [1.174, 5.181]
+  Top-10 nikal kar: PF=0.334 (25 trades)
+  Folds: F1: 2.41 (10) | F2: N/A (0) | F3: N/A (0) | F4: 2.52 (25)
+
+=== period=20, multiplier=5.5 ===
+  trades=35, win=45.7%, PF=2.250, 90% CI: [1.013, 4.572]
+  Top-10 nikal kar: PF=0.165 (25 trades)
+  Folds: F1: 3.33 (10) | F2: N/A (0) | F3: N/A (0) | F4: 1.71 (25)
+
+----- ACCEPTANCE CHECK (UNION AB — Ichimoku+MS — Baseline (ETH+RS)) -----
+Koi combo mein sab 4 folds PF>1 nahi mile.
+
+
+########## UNION AB — Ichimoku+MS — Backup Tier (RS only) ##########
+
+=== period=12, multiplier=3.5 ===
+  trades=107, win=46.7%, PF=1.672, 90% CI: [1.063, 2.568]
+  Top-10 nikal kar: PF=0.796 (97 trades)
+  Folds: F1: 2.82 (18) | F2: 4.02 (29) | F3: 0.37 (23) | F4: 1.60 (37)
+
+=== period=12, multiplier=4.5 ===
+  trades=107, win=41.1%, PF=1.037, 90% CI: [0.635, 1.605]
+  Top-10 nikal kar: PF=0.379 (97 trades)
+  Folds: F1: 2.65 (18) | F2: 1.00 (29) | F3: 0.21 (23) | F4: 1.13 (37)
+
+=== period=12, multiplier=5.5 ===
+  trades=108, win=38.0%, PF=0.884, 90% CI: [0.539, 1.369]
+  Top-10 nikal kar: PF=0.293 (98 trades)
+  Folds: F1: 1.95 (18) | F2: 0.37 (30) | F3: 0.36 (23) | F4: 1.20 (37)
+
+=== period=16, multiplier=3.5 ===
+  trades=107, win=44.9%, PF=1.324, 90% CI: [0.843, 2.026]
+  Top-10 nikal kar: PF=0.604 (97 trades)
+  Folds: F1: 1.94 (18) | F2: 2.89 (29) | F3: 0.46 (23) | F4: 1.29 (37)
+
+=== period=16, multiplier=4.5 ===
+  trades=108, win=42.6%, PF=1.300, 90% CI: [0.829, 2.023]
+  Top-10 nikal kar: PF=0.556 (98 trades)
+  Folds: F1: 2.26 (18) | F2: 1.57 (30) | F3: 0.39 (23) | F4: 1.64 (37)
+
+=== period=16, multiplier=5.5 ===
+  trades=108, win=38.9%, PF=0.973, 90% CI: [0.6, 1.51]
+  Top-10 nikal kar: PF=0.348 (98 trades)
+  Folds: F1: 2.33 (18) | F2: 0.65 (30) | F3: 0.36 (23) | F4: 1.15 (37)
+
+=== period=20, multiplier=3.5 ===
+  trades=107, win=43.9%, PF=1.435, 90% CI: [0.916, 2.211]
+  Top-10 nikal kar: PF=0.676 (97 trades)
+  Folds: F1: 2.16 (18) | F2: 2.63 (29) | F3: 0.46 (23) | F4: 1.56 (37)
+
+=== period=20, multiplier=4.5 ===
+  trades=107, win=42.1%, PF=1.205, 90% CI: [0.728, 1.917]
+  Top-10 nikal kar: PF=0.438 (97 trades)
+  Folds: F1: 1.95 (18) | F2: 1.41 (29) | F3: 0.23 (23) | F4: 1.84 (37)
+
+=== period=20, multiplier=5.5 ===
+  trades=108, win=38.0%, PF=1.132, 90% CI: [0.687, 1.764]
+  Top-10 nikal kar: PF=0.384 (98 trades)
+  Folds: F1: 2.98 (18) | F2: 0.62 (30) | F3: 0.37 (23) | F4: 1.37 (37)
+
+----- ACCEPTANCE CHECK (UNION AB — Ichimoku+MS — Backup Tier (RS only)) -----
+Koi combo mein sab 4 folds PF>1 nahi mile.
+
+
+########## UNION AB — EMA+Breakout — Baseline (ETH+RS) ##########
+
+=== period=8, multiplier=3.5 ===
+  trades=137, win=48.9%, PF=1.599, 90% CI: [1.097, 2.312]
+  Top-10 nikal kar: PF=0.993 (127 trades)
+  Folds: F1: 1.74 (33) | F2: N/A (0) | F3: 2.01 (3) | F4: 1.51 (101)
+
+=== period=8, multiplier=4.5 ===
+  trades=137, win=43.8%, PF=1.812, 90% CI: [1.221, 2.658]
+  Top-10 nikal kar: PF=1.073 (127 trades)
+  Folds: F1: 3.21 (33) | F2: N/A (0) | F3: 2.18 (3) | F4: 1.35 (101)
+
+=== period=8, multiplier=5.5 ===
+  trades=138, win=43.5%, PF=1.701, 90% CI: [1.135, 2.497]
+  Top-10 nikal kar: PF=0.922 (128 trades)
+  Folds: F1: 4.07 (33) | F2: N/A (0) | F3: 0.00 (3) | F4: 1.13 (102)
+
+=== period=12, multiplier=3.5 ===
+  trades=136, win=51.5%, PF=1.981, 90% CI: [1.376, 2.849]
+  Top-10 nikal kar: PF=1.305 (126 trades)
+  Folds: F1: 2.26 (33) | F2: N/A (0) | F3: 1.47 (3) | F4: 1.90 (100)
+
+=== period=12, multiplier=4.5 ===
+  trades=137, win=44.5%, PF=1.775, 90% CI: [1.209, 2.571]
+  Top-10 nikal kar: PF=1.098 (127 trades)
+  Folds: F1: 2.90 (33) | F2: N/A (0) | F3: 1.59 (3) | F4: 1.40 (101)
+
+=== period=12, multiplier=5.5 ===
+  trades=137, win=43.8%, PF=1.936, 90% CI: [1.308, 2.832]
+  Top-10 nikal kar: PF=1.155 (127 trades)
+  Folds: F1: 4.09 (33) | F2: N/A (0) | F3: 2.02 (3) | F4: 1.29 (101)
+
+=== period=16, multiplier=3.5 ===
+  trades=136, win=47.8%, PF=1.783, 90% CI: [1.24, 2.553]
+  Top-10 nikal kar: PF=1.164 (126 trades)
+  Folds: F1: 1.81 (33) | F2: N/A (0) | F3: 0.65 (3) | F4: 1.87 (100)
+
+=== period=16, multiplier=4.5 ===
+  trades=136, win=49.3%, PF=2.003, 90% CI: [1.403, 2.881]
+  Top-10 nikal kar: PF=1.323 (126 trades)
+  Folds: F1: 2.83 (33) | F2: N/A (0) | F3: 1.13 (3) | F4: 1.75 (100)
+
+=== period=16, multiplier=5.5 ===
+  trades=137, win=44.5%, PF=2.047, 90% CI: [1.395, 2.998]
+  Top-10 nikal kar: PF=1.236 (127 trades)
+  Folds: F1: 5.06 (33) | F2: N/A (0) | F3: 1.22 (3) | F4: 1.32 (101)
+
+----- ACCEPTANCE CHECK (UNION AB — EMA+Breakout — Baseline (ETH+RS)) -----
+Koi combo mein sab 4 folds PF>1 nahi mile.
+
+
+########## UNION AB — EMA+Breakout — Backup Tier (RS only) ##########
+
+=== period=8, multiplier=3.5 ===
+  trades=380, win=42.6%, PF=1.474, 90% CI: [1.142, 1.886]
+  Top-10 nikal kar: PF=1.109 (370 trades)
+  Folds: F1: 1.35 (76) | F2: 1.33 (75) | F3: 1.48 (83) | F4: 1.59 (146)
+
+=== period=8, multiplier=4.5 ===
+  trades=380, win=40.8%, PF=1.495, 90% CI: [1.137, 1.923]
+  Top-10 nikal kar: PF=1.104 (370 trades)
+  Folds: F1: 1.77 (76) | F2: 1.40 (75) | F3: 1.36 (83) | F4: 1.45 (146)
+
+=== period=8, multiplier=5.5 ===
+  trades=385, win=38.7%, PF=1.563, 90% CI: [1.193, 2.026]
+  Top-10 nikal kar: PF=1.111 (375 trades)
+  Folds: F1: 2.00 (77) | F2: 2.75 (77) | F3: 0.94 (84) | F4: 1.55 (147)
+
+=== period=12, multiplier=3.5 ===
+  trades=376, win=42.8%, PF=1.546, 90% CI: [1.207, 1.964]
+  Top-10 nikal kar: PF=1.210 (366 trades)
+  Folds: F1: 1.53 (73) | F2: 1.52 (75) | F3: 1.45 (83) | F4: 1.62 (145)
+
+=== period=12, multiplier=4.5 ===
+  trades=379, win=39.8%, PF=1.515, 90% CI: [1.17, 1.942]
+  Top-10 nikal kar: PF=1.151 (369 trades)
+  Folds: F1: 1.94 (75) | F2: 1.61 (75) | F3: 1.23 (83) | F4: 1.48 (146)
+
+=== period=12, multiplier=5.5 ===
+  trades=381, win=39.1%, PF=1.502, 90% CI: [1.152, 1.914]
+  Top-10 nikal kar: PF=1.096 (371 trades)
+  Folds: F1: 2.27 (77) | F2: 1.85 (75) | F3: 1.05 (83) | F4: 1.37 (146)
+
+=== period=16, multiplier=3.5 ===
+  trades=375, win=43.2%, PF=1.513, 90% CI: [1.186, 1.903]
+  Top-10 nikal kar: PF=1.187 (365 trades)
+  Folds: F1: 1.55 (73) | F2: 1.36 (75) | F3: 1.30 (82) | F4: 1.68 (145)
+
+=== period=16, multiplier=4.5 ===
+  trades=376, win=42.0%, PF=1.510, 90% CI: [1.174, 1.919]
+  Top-10 nikal kar: PF=1.176 (366 trades)
+  Folds: F1: 2.01 (73) | F2: 1.42 (75) | F3: 1.19 (83) | F4: 1.52 (145)
+
+=== period=16, multiplier=5.5 ===
+  trades=379, win=41.4%, PF=1.622, 90% CI: [1.249, 2.073]
+  Top-10 nikal kar: PF=1.213 (369 trades)
+  Folds: F1: 2.76 (75) | F2: 1.90 (75) | F3: 1.11 (83) | F4: 1.44 (146)
+
+----- ACCEPTANCE CHECK (UNION AB — EMA+Breakout — Backup Tier (RS only)) -----
+Sab se mazboot combo: period=16, multiplier=5.5 (bootstrap 5th percentile PF = 1.249)
+-> ACCEPTANCE CRITERIA POORE: har fold PF>1 aur bootstrap ki nichli hadd bhi >1.2 hai.
