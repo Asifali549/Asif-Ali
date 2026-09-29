@@ -1,0 +1,382 @@
+==============================================================================
+CHoCH ROBUSTNESS TEST - NATIJA
+==============================================================================
+PASS shart: har fold PF>1 (har fold >= 10 trades), kul >= 80 trades, bootstrap 5th-percentile PF > 1.2
+
+----- KHULASA: har (Entry | Tier | Exit) ka sab se mazboot combo (p5 ke hisab se) -----
+CHoCH khaalis  | No filter      | CE+2R  : kaafi trades nahi
+CHoCH khaalis  | No filter      | CE only: kaafi trades nahi
+CHoCH khaalis  | RS only        | CE+2R  : kaafi trades nahi
+CHoCH khaalis  | RS only        | CE only: kaafi trades nahi
+CHoCH khaalis  | ETH+RS         | CE+2R  : kaafi trades nahi
+CHoCH khaalis  | ETH+RS         | CE only: kaafi trades nahi
+CHoCH khaalis  | RS only [OLD]  | CE+2R  : kaafi trades nahi
+CHoCH khaalis  | RS only [OLD]  | CE only: kaafi trades nahi
+CHoCH khaalis  | ETH+RS [OLD]   | CE+2R  : kaafi trades nahi
+CHoCH khaalis  | ETH+RS [OLD]   | CE only: kaafi trades nahi
+CHoCH + Trend  | No filter      | CE+2R  : kaafi trades nahi
+CHoCH + Trend  | No filter      | CE only: kaafi trades nahi
+CHoCH + Trend  | RS only        | CE+2R  : kaafi trades nahi
+CHoCH + Trend  | RS only        | CE only: kaafi trades nahi
+CHoCH + Trend  | ETH+RS         | CE+2R  : kaafi trades nahi
+CHoCH + Trend  | ETH+RS         | CE only: kaafi trades nahi
+CHoCH + Trend  | RS only [OLD]  | CE+2R  : kaafi trades nahi
+CHoCH + Trend  | RS only [OLD]  | CE only: kaafi trades nahi
+CHoCH + Trend  | ETH+RS [OLD]   | CE+2R  : kaafi trades nahi
+CHoCH + Trend  | ETH+RS [OLD]   | CE only: kaafi trades nahi
+CHoCH + Score  | No filter      | CE+2R  : kaafi trades nahi
+CHoCH + Score  | No filter      | CE only: kaafi trades nahi
+CHoCH + Score  | RS only        | CE+2R  : kaafi trades nahi
+CHoCH + Score  | RS only        | CE only: kaafi trades nahi
+CHoCH + Score  | ETH+RS         | CE+2R  : kaafi trades nahi
+CHoCH + Score  | ETH+RS         | CE only: kaafi trades nahi
+CHoCH + Score  | RS only [OLD]  | CE+2R  : kaafi trades nahi
+CHoCH + Score  | RS only [OLD]  | CE only: kaafi trades nahi
+CHoCH + Score  | ETH+RS [OLD]   | CE+2R  : kaafi trades nahi
+CHoCH + Score  | ETH+RS [OLD]   | CE only: kaafi trades nahi
+
+----- LOOKAHEAD KA ASAR (production grid p16/m4.5, CE+2R) -----
+CHoCH khaalis  | RS only : PURANA (lookahead) n=0 PF=N/A  -->  SAHI n=0 PF=N/A
+CHoCH khaalis  | ETH+RS  : PURANA (lookahead) n=0 PF=N/A  -->  SAHI n=0 PF=N/A
+CHoCH + Trend  | RS only : PURANA (lookahead) n=0 PF=N/A  -->  SAHI n=0 PF=N/A
+CHoCH + Trend  | ETH+RS  : PURANA (lookahead) n=0 PF=N/A  -->  SAHI n=0 PF=N/A
+CHoCH + Score  | RS only : PURANA (lookahead) n=0 PF=N/A  -->  SAHI n=0 PF=N/A
+CHoCH + Score  | ETH+RS  : PURANA (lookahead) n=0 PF=N/A  -->  SAHI n=0 PF=N/A
+
+----- TAMAM PASS COMBOS (sirf SAHI / lookahead-free tiers) -----
+Koi combo PASS nahi hua.
+
+
+==============================================================================
+POORI DETAIL
+==============================================================================
+
+### CHoCH khaalis | No filter | CE+2R
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH khaalis | No filter | CE only
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH khaalis | RS only | CE+2R
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH khaalis | RS only | CE only
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH khaalis | ETH+RS | CE+2R
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH khaalis | ETH+RS | CE only
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH khaalis | RS only [OLD] | CE+2R
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH khaalis | RS only [OLD] | CE only
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH khaalis | ETH+RS [OLD] | CE+2R
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH khaalis | ETH+RS [OLD] | CE only
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Trend | No filter | CE+2R
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Trend | No filter | CE only
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Trend | RS only | CE+2R
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Trend | RS only | CE only
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Trend | ETH+RS | CE+2R
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Trend | ETH+RS | CE only
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Trend | RS only [OLD] | CE+2R
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Trend | RS only [OLD] | CE only
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Trend | ETH+RS [OLD] | CE+2R
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Trend | ETH+RS [OLD] | CE only
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Score | No filter | CE+2R
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Score | No filter | CE only
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Score | RS only | CE+2R
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Score | RS only | CE only
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Score | ETH+RS | CE+2R
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Score | ETH+RS | CE only
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Score | RS only [OLD] | CE+2R
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Score | RS only [OLD] | CE only
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Score | ETH+RS [OLD] | CE+2R
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
+
+### CHoCH + Score | ETH+RS [OLD] | CE only
+  p12/m3.5: koi trade nahi
+  p12/m4.5: koi trade nahi
+  p12/m5.5: koi trade nahi
+  p16/m3.5: koi trade nahi
+  p16/m4.5: koi trade nahi
+  p16/m5.5: koi trade nahi
+  p20/m3.5: koi trade nahi
+  p20/m4.5: koi trade nahi
+  p20/m5.5: koi trade nahi
