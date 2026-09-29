@@ -61,5 +61,11 @@
   "SUI/USDT|Donchian Breakout|20-period High|1.1811|N/A": "2026-09-29T12:03:30.065441+00:00",
   "PUMP/USDT|Donchian Breakout|20-period High|0.005608|N/A": "2026-09-29T12:03:30.573019+00:00",
   "KII/USDT|CE Buy-Only|Chandelier Cross|0.08888|Base+ETH": "2026-09-29T12:03:31.111906+00:00",
-  "POL/USDT|Donchian Breakout|20-period High|0.1193|N/A": "2026-09-29T12:03:31.622599+00:00"
+  "POL/USDT|Donchian Breakout|20-period High|0.1193|N/A": "2026-09-29T12:03:31.622599+00:00",
+  "POL/USDT|Union AB|Ichimoku+MS|0.124|Baseline": "2026-09-29T13:02:31.062856+00:00",
+  "POL/USDT|Union AB|EMA+Breakout|0.124|Baseline": "2026-09-29T13:02:31.730947+00:00",
+  "SOL/USDT|Donchian Breakout|20-period High|120.88|N/A": "2026-09-29T13:02:32.404496+00:00",
+  "POL/USDT|Union AB Backup Tier|Ichimoku+MS|0.124|N/A": "2026-09-29T13:02:33.094583+00:00",
+  "POL/USDT|Union AB Backup Tier|EMA+Breakout|0.124|N/A": "2026-09-29T13:02:33.805049+00:00",
+  "SOON/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.3357|N/A": "2026-09-29T13:02:34.474558+00:00"
 }
