@@ -67,5 +67,6 @@
   "PIEVERSE/USDT|CE Buy-Only|Chandelier Cross|1.4572|Base+ETH": "2026-09-28T23:02:11.790407+00:00",
   "CRV/USDT|Union AB|EMA+Breakout|0.3794|Baseline": "2026-09-29T00:06:09.763442+00:00",
   "CRV/USDT|Union AB Backup Tier|EMA+Breakout|0.3794|N/A": "2026-09-29T00:06:10.454887+00:00",
-  "NPC/USDT|Donchian Breakout|20-period High|0.02327|N/A": "2026-09-29T00:06:11.137768+00:00"
+  "NPC/USDT|Donchian Breakout|20-period High|0.02327|N/A": "2026-09-29T00:06:11.137768+00:00",
+  "PEAQ/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.04156|N/A": "2026-09-29T01:46:42.744203+00:00"
 }
