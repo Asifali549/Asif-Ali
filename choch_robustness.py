@@ -90,13 +90,13 @@ _orig_resample_to_4h = ce_mod.resample_to_4h
 
 def _resample_to_4h_closed(df):
     r = _orig_resample_to_4h(df)
-    r["timestamp"] = pd.to_datetime(r["timestamp"]) + H4_CLOSE_SHIFT
+    r["timestamp"] = (pd.to_datetime(r["timestamp"]) + H4_CLOSE_SHIFT).astype("datetime64[ns]")
     return r
 
 
 def shift_daily(daily_df):
     d = daily_df.copy()
-    d["timestamp"] = pd.to_datetime(d["timestamp"]) + DAILY_CLOSE_SHIFT
+    d["timestamp"] = (pd.to_datetime(d["timestamp"]) + DAILY_CLOSE_SHIFT).astype("datetime64[ns]")
     return d
 
 
@@ -110,7 +110,7 @@ def daily_filter_arrays(ts_1h, eth_daily, coin_daily, btc_daily, shift):
     sh = DAILY_CLOSE_SHIFT if shift else pd.Timedelta(0)
 
     eth_ema = eth_daily["close"].ewm(span=live.ETH_EMA_PERIOD, adjust=False).mean()
-    eth_df = pd.DataFrame({"timestamp": _ns(eth_daily["timestamp"]) + sh,
+    eth_df = pd.DataFrame({"timestamp": (_ns(eth_daily["timestamp"]) + sh).astype("datetime64[ns]"),
                            "eth_ok": (eth_daily["close"] > eth_ema).values}).sort_values("timestamp")
 
     c = coin_daily[["timestamp", "close"]].rename(columns={"close": "coin_close"})
@@ -121,7 +121,7 @@ def daily_filter_arrays(ts_1h, eth_daily, coin_daily, btc_daily, shift):
     rs_bull = ratio > rs_ema
     look = live.RS_PERCENTILE_LOOKBACK_DAYS
     rs_pct = ratio.rolling(look, min_periods=2).apply(lambda w: (w <= w[-1]).sum() / len(w) * 100, raw=True)
-    rs_df = pd.DataFrame({"timestamp": _ns(m["timestamp"]) + sh,
+    rs_df = pd.DataFrame({"timestamp": (_ns(m["timestamp"]) + sh).astype("datetime64[ns]"),
                           "rs_ok": (rs_bull & (rs_pct >= live.RS_PERCENTILE_CUTOFF)).values}).sort_values("timestamp")
 
     base = pd.DataFrame({"timestamp": _ns(pd.Series(ts_1h)).values})
@@ -255,7 +255,16 @@ def line_for(key, s):
 # ---------------------------------------------------------------
 # Per-coin processing (alag function taake test ho sake)
 # ---------------------------------------------------------------
+def _norm(d):
+    """pandas 3 timestamps ko 'ms' mein deta hai, purana 'ns' mein - sab ko
+    ek jaisa (ns) kar dete hain warna merge_asof error deta hai."""
+    d = d.copy()
+    d["timestamp"] = pd.to_datetime(d["timestamp"]).astype("datetime64[ns]")
+    return d
+
+
 def process_coin(df, coin_daily, btc_daily, eth_daily, results):
+    df, coin_daily, btc_daily, eth_daily = _norm(df), _norm(coin_daily), _norm(btc_daily), _norm(eth_daily)
     n = len(df)
     ts = pd.to_datetime(df["timestamp"])
     close = df["close"]
@@ -391,6 +400,7 @@ def main():
 
     results = {(e, t, x, pm): [] for e in ENTRIES for t in TIERS for x in EXITS for pm in GRID}
 
+    n_fail = 0
     for k, symbol in enumerate(coins, 1):
         try:
             df = fetch_ohlcv(exchange, symbol, TF, limit=CANDLE_LIMIT)
@@ -399,12 +409,21 @@ def main():
             coin_daily = fetch_ohlcv(exchange, symbol, "1d", limit=DAILY_LIMIT)
             process_coin(df, coin_daily, btc_daily, eth_daily, results)
         except Exception as e:
+            n_fail += 1
             print(f"[{k}/{len(coins)}] {symbol}: SKIP ({e})")
+            if n_fail == 1:
+                import traceback
+                traceback.print_exc()
             continue
         if k % 10 == 0 or k == len(coins):
             print(f"[{k}/{len(coins)}] ... done")
 
+    total = sum(len(v) for v in results.values())
+    if total == 0:
+        raise SystemExit(f"KOI TRADE NAHI BANA - {n_fail} coins error se skip hue. Upar ka traceback dekhein.")
+    print(f"Coins error se skip: {n_fail}")
     lines = build_report(results)
+    lines.insert(0, f"(Coins error se skip hue: {n_fail}/{len(coins)})")
     with open("choch_robustness_RESULTS.txt", "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
     print("\n[SAVE] choch_robustness_RESULTS.txt")
