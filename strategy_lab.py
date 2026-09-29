@@ -169,9 +169,52 @@ def fresh(cond):
 
 
 # =====================================================================
+# Sahi data fetch (data_fetcher.fetch_ohlcv mein pagination bug hai: 1000 se
+# ziada candles par beech mein bara khali soorakh reh jata hai - misal 1500
+# daily mangne par ~500 din gayab). Yahan AAGE ki taraf (purane se naye)
+# page karte hain aur har page ke baad agli candle se shuru karte hain.
+# =====================================================================
+TF_MS = {"1d": 86_400_000, "4h": 14_400_000, "1h": 3_600_000}
+
+
+def fetch_full(exchange, symbol, timeframe, limit):
+    import time
+    step = TF_MS[timeframe]
+    now_ms = int(pd.Timestamp.now(tz="UTC").timestamp() * 1000)
+    since = now_ms - limit * step
+    rows, empty_jumps = [], 0
+    while since < now_ms:
+        batch = exchange.fetch_ohlcv(symbol, timeframe=timeframe, since=since, limit=1000)
+        time.sleep(exchange.rateLimit / 1000)
+        batch = [b for b in batch if b[0] >= since] if batch else []
+        if not batch:
+            since += 1000 * step          # coin shayad baad mein list hua - aage jump
+            empty_jumps += 1
+            if empty_jumps > 20:
+                break
+            continue
+        rows.extend(batch)
+        since = batch[-1][0] + step
+        if len(batch) < 5 and since >= now_ms - 2 * step:
+            break
+    if not rows:
+        return None
+    df = pd.DataFrame(rows, columns=["timestamp", "open", "high", "low", "close", "volume"])
+    df = df.drop_duplicates("timestamp").sort_values("timestamp").reset_index(drop=True)
+    df = df[df["timestamp"] + step <= now_ms]            # sirf BAND candles
+    df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms")
+    return df.reset_index(drop=True)
+
+
+def gap_count(df, timeframe):
+    d = df["timestamp"].diff().dt.total_seconds() * 1000
+    return int((d > 1.5 * TF_MS[timeframe]).sum())
+
+
+# =====================================================================
 # Data completeness
 # =====================================================================
-def data_report(name, frames, full_len):
+def data_report(name, frames, full_len, tf):
     lens = [len(d) for d in frames.values()]
     if not lens:
         return [f"{name}: KOI DATA NAHI"]
@@ -180,7 +223,9 @@ def data_report(name, frames, full_len):
     full = sum(1 for x in lens if x >= full_len * 0.98)
     return [f"{name}: coins={len(lens)} | candles median={int(np.median(lens))} min={min(lens)} max={max(lens)} "
             f"| poori history (>= {int(full_len*0.98)}) wale coins={full} "
-            f"| sab se purani tareekh={min(starts).date()} | aakhri tareekh={max(ends).date()}"]
+            f"| sab se purani tareekh={min(starts).date()} | aakhri tareekh={max(ends).date()}",
+            f"   {name}: data mein khali soorakh (gap) wale coins = "
+            f"{sum(1 for d in frames.values() if gap_count(d, tf) > 0)} / {len(lens)}"]
 
 
 # =====================================================================
@@ -277,6 +322,7 @@ def benchmark_btc(idx, btc_df, with_regime):
     o = b["open"].values
     r = np.zeros(len(idx))
     r[:-1] = o[1:] / o[:-1] - 1
+    r = np.nan_to_num(r, nan=0.0, posinf=0.0, neginf=0.0)
     ok = (b["close"] > ema(b["close"], 50)).values
     eq = np.ones(len(idx))
     pos = not with_regime
@@ -405,7 +451,7 @@ def passes(s, rand_pf=None):
 # MAIN
 # =====================================================================
 def main():
-    from data_fetcher import get_exchange, get_coin_list, fetch_ohlcv
+    from data_fetcher import get_exchange, get_coin_list
     lines = []
 
     def emit(s=""):
@@ -421,10 +467,10 @@ def main():
     daily, h4, fails = {}, {}, 0
     for k, sym in enumerate(coins, 1):
         try:
-            d = fetch_ohlcv(ex, sym, "1d", limit=DAILY_LIMIT)
+            d = fetch_full(ex, sym, "1d", DAILY_LIMIT)
             if d is not None and len(d) >= 120:
                 daily[sym] = norm(d)
-            h = fetch_ohlcv(ex, sym, "4h", limit=H4_LIMIT)
+            h = fetch_full(ex, sym, "4h", H4_LIMIT)
             if h is not None and len(h) >= 300:
                 h4[sym] = norm(h)
         except Exception as e:
@@ -441,7 +487,7 @@ def main():
     emit("=" * 90)
     emit(f"Fee {FEE*100:.2f}% + slippage {SLIP*100:.2f}% har taraf | fetch errors: {fails}/{len(coins)}")
     emit("\n----- DATA COMPLETENESS -----")
-    for l in data_report("DAILY (1d)", daily, DAILY_LIMIT) + data_report("4H", h4, H4_LIMIT):
+    for l in data_report("DAILY (1d)", daily, DAILY_LIMIT, "1d") + data_report("4H", h4, H4_LIMIT, "4h"):
         emit(l)
     emit("NOTE: coin list AAJ ki top-liquid list hai (survivorship bias) - asal natija thora kamzor ho sakta hai.")
 
@@ -449,6 +495,8 @@ def main():
     idx, O, C, V = build_panel(daily)
     n_elig = (C.notna().cumsum() >= 120).sum(axis=1).values
     start_i = int(np.argmax(n_elig >= 30))
+    btc_first = btc_d["timestamp"].iloc[0] + pd.Timedelta(days=60)
+    start_i = max(start_i, int(np.searchsorted(idx.values, btc_first.to_datetime64())))
     emit("\n\n" + "#" * 90)
     emit("HISSA A - MOMENTUM ROTATION (har hafte top-K strongest coins, point-in-time top-100 liquid)")
     emit("#" * 90)
