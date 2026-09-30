@@ -88,7 +88,14 @@ Secrets:
   per-system closed-trade performance, PKT session analysis).
 - Purana Telegram token public git history mein hai - user ko BotFather `/revoke` ka mashwara diya.
 
+## Zer-e-test (EXPERIMENTAL)
+- **Portfolio Lab** (`portfolio_lab.py`, workflow "Portfolio Lab Test", natija `portfolio_lab_RESULTS.txt`):
+  teeno systems ki trades (bots jaisi) -> har system apni sleeve, rozana mark-to-market equity; mixes monthly
+  rebalance (1/3 har ek, ICHI 50/DON 25/DIP 25, ICHI 40/DON 20/DIP 40, ICHI+DIP, ICHI+DON), DON 0.5% risk,
+  DIP 20% size, mahana correlation. Maqsad: asli paise ki taqseem ka faisla. Portfolio hisaab unit-test se tasdeeq.
+
 ## Aglay kaam
+- Portfolio Lab natija se capital allocation tay karo (dashboard / CLAUDE.md mein likho).
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
 - 2-3 mahine paper trading ke natije backtest se milao, phir asli paisa.
