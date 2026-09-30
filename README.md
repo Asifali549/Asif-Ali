@@ -1,16 +1,17 @@
 # Crypto Spot Bots (buy-only)
 
-Sirf 2 tasdeeq-shuda systems chal rahe hain (paper trading + Telegram alerts):
+Sirf 3 tasdeeq-shuda systems chal rahe hain (paper trading + Telegram alerts):
 
 | System | Entry | Exit | Backtest (lookahead-free, fee+slippage) |
 |---|---|---|---|
 | **Ichimoku + Market Structure (4H)** | Ichimoku + MS dono ek candle par, volume > 2x | Chandelier 16 / 5.5x ATR + TP 3R | PF ~1.9, CAGR ~26%, MaxDD ~-11% |
 | **Donchian 20 (Daily)** | Close > pichle 20 din ka high, BTC > EMA50 | Chandelier 22 / 4x ATR | PF ~1.5, CAGR 20-29%, MaxDD ~-30% |
+| **Dip Daily** | Uptrend mein RSI(3) < 10, BTC > EMA50 | Close > SMA5 (agle open), stop 3 ATR, max 10 din | Win ~69%, PF ~2.1, CAGR ~6.5%, MaxDD ~-17% |
 
-Dono: 1% risk har trade, max 10 positions, ek coin max 20%.
+Ichimoku/Donchian: 1% risk har trade, max 10 positions, ek coin max 20%. Dip: har trade equity ka 10%, max 10.
 
 ## Files
-- `ichimoku4h_bot.py`, `donchian_daily_bot.py` - bots (GitHub Actions par khud chalte hain)
+- `ichimoku4h_bot.py`, `donchian_daily_bot.py`, `dip_daily_bot.py` - bots (GitHub Actions par khud chalte hain)
 - `bot_core.py`, `strategies.py`, `config.py`, `data_fetcher.py` - bots ke helpers
 - `live_colorful_dashboard.py` - Streamlit dashboard
 - `loop_watchdog.py` - bot ruk jaye to dobara chalata hai

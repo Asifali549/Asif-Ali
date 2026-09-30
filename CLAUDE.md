@@ -15,24 +15,25 @@
 | File | Kaam |
 |---|---|
 | `ichimoku4h_bot.py` | Ichimoku 4H bot - signals + paper trading + Telegram |
+| `dip_daily_bot.py` | Dip Daily bot - signals + paper trading + Telegram |
 | `donchian_daily_bot.py` | Donchian Daily bot - signals + paper trading + Telegram |
 | `bot_core.py` | dono bots ke helpers: fetch_full, norm, ema, chandelier, ichi_signal, FEE/SLIP/STOP_SLIP, STABLES |
 | `strategies.py`, `config.py` | ichimoku + market_structure signal functions aur unke params (bot_core inhein use karta hai) |
 | `data_fetcher.py` | KuCoin (ccxt) exchange + top coins list |
-| `live_colorful_dashboard.py` | Streamlit Cloud dashboard (sirf ye 2 systems) |
+| `live_colorful_dashboard.py` | Streamlit Cloud dashboard (teeno systems) |
 | `loop_watchdog.py` | bot ruk jaye (state ka `last_updated` purana) to workflow dobara chalata hai + Telegram |
 | `telegram_alert.py` | Telegram - token/chat id env ya Streamlit secrets se |
 | `*_paper_state.json`, `*_paper_trades.csv`, `*_signals.json` | bots ka data (bots khud commit karte hain) - haath mat lagao |
 
 Workflows (.github/workflows): `ichimoku4h_bot.yml` (cron `10 */4 * * *`), `donchian_daily_bot.yml`
-(cron `15 0 * * *` = 5:15 AM PKT), `watchdog.yml` (har 30 min), `telegram_test.yml` (sirf manual).
+(cron `15 0 * * *` = 5:15 AM PKT), `dip_daily_bot.yml` (cron `20 0 * * *`), `watchdog.yml` (har 30 min), `telegram_test.yml` (sirf manual).
 
 Secrets:
 - GitHub Actions secrets: `GH_TOKEN` (watchdog ke liye), `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`.
 - Streamlit secrets: `GITHUB_TOKEN` (fine-grained PAT, Actions + Contents = Read and write) - dashboard ke "▶️ Abhi chala do" buttons.
 - Token kabhi code mein mat likho.
 
-## Live strategies (dono paper trading par, $1000 start, 1% risk/trade, max 10 positions, ek coin max 20%)
+## Live strategies (teeno paper trading par, $1000 start; Ichimoku/Donchian: 1% risk/trade, max 10, ek coin max 20%)
 **1) Ichimoku + Market Structure, 4H**
 - Entry: ek hi 4H candle par Ichimoku (tenkan 9 / kijun 26 / senkou_b 52, volume > 2x) AUR market structure
   (pivot 5, swing 1.5%), cooldown `config.SIGNAL_COOLDOWN_BARS`. Agli candle ke open par.
@@ -45,6 +46,17 @@ Secrets:
 - Exit: Chandelier 22 / 4x ATR trailing (sirf ooper jata hai).
 - Backtest (~6.5 saal): PF ~1.5, CAGR 20-29%, MaxDD -28 se -33%.
 
+**3) Dip Daily** (`dip_daily_bot.py`, workflow `dip_daily_bot.yml` cron `20 0 * * *` = 5:20 AM PKT)
+- Entry: coin daily close > EMA200 aur EMA50 > EMA200, BTC close > EMA50, RSI(3) < 10, top-100 liquid.
+  Agle din open par. Kai signals hon to sab se kam RSI pehle.
+- Exit: close > SMA5 -> agle din open par; stop = signal close - 3x ATR(14) fixed; 10 din baad close par.
+  Jis din coin band ho us din usi coin mein nayi entry nahi (backtest jaisa).
+- Size: har trade equity ka 10% (risk-based nahi), max 10. Files dip_paper_state.json / dip_paper_trades.csv / dip_signals.json.
+- Backtest (2020-10 -> 2026-09): n=254, win 69%, PF 2.07, p5 1.48, random PF 0.82, CAGR ~6.5%, MaxDD ~-17%.
+  Grid RSI 5-12 x exit SMA 3/5/7 sab PF 1.7-4 (random se behtar); fail sirf kam trades / 2022 fold ~1.0 ki wajah se;
+  RSI<15 kamzor (PF 1.4). BTC filter hatane se kamzor. Bot ne fake data par 46/46 trades backtest se hubahu milayin.
+- Kam return, lekin breakout bots ka ulta (girawat par khareed) - diversification.
+
 ## Testing ke usool (har nayi strategy/tabdeeli par lazmi)
 - Lookahead-free: signal band candle par, entry agli candle ke open par; daily filter sirf band daily candle se.
 - Kharcha: fee 0.1% + slippage 0.05% har taraf + stop par 0.25% extra; gap par exit = min(stop, open).
@@ -56,6 +68,7 @@ Secrets:
 
 ## Jo FAIL ho chuka (dobara waqt zaya na karo)
 - 1h ki sab screener strategies (Union AB, CHoCH/AdvancedConfluence, CE Buy-Only, Pullback, 1h Donchian).
+- Swing Lab / Dip Focus test code: `git show 5d223f5:swing_lab.py` / `dip_focus.py` (+ `_RESULTS.txt`).
 - Donchian 3/5/7/10 din fail; 15 aur 20 pass. ETH EMA50 filter: thora ziada return lekin gehra drawdown - BTC rakha.
 - Ichimoku 4H par extra filters (BTC, ETH, RSI, ADX) se faida nahi hua; volume shart zaroori hai.
 - **SMC MTF (4H trend -> 1H -> 15m pullback+BOS, TP 2R) - FAIL (2026-09-30):** 39 coins, Nov 2024-Sep 2026:
@@ -70,21 +83,12 @@ Secrets:
   portfolio_test.py, donchian_regime_test.py, archive/...).
 
 ## Haal (2026-09-30)
-- Dono bots live aur chal rahe; Telegram test kamyab; tino GitHub secrets lag gaye.
+- Teesra bot Dip Daily shamil (dashboard tab + watchdog). Ichimoku/Donchian bots live aur chal rahe; Telegram test kamyab; tino GitHub secrets lag gaye.
 - Repo saaf kiya: sirf upar wali files. Dashboard naya (2 systems, TradingView link, manual run button,
   per-system closed-trade performance, PKT session analysis).
 - Purana Telegram token public git history mein hai - user ko BotFather `/revoke` ka mashwara diya.
 
-## Zer-e-test (EXPERIMENTAL - live nahi)
-- **DIP_DAILY** (`dip_focus.py` jo `swing_lab.py` ke functions use karta hai; workflow "Dip Focus Test",
-  natija `dip_focus_RESULTS.txt`): daily uptrend (close>EMA200, EMA50>EMA200) + BTC>EMA50 + RSI(3) < had
-  -> agle din open; exit close > SMA5 (agle open), stop 3 ATR, max 10 din.
-  Swing Lab mein: RSI3<10 PASS (n=254, win 69%, PF 2.07, p5 1.49, random PF 0.79, MaxDD -7%) lekin
-  CAGR sirf +1.6% (1% risk sizing se positions chhoti) aur 6 mein se sirf 1 variant pass (RSI<15 PF 1.41,
-  RSI<25 PF 1.06 fail). Dip Focus: RSI 5-15 x exit SMA 3/5/7 grid + 10% fixed sizing - edge ilaqa hai ya nukta.
-
 ## Aglay kaam
-- Dip Focus natija: grid ka bara hissa pass -> paper bot (Ichimoku/Donchian ke sath, kam correlation);
-  warna DIP bhi FAIL list mein, swing_lab.py/dip_focus.py hatao.
+- Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
 - 2-3 mahine paper trading ke natije backtest se milao, phir asli paisa.

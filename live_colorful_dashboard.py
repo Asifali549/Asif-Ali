@@ -68,6 +68,28 @@ SYSTEMS = {
         "backtest": {"win": 37.0, "pf": 1.55, "cagr": 26.0, "dd": -31.0,
                      "note": "6.5 saal (2020-2026, 2022 crash samet), 3 alag tests mein PASS"},
     },
+    "Dip Daily": {
+        "badge": "🎯 Dip Daily",
+        "state": "dip_paper_state.json",
+        "trades": "dip_paper_trades.csv",
+        "signals": "dip_signals.json",
+        "workflow": "dip_daily_bot.yml",
+        "stale_min": 1560,
+        "every": "rozana 5:20 AM PKT (daily candle band hone ke baad)",
+        "entry_col": "entry_day", "exit_col": "exit_day",
+        "new_signal_hours": 30,
+        "rules": [
+            ("Timeframe", "Daily candle"),
+            ("Entry", "Mazboot uptrend (close > EMA200, EMA50 > EMA200) mein RSI(3) < 10 — 2-3 din ki tez girawat"),
+            ("Market filter", "BTC daily close > BTC EMA50 (warna nayi entry nahi)"),
+            ("Stop (SL)", "Signal ke close se 3x ATR(14) neeche — fixed, hilta nahi"),
+            ("Exit", "Jis din close 5-din average (SMA5) se ooper band ho, agle din open par becho; max 10 din"),
+            ("Exchange par", "Stop-loss order; Telegram 'AAJ OPEN PAR BECHEIN' kahe to market par bech dein"),
+            ("Size", "Har trade equity ka 10% (risk-based nahi), max 10 trades"),
+        ],
+        "backtest": {"win": 69.3, "pf": 2.07, "cagr": 6.5, "dd": -16.9,
+                     "note": "6 saal (2020-2026), win-rate ooncha lekin return kam; breakout bots ka ulta (girawat par khareed)"},
+    },
 }
 
 
@@ -237,14 +259,14 @@ def position_size_box(coin, entry, sl, key):
 # ============================================================
 st.set_page_config(page_title="Live Dashboard", layout="wide")
 st.title("🎯 Live Dashboard — Ichimoku 4H + Donchian Daily")
-st.caption("Sirf wo 2 strategies jo sakht tests (lookahead-free, random-control, portfolio, 2022 crash) mein PASS huin. "
+st.caption("Sirf wo strategies jo sakht tests (lookahead-free, random-control, portfolio, 2022 crash) mein PASS huin. "
            "Signals aur paper trades dono bots khud chalate hain (GitHub Actions).")
 
 st.sidebar.header("💰 Position Sizing Calculator")
 total_capital = st.sidebar.number_input("Total Capital ($)", min_value=0.0, value=1000.0, step=100.0)
 risk_pct_per_trade = st.sidebar.number_input("Risk % per Trade", min_value=0.1, max_value=100.0, value=1.0, step=0.5)
 st.sidebar.caption("Har trade mein Entry aur SL ke farq ke mutabiq position size khud nikalta hai. "
-                   "Dono strategies ka test 1% risk par hua hai.")
+                   "Ichimoku aur Donchian ka test 1% risk par hua; Dip Daily har trade equity ka 10%.")
 st.sidebar.markdown("---")
 if st.sidebar.button("🔄 Live qeemat taaza karein"):
     fetch_live_prices.clear()
