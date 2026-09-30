@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "system": "Ichimoku 4H",
+    "symbol": "STX/USDT",
+    "signal_time_utc": "2026-09-30 20:00:00",
+    "entry_est": 0.3612,
+    "sl": 0.304965625,
+    "tp": 0.529903125,
+    "risk_pct": 15.57,
+    "size_pct": 6.42
+  }
+]
