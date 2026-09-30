@@ -1,8 +1,4 @@
 {
-  "NAKA/USDT|Union AB|EMA+Breakout|0.11213|Baseline": "2026-09-29T04:03:40.463052+00:00",
-  "HBAR/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.11856|N/A": "2026-09-29T04:03:41.053527+00:00",
-  "ZIG/USDT|CE Buy-Only|Chandelier Cross|0.05085|Base+ETH": "2026-09-29T04:03:41.634056+00:00",
-  "NAKA/USDT|Union AB Backup Tier|EMA+Breakout|0.11213|N/A": "2026-09-29T04:03:42.205879+00:00",
   "LINK/USDT|Pullback-in-Uptrend|EMA20 Pullback|14.8687|N/A": "2026-09-29T06:06:01.352805+00:00",
   "AAVE/USDT|Pullback-in-Uptrend|EMA20 Pullback|154.072|N/A": "2026-09-29T06:06:02.101731+00:00",
   "AAVE/USDT|Donchian Breakout|20-period High|154.072|N/A": "2026-09-29T06:06:02.920124+00:00",
@@ -66,5 +62,6 @@
   "MET/USDT|Union AB|EMA+Breakout|0.3389|Baseline": "2026-09-30T03:06:18.122792+00:00",
   "AAVE/USDT|CE Buy-Only|Chandelier Cross|160.326|Base+ETH": "2026-09-30T03:06:18.689409+00:00",
   "MET/USDT|Union AB Backup Tier|EMA+Breakout|0.3389|N/A": "2026-09-30T03:06:19.211933+00:00",
-  "MET/USDT|Donchian Breakout|20-period High|0.3389|N/A": "2026-09-30T03:06:19.732577+00:00"
+  "MET/USDT|Donchian Breakout|20-period High|0.3389|N/A": "2026-09-30T03:06:19.732577+00:00",
+  "STAY/USDT|CE Buy-Only|Chandelier Cross|1.1e-05|Base+ETH": "2026-09-30T04:05:03.113889+00:00"
 }
