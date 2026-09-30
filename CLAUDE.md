@@ -88,14 +88,24 @@ Secrets:
   per-system closed-trade performance, PKT session analysis).
 - Purana Telegram token public git history mein hai - user ko BotFather `/revoke` ka mashwara diya.
 
-## Zer-e-test (EXPERIMENTAL)
-- **Portfolio Lab** (`portfolio_lab.py`, workflow "Portfolio Lab Test", natija `portfolio_lab_RESULTS.txt`):
-  teeno systems ki trades (bots jaisi) -> har system apni sleeve, rozana mark-to-market equity; mixes monthly
-  rebalance (1/3 har ek, ICHI 50/DON 25/DIP 25, ICHI 40/DON 20/DIP 40, ICHI+DIP, ICHI+DON), DON 0.5% risk,
-  DIP 20% size, mahana correlation. Maqsad: asli paise ki taqseem ka faisla. Portfolio hisaab unit-test se tasdeeq.
+## Portfolio Lab natija (2026-09-30, 109 coins, 2020-10 -> 2026-09, rozana mark-to-market)
+`portfolio_lab.py` / workflow "Portfolio Lab Test" (dobara chalane ke liye rakha) / `portfolio_lab_RESULTS.txt`.
+| Portfolio | CAGR | MaxDD | Sharpe | 2022 |
+|---|---|---|---|---|
+| ICHI akela | +34.6% | -11.5% | 1.81 | +1% |
+| DON akela | +31.2% | -34.6% | 1.02 | -24% |
+| DIP akela (10%) / (20%) | +6.6% / +9.7% | -18% / -28% | 0.53 / 0.58 | 0% / -1% |
+| ICHI 50 / DON 25 / DIP 25 | +27.5% | -14.0% | 1.62 | -6% |
+| ICHI 60 / DIP(20%) 40 | +24.9% | -12.2% | 1.74 | 0% (koi saal manfi nahi) |
+| ICHI 50 / DON 50 | +33.8% | -20.1% | 1.43 | -12% |
+- Mahana correlation: ICHI-DON 0.72 (dono breakout - sath girte hain), DIP sirf 0.17-0.19 (asli diversifier).
+- Is engine mein ICHI ke number pehle (26.6%) se ziada aaye - absolute number se ziada tarteeb (ranking) par bharosa karo;
+  survivorship bias ki wajah se asal mein kam hon ge.
+- Mashwara diya: ICHI 60% + DIP 40% (DIP har trade 20%), DON paper par nazar mein (asli paisa nahi / kam).
+  User ka faisla abhi baqi.
 
 ## Aglay kaam
-- Portfolio Lab natija se capital allocation tay karo (dashboard / CLAUDE.md mein likho).
+- User se allocation ka faisla lo; phir dashboard par taqseem dikhao aur (agar mane) dip bot POS_PCT 0.20.
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
 - 2-3 mahine paper trading ke natije backtest se milao, phir asli paisa.
