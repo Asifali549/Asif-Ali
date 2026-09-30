@@ -31,6 +31,8 @@ jobs:
         env:
           # Dashboard ke "Rokein / Chalayein" button ki taaza halat GitHub se parhne ke liye
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python auto_scan_trade_bot.py
 
       - name: Commit and push results

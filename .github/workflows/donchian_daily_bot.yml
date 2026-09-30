@@ -29,6 +29,9 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run Donchian daily bot
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python donchian_daily_bot.py
 
       - name: Commit state

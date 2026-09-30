@@ -31,6 +31,9 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run dashboard scan
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python scheduled_dashboard_scan.py
 
       - name: Commit and push results
