@@ -1,72 +1,99 @@
 """
-Live + Manual Colorful Dashboard - LIVE section khud-b-khud (GitHub
-Actions se) update hoti hai, MANUAL section button se on-demand
-chalti hai. Dono mein Overall Score, Rank (best=1), aur Compact
-View available hai.
+Live Dashboard - sirf wo 2 strategies jo sakht tests mein PASS huin:
+  1) 📈 Ichimoku 4H   (Ichimoku + Market Structure, 4H, CE 16/5.5 + TP 3R)
+  2) 🐢 Donchian Daily (20-din breakout, BTC>EMA50, CE 22/4x trailing)
+
+Data dono bots ki files se aata hai (GitHub Actions har run ke baad commit karte hain):
+  ichimoku4h_paper_state.json / ichimoku4h_paper_trades.csv / ichimoku4h_signals.json
+  donchian_paper_state.json   / donchian_paper_trades.csv   / donchian_signals.json
 
 Chalayen: streamlit run live_colorful_dashboard.py
 """
 
-import base64
 import json
 import os
-import time
-from datetime import datetime, timezone
+from datetime import datetime
 
 import pandas as pd
 import requests
 import streamlit as st
 
-import config
-from data_fetcher import get_exchange, get_coin_list, fetch_ohlcv
-from strategies import STRATEGY_FUNCTIONS, apply_cooldown
-from backtest_engine import compute_atr
-from dashboard_helpers import (
-    get_fear_greed, get_futures_exchange, get_funding_and_oi, get_long_short_ratio,
-    get_orderbook_info, get_tf_volume_change, get_24h_range_distance,
-    get_historical_performance, get_btc_correlation, get_whale_activity,
-    color_value, compute_overall_score, ALL_TIMEFRAMES,
-)
+from data_fetcher import get_exchange
 
-def _safe_json_load(path):
-    """JSON file ko parhta hai; agar file corrupt/invalid JSON ho to poori app crash
-    karne ke bajaye None wapas karta hai (taake baaki dashboard sections chalte rahein)."""
+GITHUB_REPO = "Asifali549/Asif-Ali"
+GITHUB_BRANCH = "main"
+
+SYSTEMS = {
+    "Ichimoku 4H": {
+        "badge": "📈 Ichimoku 4H",
+        "state": "ichimoku4h_paper_state.json",
+        "trades": "ichimoku4h_paper_trades.csv",
+        "signals": "ichimoku4h_signals.json",
+        "workflow": "ichimoku4h_bot.yml",
+        "stale_min": 330,
+        "every": "har 4 ghante (5:10, 9:10, 1:10 ... PKT)",
+        "entry_col": "entry_bar", "exit_col": "exit_bar",
+        "new_signal_hours": 8,
+        "rules": [
+            ("Timeframe", "4H candle"),
+            ("Entry", "EK HI candle par Ichimoku (Tenkan>Kijun, cloud ke ooper, EMA200 trend, volume 2x) + Market Structure (swing high break)"),
+            ("Market filter", "Koi nahi (coin ka apna EMA200/EMA50 trend kaafi hai - test mein filters se faida nahi hua)"),
+            ("Stop (SL)", "Chandelier 16 candles, 5.5x ATR - sirf ooper jata hai"),
+            ("Take Profit", "3R (Entry se SL ke faasle ka 3 guna)"),
+            ("Exchange par", "OCO order (TP ooper, SL neeche); 🔼 aaye to SL ooper karein"),
+            ("Size", "Har trade 1% risk, max 10 trades, ek coin max 20%"),
+        ],
+        "backtest": {"win": 41.4, "pf": 1.90, "cagr": 26.6, "dd": -11.0,
+                     "note": "5.3 saal (2021-2026, 2022 crash samet), sakht usool, random-control se behtar"},
+    },
+    "Donchian Daily": {
+        "badge": "🐢 Donchian Daily",
+        "state": "donchian_paper_state.json",
+        "trades": "donchian_paper_trades.csv",
+        "signals": "donchian_signals.json",
+        "workflow": "donchian_daily_bot.yml",
+        "stale_min": 1560,
+        "every": "rozana 5:15 AM PKT (daily candle band hone ke baad)",
+        "entry_col": "entry_day", "exit_col": "exit_day",
+        "new_signal_hours": 30,
+        "rules": [
+            ("Timeframe", "Daily candle"),
+            ("Entry", "Daily close pichle 20 din ke sab se oonche high se ooper band ho"),
+            ("Market filter", "BTC daily close > BTC EMA50 (warna nayi entry nahi)"),
+            ("Stop (SL)", "Chandelier 22 din, 4x ATR - sirf ooper jata hai (rozana update karein)"),
+            ("Take Profit", "Koi nahi - trend ke sath chalti hai jab tak SL na lage"),
+            ("Exchange par", "Stop-loss order; Telegram mein naya SL aaye to update karein"),
+            ("Size", "Har trade 1% risk, max 10 trades, ek coin max 20%"),
+        ],
+        "backtest": {"win": 37.0, "pf": 1.55, "cagr": 26.0, "dd": -31.0,
+                     "note": "6.5 saal (2020-2026, 2022 crash samet), 3 alag tests mein PASS"},
+    },
+}
+
+
+# ============================================================
+# Helpers
+# ============================================================
+def load_json(path, default=None):
     try:
         with open(path) as f:
             return json.load(f)
     except Exception:
-        return None
+        return default
 
 
-st.set_page_config(page_title="Live Colorful Dashboard", layout="wide")
-st.title("🎨 Live + Manual Colorful Dashboard")
-st.warning(
-    "⚠️ Sirf MALOOMAT — asal Union AB signal logic bilkul nahi badla "
-    "gaya. 🟢 Green = signal ke HAQ mein, 🔴 Red = KHILAF."
-)
-
-st.sidebar.markdown("---")
-st.sidebar.header("💰 Position Sizing Calculator")
-total_capital = st.sidebar.number_input("Total Capital ($)", min_value=0.0, value=1000.0, step=100.0)
-risk_pct_per_trade = st.sidebar.number_input("Risk % per Trade", min_value=0.1, max_value=100.0, value=1.0, step=0.5)
-st.sidebar.caption("Har trade mein Entry aur Trail Stop ke farq ke mutabiq, khud-kar position size calculate hoga.")
-
-CE_A = {"period": 16, "multiplier": 4.5}
-CE_B = {"period": 12, "multiplier": 4.5}
-RR_MULTIPLE = 2.0
-
-COLORABLE_COLUMNS = (
-    ["OrderBook Bid/Ask", "Liquidity Compare", "Coin's Own PF", "Funding Rate", "Dist from 24h High"]
-    + [f"Vol {tf}" for tf in ALL_TIMEFRAMES]
-    + [f"Chg {tf}" for tf in ALL_TIMEFRAMES]
-)
-
-COMPACT_COLUMNS = ["Rank", "System", "Category", "Coin", "Signal Time (PKT)", "Combo", "Overall Score %", "Verdict", "Entry", "Live Price", "Live P/L %", "Current", "P/L %", "Trail Stop", "Take Profit"]
+def load_csv(path):
+    try:
+        if os.path.exists(path):
+            return pd.read_csv(path)
+    except Exception:
+        pass
+    return pd.DataFrame()
 
 
 @st.cache_data(ttl=60, show_spinner=False)
 def fetch_live_prices(symbols):
-    """Exchange (KuCoin) se abhi ki taaza qeemat - ek hi API call, 60 second cache."""
+    """KuCoin se abhi ki qeemat - ek hi API call, 60 second cache."""
     symbols = list(symbols)
     if not symbols:
         return {}
@@ -78,28 +105,21 @@ def fetch_live_prices(symbols):
         return {}
 
 
-def add_live_price_columns(df):
-    """'Live Price' (abhi ki qeemat) aur 'Live P/L %' (Entry ke muqable) columns jorta hai.
-    'Current' = scan ke waqt ki qeemat (kuch minute purani ho sakti hai)."""
-    if df is None or len(df) == 0 or "Coin" not in df.columns:
-        return df, False
-    prices = fetch_live_prices(tuple(sorted(df["Coin"].dropna().unique())))
-    if not prices:
-        return df, False
-    df = df.copy()
-    df["Live Price"] = df["Coin"].map(prices)
-    entry = pd.to_numeric(df.get("Entry"), errors="coerce")
-    df["Live P/L %"] = ((df["Live Price"] - entry) / entry * 100).round(2)
-    return df, True
+@st.cache_data(ttl=1800, show_spinner=False)
+def get_fear_greed():
+    try:
+        item = requests.get("https://api.alternative.me/fng/", timeout=10).json()["data"][0]
+        return int(item["value"]), item["value_classification"]
+    except Exception:
+        return None, None
 
 
 def trigger_github_workflow(workflow_file):
-    """Dashboard se seedha GitHub Actions ko 'workflow_dispatch' bhejta hai — taake
-    agar koi self-loop (Live Scan / Manual Bot / Auto Bot / Watchdog) ruk jaye,
-    to GitHub app/site khole bina, yahin se 'Chala Do' button se dobara chala saken.
-    Same GITHUB_TOKEN istemal karta hai jo watchlist save karne ke liye pehle se
-    Streamlit Secrets mein maujood hai."""
-    token = st.secrets.get("GITHUB_TOKEN")
+    """GitHub Actions ko workflow_dispatch - dashboard se hi system dobara chalane ke liye."""
+    try:
+        token = st.secrets.get("GITHUB_TOKEN")
+    except Exception:
+        token = None
     if not token:
         return False, "GITHUB_TOKEN Streamlit Secrets mein nahi mila."
     url = f"https://api.github.com/repos/{GITHUB_REPO}/actions/workflows/{workflow_file}/dispatches"
@@ -113,732 +133,285 @@ def trigger_github_workflow(workflow_file):
         return False, str(e)
 
 
-def _pkt_to_dt(series):
-    """'2026-09-25 12:00 PM PKT' jaisi strings ko asal waqt mein badalta hai (sahi tarteeb ke liye)."""
-    return pd.to_datetime(series.astype(str).str.replace(" PKT", "", regex=False),
-                          format="%Y-%m-%d %I:%M %p", errors="coerce")
+def tradingview_url(coin, interval=None):
+    base = str(coin).split("/")[0]
+    url = f"https://www.tradingview.com/chart/?symbol=KUCOIN:{base}USDT"
+    if interval:
+        url += f"&interval={interval}"
+    return url
 
 
-def show_bot_heartbeat(state, bot_name, max_minutes=60):
-    """Bot aakhri dafa kab chala - zyada der ho jaye to khabardar karta hai (loop toot gaya ho sakta hai)."""
+def to_pkt(ts):
+    t = pd.Timestamp(ts)
+    if t.tzinfo is None:
+        t = t.tz_localize("UTC")
+    return t.tz_convert("Asia/Karachi")
+
+
+def pkt_str(ts):
+    try:
+        return to_pkt(ts).strftime("%Y-%m-%d %I:%M %p PKT")
+    except Exception:
+        return str(ts)
+
+
+def fmt_px(x):
+    try:
+        x = float(x)
+    except Exception:
+        return "—"
+    if x >= 100:
+        return f"{x:,.2f}"
+    if x >= 1:
+        return f"{x:.4f}"
+    return f"{x:.6g}"
+
+
+def link_column(label="📊 Chart"):
+    try:
+        return st.column_config.LinkColumn(label, display_text="TradingView ↗")
+    except TypeError:
+        return st.column_config.LinkColumn(label)
+
+
+def color_pl(v):
+    try:
+        v = float(v)
+    except Exception:
+        return ""
+    if v > 0:
+        return "background-color: rgba(34,197,94,0.25)"
+    if v < 0:
+        return "background-color: rgba(239,68,68,0.25)"
+    return ""
+
+
+def stretch_df(data, **kw):
+    """Naye Streamlit mein width='stretch', purane mein use_container_width=True."""
+    try:
+        return st.dataframe(data, width="stretch", **kw)
+    except TypeError:
+        return st.dataframe(data, use_container_width=True, **kw)
+
+
+def show_table(df, pl_cols=(), link_cols=("Chart",)):
+    cfg = {c: link_column() for c in link_cols if c in df.columns}
+    styled = df.style
+    for c in pl_cols:
+        if c in df.columns:
+            styled = styled.map(color_pl, subset=[c]) if hasattr(styled, "map") else styled.applymap(color_pl, subset=[c])
+    stretch_df(styled, hide_index=True, column_config=cfg)
+
+
+def position_size_box(coin, entry, sl, key):
+    """Sidebar ke Capital / Risk % ke mutabiq position size + copy karne wala setup."""
+    try:
+        entry, sl = float(entry), float(sl)
+    except Exception:
+        return
+    if not (entry > sl > 0):
+        return
+    risk_dollars = total_capital * risk_pct_per_trade / 100
+    units = risk_dollars / (entry - sl)
+    value = units * entry
+    cap_note = ""
+    if value > total_capital * 0.20:
+        value_capped = total_capital * 0.20
+        cap_note = f" ⚠️ 20% had: ${value_capped:,.0f} tak rakhein"
+    st.info(f"💰 **Position size** (Capital ${total_capital:,.0f}, Risk {risk_pct_per_trade}%): "
+            f"**{units:.6g} {coin.split('/')[0]}** (~${value:,.2f}), SL laga to nuqsan ~${risk_dollars:,.2f}{cap_note}")
+
+
+# ============================================================
+# Page
+# ============================================================
+st.set_page_config(page_title="Live Dashboard", layout="wide")
+st.title("🎯 Live Dashboard — Ichimoku 4H + Donchian Daily")
+st.caption("Sirf wo 2 strategies jo sakht tests (lookahead-free, random-control, portfolio, 2022 crash) mein PASS huin. "
+           "Signals aur paper trades dono bots khud chalate hain (GitHub Actions).")
+
+st.sidebar.header("💰 Position Sizing Calculator")
+total_capital = st.sidebar.number_input("Total Capital ($)", min_value=0.0, value=1000.0, step=100.0)
+risk_pct_per_trade = st.sidebar.number_input("Risk % per Trade", min_value=0.1, max_value=100.0, value=1.0, step=0.5)
+st.sidebar.caption("Har trade mein Entry aur SL ke farq ke mutabiq position size khud nikalta hai. "
+                   "Dono strategies ka test 1% risk par hua hai.")
+st.sidebar.markdown("---")
+if st.sidebar.button("🔄 Live qeemat taaza karein"):
+    fetch_live_prices.clear()
+
+fg_val, fg_label = get_fear_greed()
+top1, top2, top3 = st.columns(3)
+if fg_val is not None:
+    top1.metric("BTC Fear & Greed", f"{fg_val}/100", fg_label)
+top2.metric("Waqt (PKT)", pd.Timestamp.now(tz="Asia/Karachi").strftime("%d %b %I:%M %p"))
+don_state = load_json(SYSTEMS["Donchian Daily"]["state"], {}) or {}
+if "btc_regime_ok" in don_state:
+    top3.metric("BTC regime (Donchian)", "🟢 BTC > EMA50" if don_state["btc_regime_ok"] else "🔴 BTC < EMA50")
+
+# ------------------------------------------------------------
+# System status + manual restart
+# ------------------------------------------------------------
+st.header("🩺 Systems ki halat")
+status_cols = st.columns(len(SYSTEMS) + 1)
+for col, (name, cfg) in zip(status_cols, SYSTEMS.items()):
+    state = load_json(cfg["state"], {}) or {}
     last = state.get("last_updated")
-    if not last:
-        return
-    try:
-        mins = (pd.Timestamp.now(tz="UTC") - pd.Timestamp(last)).total_seconds() / 60
-    except Exception:
-        return
-    if mins > max_minutes:
-        st.warning(f"⚠️ {bot_name} aakhri dafa **{mins/60:.1f} ghante** pehle chala tha — shayad ruk gaya hai. "
-                   f"GitHub → Actions mein check karein aur zaroorat ho to 'Run workflow' dabayein.")
-    else:
-        st.caption(f"🕐 {bot_name} aakhri dafa {mins:.0f} min pehle chala.")
-
-
-def show_bot_open_trades(open_positions, title, key_is_symbol, cash):
-    """Bot ki khuli trades - live qeemat, live P/L, SL tak faasla aur Live Equity ke sath."""
-    rows = []
-    for key, pos in open_positions.items():
-        coin = key if key_is_symbol else pos.get("symbol", key.split("|")[0])
-        system_label = pos.get("system", "CE Buy-Only")
-        if pos.get("combo"):
-            system_label += f" ({pos['combo']})"
-        rows.append({
-            "Coin": coin,
-            "System": system_label,
-            "Entry": pos.get("entry_price"),
-            "Trail Stop (SL)": pos.get("trail_stop"),
-            "TP": f"{pos.get('tp_price')}" if pos.get("tp_price") is not None else "N/A (trailing)",
-            "Capital ($)": pos.get("capital_allocated"),
-            "Last Run Price": pos.get("current_price"),
-            "Last Run P/L %": pos.get("unrealized_pnl_pct"),
-        })
-    df = pd.DataFrame(rows)
-    st.markdown(f"**🟢 {title}**")
-
-    prices = fetch_live_prices(tuple(sorted(df["Coin"].dropna().unique())))
-    if prices:
-        entry = pd.to_numeric(df["Entry"], errors="coerce")
-        sl = pd.to_numeric(df["Trail Stop (SL)"], errors="coerce")
-        cap = pd.to_numeric(df["Capital ($)"], errors="coerce")
-        live_px = df["Coin"].map(prices)
-        df["Live Price"] = live_px
-        df["Live P/L %"] = ((live_px - entry) / entry * 100).round(2)
-        df["Live P/L ($)"] = (cap * (live_px - entry) / entry).round(2)
-        df["SL tak faasla %"] = ((live_px - sl) / live_px * 100).round(2)
-        df["Halat"] = [
-            "—" if pd.isna(p) else ("⚠️ SL se neeche — agle run mein band" if p <= s else ("🟢 Nafa" if p >= e else "🔴 Nuqsan"))
-            for p, s, e in zip(live_px, sl, entry)
-        ]
-        order = ["Coin", "System", "Halat", "Entry", "Live Price", "Live P/L %", "Live P/L ($)",
-                 "Trail Stop (SL)", "SL tak faasla %", "TP", "Capital ($)"]
-        st.dataframe(df[order], use_container_width=True, hide_index=True)
-
-        live_open_value = (cap * live_px / entry).where(live_px.notna(), cap).sum()
-        open_pnl = df["Live P/L ($)"].fillna(0).sum()
-        live_equity = cash + live_open_value
-        st.caption(
-            f"💹 **Live:** khuli trades ka majmooi nafa/nuqsan **${open_pnl:+,.2f}** · "
-            f"**Live Equity ${live_equity:,.2f}** (Total Equity mein khuli trades ka nafa/nuqsan shamil nahi hota). "
-            f"Qeemat {pd.Timestamp.now(tz='Asia/Karachi').strftime('%I:%M %p')} PKT ki — fees shamil nahi."
-        )
-    else:
-        st.dataframe(df, use_container_width=True, hide_index=True)
-        st.caption("⚠️ Live qeemat is waqt nahi mil saki — 'Last Run Price' bot ke pichle run ki qeemat hai.")
-
-SYSTEM_ORDER = [
-    "Union AB", "NEW AdvancedConfluence", "Union AB Backup Tier", "CE Buy-Only",
-    "Pullback-in-Uptrend", "Donchian Breakout",
-]
-
-# Ye systems background mein scan/compute hote rehte hain (data collection jaari,
-# CE Buy-Only v2 research aur AdvancedConfluence ke liye), lekin LIVE screen
-# (naye signals ka table) par filhal NAHI dikhaye jate — audit mein koi mustaqil
-# edge sabit na hone tak. Bad mein re-enable karne ke liye bas is set se hata dein.
-HIDDEN_FROM_LIVE_SCREEN = {"CE Buy-Only", "NEW AdvancedConfluence"}
-SYSTEM_BADGE = {
-    "Union AB": "🥇 Union AB",
-    "NEW AdvancedConfluence": "🧭 NEW AdvancedConfluence",
-    "Union AB Backup Tier": "🛡️ Union AB Backup Tier",
-    "CE Buy-Only": "⚡ CE Buy-Only",
-    "Pullback-in-Uptrend": "🔁 Pullback-in-Uptrend",
-    "Donchian Breakout": "📈 Donchian Breakout",
-}
-SYSTEM_CAPTION = {
-    "Union AB": "ETH+RS+RS%95 filters, +52W tier. Audit (order-fix ke baad): PF ~1.75, Top-10 trades nikal kar ~1.2 — moatadil edge, trades zyada tar bullish daur mein.",
-    "NEW AdvancedConfluence": "CHoCH-based confluence score, koi extra filter nahi. Audit: PF ~1.30, Top-10 nikal kar ~1.04 — koi pukhta edge nahi. Auto bot mein filhal band.",
-    "Union AB Backup Tier": "Union AB jaisa combo, sirf RS+RS%95 (ETH check NAHI). Audit: PF ~1.42 (aik fold mein <1) — kamzor edge; purana PF 3.04 ghalat tha.",
-    "CE Buy-Only": "⚠️ Purana Win93%/PF45 aur baad ka Win58%/PF5 dono exit-fill bug ki wajah se ghalat sabit hue. Dobara audit hone tak GHAIR-TASDEEQ-SHUDA. Auto bot mein filhal band.",
-    "Pullback-in-Uptrend": "EMA20 pullback (rising EMA + uptrend) + ETH/RS/RS%95 filters. Audit: PF ~1.9, Top-10 nikal kar ~1.45 — zyada tar trades pichle fold mein.",
-    "Donchian Breakout": "20-period Donchian high breakout + ETH/RS/RS%95 filters. Audit: PF ~2.9, Top-10 nikal kar ~1.7 — sab se mazboot nateeja, lekin survivorship bias ka khatra.",
-}
-
-
-def style_and_show(df, compact, select_key=None):
-    """Table dikhata hai. select_key diya jaye to lines select (tap) ho sakti
-    hain - return: select ki gayi lines ki positions (list)."""
-    if compact:
-        show_cols = [c for c in COMPACT_COLUMNS if c in df.columns]
-        df = df[show_cols]
-
-    def apply_row_colors(row):
-        return [color_value(col, row[col]) if col in df.columns else "" for col in df.columns]
-
-    styled = df.style.apply(apply_row_colors, axis=1)
-    if select_key:
-        try:
-            event = st.dataframe(
-                styled, use_container_width=True, hide_index=True,
-                on_select="rerun", selection_mode="multi-row", key=select_key,
-            )
-            return list(event.selection.rows)
-        except TypeError:
-            pass   # purana Streamlit version - selection support nahi, sirf table dikhao
-    st.dataframe(styled, use_container_width=True, hide_index=True)
-    return []
-
-
-# ============================================================
-# MANUAL BOT WATCHLIST - GitHub par seedha save (Live table + form dono isi ko istemal karte hain)
-# ============================================================
-GITHUB_REPO = "Asifali549/Asif-Ali"
-GITHUB_BRANCH = "main"
-GITHUB_WATCHLIST_PATH = "manual_watchlist.json"
-DEFAULT_MANUAL_SYSTEM = "Union AB"
-UNION_SYSTEMS = ("Union AB", "Union AB Backup Tier")
-MANUAL_BOT_SYSTEMS = (
-    "CE Buy-Only", "NEW AdvancedConfluence", "Union AB", "Union AB Backup Tier",
-    "Pullback-in-Uptrend", "Donchian Breakout",
-)
-UNION_COMBOS = ("Ichimoku+MS", "EMA+Breakout")
-
-
-def _norm_symbol(sym):
-    s = str(sym or "").upper().replace(" ", "").strip()
-    if s and "/" not in s:
-        s = f"{s}/USDT"
-    return s
-
-
-def _wl_key(e):
-    """Watchlist entry (dict ya plain string) ki pehchan: (symbol, system, combo)."""
-    if isinstance(e, dict):
-        system = e.get("system") or DEFAULT_MANUAL_SYSTEM
-        combo = e.get("combo") if system in UNION_SYSTEMS else None
-        return (_norm_symbol(e.get("symbol")), system, combo or None)
-    return (_norm_symbol(e), DEFAULT_MANUAL_SYSTEM, None)
-
-
-def _read_local_watchlist():
-    try:
-        with open("manual_watchlist.json") as f:
-            data = json.load(f)
-        return data if isinstance(data, list) else []
-    except Exception:
-        return []
-
-
-def add_entries_to_github_watchlist(new_entries):
-    """
-    Nayi entries ko GitHub wali manual_watchlist.json mein jorta hai.
-    Hamesha GitHub ki TAAZA file parh kar merge karta hai (app ki purani
-    local copy par bharosa nahi) - taake bot ki beech mein ki gayi
-    tabdeeli mite nahi. Takraao (409/422) par 3 dafa dobara koshish.
-    Returns (status, added_count, message); status = OK / NO_TOKEN / ERROR.
-    """
-    token = None
-    try:
-        token = st.secrets.get("GITHUB_TOKEN")
-    except Exception:
-        token = None
-    if not token:
-        return "NO_TOKEN", 0, ""
-
-    api_url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_WATCHLIST_PATH}"
-    headers = {"Authorization": f"token {token}", "Accept": "application/vnd.github.v3+json"}
-
-    for attempt in range(3):
-        try:
-            get_resp = requests.get(api_url, headers=headers, params={"ref": GITHUB_BRANCH}, timeout=15)
-            if get_resp.status_code == 200:
-                data = get_resp.json()
-                sha = data.get("sha")
-                try:
-                    text = base64.b64decode(data.get("content", "")).decode("utf-8").strip()
-                    existing = json.loads(text) if text else []
-                    if not isinstance(existing, list):
-                        existing = []
-                except Exception:
-                    existing = []   # kharab file - saaf list se shuru
-            elif get_resp.status_code == 404:
-                existing, sha = [], None
+    with col:
+        st.markdown(f"**{cfg['badge']}**")
+        st.caption(f"Chalta hai: {cfg['every']}")
+        if last:
+            mins = (pd.Timestamp.now(tz="UTC") - pd.Timestamp(last)).total_seconds() / 60
+            if mins > cfg["stale_min"]:
+                st.error(f"⚠️ Aakhri dafa {mins/60:.1f} ghante pehle chala — shayad ruk gaya")
             else:
-                return "ERROR", 0, f"GitHub API error {get_resp.status_code}: {get_resp.text[:200]}"
-
-            keys = {_wl_key(e) for e in existing}
-            merged = list(existing)
-            added = 0
-            for e in new_entries:
-                k = _wl_key(e)
-                if k[0] and k not in keys:
-                    merged.append(e)
-                    keys.add(k)
-                    added += 1
-
-            if added == 0:
-                return "OK", 0, "ALREADY"
-
-            payload = {
-                "message": "Update manual watchlist (dashboard se)",
-                "content": base64.b64encode(json.dumps(merged, indent=2).encode("utf-8")).decode("utf-8"),
-                "branch": GITHUB_BRANCH,
-            }
-            if sha:
-                payload["sha"] = sha
-
-            put_resp = requests.put(api_url, headers=headers, json=payload, timeout=15)
-            if put_resp.status_code in (200, 201):
-                try:
-                    with open("manual_watchlist.json", "w") as f:
-                        json.dump(merged, f, indent=2)   # local copy, taake "Pending" foran nazar aaye
-                except Exception:
-                    pass
-                return "OK", added, ""
-            if put_resp.status_code in (409, 422):
-                time.sleep(1.5)   # file beech mein badal gayi (bot ne likha) - dobara taaza parh kar koshish
-                continue
-            return "ERROR", 0, f"GitHub API error {put_resp.status_code}: {put_resp.text[:200]}"
-        except Exception as exc:
-            return "ERROR", 0, f"Error: {exc}"
-
-    return "ERROR", 0, "File baar baar badal rahi thi - thori der baad dobara koshish karein"
-
-
-AUTO_CONTROL_PATH = "auto_bot_control.json"
-
-
-def read_auto_control():
-    """Auto Bot button ki halat (app ki local copy). File na ho = chal raha hai."""
-    try:
-        with open(AUTO_CONTROL_PATH) as f:
-            data = json.load(f)
-        return data if isinstance(data, dict) else {"paused": False}
-    except Exception:
-        return {"paused": False}
-
-
-def write_auto_control(paused):
-    """auto_bot_control.json ko GitHub par likhta hai. Returns (ok, message)."""
-    try:
-        token = st.secrets.get("GITHUB_TOKEN")
-    except Exception:
-        token = None
-    if not token:
-        return False, "GITHUB_TOKEN Streamlit Secrets mein nahi mila"
-
-    api_url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{AUTO_CONTROL_PATH}"
-    headers = {"Authorization": f"token {token}", "Accept": "application/vnd.github.v3+json"}
-    body_obj = {
-        "paused": bool(paused),
-        "updated_utc": datetime.now(timezone.utc).isoformat(),
-        "by": "dashboard",
-    }
-    for attempt in range(3):
-        try:
-            get_resp = requests.get(api_url, headers=headers, params={"ref": GITHUB_BRANCH}, timeout=15)
-            if get_resp.status_code == 200:
-                sha = get_resp.json().get("sha")
-            elif get_resp.status_code == 404:
-                sha = None
-            else:
-                return False, f"GitHub API error {get_resp.status_code}: {get_resp.text[:200]}"
-            payload = {
-                "message": ("Auto Bot ROKA gaya" if paused else "Auto Bot dobara CHALAYA gaya") + " (dashboard se)",
-                "content": base64.b64encode(json.dumps(body_obj, indent=2).encode("utf-8")).decode("utf-8"),
-                "branch": GITHUB_BRANCH,
-            }
-            if sha:
-                payload["sha"] = sha
-            put_resp = requests.put(api_url, headers=headers, json=payload, timeout=15)
-            if put_resp.status_code in (200, 201):
-                try:
-                    with open(AUTO_CONTROL_PATH, "w") as f:
-                        json.dump(body_obj, f, indent=2)
-                except Exception:
-                    pass
-                return True, ""
-            if put_resp.status_code in (409, 422):
-                time.sleep(1.5)
-                continue
-            return False, f"GitHub API error {put_resp.status_code}: {put_resp.text[:200]}"
-        except Exception as exc:
-            return False, f"Error: {exc}"
-    return False, "GitHub par file baar baar badal rahi thi - dobara koshish karein"
-
-
-def live_row_to_watchlist_entry(row, amount=None):
-    """Live screener ki line -> manual bot watchlist entry (sahi system/combo ke sath)."""
-    system = row.get("System")
-    if system not in MANUAL_BOT_SYSTEMS:
-        return None
-    combo = row.get("Combo") if system in UNION_SYSTEMS else None
-    if system in UNION_SYSTEMS and combo not in UNION_COMBOS:
-        return None
-    symbol = _norm_symbol(row.get("Coin"))
-    if not symbol:
-        return None
-    return {"symbol": symbol, "amount": amount, "system": system, "combo": combo}
-
-
-def send_selected_to_manual_bot(df_rows, selected_positions, key):
-    """Select ki gayi live lines ke neeche 'Manual Bot mein bhejein' button."""
-    if not selected_positions:
-        st.caption("👆 Kisi coin ki line ke bayen (left) khane par tap karein — "
-                   "'🤖 Manual Bot mein bhejein' button aa jayega.")
-        return
-
-    picked = df_rows.iloc[[p for p in selected_positions if p < len(df_rows)]]
-    entries, labels = [], []
-    for _, r in picked.iterrows():
-        e = live_row_to_watchlist_entry(r)
-        if e is not None:
-            entries.append(e)
-            labels.append(f"{e['symbol']} ({e['system']}{' — ' + e['combo'] if e['combo'] else ''})")
-
-    if not entries:
-        st.warning("Is line ka system Manual Bot mein pehchana nahi gaya.")
-        return
-
-    st.markdown("**Chuni gayi:** " + ", ".join(labels))
-    c1, c2 = st.columns([1, 2])
-    amount = c1.number_input("Amount ($, virtual)", min_value=10.0, value=100.0, step=10.0, key=f"{key}_amt")
-    if c2.button(f"🤖 Manual Bot mein bhejein ({len(entries)})", type="primary", key=f"{key}_send"):
-        amt = None if amount == 100.0 else float(amount)   # $100 = bot ka default
-        for e in entries:
-            e["amount"] = amt
-        status, added, msg = add_entries_to_github_watchlist(entries)
-        if status == "OK" and added > 0:
-            st.success(f"✅ {added} coin(s) Manual Bot ki watchlist mein apne apne system ke khane mein chali gayin. "
-                       f"Bot ke agle run (max ~5-10 min) mein trade khul jayegi.")
-        elif status == "OK":
-            st.info("Ye coin(s) pehle se watchlist mein maujood hain — bot agle run mein utha lega.")
-        elif status == "NO_TOKEN":
-            st.error("⚠️ GITHUB_TOKEN Streamlit Secrets mein nahi mila — coin GitHub par nahi gaya.")
+                st.success(f"✅ Aakhri dafa {mins/60:.1f} ghante pehle chala")
         else:
-            st.error(f"❌ GitHub par save nahi ho saka: {msg}")
+            st.warning("Abhi tak pehla run record nahi hua")
+        if st.button("▶️ Abhi chala do", key=f"run_{cfg['workflow']}"):
+            ok, msg = trigger_github_workflow(cfg["workflow"])
+            st.success("✅ GitHub ko command bhej di — 2-3 min baad page refresh karein.") if ok else st.error(f"❌ {msg}")
+with status_cols[-1]:
+    st.markdown("**🐕 Watchdog**")
+    st.caption("Har 30 min: koi bot ruk jaye to khud dobara chalata hai + Telegram")
+    if st.button("▶️ Abhi chala do", key="run_watchdog"):
+        ok, msg = trigger_github_workflow("watchdog.yml")
+        st.success("✅ Bhej diya!") if ok else st.error(f"❌ {msg}")
 
+# ------------------------------------------------------------
+# Har system alag
+# ------------------------------------------------------------
+all_closed = []
+tabs = st.tabs([cfg["badge"] for cfg in SYSTEMS.values()])
+for tab, (name, cfg) in zip(tabs, SYSTEMS.items()):
+    with tab:
+        state = load_json(cfg["state"], {}) or {}
+        signals = load_json(cfg["signals"], []) or []
+        trades = load_csv(cfg["trades"])
+        interval = "240" if name == "Ichimoku 4H" else "D"
 
-def to_pkt_str(ts):
-    ts_utc = pd.Timestamp(ts)
-    if ts_utc.tzinfo is None:
-        ts_utc = ts_utc.tz_localize("UTC")
-    ts_pkt = ts_utc.tz_convert("Asia/Karachi")
-    return ts_pkt.strftime("%Y-%m-%d %I:%M %p PKT")
+        with st.expander("📋 Strategy ke usool", expanded=False):
+            st.table(pd.DataFrame(cfg["rules"], columns=["", "Usool"]))
 
-
-def tradingview_url(coin):
-    base = coin.split("/")[0]
-    return f"https://www.tradingview.com/chart/?symbol=KUCOIN:{base}USDT"
-
-
-def show_charts_and_copy(df, key_prefix):
-    """Har coin ke liye TradingView chart link + poora trade setup copy karne ka option."""
-    if df is None or len(df) == 0:
-        return
-    st.markdown("**📊 Chart dekhein / Trade setup copy karein:**")
-    coin_options = [f"{row['Coin']} — {row.get('Combo', '')}" for _, row in df.iterrows()]
-    picked = st.selectbox("Coin chunein", coin_options, key=f"{key_prefix}_pick")
-    picked_idx = coin_options.index(picked)
-    row = df.iloc[picked_idx]
-
-    tv_url = tradingview_url(row["Coin"])
-    st.markdown(f"[📈 {row['Coin']} ka TradingView chart kholein]({tv_url})")
-
-    entry_val = row.get("Entry")
-    stop_val = row.get("Trail Stop")
-    position_line = ""
-    if entry_val and stop_val and entry_val > stop_val:
-        risk_per_unit = entry_val - stop_val
-        risk_dollars = total_capital * (risk_pct_per_trade / 100)
-        position_size_units = risk_dollars / risk_per_unit
-        position_value = position_size_units * entry_val
-        st.info(
-            f"💰 **Position Size** (Capital ${total_capital:,.0f}, Risk {risk_pct_per_trade}%): "
-            f"**{position_size_units:.4f} {row['Coin'].split('/')[0]}** "
-            f"(~${position_value:,.2f}, agar SL laga to nuksan ~${risk_dollars:,.2f})"
-        )
-        position_line = f"Position Size: {position_size_units:.4f} {row['Coin'].split('/')[0]} (~${position_value:,.2f})\n"
-
-    setup_text = (
-        f"Coin: {row['Coin']}\n"
-        f"Combo: {row.get('Combo', '')}\n"
-        f"Signal Time: {row.get('Signal Time (PKT)', 'N/A')}\n"
-        f"Entry: {row.get('Entry', 'N/A')}\n"
-        f"Trail Stop: {row.get('Trail Stop', 'N/A')}\n"
-        f"Take Profit: {row.get('Take Profit', 'N/A')}\n"
-        f"{position_line}"
-    )
-    st.code(setup_text, language=None)
-
-
-# ============================================================
-# SECTION 1: LIVE (khud-b-khud, GitHub Actions se)
-# ============================================================
-st.header("🔴 LIVE — Auto-Updated (har scan ke 5 min baad agla)")
-col_a, col_b = st.columns(2)
-compact_live = col_a.checkbox("Compact View (sirf zaroori columns)", value=True, key="compact_live")
-pass_only_live = col_b.checkbox(
-    "✅ Sirf Pass (Strong/Good) Dikhayen", value=True, key="pass_only_live",
-    help="ON hone par sirf 🟢🟢🟢 Strong aur 🟢 Good verdict wale signals dikhenge. "
-         "🟡 Mixed aur 🔴 Weak (failure) signals screen se hat jayenge.",
-)
-
-if os.path.exists("dashboard_signals.json"):
-    with open("dashboard_signals.json") as f:
-        live_data = json.load(f)
-
-    last_updated = datetime.fromisoformat(live_data["last_updated_utc"])
-    age_minutes = (datetime.now(timezone.utc) - last_updated).total_seconds() / 60
-
-    col1, col2, col3 = st.columns(3)
-    col1.metric("Last Updated", f"{age_minutes:.0f} min pehle")
-    col2.metric("Coins Scanned", live_data["coins_scanned"])
-    col3.metric("Signals", len(live_data["signals"]))
-
-    if live_data.get("fear_greed_value") is not None:
-        st.markdown(f"### 📊 BTC Fear & Greed: **{live_data['fear_greed_value']}/100** ({live_data['fear_greed_label']})")
-
-    if age_minutes > 90:
-        st.warning("⚠️ Ye data 90 minute se purana hai — background scan delay ho sakta hai.")
-        if st.button("🔁 Live Scan Ko Abhi Chala Do", key="restart_scan_dashboard"):
-            ok, msg = trigger_github_workflow("scan_dashboard.yml")
-            if ok:
-                st.success("✅ GitHub ko command bhej di gayi hai — 1-2 minute mein naya scan shuru ho jayega (page thodi der baad refresh karein).")
-            else:
-                st.error(f"❌ Restart nakam raha: {msg}")
-
-    with st.expander("🛠️ Koi bhi self-loop system ruk jaye — yahan se manually dobara chalayen"):
-        st.caption(
-            "Agar 'Last Updated' bahut purana ho ja raha hai aur watchdog khud restart nahi kar saka "
-            "(misaal: GITHUB_TOKEN expire ho gaya ho, ya GitHub ki taraf se koi masla ho), to neeche "
-            "wale button se GitHub Actions mein jaye bina, seedha yahin se us workflow ko dobara chala sakte hain."
-        )
-        rc1, rc2, rc3, rc4 = st.columns(4)
-        for col, label, wf in [
-            (rc1, "🔴 Live Scan", "scan_dashboard.yml"),
-            (rc2, "🤖 Manual Bot", "manual_trade_bot.yml"),
-            (rc3, "🔎 Auto Bot", "auto_scan_trade_bot.yml"),
-            (rc4, "🐕 Watchdog", "watchdog.yml"),
-        ]:
-            if col.button(f"Chala Do — {label}", key=f"restart_{wf}"):
-                ok, msg = trigger_github_workflow(wf)
-                if ok:
-                    col.success("✅ Bhej diya!")
-                else:
-                    col.error(f"❌ {msg}")
-
-    with st.expander("🧪 Robustness Test workflows (lamba chalne wale, ek-dafa test) — yahan se chalayen"):
-        st.caption(
-            "GitHub mobile app mein 'workflow_dispatch'-only workflows ka 'Run workflow' button kabhi "
-            "kabhi nazar nahi aata (ye mobile app ki apni kami hai). Neeche button se seedha yahin se "
-            "chala sakte hain — result file (RESULTS.txt) 5 ghante tak mein commit ho jayegi, dobara "
-            "check kar lein."
-        )
-        tc1, tc2, tc3 = st.columns(3)
-        for col, label, wf in [
-            (tc1, "CE Buy-Only v2", "ce_v2_robustness_test.yml"),
-            (tc2, "Donchian+Pullback", "donchian_pullback_robustness_test.yml"),
-            (tc3, "Union AB", "union_ab_robustness_test.yml"),
-        ]:
-            if col.button(f"Test Chalayen — {label}", key=f"restart_{wf}"):
-                ok, msg = trigger_github_workflow(wf)
-                if ok:
-                    col.success("✅ Bhej diya! Kuch ghante mein result file aa jayegi.")
-                else:
-                    col.error(f"❌ {msg}")
-
-    if live_data["signals"]:
-        df_all = pd.DataFrame(live_data["signals"])
-
-        lp1, lp2 = st.columns([3, 1])
-        if lp2.button("🔄 Live Qeemat Taaza", key="refresh_live_prices"):
-            fetch_live_prices.clear()
-        df_all, live_ok = add_live_price_columns(df_all)
-        if live_ok:
-            lp1.caption(
-                f"💹 **Live Price** = abhi ki qeemat ({pd.Timestamp.now(tz='Asia/Karachi').strftime('%I:%M %p')} PKT tak, "
-                "har minute taaza) · **Live P/L %** = Entry se abhi tak ka farq · "
-                "**Current** = scan ke waqt ki qeemat (thori purani)."
-            )
+        # ---------- 1) Naye signals ----------
+        st.subheader("🟢 Naye Signals")
+        sig_df = pd.DataFrame(signals)
+        if len(sig_df):
+            sig_df["_t"] = pd.to_datetime(sig_df["signal_time_utc"], errors="coerce", utc=True)
+            hours = st.slider("Kitne ghante purane signals dikhayen", 4, 24 * 14, cfg["new_signal_hours"],
+                              key=f"hrs_{name}")
+            recent = sig_df[sig_df["_t"] >= pd.Timestamp.now(tz="UTC") - pd.Timedelta(hours=hours)]
+            recent = recent.sort_values("_t", ascending=False)
         else:
-            lp1.caption("⚠️ Live qeemat is waqt exchange se nahi mil saki — 'Current' scan ke waqt ki qeemat hai.")
-
-        present_systems = [
-            s for s in SYSTEM_ORDER
-            if "System" in df_all.columns and s in df_all["System"].unique()
-            and s not in HIDDEN_FROM_LIVE_SCREEN
-        ]
-        if present_systems:
-            selected_systems = st.multiselect(
-                "🗂️ Systems Dikhayen", present_systems, default=present_systems, key="system_filter_live",
-            )
+            recent = pd.DataFrame()
+        if len(recent) == 0:
+            st.info("Is waqt koi naya signal nahi. (Signals kam aate hain - kai din bhi lag sakte hain.)")
         else:
-            selected_systems = []
+            prices = fetch_live_prices(tuple(sorted(recent["symbol"].unique())))
+            show = pd.DataFrame({
+                "Coin": recent["symbol"],
+                "Signal Time (PKT)": recent["signal_time_utc"].map(pkt_str),
+                "Entry (approx)": recent["entry_est"].map(fmt_px),
+                "Live Price": recent["symbol"].map(lambda s: fmt_px(prices.get(s)) if prices.get(s) else "—"),
+                "Live P/L %": [round((prices[s] / e - 1) * 100, 2) if prices.get(s) else None
+                               for s, e in zip(recent["symbol"], recent["entry_est"])],
+                "SL": recent["sl"].map(fmt_px),
+                "TP": recent["tp"].map(lambda v: fmt_px(v) if v is not None and v == v else "Nahi (trailing)"),
+                "SL tak %": recent["risk_pct"],
+                "Size % (equity)": recent["size_pct"],
+                "Chart": recent["symbol"].map(lambda s: tradingview_url(s, interval)),
+            })
+            show_table(show, pl_cols=("Live P/L %",))
+            pick = st.selectbox("Coin chunein (chart / position size / setup copy)", list(recent["symbol"]),
+                                key=f"pick_sig_{name}")
+            row = recent[recent["symbol"] == pick].iloc[0]
+            st.link_button(f"📈 {pick} — TradingView par kholein", tradingview_url(pick, interval))
+            position_size_box(pick, row["entry_est"], row["sl"], f"ps_{name}")
+            tp_txt = fmt_px(row["tp"]) if row.get("tp") is not None and row["tp"] == row["tp"] else "Nahi (trailing stop)"
+            st.code(f"System: {name}\nCoin: {pick}\nSignal: {pkt_str(row['signal_time_utc'])}\n"
+                    f"Entry (approx): {fmt_px(row['entry_est'])}\nSL: {fmt_px(row['sl'])}\nTP: {tp_txt}", language=None)
 
-        st.caption(
-            "ℹ️ 'Pass (Strong/Good)' filter sirf un systems par lagu hota hai jinka Overall Score/Verdict "
-            "calculate hota hai (Union AB). Union AB Backup Tier hamesha dikhta hai (Verdict N/A) — ye "
-            "filter usay kabhi nahi chupata. "
-            "⚠️ CE Buy-Only aur NEW AdvancedConfluence filhal is screen se hataye gaye hain (koi mustaqil "
-            "edge sabit nahi hua) — background mein data collect hoti rehti hai, CE Buy-Only v2 test result "
-            "aane ke baad dobara dekha jayega."
-        )
+        # ---------- 2) Khuli paper trades ----------
+        st.subheader("🔵 Chal Rahi Trades (paper)")
+        positions = state.get("positions", {})
+        cash = float(state.get("cash", 0) or 0)
+        if not positions:
+            st.info("Abhi koi khuli trade nahi.")
+        else:
+            prices = fetch_live_prices(tuple(sorted(positions)))
+            rows = []
+            for sym, p in positions.items():
+                live = prices.get(sym)
+                ref = live if live else p.get("last_px")
+                rows.append({
+                    "Coin": sym,
+                    "Entry": fmt_px(p["entry"]),
+                    "Live Price": fmt_px(live) if live else "—",
+                    "Live P/L %": round((ref / p["entry"] - 1) * 100, 2) if ref else None,
+                    "Live P/L ($)": round(p["qty"] * ref - p["cost"], 2) if ref else None,
+                    "SL (abhi)": fmt_px(p["trail"]),
+                    "SL tak %": round((ref - p["trail"]) / ref * 100, 2) if ref else None,
+                    "TP": fmt_px(p["tp"]) if p.get("tp") else "Nahi (trailing)",
+                    "Entry waqt": pkt_str(p.get("entry_bar") or p.get("entry_day")),
+                    "Halat": ("⚠️ SL se neeche — agle run mein band" if ref and ref <= p["trail"]
+                              else ("🟢 Nafa" if ref and ref >= p["entry"] else "🔴 Nuqsan")),
+                    "Chart": tradingview_url(sym, interval),
+                })
+            df_open = pd.DataFrame(rows)
+            show_table(df_open, pl_cols=("Live P/L %", "Live P/L ($)"))
+            open_val = sum(p["qty"] * (prices.get(s) or p.get("last_px", p["entry"])) for s, p in positions.items())
+            st.caption(f"💹 Live Equity: **${cash + open_val:,.2f}** · Cash ${cash:,.2f} · "
+                       f"{len(positions)}/10 slots bhare hue · fees shamil nahi")
 
-        any_shown = False
-        for system_name in SYSTEM_ORDER:
-            if "System" not in df_all.columns or system_name not in selected_systems:
-                continue
-            df_sys = df_all[df_all["System"] == system_name]
-            if len(df_sys) == 0:
-                continue
+        # ---------- 3) Performance ----------
+        st.subheader("📊 Performance — Band Trades")
+        hist = pd.DataFrame(state.get("history", []))
+        start_eq = 1000.0
+        if len(trades) == 0:
+            st.info("Abhi tak koi trade band nahi hui - pehli trade band hone par yahan record banna shuru hoga.")
+        else:
+            r = pd.to_numeric(trades["ret_pct"], errors="coerce").dropna()
+            wins, losses = r[r > 0], r[r <= 0]
+            pf = wins.sum() / abs(losses.sum()) if len(losses) and losses.sum() != 0 else None
+            c1, c2, c3, c4, c5 = st.columns(5)
+            c1.metric("Band trades", len(r))
+            c2.metric("Jeet / Haar", f"{len(wins)} / {len(losses)}")
+            c3.metric("Win Rate", f"{len(wins)/len(r)*100:.1f}%")
+            c4.metric("Profit Factor", f"{pf:.2f}" if pf else "N/A")
+            c5.metric("Kul nafa ($)", f"{pd.to_numeric(trades['pnl_usd'], errors='coerce').sum():+,.2f}")
+            bt = cfg["backtest"]
+            st.info(f"**Backtest:** Win {bt['win']}%, PF {bt['pf']}, CAGR +{bt['cagr']}%, MaxDD {bt['dd']}% — {bt['note']}  \n"
+                    f"**Live (paper):** Win {len(wins)/len(r)*100:.1f}%, PF {pf:.2f}" if pf else
+                    f"**Backtest:** Win {bt['win']}%, PF {bt['pf']} — {bt['note']}")
+            tshow = trades.copy()
+            tshow["Entry waqt"] = tshow[cfg["entry_col"]].map(pkt_str)
+            tshow["Exit waqt"] = tshow[cfg["exit_col"]].map(pkt_str)
+            tshow["Chart"] = tshow["symbol"].map(lambda s: tradingview_url(s, interval))
+            cols = ["symbol", "Entry waqt", "Exit waqt"] + [c for c in ("exit_reason",) if c in tshow.columns] + \
+                   ["entry", "exit", "ret_pct", "pnl_usd", "Chart"]
+            with st.expander(f"📜 Saari band trades ({len(tshow)})"):
+                show_table(tshow[cols].iloc[::-1], pl_cols=("ret_pct", "pnl_usd"))
+                st.download_button("📥 CSV download", trades.to_csv(index=False).encode(), cfg["trades"],
+                                   "text/csv", key=f"dl_{name}")
+            t2 = trades[[cfg["entry_col"], "ret_pct"]].rename(columns={cfg["entry_col"]: "entry_utc"})
+            t2["System"] = name
+            all_closed.append(t2)
+        if len(hist) > 1:
+            eq = hist.set_index(hist.columns[0])["equity"]
+            dd = (eq / eq.cummax() - 1).min() * 100
+            st.caption(f"📈 Paper equity curve (shuru ${start_eq:,.0f}) — ab ${eq.iloc[-1]:,.2f} "
+                       f"({(eq.iloc[-1]/start_eq-1)*100:+.1f}%), Max Drawdown {dd:.1f}%")
+            st.line_chart(eq, height=220)
 
-            st.markdown(f"#### {SYSTEM_BADGE.get(system_name, system_name)}")
-            st.caption(SYSTEM_CAPTION.get(system_name, ""))
-
-            df_sys_show = df_sys
-            if pass_only_live and "Verdict" in df_sys_show.columns:
-                verdict_str = df_sys_show["Verdict"].astype(str)
-                is_na = verdict_str == "N/A"
-                is_pass = verdict_str.str.contains("Strong|Good", na=False)
-                total_count = len(df_sys_show)
-                df_sys_show = df_sys_show[is_na | is_pass]
-                hidden_count = total_count - len(df_sys_show)
-                if hidden_count > 0:
-                    st.caption(f"🔴🟡 {hidden_count} kamzor (Mixed/Weak) signal chupaye gaye.")
-
-            if len(df_sys_show) == 0:
-                st.info("Is waqt is system ka koi signal nahi (filter ke baad).")
-                st.markdown("---")
-                continue
-
-            key_slug = system_name.replace(" ", "_")
-
-            if "Category" in df_sys_show.columns:
-                new_df = df_sys_show[df_sys_show["Category"] == "New Signal"]
-                open_df = df_sys_show[df_sys_show["Category"] == "Open Trade"]
-            else:
-                new_df, open_df = df_sys_show, pd.DataFrame()
-
-            if len(new_df) > 0:
-                st.markdown(f"**🟢 Naye Signals ({len(new_df)})**")
-                sel_new = style_and_show(new_df, compact_live, select_key=f"sel_{key_slug}_new")
-                send_selected_to_manual_bot(new_df, sel_new, f"mb_{key_slug}_new")
-                show_charts_and_copy(new_df, f"live_{key_slug}_new")
-                any_shown = True
-
-            if len(open_df) > 0:
-                st.markdown(f"**🔵 Chal Rahi Trades — Open ({len(open_df)})**")
-                sel_open = style_and_show(open_df, compact_live, select_key=f"sel_{key_slug}_open")
-                send_selected_to_manual_bot(open_df, sel_open, f"mb_{key_slug}_open")
-                show_charts_and_copy(open_df, f"live_{key_slug}_open")
-                any_shown = True
-
-            st.markdown("---")
-
-        if not any_shown:
-            st.info("Is waqt koi signal nahi (selected systems/filter ke mutabiq).")
-    else:
-        st.info("Is waqt koi fresh signal nahi (last scan mein).")
-else:
-    st.info(
-        "Live scan abhi setup nahi hua ya pehli baar chalne ka wait ho raha hai. "
-        "GitHub repo mein '.github/workflows/scan_dashboard.yml' hona chahiye — "
-        "thodi der mein pehla result aa jayega (har scan khatam hone ke 5 minute baad agla shuru hota hai)."
-    )
-
-st.markdown("---")
-st.header("📊 System Performance — Closed Trades (Har System Alag Alag)")
-st.caption(
-    "Jab bhi koi signal SL ya trailing-stop/TP par CLOSE hota hai, wo yahan permanently "
-    "record ho jata hai (koi live signal is se nahi hatai jaati) — taake waqt ke sath pata "
-    "chal sake konsa system asal mein behtar (high Win Rate/PF) hai aur konsa kamzor."
-)
-if os.path.exists("closed_trades_log.csv"):
-    df_closed = pd.read_csv("closed_trades_log.csv")
-    if len(df_closed) > 0 and "System" in df_closed.columns:
-        for system_name in SYSTEM_ORDER:
-            df_sys_closed = df_closed[df_closed["System"] == system_name]
-            st.markdown(f"**{SYSTEM_BADGE.get(system_name, system_name)}**")
-            if len(df_sys_closed) == 0:
-                st.caption("Abhi tak is system ki koi closed trade record nahi hui.")
-                continue
-
-            total = len(df_sys_closed)
-            wins = df_sys_closed[df_sys_closed["P/L %"] > 0]
-            losses = df_sys_closed[df_sys_closed["P/L %"] <= 0]
-            win_rate = len(wins) / total * 100
-            gross_win = wins["P/L %"].sum()
-            gross_loss = abs(losses["P/L %"].sum())
-            pf = (gross_win / gross_loss) if gross_loss > 0 else None
-
-            c1, c2, c3, c4 = st.columns(4)
-            c1.metric("Total Closed", total)
-            c2.metric("Wins / Losses", f"{len(wins)} / {len(losses)}")
-            c3.metric("Win Rate", f"{win_rate:.1f}%")
-            c4.metric("Profit Factor", f"{pf:.2f}" if pf is not None else "N/A (abhi koi loss nahi)")
-
-        st.markdown("---")
-        show_closed = st.checkbox("Poora Closed-Trades Log Dikhayein", value=False, key="show_closed_log")
-        if show_closed:
-            system_filter_closed = st.multiselect(
-                "System(s)", SYSTEM_ORDER, default=SYSTEM_ORDER, key="closed_log_system_filter",
-            )
-            df_closed_show = df_closed[df_closed["System"].isin(system_filter_closed)]
-            st.dataframe(df_closed_show.sort_values("Logged At (UTC)", ascending=False), use_container_width=True, hide_index=True)
-
-        closed_csv = df_closed.to_csv(index=False).encode("utf-8")
-        st.download_button("📥 Closed Trades CSV Download Karein", closed_csv, "closed_trades_log.csv", "text/csv", key="dl_closed_trades")
-    else:
-        st.info("Abhi tak koi closed trade record nahi.")
-else:
-    st.info(
-        "Abhi tak koi closed trade record nahi — pehli baar koi signal SL/trailing-stop par "
-        "band hone ke baad (background scan ke agle cycle mein) yahan record banna shuru hoga."
-    )
-
-st.markdown("---")
-st.header("📈 Performance Report — Drawdown, Expectancy, Equity Curve, Backtest vs Live")
-st.caption(
-    "Har system ki closed trades se Expectancy, Max Drawdown aur Equity Curve nikalte "
-    "hain, aur jahan available ho wahan audit-shuda backtest numbers se moazna karte "
-    "hain - taake pata chale konsa system waqai apne backtest jaisa perform kar raha hai."
-)
-
-# NOTE: Ye numbers audit_all_systems.py se hain (order-fix ke baad, production filters).
-# Ye "exit-fill" (gap) fix se PEHLE ke hain - trailing-only lambi trades par asar chhota
-# hona chahiye, lekin nateeja audit dobara chalane par yahan update karna hai.
-# CE Buy-Only ka koi bharosemand backtest number abhi nahi (fill bug ki wajah se).
-BACKTEST_REFERENCE = {
-    "Union AB": {"win_rate": 45.4, "pf": 1.754, "note": "Audit (order-fix ke baad, 194 trades; Top-10 nikal kar PF 1.21)"},
-    "Union AB Backup Tier": {"win_rate": 40.4, "pf": 1.422, "note": "Audit (order-fix ke baad, 500 trades; Top-10 nikal kar PF 1.14)"},
-    "CE Buy-Only": {"win_rate": None, "pf": None, "note": "Purana nateeja (Win58%/PF5.3) exit-fill bug ki wajah se ghalat; dobara audit baaqi"},
-    "Pullback-in-Uptrend": {"win_rate": 40.0, "pf": 1.929, "note": "Audit (order-fix ke baad, 862 trades; Top-10 nikal kar PF 1.45)"},
-    "Donchian Breakout": {"win_rate": 44.3, "pf": 2.909, "note": "Audit (order-fix ke baad, 648 trades; Top-10 nikal kar PF 1.73)"},
-    "NEW AdvancedConfluence": {"win_rate": 40.3, "pf": 1.304, "note": "Audit (order-fix ke baad, 404 trades; Top-10 nikal kar PF 1.04)"},
-}
-
-if os.path.exists("closed_trades_log.csv"):
-    df_closed_all = pd.read_csv("closed_trades_log.csv")
-    if len(df_closed_all) > 0 and "System" in df_closed_all.columns:
-        for system_name in SYSTEM_ORDER:
-            df_sys = df_closed_all[df_closed_all["System"] == system_name].copy()
-            st.markdown(f"**{SYSTEM_BADGE.get(system_name, system_name)}**")
-            if len(df_sys) < 2:
-                st.caption("Itni closed trades nahi (kam az kam 2 chahiye) - abhi report nahi ban sakti.")
-                st.markdown("---")
-                continue
-
-            if "Signal Time (PKT)" in df_sys.columns:
-                df_sys["_t"] = _pkt_to_dt(df_sys["Signal Time (PKT)"])
-            else:
-                df_sys["_t"] = pd.to_datetime(df_sys["Logged At (UTC)"], errors="coerce")
-            df_sys = df_sys.sort_values("_t")
-
-            pnl = pd.to_numeric(df_sys["P/L %"], errors="coerce").dropna()
-            if len(pnl) < 2:
-                st.caption("P/L % data saaf nahi - report nahi ban sakti.")
-                st.markdown("---")
-                continue
-
-            equity_curve = pnl.cumsum()
-            running_max = equity_curve.cummax()
-            drawdown = equity_curve - running_max
-            max_dd = drawdown.min()
-            expectancy = pnl.mean()
-
-            c1, c2, c3 = st.columns(3)
-            c1.metric("Expectancy (avg P/L / trade)", f"{expectancy:+.2f}%")
-            c2.metric("Max Drawdown (cumulative %)", f"{max_dd:.2f}%")
-            c3.metric("Total Closed Trades", len(pnl))
-
-            st.line_chart(equity_curve.reset_index(drop=True), height=200)
-            st.caption("📊 Equity Curve: har trade ke P/L% ka cumulative jama (fixed-size farz kar ke, compounding nahi).")
-
-            wins = pnl[pnl > 0]
-            losses = pnl[pnl <= 0]
-            live_wr = len(wins) / len(pnl) * 100
-            live_pf = (wins.sum() / abs(losses.sum())) if len(losses) and losses.sum() != 0 else None
-            live_pf_s = f"{live_pf:.2f}" if live_pf is not None else "N/A"
-
-            ref = BACKTEST_REFERENCE.get(system_name)
-            if ref:
-                bt_wr = f"{ref['win_rate']:.1f}%" if ref["win_rate"] is not None else "N/A"
-                bt_pf = f"{ref['pf']:.2f}" if ref["pf"] is not None else "N/A"
-                st.info(
-                    f"**Backtest** (Win {bt_wr}, PF {bt_pf} — {ref['note']}) vs "
-                    f"**Live** (Win {live_wr:.1f}%, PF {live_pf_s})"
-                )
-            else:
-                st.caption(f"Live: Win {live_wr:.1f}%, PF {live_pf_s} (is system ka audit-shuda backtest reference abhi nahi hai)")
-
-            st.markdown("---")
-    else:
-        st.info("Abhi tak koi closed trade record nahi.")
-else:
-    st.info("Abhi tak koi closed trade record nahi - performance report ke liye pehle kuch trades band honi chahiye.")
-
+# ------------------------------------------------------------
+# Session analysis (PKT)
+# ------------------------------------------------------------
 st.markdown("---")
 st.header("🕐 Trading Session Analysis (Pakistan Time — PKT)")
-st.caption(
-    "Har closed trade ka ENTRY waqt dekh kar us waqt kaunsa major market session "
-    "'khula' tha — sab kuch **Pakistan Time (PKT)** mein, koi UTC confusion nahi — "
-    "taake pata chale kis session mein li gayi trades zyada TP/Win par band hoti hain "
-    "aur kis mein zyada SL/Loss par."
-)
+st.caption("Har band trade ka ENTRY waqt dekh kar us waqt kaunsa market session khula tha — sab kuch PKT mein. "
+           "Note: Donchian Daily ki entry hamesha subah ~5 AM PKT (daily candle ke baad) hoti hai.")
 
 
 def classify_session(hour_pkt):
-    """Sab boundaries Pakistan Time (PKT) mein - UTC se koi lena dena nahi."""
     if 5 <= hour_pkt < 12:
         return "🌏 Asian (05:00 AM–12:00 PM PKT)"
     elif 12 <= hour_pkt < 17:
@@ -851,584 +424,37 @@ def classify_session(hour_pkt):
         return "🌙 Late NY / Off-Hours (02:00 AM–05:00 AM PKT)"
 
 
-def parse_pkt_hour(pkt_str):
-    """'2026-09-24 05:00 PM PKT' jaisi string se PKT hour (0-23) nikalta hai - koi conversion nahi."""
-    try:
-        clean = str(pkt_str).replace(" PKT", "").strip()
-        dt = datetime.strptime(clean, "%Y-%m-%d %I:%M %p")
-        return dt.hour
-    except Exception:
-        return None
-
-
-session_sources = []
-if os.path.exists("closed_trades_log.csv"):
-    _df = pd.read_csv("closed_trades_log.csv")
-    if len(_df) > 0 and "Signal Time (PKT)" in _df.columns:
-        _df = _df.rename(columns={"Signal Time (PKT)": "entry_time_pkt"})
-        # Win = nafa par band (P/L % > 0). Pehle sirf "TARGET" ko win gina jata tha - is se CE/Pullback/
-        # Donchian (jin mein TP hota hi nahi, trailing stop par nafa mein band hoti hain) ki jeet bhi
-        # ghalti se LOSS gini jati thi.
-        if "P/L %" in _df.columns:
-            _df["is_win"] = pd.to_numeric(_df["P/L %"], errors="coerce") > 0
-        else:
-            _df["is_win"] = _df["Exit Reason"] == "TARGET"
-        session_sources.append(("Live Screener (sab systems)", _df[["entry_time_pkt", "is_win"]]))
-if os.path.exists("manual_bot_closed_trades.csv"):
-    _df = pd.read_csv("manual_bot_closed_trades.csv")
-    if len(_df) > 0:
-        _df["is_win"] = _df["result"] == "WIN"
-        session_sources.append(("Manual Trade Bot", _df[["entry_time_pkt", "is_win"]]))
-if os.path.exists("auto_bot_closed_trades.csv"):
-    _df = pd.read_csv("auto_bot_closed_trades.csv")
-    if len(_df) > 0:
-        _df["is_win"] = _df["result"] == "WIN"
-        session_sources.append(("Auto-Scan Bot", _df[["entry_time_pkt", "is_win"]]))
-
-if len(session_sources) == 0:
-    st.info("Abhi tak koi closed trade record nahi mila — session analysis ke liye pehle kuch trades band honi chahiye.")
-else:
-    source_names = [s[0] for s in session_sources]
-    picked = st.multiselect("Kaunse record(s) shamil karein", source_names, default=source_names, key="session_source_pick")
-    combined = pd.concat([df for name, df in session_sources if name in picked], ignore_index=True) if picked else pd.DataFrame()
-
-    if len(combined) == 0:
-        st.caption("Koi record select nahi kiya gaya.")
-    else:
-        combined["pkt_hour"] = combined["entry_time_pkt"].apply(parse_pkt_hour)
-        combined = combined.dropna(subset=["pkt_hour"])
-        combined["session"] = combined["pkt_hour"].apply(classify_session)
-
-        session_order = [
-            "🌏 Asian (05:00 AM–12:00 PM PKT)", "🇬🇧 London (12:00 PM–05:00 PM PKT)",
-            "🇬🇧+🇺🇸 London+NY Overlap (05:00 PM–09:00 PM PKT)", "🇺🇸 New York (09:00 PM–02:00 AM PKT)",
-            "🌙 Late NY / Off-Hours (02:00 AM–05:00 AM PKT)",
-        ]
-        rows = []
-        for sess in session_order:
-            sub = combined[combined["session"] == sess]
-            if len(sub) == 0:
-                continue
-            wins = int(sub["is_win"].sum())
-            total = len(sub)
-            rows.append({
-                "Session": sess, "Total Trades": total, "TP/Win": wins, "SL/Loss": total - wins,
-                "Win Rate %": round(wins / total * 100, 1),
-            })
-
-        if rows:
-            st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
-            best = max(rows, key=lambda r: r["Win Rate %"])
-            worst = min(rows, key=lambda r: r["Win Rate %"])
-            st.caption(
-                f"✅ Sab se behtar: **{best['Session']}** ({best['Win Rate %']}% Win Rate, {best['Total Trades']} trades) — "
-                f"⚠️ Sab se kamzor: **{worst['Session']}** ({worst['Win Rate %']}% Win Rate, {worst['Total Trades']} trades). "
-                f"Note: chhota sample (~10-15 se kam trades) size wale sessions ka number abhi bharosemand nahi."
-            )
-        else:
-            st.caption("Session classify nahi ho saka.")
-
-st.markdown("---")
-# ============================================================
-# SECTION 2: MANUAL (on-demand, apni marzi ke toggles ke sath)
-# ============================================================
-st.header("🔍 Manual Scan (apni marzi ke toggles)")
-
-st.sidebar.header("Manual Scan Settings")
-show_funding = st.sidebar.checkbox("Funding Rate", value=True)
-show_oi = st.sidebar.checkbox("Open Interest", value=True)
-show_liquidity = st.sidebar.checkbox("Liquidity Up/Down", value=True)
-show_orderbook_ratio = st.sidebar.checkbox("Order Book Ratio", value=True)
-show_24h_range = st.sidebar.checkbox("24h Range", value=True)
-show_history = st.sidebar.checkbox("Coin's Own Performance", value=True)
-show_btc_corr = st.sidebar.checkbox("BTC Correlation", value=False)
-show_long_short = st.sidebar.checkbox("Long/Short Ratio", value=False)
-show_whale = st.sidebar.checkbox("Whale Transfers", value=False)
-etherscan_key = st.sidebar.text_input("Etherscan API Key", type="password") if show_whale else ""
-
-st.sidebar.markdown("---")
-st.sidebar.subheader("Volume - Har Timeframe")
-vol_tf_toggles = {tf: st.sidebar.checkbox(f"Vol {tf}", value=True, key=f"v{tf}") for tf in ALL_TIMEFRAMES}
-st.sidebar.subheader("Price Change - Har Timeframe")
-chg_tf_toggles = {tf: st.sidebar.checkbox(f"Chg {tf}", value=True, key=f"c{tf}") for tf in ALL_TIMEFRAMES}
-
-st.sidebar.markdown("---")
-coin_source = st.sidebar.radio("Coin Kaise Chunein", ["Auto Scan", "Manual Paste"])
-if coin_source.startswith("Manual"):
-    manual_coins_text = st.sidebar.text_area("Coins (comma-separated)", height=80)
-else:
-    n_coins = st.sidebar.slider("Kitne coins", 10, 400, 20)
-signal_timeframe = st.sidebar.selectbox("Signal Timeframe", ["15m", "1h", "4h"], index=1)
-
-compact_manual = st.checkbox("Compact View (sirf zaroori columns)", value=True, key="compact_manual")
-
-if st.button("🎨 Manual Scan Chalayen", type="primary"):
-    exchange = get_exchange()
-    futures_exchange = get_futures_exchange() if (show_funding or show_oi or show_long_short) else None
-
-    with st.spinner("ETH Regime check kar rahe hain..."):
-        try:
-            eth_daily = fetch_ohlcv(exchange, "ETH/USDT", "1d", limit=800)
-            eth_ema200 = eth_daily["close"].ewm(span=200, adjust=False).mean()
-            eth_regime_ok = bool(eth_daily["close"].iloc[-1] > eth_ema200.iloc[-1])
-        except Exception as e:
-            st.warning(f"⚠️ ETH Regime check nahi ho saka ({e}) — is dafa BINA filter ke scan chalega.")
-            eth_regime_ok = True
-    if eth_regime_ok:
-        st.success("✅ ETH Regime: BULLISH (signals ON)")
-    else:
-        st.warning("⚠️ ETH Regime: BEARISH — koi naya signal nahi milega (ETH apni EMA200 se neeche hai)")
-
-    if coin_source.startswith("Manual"):
-        coins = [c.strip() for c in manual_coins_text.split(",") if c.strip()]
-        if not coins:
-            st.error("Koi coin nahi likha gaya.")
-            st.stop()
-    else:
-        try:
-            with st.spinner("Coin list le rahe hain..."):
-                coins = get_coin_list(exchange)[:n_coins]
-        except Exception as e:
-            st.error(f"Exchange se connect nahi ho paya: {e}")
-            st.stop()
-
-    signal_coins = []
-    progress = st.progress(0.0, text="Signals dhoond rahe hain...")
-    for i, symbol in enumerate(coins):
-        try:
-            df = fetch_ohlcv(exchange, symbol, signal_timeframe, limit=max(config.CANDLE_LIMITS.get(signal_timeframe, 500), 300))
-        except Exception:
-            df = None
-        if df is not None and len(df) >= 220:
-            try:
-                ichi_sig = apply_cooldown(STRATEGY_FUNCTIONS["ichimoku"](df, config.STRATEGY_PARAMS["ichimoku"]), config.SIGNAL_COOLDOWN_BARS)
-                ms_sig = apply_cooldown(STRATEGY_FUNCTIONS["market_structure"](df, config.STRATEGY_PARAMS["market_structure"]), config.SIGNAL_COOLDOWN_BARS)
-                ema_sig = apply_cooldown(STRATEGY_FUNCTIONS["ema_crossover"](df, config.STRATEGY_PARAMS["ema_crossover"]), config.SIGNAL_COOLDOWN_BARS)
-                breakout_sig = apply_cooldown(STRATEGY_FUNCTIONS["breakout"](df, config.STRATEGY_PARAMS["breakout"]), config.SIGNAL_COOLDOWN_BARS)
-                combo_a = (ichi_sig & ms_sig) & eth_regime_ok
-                combo_b = (ema_sig & breakout_sig) & eth_regime_ok
-
-                for combo_sig, combo_name, ce in [(combo_a, "Ichimoku+MS", CE_A), (combo_b, "EMA+Breakout", CE_B)]:
-                    if combo_sig.tail(3).any():
-                        idx = combo_sig.tail(3)[combo_sig.tail(3)].index[-1]
-                        atr = compute_atr(df, ce["period"])
-                        highest_high = df["high"].rolling(ce["period"]).max()
-                        chandelier = (highest_high - ce["multiplier"] * atr).loc[idx]
-                        entry_price = df.loc[idx, "close"]
-                        current_price = df["close"].iloc[-1]
-                        risk = entry_price - chandelier
-                        tp_price = entry_price + risk * RR_MULTIPLE
-                        signal_coins.append({
-                            "Coin": symbol, "Combo": combo_name, "Bars Ago": len(df) - 1 - idx,
-                            "Signal Time (PKT)": to_pkt_str(df.loc[idx, "timestamp"]),
-                            "Entry": round(entry_price, 6), "Current": round(current_price, 6),
-                            "Trail Stop": round(chandelier, 6), "Take Profit": round(tp_price, 6),
-                            "_df": df, "_sig": combo_sig, "_ce": ce,
-                        })
-            except Exception:
-                pass
-        progress.progress((i + 1) / len(coins), text=f"Signals... {i+1}/{len(coins)}")
-    progress.empty()
-
-    if not signal_coins:
-        st.info("Is waqt koi fresh signal nahi mila.")
-        st.stop()
-
-    st.success(f"✅ {len(signal_coins)} signals mile — context le rahe hain...")
-
-    active_vol_tfs = [tf for tf, on in vol_tf_toggles.items() if on]
-    active_chg_tfs = [tf for tf, on in chg_tf_toggles.items() if on]
-
-    final_rows = []
-    progress2 = st.progress(0.0, text="Context le rahe hain...")
-    for i, row in enumerate(signal_coins):
-        symbol = row["Coin"]
-        final_row = {k: v for k, v in row.items() if not k.startswith("_")}
-
-        if show_funding or show_oi:
-            funding, oi = get_funding_and_oi(futures_exchange, symbol)
-            if show_funding:
-                final_row["Funding Rate"] = f"{funding*100:.3f}%" if funding is not None else "N/A"
-            if show_oi:
-                final_row["Open Interest"] = f"${oi:,.0f}" if oi is not None else "N/A"
-
-        if show_long_short:
-            ls = get_long_short_ratio(futures_exchange, symbol)
-            final_row["Long/Short Ratio"] = f"{ls:.2f}" if ls is not None else "N/A"
-
-        if show_liquidity or show_orderbook_ratio:
-            bid_liq, ask_liq, ob_ratio = get_orderbook_info(exchange, symbol)
-            if show_liquidity:
-                final_row["Liquidity Up ($)"] = f"${ask_liq:,.0f}" if ask_liq is not None else "N/A"
-                final_row["Liquidity Down ($)"] = f"${bid_liq:,.0f}" if bid_liq is not None else "N/A"
-                final_row["Liquidity Compare"] = ("Support > Resistance" if bid_liq > ask_liq else "Resistance > Support") if (bid_liq is not None and ask_liq is not None) else "N/A"
-            if show_orderbook_ratio:
-                final_row["OrderBook Bid/Ask"] = f"{ob_ratio:.2f}x" if ob_ratio is not None else "N/A"
-
-        for tf in active_vol_tfs:
-            vol_ratio, _ = get_tf_volume_change(exchange, symbol, tf)
-            final_row[f"Vol {tf}"] = f"{vol_ratio:.2f}x" if vol_ratio is not None else "N/A"
-        for tf in active_chg_tfs:
-            _, chg = get_tf_volume_change(exchange, symbol, tf)
-            final_row[f"Chg {tf}"] = f"{chg:+.2f}%" if chg is not None else "N/A"
-
-        if show_24h_range:
-            dist_high, dist_low = get_24h_range_distance(exchange, symbol)
-            final_row["Dist from 24h High"] = f"{dist_high}%" if dist_high is not None else "N/A"
-            final_row["Dist from 24h Low"] = f"{dist_low}%" if dist_low is not None else "N/A"
-
-        if show_history:
-            win_rate, pf = get_historical_performance(row["_df"], row["_sig"], row["_ce"])
-            final_row["Coin's Own Win%"] = f"{win_rate}%" if win_rate is not None else "N/A"
-            final_row["Coin's Own PF"] = f"{pf}" if pf is not None else "N/A"
-
-        if show_btc_corr:
-            corr = get_btc_correlation(exchange, symbol, signal_timeframe)
-            final_row["BTC Correlation"] = f"{corr}" if corr is not None else "N/A"
-
-        if show_whale:
-            final_row["Whale Activity"] = get_whale_activity(symbol, etherscan_key)
-
-        score, verdict = compute_overall_score(final_row, COLORABLE_COLUMNS)
-        final_row["Overall Score %"] = score
-        final_row["Verdict"] = verdict
-
-        final_rows.append(final_row)
-        progress2.progress((i + 1) / len(signal_coins), text=f"Context... {i+1}/{len(signal_coins)}")
-    progress2.empty()
-
-    final_rows.sort(key=lambda r: r["Overall Score %"], reverse=True)
-    for i, r in enumerate(final_rows):
-        r["Rank"] = i + 1
-    final_rows = [{"Rank": r.pop("Rank"), **r} for r in final_rows]
-
-    df_final = pd.DataFrame(final_rows)
-    style_and_show(df_final, compact_manual)
-    show_charts_and_copy(df_final, "manual")
-
-    csv = df_final.to_csv(index=False).encode("utf-8")
-    st.download_button("📥 CSV Download Karein", csv, "manual_dashboard.csv", "text/csv")
-
-st.caption(
-    "🟢 Green = signal ke HAQ mein. 🔴 Red = KHILAF. Rank 1 = sab se zyada "
-    "'Overall Score' wala (best) trade. Compact View se sirf zaroori columns dikhte hain."
-)
-
-st.markdown("---")
-st.header("📔 Trade Journal (Khud-kaar Record)")
-if os.path.exists("trade_journal.csv"):
-    df_journal = pd.read_csv("trade_journal.csv")
-    col1, col2, col3 = st.columns(3)
-    col1.metric("Total Signals Logged", len(df_journal))
-    if "Verdict" in df_journal.columns:
-        strong_count = df_journal["Verdict"].astype(str).str.contains("Strong", na=False).sum()
-        col2.metric("Strong Signals", strong_count)
-        col3.metric("Normal Signals", len(df_journal) - strong_count)
-
-    show_journal = st.checkbox("Poora Journal Dikhayein", value=False)
-    if show_journal:
-        st.dataframe(df_journal.sort_values("Logged At (UTC)", ascending=False), use_container_width=True, hide_index=True)
-
-    journal_csv = df_journal.to_csv(index=False).encode("utf-8")
-    st.download_button("📥 Journal CSV Download Karein", journal_csv, "trade_journal.csv", "text/csv")
-else:
-    st.info("Abhi tak koi journal entry nahi — pehla background scan chalne ke baad yahan record nazar aayega.")
-
-st.markdown("---")
-st.header("🤖 Manual Trade Bot (Coin Aap Daalein)")
-st.caption(
-    "Yeh koi auto-scan nahi karta — SIRF unhi coins par kaam karta hai jo aap khud "
-    "'manual_watchlist.json' (GitHub par) mein daalein — chahe wo CE Buy-Only, Union AB, "
-    "NEW AdvancedConfluence, Pullback-in-Uptrend ya Donchian Breakout, jis bhi system ka signal ho. "
-    "Feed karne ke agle run (max 5 min) mein bot us coin par virtual trade le leta hai, us SYSTEM ke "
-    "apne tasdeeq-shuda SL/TP rules ke sath (default $100, watchlist mein amount badal sakte hain). "
-    "Asal paisa is mein bilkul risk mein nahi hai (paper/virtual)."
-)
-st.info(
-    "💡 **Aasan tareeqa:** Upar LIVE table mein kisi coin ki line par tap karein aur "
-    "'🤖 Manual Bot mein bhejein' dabayein — coin khud apne system/combo ke khane mein aa jayega."
-)
-
-MANUAL_SYSTEM_BOXES = [
-    ("CE Buy-Only", "CE Buy-Only", None),
-    ("NEW AdvancedConfluence", "NEW AdvancedConfluence", None),
-    ("Union AB — Ichimoku+MS", "Union AB", "Ichimoku+MS"),
-    ("Union AB — EMA+Breakout", "Union AB", "EMA+Breakout"),
-    ("Union AB Backup Tier — Ichimoku+MS", "Union AB Backup Tier", "Ichimoku+MS"),
-    ("Union AB Backup Tier — EMA+Breakout", "Union AB Backup Tier", "EMA+Breakout"),
-    ("Pullback-in-Uptrend", "Pullback-in-Uptrend", None),
-    ("Donchian Breakout", "Donchian Breakout", None),
+SESSION_ORDER = [
+    "🌏 Asian (05:00 AM–12:00 PM PKT)", "🇬🇧 London (12:00 PM–05:00 PM PKT)",
+    "🇬🇧+🇺🇸 London+NY Overlap (05:00 PM–09:00 PM PKT)", "🇺🇸 New York (09:00 PM–02:00 AM PKT)",
+    "🌙 Late NY / Off-Hours (02:00 AM–05:00 AM PKT)",
 ]
 
-with st.expander("➕ Coin Yahan Daalein (Har System Ka Alag Khana)", expanded=False):
-    st.caption(
-        "Jis system ka signal mila hai usi khane mein coin ka naam likhein (ek line mein ek coin, "
-        "jaise BTC/USDT). Custom amount dena ho to ':' laga kar likhein — jaise BTC/USDT:200 "
-        "(warna default $100 lagega). 'Save Watchlist' dabate hi yeh seedha manual_watchlist.json "
-        "mein chali jayengi — koi JSON likhne ki zaroorat nahi."
-    )
-    with st.form("manual_watchlist_form"):
-        box_values = {}
-        for label, system_name, combo_name in MANUAL_SYSTEM_BOXES:
-            box_values[label] = st.text_area(label, value="", height=70, key=f"wl_box_{label}")
-        submitted = st.form_submit_button("💾 Save Watchlist")
-
-    if submitted:
-        new_entries = []
-        for label, system_name, combo_name in MANUAL_SYSTEM_BOXES:
-            raw_text = box_values[label]
-            for line in raw_text.splitlines():
-                line = line.strip()
-                if not line:
-                    continue
-                amount = None
-                if ":" in line:
-                    sym_part, amt_part = line.rsplit(":", 1)
-                    sym_part = sym_part.strip()
-                    try:
-                        amount = float(amt_part.strip())
-                    except ValueError:
-                        sym_part = line
-                        amount = None
-                else:
-                    sym_part = line
-                symbol = _norm_symbol(sym_part)
-                # Sirf asal coin naam (harf/number) - ghalti se paste hue emoji/nishan rad
-                if not symbol or not symbol.replace("/", "").isalnum() or not symbol.isascii():
-                    st.warning(f"⚠️ '{line}' coin ka sahi naam nahi lagta — chhor diya gaya.")
-                    continue
-                entry = {"symbol": symbol, "amount": amount, "system": system_name, "combo": combo_name}
-                new_entries.append(entry)
-
-        if not new_entries:
-            st.info("Koi nayi entry nahi mili.")
-        else:
-            status, added_count, msg = add_entries_to_github_watchlist(new_entries)
-            if status == "OK" and added_count > 0:
-                st.success(f"✅ {added_count} nayi coin(s) seedha GitHub par save ho gayin. GitHub Actions ke "
-                           f"agle run (max 5 min) mein bot inhein process karega.")
-            elif status == "OK":
-                st.info("Ye coin(s) pehle se watchlist mein maujood hain.")
-            elif status == "NO_TOKEN":
-                merged = _read_local_watchlist()
-                keys = {_wl_key(e) for e in merged}
-                for e in new_entries:
-                    if _wl_key(e) not in keys:
-                        merged.append(e)
-                        keys.add(_wl_key(e))
-                with open("manual_watchlist.json", "w") as f:
-                    json.dump(merged, f, indent=2)
-                st.warning(
-                    "⚠️ Yeh sirf is app ke local copy mein save hui hai — GitHub par NAHI gayi, isliye bot "
-                    "ko nazar nahi aayegi. GitHub se seedha auto-save karne ke liye ek baar "
-                    "'GITHUB_TOKEN' Streamlit app Settings → Secrets mein add karwana hoga (mujhe bata dein, "
-                    "main step-by-step bata deta hoon). Filhal neeche di gayi JSON copy kar ke khud "
-                    "GitHub app mein 'manual_watchlist.json' file mein paste kar dein:"
-                )
-                st.code(json.dumps(merged, indent=2), language="json")
-            else:
-                st.error(f"❌ GitHub par save nahi ho saki: {msg}\n\nNeeche di JSON (nayi entries) copy kar ke "
-                          f"khud GitHub app mein 'manual_watchlist.json' ki list mein shamil kar dein:")
-                st.code(json.dumps(new_entries, indent=2), language="json")
-
-if os.path.exists("manual_watchlist.json"):
-    try:
-        with open("manual_watchlist.json") as f:
-            pending_watchlist = json.load(f)
-    except Exception:
-        pending_watchlist = None
-        st.error(
-            "⚠️ 'manual_watchlist.json' file mein JSON theek nahi hai (koi extra bracket/comma reh gaya "
-            "hoga), isliye is file ko padha nahi ja saka. Upar wale form se 'Save Watchlist' dabayein — "
-            "woh khud file ko sahi format mein dobara likh dega. Ya GitHub par file kholkar poori "
-            "content mita kar sirf `[]` likh dein aur commit kar dein."
-        )
-    if pending_watchlist:
-        pending_labels = []
-        for e in pending_watchlist:
-            if isinstance(e, dict):
-                pending_labels.append(f"{e.get('symbol')} ({e.get('system', 'CE Buy-Only')})")
-            else:
-                pending_labels.append(f"{e} (CE Buy-Only)")
-        st.caption(f"⏳ Pending (agle run mein process hongi): {', '.join(pending_labels)}")
-
-_mb_state_loaded = _safe_json_load("manual_bot_state.json") if os.path.exists("manual_bot_state.json") else None
-if os.path.exists("manual_bot_state.json") and _mb_state_loaded is None:
-    st.error("⚠️ 'manual_bot_state.json' file corrupt ho gayi hai — bot ke agle run par yeh khud theek ho jayegi.")
-if _mb_state_loaded is not None:
-    mb_state = _mb_state_loaded
-
-    cash = mb_state.get("cash", 0)
-    open_positions = mb_state.get("positions", {})
-    total_equity = mb_state.get("total_equity_usd", cash)
-    starting_capital = mb_state.get("starting_capital_usd", 1000.0)
-    overall_pnl = total_equity - starting_capital
-    overall_pnl_pct = (overall_pnl / starting_capital * 100) if starting_capital else 0
-
-    c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Total Equity", f"${total_equity:,.2f}", f"{overall_pnl_pct:+.2f}%")
-    c2.metric("Free Cash", f"${cash:,.2f}")
-    c3.metric("Open Positions", f"{len(open_positions)} / {mb_state.get('max_concurrent_positions', 8)}")
-    c4.metric("Per-Trade Size", f"${mb_state.get('position_size_usd', 100):,.2f}")
-    show_bot_heartbeat(mb_state, "Manual Bot")
-
-    if len(open_positions) > 0:
-        show_bot_open_trades(open_positions, "Abhi Khuli Hui Manual Trades", key_is_symbol=True, cash=cash)
-    else:
-        st.caption("Abhi koi manual trade khuli nahi hai — coin 'manual_watchlist.json' mein daal kar feed karein.")
-
-    if os.path.exists("manual_bot_closed_trades.csv"):
-        df_mb_closed = pd.read_csv("manual_bot_closed_trades.csv")
-        if len(df_mb_closed) > 0:
-            wins = df_mb_closed[df_mb_closed["result"] == "WIN"]
-            losses = df_mb_closed[df_mb_closed["result"] == "LOSS"]
-            win_rate = len(wins) / len(df_mb_closed) * 100
-            gross_win = wins["realized_pnl_usd"].sum()
-            gross_loss = abs(losses["realized_pnl_usd"].sum())
-            pf = (gross_win / gross_loss) if gross_loss > 0 else None
-
-            st.markdown("**📒 Band Ho Chuki Manual Trades**")
-            c1, c2, c3, c4 = st.columns(4)
-            c1.metric("Total Closed", len(df_mb_closed))
-            c2.metric("Win Rate", f"{win_rate:.1f}%")
-            c3.metric("Profit Factor", f"{pf:.2f}" if pf is not None else "N/A")
-            c4.metric("Realized P&L", f"${df_mb_closed['realized_pnl_usd'].sum():,.2f}")
-
-            show_mb = st.checkbox("Poori Manual-Trade History Dikhayein", value=False, key="show_manual_bot_log")
-            if show_mb:
-                _mb_sorted = df_mb_closed.assign(_t=_pkt_to_dt(df_mb_closed["exit_time_pkt"])).sort_values("_t", ascending=False).drop(columns="_t")
-                st.dataframe(_mb_sorted, use_container_width=True, hide_index=True)
-
-            mb_csv = df_mb_closed.to_csv(index=False).encode("utf-8")
-            st.download_button("📥 Manual Trades CSV Download Karein", mb_csv, "manual_bot_closed_trades.csv", "text/csv", key="dl_manual_bot")
-        else:
-            st.caption("Abhi tak koi manual trade band nahi hui.")
+if not all_closed:
+    st.info("Abhi tak koi band trade nahi — session analysis ke liye pehle kuch trades band honi chahiye.")
 else:
-    st.info(
-        "Manual trade bot abhi tak nahi chala — GitHub repo mein "
-        "'.github/workflows/manual_trade_bot.yml' hona chahiye, chalne ke thodi der baad yahan "
-        "result nazar aayega."
-    )
+    comb = pd.concat(all_closed, ignore_index=True)
+    picked = st.multiselect("Kaunse system(s) shamil karein", list(SYSTEMS), default=list(SYSTEMS), key="sess_pick")
+    comb = comb[comb["System"].isin(picked)]
+    if len(comb):
+        comb["hour"] = comb["entry_utc"].map(lambda t: to_pkt(t).hour)
+        comb["session"] = comb["hour"].map(classify_session)
+        comb["win"] = pd.to_numeric(comb["ret_pct"], errors="coerce") > 0
+        rows = []
+        for sname in SESSION_ORDER:
+            sub = comb[comb["session"] == sname]
+            if len(sub):
+                w = int(sub["win"].sum())
+                rows.append({"Session": sname, "Total Trades": len(sub), "TP/Win": w, "SL/Loss": len(sub) - w,
+                             "Win Rate %": round(w / len(sub) * 100, 1),
+                             "Avg P/L %": round(pd.to_numeric(sub["ret_pct"], errors="coerce").mean(), 2)})
+        if rows:
+            stretch_df(pd.DataFrame(rows), hide_index=True)
+            best = max(rows, key=lambda r: r["Win Rate %"])
+            worst = min(rows, key=lambda r: r["Win Rate %"])
+            st.caption(f"✅ Sab se behtar: **{best['Session']}** ({best['Win Rate %']}%, {best['Total Trades']} trades) — "
+                       f"⚠️ Sab se kamzor: **{worst['Session']}** ({worst['Win Rate %']}%, {worst['Total Trades']} trades). "
+                       f"Chhota sample (~15 se kam trades) abhi bharosemand nahi.")
 
 st.markdown("---")
-st.header("🎲 Auto-Scan Trade Bot (Dummy/Paper — Sab 5 Systems Khud Scan Karta Hai)")
-st.caption(
-    "Yeh manual bot ka 'auto' sāthi hai — khud 150 coins scan karta hai (Union AB, NEW AdvancedConfluence, "
-    "CE Buy-Only, Pullback-in-Uptrend, Donchian Breakout) aur sirf MAZBOOT signal par foran paper trade leta hai: "
-    "Union AB/NEW sirf 'Strong' verdict, CE sirf ETH bullish, sirf taaza (aakhri band candle ka) signal, "
-    "ek coin par ek trade. BTC/ETH girne par, ya lagatar SL par, nayi entry khud ruk jati hai. "
-    "Capital/ledger manual bot se BILKUL ALAG hai. Asal paisa risk mein nahi (paper)."
-)
-
-# ---- ⏸️ / ▶️ Auto Bot ko rokne / chalane ka button ----
-_ctrl = read_auto_control()
-_is_paused = bool(_ctrl.get("paused"))
-_bc1, _bc2 = st.columns([3, 2])
-if _is_paused:
-    _bc1.error("⏸️ **Auto Bot ROKA HUA hai** — koi nayi trade nahi lega. "
-               "Khuli trades ka SL/TP barabar chalta rahega.")
-    _btn = _bc2.button("▶️ Bot Dobara Chalayein", type="primary", key="auto_bot_resume", use_container_width=True)
-else:
-    _bc1.success("▶️ **Auto Bot chal raha hai** — naye signal par trade le sakta hai.")
-    _btn = _bc2.button("⏸️ Nayi Entry Rokein", key="auto_bot_pause", use_container_width=True)
-if _btn:
-    _ok, _msg = write_auto_control(not _is_paused)
-    if _ok:
-        st.session_state["auto_ctrl_msg"] = (
-            "⏸️ Bot roka gaya — agle check par (aam taur par chand minute) nayi trade lena band kar dega."
-            if not _is_paused else
-            "▶️ Bot dobara chalaya gaya — agle run se naye signal par trade lena shuru karega."
-        )
-        st.rerun()
-    else:
-        st.error(f"❌ Button ki halat GitHub par save nahi ho saki: {_msg}")
-if st.session_state.get("auto_ctrl_msg"):
-    st.info(st.session_state.pop("auto_ctrl_msg"))
-
-_ab_state_loaded = _safe_json_load("auto_bot_state.json") if os.path.exists("auto_bot_state.json") else None
-if os.path.exists("auto_bot_state.json") and _ab_state_loaded is None:
-    st.error("⚠️ 'auto_bot_state.json' file corrupt ho gayi hai — bot ke agle run par yeh khud theek ho jayegi.")
-if _ab_state_loaded is not None:
-    ab_state = _ab_state_loaded
-
-    cash = ab_state.get("cash", 0)
-    open_positions = ab_state.get("positions", {})
-    total_equity = ab_state.get("total_equity_usd", cash)
-    starting_capital = ab_state.get("starting_capital_usd", 2000.0)
-    overall_pnl = total_equity - starting_capital
-    overall_pnl_pct = (overall_pnl / starting_capital * 100) if starting_capital else 0
-
-    c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Total Equity", f"${total_equity:,.2f}", f"{overall_pnl_pct:+.2f}%")
-    c2.metric("Free Cash", f"${cash:,.2f}")
-    c3.metric("Open Positions", f"{len(open_positions)} / {ab_state.get('max_concurrent_positions', 15)}")
-    c4.metric("Per-Trade Size", f"${ab_state.get('position_size_usd', 100):,.2f}")
-
-    def _pkt(iso):
-        try:
-            return pd.Timestamp(iso).tz_convert("Asia/Karachi").strftime("%d %b %I:%M %p PKT")
-        except Exception:
-            return str(iso)
-
-    _now = pd.Timestamp.now(tz="UTC")
-    _crash = ab_state.get("crash_until")
-    _pause = ab_state.get("pause_until")
-    _mlevel = ab_state.get("market_level")
-    _minfo = ab_state.get("market_info", "")
-    if _crash and pd.Timestamp(_crash) > _now:
-        st.error(f"🚨 **Market Crash Guard:** BTC/ETH mein bari giravat — nayi entry **{_pkt(_crash)}** tak band (khuli trades apne SL par chal rahi hain). ({_minfo})")
-    elif _pause and pd.Timestamp(_pause) > _now:
-        st.warning(f"⏸️ **Loss-streak break:** lagatar SL ki wajah se nayi entry **{_pkt(_pause)}** tak band.")
-    elif _mlevel == "CAUTION":
-        st.warning(f"⚠️ **Ehtiyat:** BTC/ETH tezi se gir rahe hain — nayi entry abhi ruki hui hai. ({_minfo})")
-    elif _mlevel == "OK":
-        st.caption(f"✅ Market normal — bot nayi entry le sakta hai. ({_minfo})")
-
-    show_bot_heartbeat(ab_state, "Auto Bot")
-
-    if len(open_positions) > 0:
-        show_bot_open_trades(open_positions, "Abhi Khuli Hui Auto Trades", key_is_symbol=False, cash=cash)
-    else:
-        st.caption("Abhi koi auto trade khuli nahi hai.")
-
-    if os.path.exists("auto_bot_closed_trades.csv"):
-        df_ab_closed = pd.read_csv("auto_bot_closed_trades.csv")
-        if len(df_ab_closed) > 0:
-            wins = df_ab_closed[df_ab_closed["result"] == "WIN"]
-            losses = df_ab_closed[df_ab_closed["result"] == "LOSS"]
-            win_rate = len(wins) / len(df_ab_closed) * 100
-            gross_win = wins["realized_pnl_usd"].sum()
-            gross_loss = abs(losses["realized_pnl_usd"].sum())
-            pf = (gross_win / gross_loss) if gross_loss > 0 else None
-
-            st.markdown("**📒 Band Ho Chuki Auto Trades**")
-            c1, c2, c3, c4 = st.columns(4)
-            c1.metric("Total Closed", len(df_ab_closed))
-            c2.metric("Win Rate", f"{win_rate:.1f}%")
-            c3.metric("Profit Factor", f"{pf:.2f}" if pf is not None else "N/A")
-            c4.metric("Realized P&L", f"${df_ab_closed['realized_pnl_usd'].sum():,.2f}")
-
-            if "system" in df_ab_closed.columns:
-                st.markdown("**System ke hisaab se breakdown**")
-                for sys_name in df_ab_closed["system"].unique():
-                    sub = df_ab_closed[df_ab_closed["system"] == sys_name]
-                    sub_wins = sub[sub["result"] == "WIN"]
-                    sub_wr = len(sub_wins) / len(sub) * 100
-                    st.caption(f"**{sys_name}**: {len(sub)} closed, Win Rate {sub_wr:.1f}%, "
-                               f"P&L ${sub['realized_pnl_usd'].sum():,.2f}")
-
-            show_ab = st.checkbox("Poori Auto-Trade History Dikhayein", value=False, key="show_auto_bot_log")
-            if show_ab:
-                _ab_sorted = df_ab_closed.assign(_t=_pkt_to_dt(df_ab_closed["exit_time_pkt"])).sort_values("_t", ascending=False).drop(columns="_t")
-                st.dataframe(_ab_sorted, use_container_width=True, hide_index=True)
-
-            ab_csv = df_ab_closed.to_csv(index=False).encode("utf-8")
-            st.download_button("📥 Auto Trades CSV Download Karein", ab_csv, "auto_bot_closed_trades.csv", "text/csv", key="dl_auto_bot")
-        else:
-            st.caption("Abhi tak koi auto trade band nahi hui.")
-else:
-    st.info(
-        "Auto-scan trade bot abhi tak nahi chala — GitHub repo mein "
-        "'.github/workflows/auto_scan_trade_bot.yml' hona chahiye, chalne ke thodi der baad yahan "
-        "result nazar aayega."
-    )
+st.caption("⚠️ Ye paper trading hai. Backtest numbers mein survivorship bias hai (aaj ki coin list) — asal natija kuch kam ho sakta hai.")

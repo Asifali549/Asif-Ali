@@ -1,7 +1,6 @@
 """
-Watchdog - GitHub Actions ke zariye har (misaal ke tor par) 30 minute
-khud chalta hai. Teenon "self-loop" systems (Live Scanner, Manual
-Trade Bot, Auto-Scan Trade Bot) ki taaza-tareen output/state file
+Watchdog - GitHub Actions ke zariye har 30 minute khud chalta hai.
+Dono live bots (Ichimoku 4H Bot, Donchian Daily Bot) ki taaza-tareen state file
 dekhta hai - agar koi loop expected waqt se zyada purana ho gaya ho
 (yani beech mein kahin ruk gaya), to us workflow ko khud
 "workflow_dispatch" se dobara chalata hai aur Telegram par khabar
@@ -28,16 +27,12 @@ GH_TOKEN = os.environ.get("GH_TOKEN")
 # (state file, us file ke andar timestamp wali key, jis workflow ko
 #  dobara chalana hai, kitne minute ke baad "stale" mana jaye, naam)
 #
-# Thresholds ki wajah:
-#   - Live Scanner: scan + 5 min wait khud ~10-20 min leta hai; 90 min
-#     ka margin generous hai taake normal slow scan cycle ko ghalti se
-#     "ruka hua" na samjha jaye.
-#   - Manual/Auto Bot: dono halke hain, har run jaldi khatam hota hai;
-#     60 min ka margin kaafi hai.
+# Dono bots GitHub ke schedule (cron) par chalte hain:
+#   - Ichimoku 4H Bot: har 4 ghante -> 5.5 ghante (330 min) se purana ho to ruka hua
+#   - Donchian Daily Bot: rozana 00:15 UTC -> 26 ghante (1560 min) se purana ho to ruka hua
 LOOPS = [
-    ("dashboard_signals.json", ["last_updated_utc"], "scan_dashboard.yml", 90, "Live Scanner"),
-    ("manual_bot_state.json", ["last_updated"], "manual_trade_bot.yml", 60, "Manual Trade Bot"),
-    ("auto_bot_state.json", ["last_updated"], "auto_scan_trade_bot.yml", 60, "Auto-Scan Trade Bot"),
+    ("ichimoku4h_paper_state.json", ["last_updated"], "ichimoku4h_bot.yml", 330, "Ichimoku 4H Bot"),
+    ("donchian_paper_state.json", ["last_updated"], "donchian_daily_bot.yml", 1560, "Donchian Daily Bot"),
 ]
 
 

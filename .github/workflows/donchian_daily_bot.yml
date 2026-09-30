@@ -41,13 +41,17 @@ jobs:
           cp donchian_paper_state.json /tmp/state.json 2>/dev/null || exit 0
           HAS_CSV=0
           if [ -f donchian_paper_trades.csv ]; then cp donchian_paper_trades.csv /tmp/trades.csv; HAS_CSV=1; fi
+          HAS_SIG=0
+          if [ -f donchian_signals.json ]; then cp donchian_signals.json /tmp/signals.json; HAS_SIG=1; fi
           for i in 1 2 3 4 5; do
             git fetch origin main
             git reset --hard origin/main
             cp /tmp/state.json donchian_paper_state.json
             if [ "$HAS_CSV" = "1" ]; then cp /tmp/trades.csv donchian_paper_trades.csv; fi
+            if [ "$HAS_SIG" = "1" ]; then cp /tmp/signals.json donchian_signals.json; fi
             git add donchian_paper_state.json
             if [ "$HAS_CSV" = "1" ]; then git add donchian_paper_trades.csv; fi
+            if [ "$HAS_SIG" = "1" ]; then git add donchian_signals.json; fi
             if git diff --staged --quiet; then echo "Koi tabdeeli nahi"; exit 0; fi
             git commit -m "Donchian daily bot update ($(date -u +'%Y-%m-%d'))"
             if git push origin HEAD:main; then echo "Push kamyab"; exit 0; fi

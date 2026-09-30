@@ -46,6 +46,7 @@ HISTORY_DAYS = 300
 START_EQUITY = 1000.0          # paper account (USDT)
 STATE_FILE = "donchian_paper_state.json"
 TRADES_CSV = "donchian_paper_trades.csv"
+SIGNALS_FILE = "donchian_signals.json"      # dashboard ke liye signals ka record
 
 
 def load_state():
@@ -75,6 +76,20 @@ def fmt_px(x):
     if x >= 1:
         return f"{x:.4f}"
     return f"{x:.6g}"
+
+
+def append_signals(new_rows, keep=300):
+    """Dashboard ke liye har naye signal ka record (aakhri 300)."""
+    rows = []
+    if os.path.exists(SIGNALS_FILE):
+        try:
+            with open(SIGNALS_FILE) as f:
+                rows = json.load(f)
+        except Exception:
+            rows = []
+    rows = (rows + new_rows)[-keep:]
+    with open(SIGNALS_FILE, "w") as f:
+        json.dump(rows, f, indent=2)
 
 
 def send(msg):
@@ -204,7 +219,15 @@ def main():
     equity = st["cash"] + inv
     st["history"].append({"day": Ds, "equity": round(equity, 2)})
     st["last_day"] = Ds
+    st["last_updated"] = pd.Timestamp.now(tz="UTC").isoformat()
+    st["btc_regime_ok"] = btc_ok
     save_state(st)
+    append_signals([{
+        "system": "Donchian Daily", "symbol": s, "signal_time_utc": str(D + pd.Timedelta(days=1)),
+        "entry_est": round(close, 10), "sl": round(stop, 10), "tp": None,
+        "risk_pct": round((close - stop) / close * 100, 2),
+        "size_pct": round(min(RISK_PCT / ((close - stop) / close), MAX_POS_PCT) * 100, 2),
+    } for s, close, stop, _ in chosen])
 
     # ---------- Telegram ----------
     L = [f"📊 <b>Donchian Daily Bot</b> — {Ds} (daily candle band)",

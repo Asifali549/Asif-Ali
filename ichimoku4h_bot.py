@@ -45,6 +45,7 @@ MAX_HOLD = 500
 START_EQUITY = 1000.0
 STATE_FILE = "ichimoku4h_paper_state.json"
 TRADES_CSV = "ichimoku4h_paper_trades.csv"
+SIGNALS_FILE = "ichimoku4h_signals.json"    # dashboard ke liye signals ka record
 
 
 def load_state():
@@ -78,6 +79,20 @@ def fmt_px(x):
 
 def pkt(ts):
     return (pd.Timestamp(ts) + pd.Timedelta(hours=5)).strftime("%d %b %H:%M PKT")
+
+
+def append_signals(new_rows, keep=300):
+    """Dashboard ke liye har naye signal ka record (aakhri 300)."""
+    rows = []
+    if os.path.exists(SIGNALS_FILE):
+        try:
+            with open(SIGNALS_FILE) as f:
+                rows = json.load(f)
+        except Exception:
+            rows = []
+    rows = (rows + new_rows)[-keep:]
+    with open(SIGNALS_FILE, "w") as f:
+        json.dump(rows, f, indent=2)
 
 
 def send(msg):
@@ -200,7 +215,14 @@ def main():
     st["history"].append({"bar": Ds, "equity": round(equity, 2)})
     st["history"] = st["history"][-3000:]
     st["last_bar"] = Ds
+    st["last_updated"] = pd.Timestamp.now(tz="UTC").isoformat()
     save_state(st)
+    append_signals([{
+        "system": "Ichimoku 4H", "symbol": s, "signal_time_utc": str(D + pd.Timedelta(hours=4)),
+        "entry_est": round(close, 10), "sl": round(stop, 10), "tp": round(close + TP_R * (close - stop), 10),
+        "risk_pct": round((close - stop) / close * 100, 2),
+        "size_pct": round(min(RISK_PCT / ((close - stop) / close), MAX_POS_PCT) * 100, 2),
+    } for s, close, stop, _ in chosen])
 
     # ---------- Telegram: sirf jab kuch hua ho, ya din ki pehli candle (khulasa) ----------
     daily_summary = D.hour == 20        # 20:00 UTC wali candle = din ka aakhri (01:00 PKT ke baad)
