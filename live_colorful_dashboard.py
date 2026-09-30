@@ -133,6 +133,16 @@ def trigger_github_workflow(workflow_file):
         return False, str(e)
 
 
+def show_dispatch_error(msg):
+    if "403" in msg or "not accessible" in msg:
+        st.error("❌ GitHub ne mana kar diya (403): Streamlit Secrets wale GITHUB_TOKEN ko "
+                 "'Actions' chalane ki ijazat nahi. GitHub → Settings → Developer settings → "
+                 "Personal access tokens → apna token → Repository permissions → **Actions: Read and write** "
+                 "kar ke Save karein (ya naya token bana kar Streamlit Secrets mein GITHUB_TOKEN badal dein).")
+    else:
+        st.error(f"❌ {msg}")
+
+
 def tradingview_url(coin, interval=None):
     base = str(coin).split("/")[0]
     url = f"https://www.tradingview.com/chart/?symbol=KUCOIN:{base}USDT"
@@ -269,13 +279,19 @@ for col, (name, cfg) in zip(status_cols, SYSTEMS.items()):
             st.warning("Abhi tak pehla run record nahi hua")
         if st.button("▶️ Abhi chala do", key=f"run_{cfg['workflow']}"):
             ok, msg = trigger_github_workflow(cfg["workflow"])
-            st.success("✅ GitHub ko command bhej di — 2-3 min baad page refresh karein.") if ok else st.error(f"❌ {msg}")
+            if ok:
+                st.success("✅ GitHub ko command bhej di — 2-3 min baad page refresh karein.")
+            else:
+                show_dispatch_error(msg)
 with status_cols[-1]:
     st.markdown("**🐕 Watchdog**")
     st.caption("Har 30 min: koi bot ruk jaye to khud dobara chalata hai + Telegram")
     if st.button("▶️ Abhi chala do", key="run_watchdog"):
         ok, msg = trigger_github_workflow("watchdog.yml")
-        st.success("✅ Bhej diya!") if ok else st.error(f"❌ {msg}")
+        if ok:
+            st.success("✅ Bhej diya!")
+        else:
+            show_dispatch_error(msg)
 
 # ------------------------------------------------------------
 # Har system alag
