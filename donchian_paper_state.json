@@ -1,0 +1,38 @@
+{
+  "cash": 1000.0,
+  "positions": {},
+  "pending": [
+    {
+      "symbol": "PUMP/USDT",
+      "signal_day": "2026-09-29",
+      "stop": 0.003984
+    },
+    {
+      "symbol": "GRASS/USDT",
+      "signal_day": "2026-09-29",
+      "stop": 0.5746545454545455
+    },
+    {
+      "symbol": "AAVE/USDT",
+      "signal_day": "2026-09-29",
+      "stop": 134.49009090909092
+    },
+    {
+      "symbol": "ICP/USDT",
+      "signal_day": "2026-09-29",
+      "stop": 2.6793636363636364
+    },
+    {
+      "symbol": "ZBCN/USDT",
+      "signal_day": "2026-09-29",
+      "stop": 0.0019310999999999998
+    }
+  ],
+  "last_day": "2026-09-29",
+  "history": [
+    {
+      "day": "2026-09-29",
+      "equity": 1000.0
+    }
+  ]
+}
