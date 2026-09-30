@@ -30,6 +30,10 @@ Strategies (har ek ka PRODUCTION exit):
   Har 1h strategy 3 filter tiers par: No filter / RS only (Backup) / ETH+RS (Baseline)
   DAILY Donchian 20 (reference) exit CE 22/4x (trail), regime BTC>EMA50
 
+TIMEFRAMES: har screener strategy 1H, 4H aur DAILY teeno par (bilkul wahi
+parameters - bars ke hisab se). Daily/4H filters aur confluence ka BTC/4H
+hamesha sirf BAND candle se (shift = 24h - timeframe).
+
 Natija: unified_test_RESULTS.txt
 """
 
@@ -43,10 +47,12 @@ from strategies import STRATEGY_FUNCTIONS, apply_cooldown
 from backtest_engine import compute_chandelier_long_stop
 from strategy_lab import (fetch_full, norm, ema, chandelier, data_report, pf_of, bootstrap_p5, fmt,
                           STABLES, FEE, SLIP, STOP_SLIP)
+import choch_robustness as cr
 from choch_robustness import daily_filter_arrays, shift_daily, _resample_to_4h_closed, _orig_resample_to_4h
 
 TOP_N_COINS = 150
 H1_LIMIT = 17520            # 2 saal 1h
+H4_LIMIT = 6570             # 3 saal 4H
 D_FILTER_LIMIT = 900        # 1h filters ke liye daily
 D_REF_LIMIT = 2400          # Daily Donchian reference (~6.5 saal)
 UNIVERSE = 100
@@ -297,6 +303,75 @@ def liquid_mask(C, V, hist_min, window, min_periods):
     return liq
 
 
+TF_CFG = {
+    #       bars/din, max_hold, per_year, daily-filter shift, 4H-confluence shift
+    "1h": (24, 500, 24 * 365, pd.Timedelta(hours=23), pd.Timedelta(hours=3)),
+    "4h": (6, 500, 6 * 365, pd.Timedelta(hours=20), pd.Timedelta(0)),
+    "1d": (1, 365, 365, pd.Timedelta(0), pd.Timedelta(0)),
+}
+
+
+def run_tf(tf, frames, dd, emit, summary):
+    bpd, max_hold, per_year, dshift, h4shift = TF_CFG[tf]
+    cr.DAILY_CLOSE_SHIFT, cr.H4_CLOSE_SHIFT = dshift, h4shift      # band-candle shifts is timeframe ke liye
+    btc_d, eth_d = dd["BTC/USDT"], dd["ETH/USDT"]
+    idx = pd.DatetimeIndex(sorted(set().union(*[set(d["timestamp"]) for d in frames.values()])))
+    syms, O, H, L, C, V = build_panel(frames, idx)
+    T, N = O.shape
+    liquid = liquid_mask(C, V, hist_min=60 * bpd, window=30 * bpd, min_periods=20 * bpd)
+    mom = pd.DataFrame(C).pct_change(60 * bpd, fill_method=None).values
+    start = int(max(np.argmax(liquid.sum(1) >= 30), 60 * bpd))
+
+    tiers = {t: np.zeros((T, N), bool) for t in TIERS_1H}
+    tiers["No filter"][:] = True
+    sigs = {n: np.zeros((T, N), bool) for n, *_ in STRATS_1H}
+    stops = {}
+    for j, s in enumerate(syms):
+        df = frames[s]
+        pos = idx.get_indexer(df["timestamp"])
+        if s in dd:
+            try:
+                eth_ok, rs_ok = daily_filter_arrays(df["timestamp"], eth_d, dd[s], btc_d, shift=True)
+                tiers["RS only"][pos, j] = rs_ok
+                tiers["ETH+RS"][pos, j] = rs_ok & eth_ok
+            except Exception as e:
+                print(f"{s}: filter fail ({e})")
+        for name, ice, tce, _ in STRATS_1H:
+            try:
+                sigs[name][pos, j] = signals_1h(name, df, btc_d)
+            except Exception as e:
+                print(f"{tf} {s} {name}: signal fail ({e})")
+            for ce in (ice, tce):
+                if ce not in stops:
+                    stops[ce] = np.full((T, N), np.nan)
+                stops[ce][pos, j] = chandelier(df, *ce)
+
+    emit(f"\n\n{'#'*100}\n{tf.upper()} - screener strategies - period {idx[start].date()} -> {idx[-1].date()}\n{'#'*100}")
+    for name, ice, tce, tp_r in STRATS_1H:
+        for tier in TIERS_1H:
+            live_now = tf == "1h" and PROD_TIER[name] == tier
+            v, _ = evaluate(emit, f"[{tf}] {name} | {tier}", idx, O, H, L, C, sigs[name], tiers[tier],
+                            stops[ice], stops[tce], tp_r, liquid, mom, start, max_hold, per_year, live_now)
+            summary.append((f"[{tf}] {name} | {tier}", v, live_now))
+
+    if tf == "1d":
+        bi = syms.index("BTC/USDT")
+        bt = pd.Series(C[:, bi], index=idx).ffill()
+        reg = np.repeat((bt > ema(bt, 50)).values[:, None], N, axis=1)
+        dsig = np.zeros((T, N), bool)
+        dstop = np.full((T, N), np.nan)
+        for j, s in enumerate(syms):
+            d = frames[s]
+            pos = idx.get_indexer(d["timestamp"])
+            brk = (d["close"] > d["high"].shift(1).rolling(20).max()).fillna(False)
+            dsig[pos, j] = (brk & ~brk.shift(1, fill_value=False)).values
+            dstop[pos, j] = chandelier(d, 22, 4.0)
+        emit(f"\n--- Reference: Daily Donchian 20 (Donchian Daily Bot wali) ---")
+        v, _ = evaluate(emit, "[1d] Daily Donchian 20 | BTC>EMA50", idx, O, H, L, C, dsig, reg, dstop, dstop, None,
+                        liquid, mom, start, max_hold, per_year, False)
+        summary.append(("[1d] Daily Donchian 20 | BTC>EMA50  (Donchian Daily Bot)", v, False))
+
+
 def main():
     from data_fetcher import get_exchange, get_coin_list
     lines = []
@@ -311,94 +386,39 @@ def main():
         if must not in coins:
             coins.insert(0, must)
 
-    h1, dd, dref, fails = {}, {}, {}, 0
+    data = {"1h": {}, "4h": {}, "1d": {}}
+    fails = 0
     for k, sym in enumerate(coins, 1):
         try:
             d = fetch_full(ex, sym, "1d", D_REF_LIMIT)
             if d is not None and len(d) >= 150:
-                dref[sym] = norm(d)
-                dd[sym] = dref[sym].iloc[-D_FILTER_LIMIT:].reset_index(drop=True)
-            h = fetch_full(ex, sym, "1h", H1_LIMIT)
-            if h is not None and len(h) >= 1500:
-                h1[sym] = norm(h)
+                data["1d"][sym] = norm(d)
+            for tf, lim, mn in (("4h", H4_LIMIT, 600), ("1h", H1_LIMIT, 1500)):
+                h = fetch_full(ex, sym, tf, lim)
+                if h is not None and len(h) >= mn:
+                    data[tf][sym] = norm(h)
         except Exception as e:
             fails += 1
             print(f"[{k}] {sym}: SKIP ({e})")
         if k % 25 == 0:
             print(f"[{k}/{len(coins)}] data...")
-    btc_d, eth_d = dd["BTC/USDT"], dd["ETH/USDT"]
+    dd = data["1d"]
 
     emit("=" * 100)
-    emit("UNIFIED TEST - SAB STRATEGIES EK HI SAKHT TARAZU PAR")
+    emit("UNIFIED TEST - SAB STRATEGIES, 1H + 4H + DAILY, EK HI SAKHT TARAZU PAR")
     emit("=" * 100)
     emit(f"fetch errors: {fails}/{len(coins)} | fee {FEE*100:.2f}% + slip {SLIP*100:.2f}% har taraf + stop slip {STOP_SLIP*100:.2f}%")
-    for l in data_report("1H", h1, H1_LIMIT, "1h") + data_report("DAILY", dref, D_REF_LIMIT, "1d"):
+    for l in (data_report("1H", data["1h"], H1_LIMIT, "1h") + data_report("4H", data["4h"], H4_LIMIT, "4h")
+              + data_report("DAILY", dd, D_REF_LIMIT, "1d")):
         emit(l)
     emit("PASS = har trade [n>=100, har fold PF>1, p5>1.2, p5>random] AUR portfolio [Sharpe>random 95th, CAGR>0, MaxDD>-50%]")
-    emit("NOTE: coin list aaj ki hai (survivorship bias) - sab strategies par barabar asar.")
+    emit("NOTE: parameters (EMA, Ichimoku, cooldown, CE) bars mein hain - 4H/daily par wahi numbers istemal hue.")
+    emit("NOTE: coin list aaj ki hai (survivorship bias) - sab par barabar asar.")
 
-    # ---------------- 1H ----------------
-    idx = pd.DatetimeIndex(sorted(set().union(*[set(d["timestamp"]) for d in h1.values()])))
-    syms, O, H, L, C, V = build_panel(h1, idx)
-    T, N = O.shape
-    liquid = liquid_mask(C, V, hist_min=24 * 60, window=720, min_periods=480)
-    mom = pd.DataFrame(C).pct_change(24 * 60, fill_method=None).values
-    start = int(max(np.argmax(liquid.sum(1) >= 30), 24 * 60))
-
-    tiers = {t: np.zeros((T, N), bool) for t in TIERS_1H}
-    tiers["No filter"][:] = True
-    sigs = {n: np.zeros((T, N), bool) for n, *_ in STRATS_1H}
-    stops = {}
-    for j, s in enumerate(syms):
-        df = h1[s]
-        pos = idx.get_indexer(df["timestamp"])
-        if s in dd:
-            try:
-                eth_ok, rs_ok = daily_filter_arrays(df["timestamp"], eth_d, dd[s], btc_d, shift=True)
-                tiers["RS only"][pos, j] = rs_ok
-                tiers["ETH+RS"][pos, j] = rs_ok & eth_ok
-            except Exception as e:
-                print(f"{s}: filter fail ({e})")
-        for name, ice, tce, _ in STRATS_1H:
-            try:
-                sigs[name][pos, j] = signals_1h(name, df, btc_d)
-            except Exception as e:
-                print(f"{s} {name}: signal fail ({e})")
-            for ce in (ice, tce):
-                if ce not in stops:
-                    stops[ce] = np.full((T, N), np.nan)
-                stops[ce][pos, j] = chandelier(df, *ce)
-
-    emit(f"\n\n{'#'*100}\n1H STRATEGIES (screener) - period {idx[start].date()} -> {idx[-1].date()}\n{'#'*100}")
     summary = []
-    for name, ice, tce, tp_r in STRATS_1H:
-        for tier in TIERS_1H:
-            v, _ = evaluate(emit, f"{name} | {tier}", idx, O, H, L, C, sigs[name], tiers[tier],
-                            stops[ice], stops[tce], tp_r, liquid, mom, start, 500, 24 * 365,
-                            PROD_TIER[name] == tier)
-            summary.append((f"{name} | {tier}", v, PROD_TIER[name] == tier))
-
-    # ---------------- DAILY reference ----------------
-    didx = pd.DatetimeIndex(sorted(set().union(*[set(d["timestamp"]) for d in dref.values()])))
-    dsyms, dO, dH, dL, dC, dV = build_panel(dref, didx)
-    dT, dN = dO.shape
-    dliq = liquid_mask(dC, dV, hist_min=60, window=30, min_periods=20)
-    dmom = pd.DataFrame(dC).pct_change(60, fill_method=None).values
-    dstart = int(max(np.argmax(dliq.sum(1) >= 30), 60))
-    bt = pd.Series(dC[:, dsyms.index("BTC/USDT")], index=didx).ffill()
-    reg = np.repeat((bt > ema(bt, 50)).values[:, None], dN, axis=1)
-    dsig = np.zeros((dT, dN), bool)
-    dstop = np.full((dT, dN), np.nan)
-    for j, s in enumerate(dsyms):
-        d = dref[s]
-        pos = didx.get_indexer(d["timestamp"])
-        brk = (d["close"] > d["high"].shift(1).rolling(20).max()).fillna(False)
-        dsig[pos, j] = (brk & ~brk.shift(1, fill_value=False)).values
-        dstop[pos, j] = chandelier(d, 22, 4.0)
-    emit(f"\n\n{'#'*100}\nDAILY DONCHIAN 20 (reference, Donchian Daily Bot wali) - period {didx[dstart].date()} -> {didx[-1].date()}\n{'#'*100}")
-    v, _ = evaluate(emit, "Daily Donchian 20 | BTC>EMA50", didx, dO, dH, dL, dC, dsig, reg, dstop, dstop, None,
-                    dliq, dmom, dstart, 365, 365, False)
-    summary.append(("Daily Donchian 20 | BTC>EMA50", v, False))
+    for tf in ("1h", "4h", "1d"):
+        if data[tf]:
+            run_tf(tf, data[tf], dd, emit, summary)
 
     emit(f"\n\n{'='*100}\nKHULASA\n{'='*100}")
     for name, v, prod in summary:
