@@ -23,7 +23,7 @@ STABLES = {"USDC", "USDT", "DAI", "TUSD", "FDUSD", "USDD", "USDP", "PYUSD", "BUS
 ICHI_BASE = {"tenkan": 9, "kijun": 26, "senkou_b": 52, "vol_mult": 2.0, "pivot": 5, "swing": 1.5,
              "cool": config.SIGNAL_COOLDOWN_BARS}
 
-TF_MS = {"1d": 86_400_000, "4h": 14_400_000, "1h": 3_600_000}
+TF_MS = {"1d": 86_400_000, "4h": 14_400_000, "1h": 3_600_000, "15m": 900_000}
 
 
 def norm(df):

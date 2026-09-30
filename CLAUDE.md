@@ -16,7 +16,7 @@
 |---|---|
 | `ichimoku4h_bot.py` | Ichimoku 4H bot - signals + paper trading + Telegram |
 | `donchian_daily_bot.py` | Donchian Daily bot - signals + paper trading + Telegram |
-| `bot_core.py` | dono bots ke helpers: fetch_full, norm, ema, chandelier, ichi_signal, FEE/SLIP/STOP_SLIP, STABLES |
+| `bot_core.py` | dono bots ke helpers (15m bhi): fetch_full, norm, ema, chandelier, ichi_signal, FEE/SLIP/STOP_SLIP, STABLES |
 | `strategies.py`, `config.py` | ichimoku + market_structure signal functions aur unke params (bot_core inhein use karta hai) |
 | `data_fetcher.py` | KuCoin (ccxt) exchange + top coins list |
 | `live_colorful_dashboard.py` | Streamlit Cloud dashboard (sirf ye 2 systems) |
@@ -68,6 +68,15 @@ Secrets:
   per-system closed-trade performance, PKT session analysis).
 - Purana Telegram token public git history mein hai - user ko BotFather `/revoke` ka mashwara diya.
 
+## Zer-e-test (EXPERIMENTAL - live nahi)
+- **SMC MTF** (`smc_mtf_strategy.py`, test `smc_mtf_test.py`, workflow "SMC MTF Test"):
+  4H trend (EMA50>EMA200, close>EMA200, Higher Low) -> 1H (close>EMA50, RSI>50) -> 15m entry
+  (RSI pullback <40 pichle 12 candles, fresh BOS swing high, volume >1.5x, close upper 40%, RSI<72,
+  ATR-percentile 20-90). Stop = 15m swing low - 0.2 ATR (1-3 ATR), TP 2R, time stop 24h.
+  Truncation test se lookahead 0 tasdeeq. Natija `smc_mtf_RESULTS.txt` ka intezar.
+  PASS hone par hi paper bot banana. Khatra: 15m par kharcha bhaari (1h strategies sab fail huin thin).
+
 ## Aglay kaam
+- SMC MTF test ka natija parh kar faisla (pass -> paper bot; fail -> khatam, CLAUDE.md mein FAIL list mein daalo).
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
 - 2-3 mahine paper trading ke natije backtest se milao, phir asli paisa.
