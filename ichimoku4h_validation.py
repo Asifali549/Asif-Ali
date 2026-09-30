@@ -36,6 +36,8 @@ MAX_HOLD = 500
 PER_YEAR = 6 * 365
 N_RANDOM = 20
 COOL = config.SIGNAL_COOLDOWN_BARS
+OUT_FILE = "ichimoku4h_validation_RESULTS.txt"
+TITLE = "4H ICHIMOKU + MARKET STRUCTURE - PAKKI TASDEEQ"
 
 BASE = {"tenkan": 9, "kijun": 26, "senkou_b": 52, "vol_mult": 2.0, "pivot": 5, "swing": 1.5,
         "ce_p": 16, "ce_m": 4.5, "tp": 2.0, "cool": COOL}
@@ -105,7 +107,7 @@ def main():
             print(f"[{k}/{len(coins)}] data...")
 
     emit("=" * 100)
-    emit("4H ICHIMOKU + MARKET STRUCTURE - PAKKI TASDEEQ")
+    emit(TITLE)
     emit("=" * 100)
     emit(f"fetch errors: {fails}/{len(coins)} | fee {FEE*100:.2f}% + slip {SLIP*100:.2f}% har taraf + stop slip {STOP_SLIP*100:.2f}%")
     for l in data_report("4H", h4, H4_LIMIT, "4h") + data_report("DAILY", d1, D_LIMIT, "1d"):
@@ -148,7 +150,7 @@ def main():
         return sig_cache[key]
 
     emit("\n" + "#" * 100)
-    emit("PARAMETER PADOS (har line mein sirf EK setting badli, baqi production jaisi)")
+    emit("VARIANTS (baqi sab production jaisa)")
     emit("#" * 100)
     base_eq = None
     rows = []
@@ -229,9 +231,9 @@ def main():
         yr = " ".join(f"{y}:{v*100:+.0f}%" for y, v in st["yearly"].items())
         emit(f"{name:30s} CAGR={st['cagr']*100:+6.1f}% MaxDD={st['dd']*100:6.1f}% Sharpe={fmt(st['sharpe'])} | {yr}")
 
-    with open("ichimoku4h_validation_RESULTS.txt", "w", encoding="utf-8") as f:
+    with open(OUT_FILE, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
-    print("\n[SAVE] ichimoku4h_validation_RESULTS.txt")
+    print(f"\n[SAVE] {OUT_FILE}")
 
 
 if __name__ == "__main__":
