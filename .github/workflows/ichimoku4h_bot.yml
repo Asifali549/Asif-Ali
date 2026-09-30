@@ -1,0 +1,56 @@
+name: Ichimoku 4H Bot
+
+on:
+  schedule:
+    - cron: "10 */4 * * *"    # har 4 ghante, 4H candle band hone ke 10 min baad
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ichimoku-4h-bot
+  cancel-in-progress: false
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Ichimoku 4H bot
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python ichimoku4h_bot.py
+
+      - name: Commit state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          cp ichimoku4h_paper_state.json /tmp/state.json 2>/dev/null || exit 0
+          HAS_CSV=0
+          if [ -f ichimoku4h_paper_trades.csv ]; then cp ichimoku4h_paper_trades.csv /tmp/trades.csv; HAS_CSV=1; fi
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/state.json ichimoku4h_paper_state.json
+            if [ "$HAS_CSV" = "1" ]; then cp /tmp/trades.csv ichimoku4h_paper_trades.csv; fi
+            git add ichimoku4h_paper_state.json
+            if [ "$HAS_CSV" = "1" ]; then git add ichimoku4h_paper_trades.csv; fi
+            if git diff --staged --quiet; then echo "Koi tabdeeli nahi"; exit 0; fi
+            git commit -m "Ichimoku 4H bot update ($(date -u +'%Y-%m-%d'))"
+            if git push origin HEAD:main; then echo "Push kamyab"; exit 0; fi
+            sleep $((i * 5))
+          done
+          exit 1
