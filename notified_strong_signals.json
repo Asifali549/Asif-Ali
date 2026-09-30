@@ -63,5 +63,8 @@
   "AAVE/USDT|CE Buy-Only|Chandelier Cross|160.326|Base+ETH": "2026-09-30T03:06:18.689409+00:00",
   "MET/USDT|Union AB Backup Tier|EMA+Breakout|0.3389|N/A": "2026-09-30T03:06:19.211933+00:00",
   "MET/USDT|Donchian Breakout|20-period High|0.3389|N/A": "2026-09-30T03:06:19.732577+00:00",
-  "STAY/USDT|CE Buy-Only|Chandelier Cross|1.1e-05|Base+ETH": "2026-09-30T04:05:03.113889+00:00"
+  "STAY/USDT|CE Buy-Only|Chandelier Cross|1.1e-05|Base+ETH": "2026-09-30T04:05:03.113889+00:00",
+  "PUMP/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.005726|N/A": "2026-09-30T05:04:02.461058+00:00",
+  "LIT/USDT|CE Buy-Only|Chandelier Cross|3.728|Base+ETH": "2026-09-30T05:04:02.504515+00:00",
+  "AURORA/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.06694|N/A": "2026-09-30T05:04:02.544287+00:00"
 }
