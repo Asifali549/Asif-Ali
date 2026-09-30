@@ -1,0 +1,143 @@
+====================================================================================================
+SWING LAB - SMC 4H / SQUEEZE 4H / DIP DAILY - SAKHT TEST
+====================================================================================================
+Coins: 109 | Period: 2020-10-01 -> 2026-09-30 | point-in-time top-100 liquid
+Kharcha: fee 0.10% + slip 0.05% har taraf + stop slip 0.25%
+Muqabla: Ichimoku 4H (PF ~1.9, CAGR ~26%, MaxDD ~-11%) | Donchian Daily (PF ~1.5, CAGR 20-29%, MaxDD ~-30%)
+
+
+####################################################################################################
+DIP_DAILY
+####################################################################################################
+
+[PASS] BASELINE
+   Har trade: n=254 win=69.3% PF=2.07 p5=1.48 Top10-hata=1.56 Exp=+2.29% | Random PF=0.82 (n=376)
+   Folds: 1.58(39) / 1.13(11) / 1.98(152) / 4.06(52) | Exit: {'signal': 239, 'stop': 11, 'time': 4}
+   Portfolio: CAGR=+6.5% MaxDD=-16.9% Sharpe=0.78 | Random portfolio: CAGR=-4.1% Sharpe=-0.39
+   Saal-war: 2020:-3% 2021:+9% 2022:-0% 2023:+6% 2024:-1% 2025:+16% 2026:+12%
+
+[FAIL] RSI3<5 exit SMA3
+   Har trade: n=49 win=83.7% PF=3.99 p5=2.05 Top10-hata=1.61 Exp=+3.23% | Random PF=0.78 (n=70)
+   Folds: 12.71(6) / inf(2) / 3.11(32) / 2.84(9) | Exit: {'signal': 47, 'stop': 2}
+   Portfolio: CAGR=+2.7% MaxDD=-1.6% Sharpe=1.16 | Random portfolio: CAGR=-0.7% Sharpe=-0.26
+   Saal-war: 2020:+3% 2021:+1% 2022:+0% 2023:+2% 2024:+7% 2025:+2% 2026:+1%
+
+[FAIL] RSI3<5 exit SMA5
+   Har trade: n=47 win=78.7% PF=2.94 p5=1.57 Top10-hata=1.21 Exp=+2.92% | Random PF=0.59 (n=70)
+   Folds: 14.01(6) / 1.61(2) / 2.50(30) / 3.42(9) | Exit: {'signal': 42, 'stop': 3, 'time': 2}
+   Portfolio: CAGR=+2.3% MaxDD=-3.1% Sharpe=0.83 | Random portfolio: CAGR=-1.7% Sharpe=-0.50
+   Saal-war: 2020:+3% 2021:+1% 2022:+0% 2023:+1% 2024:+6% 2025:+2% 2026:+1%
+
+[FAIL] RSI3<5 exit SMA7
+   Har trade: n=47 win=76.6% PF=2.44 p5=1.28 Top10-hata=1.14 Exp=+3.29% | Random PF=0.57 (n=70)
+   Folds: 44.15(6) / 1.89(2) / 1.60(30) / 9.33(9) | Exit: {'signal': 40, 'stop': 4, 'time': 3}
+   Portfolio: CAGR=+2.6% MaxDD=-4.5% Sharpe=0.81 | Random portfolio: CAGR=-1.9% Sharpe=-0.55
+   Saal-war: 2020:+2% 2021:+2% 2022:+0% 2023:+1% 2024:+6% 2025:+4% 2026:+2%
+
+[FAIL] RSI3<8 exit SMA3
+   Har trade: n=161 win=75.2% PF=2.54 p5=1.64 Top10-hata=1.75 Exp=+2.40% | Random PF=1.00 (n=225)
+   Folds: 26.94(27) / 1.82(7) / 1.81(96) / 3.44(31) | Exit: {'signal': 156, 'stop': 5}
+   Portfolio: CAGR=+5.8% MaxDD=-12.9% Sharpe=0.98 | Random portfolio: CAGR=-0.2% Sharpe=-0.00
+   Saal-war: 2020:+3% 2021:+10% 2022:+0% 2023:+4% 2024:+3% 2025:+7% 2026:+7%
+
+[FAIL] RSI3<8 exit SMA5
+   Har trade: n=159 win=74.8% PF=2.34 p5=1.53 Top10-hata=1.60 Exp=+2.79% | Random PF=0.92 (n=226)
+   Folds: 3.08(27) / 1.26(7) / 2.16(94) / 3.11(31) | Exit: {'signal': 149, 'stop': 8, 'time': 2}
+   Portfolio: CAGR=+6.3% MaxDD=-14.2% Sharpe=0.89 | Random portfolio: CAGR=-1.2% Sharpe=-0.15
+   Saal-war: 2020:+4% 2021:+5% 2022:+0% 2023:+5% 2024:+2% 2025:+16% 2026:+7%
+
+[FAIL] RSI3<8 exit SMA7
+   Har trade: n=159 win=76.7% PF=2.26 p5=1.55 Top10-hata=1.67 Exp=+3.35% | Random PF=0.98 (n=225)
+   Folds: 2.20(27) / 1.55(7) / 2.01(94) / 4.22(31) | Exit: {'signal': 144, 'stop': 12, 'time': 3}
+   Portfolio: CAGR=+7.1% MaxDD=-17.3% Sharpe=0.97 | Random portfolio: CAGR=-0.5% Sharpe=-0.05
+   Saal-war: 2020:+2% 2021:+5% 2022:+0% 2023:+6% 2024:+8% 2025:+13% 2026:+8%
+
+[PASS] RSI3<10 exit SMA3
+   Har trade: n=261 win=68.2% PF=2.13 p5=1.51 Top10-hata=1.58 Exp=+1.91% | Random PF=0.72 (n=376)
+   Folds: 2.63(41) / 2.31(12) / 1.73(155) / 3.93(53) | Exit: {'signal': 255, 'stop': 6}
+   Portfolio: CAGR=+6.9% MaxDD=-13.6% Sharpe=0.97 | Random portfolio: CAGR=-6.4% Sharpe=-0.59
+   Saal-war: 2020:-2% 2021:+14% 2022:+0% 2023:+7% 2024:+4% 2025:+7% 2026:+12%
+
+[PASS] RSI3<10 exit SMA7
+   Har trade: n=250 win=72.4% PF=2.23 p5=1.61 Top10-hata=1.76 Exp=+2.97% | Random PF=0.94 (n=372)
+   Folds: 1.31(37) / 1.27(11) / 2.28(152) / 4.39(50) | Exit: {'signal': 228, 'stop': 15, 'time': 7}
+   Portfolio: CAGR=+8.4% MaxDD=-19.0% Sharpe=0.85 | Random portfolio: CAGR=-1.6% Sharpe=-0.11
+   Saal-war: 2020:-4% 2021:+7% 2022:-0% 2023:+7% 2024:+10% 2025:+17% 2026:+14%
+
+[PASS] RSI3<12 exit SMA3
+   Har trade: n=377 win=63.4% PF=1.68 p5=1.30 Top10-hata=1.34 Exp=+1.37% | Random PF=1.09 (n=559)
+   Folds: 2.91(60) / 2.64(21) / 1.50(219) / 1.36(77) | Exit: {'signal': 367, 'stop': 9, 'time': 1}
+   Portfolio: CAGR=+6.4% MaxDD=-17.5% Sharpe=0.75 | Random portfolio: CAGR=+1.1% Sharpe=0.15
+   Saal-war: 2020:+1% 2021:+15% 2022:+2% 2023:+10% 2024:+5% 2025:-3% 2026:+9%
+
+[PASS] RSI3<12 exit SMA5
+   Har trade: n=365 win=64.9% PF=1.73 p5=1.34 Top10-hata=1.41 Exp=+1.79% | Random PF=1.19 (n=558)
+   Folds: 1.76(58) / 1.25(20) / 1.79(212) / 1.68(75) | Exit: {'signal': 345, 'stop': 15, 'time': 5}
+   Portfolio: CAGR=+7.4% MaxDD=-20.5% Sharpe=0.67 | Random portfolio: CAGR=+2.5% Sharpe=0.26
+   Saal-war: 2020:+1% 2021:+8% 2022:+3% 2023:+10% 2024:+6% 2025:+6% 2026:+10%
+
+[FAIL] RSI3<12 exit SMA7
+   Har trade: n=359 win=66.9% PF=1.72 p5=1.33 Top10-hata=1.42 Exp=+2.13% | Random PF=1.15 (n=554)
+   Folds: 1.62(55) / 0.97(20) / 1.89(212) / 1.68(72) | Exit: {'signal': 321, 'stop': 24, 'time': 14}
+   Portfolio: CAGR=+7.6% MaxDD=-25.6% Sharpe=0.63 | Random portfolio: CAGR=+1.2% Sharpe=0.16
+   Saal-war: 2020:+0% 2021:+6% 2022:+1% 2023:+9% 2024:+16% 2025:+4% 2026:+10%
+
+[FAIL] RSI3<15 exit SMA3
+   Har trade: n=564 win=60.8% PF=1.40 p5=1.10 Top10-hata=1.12 Exp=+0.93% | Random PF=1.01 (n=870)
+   Folds: 4.26(93) / 1.55(37) / 1.16(331) / 0.81(103) | Exit: {'signal': 544, 'stop': 18, 'time': 2}
+   Portfolio: CAGR=+5.8% MaxDD=-30.0% Sharpe=0.52 | Random portfolio: CAGR=-1.4% Sharpe=-0.01
+   Saal-war: 2020:+4% 2021:+36% 2022:+2% 2023:+16% 2024:-10% 2025:-11% 2026:+3%
+
+[FAIL] RSI3<15 exit SMA5
+   Har trade: n=541 win=60.8% PF=1.41 p5=1.14 Top10-hata=1.15 Exp=+1.18% | Random PF=0.99 (n=861)
+   Folds: 2.89(89) / 1.06(36) / 1.25(317) / 1.00(99) | Exit: {'signal': 507, 'stop': 27, 'time': 7}
+   Portfolio: CAGR=+4.9% MaxDD=-34.4% Sharpe=0.40 | Random portfolio: CAGR=-2.4% Sharpe=-0.07
+   Saal-war: 2020:+5% 2021:+33% 2022:+2% 2023:+16% 2024:-15% 2025:-10% 2026:+4%
+
+[FAIL] RSI3<15 exit SMA7
+   Har trade: n=530 win=64.0% PF=1.44 p5=1.14 Top10-hata=1.18 Exp=+1.44% | Random PF=1.10 (n=856)
+   Folds: 3.01(85) / 0.89(36) / 1.33(316) / 1.00(93) | Exit: {'signal': 467, 'stop': 37, 'time': 26}
+   Portfolio: CAGR=+4.1% MaxDD=-37.8% Sharpe=0.33 | Random portfolio: CAGR=+2.0% Sharpe=0.20
+   Saal-war: 2020:+3% 2021:+41% 2022:-2% 2023:+13% 2024:-11% 2025:-15% 2026:+5%
+
+[FAIL] RSI3<10 BTC filter nahi
+   Har trade: n=480 win=68.5% PF=1.66 p5=1.29 Top10-hata=1.40 Exp=+1.86% | Random PF=0.78 (n=731)
+   Folds: 1.24(85) / 0.90(36) / 1.84(234) / 2.53(125) | Exit: {'signal': 442, 'stop': 33, 'time': 5}
+   Portfolio: CAGR=+8.7% MaxDD=-18.8% Sharpe=0.67 | Random portfolio: CAGR=-10.1% Sharpe=-0.73
+   Saal-war: 2020:-2% 2021:+18% 2022:-11% 2023:+9% 2024:+2% 2025:+40% 2026:+3%
+
+[PASS] RSI3<10 stop 2.5 ATR
+   Har trade: n=255 win=69.4% PF=2.18 p5=1.60 Top10-hata=1.66 Exp=+2.42% | Random PF=0.77 (n=376)
+   Folds: 1.81(39) / 1.20(11) / 2.03(153) / 4.32(52) | Exit: {'signal': 239, 'stop': 13, 'time': 3}
+   Portfolio: CAGR=+7.0% MaxDD=-15.8% Sharpe=0.85 | Random portfolio: CAGR=-5.6% Sharpe=-0.52
+   Saal-war: 2020:-2% 2021:+10% 2022:-0% 2023:+6% 2024:-0% 2025:+16% 2026:+13%
+
+[FAIL] RSI3<10 stop 4 ATR
+   Har trade: n=253 win=69.6% PF=2.19 p5=1.59 Top10-hata=1.66 Exp=+2.42% | Random PF=0.84 (n=375)
+   Folds: 1.67(39) / 0.96(11) / 2.27(152) / 3.52(51) | Exit: {'signal': 243, 'time': 6, 'stop': 4}
+   Portfolio: CAGR=+7.1% MaxDD=-13.6% Sharpe=0.78 | Random portfolio: CAGR=-3.6% Sharpe=-0.31
+   Saal-war: 2020:-2% 2021:+9% 2022:+0% 2023:+5% 2024:+4% 2025:+16% 2026:+11%
+
+====================================================================================================
+KHULASA
+====================================================================================================
+   Strategy |                  Variant | Trades |  Win% |    PF |    p5 | Random |    CAGR |   MaxDD | Sharpe | Faisla
+  DIP_DAILY |                 BASELINE |    254 |  69.3 |  2.07 |  1.48 |   0.82 |   +6.5% |  -16.9% |   0.78 | PASS
+  DIP_DAILY |         RSI3<5 exit SMA3 |     49 |  83.7 |  3.99 |  2.05 |   0.78 |   +2.7% |   -1.6% |   1.16 | FAIL
+  DIP_DAILY |         RSI3<5 exit SMA5 |     47 |  78.7 |  2.94 |  1.57 |   0.59 |   +2.3% |   -3.1% |   0.83 | FAIL
+  DIP_DAILY |         RSI3<5 exit SMA7 |     47 |  76.6 |  2.44 |  1.28 |   0.57 |   +2.6% |   -4.5% |   0.81 | FAIL
+  DIP_DAILY |         RSI3<8 exit SMA3 |    161 |  75.2 |  2.54 |  1.64 |   1.00 |   +5.8% |  -12.9% |   0.98 | FAIL
+  DIP_DAILY |         RSI3<8 exit SMA5 |    159 |  74.8 |  2.34 |  1.53 |   0.92 |   +6.3% |  -14.2% |   0.89 | FAIL
+  DIP_DAILY |         RSI3<8 exit SMA7 |    159 |  76.7 |  2.26 |  1.55 |   0.98 |   +7.1% |  -17.3% |   0.97 | FAIL
+  DIP_DAILY |        RSI3<10 exit SMA3 |    261 |  68.2 |  2.13 |  1.51 |   0.72 |   +6.9% |  -13.6% |   0.97 | PASS
+  DIP_DAILY |        RSI3<10 exit SMA7 |    250 |  72.4 |  2.23 |  1.61 |   0.94 |   +8.4% |  -19.0% |   0.85 | PASS
+  DIP_DAILY |        RSI3<12 exit SMA3 |    377 |  63.4 |  1.68 |  1.30 |   1.09 |   +6.4% |  -17.5% |   0.75 | PASS
+  DIP_DAILY |        RSI3<12 exit SMA5 |    365 |  64.9 |  1.73 |  1.34 |   1.19 |   +7.4% |  -20.5% |   0.67 | PASS
+  DIP_DAILY |        RSI3<12 exit SMA7 |    359 |  66.9 |  1.72 |  1.33 |   1.15 |   +7.6% |  -25.6% |   0.63 | FAIL
+  DIP_DAILY |        RSI3<15 exit SMA3 |    564 |  60.8 |  1.40 |  1.10 |   1.01 |   +5.8% |  -30.0% |   0.52 | FAIL
+  DIP_DAILY |        RSI3<15 exit SMA5 |    541 |  60.8 |  1.41 |  1.14 |   0.99 |   +4.9% |  -34.4% |   0.40 | FAIL
+  DIP_DAILY |        RSI3<15 exit SMA7 |    530 |  64.0 |  1.44 |  1.14 |   1.10 |   +4.1% |  -37.8% |   0.33 | FAIL
+  DIP_DAILY |  RSI3<10 BTC filter nahi |    480 |  68.5 |  1.66 |  1.29 |   0.78 |   +8.7% |  -18.8% |   0.67 | FAIL
+  DIP_DAILY |     RSI3<10 stop 2.5 ATR |    255 |  69.4 |  2.18 |  1.60 |   0.77 |   +7.0% |  -15.8% |   0.85 | PASS
+  DIP_DAILY |       RSI3<10 stop 4 ATR |    253 |  69.6 |  2.19 |  1.59 |   0.84 |   +7.1% |  -13.6% |   0.78 | FAIL
+DIP_DAILY: 6/18 PASS
