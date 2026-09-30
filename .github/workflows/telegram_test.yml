@@ -1,0 +1,33 @@
+name: Telegram Test
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Send test message
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python - <<'PY'
+          import sys
+          from telegram_alert import send_telegram_alert
+          ok = send_telegram_alert("✅ <b>Telegram Test</b>\nGitHub secrets theek lage hue hain - Ichimoku 4H Bot aur Donchian Daily Bot ke alerts yahan aayenge.")
+          print("Telegram test:", "KAMYAB" if ok else "NAKAM")
+          sys.exit(0 if ok else 1)
+          PY

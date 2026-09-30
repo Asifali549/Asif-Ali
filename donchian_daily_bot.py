@@ -122,7 +122,9 @@ def main():
 
     st = load_state()
     if st["last_day"] == Ds:
-        print(f"{Ds} pehle hi process ho chuka - kuch nahi karna.")
+        print(f"{Ds} pehle hi process ho chuka - sirf 'aakhri run' ka waqt update.")
+        st["last_updated"] = pd.Timestamp.now(tz="UTC").isoformat()
+        save_state(st)
         return
 
     # ---------- per-coin indicators ----------

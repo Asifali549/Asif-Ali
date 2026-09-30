@@ -130,7 +130,9 @@ def main():
     Ds = str(D)
     st = load_state()
     if st["last_bar"] == Ds:
-        print(f"{Ds} pehle hi process ho chuka.")
+        print(f"{Ds} pehle hi process ho chuka - sirf 'aakhri run' ka waqt update.")
+        st["last_updated"] = pd.Timestamp.now(tz="UTC").isoformat()
+        save_state(st)
         return
     last_bar = pd.Timestamp(st["last_bar"]) if st["last_bar"] else D - pd.Timedelta(hours=4)
     fills_msg, exits_msg = [], []
