@@ -32,6 +32,7 @@ H4_BARS = 2400 * 6          # ~6.5 saal 4H
 UNIVERSE = 100
 N_FOLDS = 4
 RISK_PCT, MAX_POS, MAX_POS_PCT = 0.01, 10, 0.20
+FIXED_PCT = None            # misal 0.10 = har trade equity ka 10% (risk-based sizing ki jagah)
 OUT = "swing_lab_RESULTS.txt"
 
 
@@ -148,6 +149,8 @@ def dip_daily(dd_in, p, ctx):
     c = d["close"]
     e50, e200 = ema(c, 50), ema(c, 200)
     btc = ctx["btc_ok"].reindex(d["timestamp"]).fillna(False).to_numpy(bool)
+    if not p.get("btc", True):
+        btc = np.ones(len(d), bool)
     trend = ((c > e200) & (e50 > e200)).to_numpy() & btc
     trend[:200] = False
     r = rsi(c, 3)
@@ -252,7 +255,8 @@ def portfolio(trades):
         open_pos = keep
         if len(open_pos) >= MAX_POS:
             continue
-        open_pos.append((t["t_out"], min(eq * RISK_PCT / max(t["risk"], 1e-6), MAX_POS_PCT * eq), t["ret"]))
+        val = FIXED_PCT * eq if FIXED_PCT else min(eq * RISK_PCT / max(t["risk"], 1e-6), MAX_POS_PCT * eq)
+        open_pos.append((t["t_out"], val, t["ret"]))
     for (t_out, val, ret) in sorted(open_pos):
         eq += val * ret
         curve.append((t_out, eq))

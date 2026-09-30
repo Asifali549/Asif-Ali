@@ -62,6 +62,9 @@ Secrets:
   PF 0.58, win 31%, CAGR -6%; 14/14 variants fail, random entries jaisi ya un se bhi buri. 15m par kharcha
   chhote stops ko kha jata hai. Files `git show 2645cca:smc_mtf_strategy.py` / `smc_mtf_test.py` / `smc_mtf_RESULTS.txt`.
   Sabaq: 15m/1h intraday entries is setup (spot, taker fees) mein kaam nahi karti - 4H/Daily par raho.
+- **Swing Lab (2026-09-30, 109 coins, 2020-10 -> 2026-09):** SMC_4H FAIL (PF 0.82, 0/8; sirf 67 trades,
+  random se bura). SQUEEZE_4H FAIL (PF 1.34 lekin random PF 1.47 - edge entry ka nahi trailing/trend ka,
+  MaxDD -49%, 0/7). Natija `swing_lab_RESULTS.txt`.
 - Purane research scripts/natije git history mein hain: commit `ec7962f` (cleanup se pehle) par
   `git show ec7962f:<file>` se wapas mil sakte hain (unified_test.py, ichimoku4h_validation.py, strategy_lab.py,
   portfolio_test.py, donchian_regime_test.py, archive/...).
@@ -73,14 +76,15 @@ Secrets:
 - Purana Telegram token public git history mein hai - user ko BotFather `/revoke` ka mashwara diya.
 
 ## Zer-e-test (EXPERIMENTAL - live nahi)
-- **Swing Lab** (`swing_lab.py`, workflow "Swing Lab Test", natija `swing_lab_RESULTS.txt`): 3 strategies
-  ek hi sakht tarazu par (4H data ~6.5 saal, top-150, point-in-time top-100):
-  SMC_4H (Daily trend+HL -> 4H RSI pullback + BOS + volume, TP 2R / trail variant),
-  SQUEEZE_4H (BB width tang 15% -> upper band + 20-bar high breakout, volume, EMA200, CE 16/5.5),
-  DIP_DAILY (daily uptrend + BTC>EMA50 + RSI3<15, exit close>SMA5, stop 3 ATR, max 10 din).
-  Lookahead truncation test 0. PASS hone par hi paper bot.
+- **DIP_DAILY** (`dip_focus.py` jo `swing_lab.py` ke functions use karta hai; workflow "Dip Focus Test",
+  natija `dip_focus_RESULTS.txt`): daily uptrend (close>EMA200, EMA50>EMA200) + BTC>EMA50 + RSI(3) < had
+  -> agle din open; exit close > SMA5 (agle open), stop 3 ATR, max 10 din.
+  Swing Lab mein: RSI3<10 PASS (n=254, win 69%, PF 2.07, p5 1.49, random PF 0.79, MaxDD -7%) lekin
+  CAGR sirf +1.6% (1% risk sizing se positions chhoti) aur 6 mein se sirf 1 variant pass (RSI<15 PF 1.41,
+  RSI<25 PF 1.06 fail). Dip Focus: RSI 5-15 x exit SMA 3/5/7 grid + 10% fixed sizing - edge ilaqa hai ya nukta.
 
 ## Aglay kaam
-- Swing Lab natija parh kar faisla (pass -> paper bot; fail -> FAIL list, files hatao).
+- Dip Focus natija: grid ka bara hissa pass -> paper bot (Ichimoku/Donchian ke sath, kam correlation);
+  warna DIP bhi FAIL list mein, swing_lab.py/dip_focus.py hatao.
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
 - 2-3 mahine paper trading ke natije backtest se milao, phir asli paisa.
