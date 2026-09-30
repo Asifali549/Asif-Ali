@@ -31,7 +31,7 @@ import csv
 import numpy as np
 import pandas as pd
 
-from strategy_lab import fetch_full, norm, ema, chandelier, STABLES, FEE, SLIP, STOP_SLIP
+from bot_core import fetch_full, norm, ema, chandelier, STABLES, FEE, SLIP, STOP_SLIP
 
 # ---------------- Settings ----------------
 DONCHIAN_N = 20

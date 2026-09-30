@@ -29,8 +29,7 @@ import os
 import numpy as np
 import pandas as pd
 
-from strategy_lab import fetch_full, norm, chandelier, STABLES, FEE, SLIP, STOP_SLIP
-from ichimoku4h_validation import signal as ichi_signal, BASE
+from bot_core import fetch_full, norm, chandelier, ichi_signal, ICHI_BASE as BASE, STABLES, FEE, SLIP, STOP_SLIP
 
 CE_P, CE_M, TP_R = 16, 5.5, 3.0
 PARAMS = dict(BASE, ce_p=CE_P, ce_m=CE_M, tp=TP_R)
