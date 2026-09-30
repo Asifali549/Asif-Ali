@@ -72,6 +72,15 @@ Secrets:
   per-system closed-trade performance, PKT session analysis).
 - Purana Telegram token public git history mein hai - user ko BotFather `/revoke` ka mashwara diya.
 
+## Zer-e-test (EXPERIMENTAL - live nahi)
+- **Swing Lab** (`swing_lab.py`, workflow "Swing Lab Test", natija `swing_lab_RESULTS.txt`): 3 strategies
+  ek hi sakht tarazu par (4H data ~6.5 saal, top-150, point-in-time top-100):
+  SMC_4H (Daily trend+HL -> 4H RSI pullback + BOS + volume, TP 2R / trail variant),
+  SQUEEZE_4H (BB width tang 15% -> upper band + 20-bar high breakout, volume, EMA200, CE 16/5.5),
+  DIP_DAILY (daily uptrend + BTC>EMA50 + RSI3<15, exit close>SMA5, stop 3 ATR, max 10 din).
+  Lookahead truncation test 0. PASS hone par hi paper bot.
+
 ## Aglay kaam
+- Swing Lab natija parh kar faisla (pass -> paper bot; fail -> FAIL list, files hatao).
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
 - 2-3 mahine paper trading ke natije backtest se milao, phir asli paisa.
