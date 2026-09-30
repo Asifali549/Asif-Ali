@@ -1,139 +1,365 @@
 ====================================================================================================
-UNIFIED TEST - SAB STRATEGIES EK HI SAKHT TARAZU PAR
+UNIFIED TEST - SAB STRATEGIES, 1H + 4H + DAILY, EK HI SAKHT TARAZU PAR
 ====================================================================================================
-fetch errors: 0/150 | fee 0.10% + slip 0.05% har taraf + stop slip 0.25%
-1H: coins=125 | candles median=17519 min=1554 max=17519 | poori history (>= 17169) wale coins=72 | sab se purani tareekh=2024-09-30 | aakhri tareekh=2026-09-30
+fetch errors: 1/150 | fee 0.10% + slip 0.05% har taraf + stop slip 0.25%
+1H: coins=125 | candles median=17519 min=1555 max=17519 | poori history (>= 17169) wale coins=72 | sab se purani tareekh=2024-09-30 | aakhri tareekh=2026-09-30
    1H: data mein khali soorakh (gap) wale coins = 0 / 125
+4H: coins=120 | candles median=6212 min=629 max=6569 | poori history (>= 6438) wale coins=58 | sab se purani tareekh=2023-10-01 | aakhri tareekh=2026-09-30
+   4H: data mein khali soorakh (gap) wale coins = 0 / 120
 DAILY: coins=114 | candles median=1153 min=153 max=2399 | poori history (>= 2352) wale coins=17 | sab se purani tareekh=2020-03-06 | aakhri tareekh=2026-09-29
    DAILY: data mein khali soorakh (gap) wale coins = 0 / 114
 PASS = har trade [n>=100, har fold PF>1, p5>1.2, p5>random] AUR portfolio [Sharpe>random 95th, CAGR>0, MaxDD>-50%]
-NOTE: coin list aaj ki hai (survivorship bias) - sab strategies par barabar asar.
+NOTE: parameters (EMA, Ichimoku, cooldown, CE) bars mein hain - 4H/daily par wahi numbers istemal hue.
+NOTE: coin list aaj ki hai (survivorship bias) - sab par barabar asar.
 
 
 ####################################################################################################
-1H STRATEGIES (screener) - period 2024-11-29 -> 2026-09-30
+1H - screener strategies - period 2024-11-29 -> 2026-09-30
 ####################################################################################################
 
-[FAIL] Union AB Ichimoku+MS | No filter
-   Har trade: n=880 win=33.9% PF=1.05 p5=0.89 Top10-hata=0.89 RandomPF=0.67 Exp=+0.13% | Folds: 1.22(201) / 0.80(250) / 1.40(180) / 0.91(249) -> FAIL
-   Portfolio (10 slots, 1% risk): CAGR=+20.7% MaxDD=-23.5% Sharpe=0.85 (random 95th=0.33) trades=772 -> theek
+[FAIL] [1h] Union AB Ichimoku+MS | No filter
+   Har trade: n=880 win=33.9% PF=1.05 p5=0.89 Top10-hata=0.89 RandomPF=0.73 Exp=+0.12% | Folds: 1.22(201) / 0.80(250) / 1.43(181) / 0.90(248) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+20.7% MaxDD=-23.5% Sharpe=0.85 (random 95th=0.21) trades=772 -> theek
    Saal-war: 2024:+4% 2025:+30% 2026:+5%
 
-[FAIL] Union AB Ichimoku+MS | RS only
-   Har trade: n=113 win=35.4% PF=1.12 p5=0.71 Top10-hata=0.50 RandomPF=0.65 Exp=+0.42% | Folds: 6.34(14) / 1.12(24) / 1.59(24) / 0.42(51) -> FAIL
-   Portfolio (10 slots, 1% risk): CAGR=+7.5% MaxDD=-12.6% Sharpe=0.94 (random 95th=1.39) trades=113 -> FAIL
+[FAIL] [1h] Union AB Ichimoku+MS | RS only
+   Har trade: n=113 win=35.4% PF=1.12 p5=0.70 Top10-hata=0.49 RandomPF=1.07 Exp=+0.42% | Folds: 6.34(14) / 1.12(24) / 1.59(24) / 0.41(51) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+7.5% MaxDD=-12.6% Sharpe=0.94 (random 95th=1.02) trades=113 -> FAIL
    Saal-war: 2024:+8% 2025:+15% 2026:-8%
 
-[FAIL] Union AB Ichimoku+MS | ETH+RS   <-- screener par yehi chal raha hai
-   Har trade: n=59 win=45.8% PF=2.12 p5=1.19 Top10-hata=0.71 RandomPF=0.83 Exp=+3.10% | Folds: 6.98(13) / 1.12(24) / N/A(2) / 0.75(20) -> FAIL
-   Portfolio (10 slots, 1% risk): CAGR=+13.2% MaxDD=-3.8% Sharpe=2.21 (random 95th=1.58) trades=59 -> theek
-   Saal-war: 2024:+8% 2025:+17% 2026:-0%
+[FAIL] [1h] Union AB Ichimoku+MS | ETH+RS   <-- screener par yehi chal raha hai
+   Har trade: n=59 win=45.8% PF=2.11 p5=1.18 Top10-hata=0.71 RandomPF=0.56 Exp=+3.09% | Folds: 6.98(13) / 1.12(24) / N/A(2) / 0.74(20) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+13.1% MaxDD=-3.8% Sharpe=2.20 (random 95th=1.58) trades=59 -> theek
+   Saal-war: 2024:+8% 2025:+17% 2026:-1%
 
-[FAIL] Union AB EMA+Breakout | No filter
-   Har trade: n=2454 win=31.8% PF=0.92 p5=0.83 Top10-hata=0.86 RandomPF=0.80 Exp=-0.26% | Folds: 0.88(508) / 0.86(646) / 0.86(561) / 1.03(739) -> FAIL
-   Portfolio (10 slots, 1% risk): CAGR=-25.5% MaxDD=-60.9% Sharpe=-0.56 (random 95th=-1.24) trades=1743 -> FAIL
-   Saal-war: 2024:-4% 2025:-43% 2026:+6%
+[FAIL] [1h] Union AB EMA+Breakout | No filter
+   Har trade: n=2455 win=31.9% PF=0.92 p5=0.84 Top10-hata=0.86 RandomPF=0.73 Exp=-0.25% | Folds: 0.88(508) / 0.86(646) / 0.86(561) / 1.03(740) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-25.4% MaxDD=-60.9% Sharpe=-0.56 (random 95th=-1.28) trades=1744 -> FAIL
+   Saal-war: 2024:-4% 2025:-43% 2026:+7%
 
-[FAIL] Union AB EMA+Breakout | RS only
-   Har trade: n=308 win=31.5% PF=0.93 p5=0.69 Top10-hata=0.63 RandomPF=0.90 Exp=-0.29% | Folds: 1.11(44) / 1.01(67) / 1.23(68) / 0.75(129) -> FAIL
-   Portfolio (10 slots, 1% risk): CAGR=-8.9% MaxDD=-22.5% Sharpe=-0.57 (random 95th=-0.02) trades=312 -> FAIL
+[FAIL] [1h] Union AB EMA+Breakout | RS only
+   Har trade: n=308 win=31.5% PF=0.93 p5=0.69 Top10-hata=0.63 RandomPF=0.86 Exp=-0.29% | Folds: 1.11(44) / 1.01(67) / 1.23(68) / 0.75(129) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-8.9% MaxDD=-22.5% Sharpe=-0.57 (random 95th=-0.24) trades=312 -> FAIL
    Saal-war: 2024:-3% 2025:+6% 2026:-18%
 
-[FAIL] Union AB EMA+Breakout | ETH+RS   <-- screener par yehi chal raha hai
-   Har trade: n=161 win=30.4% PF=0.94 p5=0.64 Top10-hata=0.48 RandomPF=1.49 Exp=-0.26% | Folds: 1.10(39) / 1.01(67) / N/A(2) / 0.56(53) -> FAIL
-   Portfolio (10 slots, 1% risk): CAGR=-3.0% MaxDD=-12.5% Sharpe=-0.22 (random 95th=0.42) trades=164 -> FAIL
+[FAIL] [1h] Union AB EMA+Breakout | ETH+RS   <-- screener par yehi chal raha hai
+   Har trade: n=161 win=30.4% PF=0.94 p5=0.64 Top10-hata=0.48 RandomPF=1.44 Exp=-0.25% | Folds: 1.10(39) / 1.01(67) / N/A(2) / 0.56(53) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-3.0% MaxDD=-12.5% Sharpe=-0.22 (random 95th=0.16) trades=164 -> FAIL
    Saal-war: 2024:-3% 2025:+9% 2026:-11%
 
-[FAIL] NEW AdvancedConfluence (CHoCH) | No filter   <-- screener par yehi chal raha hai
-   Har trade: n=583 win=36.5% PF=1.24 p5=1.04 Top10-hata=1.05 RandomPF=0.72 Exp=+0.37% | Folds: 1.29(130) / 1.11(212) / 1.05(73) / 1.47(168) -> FAIL
-   Portfolio (10 slots, 1% risk): CAGR=+19.5% MaxDD=-12.7% Sharpe=1.15 (random 95th=0.01) trades=521 -> theek
+[FAIL] [1h] NEW AdvancedConfluence (CHoCH) | No filter   <-- screener par yehi chal raha hai
+   Har trade: n=583 win=36.5% PF=1.24 p5=1.04 Top10-hata=1.05 RandomPF=0.62 Exp=+0.37% | Folds: 1.29(130) / 1.11(212) / 1.05(73) / 1.47(168) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+19.5% MaxDD=-12.7% Sharpe=1.15 (random 95th=0.08) trades=521 -> theek
    Saal-war: 2024:-0% 2025:+12% 2026:+23%
 
-[FAIL] NEW AdvancedConfluence (CHoCH) | RS only
-   Har trade: n=43 win=34.9% PF=1.33 p5=0.64 Top10-hata=0.08 RandomPF=0.88 Exp=+0.71% | Folds: 1.89(10) / 0.70(11) / 0.00(4) / 2.55(18) -> FAIL
-   Portfolio (10 slots, 1% risk): CAGR=+2.6% MaxDD=-4.6% Sharpe=0.53 (random 95th=0.96) trades=43 -> FAIL
+[FAIL] [1h] NEW AdvancedConfluence (CHoCH) | RS only
+   Har trade: n=43 win=34.9% PF=1.33 p5=0.65 Top10-hata=0.08 RandomPF=1.19 Exp=+0.71% | Folds: 1.89(10) / 0.70(11) / 0.00(4) / 2.55(18) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+2.6% MaxDD=-4.6% Sharpe=0.53 (random 95th=0.76) trades=43 -> FAIL
    Saal-war: 2024:-1% 2025:+1% 2026:+4%
 
-[FAIL] NEW AdvancedConfluence (CHoCH) | ETH+RS
-   Har trade: n=30 win=33.3% PF=1.37 p5=0.58 Top10-hata=0.00 RandomPF=1.31 Exp=+0.92% | Folds: 1.89(10) / 0.70(11) / N/A(0) / 2.23(9) -> FAIL
-   Portfolio (10 slots, 1% risk): CAGR=+1.9% MaxDD=-4.0% Sharpe=0.49 (random 95th=0.86) trades=30 -> FAIL
+[FAIL] [1h] NEW AdvancedConfluence (CHoCH) | ETH+RS
+   Har trade: n=30 win=33.3% PF=1.37 p5=0.58 Top10-hata=0.00 RandomPF=1.47 Exp=+0.92% | Folds: 1.89(10) / 0.70(11) / N/A(0) / 2.23(9) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+1.9% MaxDD=-4.0% Sharpe=0.49 (random 95th=0.90) trades=30 -> FAIL
    Saal-war: 2024:-1% 2025:+1% 2026:+3%
 
-[FAIL] CE Buy-Only | No filter   <-- screener par yehi chal raha hai
-   Har trade: n=13700 win=23.7% PF=0.38 p5=0.35 Top10-hata=0.34 RandomPF=0.61 Exp=-0.41% | Folds: 0.57(2816) / 0.29(3136) / 0.39(4269) / 0.32(3479) -> FAIL
-   Portfolio (10 slots, 1% risk): CAGR=-97.5% MaxDD=-99.9% Sharpe=-14.03 (random 95th=-6.64) trades=9236 -> FAIL
+[FAIL] [1h] CE Buy-Only | No filter   <-- screener par yehi chal raha hai
+   Har trade: n=13701 win=23.7% PF=0.38 p5=0.35 Top10-hata=0.34 RandomPF=0.63 Exp=-0.41% | Folds: 0.57(2816) / 0.29(3136) / 0.39(4269) / 0.32(3480) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-97.5% MaxDD=-99.9% Sharpe=-14.04 (random 95th=-6.70) trades=9237 -> FAIL
    Saal-war: 2024:-12% 2025:-96% 2026:-97%
 
-[FAIL] CE Buy-Only | RS only
-   Har trade: n=774 win=28.7% PF=0.72 p5=0.45 Top10-hata=0.33 RandomPF=0.87 Exp=-0.20% | Folds: 0.70(93) / 0.30(144) / 1.43(201) / 0.54(336) -> FAIL
-   Portfolio (10 slots, 1% risk): CAGR=-14.1% MaxDD=-28.9% Sharpe=-1.48 (random 95th=-0.98) trades=765 -> FAIL
+[FAIL] [1h] CE Buy-Only | RS only
+   Har trade: n=774 win=28.7% PF=0.72 p5=0.45 Top10-hata=0.33 RandomPF=0.83 Exp=-0.20% | Folds: 0.70(93) / 0.30(144) / 1.43(201) / 0.54(336) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-14.1% MaxDD=-28.9% Sharpe=-1.48 (random 95th=-0.76) trades=765 -> FAIL
    Saal-war: 2024:-2% 2025:-2% 2026:-22%
 
-[FAIL] CE Buy-Only | ETH+RS
-   Har trade: n=315 win=28.6% PF=0.85 p5=0.34 Top10-hata=0.23 RandomPF=0.76 Exp=-0.12% | Folds: 0.61(78) / 0.30(144) / 111.75(4) / 0.27(89) -> FAIL
-   Portfolio (10 slots, 1% risk): CAGR=-3.6% MaxDD=-18.1% Sharpe=-0.43 (random 95th=0.30) trades=310 -> FAIL
+[FAIL] [1h] CE Buy-Only | ETH+RS
+   Har trade: n=315 win=28.6% PF=0.85 p5=0.35 Top10-hata=0.23 RandomPF=0.52 Exp=-0.12% | Folds: 0.61(78) / 0.30(144) / 111.75(4) / 0.27(89) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-3.6% MaxDD=-18.1% Sharpe=-0.43 (random 95th=0.12) trades=310 -> FAIL
    Saal-war: 2024:-2% 2025:+3% 2026:-8%
 
-[FAIL] Pullback-in-Uptrend | No filter
-   Har trade: n=16382 win=27.3% PF=0.77 p5=0.73 Top10-hata=0.74 RandomPF=0.77 Exp=-0.55% | Folds: 0.73(3380) / 0.77(3987) / 0.63(4121) / 0.94(4894) -> FAIL
-   Portfolio (10 slots, 1% risk): CAGR=-78.9% MaxDD=-96.7% Sharpe=-2.01 (random 95th=-2.27) trades=3657 -> FAIL
+[FAIL] [1h] Pullback-in-Uptrend | No filter
+   Har trade: n=16383 win=27.3% PF=0.77 p5=0.73 Top10-hata=0.74 RandomPF=0.74 Exp=-0.55% | Folds: 0.73(3380) / 0.77(3987) / 0.63(4128) / 0.94(4888) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-78.9% MaxDD=-96.7% Sharpe=-2.00 (random 95th=-2.21) trades=3657 -> FAIL
    Saal-war: 2024:-5% 2025:-86% 2026:-57%
 
-[FAIL] Pullback-in-Uptrend | RS only
-   Har trade: n=1718 win=26.1% PF=0.79 p5=0.67 Top10-hata=0.63 RandomPF=0.79 Exp=-0.68% | Folds: 0.75(268) / 0.76(351) / 0.90(375) / 0.79(724) -> FAIL
-   Portfolio (10 slots, 1% risk): CAGR=-44.2% MaxDD=-79.4% Sharpe=-1.07 (random 95th=-0.35) trades=1486 -> FAIL
+[FAIL] [1h] Pullback-in-Uptrend | RS only
+   Har trade: n=1719 win=26.2% PF=0.79 p5=0.67 Top10-hata=0.63 RandomPF=0.74 Exp=-0.67% | Folds: 0.75(268) / 0.76(351) / 0.90(376) / 0.79(724) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-43.9% MaxDD=-79.4% Sharpe=-1.06 (random 95th=-0.08) trades=1487 -> FAIL
    Saal-war: 2024:+12% 2025:-20% 2026:-62%
 
-[FAIL] Pullback-in-Uptrend | ETH+RS   <-- screener par yehi chal raha hai
-   Har trade: n=843 win=27.4% PF=0.91 p5=0.72 Top10-hata=0.61 RandomPF=1.04 Exp=-0.30% | Folds: 0.77(229) / 0.76(348) / 2.70(7) / 1.19(259) -> FAIL
-   Portfolio (10 slots, 1% risk): CAGR=+3.3% MaxDD=-38.3% Sharpe=0.27 (random 95th=0.52) trades=665 -> FAIL
-   Saal-war: 2024:+12% 2025:-7% 2026:+1%
+[FAIL] [1h] Pullback-in-Uptrend | ETH+RS   <-- screener par yehi chal raha hai
+   Har trade: n=844 win=27.5% PF=0.92 p5=0.72 Top10-hata=0.61 RandomPF=1.11 Exp=-0.29% | Folds: 0.77(229) / 0.76(348) / 2.70(7) / 1.20(260) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+3.7% MaxDD=-38.3% Sharpe=0.28 (random 95th=0.62) trades=666 -> FAIL
+   Saal-war: 2024:+12% 2025:-7% 2026:+2%
 
-[FAIL] Donchian Breakout 1h | No filter
-   Har trade: n=18836 win=28.8% PF=0.79 p5=0.76 Top10-hata=0.77 RandomPF=0.72 Exp=-0.51% | Folds: 0.73(3997) / 0.81(4636) / 0.68(5125) / 0.97(5078) -> FAIL
-   Portfolio (10 slots, 1% risk): CAGR=-80.7% MaxDD=-96.2% Sharpe=-2.24 (random 95th=-1.84) trades=3620 -> FAIL
+[FAIL] [1h] Donchian Breakout 1h | No filter
+   Har trade: n=18837 win=28.8% PF=0.79 p5=0.76 Top10-hata=0.77 RandomPF=0.75 Exp=-0.50% | Folds: 0.73(3997) / 0.81(4636) / 0.68(5132) / 0.96(5072) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-80.7% MaxDD=-96.2% Sharpe=-2.24 (random 95th=-1.70) trades=3620 -> FAIL
    Saal-war: 2024:-17% 2025:-83% 2026:-65%
 
-[FAIL] Donchian Breakout 1h | RS only
-   Har trade: n=1224 win=29.9% PF=0.87 p5=0.72 Top10-hata=0.65 RandomPF=0.90 Exp=-0.46% | Folds: 1.05(167) / 0.86(237) / 0.69(287) / 0.89(533) -> FAIL
-   Portfolio (10 slots, 1% risk): CAGR=-26.4% MaxDD=-61.7% Sharpe=-0.62 (random 95th=0.05) trades=1128 -> FAIL
+[FAIL] [1h] Donchian Breakout 1h | RS only
+   Har trade: n=1224 win=29.9% PF=0.87 p5=0.72 Top10-hata=0.65 RandomPF=0.76 Exp=-0.46% | Folds: 1.05(167) / 0.86(237) / 0.69(287) / 0.89(533) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-26.5% MaxDD=-61.7% Sharpe=-0.62 (random 95th=-0.01) trades=1128 -> FAIL
    Saal-war: 2024:-4% 2025:+3% 2026:-42%
 
-[FAIL] Donchian Breakout 1h | ETH+RS   <-- screener par yehi chal raha hai
-   Har trade: n=574 win=31.9% PF=1.11 p5=0.84 Top10-hata=0.67 RandomPF=1.12 Exp=+0.43% | Folds: 1.02(144) / 0.88(234) / 14.69(3) / 1.30(193) -> FAIL
-   Portfolio (10 slots, 1% risk): CAGR=+12.8% MaxDD=-24.0% Sharpe=0.56 (random 95th=1.05) trades=495 -> FAIL
+[FAIL] [1h] Donchian Breakout 1h | ETH+RS   <-- screener par yehi chal raha hai
+   Har trade: n=574 win=31.9% PF=1.11 p5=0.84 Top10-hata=0.67 RandomPF=1.18 Exp=+0.43% | Folds: 1.02(144) / 0.88(234) / 14.69(3) / 1.30(193) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+12.7% MaxDD=-24.0% Sharpe=0.56 (random 95th=0.99) trades=495 -> FAIL
    Saal-war: 2024:-4% 2025:+30% 2026:-0%
 
 
 ####################################################################################################
-DAILY DONCHIAN 20 (reference, Donchian Daily Bot wali) - period 2021-05-03 -> 2026-09-29
+4H - screener strategies - period 2023-11-30 -> 2026-09-30
 ####################################################################################################
 
-[PASS] Daily Donchian 20 | BTC>EMA50
-   Har trade: n=1424 win=37.2% PF=1.55 p5=1.34 Top10-hata=1.33 RandomPF=1.28 Exp=+4.69% | Folds: 1.41(153) / 2.36(315) / 1.19(470) / 1.53(486) -> theek
-   Portfolio (10 slots, 1% risk): CAGR=+26.2% MaxDD=-30.7% Sharpe=0.98 (random 95th=0.78) trades=448 -> theek
+[PASS] [4h] Union AB Ichimoku+MS | No filter
+   Har trade: n=287 win=43.6% PF=1.88 p5=1.46 Top10-hata=1.46 RandomPF=0.83 Exp=+3.64% | Folds: 1.43(76) / 2.65(82) / 1.25(51) / 1.88(78) -> theek
+   Portfolio (10 slots, 1% risk): CAGR=+31.4% MaxDD=-10.9% Sharpe=1.92 (random 95th=1.11) trades=280 -> theek
+   Saal-war: 2023:+6% 2024:+54% 2025:+8% 2026:+23%
+
+[FAIL] [4h] Union AB Ichimoku+MS | RS only
+   Har trade: n=52 win=40.4% PF=2.46 p5=1.33 Top10-hata=0.65 RandomPF=1.07 Exp=+6.47% | Folds: 2.36(16) / 1.79(13) / 9.10(5) / 2.16(18) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+6.8% MaxDD=-5.6% Sharpe=1.35 (random 95th=0.92) trades=52 -> theek
+   Saal-war: 2023:-1% 2024:+11% 2025:+6% 2026:+3%
+
+[FAIL] [4h] Union AB Ichimoku+MS | ETH+RS
+   Har trade: n=30 win=43.3% PF=2.48 p5=1.10 Top10-hata=0.19 RandomPF=1.11 Exp=+7.10% | Folds: 2.36(16) / 1.29(8) / N/A(2) / 4.01(4) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+4.8% MaxDD=-3.6% Sharpe=1.32 (random 95th=1.18) trades=30 -> theek
+   Saal-war: 2023:-1% 2024:+7% 2025:+5% 2026:+2%
+
+[FAIL] [4h] Union AB EMA+Breakout | No filter
+   Har trade: n=748 win=36.2% PF=1.26 p5=1.08 Top10-hata=1.14 RandomPF=0.89 Exp=+1.48% | Folds: 1.37(182) / 1.94(163) / 0.93(161) / 1.04(242) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+27.4% MaxDD=-29.9% Sharpe=1.10 (random 95th=0.89) trades=654 -> theek
+   Saal-war: 2023:+14% 2024:+69% 2025:-4% 2026:+7%
+
+[FAIL] [4h] Union AB EMA+Breakout | RS only
+   Har trade: n=122 win=40.2% PF=1.53 p5=1.06 Top10-hata=0.93 RandomPF=1.00 Exp=+3.48% | Folds: 2.12(32) / 2.61(23) / 2.33(24) / 0.58(43) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+10.2% MaxDD=-8.8% Sharpe=1.23 (random 95th=1.24) trades=122 -> FAIL
+   Saal-war: 2023:+6% 2024:+21% 2025:+10% 2026:-7%
+
+[FAIL] [4h] Union AB EMA+Breakout | ETH+RS
+   Har trade: n=78 win=47.4% PF=2.15 p5=1.40 Top10-hata=1.10 RandomPF=1.24 Exp=+6.54% | Folds: 2.12(32) / 2.75(16) / 3.24(20) / 0.56(10) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+11.4% MaxDD=-7.6% Sharpe=1.57 (random 95th=0.89) trades=78 -> theek
+   Saal-war: 2023:+6% 2024:+20% 2025:+10% 2026:-3%
+
+[FAIL] [4h] NEW AdvancedConfluence (CHoCH) | No filter
+   Har trade: n=364 win=39.6% PF=1.53 p5=1.21 Top10-hata=1.21 RandomPF=0.61 Exp=+1.42% | Folds: 0.95(98) / 1.90(81) / 1.00(75) / 2.37(110) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+29.8% MaxDD=-11.2% Sharpe=1.83 (random 95th=0.14) trades=327 -> theek
+   Saal-war: 2023:+6% 2024:+30% 2025:-3% 2026:+57%
+
+[FAIL] [4h] NEW AdvancedConfluence (CHoCH) | RS only
+   Har trade: n=34 win=38.2% PF=1.79 p5=0.79 Top10-hata=0.08 RandomPF=0.70 Exp=+3.15% | Folds: 0.82(14) / 12.17(6) / 0.57(6) / 2.13(8) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+3.8% MaxDD=-3.5% Sharpe=0.99 (random 95th=1.03) trades=34 -> FAIL
+   Saal-war: 2023:+3% 2024:+5% 2025:-0% 2026:+3%
+
+[FAIL] [4h] NEW AdvancedConfluence (CHoCH) | ETH+RS
+   Har trade: n=30 win=40.0% PF=1.91 p5=0.82 Top10-hata=0.01 RandomPF=1.42 Exp=+3.69% | Folds: 0.82(14) / 20.93(4) / 0.57(6) / 2.85(6) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+3.7% MaxDD=-3.5% Sharpe=1.02 (random 95th=0.76) trades=30 -> theek
+   Saal-war: 2023:+3% 2024:+4% 2025:-0% 2026:+4%
+
+[FAIL] [4h] CE Buy-Only | No filter
+   Har trade: n=3777 win=31.7% PF=0.61 p5=0.55 Top10-hata=0.54 RandomPF=0.70 Exp=-0.39% | Folds: 0.57(541) / 0.54(850) / 0.63(1045) / 0.67(1341) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-55.1% MaxDD=-89.7% Sharpe=-4.68 (random 95th=-1.63) trades=2645 -> FAIL
+   Saal-war: 2023:-0% 2024:-41% 2025:-62% 2026:-54%
+
+[FAIL] [4h] CE Buy-Only | RS only
+   Har trade: n=130 win=30.8% PF=0.44 p5=0.24 Top10-hata=0.14 RandomPF=0.39 Exp=-0.86% | Folds: 0.31(17) / 0.31(14) / 0.77(27) / 0.38(72) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-5.4% MaxDD=-14.8% Sharpe=-1.66 (random 95th=0.66) trades=130 -> FAIL
+   Saal-war: 2023:+0% 2024:-2% 2025:-4% 2026:-9%
+
+[FAIL] [4h] CE Buy-Only | ETH+RS
+   Har trade: n=56 win=30.4% PF=0.25 p5=0.11 Top10-hata=0.02 RandomPF=0.49 Exp=-1.10% | Folds: 0.43(15) / 0.28(7) / 0.07(19) / 0.32(15) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-3.3% MaxDD=-9.2% Sharpe=-1.65 (random 95th=0.85) trades=56 -> FAIL
+   Saal-war: 2023:+0% 2024:-1% 2025:-6% 2026:-3%
+
+[FAIL] [4h] Pullback-in-Uptrend | No filter
+   Har trade: n=4837 win=29.7% PF=1.14 p5=1.03 Top10-hata=1.01 RandomPF=0.99 Exp=+0.62% | Folds: 1.06(1077) / 1.61(1009) / 0.74(1325) / 1.27(1426) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+41.6% MaxDD=-49.9% Sharpe=0.92 (random 95th=-0.09) trades=1529 -> theek
+   Saal-war: 2023:+29% 2024:+21% 2025:-17% 2026:+108%
+
+[FAIL] [4h] Pullback-in-Uptrend | RS only
+   Har trade: n=692 win=31.2% PF=1.14 p5=0.91 Top10-hata=0.83 RandomPF=1.05 Exp=+0.81% | Folds: 1.05(174) / 1.19(117) / 1.17(139) / 1.16(262) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+28.4% MaxDD=-25.8% Sharpe=0.91 (random 95th=0.90) trades=630 -> theek
+   Saal-war: 2023:+5% 2024:+25% 2025:+18% 2026:+31%
+
+[FAIL] [4h] Pullback-in-Uptrend | ETH+RS
+   Har trade: n=432 win=30.8% PF=1.25 p5=0.94 Top10-hata=0.78 RandomPF=1.30 Exp=+1.42% | Folds: 1.04(170) / 1.22(84) / 1.50(101) / 1.41(77) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+22.2% MaxDD=-26.4% Sharpe=0.84 (random 95th=0.93) trades=378 -> FAIL
+   Saal-war: 2023:+5% 2024:+20% 2025:+31% 2026:+6%
+
+[FAIL] [4h] Donchian Breakout 1h | No filter
+   Har trade: n=6190 win=30.6% PF=1.04 p5=0.96 Top10-hata=0.95 RandomPF=0.96 Exp=+0.20% | Folds: 0.98(1210) / 1.45(1345) / 0.76(1824) / 1.09(1811) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+4.5% MaxDD=-59.1% Sharpe=0.33 (random 95th=0.46) trades=1489 -> FAIL
+   Saal-war: 2023:+23% 2024:+5% 2025:-37% 2026:+38%
+
+[FAIL] [4h] Donchian Breakout 1h | RS only
+   Har trade: n=483 win=32.9% PF=1.09 p5=0.85 Top10-hata=0.78 RandomPF=1.27 Exp=+0.55% | Folds: 0.93(128) / 1.47(69) / 1.39(88) / 0.94(198) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+15.1% MaxDD=-19.6% Sharpe=0.69 (random 95th=0.53) trades=448 -> theek
+   Saal-war: 2023:+5% 2024:+2% 2025:+19% 2026:+17%
+
+[FAIL] [4h] Donchian Breakout 1h | ETH+RS
+   Har trade: n=303 win=34.7% PF=1.23 p5=0.89 Top10-hata=0.75 RandomPF=1.39 Exp=+1.39% | Folds: 0.91(125) / 1.51(51) / 2.09(61) / 0.93(66) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+13.7% MaxDD=-19.6% Sharpe=0.70 (random 95th=0.67) trades=270 -> theek
+   Saal-war: 2023:+5% 2024:-2% 2025:+36% 2026:+2%
+
+
+####################################################################################################
+1D - screener strategies - period 2021-05-03 -> 2026-09-29
+####################################################################################################
+
+[FAIL] [1d] Union AB Ichimoku+MS | No filter
+   Har trade: n=56 win=42.9% PF=1.64 p5=0.92 Top10-hata=0.49 RandomPF=1.49 Exp=+6.30% | Folds: 0.84(12) / 1.57(17) / 1.07(13) / 5.64(14) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+3.0% MaxDD=-5.2% Sharpe=0.68 (random 95th=1.10) trades=56 -> FAIL
+   Saal-war: 2021:-1% 2022:+0% 2023:+8% 2024:-0% 2025:+3% 2026:+6%
+
+[FAIL] [1d] Union AB Ichimoku+MS | RS only
+   Har trade: n=31 win=41.9% PF=1.42 p5=0.57 Top10-hata=0.03 RandomPF=0.91 Exp=+4.55% | Folds: 1.18(6) / 0.37(8) / 0.67(7) / 6.85(10) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+0.8% MaxDD=-6.0% Sharpe=0.28 (random 95th=0.43) trades=31 -> FAIL
+   Saal-war: 2021:-0% 2022:+0% 2023:+2% 2024:-4% 2025:+2% 2026:+4%
+
+[FAIL] [1d] Union AB Ichimoku+MS | ETH+RS
+   Har trade: n=25 win=36.0% PF=1.01 p5=0.30 Top10-hata=0.00 RandomPF=1.05 Exp=+0.16% | Folds: 1.18(6) / 0.01(7) / 0.71(5) / 4.17(7) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-0.3% MaxDD=-6.2% Sharpe=-0.10 (random 95th=0.41) trades=25 -> FAIL
+   Saal-war: 2021:-0% 2022:+0% 2023:-0% 2024:-5% 2025:+3% 2026:+0%
+
+[FAIL] [1d] Union AB EMA+Breakout | No filter
+   Har trade: n=126 win=42.1% PF=1.89 p5=1.37 Top10-hata=1.34 RandomPF=1.01 Exp=+9.82% | Folds: 0.63(19) / 1.61(30) / 1.55(49) / 8.54(28) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+8.3% MaxDD=-13.2% Sharpe=1.03 (random 95th=0.92) trades=126 -> theek
+   Saal-war: 2021:-3% 2022:-2% 2023:+7% 2024:+17% 2025:+7% 2026:+17%
+
+[FAIL] [1d] Union AB EMA+Breakout | RS only
+   Har trade: n=70 win=40.0% PF=1.75 p5=1.10 Top10-hata=0.87 RandomPF=0.77 Exp=+9.20% | Folds: 0.60(11) / 1.92(19) / 0.84(22) / 10.18(18) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+3.6% MaxDD=-8.9% Sharpe=0.65 (random 95th=0.38) trades=71 -> theek
+   Saal-war: 2021:-2% 2022:-0% 2023:+10% 2024:-4% 2025:+5% 2026:+9%
+
+[FAIL] [1d] Union AB EMA+Breakout | ETH+RS
+   Har trade: n=61 win=37.7% PF=1.54 p5=0.92 Top10-hata=0.64 RandomPF=1.34 Exp=+6.77% | Folds: 0.60(11) / 1.74(18) / 0.95(20) / 22.24(12) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+2.3% MaxDD=-7.7% Sharpe=0.45 (random 95th=0.44) trades=62 -> theek
+   Saal-war: 2021:-2% 2022:-0% 2023:+8% 2024:-3% 2025:+7% 2026:+2%
+
+[FAIL] [1d] NEW AdvancedConfluence (CHoCH) | No filter
+   Har trade: n=71 win=32.4% PF=0.71 p5=0.39 Top10-hata=0.15 RandomPF=1.02 Exp=-2.25% | Folds: 0.28(15) / 1.27(17) / 1.33(10) / 0.60(29) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-0.7% MaxDD=-7.5% Sharpe=-0.12 (random 95th=0.10) trades=71 -> FAIL
+   Saal-war: 2021:-3% 2022:+3% 2023:+1% 2024:-0% 2025:-0% 2026:-5%
+
+[FAIL] [1d] NEW AdvancedConfluence (CHoCH) | RS only
+   Har trade: n=14 win=35.7% PF=0.81 p5=0.19 Top10-hata=0.00 RandomPF=0.43 Exp=-1.57% | Folds: 0.04(3) / 2.59(4) / 0.87(4) / 0.73(3) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+0.4% MaxDD=-2.5% Sharpe=0.22 (random 95th=0.45) trades=14 -> FAIL
+   Saal-war: 2021:-1% 2022:+1% 2023:+1% 2024:+1% 2025:+1% 2026:-1%
+
+[FAIL] [1d] NEW AdvancedConfluence (CHoCH) | ETH+RS
+   Har trade: n=11 win=36.4% PF=0.79 p5=0.11 Top10-hata=0.00 RandomPF=1.23 Exp=-1.86% | Folds: 0.08(2) / 1.57(2) / 0.87(4) / 0.73(3) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+0.2% MaxDD=-2.5% Sharpe=0.13 (random 95th=0.18) trades=11 -> FAIL
+   Saal-war: 2021:-1% 2022:+0% 2023:+1% 2024:+1% 2025:+1% 2026:-1%
+
+[FAIL] [1d] CE Buy-Only | No filter
+   Har trade: n=794 win=33.8% PF=0.72 p5=0.56 Top10-hata=0.52 RandomPF=1.13 Exp=-0.66% | Folds: 0.48(146) / 0.44(122) / 0.43(156) / 1.17(370) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-8.2% MaxDD=-48.1% Sharpe=-0.61 (random 95th=0.35) trades=667 -> FAIL
+   Saal-war: 2021:+0% 2022:-23% 2023:-8% 2024:-3% 2025:-14% 2026:+6%
+
+[FAIL] [1d] CE Buy-Only | RS only
+   Har trade: n=14 win=35.7% PF=1.33 p5=0.05 Top10-hata=0.00 RandomPF=4.80 Exp=+2.08% | Folds: 1.37(2) / 0.00(2) / 0.51(2) / 2.31(8) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-0.3% MaxDD=-3.3% Sharpe=-0.17 (random 95th=-0.03) trades=14 -> FAIL
+   Saal-war: 2021:+0% 2022:-1% 2023:-1% 2024:+0% 2025:-1% 2026:+1%
+
+[FAIL] [1d] CE Buy-Only | ETH+RS
+   Har trade: n=4 win=25.0% PF=0.15 p5=N/A Top10-hata=N/A RandomPF=9.02 Exp=-11.90% | Folds: N/A(1) / 0.00(1) / N/A(0) / 0.00(2) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-0.5% MaxDD=-3.1% Sharpe=-0.64 (random 95th=0.21) trades=4 -> FAIL
+   Saal-war: 2021:+0% 2022:+0% 2023:-1% 2024:+0% 2025:+0% 2026:-2%
+
+[FAIL] [1d] Pullback-in-Uptrend | No filter
+   Har trade: n=933 win=29.9% PF=1.18 p5=0.92 Top10-hata=0.81 RandomPF=1.20 Exp=+2.12% | Folds: 0.47(144) / 2.32(197) / 0.76(322) / 1.73(270) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+5.0% MaxDD=-42.7% Sharpe=0.32 (random 95th=0.51) trades=458 -> FAIL
+   Saal-war: 2021:-19% 2022:-22% 2023:+76% 2024:-12% 2025:-4% 2026:+26%
+
+[FAIL] [1d] Pullback-in-Uptrend | RS only
+   Har trade: n=209 win=28.2% PF=1.22 p5=0.55 Top10-hata=0.32 RandomPF=1.03 Exp=+3.16% | Folds: 0.11(42) / 1.41(38) / 0.35(47) / 3.05(82) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+5.7% MaxDD=-30.5% Sharpe=0.41 (random 95th=0.41) trades=205 -> theek
+   Saal-war: 2021:-14% 2022:-9% 2023:+16% 2024:-24% 2025:+19% 2026:+58%
+
+[FAIL] [1d] Pullback-in-Uptrend | ETH+RS
+   Har trade: n=131 win=28.2% PF=0.80 p5=0.34 Top10-hata=0.18 RandomPF=0.99 Exp=-3.07% | Folds: 0.14(32) / 0.86(29) / 0.35(35) / 3.23(35) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=-0.7% MaxDD=-30.2% Sharpe=-0.01 (random 95th=0.21) trades=126 -> FAIL
+   Saal-war: 2021:-14% 2022:-3% 2023:+4% 2024:-20% 2025:+22% 2026:+9%
+
+[FAIL] [1d] Donchian Breakout 1h | No filter
+   Har trade: n=1501 win=34.0% PF=1.54 p5=1.31 Top10-hata=1.24 RandomPF=1.13 Exp=+5.67% | Folds: 0.93(189) / 2.68(305) / 1.28(436) / 1.50(571) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+19.3% MaxDD=-39.0% Sharpe=0.69 (random 95th=0.67) trades=492 -> theek
+   Saal-war: 2021:-2% 2022:-26% 2023:+109% 2024:+6% 2025:+0% 2026:+46%
+
+[FAIL] [1d] Donchian Breakout 1h | RS only
+   Har trade: n=303 win=31.7% PF=1.21 p5=0.72 Top10-hata=0.51 RandomPF=0.99 Exp=+2.97% | Folds: 0.29(48) / 1.89(62) / 0.50(74) / 2.13(119) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+11.1% MaxDD=-25.9% Sharpe=0.60 (random 95th=0.57) trades=250 -> theek
+   Saal-war: 2021:-10% 2022:-16% 2023:+51% 2024:-16% 2025:+11% 2026:+59%
+
+[FAIL] [1d] Donchian Breakout 1h | ETH+RS
+   Har trade: n=189 win=33.9% PF=0.88 p5=0.52 Top10-hata=0.35 RandomPF=1.06 Exp=-1.71% | Folds: 0.38(34) / 1.20(39) / 0.46(59) / 2.13(57) -> FAIL
+   Portfolio (10 slots, 1% risk): CAGR=+2.9% MaxDD=-21.2% Sharpe=0.28 (random 95th=0.27) trades=143 -> theek
+   Saal-war: 2021:-9% 2022:-3% 2023:+9% 2024:-11% 2025:+20% 2026:+9%
+
+--- Reference: Daily Donchian 20 (Donchian Daily Bot wali) ---
+
+[PASS] [1d] Daily Donchian 20 | BTC>EMA50
+   Har trade: n=1424 win=37.2% PF=1.55 p5=1.34 Top10-hata=1.33 RandomPF=1.27 Exp=+4.69% | Folds: 1.41(153) / 2.36(315) / 1.19(470) / 1.53(486) -> theek
+   Portfolio (10 slots, 1% risk): CAGR=+26.2% MaxDD=-30.7% Sharpe=0.98 (random 95th=0.76) trades=448 -> theek
    Saal-war: 2021:+41% 2022:-23% 2023:+124% 2024:-2% 2025:+24% 2026:+12%
 
 
 ====================================================================================================
 KHULASA
 ====================================================================================================
-FAIL  Union AB Ichimoku+MS | No filter
-FAIL  Union AB Ichimoku+MS | RS only
-FAIL  Union AB Ichimoku+MS | ETH+RS   (screener par live)
-FAIL  Union AB EMA+Breakout | No filter
-FAIL  Union AB EMA+Breakout | RS only
-FAIL  Union AB EMA+Breakout | ETH+RS   (screener par live)
-FAIL  NEW AdvancedConfluence (CHoCH) | No filter   (screener par live)
-FAIL  NEW AdvancedConfluence (CHoCH) | RS only
-FAIL  NEW AdvancedConfluence (CHoCH) | ETH+RS
-FAIL  CE Buy-Only | No filter   (screener par live)
-FAIL  CE Buy-Only | RS only
-FAIL  CE Buy-Only | ETH+RS
-FAIL  Pullback-in-Uptrend | No filter
-FAIL  Pullback-in-Uptrend | RS only
-FAIL  Pullback-in-Uptrend | ETH+RS   (screener par live)
-FAIL  Donchian Breakout 1h | No filter
-FAIL  Donchian Breakout 1h | RS only
-FAIL  Donchian Breakout 1h | ETH+RS   (screener par live)
-PASS  Daily Donchian 20 | BTC>EMA50
+FAIL  [1h] Union AB Ichimoku+MS | No filter
+FAIL  [1h] Union AB Ichimoku+MS | RS only
+FAIL  [1h] Union AB Ichimoku+MS | ETH+RS   (screener par live)
+FAIL  [1h] Union AB EMA+Breakout | No filter
+FAIL  [1h] Union AB EMA+Breakout | RS only
+FAIL  [1h] Union AB EMA+Breakout | ETH+RS   (screener par live)
+FAIL  [1h] NEW AdvancedConfluence (CHoCH) | No filter   (screener par live)
+FAIL  [1h] NEW AdvancedConfluence (CHoCH) | RS only
+FAIL  [1h] NEW AdvancedConfluence (CHoCH) | ETH+RS
+FAIL  [1h] CE Buy-Only | No filter   (screener par live)
+FAIL  [1h] CE Buy-Only | RS only
+FAIL  [1h] CE Buy-Only | ETH+RS
+FAIL  [1h] Pullback-in-Uptrend | No filter
+FAIL  [1h] Pullback-in-Uptrend | RS only
+FAIL  [1h] Pullback-in-Uptrend | ETH+RS   (screener par live)
+FAIL  [1h] Donchian Breakout 1h | No filter
+FAIL  [1h] Donchian Breakout 1h | RS only
+FAIL  [1h] Donchian Breakout 1h | ETH+RS   (screener par live)
+PASS  [4h] Union AB Ichimoku+MS | No filter
+FAIL  [4h] Union AB Ichimoku+MS | RS only
+FAIL  [4h] Union AB Ichimoku+MS | ETH+RS
+FAIL  [4h] Union AB EMA+Breakout | No filter
+FAIL  [4h] Union AB EMA+Breakout | RS only
+FAIL  [4h] Union AB EMA+Breakout | ETH+RS
+FAIL  [4h] NEW AdvancedConfluence (CHoCH) | No filter
+FAIL  [4h] NEW AdvancedConfluence (CHoCH) | RS only
+FAIL  [4h] NEW AdvancedConfluence (CHoCH) | ETH+RS
+FAIL  [4h] CE Buy-Only | No filter
+FAIL  [4h] CE Buy-Only | RS only
+FAIL  [4h] CE Buy-Only | ETH+RS
+FAIL  [4h] Pullback-in-Uptrend | No filter
+FAIL  [4h] Pullback-in-Uptrend | RS only
+FAIL  [4h] Pullback-in-Uptrend | ETH+RS
+FAIL  [4h] Donchian Breakout 1h | No filter
+FAIL  [4h] Donchian Breakout 1h | RS only
+FAIL  [4h] Donchian Breakout 1h | ETH+RS
+FAIL  [1d] Union AB Ichimoku+MS | No filter
+FAIL  [1d] Union AB Ichimoku+MS | RS only
+FAIL  [1d] Union AB Ichimoku+MS | ETH+RS
+FAIL  [1d] Union AB EMA+Breakout | No filter
+FAIL  [1d] Union AB EMA+Breakout | RS only
+FAIL  [1d] Union AB EMA+Breakout | ETH+RS
+FAIL  [1d] NEW AdvancedConfluence (CHoCH) | No filter
+FAIL  [1d] NEW AdvancedConfluence (CHoCH) | RS only
+FAIL  [1d] NEW AdvancedConfluence (CHoCH) | ETH+RS
+FAIL  [1d] CE Buy-Only | No filter
+FAIL  [1d] CE Buy-Only | RS only
+FAIL  [1d] CE Buy-Only | ETH+RS
+FAIL  [1d] Pullback-in-Uptrend | No filter
+FAIL  [1d] Pullback-in-Uptrend | RS only
+FAIL  [1d] Pullback-in-Uptrend | ETH+RS
+FAIL  [1d] Donchian Breakout 1h | No filter
+FAIL  [1d] Donchian Breakout 1h | RS only
+FAIL  [1d] Donchian Breakout 1h | ETH+RS
+PASS  [1d] Daily Donchian 20 | BTC>EMA50  (Donchian Daily Bot)
