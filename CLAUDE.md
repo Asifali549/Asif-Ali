@@ -16,7 +16,7 @@
 |---|---|
 | `ichimoku4h_bot.py` | Ichimoku 4H bot - signals + paper trading + Telegram |
 | `donchian_daily_bot.py` | Donchian Daily bot - signals + paper trading + Telegram |
-| `bot_core.py` | dono bots ke helpers (15m bhi): fetch_full, norm, ema, chandelier, ichi_signal, FEE/SLIP/STOP_SLIP, STABLES |
+| `bot_core.py` | dono bots ke helpers: fetch_full, norm, ema, chandelier, ichi_signal, FEE/SLIP/STOP_SLIP, STABLES |
 | `strategies.py`, `config.py` | ichimoku + market_structure signal functions aur unke params (bot_core inhein use karta hai) |
 | `data_fetcher.py` | KuCoin (ccxt) exchange + top coins list |
 | `live_colorful_dashboard.py` | Streamlit Cloud dashboard (sirf ye 2 systems) |
@@ -58,6 +58,10 @@ Secrets:
 - 1h ki sab screener strategies (Union AB, CHoCH/AdvancedConfluence, CE Buy-Only, Pullback, 1h Donchian).
 - Donchian 3/5/7/10 din fail; 15 aur 20 pass. ETH EMA50 filter: thora ziada return lekin gehra drawdown - BTC rakha.
 - Ichimoku 4H par extra filters (BTC, ETH, RSI, ADX) se faida nahi hua; volume shart zaroori hai.
+- **SMC MTF (4H trend -> 1H -> 15m pullback+BOS, TP 2R) - FAIL (2026-09-30):** 39 coins, Nov 2024-Sep 2026:
+  PF 0.58, win 31%, CAGR -6%; 14/14 variants fail, random entries jaisi ya un se bhi buri. 15m par kharcha
+  chhote stops ko kha jata hai. Files `git show 2645cca:smc_mtf_strategy.py` / `smc_mtf_test.py` / `smc_mtf_RESULTS.txt`.
+  Sabaq: 15m/1h intraday entries is setup (spot, taker fees) mein kaam nahi karti - 4H/Daily par raho.
 - Purane research scripts/natije git history mein hain: commit `ec7962f` (cleanup se pehle) par
   `git show ec7962f:<file>` se wapas mil sakte hain (unified_test.py, ichimoku4h_validation.py, strategy_lab.py,
   portfolio_test.py, donchian_regime_test.py, archive/...).
@@ -68,15 +72,6 @@ Secrets:
   per-system closed-trade performance, PKT session analysis).
 - Purana Telegram token public git history mein hai - user ko BotFather `/revoke` ka mashwara diya.
 
-## Zer-e-test (EXPERIMENTAL - live nahi)
-- **SMC MTF** (`smc_mtf_strategy.py`, test `smc_mtf_test.py`, workflow "SMC MTF Test"):
-  4H trend (EMA50>EMA200, close>EMA200, Higher Low) -> 1H (close>EMA50, RSI>50) -> 15m entry
-  (RSI pullback <40 pichle 12 candles, fresh BOS swing high, volume >1.5x, close upper 40%, RSI<72,
-  ATR-percentile 20-90). Stop = 15m swing low - 0.2 ATR (1-3 ATR), TP 2R, time stop 24h.
-  Truncation test se lookahead 0 tasdeeq. Natija `smc_mtf_RESULTS.txt` ka intezar.
-  PASS hone par hi paper bot banana. Khatra: 15m par kharcha bhaari (1h strategies sab fail huin thin).
-
 ## Aglay kaam
-- SMC MTF test ka natija parh kar faisla (pass -> paper bot; fail -> khatam, CLAUDE.md mein FAIL list mein daalo).
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
 - 2-3 mahine paper trading ke natije backtest se milao, phir asli paisa.
