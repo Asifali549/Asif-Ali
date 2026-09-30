@@ -62,5 +62,6 @@
   "PHA/USDT|Donchian Breakout|20-period High|0.075|N/A": "2026-09-29T23:03:17.199053+00:00",
   "ICP/USDT|Donchian Breakout|20-period High|3.482|N/A": "2026-09-30T00:01:30.829504+00:00",
   "KII/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.09069|N/A": "2026-09-30T00:01:31.227380+00:00",
-  "MET/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.3277|N/A": "2026-09-30T01:00:43.904842+00:00"
+  "MET/USDT|Pullback-in-Uptrend|EMA20 Pullback|0.3277|N/A": "2026-09-30T01:00:43.904842+00:00",
+  "KAS/USDT|CE Buy-Only|Chandelier Cross|0.04323|Base+ETH": "2026-09-30T01:08:20.522209+00:00"
 }
