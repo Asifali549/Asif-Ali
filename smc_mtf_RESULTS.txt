@@ -1,0 +1,111 @@
+====================================================================================================
+SMC MULTI-TIMEFRAME (4H trend -> 1H momentum -> 15m pullback + BOS) - SAKHT TEST
+====================================================================================================
+Coins: 39 | Period: 2024-11-09 -> 2026-09-30 | point-in-time top-40 liquid
+Kharcha: fee 0.10% + slip 0.05% har taraf + stop slip 0.25%
+Portfolio: max 10 positions, 1% risk/trade, ek trade max 20%
+
+[FAIL] BASELINE
+   Har trade: n=77 win=31.2% (2R par breakeven ~33%+kharcha) PF=0.58 p5=0.33 Top10-hata=0.16 Exp=-0.753% avgR=-0.18
+   Random-entry PF=0.63 (n=78) | Folds: 0.53(18) / 0.64(31) / 0.57(8) / 0.54(20) | Exit: {'stop': 49, 'target': 23, 'time': 5}
+   Portfolio: CAGR=-5.8% MaxDD=-11.3% Sharpe=-1.37 | Random-entry portfolio: CAGR=-3.8% Sharpe=-0.98
+   Saal-war: 2024:-1% 2025:-4% 2026:-5%
+
+[FAIL] vol_mult=1.2
+   Har trade: n=112 win=27.7% (2R par breakeven ~33%+kharcha) PF=0.49 p5=0.31 Top10-hata=0.19 Exp=-0.954% avgR=-0.31
+   Random-entry PF=0.51 (n=113) | Folds: 0.39(32) / 0.48(42) / 0.46(11) / 0.76(27) | Exit: {'stop': 77, 'target': 29, 'time': 6}
+   Portfolio: CAGR=-10.5% MaxDD=-20.9% Sharpe=-2.19 | Random-entry portfolio: CAGR=-8.5% Sharpe=-2.05
+   Saal-war: 2024:-4% 2025:-11% 2026:-5%
+
+[FAIL] vol_mult=2.0
+   Har trade: n=45 win=33.3% (2R par breakeven ~33%+kharcha) PF=0.59 p5=0.29 Top10-hata=0.06 Exp=-0.750% avgR=-0.11
+   Random-entry PF=1.33 (n=44) | Folds: 0.26(8) / 0.91(20) / 0.00(5) / 1.04(12) | Exit: {'stop': 27, 'target': 14, 'time': 4}
+   Portfolio: CAGR=-3.2% MaxDD=-6.5% Sharpe=-0.98 | Random-entry portfolio: CAGR=+1.0% Sharpe=0.38
+   Saal-war: 2024:-1% 2025:-4% 2026:-2%
+
+[FAIL] vol_mult=0.0
+   Har trade: n=334 win=29.3% (2R par breakeven ~33%+kharcha) PF=0.51 p5=0.40 Top10-hata=0.38 Exp=-0.865% avgR=-0.29
+   Random-entry PF=0.73 (n=355) | Folds: 0.52(77) / 0.49(124) / 0.43(36) / 0.56(97) | Exit: {'stop': 229, 'target': 91, 'time': 14}
+   Portfolio: CAGR=-26.0% MaxDD=-44.2% Sharpe=-2.94 | Random-entry portfolio: CAGR=-15.0% Sharpe=-1.93
+   Saal-war: 2024:-10% 2025:-24% 2026:-17%
+
+[FAIL] pivot_15=2
+   Har trade: n=147 win=34.7% (2R par breakeven ~33%+kharcha) PF=0.63 p5=0.44 Top10-hata=0.36 Exp=-0.558% avgR=-0.13
+   Random-entry PF=0.77 (n=151) | Folds: 0.52(28) / 0.84(51) / 0.55(17) / 0.57(51) | Exit: {'stop': 92, 'target': 49, 'time': 6}
+   Portfolio: CAGR=-8.3% MaxDD=-15.0% Sharpe=-1.67 | Random-entry portfolio: CAGR=-5.1% Sharpe=-1.05
+   Saal-war: 2024:-3% 2025:-5% 2026:-8%
+
+[FAIL] pivot_15=5
+   Har trade: n=36 win=36.1% (2R par breakeven ~33%+kharcha) PF=0.81 p5=0.37 Top10-hata=0.05 Exp=-0.316% avgR=+0.01
+   Random-entry PF=1.01 (n=36) | Folds: 0.76(10) / 1.34(13) / 0.00(2) / 0.48(11) | Exit: {'stop': 20, 'target': 11, 'time': 5}
+   Portfolio: CAGR=-1.3% MaxDD=-5.2% Sharpe=-0.34 | Random-entry portfolio: CAGR=+0.7% Sharpe=0.21
+   Saal-war: 2024:+1% 2025:-1% 2026:-3%
+
+[FAIL] pullback_rsi=35
+   Har trade: n=17 win=35.3% (2R par breakeven ~33%+kharcha) PF=0.68 p5=N/A Top10-hata=0.00 Exp=-0.607% avgR=-0.06
+   Random-entry PF=0.94 (n=17) | Folds: 0.15(5) / 0.66(5) / inf(1) / 0.42(6) | Exit: {'stop': 11, 'target': 6}
+   Portfolio: CAGR=-1.2% MaxDD=-3.6% Sharpe=-0.54 | Random-entry portfolio: CAGR=-0.5% Sharpe=-0.25
+   Saal-war: 2024:-1% 2025:-0% 2026:-1%
+
+[FAIL] pullback_rsi=45
+   Har trade: n=237 win=33.3% (2R par breakeven ~33%+kharcha) PF=0.59 p5=0.45 Top10-hata=0.41 Exp=-0.706% avgR=-0.16
+   Random-entry PF=0.79 (n=237) | Folds: 0.55(55) / 0.73(92) / 0.45(23) / 0.49(67) | Exit: {'stop': 154, 'target': 74, 'time': 9}
+   Portfolio: CAGR=-16.0% MaxDD=-28.4% Sharpe=-2.24 | Random-entry portfolio: CAGR=-6.8% Sharpe=-1.05
+   Saal-war: 2024:-10% 2025:-8% 2026:-13%
+
+[FAIL] close_pos_min=0.5
+   Har trade: n=85 win=32.9% (2R par breakeven ~33%+kharcha) PF=0.69 p5=0.42 Top10-hata=0.23 Exp=-0.549% avgR=-0.13
+   Random-entry PF=0.57 (n=86) | Folds: 0.87(24) / 0.62(32) / 0.66(9) / 0.54(20) | Exit: {'stop': 53, 'target': 27, 'time': 5}
+   Portfolio: CAGR=-4.6% MaxDD=-10.2% Sharpe=-0.98 | Random-entry portfolio: CAGR=-6.3% Sharpe=-1.52
+   Saal-war: 2024:+0% 2025:-4% 2026:-5%
+
+[FAIL] tp_r=1.5
+   Har trade: n=77 win=37.7% (2R par breakeven ~40%+kharcha) PF=0.62 p5=0.38 Top10-hata=0.22 Exp=-0.621% avgR=-0.18
+   Random-entry PF=0.73 (n=78) | Folds: 0.78(18) / 0.53(31) / 0.54(8) / 0.74(20) | Exit: {'stop': 46, 'target': 28, 'time': 3}
+   Portfolio: CAGR=-4.7% MaxDD=-10.5% Sharpe=-1.17 | Random-entry portfolio: CAGR=-2.4% Sharpe=-0.56
+   Saal-war: 2024:-0% 2025:-5% 2026:-3%
+
+[FAIL] tp_r=3.0
+   Har trade: n=77 win=26.0% (2R par breakeven ~25%+kharcha) PF=0.47 p5=0.26 Top10-hata=0.09 Exp=-1.013% avgR=-0.24
+   Random-entry PF=0.76 (n=78) | Folds: 0.69(18) / 0.43(31) / 0.27(8) / 0.46(20) | Exit: {'stop': 53, 'target': 13, 'time': 11}
+   Portfolio: CAGR=-7.8% MaxDD=-14.9% Sharpe=-1.95 | Random-entry portfolio: CAGR=-2.3% Sharpe=-0.47
+   Saal-war: 2024:-0% 2025:-9% 2026:-5%
+
+[FAIL] be_at_r=1.0
+   Har trade: n=77 win=23.4% (2R par breakeven ~33%+kharcha) PF=0.48 p5=0.26 Top10-hata=0.08 Exp=-0.845% avgR=-0.25
+   Random-entry PF=0.59 (n=78) | Folds: 0.44(18) / 0.57(31) / 0.20(8) / 0.55(20) | Exit: {'stop': 58, 'target': 17, 'time': 2}
+   Portfolio: CAGR=-6.5% MaxDD=-12.8% Sharpe=-1.64 | Random-entry portfolio: CAGR=-3.6% Sharpe=-1.02
+   Saal-war: 2024:-1% 2025:-7% 2026:-4%
+
+[FAIL] sl_max_atr=2.0
+   Har trade: n=10 win=50.0% (2R par breakeven ~33%+kharcha) PF=2.07 p5=N/A Top10-hata=N/A Exp=+0.932% avgR=+0.32
+   Random-entry PF=0.31 (n=10) | Folds: 2.30(3) / 0.38(3) / inf(1) / 0.79(3) | Exit: {'stop': 5, 'target': 5}
+   Portfolio: CAGR=+1.0% MaxDD=-0.9% Sharpe=0.60 | Random-entry portfolio: CAGR=-1.7% Sharpe=-1.34
+   Saal-war: 2024:-0% 2025:+2% 2026:-0%
+
+[FAIL] atr_rank_min=0.0
+   Har trade: n=94 win=29.8% (2R par breakeven ~33%+kharcha) PF=0.54 p5=0.32 Top10-hata=0.18 Exp=-0.787% avgR=-0.27
+   Random-entry PF=0.50 (n=94) | Folds: 0.44(22) / 0.63(37) / 0.57(8) / 0.45(27) | Exit: {'stop': 62, 'target': 26, 'time': 6}
+   Portfolio: CAGR=-7.4% MaxDD=-14.1% Sharpe=-1.76 | Random-entry portfolio: CAGR=-7.2% Sharpe=-1.70
+   Saal-war: 2024:-2% 2025:-5% 2026:-6%
+
+====================================================================================================
+KHULASA
+====================================================================================================
+             Variant | Trades |  Win% |    PF |    p5 | Random |    CAGR |   MaxDD | Faisla
+            BASELINE |     77 |  31.2 |  0.58 |  0.33 |   0.63 |   -5.8% |  -11.3% | FAIL
+        vol_mult=1.2 |    112 |  27.7 |  0.49 |  0.31 |   0.51 |  -10.5% |  -20.9% | FAIL
+        vol_mult=2.0 |     45 |  33.3 |  0.59 |  0.29 |   1.33 |   -3.2% |   -6.5% | FAIL
+        vol_mult=0.0 |    334 |  29.3 |  0.51 |  0.40 |   0.73 |  -26.0% |  -44.2% | FAIL
+          pivot_15=2 |    147 |  34.7 |  0.63 |  0.44 |   0.77 |   -8.3% |  -15.0% | FAIL
+          pivot_15=5 |     36 |  36.1 |  0.81 |  0.37 |   1.01 |   -1.3% |   -5.2% | FAIL
+     pullback_rsi=35 |     17 |  35.3 |  0.68 |   N/A |   0.94 |   -1.2% |   -3.6% | FAIL
+     pullback_rsi=45 |    237 |  33.3 |  0.59 |  0.45 |   0.79 |  -16.0% |  -28.4% | FAIL
+   close_pos_min=0.5 |     85 |  32.9 |  0.69 |  0.42 |   0.57 |   -4.6% |  -10.2% | FAIL
+            tp_r=1.5 |     77 |  37.7 |  0.62 |  0.38 |   0.73 |   -4.7% |  -10.5% | FAIL
+            tp_r=3.0 |     77 |  26.0 |  0.47 |  0.26 |   0.76 |   -7.8% |  -14.9% | FAIL
+         be_at_r=1.0 |     77 |  23.4 |  0.48 |  0.26 |   0.59 |   -6.5% |  -12.8% | FAIL
+      sl_max_atr=2.0 |     10 |  50.0 |  2.07 |   N/A |   0.31 |   +1.0% |   -0.9% | FAIL
+    atr_rank_min=0.0 |     94 |  29.8 |  0.54 |  0.32 |   0.50 |   -7.4% |  -14.1% | FAIL
+
+Parameter-neighbourhood: 0/14 PASS. Asli edge = BASELINE pass + aas paas ke ziada tar variants bhi pass.
