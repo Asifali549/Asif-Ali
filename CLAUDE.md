@@ -154,10 +154,17 @@ Secrets:
 - Exits 6/6 random se behtar; Donchian 10-din low exit: PF 2.42 (rnd 1.86, +0.56, OOS 1.49) sab se behtar; ATR trail sab se kam DD (-32%).
 - Faisla: PROMISING - kyunke (1) nafa right-tail coins par kaafi had tak, (2) bear/high-vol mein edge nahi, (3) 2025-26 kamzor.
 
-## Zer-e-test
-- **DONCHIAN STRESS** (`donchian_stress.py`, workflow "Donchian Stress Test", natija `donchian_stress_RESULTS.txt`):
-  N=20 (baghair filter / BTC>EMA50): A) kharcha 1x/2x/3x (ATR trail + Donchian 10 exit), B) Donchian exit M 5/10/15/20/30,
-  C) 2025 tajziya (mahana PF vs random, breadth, BTC regime, bure coins, saal-war stop-out).
+## Donchian Stress natija (2026-10-01) - `donchian_stress.py` / `donchian_stress_RESULTS.txt`
+- COST STRESS: mazboot. Baghair filter ATR trail PF 1.45 -> 1.36 (2x) -> 1.28 (3x), OOS 1.18 -> 1.04, random par faida
+  +0.28 -> +0.25 barqarar. Donchian 10 exit PF 2.39 -> 2.25, OOS 1.49 -> 1.40, faida +0.69 -> +0.66.
+- EXIT PLATEAU (Donchian M): baghair filter 5/5 M (5-30) random se +0.57..+0.84, OOS 1.37-2.01; lekin M>=15 par
+  MaxDD -62 se -76% (M5 -37%, M10 -40%, ATR trail -32%). BTC filter ke sath M>=15 random jaisa (2/5).
+- 2025: BTC -7% saal, magar BTC regime 73% din "bull" - altcoins kamzor (breadth kam). 56/90 coins manfi, bure 10
+  coins = 40% nuqsan -> nuqsan PHAILA hua (chand coins nahi). Jan-Mar aur May bhari nuqsan; Apr/Jul nafa.
+  2025 bull-regime trades PF 0.89. Saal-war PF: 2020 1.93, 2021 2.95, 2022 0.49, 2023 2.07, 2024 1.33, 2025 0.91, 2026 1.39.
+  (Breadth % ka denominator listing se pehle wale coins bhi ginta hai - absolute % kam; sirf relative dekho.)
+- Tashkhees: edge kharche aur exit par mazboot; kamzori ALTCOIN market ki halat (2022, 2025) - BTC regime ise nahi pakarta.
+  Agla munasib EK filter: altcoin breadth (sahi denominator ke sath) - user ki manzoori baqi.
 
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
