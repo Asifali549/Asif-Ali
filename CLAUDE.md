@@ -133,9 +133,14 @@ Secrets:
   Plateau: N 20-55 + trail 3.0x sab PF 1.47-1.54. DD -25 se -50% (koi market filter nahi).
 - Masla-shinakht (user ka rule): asal masla TIMEFRAME (4H) tha; entry hypothesis Daily par sach hai; exit: trailing behtar.
   Ye live Donchian Daily (N20 + CE22/4 + BTC>EMA50) ki tasdeeq hai.
-- Agla qadam (user ne mana, zer-e-test): `donchian_filter.py` (workflow "Donchian Filter Test", natija
-  `donchian_filter_RESULTS.txt`): Daily N 10-55 x trail 2.5/3.0, har config filter BAGHAIR vs BTC>EMA50 (sirf ye ek
-  tabdeeli); filter wali row ka random bhi sirf BTC>EMA50 din par; daily regimes har row.
+- **EK FILTER (BTC>EMA50) natija** (`donchian_filter.py`, workflow "Donchian Filter Test", `donchian_filter_RESULTS.txt`):
+  trail 3.0x: BAGHAIR filter 4/5 N PASS, BTC>EMA50 sirf 1/5 (N20). Filter se PF barhta hai (1.49->1.61 N20) lekin
+  RANDOM PF bhi barhta hai (1.12->1.31; N55 1.35->1.55) - yani filter market-timing hai, entry edge nahi; breakout ka
+  random par faida ghatta hai (+0.36->+0.30, N40 +0.35->+0.22, N55 +0.23->+0.10). OOS PF thora behtar (N20 1.19->1.28,
+  N30 1.08->1.13, N40 1.15->1.19) magar N55 kam (1.17->1.13); MaxDD sirf N20 behtar (-32.5->-29.7), baqi bura (-25->-32).
+  Bear PF thora behtar (0.83-1.05 -> 0.89-1.15). FAISLA: filter ka faida N par munhasir, plateau nahi -> universal
+  taur par SABIT NAHI. Daily Donchian (filter baghair, N20-55, trail 3x) khud mazboot. Live bot (N20+BTC filter) wohi
+  ek cell hai jahan filter sab cheez behtar karta hai - badalne ki zaroorat nahi.
 
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
