@@ -1,0 +1,22 @@
+[
+  {
+    "system": "Donchian Daily",
+    "symbol": "STX/USDT",
+    "signal_time_utc": "2026-10-01 00:00:00",
+    "entry_est": 0.3718,
+    "sl": 0.2742272727,
+    "tp": null,
+    "risk_pct": 26.24,
+    "size_pct": 3.81
+  },
+  {
+    "system": "Donchian Daily",
+    "symbol": "ZRO/USDT",
+    "signal_time_utc": "2026-10-01 00:00:00",
+    "entry_est": 1.74,
+    "sl": 1.3142,
+    "tp": null,
+    "risk_pct": 24.47,
+    "size_pct": 4.09
+  }
+]
