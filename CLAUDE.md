@@ -124,13 +124,17 @@ Secrets:
   (Telegram mein "hisse ka X% = kul capital ka Y%"), Donchian Telegram mein "Sirf PAPER", dashboard sidebar
   "Sarmaye ki taqseem" (kul capital -> har system ka $) aur har signal ka size system ke hisse se.
 
-## Zer-e-test (EXPERIMENTAL)
-- **SIMPLE DONCHIAN RESEARCH** (user ka hypothesis 2026-10-01; `donchian_research.py` (numba), workflow
-  "Donchian Research Test", natija `donchian_research_RESULTS.txt`): 4H close > pichle N high (N 10/20/30/40/55),
-  koi filter nahi, 109 coins. Model A: SL m x ATR (1.5/2/2.5/3) x TP 1/1.5/2/3R; Model B: ATR stop + ATR trailing.
-  Har config ka matched random baseline, OOS Jan 2025+, regimes (BTC bull/bear/sideways, BTC vol), plateau table,
-  timeframe experiment (wahi Daily par). User ka rule: fail ho to indicators mat jodo - pehle masla dhundo
-  (entry/exit/timeframe/volatility/universe), pass ho to sirf EK filter add kar ke dobara isi tarah test.
+## Simple Donchian Research natija (2026-10-01, 109 coins, 2020-10 -> 2026-09, OOS 2025+)
+`donchian_research.py` (numba) / workflow "Donchian Research Test" / `donchian_research_RESULTS.txt` (agle qadam ke liye rakha).
+- **4H: FAIL 0/100** - PF 0.77-1.15, OOS PF har config < 1 (0.80-0.99), random jaisa; portfolio DD -72 se -98%.
+  Bear (PF 0.82-0.93) aur sideways mein kharab. Tight stop (1.5x) sab se bura -> 4H par noise + kharcha.
+- **Daily: 5/10 PASS** - PF 1.09-1.54, OOS 0.98-1.16; trailing (B 3.0x) > fixed TP. Random PF bhi 1.01-1.35
+  (trailing + crypto uptrend khud kuch deta hai); entry ka faida N>=20 par +0.15 se +0.35 PF, N=10 par ~0 (random jaisa).
+  Plateau: N 20-55 + trail 3.0x sab PF 1.47-1.54. DD -25 se -50% (koi market filter nahi).
+- Masla-shinakht (user ka rule): asal masla TIMEFRAME (4H) tha; entry hypothesis Daily par sach hai; exit: trailing behtar.
+  Ye live Donchian Daily (N20 + CE22/4 + BTC>EMA50) ki tasdeeq hai.
+- Agla qadam (user ki manzoori baqi): Daily N 20-55 + trail 3.0x par SIRF EK filter (BTC>EMA50) - isi methodology se
+  (random, OOS, daily regimes - is run mein daily regimes print nahi hue the).
 
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
