@@ -209,6 +209,14 @@ Secrets:
      ICHI 50 / DIP 30 / C(10%) 20: Sharpe 1.73 vs 1.68, DD -9.5% vs -11.0%, +mahine 62% vs 56%, CAGR 21.5 vs 24.2.
      -> PROMISING. Validation: `capit_validate.py` (workflow "Capitulation Validation Test", push par chalta) -
      bootstrap, top-10 hata kar, 4 folds, coin concentration, kharcha 2x/3x, regime, DIP overlap, size/hissa mixes.
+  **VALIDATION NATIJA (2026-10-02, `capit_validate_RESULTS.txt`) - PASS, PAPER ke qabil:** R8% V2.0: 313 trades
+  (1/hafta), win 65%, PF 1.87, OOS 1.59; bootstrap p5 1.40; top-10 hata kar 1.38 (top-20: 1.19); 4/4 folds musbat
+  (1.55-2.61); kharcha 3x PF 1.66; 48/73 coins nafa mein, median coin PF 2.76 (lekin top 10% coins = 70% nafa - flag);
+  bull PF 2.21 (255), bear 1.08 (30), sideways 1.39 (28); 2022 sirf 7 trades PF 0.55; DIP se overlap sirf 7%.
+  R8% V2.5 bhi pass (PF 1.79, p5 1.22, top-20 hata kar 0.89). Portfolio (C har trade 20%): ICHI 60/DIP 30/C 10 ->
+  CAGR 25.9%, DD -9.6%, Sharpe 1.81; ICHI 60/DIP 20/C 20 -> 26.8%, DD -8.4%, Sharpe 1.79, +mahine 66% (BASE 24.9%,
+  -11.0%, 1.71, 55%). Corr C: ICHI 0.03, DIP 0.06. Khatre: 3 khayalon mein se chuna (multiple testing), survivorship.
+  Agla qadam (user ki manzoori): paper bot `capit_daily_bot.py` (R8% V2.0, 20%/trade, max 10) + dashboard.
 
 ## Aglay kaam
 - **GitHub cron masla (2026-10-01 dekha):** 30 Sep ~17:30 PKT se scheduled runs bohat kam: Watchdog (har 30 min)
