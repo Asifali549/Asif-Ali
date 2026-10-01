@@ -124,6 +124,14 @@ Secrets:
   (Telegram mein "hisse ka X% = kul capital ka Y%"), Donchian Telegram mein "Sirf PAPER", dashboard sidebar
   "Sarmaye ki taqseem" (kul capital -> har system ka $) aur har signal ka size system ke hisse se.
 
+## Zer-e-test (EXPERIMENTAL)
+- **SIMPLE DONCHIAN RESEARCH** (user ka hypothesis 2026-10-01; `donchian_research.py` (numba), workflow
+  "Donchian Research Test", natija `donchian_research_RESULTS.txt`): 4H close > pichle N high (N 10/20/30/40/55),
+  koi filter nahi, 109 coins. Model A: SL m x ATR (1.5/2/2.5/3) x TP 1/1.5/2/3R; Model B: ATR stop + ATR trailing.
+  Har config ka matched random baseline, OOS Jan 2025+, regimes (BTC bull/bear/sideways, BTC vol), plateau table,
+  timeframe experiment (wahi Daily par). User ka rule: fail ho to indicators mat jodo - pehle masla dhundo
+  (entry/exit/timeframe/volatility/universe), pass ho to sirf EK filter add kar ke dobara isi tarah test.
+
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
