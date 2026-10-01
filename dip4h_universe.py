@@ -1,6 +1,10 @@
 """
-FAST LAB - DIP 4H: wahi "uptrend mein girawat khareedo" edge, lekin 4H par -> rozana kai signals
-================================================================================================
+DIP 4H - COIN UNIVERSE TEST: top 70 / 100 / 150 / 200 liquid coins par alag alag
+================================================================================
+Sawal: coins kam karne ya ziada karne se natije par kitna farq parta hai?
+Har universe par: Dip 4H BASELINE + 3 parosi settings (RSI 5 / RSI 15 / exit 8) + Daily Dip muqabla.
+Universe = har din pichle 30 din ke dollar volume se top-N (point-in-time).
+
 User ki khwahish: signals market ke sath sath milte rahein, trades taqatwar hon (hafton intezar nahi).
 Daily Dip (win ~69%, PF ~2) ka edge asli tha lekin signals kam. Yahan wahi 4H candle par, 100 coins:
   Setup : coin ka DAILY close > EMA200 aur EMA50 > EMA200 (sirf band din) + BTC daily close > EMA50
@@ -19,20 +23,14 @@ import pandas as pd
 from bot_core import fetch_full, norm, STABLES, FEE, SLIP, STOP_SLIP
 from portfolio_lab import ema, rsi, atr_w, to_daily, sim_one, portfolio, stats, trades_dip
 
-TOP_N = 150
+TOP_N = 230                 # 200 tak ke universe ke liye kaafi coins (stables nikal kar)
+UNIVERSES = [70, 100, 150, 200]
 H4_BARS = 2400 * 6
-UNIVERSE = 100
 N_FOLDS = 4
-OUT = "fast_lab_RESULTS.txt"
+OUT = "dip4h_universe_RESULTS.txt"
 
 BASE = {"rsi_lo": 10, "exit_n": 5, "stop_atr": 3.0, "max_hold": 30, "btc": True, "trend": "daily"}
-VARIANTS = [("BASELINE", {})] + [(f"{k}={v}", {k: v}) for k, v in [
-    ("rsi_lo", 5), ("rsi_lo", 15), ("rsi_lo", 20),
-    ("exit_n", 3), ("exit_n", 8),
-    ("stop_atr", 2.0), ("stop_atr", 4.0),
-    ("max_hold", 12),
-    ("btc", False), ("trend", "4h"),
-]]
+VARIANTS = [("BASELINE", {}), ("rsi_lo=5", {"rsi_lo": 5}), ("rsi_lo=15", {"rsi_lo": 15}), ("exit_n=8", {"exit_n": 8})]
 
 
 def attach_daily(d4, series):
@@ -159,62 +157,65 @@ def main(h4=None):
     btc_ok = bd > ema(bd, 50)
     dv = pd.DataFrame({s: d.set_index("timestamp")["close"] * d.set_index("timestamp")["volume"] for s, d in daily.items()})
     dv = dv.rolling(30, min_periods=20).mean().shift(1)
-    allowed = {day: set(row.dropna().nlargest(UNIVERSE).index) for day, row in dv.iterrows()}
     closes = pd.DataFrame({s: d.set_index("timestamp")["close"] for s, d in daily.items()}).sort_index().ffill()
     start = closes.index[0] + pd.Timedelta(days=210)
     closes = closes[closes.index >= start]
     fold_bounds = pd.date_range(start, closes.index[-1], periods=N_FOLDS + 1).values
+    avail = dv[dv.index >= start].notna().sum(axis=1)
 
     emit("=" * 100)
-    emit("FAST LAB - DIP 4H (uptrend mein chand ghanton ki girawat khareedo)")
+    emit("DIP 4H - COIN UNIVERSE TEST (top 70 / 100 / 150 / 200 liquid coins)")
     emit("=" * 100)
-    emit(f"Coins: {len(h4)} | Period: {start.date()} -> {closes.index[-1].date()} | top-{UNIVERSE} liquid | size 20%/trade, max 10")
+    emit(f"Coins fetch: {len(h4)} | Period: {start.date()} -> {closes.index[-1].date()} | size 20%/trade, max 10")
+    emit(f"Har din volume-data wale coins: kam se kam {int(avail.min())}, ausat {avail.mean():.0f}, ziada {int(avail.max())} "
+         "(jab is se kam hon to bara universe = sab dastiyab coins)")
     emit(f"Kharcha: fee {FEE*100:.2f}% + slip {SLIP*100:.2f}% har taraf + stop slip {STOP_SLIP*100:.2f}%")
 
-    rows = []
-    # muqabla: Daily Dip (live)
-    rng = np.random.default_rng(7)
-    dtr = [t for t in trades_dip(daily, allowed, btc_ok) if pd.Timestamp(t["t_in"]) >= start]
-    s = summarize(dtr, [], fold_bounds, closes, 0.20)
-    rows.append(("DAILY DIP (abhi live)", s, None))
-
-    for name, over in VARIANTS:
-        p = dict(BASE, **over)
-        tr, rtr = dip4h_trades(h4, allowed, btc_ok, p, rng=np.random.default_rng(7))
-        tr = [t for t in tr if pd.Timestamp(t["t_in"]) >= start]
-        rtr = [t for t in rtr if pd.Timestamp(t["t_in"]) >= start]
-        if len(tr) < 5:
-            emit(f"\n[FAIL] {name}: trades nahi")
-            continue
-        s = summarize(tr, rtr, fold_bounds, closes, 0.20)
-        ok = verdict(s)
-        rows.append((name, s, ok))
-
-    for name, s, ok in rows:
-        ps, rp = s["port"], s["rport"]
-        folds = " / ".join(f"{fmt(f)}({n})" for f, n in zip(s["fp"], s["fn"]))
-        tag = "MUQABLA" if ok is None else ("PASS" if ok else "FAIL")
-        emit(f"\n[{tag}] {name}")
-        emit(f"   Har trade: n={s['n']} win={s['win']:.1f}% PF={fmt(s['pf'])} p5={fmt(s['p5'])} Top10-hata={fmt(s['t10'])} "
-             f"avg={s['exp']:+.2f}% | Random PF={fmt(s['rpf'])}")
-        emit(f"   Folds: {folds}")
-        emit(f"   Portfolio: CAGR={ps['cagr']*100:+.1f}% MaxDD={ps['dd']*100:.1f}% Sharpe={ps['sharpe']:.2f}"
-             + (f" | Random portfolio: CAGR={rp['cagr']*100:+.1f}% Sharpe={rp['sharpe']:.2f}" if rp else ""))
-        emit(f"   Li gayi trades: {s['taken']} = {s['per_week']:.1f}/hafta | trade ~{s['hold_h']:.0f} ghante | "
-             "Saal-war: " + " ".join(f"{y.year}:{v*100:+.0f}%" for y, v in ps["yearly"].items()))
+    summary = []
+    for U in UNIVERSES:
+        allowed = {day: set(row.dropna().nlargest(U).index) for day, row in dv.iterrows()}
+        emit(f"\n\n{'#' * 100}\nUNIVERSE: TOP {U} COINS\n{'#' * 100}")
+        rows = []
+        dtr = [t for t in trades_dip(daily, allowed, btc_ok) if pd.Timestamp(t["t_in"]) >= start]
+        if len(dtr) >= 5:
+            rows.append(("DAILY DIP (muqabla)", summarize(dtr, [], fold_bounds, closes, 0.20), None))
+        for name, over in VARIANTS:
+            p = dict(BASE, **over)
+            tr, rtr = dip4h_trades(h4, allowed, btc_ok, p, rng=np.random.default_rng(7))
+            tr = [t for t in tr if pd.Timestamp(t["t_in"]) >= start]
+            rtr = [t for t in rtr if pd.Timestamp(t["t_in"]) >= start]
+            if len(tr) < 5:
+                emit(f"\n[FAIL] {name}: trades nahi")
+                continue
+            s = summarize(tr, rtr, fold_bounds, closes, 0.20)
+            rows.append((name, s, verdict(s)))
+        for name, s, ok in rows:
+            ps, rp = s["port"], s["rport"]
+            folds = " / ".join(f"{fmt(f)}({n})" for f, n in zip(s["fp"], s["fn"]))
+            tag = "MUQABLA" if ok is None else ("PASS" if ok else "FAIL")
+            emit(f"\n[{tag}] TOP {U} | {name}")
+            emit(f"   Har trade: n={s['n']} win={s['win']:.1f}% PF={fmt(s['pf'])} p5={fmt(s['p5'])} Top10-hata={fmt(s['t10'])} "
+                 f"avg={s['exp']:+.2f}% | Random PF={fmt(s['rpf'])}")
+            emit(f"   Folds: {folds}")
+            emit(f"   Portfolio: CAGR={ps['cagr']*100:+.1f}% MaxDD={ps['dd']*100:.1f}% Sharpe={ps['sharpe']:.2f}"
+                 + (f" | Random portfolio: CAGR={rp['cagr']*100:+.1f}% Sharpe={rp['sharpe']:.2f}" if rp else ""))
+            emit(f"   Li gayi trades: {s['taken']} = {s['per_week']:.1f}/hafta | trade ~{s['hold_h']:.0f} ghante | "
+                 "Saal-war: " + " ".join(f"{y.year}:{v*100:+.0f}%" for y, v in ps["yearly"].items()))
+            summary.append((U, name, s, ok))
 
     emit("\n" + "=" * 100)
-    emit("KHULASA")
+    emit("KHULASA - coins ki tadaad ka asar")
     emit("=" * 100)
-    emit(f"{'Variant':>22} | {'Trades':>6} | {'/hafta':>6} | {'Ghante':>6} | {'Win%':>5} | {'PF':>5} | {'p5':>5} | {'Random':>6} | "
-         f"{'CAGR':>7} | {'MaxDD':>7} | {'Sharpe':>6} | Faisla")
-    for name, s, ok in rows:
+    emit(f"{'Coins':>5} | {'Variant':>20} | {'Trades':>6} | {'/hafta':>6} | {'Ghante':>6} | {'Win%':>5} | {'PF':>5} | {'p5':>5} | "
+         f"{'Random':>6} | {'CAGR':>7} | {'MaxDD':>7} | {'Sharpe':>6} | Faisla")
+    for U, name, s, ok in summary:
         tag = "-" if ok is None else ("PASS" if ok else "FAIL")
-        emit(f"{name:>22} | {s['n']:>6} | {s['per_week']:>6.1f} | {s['hold_h']:>6.0f} | {s['win']:>5.1f} | {fmt(s['pf']):>5} | "
-             f"{fmt(s['p5']):>5} | {fmt(s['rpf']):>6} | {s['port']['cagr']*100:>+6.1f}% | {s['port']['dd']*100:>6.1f}% | "
-             f"{s['port']['sharpe']:>6.2f} | {tag}")
-    npass = sum(1 for _, _, ok in rows if ok)
-    emit(f"\nDIP 4H: {npass}/{len(rows) - 1} PASS")
+        emit(f"{U:>5} | {name:>20} | {s['n']:>6} | {s['per_week']:>6.1f} | {s['hold_h']:>6.0f} | {s['win']:>5.1f} | "
+             f"{fmt(s['pf']):>5} | {fmt(s['p5']):>5} | {fmt(s['rpf']):>6} | {s['port']['cagr']*100:>+6.1f}% | "
+             f"{s['port']['dd']*100:>6.1f}% | {s['port']['sharpe']:>6.2f} | {tag}")
+    for U in UNIVERSES:
+        r = [ok for u, _, _, ok in summary if u == U and ok is not None]
+        emit(f"TOP {U}: Dip 4H {sum(r)}/{len(r)} PASS")
 
     with open(OUT, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))

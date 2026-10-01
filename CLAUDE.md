@@ -113,11 +113,11 @@ Secrets:
   "Sarmaye ki taqseem" (kul capital -> har system ka $) aur har signal ka size system ke hisse se.
 
 ## Zer-e-test (EXPERIMENTAL)
-- **Fast Lab - DIP 4H** (`fast_lab.py`, workflow "Fast Lab Test", natija `fast_lab_RESULTS.txt`): Daily Dip ka edge
-  4H par (rozana kai signals). Daily trend (EMA200/EMA50, band din) + BTC>EMA50 + 4H RSI3<10 -> agli 4H open;
-  exit 4H close > SMA5; stop 3 ATR(4H); max 30 candles; 20%/trade max 10. Variants: RSI 5/15/20, exit 3/8,
-  stop 2/4, hold 12, BTC filter nahi, 4H trend. Daily Dip se muqabla, signals/hafta aur ghante bhi.
-  Truncation test se lookahead 0. Pass ho to Dip 4H bot.
+- **DIP 4H Universe Test** (`dip4h_universe.py`, workflow "Dip 4H Universe Test", natija `dip4h_universe_RESULTS.txt`):
+  Daily Dip ka edge 4H par (daily trend + BTC>EMA50 + 4H RSI3<10, exit 4H close>SMA5, stop 3 ATR, max 30 candles,
+  20%/trade max 10) - user ke kehne par top 70 / 100 / 150 / 200 liquid coins par alag alag (point-in-time),
+  har universe par BASELINE + RSI 5 / RSI 15 / exit 8 + Daily Dip muqabla. Lookahead truncation test 0.
+  (Pehla "Fast Lab" 11-variant version user ne hatwa diya - ye us ki jagah.)
 
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
