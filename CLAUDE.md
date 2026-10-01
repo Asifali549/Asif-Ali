@@ -154,6 +154,11 @@ Secrets:
 - Exits 6/6 random se behtar; Donchian 10-din low exit: PF 2.42 (rnd 1.86, +0.56, OOS 1.49) sab se behtar; ATR trail sab se kam DD (-32%).
 - Faisla: PROMISING - kyunke (1) nafa right-tail coins par kaafi had tak, (2) bear/high-vol mein edge nahi, (3) 2025-26 kamzor.
 
+## Zer-e-test
+- **DONCHIAN STRESS** (`donchian_stress.py`, workflow "Donchian Stress Test", natija `donchian_stress_RESULTS.txt`):
+  N=20 (baghair filter / BTC>EMA50): A) kharcha 1x/2x/3x (ATR trail + Donchian 10 exit), B) Donchian exit M 5/10/15/20/30,
+  C) 2025 tajziya (mahana PF vs random, breadth, BTC regime, bure coins, saal-war stop-out).
+
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
