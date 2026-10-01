@@ -1,0 +1,12 @@
+[
+  {
+    "system": "Dip Daily",
+    "symbol": "LIT/USDT",
+    "signal_time_utc": "2026-10-01 00:00:00",
+    "entry_est": 3.955,
+    "sl": 2.5529163055,
+    "tp": null,
+    "risk_pct": 35.45,
+    "size_pct": 10.0
+  }
+]
