@@ -191,6 +191,10 @@ Secrets:
   Khatre: CAGR 2021 (+500..+3000%) se phoola; survivorship bias momentum ko sab se ziada faida deta hai (mare hue
   pump coins list mein nahi); K3 mein 1-2 coin poora saal bana dete hain. Agla qadam: validation (coin concentration,
   2022 se shuru, survivorship, drawdown control) - live/paper abhi NAHI.
+- **RS VALIDATION** (`rs_validate.py`, workflow "RS Validation Test", natija `rs_validate_RESULTS.txt`), 6 plateau
+  configs (L14K5, L14K10, L30K10, L60K5, L60K10, L90K10), random turnover-matched 50 seeds: A) top-5 nafa wale coins
+  nikaal kar dobara; B) 2022-01-01 se (vs random p95, EW, BTC); C) survivorship proxy: 365+ din history / top-50
+  liquidity; D) drawdown control: apni equity < SMA 30/50/100 -> cash (pass: DD > -45%, Sharpe -0.10 se kam nahi).
 
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
