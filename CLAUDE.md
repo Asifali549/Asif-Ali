@@ -118,6 +118,15 @@ Secrets:
   (Telegram mein "hisse ka X% = kul capital ka Y%"), Donchian Telegram mein "Sirf PAPER", dashboard sidebar
   "Sarmaye ki taqseem" (kul capital -> har system ka $) aur har signal ka size system ke hisse se.
 
+## Zer-e-test (EXPERIMENTAL)
+- **SPOT CORE TREND-PULLBACK PRO** (user ka spec 2026-10-01; `spot_core_lab.py`, workflow "Spot Core Test",
+  natija `spot_core_RESULTS.txt`; TradingView: `spot_core_trend_pullback_pro.pine` - compile abhi user ne check karna).
+  4H: daily bias (EMA200/50) + 4H EMA50>200, close>EMA200, ADX>=21 + pullback (8 candles, 1-5 ATR) + support (EMA20
+  touch ya swing-high retest, structure intact) + RSI 45-65 barhta + bullish candle + volume 1.75x + reclaim 5-candle
+  high + overext (<=2 ATR EMA20 se) + resistance >=1R; SL pullback low-0.5ATR; TP1 1.5R 40%, TP2 3R 30%, baqi CE16/5.5
+  trail (TP1 ke baad BE); max 120 candles; divergence sirf ranking. 18 variants: parosi + exits + ABLATION (har filter
+  hata kar). Regimes/bare coins alag. Lookahead truncation 0; exit-sim unit test theek.
+
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
 - User dashboard review kar ke mazeed tabdeeliyan batayega.

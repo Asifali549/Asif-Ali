@@ -1,0 +1,169 @@
+// This Pine Script® code is subject to the terms of the Mozilla Public License 2.0
+// SPOT CORE TREND-PULLBACK PRO  — spot / long-only, 4H chart ke liye (Daily bias andar se)
+// Daily Trend -> 4H Trend -> Controlled Pullback -> Support/Structure -> Momentum Recovery
+// -> Volume -> Local Structure Reclaim -> R:R -> BUY
+// Non-repainting: daily data sirf BAND din ([1] + lookahead_on), pivots confirmed (5 candles baad),
+// signal band candle par, order agli candle ke open par.
+//@version=5
+strategy("SPOT CORE TREND-PULLBACK PRO", overlay = true, pyramiding = 0, initial_capital = 1000,
+     commission_type = strategy.commission.percent, commission_value = 0.1, slippage = 2,
+     process_orders_on_close = false, calc_on_every_tick = false, max_labels_count = 500)
+
+// ───────────── Inputs ─────────────
+gT = "Trend"
+useDaily  = input.bool(true,  "Daily trend filter (close > EMA200, EMA50 > EMA200)", group = gT)
+useAdx    = input.bool(true,  "ADX filter", group = gT)
+adxMin    = input.float(21,   "ADX minimum", minval = 5, step = 1, group = gT)
+
+gP = "Pullback / Support"
+usePB     = input.bool(true,  "Pullback + support zaroori", group = gP)
+pbLen     = input.int(8,      "Pullback lookback (candles)", minval = 3, group = gP)
+pbMin     = input.float(1.0,  "Pullback min depth (ATR)", step = 0.25, group = gP)
+pbMax     = input.float(5.0,  "Pullback max depth (ATR)", step = 0.25, group = gP)
+pivLen    = input.int(5,      "Swing pivot length", minval = 2, group = gP)
+
+gM = "Momentum / Volume / Reclaim"
+useRsi    = input.bool(true,  "RSI recovery zone", group = gM)
+rsiLo     = input.float(45,   "RSI min", group = gM)
+rsiHi     = input.float(65,   "RSI max", group = gM)
+useCandle = input.bool(true,  "Bullish candle (close range ke ooper 40% mein)", group = gM)
+useVol    = input.bool(true,  "Volume confirmation", group = gM)
+volMult   = input.float(1.75, "Volume x average(20)", step = 0.05, group = gM)
+useRecl   = input.bool(true,  "Local structure reclaim", group = gM)
+reclLen   = input.int(5,      "Reclaim lookback (candles)", minval = 2, group = gM)
+
+gR = "Risk / Exits"
+useExt    = input.bool(true,  "Overextension filter", group = gR)
+extAtr    = input.float(2.0,  "Max (close - EMA20) in ATR", step = 0.25, group = gR)
+useRR     = input.bool(true,  "Resistance / R:R filter", group = gR)
+resLen    = input.int(120,    "Resistance lookback (candles)", group = gR)
+resRR     = input.float(1.0,  "Resistance tak kam az kam (R)", step = 0.25, group = gR)
+slAtr     = input.float(0.5,  "SL buffer (ATR, pullback low ke neeche)", step = 0.1, group = gR)
+exitMode  = input.string("Partial", "Exit mode", options = ["Partial", "TP all", "Trailing"], group = gR)
+tp1R      = input.float(1.5,  "TP1 (R)", step = 0.25, group = gR)
+tp2R      = input.float(3.0,  "TP2 (R)", step = 0.25, group = gR)
+tp1Pct    = input.float(40,   "TP1 par bechna %", group = gR)
+tp2Pct    = input.float(30,   "TP2 par bechna %", group = gR)
+ceLen     = input.int(16,     "Trailing Chandelier length", group = gR)
+ceMult    = input.float(5.5,  "Trailing Chandelier ATR x", step = 0.25, group = gR)
+maxHold   = input.int(120,    "Max candles (time exit)", group = gR)
+riskPct   = input.float(1.0,  "Risk % equity per trade", step = 0.25, group = gR)
+maxPosPct = input.float(20,   "Max position % equity", group = gR)
+coolBars  = input.int(6,      "Cooldown (candles)", group = gR)
+showLines = input.bool(true,  "SL/TP lines dikhao", group = gR)
+
+// ───────────── Daily bias (sirf band din) ─────────────
+dClose = request.security(syminfo.tickerid, "D", close[1], lookahead = barmerge.lookahead_on)
+dE50   = request.security(syminfo.tickerid, "D", ta.ema(close, 50)[1], lookahead = barmerge.lookahead_on)
+dE200  = request.security(syminfo.tickerid, "D", ta.ema(close, 200)[1], lookahead = barmerge.lookahead_on)
+dailyOK = not useDaily or (dClose > dE200 and dE50 > dE200)
+
+// ───────────── 4H trend ─────────────
+e20  = ta.ema(close, 20)
+e50  = ta.ema(close, 50)
+e200 = ta.ema(close, 200)
+atr  = ta.rma(ta.tr(true), 14)
+[diP, diM, adxV] = ta.dmi(14, 14)
+trendOK = e50 > e200 and close > e200 and (not useAdx or adxV >= adxMin)
+
+// ───────────── Pullback + support / structure ─────────────
+lowPB  = ta.lowest(low, pbLen)
+hh20   = ta.highest(high, 20)[1]
+depth  = (hh20 - lowPB) / atr
+pbOK   = depth >= pbMin and depth <= pbMax
+touchE = ta.highest(low <= e20 + 0.25 * atr ? 1 : 0, pbLen) > 0
+ph     = ta.pivothigh(high, pivLen, pivLen)
+pl     = ta.pivotlow(low, pivLen, pivLen)
+phLast = ta.valuewhen(not na(ph), ph, 0)
+plLast = ta.valuewhen(not na(pl), pl, 0)
+phPrev = phLast[pbLen]
+plPrev = plLast[pbLen]
+retest = not na(phPrev) and math.abs(lowPB - phPrev) <= 0.5 * atr
+intact = (na(plPrev) or lowPB > plPrev) and lowPB > e200
+supOK  = not usePB or (pbOK and (touchE or retest) and intact)
+
+// ───────────── Momentum / volume / reclaim ─────────────
+r      = ta.rsi(close, 14)
+momOK  = not useRsi or (r >= rsiLo and r <= rsiHi and r > r[1])
+rngC   = high - low
+candOK = not useCandle or (close > open and rngC > 0 and (close - low) / rngC >= 0.6)
+volOK  = not useVol or volume >= volMult * ta.sma(volume, 20)[1]
+hhR    = ta.highest(high, reclLen)[1]
+reclOK = not useRecl or (close > hhR and close[1] <= hhR[1])
+
+// ───────────── Overextension / risk / resistance ─────────────
+slLvl  = lowPB - slAtr * atr
+R      = close - slLvl
+extOK  = not useExt or ((close - e20) / atr <= extAtr and rngC / atr <= 3)
+resH   = ta.highest(high, resLen)[1]
+rrOK   = not useRR or resH <= close or (resH - close) / R >= resRR
+riskOK = R / atr >= 0.5 and R / atr <= 4
+
+// ───────────── Optional RSI bullish divergence (sirf quality, signal ke liye zaroori nahi) ─────────────
+var float pl1 = na
+var float pl2 = na
+var float r1 = na
+var float r2 = na
+var int plBar = na
+if not na(pl)
+    pl1 := pl2
+    r1 := r2
+    pl2 := pl
+    r2 := r[pivLen]
+    plBar := bar_index
+divOK = not na(pl1) and pl2 < pl1 and r2 > r1 and bar_index - plBar <= 15
+
+// ───────────── BUY ─────────────
+rawBuy = barstate.isconfirmed and dailyOK and trendOK and supOK and momOK and candOK and volOK and reclOK and extOK and rrOK and riskOK
+var int lastSig = na
+sigC = rawBuy and (na(lastSig) or bar_index - lastSig > coolBars)
+if sigC
+    lastSig := bar_index
+buy = sigC and strategy.position_size == 0
+
+// ───────────── Orders ─────────────
+ceStop = ta.highest(high, ceLen) - ceMult * ta.sma(ta.tr(true), ceLen)
+var float tp1 = na
+var float tp2 = na
+var float stopNow = na
+var int entryBar = na
+var float initQty = na
+var bool tp1Done = false
+
+if buy
+    qtyRisk = strategy.equity * riskPct / 100 / R
+    qtyCap  = strategy.equity * maxPosPct / 100 / close
+    q = math.min(qtyRisk, qtyCap)
+    strategy.entry("L", strategy.long, qty = q, comment = divOK ? "BUY+DIV" : "BUY")
+    tp1 := close + tp1R * R
+    tp2 := close + tp2R * R
+    stopNow := slLvl
+    entryBar := bar_index + 1
+    initQty := q
+    tp1Done := false
+
+inPos = strategy.position_size > 0
+if inPos or buy                                                          // buy wali candle par hi exits laga do
+    if inPos and exitMode == "Partial" and not tp1Done and strategy.position_size < initQty * 0.99
+        tp1Done := true
+        stopNow := math.max(stopNow, strategy.position_avg_price)        // TP1 ke baad breakeven
+    if inPos and ((exitMode == "Partial" and tp1Done) or exitMode == "Trailing")
+        stopNow := math.max(stopNow, ceStop)                             // phir trailing
+    if exitMode == "Partial"
+        strategy.exit("TP1", "L", qty_percent = tp1Pct, limit = tp1, stop = stopNow, comment_loss = "SL", comment_profit = "TP1")
+        strategy.exit("TP2", "L", qty_percent = tp2Pct, limit = tp2, stop = stopNow, comment_loss = "SL", comment_profit = "TP2")
+        strategy.exit("RUN", "L", stop = stopNow, comment = "TRAIL")
+    else if exitMode == "TP all"
+        strategy.exit("TP", "L", limit = tp2, stop = stopNow, comment_loss = "SL", comment_profit = "TP")
+    else
+        strategy.exit("TRAIL", "L", stop = stopNow, comment = "TRAIL")
+    if inPos and bar_index - entryBar >= maxHold
+        strategy.close("L", comment = "TIME")
+
+// ───────────── Chart (saaf) ─────────────
+plotshape(buy, "BUY", shape.labelup, location.belowbar, color.new(color.green, 0), text = "BUY", textcolor = color.white, size = size.small)
+plot(showLines and inPos ? stopNow : na, "SL", color.new(color.red, 0), 1, plot.style_linebr)
+plot(showLines and inPos and exitMode != "Trailing" ? tp1 : na, "TP1", color.new(color.teal, 30), 1, plot.style_linebr)
+plot(showLines and inPos and exitMode != "Trailing" ? tp2 : na, "TP2", color.new(color.green, 30), 1, plot.style_linebr)
+
+alertcondition(buy, "SPOT CORE BUY", "SPOT CORE BUY: {{ticker}} @ {{close}} (4H)")
