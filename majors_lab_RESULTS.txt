@@ -1,0 +1,116 @@
+====================================================================================================
+MAJORS TREND LAB - BTC 50% + ETH 50%, daily trend-following
+====================================================================================================
+Period: 2018-05-17 -> 2026-09-30 (8.4 saal) | kharcha 0.15% har position-badlao par
+
+BUY & HOLD (BTC+ETH): CAGR=+27.7% MaxDD=-78.5% Sharpe=0.71 | Folds: -36% / +342% / +127% / +20%
+   Saal-war: 2018:-70% 2019:+42% 2020:+395% 2021:+199% 2022:-65% 2023:+123% 2024:+83% 2025:-6% 2026:-7%
+
+[FAIL] SMA 50
+   CAGR=+52.0% MaxDD=-56.3% Sharpe=1.16 (random-timing 95th=0.84) | market mein 52% waqt | ~163 trades/coin
+   Folds: +70% / +405% / +76% / +121% | Saal-war: 2018:-27% 2019:+39% 2020:+310% 2021:+162% 2022:-41% 2023:+94% 2024:+49% 2025:+42% 2026:+26%
+
+[FAIL] SMA 50 +volTarget
+   CAGR=+43.5% MaxDD=-48.6% Sharpe=1.25 (random-timing 95th=0.88) | market mein 41% waqt | ~150 trades/coin
+   Folds: +87% / +219% / +81% / +92% | Saal-war: 2018:-19% 2019:+60% 2020:+215% 2021:+78% 2022:-36% 2023:+84% 2024:+51% 2025:+27% 2026:+24%
+
+[FAIL] SMA 100
+   CAGR=+45.0% MaxDD=-52.8% Sharpe=1.04 (random-timing 95th=0.93) | market mein 53% waqt | ~112 trades/coin
+   Folds: +60% / +460% / +41% / +77% | Saal-war: 2018:-9% 2019:+97% 2020:+150% 2021:+134% 2022:-34% 2023:+66% 2024:+40% 2025:+22% 2026:+14%
+
+[FAIL] SMA 100 +volTarget
+   CAGR=+37.3% MaxDD=-45.4% Sharpe=1.12 (random-timing 95th=0.96) | market mein 42% waqt | ~105 trades/coin
+   Folds: +79% / +241% / +48% / +58% | Saal-war: 2018:-6% 2019:+92% 2020:+143% 2021:+65% 2022:-31% 2023:+56% 2024:+41% 2025:+15% 2026:+12%
+
+[FAIL] SMA 150
+   CAGR=+47.8% MaxDD=-54.6% Sharpe=1.08 (random-timing 95th=0.94) | market mein 52% waqt | ~66 trades/coin
+   Folds: +30% / +537% / +120% / +45% | Saal-war: 2018:-4% 2019:+53% 2020:+185% 2021:+107% 2022:-12% 2023:+79% 2024:+73% 2025:-2% 2026:+16%
+
+[PASS] SMA 150 +volTarget
+   CAGR=+41.4% MaxDD=-35.4% Sharpe=1.21 (random-timing 95th=0.97) | market mein 41% waqt | ~56 trades/coin
+   Folds: +51% / +296% / +118% / +39% | Saal-war: 2018:-3% 2019:+61% 2020:+166% 2021:+52% 2022:-10% 2023:+68% 2024:+73% 2025:-1% 2026:+13%
+
+[FAIL] SMA 200
+   CAGR=+42.0% MaxDD=-62.3% Sharpe=0.99 (random-timing 95th=0.97) | market mein 52% waqt | ~54 trades/coin
+   Folds: +4% / +479% / +131% / +35% | Saal-war: 2018:+0% 2019:+32% 2020:+154% 2021:+96% 2022:-8% 2023:+72% 2024:+67% 2025:-9% 2026:+20%
+
+[PASS] SMA 200 +volTarget
+   CAGR=+36.5% MaxDD=-44.1% Sharpe=1.10 (random-timing 95th=1.05) | market mein 41% waqt | ~47 trades/coin
+   Folds: +23% / +263% / +126% / +34% | Saal-war: 2018:+0% 2019:+35% 2020:+148% 2021:+43% 2022:-7% 2023:+61% 2024:+69% 2025:-5% 2026:+17%
+
+[FAIL] EMA 10/50
+   CAGR=+46.5% MaxDD=-49.2% Sharpe=1.07 (random-timing 95th=0.88) | market mein 51% waqt | ~62 trades/coin
+   Folds: +60% / +683% / +21% / +62% | Saal-war: 2018:-20% 2019:+45% 2020:+293% 2021:+186% 2022:-33% 2023:+53% 2024:+30% 2025:+21% 2026:+16%
+
+[FAIL] EMA 10/50 +volTarget
+   CAGR=+36.0% MaxDD=-45.2% Sharpe=1.09 (random-timing 95th=0.90) | market mein 41% waqt | ~55 trades/coin
+   Folds: +75% / +318% / +25% / +44% | Saal-war: 2018:-14% 2019:+61% 2020:+210% 2021:+83% 2022:-33% 2023:+47% 2024:+32% 2025:+13% 2026:+13%
+
+[FAIL] EMA 20/100
+   CAGR=+39.8% MaxDD=-51.8% Sharpe=0.96 (random-timing 95th=1.00) | market mein 52% waqt | ~28 trades/coin
+   Folds: +17% / +575% / +31% / +61% | Saal-war: 2018:-17% 2019:+48% 2020:+205% 2021:+140% 2022:-26% 2023:+44% 2024:+35% 2025:+18% 2026:+8%
+
+[PASS] EMA 20/100 +volTarget
+   CAGR=+32.2% MaxDD=-42.6% Sharpe=1.02 (random-timing 95th=0.99) | market mein 41% waqt | ~26 trades/coin
+   Folds: +30% / +296% / +34% / +50% | Saal-war: 2018:-11% 2019:+46% 2020:+172% 2021:+66% 2022:-22% 2023:+35% 2024:+37% 2025:+15% 2026:+6%
+
+[FAIL] EMA 50/200
+   CAGR=+28.7% MaxDD=-72.6% Sharpe=0.76 (random-timing 95th=1.02) | market mein 54% waqt | ~15 trades/coin
+   Folds: -43% / +543% / +87% / +20% | Saal-war: 2018:-4% 2019:+4% 2020:+87% 2021:+155% 2022:-22% 2023:+39% 2024:+65% 2025:-9% 2026:+7%
+
+[FAIL] EMA 50/200 +volTarget
+   CAGR=+25.7% MaxDD=-54.4% Sharpe=0.83 (random-timing 95th=1.08) | market mein 43% waqt | ~12 trades/coin
+   Folds: -22% / +285% / +82% / +23% | Saal-war: 2018:-3% 2019:+14% 2020:+92% 2021:+73% 2022:-18% 2023:+31% 2024:+71% 2025:-6% 2026:+6%
+
+[FAIL] DONCH 20/10
+   CAGR=+32.4% MaxDD=-44.9% Sharpe=0.89 (random-timing 95th=0.87) | market mein 44% waqt | ~85 trades/coin
+   Folds: +43% / +674% / +10% / -14% | Saal-war: 2018:-24% 2019:+22% 2020:+295% 2021:+207% 2022:-31% 2023:+43% 2024:+21% 2025:-12% 2026:-11%
+
+[FAIL] DONCH 20/10 +volTarget
+   CAGR=+24.1% MaxDD=-40.9% Sharpe=0.87 (random-timing 95th=0.90) | market mein 35% waqt | ~80 trades/coin
+   Folds: +55% / +287% / +19% / -14% | Saal-war: 2018:-18% 2019:+35% 2020:+213% 2021:+83% 2022:-30% 2023:+36% 2024:+27% 2025:-13% 2026:-8%
+
+[FAIL] DONCH 50/20
+   CAGR=+34.9% MaxDD=-56.9% Sharpe=0.96 (random-timing 95th=0.92) | market mein 40% waqt | ~42 trades/coin
+   Folds: +42% / +370% / +18% / +56% | Saal-war: 2018:-19% 2019:+50% 2020:+187% 2021:+130% 2022:-29% 2023:+17% 2024:+60% 2025:+16% 2026:-0%
+
+[FAIL] DONCH 50/20 +volTarget
+   CAGR=+26.9% MaxDD=-46.1% Sharpe=0.98 (random-timing 95th=0.97) | market mein 32% waqt | ~39 trades/coin
+   Folds: +51% / +189% / +23% / +37% | Saal-war: 2018:-13% 2019:+53% 2020:+142% 2021:+61% 2022:-26% 2023:+14% 2024:+57% 2025:+9% 2026:-2%
+
+[FAIL] DONCH 100/50
+   CAGR=+31.8% MaxDD=-56.6% Sharpe=0.87 (random-timing 95th=0.96) | market mein 40% waqt | ~17 trades/coin
+   Folds: -17% / +644% / +43% / +15% | Saal-war: 2018:+0% 2019:+25% 2020:+98% 2021:+195% 2022:-16% 2023:+10% 2024:+47% 2025:+0% 2026:+1%
+
+[FAIL] DONCH 100/50 +volTarget
+   CAGR=+25.0% MaxDD=-40.3% Sharpe=0.91 (random-timing 95th=1.04) | market mein 31% waqt | ~16 trades/coin
+   Folds: -2% / +300% / +45% / +14% | Saal-war: 2018:+0% 2019:+23% 2020:+102% 2021:+82% 2022:-13% 2023:+7% 2024:+52% 2025:+1% 2026:+1%
+
+====================================================================================================
+KHULASA (PASS = Sharpe > random-timing 95th aur > Buy&Hold, MaxDD > -45%, koi fold -5% se bura nahi)
+====================================================================================================
+                      Rule |    CAGR |   MaxDD | Sharpe | Rnd95 | Expo | Trades | Faisla
+                BUY & HOLD |  +27.7% |  -78.5% |   0.71 |   -   | 100% |      - | -
+                    SMA 50 |  +52.0% |  -56.3% |   1.16 |  0.84 |  52% |    163 | FAIL
+         SMA 50 +volTarget |  +43.5% |  -48.6% |   1.25 |  0.88 |  41% |    150 | FAIL
+                   SMA 100 |  +45.0% |  -52.8% |   1.04 |  0.93 |  53% |    112 | FAIL
+        SMA 100 +volTarget |  +37.3% |  -45.4% |   1.12 |  0.96 |  42% |    105 | FAIL
+                   SMA 150 |  +47.8% |  -54.6% |   1.08 |  0.94 |  52% |     66 | FAIL
+        SMA 150 +volTarget |  +41.4% |  -35.4% |   1.21 |  0.97 |  41% |     56 | PASS
+                   SMA 200 |  +42.0% |  -62.3% |   0.99 |  0.97 |  52% |     54 | FAIL
+        SMA 200 +volTarget |  +36.5% |  -44.1% |   1.10 |  1.05 |  41% |     47 | PASS
+                 EMA 10/50 |  +46.5% |  -49.2% |   1.07 |  0.88 |  51% |     62 | FAIL
+      EMA 10/50 +volTarget |  +36.0% |  -45.2% |   1.09 |  0.90 |  41% |     55 | FAIL
+                EMA 20/100 |  +39.8% |  -51.8% |   0.96 |  1.00 |  52% |     28 | FAIL
+     EMA 20/100 +volTarget |  +32.2% |  -42.6% |   1.02 |  0.99 |  41% |     26 | PASS
+                EMA 50/200 |  +28.7% |  -72.6% |   0.76 |  1.02 |  54% |     15 | FAIL
+     EMA 50/200 +volTarget |  +25.7% |  -54.4% |   0.83 |  1.08 |  43% |     12 | FAIL
+               DONCH 20/10 |  +32.4% |  -44.9% |   0.89 |  0.87 |  44% |     85 | FAIL
+    DONCH 20/10 +volTarget |  +24.1% |  -40.9% |   0.87 |  0.90 |  35% |     80 | FAIL
+               DONCH 50/20 |  +34.9% |  -56.9% |   0.96 |  0.92 |  40% |     42 | FAIL
+    DONCH 50/20 +volTarget |  +26.9% |  -46.1% |   0.98 |  0.97 |  32% |     39 | FAIL
+              DONCH 100/50 |  +31.8% |  -56.6% |   0.87 |  0.96 |  40% |     17 | FAIL
+   DONCH 100/50 +volTarget |  +25.0% |  -40.3% |   0.91 |  1.04 |  31% |     16 | FAIL
+SMA: 2/8 PASS
+EMA: 1/6 PASS
+DONCH: 0/6 PASS
