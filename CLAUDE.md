@@ -103,6 +103,16 @@ Secrets:
   0/4 - PF barhta hai magar random bhi (+0.12..+0.18 sirf), 2022 0.52 -> 0.11-0.31, 2025 0.98 -> 0.46-0.83 (market
   breadth jaisa hi bull-trap masla). Sabaq: shobe ki taqat Donchian ki 2022/2025 kamzori theek nahi karti.
   Files `git show f985de7:sector_rotation.py` / natija commit ke baad `sector_rotation_RESULTS.txt` history mein.
+- **WEEKLY RS ROTATION (top-K coins by L-din return, har itwar, 2026-10-01) - FAIL (tradeable nahi):**
+  Pehla test: 9/12 grid random (turnover-matched) p95 se behtar, OOS 2025+ +3..+728% vs random -40..-56%.
+  VALIDATION (6 plateau configs): edge hai (2022 se 5/6, 365+ din coins 6/6, top-50 coins 6/6 random p95 se behtar)
+  LEKIN (1) nafa lottery jaisa: top-5 coins = kul net nafa ka 80-161% (ZEC, VVV, USELESS, AKE, TEL, PUMP...),
+  unhein nikaal kar sirf 2/6 bache; nafa wale coins ~45%, nuqsan wale ~55%. (2) MaxDD -80 se -95% HAR version mein
+  (purane/bare coins mein bhi), 2022 -76..-89%, 1000-1900 din paani ke neeche, sirf ~50% mahine musbat.
+  (3) Equity-curve filter (apni equity < SMA 30/50/100 -> cash): 0/18 - DD sirf -68..-91% tak aaya, nafa aadha.
+  Sabaq: crypto mein cross-sectional momentum ka edge right-tail (chand pump coins) se aata hai aur survivorship
+  bias isi ko phulata hai; crash risk itna hai ke koi insaan nahi jhel sakta. Files `git show c8faed3:rs_rotation.py`,
+  `git show c7fa63a:rs_validate.py`, natije `git show cd81dde:rs_rotation_RESULTS.txt` / `git show 2005af0:rs_validate_RESULTS.txt`.
 - Purane research scripts/natije git history mein hain: commit `ec7962f` (cleanup se pehle) par
   `git show ec7962f:<file>` se wapas mil sakte hain (unified_test.py, ichimoku4h_validation.py, strategy_lab.py,
   portfolio_test.py, donchian_regime_test.py, archive/...).
@@ -176,25 +186,6 @@ Secrets:
   Asal maqsad NAKAM: 2022 PF 0.49 -> 0.22-0.26 aur 2025 0.89 -> 0.66-0.87 (aur BURA). Donchian exit: 2022 0.37 -> 0.11-0.16.
   Matlab: bure saalon ka nuqsan tab hota hai jab breadth ooncha ho (bear market ke jhoote rally / bull traps) -
   market-level filters (BTC, breadth) is kamzori ko theek nahi karte. FAISLA: Donchian par filter-tahqeeq BAND.
-
-## Zer-e-test
-- **WEEKLY RS ROTATION** (`rs_rotation.py`, workflow "RS Rotation Test", natija `rs_rotation_RESULTS.txt`):
-  har itwar band -> top-K coins by L-din return (eligible: 90+ din history, top-100 liquidity), peer open par
-  sirf nikle coin becho / naye khareedo (held dobara barabar nahi). Grid L 14/30/60/90 x K 3/5/10; ek filter alag:
-  BTC>EMA50 warna cash. Random = TURNOVER-MATCHED (rakha coin keep_p se rehta, baqi random; pehle simple random ka
-  turnover bohat ziada tha -> jhoota edge). Pass: Sharpe > random p95, CAGR > EW benchmark, OOS > random median,
-  2x kharche par CAGR > 0. Truncation test: koi lookahead nahi. Random-walk data par 2/12 aur 1/12 (itefaq ki had).
-  **NATIJA (2026-10-01): PROMISING magar KHATARNAK.** Baghair filter 9/12 PASS (K10 4/4, L14 aur L60 har K par),
-  Sharpe 0.83-1.35 vs random p95 ~1.0-1.1, OOS (2025+) +3% se +728% vs random -38..-56%, EW benchmark -17%;
-  2x kharcha sirf ~5-20% CAGR kam; turnover 0.7-5 trades/hafta. LEKIN MaxDD -85 se -95%, 2022 -76..-89%.
-  BTC>EMA50 filter: 5/12 (DD -52..-75%, 2022 -40..-60%; random bhi behtar hota hai is liye p95 kam pass).
-  Khatre: CAGR 2021 (+500..+3000%) se phoola; survivorship bias momentum ko sab se ziada faida deta hai (mare hue
-  pump coins list mein nahi); K3 mein 1-2 coin poora saal bana dete hain. Agla qadam: validation (coin concentration,
-  2022 se shuru, survivorship, drawdown control) - live/paper abhi NAHI.
-- **RS VALIDATION** (`rs_validate.py`, workflow "RS Validation Test", natija `rs_validate_RESULTS.txt`), 6 plateau
-  configs (L14K5, L14K10, L30K10, L60K5, L60K10, L90K10), random turnover-matched 50 seeds: A) top-5 nafa wale coins
-  nikaal kar dobara; B) 2022-01-01 se (vs random p95, EW, BTC); C) survivorship proxy: 365+ din history / top-50
-  liquidity; D) drawdown control: apni equity < SMA 30/50/100 -> cash (pass: DD > -45%, Sharpe -0.10 se kam nahi).
 
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
