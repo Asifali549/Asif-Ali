@@ -164,7 +164,9 @@ Secrets:
   2025 bull-regime trades PF 0.89. Saal-war PF: 2020 1.93, 2021 2.95, 2022 0.49, 2023 2.07, 2024 1.33, 2025 0.91, 2026 1.39.
   (Breadth % ka denominator listing se pehle wale coins bhi ginta hai - absolute % kam; sirf relative dekho.)
 - Tashkhees: edge kharche aur exit par mazboot; kamzori ALTCOIN market ki halat (2022, 2025) - BTC regime ise nahi pakarta.
-  Agla munasib EK filter: altcoin breadth (sahi denominator ke sath) - user ki manzoori baqi.
+  Agla EK filter (user ne mana, zer-e-test): `donchian_breadth.py` (workflow "Donchian Breadth Test", natija
+  `donchian_breadth_RESULTS.txt`): breadth = maujood coins (>=50 din history) mein se % jo EMA50 se ooper, band din par;
+  had 30/40/50/60% vs baghair filter vs BTC>EMA50 (ref); ATR trail + Donchian 10 exit; saal-war PF, regimes, coin median.
 
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
