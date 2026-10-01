@@ -170,11 +170,15 @@ Secrets:
   Matlab: bure saalon ka nuqsan tab hota hai jab breadth ooncha ho (bear market ke jhoote rally / bull traps) -
   market-level filters (BTC, breadth) is kamzori ko theek nahi karte. FAISLA: Donchian par filter-tahqeeq BAND.
 
+## Zer-e-test
+- **SECTOR ROTATION** (`sector_rotation.py`, workflow "Sector Rotation Test", natija `sector_rotation_RESULTS.txt`):
+  6 shobe (L1, PAY_POW, L2_INFRA, DEFI, AI_DEPIN, MEME - dasti labels file mein; user list dekhna nahi chahta).
+  Daily Donchian N20 + ATR stop/trail 3x. Versions: BASE; top-1/2/3 shobe by 30d median return, top-2 by 14d/60d;
+  sector breadth (% coins > EMA50) >= 50/60/70/80%. Random baseline allowed (coin, din) par. Pass = random se +0.15,
+  OOS > 1 aur >= base, DD base se bura nahi, 2022/2025 base se behtar, n >= 150; plateau dekhna.
+  Khatre: labels aaj ke (AI narrative 2023 se), chhote shobe (min 4 coins). FAIL ho to files hatao.
+
 ## Aglay kaam
-- User ka aaiandah idea: SECTOR ROTATION (coins ko shobon mein baant kar - AI/Meme/DeFi/L1 waghera; sirf mazboot
-  shobe ke coins mein Donchian breakout; sector breadth 50-80% ya top-2 sector by 30-din median return; random
-  baseline garam shobe ke andar). Khatre: labels aaj ke (AI narrative 2023 se), chhote shobe (min 5 coins), late entry.
-  Market breadth ke FAIL hone se ummeed kam - lekin ranking (rotation) alag cheez hai.
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
 - 2-3 mahine paper trading ke natije backtest se milao, phir asli paisa.
