@@ -1,0 +1,148 @@
+==============================================================================================================
+SPOT CORE TREND-PULLBACK PRO - SAKHT TEST (4H, daily bias, spot long-only)
+==============================================================================================================
+Coins: 109 | Period: 2020-10-02 -> 2026-09-30 | top-100 liquid (point-in-time)
+Kharcha: fee 0.10% + slip 0.05% har taraf + stop slip 0.25% | portfolio: 1% risk/trade, max 10, coin max 20%
+Muqabla: Ichimoku 4H (PF ~1.9-2.4, Sharpe ~1.8) - live system
+
+[FAIL] BASELINE
+   Har trade: n=41 win=24.4% avgWin=+13.48% avgLoss=-9.04% PF=0.48 p5=0.23 Top10-hata=0.00 Expectancy=-3.54% | Random PF=0.75
+   Folds: 0.20(9) / 0.55(4) / 0.55(19) / 0.68(9) | Exits: {'SL': 87, 'TP1': 10, 'BE': 9, 'TP2': 5, 'TIME': 4, 'TRAIL': 3}
+   Portfolio: CAGR=-2.5% MaxDD=-16.5% Sharpe=-0.41 | Random portfolio: CAGR=-1.0% Sharpe=-0.15 | 0.1 trades/hafta
+   Saal-war: 2020:+0% 2021:-5% 2022:+0% 2023:+2% 2024:-8% 2025:-2% 2026:-2%
+
+[FAIL] ADX 18
+   Har trade: n=60 win=26.7% avgWin=+15.53% avgLoss=-9.49% PF=0.59 p5=0.27 Top10-hata=0.07 Expectancy=-2.82% | Random PF=1.17
+   Folds: 0.94(15) / 0.28(6) / 0.50(28) / 0.46(11) | Exits: {'SL': 126, 'TP1': 16, 'BE': 15, 'TP2': 7, 'TRAIL': 7, 'TIME': 4}
+   Portfolio: CAGR=-3.1% MaxDD=-20.8% Sharpe=-0.44 | Random portfolio: CAGR=+1.9% Sharpe=0.26 | 0.2 trades/hafta
+   Saal-war: 2020:-2% 2021:+0% 2022:+0% 2023:+0% 2024:-11% 2025:-3% 2026:-3%
+
+[FAIL] ADX 25
+   Har trade: n=19 win=47.4% avgWin=+12.61% avgLoss=-8.95% PF=1.27 p5=N/A Top10-hata=0.00 Expectancy=+1.26% | Random PF=0.49
+   Folds: 0.44(5) / inf(1) / 2.10(8) / 1.19(5) | Exits: {'SL': 27, 'TP1': 9, 'BE': 9, 'TP2': 4, 'TRAIL': 3, 'TIME': 2}
+   Portfolio: CAGR=+0.3% MaxDD=-4.9% Sharpe=0.09 | Random portfolio: CAGR=-0.8% Sharpe=-0.25 | 0.1 trades/hafta
+   Saal-war: 2020:+0% 2021:-1% 2022:+0% 2023:+3% 2024:+0% 2025:-0% 2026:-0%
+
+[FAIL] Volume 1.5x
+   Har trade: n=65 win=32.3% avgWin=+13.33% avgLoss=-9.42% PF=0.68 p5=0.40 Top10-hata=0.19 Expectancy=-2.07% | Random PF=0.96
+   Folds: 0.33(13) / 0.76(6) / 0.77(26) / 0.95(20) | Exits: {'SL': 126, 'TP1': 21, 'TRAIL': 15, 'TP2': 12, 'BE': 10, 'TIME': 5}
+   Portfolio: CAGR=-1.3% MaxDD=-22.7% Sharpe=-0.09 | Random portfolio: CAGR=+1.1% Sharpe=0.15 | 0.2 trades/hafta
+   Saal-war: 2020:+3% 2021:-8% 2022:+0% 2023:+3% 2024:-5% 2025:+3% 2026:-2%
+
+[FAIL] Volume 2.0x
+   Har trade: n=27 win=22.2% avgWin=+15.29% avgLoss=-9.58% PF=0.46 p5=0.16 Top10-hata=0.00 Expectancy=-4.05% | Random PF=0.84
+   Folds: 0.22(6) / 0.00(1) / 0.50(16) / 0.84(4) | Exits: {'SL': 63, 'TP1': 6, 'BE': 5, 'TP2': 4, 'TRAIL': 2, 'TIME': 1}
+   Portfolio: CAGR=-1.9% MaxDD=-15.0% Sharpe=-0.33 | Random portfolio: CAGR=-0.3% Sharpe=-0.07 | 0.1 trades/hafta
+   Saal-war: 2020:+0% 2021:-4% 2022:+0% 2023:+2% 2024:-7% 2025:-2% 2026:-0%
+
+[FAIL] RSI 40-65
+   Har trade: n=41 win=24.4% avgWin=+13.48% avgLoss=-9.04% PF=0.48 p5=0.23 Top10-hata=0.00 Expectancy=-3.54% | Random PF=0.75
+   Folds: 0.20(9) / 0.55(4) / 0.55(19) / 0.68(9) | Exits: {'SL': 87, 'TP1': 10, 'BE': 9, 'TP2': 5, 'TIME': 4, 'TRAIL': 3}
+   Portfolio: CAGR=-2.5% MaxDD=-16.5% Sharpe=-0.41 | Random portfolio: CAGR=-1.0% Sharpe=-0.15 | 0.1 trades/hafta
+   Saal-war: 2020:+0% 2021:-5% 2022:+0% 2023:+2% 2024:-8% 2025:-2% 2026:-2%
+
+[FAIL] RSI 50-70
+   Har trade: n=92 win=32.6% avgWin=+18.59% avgLoss=-10.51% PF=0.86 p5=0.51 Top10-hata=0.31 Expectancy=-1.02% | Random PF=0.73
+   Folds: 1.83(26) / 0.55(4) / 0.50(44) / 0.51(18) | Exits: {'SL': 177, 'TP1': 30, 'BE': 19, 'TRAIL': 17, 'TP2': 16, 'TIME': 9}
+   Portfolio: CAGR=+0.2% MaxDD=-33.8% Sharpe=0.09 | Random portfolio: CAGR=-0.5% Sharpe=-0.02 | 0.3 trades/hafta
+   Saal-war: 2020:+2% 2021:+24% 2022:-1% 2023:-1% 2024:-10% 2025:-6% 2026:-2%
+
+[FAIL] Exit: TP 2.5R sab
+   Har trade: n=41 win=19.5% avgWin=+16.76% avgLoss=-9.14% PF=0.44 p5=0.20 Top10-hata=0.00 Expectancy=-4.09% | Random PF=1.02
+   Folds: 0.51(9) / 0.67(4) / 0.47(19) / 0.27(9) | Exits: {'SL': 29, 'TP': 7, 'TIME': 5}
+   Portfolio: CAGR=-2.4% MaxDD=-13.7% Sharpe=-0.64 | Random portfolio: CAGR=-0.2% Sharpe=-0.03 | 0.1 trades/hafta
+   Saal-war: 2020:+0% 2021:-2% 2022:+0% 2023:+0% 2024:-8% 2025:-2% 2026:-3%
+
+[FAIL] Exit: sirf trailing
+   Har trade: n=41 win=22.0% avgWin=+15.38% avgLoss=-8.27% PF=0.52 p5=0.16 Top10-hata=0.00 Expectancy=-3.08% | Random PF=0.63
+   Folds: 0.01(9) / 0.67(4) / 1.16(19) / 0.23(9) | Exits: {'TRAIL': 37, 'TIME': 4}
+   Portfolio: CAGR=-1.3% MaxDD=-11.2% Sharpe=-0.23 | Random portfolio: CAGR=-1.3% Sharpe=-0.18 | 0.1 trades/hafta
+   Saal-war: 2020:+0% 2021:-7% 2022:+0% 2023:+10% 2024:-5% 2025:-2% 2026:-3%
+
+[FAIL] HATAO: daily filter
+   Har trade: n=121 win=40.5% avgWin=+15.71% avgLoss=-9.69% PF=1.10 p5=0.76 Top10-hata=0.56 Expectancy=+0.60% | Random PF=1.04
+   Folds: 1.21(18) / 1.12(19) / 0.77(32) / 1.30(52) | Exits: {'SL': 210, 'TP1': 49, 'BE': 37, 'TP2': 25, 'TRAIL': 25, 'TIME': 10}
+   Portfolio: CAGR=+0.3% MaxDD=-17.0% Sharpe=0.09 | Random portfolio: CAGR=+0.2% Sharpe=0.08 | 0.4 trades/hafta
+   Saal-war: 2020:-0% 2021:+0% 2022:-1% 2023:+8% 2024:-6% 2025:+0% 2026:+1%
+
+[FAIL] HATAO: ADX
+   Har trade: n=148 win=30.4% avgWin=+13.28% avgLoss=-8.97% PF=0.65 p5=0.42 Top10-hata=0.29 Expectancy=-2.20% | Random PF=0.75
+   Folds: 0.86(33) / 0.86(11) / 0.48(78) / 0.78(26) | Exits: {'SL': 303, 'TP1': 45, 'BE': 31, 'TRAIL': 28, 'TP2': 24, 'TIME': 8}
+   Portfolio: CAGR=-5.1% MaxDD=-31.4% Sharpe=-0.42 | Random portfolio: CAGR=-2.8% Sharpe=-0.14 | 0.5 trades/hafta
+   Saal-war: 2020:-3% 2021:-2% 2022:-1% 2023:+2% 2024:-23% 2025:-3% 2026:+1%
+
+[FAIL] HATAO: pullback+support
+   Har trade: n=213 win=35.2% avgWin=+13.72% avgLoss=-10.22% PF=0.73 p5=0.53 Top10-hata=0.45 Expectancy=-1.79% | Random PF=1.01
+   Folds: 1.10(35) / 0.40(24) / 0.82(104) / 0.43(50) | Exits: {'SL': 390, 'TP1': 68, 'TRAIL': 49, 'BE': 36, 'TP2': 34, 'TIME': 28}
+   Portfolio: CAGR=-5.0% MaxDD=-41.2% Sharpe=-0.34 | Random portfolio: CAGR=+4.0% Sharpe=0.29 | 0.6 trades/hafta
+   Saal-war: 2020:+0% 2021:+3% 2022:-4% 2023:+10% 2024:-16% 2025:-9% 2026:-12%
+
+[FAIL] HATAO: RSI recovery
+   Har trade: n=99 win=33.3% avgWin=+17.45% avgLoss=-10.27% PF=0.85 p5=0.51 Top10-hata=0.33 Expectancy=-1.03% | Random PF=1.04
+   Folds: 1.93(28) / 0.43(5) / 0.48(48) / 0.51(18) | Exits: {'SL': 189, 'TP1': 33, 'BE': 25, 'TRAIL': 17, 'TP2': 16, 'TIME': 9}
+   Portfolio: CAGR=-0.2% MaxDD=-35.6% Sharpe=0.06 | Random portfolio: CAGR=-0.2% Sharpe=0.03 | 0.3 trades/hafta
+   Saal-war: 2020:+2% 2021:+25% 2022:-1% 2023:-2% 2024:-12% 2025:-7% 2026:-2%
+
+[FAIL] HATAO: bullish candle
+   Har trade: n=62 win=32.3% avgWin=+15.00% avgLoss=-9.16% PF=0.78 p5=0.45 Top10-hata=0.21 Expectancy=-1.37% | Random PF=0.91
+   Folds: 0.83(15) / 0.55(4) / 0.93(27) / 0.52(16) | Exits: {'SL': 120, 'TP1': 20, 'TP2': 13, 'TRAIL': 13, 'BE': 11, 'TIME': 4}
+   Portfolio: CAGR=-1.5% MaxDD=-16.6% Sharpe=-0.16 | Random portfolio: CAGR=-1.1% Sharpe=-0.14 | 0.2 trades/hafta
+   Saal-war: 2020:+2% 2021:-4% 2022:+2% 2023:+4% 2024:-5% 2025:-2% 2026:-5%
+
+[FAIL] HATAO: volume
+   Har trade: n=387 win=40.3% avgWin=+15.65% avgLoss=-8.59% PF=1.23 p5=0.99 Top10-hata=0.93 Expectancy=+1.18% | Random PF=1.14
+   Folds: 1.19(102) / 0.84(20) / 1.43(156) / 1.10(109) | Exits: {'SL': 678, 'TP1': 154, 'TRAIL': 98, 'TP2': 95, 'BE': 90, 'TIME': 29}
+   Portfolio: CAGR=+9.6% MaxDD=-37.3% Sharpe=0.46 | Random portfolio: CAGR=+4.2% Sharpe=0.29 | 1.0 trades/hafta
+   Saal-war: 2020:+5% 2021:+16% 2022:-2% 2023:+27% 2024:+1% 2025:+12% 2026:+1%
+
+[FAIL] HATAO: reclaim
+   Har trade: n=185 win=40.0% avgWin=+13.39% avgLoss=-8.14% PF=1.10 p5=0.74 Top10-hata=0.59 Expectancy=+0.47% | Random PF=1.25
+   Folds: 1.76(41) / 1.75(7) / 1.11(87) / 0.40(50) | Exits: {'SL': 324, 'TP1': 73, 'BE': 68, 'TP2': 38, 'TRAIL': 33, 'TIME': 10}
+   Portfolio: CAGR=+3.0% MaxDD=-53.8% Sharpe=0.26 | Random portfolio: CAGR=-0.2% Sharpe=0.09 | 0.6 trades/hafta
+   Saal-war: 2020:-2% 2021:+38% 2022:-2% 2023:+9% 2024:-6% 2025:-1% 2026:-10%
+
+[FAIL] HATAO: overextension
+   Har trade: n=44 win=25.0% avgWin=+16.05% avgLoss=-8.95% PF=0.60 p5=0.27 Top10-hata=0.02 Expectancy=-2.70% | Random PF=1.22
+   Folds: 0.20(9) / 0.55(4) / 0.52(20) / 1.28(11) | Exits: {'SL': 93, 'TP1': 11, 'BE': 9, 'TP2': 6, 'TIME': 4, 'TRAIL': 4}
+   Portfolio: CAGR=-2.5% MaxDD=-17.4% Sharpe=-0.40 | Random portfolio: CAGR=+1.4% Sharpe=0.18 | 0.1 trades/hafta
+   Saal-war: 2020:+0% 2021:-5% 2022:+0% 2023:+2% 2024:-8% 2025:-4% 2026:-0%
+
+[FAIL] HATAO: R:R/resistance
+   Har trade: n=128 win=39.1% avgWin=+14.74% avgLoss=-11.30% PF=0.84 p5=0.57 Top10-hata=0.44 Expectancy=-1.13% | Random PF=1.02
+   Folds: 1.16(31) / 0.48(8) / 0.80(51) / 0.63(38) | Exits: {'SL': 225, 'TP1': 49, 'TRAIL': 32, 'BE': 30, 'TP2': 27, 'TIME': 11}
+   Portfolio: CAGR=-0.4% MaxDD=-26.8% Sharpe=0.03 | Random portfolio: CAGR=-2.7% Sharpe=-0.21 | 0.4 trades/hafta
+   Saal-war: 2020:-0% 2021:+2% 2022:+0% 2023:+11% 2024:-11% 2025:+3% 2026:-6%
+
+==============================================================================================================
+BASELINE - REGIMES, BARE COINS, DIVERGENCE
+==============================================================================================================
+BTC regime (entry ke waqt): bear: n=4 win=50% PF=1.32 | bull: n=31 win=16% PF=0.29 | sideways: n=6 win=50% PF=1.37
+Coin volatility: neecha: n=23 win=22% PF=0.38 | ooncha: n=18 win=28% PF=0.57
+RSI divergence (optional): False: n=38 win=24% PF=0.45 | True: n=3 win=33% PF=1.56
+Coins: baqi altcoins: n=38 win=26% PF=0.51 | bare 5 coins: n=3 win=0% PF=0.00
+Bare coins alag: BTC: n=1 PF=0.00 | SOL: n=2 PF=0.00
+
+==============================================================================================================
+KHULASA (ABLATION: 'HATAO' row ka PF/CAGR BASELINE se BEHTAR ho to wo filter bekaar hai)
+==============================================================================================================
+                   Variant | Trades | /hafta |  Win% |    PF |    p5 | Random |   Exp% |    CAGR |   MaxDD | Sharpe | Faisla
+                  BASELINE |     41 |    0.1 |  24.4 |  0.48 |  0.23 |   0.75 |  -3.54 |   -2.5% |  -16.5% |  -0.41 | FAIL
+                    ADX 18 |     60 |    0.2 |  26.7 |  0.59 |  0.27 |   1.17 |  -2.82 |   -3.1% |  -20.8% |  -0.44 | FAIL
+                    ADX 25 |     19 |    0.1 |  47.4 |  1.27 |   N/A |   0.49 |  +1.26 |   +0.3% |   -4.9% |   0.09 | FAIL
+               Volume 1.5x |     65 |    0.2 |  32.3 |  0.68 |  0.40 |   0.96 |  -2.07 |   -1.3% |  -22.7% |  -0.09 | FAIL
+               Volume 2.0x |     27 |    0.1 |  22.2 |  0.46 |  0.16 |   0.84 |  -4.05 |   -1.9% |  -15.0% |  -0.33 | FAIL
+                 RSI 40-65 |     41 |    0.1 |  24.4 |  0.48 |  0.23 |   0.75 |  -3.54 |   -2.5% |  -16.5% |  -0.41 | FAIL
+                 RSI 50-70 |     92 |    0.3 |  32.6 |  0.86 |  0.51 |   0.73 |  -1.02 |   +0.2% |  -33.8% |   0.09 | FAIL
+         Exit: TP 2.5R sab |     41 |    0.1 |  19.5 |  0.44 |  0.20 |   1.02 |  -4.09 |   -2.4% |  -13.7% |  -0.64 | FAIL
+       Exit: sirf trailing |     41 |    0.1 |  22.0 |  0.52 |  0.16 |   0.63 |  -3.08 |   -1.3% |  -11.2% |  -0.23 | FAIL
+       HATAO: daily filter |    121 |    0.4 |  40.5 |  1.10 |  0.76 |   1.04 |  +0.60 |   +0.3% |  -17.0% |   0.09 | FAIL
+                HATAO: ADX |    148 |    0.5 |  30.4 |  0.65 |  0.42 |   0.75 |  -2.20 |   -5.1% |  -31.4% |  -0.42 | FAIL
+   HATAO: pullback+support |    213 |    0.6 |  35.2 |  0.73 |  0.53 |   1.01 |  -1.79 |   -5.0% |  -41.2% |  -0.34 | FAIL
+       HATAO: RSI recovery |     99 |    0.3 |  33.3 |  0.85 |  0.51 |   1.04 |  -1.03 |   -0.2% |  -35.6% |   0.06 | FAIL
+     HATAO: bullish candle |     62 |    0.2 |  32.3 |  0.78 |  0.45 |   0.91 |  -1.37 |   -1.5% |  -16.6% |  -0.16 | FAIL
+             HATAO: volume |    387 |    1.0 |  40.3 |  1.23 |  0.99 |   1.14 |  +1.18 |   +9.6% |  -37.3% |   0.46 | FAIL
+            HATAO: reclaim |    185 |    0.6 |  40.0 |  1.10 |  0.74 |   1.25 |  +0.47 |   +3.0% |  -53.8% |   0.26 | FAIL
+      HATAO: overextension |     44 |    0.1 |  25.0 |  0.60 |  0.27 |   1.22 |  -2.70 |   -2.5% |  -17.4% |  -0.40 | FAIL
+     HATAO: R:R/resistance |    128 |    0.4 |  39.1 |  0.84 |  0.57 |   1.02 |  -1.13 |   -0.4% |  -26.8% |   0.03 | FAIL
+
+Baseline + parosi + exits: 0/9 PASS
