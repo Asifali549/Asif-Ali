@@ -177,6 +177,14 @@ Secrets:
   Matlab: bure saalon ka nuqsan tab hota hai jab breadth ooncha ho (bear market ke jhoote rally / bull traps) -
   market-level filters (BTC, breadth) is kamzori ko theek nahi karte. FAISLA: Donchian par filter-tahqeeq BAND.
 
+## Zer-e-test
+- **WEEKLY RS ROTATION** (`rs_rotation.py`, workflow "RS Rotation Test", natija `rs_rotation_RESULTS.txt`):
+  har itwar band -> top-K coins by L-din return (eligible: 90+ din history, top-100 liquidity), peer open par
+  sirf nikle coin becho / naye khareedo (held dobara barabar nahi). Grid L 14/30/60/90 x K 3/5/10; ek filter alag:
+  BTC>EMA50 warna cash. Random = TURNOVER-MATCHED (rakha coin keep_p se rehta, baqi random; pehle simple random ka
+  turnover bohat ziada tha -> jhoota edge). Pass: Sharpe > random p95, CAGR > EW benchmark, OOS > random median,
+  2x kharche par CAGR > 0. Truncation test: koi lookahead nahi. Random-walk data par 2/12 aur 1/12 (itefaq ki had).
+
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
