@@ -106,13 +106,17 @@ Secrets:
   (Telegram mein "hisse ka X% = kul capital ka Y%"), Donchian Telegram mein "Sirf PAPER", dashboard sidebar
   "Sarmaye ki taqseem" (kul capital -> har system ka $) aur har signal ka size system ke hisse se.
 
-## Zer-e-test (EXPERIMENTAL)
-- **Majors Trend Lab** (`majors_lab.py`, workflow "Majors Trend Test", natija `majors_lab_RESULTS.txt`):
-  BTC 50% + ETH 50% daily trend-following (survivorship-free, 2018+2022 crash shamil). Rules: SMA 50/100/150/200,
-  EMA 10/50 20/100 50/200, Donchian 20/10 50/20 100/50; har ek full aur vol-target (50%) ke sath.
-  Control: random-timing (wahi exposure + switches, 200 baar), B&H, 4 folds. Pass = Sharpe > random 95th aur > B&H,
-  MaxDD > -45%, koi fold < -5%. Pass ho to 4th sleeve (portfolio_lab mein correlation check, phir bot).
-  Momentum rotation (strategy_lab, ec7962f) dobara nahi: survivorship bias sab se ziada, DD -46 se -80%.
+## Majors Trend Lab natija (2026-10-01, BTC 50% + ETH 50%, 2018-05 -> 2026-09, 8.4 saal)
+`majors_lab.py` / workflow "Majors Trend Test" / `majors_lab_RESULTS.txt`.
+- Buy&hold: CAGR +27.7%, MaxDD -78.5%, Sharpe 0.71 (2018 -70%, 2022 -65%).
+- HAR trend rule ka Sharpe B&H se ooper (0.83-1.25) aur MaxDD bohat kam (-35 se -72%). Random-timing control
+  ke 95th se zyada tar rules thore se ooper - edge asli lekin chhota; sab se wazeh: SMA50 +vol (1.25 vs 0.88) aur
+  SMA50 (1.16 vs 0.84) - magar inka MaxDD -49/-56% (shart -45%) is liye FAIL.
+- PASS 3/20: SMA150 +vol (CAGR +41%, DD -35%, Sharpe 1.21, 2022 -10%), SMA200 +vol (+37%, -44%, 1.10),
+  EMA20/100 +vol (+32%, -43%, 1.02). Donchian 0/6. Vol-target har rule ka DD 10-20 point kam karta hai.
+- Matlab: BTC/ETH ko seedha hold karne ki jagah SMA150+vol-target se hold karna drawdown aadha karta hai.
+  Survivorship-free hai, lekin altcoin bots (ICHI Sharpe ~1.8) se kamzor - akela core nahi, mix mein dekhna hai.
+- portfolio_lab.py mein MAJ sleeve (SMA150 vol / SMA50 vol) aur mixes ICHI/DIP/MAJ shamil kiye - dobara chalana baqi.
 
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
