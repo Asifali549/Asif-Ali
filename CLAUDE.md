@@ -113,6 +113,13 @@ Secrets:
   Sabaq: crypto mein cross-sectional momentum ka edge right-tail (chand pump coins) se aata hai aur survivorship
   bias isi ko phulata hai; crash risk itna hai ke koi insaan nahi jhel sakta. Files `git show c8faed3:rs_rotation.py`,
   `git show c7fa63a:rs_validate.py`, natije `git show cd81dde:rs_rotation_RESULTS.txt` / `git show 2005af0:rs_validate_RESULTS.txt`.
+- **ALT/BTC BREAKOUT (2026-10-01) - FAIL 0/14:** 104 coins (BTC bahar). RATIO BRK (ALT/BTC ratio close > pichle N din
+  max, N 10/20/30/55) apne aap mein bhi random jaisa: ATR trail PF 1.13-1.25 vs random 1.09-1.22 (-0.05..+0.15),
+  Donchian exit 1.61-1.67 vs random 1.64-1.86 (-0.20..+0.02); DD -40..-56%; 2022 0.39-0.63, 2025 0.58-0.91.
+  Filter "ratio > EMA 20/50/100" base (USDT N20) ko kamzor karta hai (PF 1.43 -> 1.25-1.34, 2025 0.87 -> 0.58-0.85).
+  Sabaq: BTC ke muqable taqat ka koi alag entry edge nahi; USDT breakout behtar. Files `git show 2873a0c:alt_btc.py`,
+  natija `git show 2ed9b41:alt_btc_RESULTS.txt`. User ne kaha: har cheez ko Donchian par mat parkho - aage naye
+  khayal portfolio ke liye parkhne hain (random se behtar + ICHI/DIP se kam correlation + portfolio Sharpe/DD behtar).
 - Purane research scripts/natije git history mein hain: commit `ec7962f` (cleanup se pehle) par
   `git show ec7962f:<file>` se wapas mil sakte hain (unified_test.py, ichimoku4h_validation.py, strategy_lab.py,
   portfolio_test.py, donchian_regime_test.py, archive/...).
@@ -187,13 +194,10 @@ Secrets:
   Matlab: bure saalon ka nuqsan tab hota hai jab breadth ooncha ho (bear market ke jhoote rally / bull traps) -
   market-level filters (BTC, breadth) is kamzori ko theek nahi karte. FAISLA: Donchian par filter-tahqeeq BAND.
 
-## Zer-e-test
-- **ALT/BTC BREAKOUT** (`alt_btc.py`, workflow "ALT BTC Breakout Test", natija `alt_btc_RESULTS.txt`): trade USDT
-  mein, signal ALT/BTC ratio se (BTC khud bahar). BASE USDT Donchian N20; RATIO BRK (ratio close > pichle N din ka
-  max ratio close, N 10/20/30/55); BASE + filter ratio > EMA 20/50/100. Exits ATR trail 3x aur Donchian 10 low.
-  Pass vs base: random +0.15, OOS >= base, DD 3% se ziada bura nahi, 2022 aur 2025 PF behtar, n >= 150; plateau.
-
 ## Aglay kaam
+- Naye khayal (Donchian khandan se bahar), user ko diye: (1) BTC lead-lag catch-up (2) volume capitulation dip
+  (3) market-wide panic ke baad khareed (4) VOLATILITY TARGETING ICHI+DIP portfolio par (meri pehli tarjeeh)
+  (5) funding rate (6) seasonality. Pass ka paimana: portfolio_lab mein ICHI60/DIP40 ke sath.
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
 - 2-3 mahine paper trading ke natije backtest se milao, phir asli paisa.
