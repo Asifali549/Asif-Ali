@@ -142,6 +142,13 @@ Secrets:
   taur par SABIT NAHI. Daily Donchian (filter baghair, N20-55, trail 3x) khud mazboot. Live bot (N20+BTC filter) wohi
   ek cell hai jahan filter sab cheez behtar karta hai - badalne ki zaroorat nahi.
 
+## Zer-e-test
+- **DONCHIAN N=20 VALIDATION** (user ka plan; `donchian_validate.py`, workflow "Donchian Validation Test", natija
+  `donchian_validate_RESULTS.txt`): Daily N=20, stop 3xATR + ATR trail 3x, baghair filter aur BTC>EMA50. 7 tests: coin-by-coin,
+  equal-weight vs pooled (top 10% coins ka hissa), regimes, walk-forward (N sirf pichle data se, test 2023/24/25/26),
+  N 15-30 plateau, random har jagah, exits (TP 1/1.5/2/3R, ATR trail, Donchian 10-din low). Aakhir mein PASS / PROMISING / FAIL.
+  User: abhi koi indicator NAHI, Pine Script NAHI.
+
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
