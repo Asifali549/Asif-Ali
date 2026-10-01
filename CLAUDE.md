@@ -184,6 +184,13 @@ Secrets:
   BTC>EMA50 warna cash. Random = TURNOVER-MATCHED (rakha coin keep_p se rehta, baqi random; pehle simple random ka
   turnover bohat ziada tha -> jhoota edge). Pass: Sharpe > random p95, CAGR > EW benchmark, OOS > random median,
   2x kharche par CAGR > 0. Truncation test: koi lookahead nahi. Random-walk data par 2/12 aur 1/12 (itefaq ki had).
+  **NATIJA (2026-10-01): PROMISING magar KHATARNAK.** Baghair filter 9/12 PASS (K10 4/4, L14 aur L60 har K par),
+  Sharpe 0.83-1.35 vs random p95 ~1.0-1.1, OOS (2025+) +3% se +728% vs random -38..-56%, EW benchmark -17%;
+  2x kharcha sirf ~5-20% CAGR kam; turnover 0.7-5 trades/hafta. LEKIN MaxDD -85 se -95%, 2022 -76..-89%.
+  BTC>EMA50 filter: 5/12 (DD -52..-75%, 2022 -40..-60%; random bhi behtar hota hai is liye p95 kam pass).
+  Khatre: CAGR 2021 (+500..+3000%) se phoola; survivorship bias momentum ko sab se ziada faida deta hai (mare hue
+  pump coins list mein nahi); K3 mein 1-2 coin poora saal bana dete hain. Agla qadam: validation (coin concentration,
+  2022 se shuru, survivorship, drawdown control) - live/paper abhi NAHI.
 
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
