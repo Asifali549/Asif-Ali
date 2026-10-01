@@ -194,6 +194,13 @@ Secrets:
   Matlab: bure saalon ka nuqsan tab hota hai jab breadth ooncha ho (bear market ke jhoote rally / bull traps) -
   market-level filters (BTC, breadth) is kamzori ko theek nahi karte. FAISLA: Donchian par filter-tahqeeq BAND.
 
+## Zer-e-test
+- **VOLATILITY TARGETING** (`vol_target.py`, workflow "Vol Target Test", natija `vol_target_RESULTS.txt`): ICHI 60 +
+  DIP(20%) 40 bilkul live jaise; sirf NAYI trade ka size x mult, mult = clip(normal vol / haaliya vol, 0.25, CAP),
+  haaliya = pichle L din std (shift 1), normal = expanding median. Signal BTC vol ya portfolio ki apni (shadow) vol;
+  grid L 20/60 x CAP 1.0/1.5. Pass: Sharpe +0.10, MaxDD 2% behtar, bura-tareen saal bura nahi; plateau 3/4.
+  mult=1 par portfolio_lab se hubahu (fake data check).
+
 ## Aglay kaam
 - Naye khayal (Donchian khandan se bahar), user ko diye: (1) BTC lead-lag catch-up (2) volume capitulation dip
   (3) market-wide panic ke baad khareed (4) VOLATILITY TARGETING ICHI+DIP portfolio par (meri pehli tarjeeh)
