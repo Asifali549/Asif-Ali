@@ -96,6 +96,13 @@ Secrets:
   dete hain - volume hatao PF 1.23 (387 trades) magar random 1.14, p5 0.99 -> edge nahi; daily/reclaim hatao PF 1.10.
   Sabaq: bohat se filters AND karne se "perfect setup" late entry ban jata hai; 4H pullback-reclaim ka crypto mein edge
   nahi (SMC_4H jaisa). Files `git show 2c353bc:spot_core_lab.py` / `spot_core_RESULTS.txt`; Pine `git show 05f2b7f:spot_core_trend_pullback_pro.pine`.
+- **SECTOR ROTATION (user ka idea, 2026-10-01) - FAIL:** 6 dasti shobe (89 coins), Daily Donchian N20 + ATR 3x.
+  BASE PF 1.41 (rnd 1.12), OOS 1.16, CAGR 23.8%, DD -33%, 2022 0.52, 2025 0.98. ROTATION top-K by momentum: 1/5
+  (sirf top-1 30d: PF 1.55, OOS 1.26 magar random OOS bhi 1.21, CAGR 14.5%, median coin PF 1.17 - akela cell, plateau
+  nahi); top-2/3 aur 14d/60d mein 2022/2025 aur bure. #1 shoba har ~6 din badalta hai (noise). SECTOR BREADTH 50-80%:
+  0/4 - PF barhta hai magar random bhi (+0.12..+0.18 sirf), 2022 0.52 -> 0.11-0.31, 2025 0.98 -> 0.46-0.83 (market
+  breadth jaisa hi bull-trap masla). Sabaq: shobe ki taqat Donchian ki 2022/2025 kamzori theek nahi karti.
+  Files `git show f985de7:sector_rotation.py` / natija commit ke baad `sector_rotation_RESULTS.txt` history mein.
 - Purane research scripts/natije git history mein hain: commit `ec7962f` (cleanup se pehle) par
   `git show ec7962f:<file>` se wapas mil sakte hain (unified_test.py, ichimoku4h_validation.py, strategy_lab.py,
   portfolio_test.py, donchian_regime_test.py, archive/...).
@@ -169,14 +176,6 @@ Secrets:
   Asal maqsad NAKAM: 2022 PF 0.49 -> 0.22-0.26 aur 2025 0.89 -> 0.66-0.87 (aur BURA). Donchian exit: 2022 0.37 -> 0.11-0.16.
   Matlab: bure saalon ka nuqsan tab hota hai jab breadth ooncha ho (bear market ke jhoote rally / bull traps) -
   market-level filters (BTC, breadth) is kamzori ko theek nahi karte. FAISLA: Donchian par filter-tahqeeq BAND.
-
-## Zer-e-test
-- **SECTOR ROTATION** (`sector_rotation.py`, workflow "Sector Rotation Test", natija `sector_rotation_RESULTS.txt`):
-  6 shobe (L1, PAY_POW, L2_INFRA, DEFI, AI_DEPIN, MEME - dasti labels file mein; user list dekhna nahi chahta).
-  Daily Donchian N20 + ATR stop/trail 3x. Versions: BASE; top-1/2/3 shobe by 30d median return, top-2 by 14d/60d;
-  sector breadth (% coins > EMA50) >= 50/60/70/80%. Random baseline allowed (coin, din) par. Pass = random se +0.15,
-  OOS > 1 aur >= base, DD base se bura nahi, 2022/2025 base se behtar, n >= 150; plateau dekhna.
-  Khatre: labels aaj ke (AI narrative 2023 se), chhote shobe (min 4 coins). FAIL ho to files hatao.
 
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
