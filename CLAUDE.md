@@ -142,12 +142,17 @@ Secrets:
   taur par SABIT NAHI. Daily Donchian (filter baghair, N20-55, trail 3x) khud mazboot. Live bot (N20+BTC filter) wohi
   ek cell hai jahan filter sab cheez behtar karta hai - badalne ki zaroorat nahi.
 
-## Zer-e-test
-- **DONCHIAN N=20 VALIDATION** (user ka plan; `donchian_validate.py`, workflow "Donchian Validation Test", natija
-  `donchian_validate_RESULTS.txt`): Daily N=20, stop 3xATR + ATR trail 3x, baghair filter aur BTC>EMA50. 7 tests: coin-by-coin,
-  equal-weight vs pooled (top 10% coins ka hissa), regimes, walk-forward (N sirf pichle data se, test 2023/24/25/26),
-  N 15-30 plateau, random har jagah, exits (TP 1/1.5/2/3R, ATR trail, Donchian 10-din low). Aakhir mein PASS / PROMISING / FAIL.
-  User: abhi koi indicator NAHI, Pine Script NAHI.
+## Donchian N=20 Validation natija (2026-10-01) - PROMISING, NEEDS MORE VALIDATION (dono versions 5/6)
+`donchian_validate.py` / workflow "Donchian Validation Test" / `donchian_validate_RESULTS.txt`.
+- Coin-level (baghair filter): 101 coins, median coin PF 1.30, mean 1.69, PF>1: 67 (66%), PF<1: 34; median coin net +2.2%.
+  Top 10% coins (11) = 60% kul nafa (FLAG) - lekin unhein hata kar bhi PF 1.22. BTC filter: median 1.39, 62/86 PF>1, top10% = 54%.
+- Regimes: bull PF 1.61 vs random 1.10 (asli edge); BEAR 1.03 vs random 1.18 (edge NAHI); sideways 2.21 vs 1.61 (216 trades);
+  high-vol +0.12 (BTC filter -0.01, edge nahi); low-vol +0.41. (Regime MaxDD column bekaar - har trade 20% sequential, ignore.)
+- Walk-forward OOS: 2023 2.15 (rnd 1.98), 2024 1.65 (1.31), 2025 0.87 (0.66 - nuqsan magar random se behtar),
+  2026 1.38 (random 1.41 - random se KAM). Haaliya edge kamzor ho raha hai.
+- Plateau N 15-30: PF 1.36-1.55, random se +0.22..+0.40, OOS 1.04-1.20 -> mazboot.
+- Exits 6/6 random se behtar; Donchian 10-din low exit: PF 2.42 (rnd 1.86, +0.56, OOS 1.49) sab se behtar; ATR trail sab se kam DD (-32%).
+- Faisla: PROMISING - kyunke (1) nafa right-tail coins par kaafi had tak, (2) bear/high-vol mein edge nahi, (3) 2025-26 kamzor.
 
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
