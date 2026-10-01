@@ -84,6 +84,12 @@ Secrets:
   random-timing se sirf thora behtar, 3/20 pass (best SMA150+vol: CAGR 41%, DD -35%, Sharpe 1.21). **User ne
   REJECT kiya** - saal mein chand trades nahi chahiye; use ziada signals wali taqatwar strategy chahiye.
   Files `git show 9e0f740:majors_lab.py` / `majors_lab_RESULTS.txt`.
+- **DIP 4H (2026-10-01, top 70/100/150/200 coins) - FAIL 0/16:** win ~61% lekin PF 0.87-1.04 (random PF ~0.80 -
+  entry mein thora edge, magar 7-8 trades/hafta ka kharcha sab kha jata hai), portfolio CAGR -6 se -49%, DD -59 se -99%.
+  Coins ziada/kam karne se farq nahi. Sabaq (3rd baar): ziada signals = ziada kharcha; 4H par mean-reversion nahi chalti.
+  Universe note: sirf 175 coins ke paas kaafi history; rozana ausat ~94 coins volume-data wale -> top150/200 = top100 jaisa.
+  Daily Dip isi test mein (20% size, 175 coins): top70 PF 2.55 win 73% CAGR +17.6% DD -26%; top100 PF 2.41 CAGR +15.4%
+  DD -36% -> top70 thora behtar (sirf ek test; live bot abhi top100). Files `git show f289b1a:dip4h_universe.py` / `_RESULTS.txt`.
 - Purane research scripts/natije git history mein hain: commit `ec7962f` (cleanup se pehle) par
   `git show ec7962f:<file>` se wapas mil sakte hain (unified_test.py, ichimoku4h_validation.py, strategy_lab.py,
   portfolio_test.py, donchian_regime_test.py, archive/...).
@@ -111,13 +117,6 @@ Secrets:
   DON 0% - sirf paper par nazar.** Lagu: dip_daily_bot POS_PCT 0.20 + ALLOC 0.40, ichimoku4h_bot ALLOC 0.60
   (Telegram mein "hisse ka X% = kul capital ka Y%"), Donchian Telegram mein "Sirf PAPER", dashboard sidebar
   "Sarmaye ki taqseem" (kul capital -> har system ka $) aur har signal ka size system ke hisse se.
-
-## Zer-e-test (EXPERIMENTAL)
-- **DIP 4H Universe Test** (`dip4h_universe.py`, workflow "Dip 4H Universe Test", natija `dip4h_universe_RESULTS.txt`):
-  Daily Dip ka edge 4H par (daily trend + BTC>EMA50 + 4H RSI3<10, exit 4H close>SMA5, stop 3 ATR, max 30 candles,
-  20%/trade max 10) - user ke kehne par top 70 / 100 / 150 / 200 liquid coins par alag alag (point-in-time),
-  har universe par BASELINE + RSI 5 / RSI 15 / exit 8 + Daily Dip muqabla. Lookahead truncation test 0.
-  (Pehla "Fast Lab" 11-variant version user ne hatwa diya - ye us ki jagah.)
 
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
