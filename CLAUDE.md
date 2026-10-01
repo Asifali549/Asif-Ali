@@ -199,6 +199,12 @@ Secrets:
   Matlab: bure saalon ka nuqsan tab hota hai jab breadth ooncha ho (bear market ke jhoote rally / bull traps) -
   market-level filters (BTC, breadth) is kamzori ko theek nahi karte. FAISLA: Donchian par filter-tahqeeq BAND.
 
+## Zer-e-test
+- **NAYE KHAYAL** (`new_ideas.py`, workflow "New Ideas Test" - push par khud chalta hai, natija `new_ideas_RESULTS.txt`):
+  A) BTC lead-lag catch-up, B) market panic (median coin return <= Z), C) volume capitulation (uptrend, -R% din,
+  volume >= V x). Har ek 9-cell grid, random 20 seeds (C ka random sirf uptrend din par); pass = PF > random p95,
+  PF >= 1.1, OOS > 1, n >= 100, plateau 6/9; phir beech wala config ICHI 50 / DIP 30 / NAYA 20 vs ICHI 60 / DIP 40.
+
 ## Aglay kaam
 - **GitHub cron masla (2026-10-01 dekha):** 30 Sep ~17:30 PKT se scheduled runs bohat kam: Watchdog (har 30 min)
   din mein sirf ~4 baar, Ichimoku 6 mein se ~2-3, Dip 00:20 UTC ki jagah 05:57 UTC. Ichimoku bot `last_bar` se
