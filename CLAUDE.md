@@ -200,10 +200,15 @@ Secrets:
   market-level filters (BTC, breadth) is kamzori ko theek nahi karte. FAISLA: Donchian par filter-tahqeeq BAND.
 
 ## Zer-e-test
-- **NAYE KHAYAL** (`new_ideas.py`, workflow "New Ideas Test" - push par khud chalta hai, natija `new_ideas_RESULTS.txt`):
-  A) BTC lead-lag catch-up, B) market panic (median coin return <= Z), C) volume capitulation (uptrend, -R% din,
-  volume >= V x). Har ek 9-cell grid, random 20 seeds (C ka random sirf uptrend din par); pass = PF > random p95,
-  PF >= 1.1, OOS > 1, n >= 100, plateau 6/9; phir beech wala config ICHI 50 / DIP 30 / NAYA 20 vs ICHI 60 / DIP 40.
+- **NAYE KHAYAL natija (2026-10-02, `new_ideas.py` / `new_ideas_RESULTS.txt`):**
+  A) BTC catch-up: 5/9 (X>=4% chalta, PF 1.42-1.84 vs rnd p95 1.12-1.42) LEKIN ICHI se corr 0.50, akela DD -58%,
+     2022 PF 0.16-0.49, 2025 0.36-0.68; portfolio mein Sharpe 1.68 -> 1.47 -> FAIL (portfolio ke liye bekaar).
+  B) Market panic: 3/9 (sirf Z-9%), Z-5/-7% random se bura; akela CAGR -5%, DD -71% -> FAIL.
+  C) **VOLUME CAPITULATION: 7/9 PASS** - PF 1.55-1.89 vs random p50 ~1.0 (p95 1.2-1.5), win 57-66%, OOS 1.5-2.1,
+     ~0.4-1.3 trades/hafta; 2022 kamzor (0.21-0.75). Corr ICHI 0.08, DIP -0.02 (asli diversifier).
+     ICHI 50 / DIP 30 / C(10%) 20: Sharpe 1.73 vs 1.68, DD -9.5% vs -11.0%, +mahine 62% vs 56%, CAGR 21.5 vs 24.2.
+     -> PROMISING. Validation: `capit_validate.py` (workflow "Capitulation Validation Test", push par chalta) -
+     bootstrap, top-10 hata kar, 4 folds, coin concentration, kharcha 2x/3x, regime, DIP overlap, size/hissa mixes.
 
 ## Aglay kaam
 - **GitHub cron masla (2026-10-01 dekha):** 30 Sep ~17:30 PKT se scheduled runs bohat kam: Watchdog (har 30 min)
