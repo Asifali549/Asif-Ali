@@ -187,6 +187,12 @@ Secrets:
   Matlab: bure saalon ka nuqsan tab hota hai jab breadth ooncha ho (bear market ke jhoote rally / bull traps) -
   market-level filters (BTC, breadth) is kamzori ko theek nahi karte. FAISLA: Donchian par filter-tahqeeq BAND.
 
+## Zer-e-test
+- **ALT/BTC BREAKOUT** (`alt_btc.py`, workflow "ALT BTC Breakout Test", natija `alt_btc_RESULTS.txt`): trade USDT
+  mein, signal ALT/BTC ratio se (BTC khud bahar). BASE USDT Donchian N20; RATIO BRK (ratio close > pichle N din ka
+  max ratio close, N 10/20/30/55); BASE + filter ratio > EMA 20/50/100. Exits ATR trail 3x aur Donchian 10 low.
+  Pass vs base: random +0.15, OOS >= base, DD 3% se ziada bura nahi, 2022 aur 2025 PF behtar, n >= 150; plateau.
+
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
