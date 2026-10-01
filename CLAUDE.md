@@ -164,11 +164,17 @@ Secrets:
   2025 bull-regime trades PF 0.89. Saal-war PF: 2020 1.93, 2021 2.95, 2022 0.49, 2023 2.07, 2024 1.33, 2025 0.91, 2026 1.39.
   (Breadth % ka denominator listing se pehle wale coins bhi ginta hai - absolute % kam; sirf relative dekho.)
 - Tashkhees: edge kharche aur exit par mazboot; kamzori ALTCOIN market ki halat (2022, 2025) - BTC regime ise nahi pakarta.
-  Agla EK filter (user ne mana, zer-e-test): `donchian_breadth.py` (workflow "Donchian Breadth Test", natija
-  `donchian_breadth_RESULTS.txt`): breadth = maujood coins (>=50 din history) mein se % jo EMA50 se ooper, band din par;
-  had 30/40/50/60% vs baghair filter vs BTC>EMA50 (ref); ATR trail + Donchian 10 exit; saal-war PF, regimes, coin median.
+- **ALTCOIN BREADTH FILTER - FAIL (0/4 had, dono exits)** (`donchian_breadth.py`, `donchian_breadth_RESULTS.txt`):
+  ATR trail: PF 1.44 -> 1.51-1.62 lekin random bhi 1.32-1.43 (faida +0.12..+0.28); OOS 1.17 -> 1.18-1.23; DD -33 -> -28..-36%.
+  Asal maqsad NAKAM: 2022 PF 0.49 -> 0.22-0.26 aur 2025 0.89 -> 0.66-0.87 (aur BURA). Donchian exit: 2022 0.37 -> 0.11-0.16.
+  Matlab: bure saalon ka nuqsan tab hota hai jab breadth ooncha ho (bear market ke jhoote rally / bull traps) -
+  market-level filters (BTC, breadth) is kamzori ko theek nahi karte. FAISLA: Donchian par filter-tahqeeq BAND.
 
 ## Aglay kaam
+- User ka aaiandah idea: SECTOR ROTATION (coins ko shobon mein baant kar - AI/Meme/DeFi/L1 waghera; sirf mazboot
+  shobe ke coins mein Donchian breakout; sector breadth 50-80% ya top-2 sector by 30-din median return; random
+  baseline garam shobe ke andar). Khatre: labels aaj ke (AI narrative 2023 se), chhote shobe (min 5 coins), late entry.
+  Market breadth ke FAIL hone se ummeed kam - lekin ranking (rotation) alag cheez hai.
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
 - 2-3 mahine paper trading ke natije backtest se milao, phir asli paisa.
