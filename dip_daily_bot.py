@@ -10,7 +10,8 @@ STRATEGY (dip_focus.py mein tasdeeq-shuda, 2020-2026, 18 mein se 6 variants PASS
   Exit  : jis din daily CLOSE apni 5-din average (SMA5) se ooper band ho -> AGLE din ke open par becho
   Stop  : entry signal ke close se 3 x ATR(14) neeche (fixed, hilta nahi)
   Time  : 10 din baad bhi na nikla ho to us din ke close par becho
-  Size  : har trade equity ka 10%, ek waqt mein max 10 positions
+  Size  : har trade Dip hisse (kul capital ka 40%) ka 20% = kul capital ka 8%, max 10 positions
+          (Portfolio Lab: Ichimoku 60% + Dip 40% sab se behtar mix; Donchian sirf paper)
 Backtest: win ~69%, PF ~2.1, CAGR ~6.5%, MaxDD ~-17%. Kam return lekin baqi 2 bots se ulta
 (wo breakout par khareedte hain, ye girawat par) - portfolio ko santulan deta hai.
 
@@ -32,7 +33,8 @@ STOP_ATR = 3.0
 MAX_HOLD = 10
 BTC_EMA = 50
 MAX_POSITIONS = 10
-POS_PCT = 0.10
+POS_PCT = 0.20                 # Dip hisse ka 20% har trade
+ALLOC = 0.40                   # kul capital mein Dip ka hissa
 UNIVERSE = 100
 TOP_N_COINS = 150
 HISTORY_DAYS = 400
@@ -240,7 +242,8 @@ def main():
         L += [f"• <b>{s}</b> (entry {fmt_px(st['positions'][s]['entry'])}, abhi {fmt_px(st['positions'][s]['last_px'])})"
               for s in sell_now]
     if chosen:
-        L.append(f"\n🟢 <b>NAYE BUY SIGNALS</b> ({len(chosen)}) — aaj open par khareedein (equity ka 10%):")
+        L.append(f"\n🟢 <b>NAYE BUY SIGNALS</b> ({len(chosen)}) — aaj open par khareedein:")
+        L.append(f"Size: Dip hisse ka {POS_PCT*100:.0f}% = kul capital ka {POS_PCT*ALLOC*100:.0f}%")
         L += [f"• <b>{s}</b> ~{fmt_px(c)} | Stop: {fmt_px(stop)} ({(c - stop) / c * 100:.1f}% neeche) | RSI3 {r:.1f}"
               for s, c, stop, r in chosen]
         L.append("Becho: jis din close 5-din average se ooper band ho, agle din open par (max 10 din).")

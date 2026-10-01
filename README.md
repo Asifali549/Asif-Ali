@@ -8,7 +8,9 @@ Sirf 3 tasdeeq-shuda systems chal rahe hain (paper trading + Telegram alerts):
 | **Donchian 20 (Daily)** | Close > pichle 20 din ka high, BTC > EMA50 | Chandelier 22 / 4x ATR | PF ~1.5, CAGR 20-29%, MaxDD ~-30% |
 | **Dip Daily** | Uptrend mein RSI(3) < 10, BTC > EMA50 | Close > SMA5 (agle open), stop 3 ATR, max 10 din | Win ~69%, PF ~2.1, CAGR ~6.5%, MaxDD ~-17% |
 
-Ichimoku/Donchian: 1% risk har trade, max 10 positions, ek coin max 20%. Dip: har trade equity ka 10%, max 10.
+Ichimoku/Donchian: 1% risk har trade, max 10 positions, ek coin max 20%. Dip: har trade apne hisse ka 20%, max 10.
+
+**Sarmaye ki taqseem (Portfolio Lab):** Ichimoku 60% + Dip 40%; Donchian sirf paper (0%).
 
 ## Files
 - `ichimoku4h_bot.py`, `donchian_daily_bot.py`, `dip_daily_bot.py` - bots (GitHub Actions par khud chalte hain)

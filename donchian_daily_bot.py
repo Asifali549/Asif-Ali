@@ -233,6 +233,7 @@ def main():
 
     # ---------- Telegram ----------
     L = [f"📊 <b>Donchian Daily Bot</b> — {Ds} (daily candle band)",
+         "📝 <b>Sirf PAPER</b> — asli paisa nahi (Portfolio Lab: Ichimoku ke sath girti hai, hissa 0%)",
          f"BTC regime: {'🟢 BTC > EMA50 (nayi entry allowed)' if btc_ok else '🔴 BTC < EMA50 (nayi entry NAHI)'}"]
     if chosen:
         L.append(f"\n🟢 <b>NAYE BUY SIGNALS</b> ({len(chosen)}) — abhi (agle din ke open par) khareedein:")

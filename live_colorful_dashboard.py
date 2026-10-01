@@ -30,6 +30,7 @@ SYSTEMS = {
         "trades": "ichimoku4h_paper_trades.csv",
         "signals": "ichimoku4h_signals.json",
         "workflow": "ichimoku4h_bot.yml",
+        "alloc": 0.60, "sizing": ("risk", 0.01, 0.20),
         "stale_min": 330,
         "every": "har 4 ghante (5:10, 9:10, 1:10 ... PKT)",
         "entry_col": "entry_bar", "exit_col": "exit_bar",
@@ -41,7 +42,7 @@ SYSTEMS = {
             ("Stop (SL)", "Chandelier 16 candles, 5.5x ATR - sirf ooper jata hai"),
             ("Take Profit", "3R (Entry se SL ke faasle ka 3 guna)"),
             ("Exchange par", "OCO order (TP ooper, SL neeche); 🔼 aaye to SL ooper karein"),
-            ("Size", "Har trade 1% risk, max 10 trades, ek coin max 20%"),
+            ("Size", "Har trade Ichimoku hisse ka 1% risk, max 10 trades, ek coin max 20%"),
         ],
         "backtest": {"win": 41.4, "pf": 1.90, "cagr": 26.6, "dd": -11.0,
                      "note": "5.3 saal (2021-2026, 2022 crash samet), sakht usool, random-control se behtar"},
@@ -52,6 +53,7 @@ SYSTEMS = {
         "trades": "donchian_paper_trades.csv",
         "signals": "donchian_signals.json",
         "workflow": "donchian_daily_bot.yml",
+        "alloc": 0.0, "sizing": ("risk", 0.01, 0.20),
         "stale_min": 1560,
         "every": "rozana 5:15 AM PKT (daily candle band hone ke baad)",
         "entry_col": "entry_day", "exit_col": "exit_day",
@@ -63,7 +65,7 @@ SYSTEMS = {
             ("Stop (SL)", "Chandelier 22 din, 4x ATR - sirf ooper jata hai (rozana update karein)"),
             ("Take Profit", "Koi nahi - trend ke sath chalti hai jab tak SL na lage"),
             ("Exchange par", "Stop-loss order; Telegram mein naya SL aaye to update karein"),
-            ("Size", "Har trade 1% risk, max 10 trades, ek coin max 20%"),
+            ("Size", "SIRF PAPER — asli paisa nahi (Ichimoku ke sath girti hai; Portfolio Lab mein hissa 0%)"),
         ],
         "backtest": {"win": 37.0, "pf": 1.55, "cagr": 26.0, "dd": -31.0,
                      "note": "6.5 saal (2020-2026, 2022 crash samet), 3 alag tests mein PASS"},
@@ -74,6 +76,7 @@ SYSTEMS = {
         "trades": "dip_paper_trades.csv",
         "signals": "dip_signals.json",
         "workflow": "dip_daily_bot.yml",
+        "alloc": 0.40, "sizing": ("fixed", 0.20, 0.20),
         "stale_min": 1560,
         "every": "rozana 5:20 AM PKT (daily candle band hone ke baad)",
         "entry_col": "entry_day", "exit_col": "exit_day",
@@ -85,9 +88,9 @@ SYSTEMS = {
             ("Stop (SL)", "Signal ke close se 3x ATR(14) neeche — fixed, hilta nahi"),
             ("Exit", "Jis din close 5-din average (SMA5) se ooper band ho, agle din open par becho; max 10 din"),
             ("Exchange par", "Stop-loss order; Telegram 'AAJ OPEN PAR BECHEIN' kahe to market par bech dein"),
-            ("Size", "Har trade equity ka 10% (risk-based nahi), max 10 trades"),
+            ("Size", "Har trade Dip hisse ka 20% (kul capital ka 8%), max 10 trades"),
         ],
-        "backtest": {"win": 69.3, "pf": 2.07, "cagr": 6.5, "dd": -16.9,
+        "backtest": {"win": 69.3, "pf": 2.07, "cagr": 9.7, "dd": -27.7,
                      "note": "6 saal (2020-2026), win-rate ooncha lekin return kam; breakout bots ka ulta (girawat par khareed)"},
     },
 }
@@ -235,38 +238,47 @@ def show_table(df, pl_cols=(), link_cols=("Chart",)):
     stretch_df(styled, hide_index=True, column_config=cfg)
 
 
-def position_size_box(coin, entry, sl, key):
-    """Sidebar ke Capital / Risk % ke mutabiq position size + copy karne wala setup."""
+def position_size_box(coin, entry, sl, key, cfg):
+    """Kul capital -> is system ka hissa -> is trade ka size (Portfolio Lab ki taqseem)."""
     try:
         entry, sl = float(entry), float(sl)
     except Exception:
         return
     if not (entry > sl > 0):
         return
-    risk_dollars = total_capital * risk_pct_per_trade / 100
-    units = risk_dollars / (entry - sl)
-    value = units * entry
-    cap_note = ""
-    if value > total_capital * 0.20:
-        value_capped = total_capital * 0.20
-        cap_note = f" ⚠️ 20% had: ${value_capped:,.0f} tak rakhein"
-    st.info(f"💰 **Position size** (Capital ${total_capital:,.0f}, Risk {risk_pct_per_trade}%): "
-            f"**{units:.6g} {coin.split('/')[0]}** (~${value:,.2f}), SL laga to nuqsan ~${risk_dollars:,.2f}{cap_note}")
+    sleeve = total_capital * cfg["alloc"]
+    if sleeve <= 0:
+        st.warning("📝 Ye system **sirf paper** par hai — asli paisa nahi lagana (hissa 0%).")
+        return
+    mode, size, cap = cfg["sizing"]
+    if mode == "risk":
+        value = min(sleeve * size * entry / (entry - sl), sleeve * cap)
+    else:
+        value = sleeve * size
+    units = value / entry
+    loss = units * (entry - sl)
+    st.info(f"💰 **Position size** — {cfg['badge']} ka hissa ${sleeve:,.0f} (kul ${total_capital:,.0f} ka "
+            f"{cfg['alloc']*100:.0f}%): **{units:.6g} {coin.split('/')[0]}** (~${value:,.2f} = kul ka "
+            f"{value / total_capital * 100:.1f}%) | SL laga to nuqsan ~${loss:,.2f}")
 
 
 # ============================================================
 # Page
 # ============================================================
 st.set_page_config(page_title="Live Dashboard", layout="wide")
-st.title("🎯 Live Dashboard — Ichimoku 4H + Donchian Daily")
+st.title("🎯 Live Dashboard — Ichimoku 4H + Dip Daily (+ Donchian paper)")
 st.caption("Sirf wo strategies jo sakht tests (lookahead-free, random-control, portfolio, 2022 crash) mein PASS huin. "
            "Signals aur paper trades dono bots khud chalate hain (GitHub Actions).")
 
-st.sidebar.header("💰 Position Sizing Calculator")
-total_capital = st.sidebar.number_input("Total Capital ($)", min_value=0.0, value=1000.0, step=100.0)
-risk_pct_per_trade = st.sidebar.number_input("Risk % per Trade", min_value=0.1, max_value=100.0, value=1.0, step=0.5)
-st.sidebar.caption("Har trade mein Entry aur SL ke farq ke mutabiq position size khud nikalta hai. "
-                   "Ichimoku aur Donchian ka test 1% risk par hua; Dip Daily har trade equity ka 10%.")
+st.sidebar.header("💼 Sarmaye ki taqseem")
+total_capital = st.sidebar.number_input("Kul Capital ($)", min_value=0.0, value=1000.0, step=100.0)
+for _n, _c in SYSTEMS.items():
+    _amt = total_capital * _c["alloc"]
+    st.sidebar.markdown(f"**{_c['badge']}** — {_c['alloc']*100:.0f}% = **${_amt:,.0f}**"
+                        + ("" if _c["alloc"] else " _(sirf paper)_"))
+st.sidebar.caption("Portfolio Lab (6 saal, teeno ek sath): Ichimoku 60% + Dip 40% sab se hamwar — "
+                   "CAGR ~+25%, MaxDD ~-12%, koi saal manfi nahi (2022 bhi 0%). Donchian Ichimoku ke sath "
+                   "girti hai (correlation 0.72), is liye asli paisa nahi. Har signal ka size neeche khud nikalta hai.")
 st.sidebar.markdown("---")
 if st.sidebar.button("🔄 Live qeemat taaza karein"):
     fetch_live_prices.clear()
@@ -363,7 +375,7 @@ for tab, (name, cfg) in zip(tabs, SYSTEMS.items()):
                                 key=f"pick_sig_{name}")
             row = recent[recent["symbol"] == pick].iloc[0]
             st.link_button(f"📈 {pick} — TradingView par kholein", tradingview_url(pick, interval))
-            position_size_box(pick, row["entry_est"], row["sl"], f"ps_{name}")
+            position_size_box(pick, row["entry_est"], row["sl"], f"ps_{name}", cfg)
             tp_txt = fmt_px(row["tp"]) if row.get("tp") is not None and row["tp"] == row["tp"] else "Nahi (trailing stop)"
             st.code(f"System: {name}\nCoin: {pick}\nSignal: {pkt_str(row['signal_time_utc'])}\n"
                     f"Entry (approx): {fmt_px(row['entry_est'])}\nSL: {fmt_px(row['sl'])}\nTP: {tp_txt}", language=None)

@@ -36,6 +36,7 @@ PARAMS = dict(BASE, ce_p=CE_P, ce_m=CE_M, tp=TP_R)
 MAX_POSITIONS = 10
 RISK_PCT = 0.01
 MAX_POS_PCT = 0.20
+ALLOC = 0.60                  # kul capital mein Ichimoku ka hissa (Portfolio Lab)
 UNIVERSE = 100
 TOP_N_COINS = 150
 HISTORY_BARS = 700            # EMA200 + Ichimoku + 60 din momentum ke liye kaafi
@@ -238,7 +239,7 @@ def main():
             tp = close + TP_R * (close - stop)
             size = min(RISK_PCT / risk, MAX_POS_PCT) * 100
             L.append(f"• <b>{s}</b> ~{fmt_px(close)}\n   SL: {fmt_px(stop)} ({risk*100:.1f}% neeche) | "
-                     f"TP: {fmt_px(tp)} (+{risk*TP_R*100:.1f}%) | Size: equity ka {size:.1f}%")
+                     f"TP: {fmt_px(tp)} (+{risk*TP_R*100:.1f}%) | Size: Ichimoku hisse ka {size:.1f}% = kul capital ka {size*ALLOC:.1f}%")
         L.append("   (OCO order: upar TP, neeche SL)")
     if len(cands) > len(chosen):
         L.append(f"({len(cands) - len(chosen)} aur signals the, slots bhare hue)")

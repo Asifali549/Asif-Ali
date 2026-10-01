@@ -51,7 +51,7 @@ Secrets:
   Agle din open par. Kai signals hon to sab se kam RSI pehle.
 - Exit: close > SMA5 -> agle din open par; stop = signal close - 3x ATR(14) fixed; 10 din baad close par.
   Jis din coin band ho us din usi coin mein nayi entry nahi (backtest jaisa).
-- Size: har trade equity ka 10% (risk-based nahi), max 10. Files dip_paper_state.json / dip_paper_trades.csv / dip_signals.json.
+- Size: har trade apne hisse ka 20% (2026-10-01 se; pehle 10%), max 10. Files dip_paper_state.json / dip_paper_trades.csv / dip_signals.json.
 - Backtest (2020-10 -> 2026-09): n=254, win 69%, PF 2.07, p5 1.48, random PF 0.82, CAGR ~6.5%, MaxDD ~-17%.
   Grid RSI 5-12 x exit SMA 3/5/7 sab PF 1.7-4 (random se behtar); fail sirf kam trades / 2022 fold ~1.0 ki wajah se;
   RSI<15 kamzor (PF 1.4). BTC filter hatane se kamzor. Bot ne fake data par 46/46 trades backtest se hubahu milayin.
@@ -101,11 +101,12 @@ Secrets:
 - Mahana correlation: ICHI-DON 0.72 (dono breakout - sath girte hain), DIP sirf 0.17-0.19 (asli diversifier).
 - Is engine mein ICHI ke number pehle (26.6%) se ziada aaye - absolute number se ziada tarteeb (ranking) par bharosa karo;
   survivorship bias ki wajah se asal mein kam hon ge.
-- Mashwara diya: ICHI 60% + DIP 40% (DIP har trade 20%), DON paper par nazar mein (asli paisa nahi / kam).
-  User ka faisla abhi baqi.
+- **FAISLA (2026-10-01, user ne mana): ICHI 60% + DIP 40% (DIP har trade apne hisse ka 20% = kul ka 8%),
+  DON 0% - sirf paper par nazar.** Lagu: dip_daily_bot POS_PCT 0.20 + ALLOC 0.40, ichimoku4h_bot ALLOC 0.60
+  (Telegram mein "hisse ka X% = kul capital ka Y%"), Donchian Telegram mein "Sirf PAPER", dashboard sidebar
+  "Sarmaye ki taqseem" (kul capital -> har system ka $) aur har signal ka size system ke hisse se.
 
 ## Aglay kaam
-- User se allocation ka faisla lo; phir dashboard par taqseem dikhao aur (agar mane) dip bot POS_PCT 0.20.
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
 - 2-3 mahine paper trading ke natije backtest se milao, phir asli paisa.
