@@ -120,6 +120,11 @@ Secrets:
   Sabaq: BTC ke muqable taqat ka koi alag entry edge nahi; USDT breakout behtar. Files `git show 2873a0c:alt_btc.py`,
   natija `git show 2ed9b41:alt_btc_RESULTS.txt`. User ne kaha: har cheez ko Donchian par mat parkho - aage naye
   khayal portfolio ke liye parkhne hain (random se behtar + ICHI/DIP se kam correlation + portfolio Sharpe/DD behtar).
+- **VOLATILITY TARGETING ICHI60/DIP40 (2026-10-01) - FAIL 0/8:** nayi trade ka size x clip(normal vol/haaliya vol,
+  0.25, CAP); BTC vol ya portfolio ki apni vol, L 20/60, CAP 1.0/1.5. BASE CAGR 23.7%, DD -11.1%, Sharpe 1.65.
+  Sharpe sirf 1.53-1.70 (-0.12..+0.05); DD kam hua to nafa bhi utna hi kam (APNI L20: DD -7.5% magar CAGR 18.1%) =
+  bas chhota size. Sabaq: portfolio pehle se mutawazin; vol scaling se muft faida nahi. Files `git show 70675d7:vol_target.py`,
+  natija `git show 6ab0786:vol_target_RESULTS.txt`.
 - Purane research scripts/natije git history mein hain: commit `ec7962f` (cleanup se pehle) par
   `git show ec7962f:<file>` se wapas mil sakte hain (unified_test.py, ichimoku4h_validation.py, strategy_lab.py,
   portfolio_test.py, donchian_regime_test.py, archive/...).
@@ -194,14 +199,11 @@ Secrets:
   Matlab: bure saalon ka nuqsan tab hota hai jab breadth ooncha ho (bear market ke jhoote rally / bull traps) -
   market-level filters (BTC, breadth) is kamzori ko theek nahi karte. FAISLA: Donchian par filter-tahqeeq BAND.
 
-## Zer-e-test
-- **VOLATILITY TARGETING** (`vol_target.py`, workflow "Vol Target Test", natija `vol_target_RESULTS.txt`): ICHI 60 +
-  DIP(20%) 40 bilkul live jaise; sirf NAYI trade ka size x mult, mult = clip(normal vol / haaliya vol, 0.25, CAP),
-  haaliya = pichle L din std (shift 1), normal = expanding median. Signal BTC vol ya portfolio ki apni (shadow) vol;
-  grid L 20/60 x CAP 1.0/1.5. Pass: Sharpe +0.10, MaxDD 2% behtar, bura-tareen saal bura nahi; plateau 3/4.
-  mult=1 par portfolio_lab se hubahu (fake data check).
-
 ## Aglay kaam
+- **GitHub cron masla (2026-10-01 dekha):** 30 Sep ~17:30 PKT se scheduled runs bohat kam: Watchdog (har 30 min)
+  din mein sirf ~4 baar, Ichimoku 6 mein se ~2-3, Dip 00:20 UTC ki jagah 05:57 UTC. Ichimoku bot `last_bar` se
+  chhoote 4H bars khud pakar leta hai (paper data zaya nahi) magar alert der se. Hal: bahar se trigger (cron-job.org
+  -> workflow_dispatch API, PAT ke sath) - user ki manzoori ka intezar.
 - Naye khayal (Donchian khandan se bahar), user ko diye: (1) BTC lead-lag catch-up (2) volume capitulation dip
   (3) market-wide panic ke baad khareed (4) VOLATILITY TARGETING ICHI+DIP portfolio par (meri pehli tarjeeh)
   (5) funding rate (6) seasonality. Pass ka paimana: portfolio_lab mein ICHI60/DIP40 ke sath.
