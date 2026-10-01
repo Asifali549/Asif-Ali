@@ -133,8 +133,9 @@ Secrets:
   Plateau: N 20-55 + trail 3.0x sab PF 1.47-1.54. DD -25 se -50% (koi market filter nahi).
 - Masla-shinakht (user ka rule): asal masla TIMEFRAME (4H) tha; entry hypothesis Daily par sach hai; exit: trailing behtar.
   Ye live Donchian Daily (N20 + CE22/4 + BTC>EMA50) ki tasdeeq hai.
-- Agla qadam (user ki manzoori baqi): Daily N 20-55 + trail 3.0x par SIRF EK filter (BTC>EMA50) - isi methodology se
-  (random, OOS, daily regimes - is run mein daily regimes print nahi hue the).
+- Agla qadam (user ne mana, zer-e-test): `donchian_filter.py` (workflow "Donchian Filter Test", natija
+  `donchian_filter_RESULTS.txt`): Daily N 10-55 x trail 2.5/3.0, har config filter BAGHAIR vs BTC>EMA50 (sirf ye ek
+  tabdeeli); filter wali row ka random bhi sirf BTC>EMA50 din par; daily regimes har row.
 
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.

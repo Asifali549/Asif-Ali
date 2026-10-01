@@ -124,13 +124,15 @@ class Universe:
             out[s] = np.flatnonzero(brk).astype(np.int64)
         return out
 
-    def run(self, sig, m, tp_r, trail, max_hold, rng=None):
+    def run(self, sig, m, tp_r, trail, max_hold, rng=None, allow=None):
         rows = []
         for s in self.syms:
             a = self.arr[s]
             idx = sig[s]
             if rng is not None:
                 pool = np.arange(a["warm"], len(a["o"]) - 1)
+                if allow is not None:                       # random bhi sirf filter-allowed candles par
+                    pool = pool[allow[s][pool]]
                 k = min(len(idx), len(pool))
                 if k == 0:
                     continue
@@ -145,9 +147,9 @@ class Universe:
         return pd.concat(rows, ignore_index=True) if rows else pd.DataFrame()
 
 
-def evaluate(U, sig, m, tp_r, trail, max_hold, closes, start, btc_reg, btc_vol, with_port=True):
+def evaluate(U, sig, m, tp_r, trail, max_hold, closes, start, btc_reg, btc_vol, with_port=True, allow=None):
     tr = U.run(sig, m, tp_r, trail, max_hold)
-    rt = U.run(sig, m, tp_r, trail, max_hold, rng=np.random.default_rng(7))
+    rt = U.run(sig, m, tp_r, trail, max_hold, rng=np.random.default_rng(7), allow=allow)
     tr = tr[tr["t_in"] >= start] if len(tr) else tr
     rt = rt[rt["t_in"] >= start] if len(rt) else rt
     if len(tr) < 10:
