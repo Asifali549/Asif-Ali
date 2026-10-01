@@ -1,21 +1,21 @@
 """
-DIP DAILY BOT - uptrend mein tez girawat khareedo, uchhal par becho (paper trading + Telegram)
-=============================================================================================
-Rozana ek dafa (daily candle band hone ke baad, 00:20 UTC = 05:20 PKT) chalta hai.
+VOLUME CAPITULATION BOT - uptrend coin mein ek din ki ghabrahat wali farokht khareedo (paper trading + Telegram)
+==============================================================================================================
+Rozana ek dafa (daily candle band hone ke baad, 00:25 UTC = 05:25 PKT) chalta hai.
 
-STRATEGY (dip_focus.py mein tasdeeq-shuda, 2020-2026, 18 mein se 6 variants PASS, RSI 5-12 sab PF 1.7-4):
-  Entry : coin ka daily close > EMA200 AUR EMA50 > EMA200 (mazboot uptrend)
-          AUR BTC daily close > BTC EMA50  AUR  RSI(3) < 10 (2-3 din ki tez girawat)
-          AUR coin top-100 liquid  -> agle din ke OPEN par khareedo
+STRATEGY (new_ideas.py + capit_validate.py mein tasdeeq-shuda, 2020-2026):
+  Entry : coin ka daily close > EMA200 (uptrend)
+          AUR us din ka return <= -8% (tez girawat)
+          AUR us din ka volume >= 2 x pichle 20 din ka ausat volume (ghabrahat wali farokht)
+          AUR coin top-100 liquid  -> agle din ke OPEN par khareedo. Koi BTC filter NAHI.
   Exit  : jis din daily CLOSE apni 5-din average (SMA5) se ooper band ho -> AGLE din ke open par becho
-  Stop  : entry signal ke close se 3 x ATR(14) neeche (fixed, hilta nahi)
+  Stop  : signal din ke close se 3 x ATR(14) neeche (fixed)
   Time  : 10 din baad bhi na nikla ho to us din ke close par becho
-  Size  : har trade Dip hisse (kul capital ka 30%) ka 20% = kul capital ka 6%, max 10 positions
-          (2026-10-02 se: Ichimoku 60% + Dip 30% + Capitulation 10%; Donchian sirf paper)
-Backtest: win ~69%, PF ~2.1, CAGR ~6.5%, MaxDD ~-17%. Kam return lekin baqi 2 bots se ulta
-(wo breakout par khareedte hain, ye girawat par) - portfolio ko santulan deta hai.
+  Size  : har trade Capitulation hisse (kul ka 10%) ka 20% = kul capital ka 2%, max 10 positions
+Backtest: 313 trades (~1/hafta), win 65%, PF 1.87, OOS PF 1.59, bootstrap p5 1.40, 4/4 folds musbat,
+3x kharche par PF 1.66. ICHI/DIP se correlation ~0. ICHI 60 / DIP 30 / CAPIT 10 -> Sharpe 1.81 (pehle 1.71).
 
-State: dip_paper_state.json | Band trades: dip_paper_trades.csv | Signals: dip_signals.json
+State: capit_paper_state.json | Band trades: capit_paper_trades.csv | Signals: capit_signals.json
 """
 import csv
 import json
@@ -27,28 +27,21 @@ import pandas as pd
 from bot_core import fetch_full, norm, ema, STABLES, FEE, SLIP, STOP_SLIP
 
 # ---------------- Settings ----------------
-RSI_N, RSI_LO = 3, 10
+DROP = 0.08                    # din ka return <= -8%
+VOL_MULT = 2.0                 # volume >= 2 x pichle 20 din ka ausat
 EXIT_SMA = 5
 STOP_ATR = 3.0
 MAX_HOLD = 10
-BTC_EMA = 50
 MAX_POSITIONS = 10
-POS_PCT = 0.20                 # Dip hisse ka 20% har trade
-ALLOC = 0.30                   # kul capital mein Dip ka hissa (ICHI 60 / DIP 30 / CAPIT 10)
+POS_PCT = 0.20                 # Capitulation hisse ka 20% har trade
+ALLOC = 0.10                   # kul capital mein Capitulation ka hissa (ICHI 60 / DIP 30 / CAPIT 10)
 UNIVERSE = 100
 TOP_N_COINS = 150
-HISTORY_DAYS = 400
+HISTORY_DAYS = 1000              # EMA200 poora pakne ke liye lambi history (backtest jaisa)
 START_EQUITY = 1000.0
-STATE_FILE = "dip_paper_state.json"
-TRADES_CSV = "dip_paper_trades.csv"
-SIGNALS_FILE = "dip_signals.json"
-
-
-def rsi(close, n):
-    d = close.diff()
-    up = d.clip(lower=0).ewm(alpha=1 / n, adjust=False).mean()
-    dn = (-d.clip(upper=0)).ewm(alpha=1 / n, adjust=False).mean()
-    return 100 - 100 / (1 + up / dn.replace(0, np.nan))
+STATE_FILE = "capit_paper_state.json"
+TRADES_CSV = "capit_paper_trades.csv"
+SIGNALS_FILE = "capit_signals.json"
 
 
 def atr(df, n=14):
@@ -131,9 +124,9 @@ def main():
                 continue
             d = norm(d)
             c = d["close"]
-            e50, e200 = ema(c, 50), ema(c, 200)
-            d["uptrend"] = (c > e200) & (e50 > e200) & (np.arange(len(d)) >= 200)
-            d["rsi"] = rsi(c, RSI_N)
+            d["uptrend"] = (c > ema(c, 200)) & (np.arange(len(d)) >= 200)
+            d["ret"] = c.pct_change()
+            d["vrat"] = d["volume"] / d["volume"].shift(1).rolling(20).mean()
             d["stop"] = c - STOP_ATR * atr(d)
             d["exit_sig"] = c > c.rolling(EXIT_SMA).mean()
             d["dvol30"] = (c * d["volume"]).rolling(30, min_periods=20).mean()
@@ -203,39 +196,37 @@ def main():
             pos["bars"] += 1
 
     # ---------- aaj (D) ke naye signals ----------
-    btc_ok = bool(btc["close"].iloc[-1] > ema(btc["close"], BTC_EMA).iloc[-1])
     liq = sorted([(s, di.at[D, "dvol30"]) for s, di in ind.items()
                   if D in di.index and not np.isnan(di.at[D, "dvol30"]) and len(di) >= 60],
                  key=lambda x: -x[1])[:UNIVERSE]
     cands = []
-    if btc_ok:
-        for s, _ in liq:
-            r = ind[s].loc[D]
-            if s in st["positions"] or st.get("closed_on", {}).get(s) == Ds:
-                continue
-            if not bool(r["uptrend"]) or not (r["rsi"] < RSI_LO):
-                continue
-            if np.isnan(r["stop"]) or r["stop"] >= r["close"]:
-                continue
-            cands.append((s, float(r["close"]), float(r["stop"]), float(r["rsi"])))
+    for s, _ in liq:
+        if s == "BTC/USDT":
+            continue
+        r = ind[s].loc[D]
+        if s in st["positions"] or st.get("closed_on", {}).get(s) == Ds:
+            continue
+        if not bool(r["uptrend"]) or not (r["ret"] <= -DROP) or not (r["vrat"] >= VOL_MULT):
+            continue
+        if np.isnan(r["stop"]) or r["stop"] >= r["close"]:
+            continue
+        cands.append((s, float(r["close"]), float(r["stop"]), float(r["ret"]), float(r["vrat"])))
     cands.sort(key=lambda x: x[3])                   # sab se gehri girawat pehle
     chosen = cands[:max(MAX_POSITIONS - len(st["positions"]), 0)]
-    st["pending"] = [{"symbol": s, "signal_day": Ds, "stop": stop} for s, _, stop, _ in chosen]
+    st["pending"] = [{"symbol": s, "signal_day": Ds, "stop": stop} for s, _, stop, _, _ in chosen]
 
     equity = st["cash"] + sum(p["qty"] * p["last_px"] for p in st["positions"].values())
     st["history"].append({"day": Ds, "equity": round(equity, 2)})
     st["last_day"] = Ds
     st["last_updated"] = pd.Timestamp.now(tz="UTC").isoformat()
-    st["btc_regime_ok"] = btc_ok
     save_state(st)
-    append_signals([{"system": "Dip Daily", "symbol": s, "signal_time_utc": str(D + pd.Timedelta(days=1)),
+    append_signals([{"system": "Volume Capitulation", "symbol": s, "signal_time_utc": str(D + pd.Timedelta(days=1)),
                      "entry_est": round(c, 10), "sl": round(stop, 10), "tp": None,
                      "risk_pct": round((c - stop) / c * 100, 2), "size_pct": POS_PCT * 100}
-                    for s, c, stop, _ in chosen])
+                    for s, c, stop, _, _ in chosen])
 
     # ---------- Telegram ----------
-    L = [f"🎯 <b>Dip Daily Bot</b> — {Ds} (daily candle band)",
-         f"BTC: {'🟢 BTC > EMA50 (nayi entry allowed)' if btc_ok else '🔴 BTC < EMA50 (nayi entry NAHI)'}"]
+    L = [f"🌊 <b>Volume Capitulation Bot</b> — {Ds} (daily candle band)"]
     sell_now = [s for s, p in st["positions"].items() if p.get("exit_next")]
     if sell_now:
         L.append("\n🔔 <b>AAJ OPEN PAR BECHEIN</b> (close 5-din average se ooper band hua):")
@@ -243,11 +234,11 @@ def main():
               for s in sell_now]
     if chosen:
         L.append(f"\n🟢 <b>NAYE BUY SIGNALS</b> ({len(chosen)}) — aaj open par khareedein:")
-        L.append(f"Size: Dip hisse ka {POS_PCT*100:.0f}% = kul capital ka {POS_PCT*ALLOC*100:.0f}%")
-        L += [f"• <b>{s}</b> ~{fmt_px(c)} | Stop: {fmt_px(stop)} ({(c - stop) / c * 100:.1f}% neeche) | RSI3 {r:.1f}"
-              for s, c, stop, r in chosen]
+        L.append(f"Size: Capitulation hisse ka {POS_PCT*100:.0f}% = kul capital ka {POS_PCT*ALLOC*100:.0f}%")
+        L += [f"• <b>{s}</b> ~{fmt_px(c)} | Stop: {fmt_px(stop)} ({(c - stop) / c * 100:.1f}% neeche) | "
+              f"girawat {r*100:.1f}%, volume {v:.1f}x" for s, c, stop, r, v in chosen]
         L.append("Becho: jis din close 5-din average se ooper band ho, agle din open par (max 10 din).")
-    elif btc_ok:
+    else:
         L.append("\nAaj koi naya signal nahi.")
     if fills:
         L.append("\n" + "\n".join(fills))

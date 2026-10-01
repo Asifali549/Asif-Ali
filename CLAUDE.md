@@ -19,6 +19,7 @@
 | `ichimoku4h_bot.py` | Ichimoku 4H bot - signals + paper trading + Telegram |
 | `dip_daily_bot.py` | Dip Daily bot - signals + paper trading + Telegram |
 | `donchian_daily_bot.py` | Donchian Daily bot - signals + paper trading + Telegram |
+| `capit_daily_bot.py` | Volume Capitulation bot - signals + paper trading + Telegram (2026-10-02 se) |
 | `bot_core.py` | dono bots ke helpers: fetch_full, norm, ema, chandelier, ichi_signal, FEE/SLIP/STOP_SLIP, STABLES |
 | `strategies.py`, `config.py` | ichimoku + market_structure signal functions aur unke params (bot_core inhein use karta hai) |
 | `data_fetcher.py` | KuCoin (ccxt) exchange + top coins list |
@@ -28,14 +29,14 @@
 | `*_paper_state.json`, `*_paper_trades.csv`, `*_signals.json` | bots ka data (bots khud commit karte hain) - haath mat lagao |
 
 Workflows (.github/workflows): `ichimoku4h_bot.yml` (cron `10 */4 * * *`), `donchian_daily_bot.yml`
-(cron `15 0 * * *` = 5:15 AM PKT), `dip_daily_bot.yml` (cron `20 0 * * *`), `watchdog.yml` (har 30 min), `telegram_test.yml` (sirf manual).
+(cron `15 0 * * *` = 5:15 AM PKT), `dip_daily_bot.yml` (cron `20 0 * * *`), `capit_daily_bot.yml` (cron `25 0 * * *`), `watchdog.yml` (har 30 min), `telegram_test.yml` (sirf manual).
 
 Secrets:
 - GitHub Actions secrets: `GH_TOKEN` (watchdog ke liye), `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`.
 - Streamlit secrets: `GITHUB_TOKEN` (fine-grained PAT, Actions + Contents = Read and write) - dashboard ke "▶️ Abhi chala do" buttons.
 - Token kabhi code mein mat likho.
 
-## Live strategies (teeno paper trading par, $1000 start; Ichimoku/Donchian: 1% risk/trade, max 10, ek coin max 20%)
+## Live strategies (chaaron paper trading par, $1000 start; Ichimoku/Donchian: 1% risk/trade, max 10, ek coin max 20%)
 **1) Ichimoku + Market Structure, 4H**
 - Entry: ek hi 4H candle par Ichimoku (tenkan 9 / kijun 26 / senkou_b 52, volume > 2x) AUR market structure
   (pivot 5, swing 1.5%), cooldown `config.SIGNAL_COOLDOWN_BARS`. Agli candle ke open par.
@@ -53,11 +54,20 @@ Secrets:
   Agle din open par. Kai signals hon to sab se kam RSI pehle.
 - Exit: close > SMA5 -> agle din open par; stop = signal close - 3x ATR(14) fixed; 10 din baad close par.
   Jis din coin band ho us din usi coin mein nayi entry nahi (backtest jaisa).
-- Size: har trade apne hisse ka 20% (2026-10-01 se; pehle 10%), max 10. Files dip_paper_state.json / dip_paper_trades.csv / dip_signals.json.
+- Size: har trade apne hisse ka 20% (2026-10-01 se; pehle 10%), max 10. Hissa 30% (2026-10-02 se; pehle 40%). Files dip_paper_state.json / dip_paper_trades.csv / dip_signals.json.
 - Backtest (2020-10 -> 2026-09): n=254, win 69%, PF 2.07, p5 1.48, random PF 0.82, CAGR ~6.5%, MaxDD ~-17%.
   Grid RSI 5-12 x exit SMA 3/5/7 sab PF 1.7-4 (random se behtar); fail sirf kam trades / 2022 fold ~1.0 ki wajah se;
   RSI<15 kamzor (PF 1.4). BTC filter hatane se kamzor. Bot ne fake data par 46/46 trades backtest se hubahu milayin.
 - Kam return, lekin breakout bots ka ulta (girawat par khareed) - diversification.
+
+**4) Volume Capitulation Daily** (`capit_daily_bot.py`, workflow `capit_daily_bot.yml` cron `25 0 * * *` = 5:25 AM PKT)
+- Entry: coin daily close > EMA200, us din return <= -8%, volume >= 2 x pichle 20 din ka ausat (shift 1), top-100
+  liquid; koi BTC filter nahi. Agle din open par. Kai signals hon to sab se gehri girawat pehle.
+- Exit/stop/time: Dip jaisa (close > SMA5 -> agle din open; stop signal close - 3 ATR fixed; 10 din). HISTORY_DAYS 1000
+  (EMA200 pakne ke liye). Size: hisse ka 20% (kul ka 2%), max 10, hissa 10%. Files capit_paper_state.json /
+  capit_paper_trades.csv / capit_signals.json.
+- Backtest (new_ideas + capit_validate): 313 trades, win 65%, PF 1.87, OOS 1.59, p5 1.40, 4/4 folds, 3x kharcha 1.66.
+- Bot ne fake data par din-ba-din replay mein 45/45 backtest trades hubahu (entry, exit, return) milayin; 1 extra trade.
 
 ## Testing ke usool (har nayi strategy/tabdeeli par lazmi)
 - Lookahead-free: signal band candle par, entry agli candle ke open par; daily filter sirf band daily candle se.
@@ -199,7 +209,7 @@ Secrets:
   Matlab: bure saalon ka nuqsan tab hota hai jab breadth ooncha ho (bear market ke jhoote rally / bull traps) -
   market-level filters (BTC, breadth) is kamzori ko theek nahi karte. FAISLA: Donchian par filter-tahqeeq BAND.
 
-## Zer-e-test
+## Naye khayal / Capitulation natija
 - **NAYE KHAYAL natija (2026-10-02, `new_ideas.py` / `new_ideas_RESULTS.txt`):**
   A) BTC catch-up: 5/9 (X>=4% chalta, PF 1.42-1.84 vs rnd p95 1.12-1.42) LEKIN ICHI se corr 0.50, akela DD -58%,
      2022 PF 0.16-0.49, 2025 0.36-0.68; portfolio mein Sharpe 1.68 -> 1.47 -> FAIL (portfolio ke liye bekaar).
@@ -216,7 +226,8 @@ Secrets:
   R8% V2.5 bhi pass (PF 1.79, p5 1.22, top-20 hata kar 0.89). Portfolio (C har trade 20%): ICHI 60/DIP 30/C 10 ->
   CAGR 25.9%, DD -9.6%, Sharpe 1.81; ICHI 60/DIP 20/C 20 -> 26.8%, DD -8.4%, Sharpe 1.79, +mahine 66% (BASE 24.9%,
   -11.0%, 1.71, 55%). Corr C: ICHI 0.03, DIP 0.06. Khatre: 3 khayalon mein se chuna (multiple testing), survivorship.
-  Agla qadam (user ki manzoori): paper bot `capit_daily_bot.py` (R8% V2.0, 20%/trade, max 10) + dashboard.
+  **LAGU (2026-10-02, user ne kaha "bot mein shamil karo"):** capit_daily_bot + dashboard tab + watchdog;
+  taqseem ICHI 60 / DIP 30 / CAPIT 10 (sab se ooncha Sharpe 1.81) - dip_daily_bot ALLOC 0.30, dashboard alloc.
 
 ## Aglay kaam
 - **GitHub cron masla (2026-10-01 dekha):** 30 Sep ~17:30 PKT se scheduled runs bohat kam: Watchdog (har 30 min)

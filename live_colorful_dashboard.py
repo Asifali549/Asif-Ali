@@ -76,7 +76,7 @@ SYSTEMS = {
         "trades": "dip_paper_trades.csv",
         "signals": "dip_signals.json",
         "workflow": "dip_daily_bot.yml",
-        "alloc": 0.40, "sizing": ("fixed", 0.20, 0.20),
+        "alloc": 0.30, "sizing": ("fixed", 0.20, 0.20),
         "stale_min": 1560,
         "every": "rozana 5:20 AM PKT (daily candle band hone ke baad)",
         "entry_col": "entry_day", "exit_col": "exit_day",
@@ -88,10 +88,33 @@ SYSTEMS = {
             ("Stop (SL)", "Signal ke close se 3x ATR(14) neeche — fixed, hilta nahi"),
             ("Exit", "Jis din close 5-din average (SMA5) se ooper band ho, agle din open par becho; max 10 din"),
             ("Exchange par", "Stop-loss order; Telegram 'AAJ OPEN PAR BECHEIN' kahe to market par bech dein"),
-            ("Size", "Har trade Dip hisse ka 20% (kul capital ka 8%), max 10 trades"),
+            ("Size", "Har trade Dip hisse ka 20% (kul capital ka 6%), max 10 trades"),
         ],
         "backtest": {"win": 69.3, "pf": 2.07, "cagr": 9.7, "dd": -27.7,
                      "note": "6 saal (2020-2026), win-rate ooncha lekin return kam; breakout bots ka ulta (girawat par khareed)"},
+    },
+    "Volume Capitulation": {
+        "badge": "🌊 Capitulation",
+        "state": "capit_paper_state.json",
+        "trades": "capit_paper_trades.csv",
+        "signals": "capit_signals.json",
+        "workflow": "capit_daily_bot.yml",
+        "alloc": 0.10, "sizing": ("fixed", 0.20, 0.20),
+        "stale_min": 1560,
+        "every": "rozana 5:25 AM PKT (daily candle band hone ke baad)",
+        "entry_col": "entry_day", "exit_col": "exit_day",
+        "new_signal_hours": 30,
+        "rules": [
+            ("Timeframe", "Daily candle"),
+            ("Entry", "Uptrend coin (close > EMA200) ek din mein 8%+ gire AUR us din volume pichle 20 din ke ausat ka 2x+ ho (ghabrahat wali farokht)"),
+            ("Market filter", "Koi nahi (BTC filter ke baghair test hua)"),
+            ("Stop (SL)", "Signal ke close se 3x ATR(14) neeche — fixed, hilta nahi"),
+            ("Exit", "Jis din close 5-din average (SMA5) se ooper band ho, agle din open par becho; max 10 din"),
+            ("Exchange par", "Stop-loss order; Telegram 'AAJ OPEN PAR BECHEIN' kahe to market par bech dein"),
+            ("Size", "Har trade Capitulation hisse ka 20% (kul capital ka 2%), max 10 trades"),
+        ],
+        "backtest": {"win": 65.2, "pf": 1.87, "cagr": 14.1, "dd": -20.3,
+                     "note": "6 saal (2020-2026), ~1 trade/hafta, bootstrap p5 1.40, 4/4 folds musbat; Ichimoku/Dip se correlation ~0"},
     },
 }
 
@@ -266,7 +289,7 @@ def position_size_box(coin, entry, sl, key, cfg):
 # Page
 # ============================================================
 st.set_page_config(page_title="Live Dashboard", layout="wide")
-st.title("🎯 Live Dashboard — Ichimoku 4H + Dip Daily (+ Donchian paper)")
+st.title("🎯 Live Dashboard — Ichimoku 4H + Dip Daily + Capitulation (+ Donchian paper)")
 st.caption("Sirf wo strategies jo sakht tests (lookahead-free, random-control, portfolio, 2022 crash) mein PASS huin. "
            "Signals aur paper trades dono bots khud chalate hain (GitHub Actions).")
 
@@ -276,9 +299,10 @@ for _n, _c in SYSTEMS.items():
     _amt = total_capital * _c["alloc"]
     st.sidebar.markdown(f"**{_c['badge']}** — {_c['alloc']*100:.0f}% = **${_amt:,.0f}**"
                         + ("" if _c["alloc"] else " _(sirf paper)_"))
-st.sidebar.caption("Portfolio Lab (6 saal, teeno ek sath): Ichimoku 60% + Dip 40% sab se hamwar — "
-                   "CAGR ~+25%, MaxDD ~-12%, koi saal manfi nahi (2022 bhi 0%). Donchian Ichimoku ke sath "
-                   "girti hai (correlation 0.72), is liye asli paisa nahi. Har signal ka size neeche khud nikalta hai.")
+st.sidebar.caption("Backtest (6 saal): Ichimoku 60% + Dip 30% + Capitulation 10% — CAGR ~+26%, MaxDD ~-10%, "
+                   "Sharpe 1.81 (pehle ICHI 60 / DIP 40: 1.71). Capitulation baqi dono se bilkul alag chalti hai. "
+                   "Donchian Ichimoku ke sath girti hai (correlation 0.72), is liye asli paisa nahi. "
+                   "Har signal ka size neeche khud nikalta hai.")
 st.sidebar.markdown("---")
 if st.sidebar.button("🔄 Live qeemat taaza karein"):
     fetch_live_prices.clear()

@@ -31,10 +31,12 @@ GH_TOKEN = os.environ.get("GH_TOKEN")
 #   - Ichimoku 4H Bot: har 4 ghante -> 5.5 ghante (330 min) se purana ho to ruka hua
 #   - Donchian Daily Bot: rozana 00:15 UTC -> 26 ghante (1560 min) se purana ho to ruka hua
 #   - Dip Daily Bot: rozana 00:20 UTC -> 26 ghante (1560 min)
+#   - Capitulation Bot: rozana 00:25 UTC -> 26 ghante (1560 min)
 LOOPS = [
     ("ichimoku4h_paper_state.json", ["last_updated"], "ichimoku4h_bot.yml", 330, "Ichimoku 4H Bot"),
     ("donchian_paper_state.json", ["last_updated"], "donchian_daily_bot.yml", 1560, "Donchian Daily Bot"),
     ("dip_paper_state.json", ["last_updated"], "dip_daily_bot.yml", 1560, "Dip Daily Bot"),
+    ("capit_paper_state.json", ["last_updated"], "capit_daily_bot.yml", 1560, "Capitulation Bot"),
 ]
 
 

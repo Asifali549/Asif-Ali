@@ -1,0 +1,61 @@
+name: Capitulation Bot
+
+on:
+  schedule:
+    - cron: "25 0 * * *"     # rozana 00:25 UTC = 05:25 PKT (daily candle band hone ke baad)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: capit-daily-bot
+  cancel-in-progress: false
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Capitulation bot
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python capit_daily_bot.py
+
+      - name: Commit state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          cp capit_paper_state.json /tmp/state.json 2>/dev/null || exit 0
+          HAS_CSV=0
+          if [ -f capit_paper_trades.csv ]; then cp capit_paper_trades.csv /tmp/trades.csv; HAS_CSV=1; fi
+          HAS_SIG=0
+          if [ -f capit_signals.json ]; then cp capit_signals.json /tmp/signals.json; HAS_SIG=1; fi
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/state.json capit_paper_state.json
+            if [ "$HAS_CSV" = "1" ]; then cp /tmp/trades.csv capit_paper_trades.csv; fi
+            if [ "$HAS_SIG" = "1" ]; then cp /tmp/signals.json capit_signals.json; fi
+            git add capit_paper_state.json
+            if [ "$HAS_CSV" = "1" ]; then git add capit_paper_trades.csv; fi
+            if [ "$HAS_SIG" = "1" ]; then git add capit_signals.json; fi
+            if git diff --staged --quiet; then echo "Koi tabdeeli nahi"; exit 0; fi
+            git commit -m "Capitulation bot update ($(date -u +'%Y-%m-%d'))"
+            if git push origin HEAD:main; then echo "Push kamyab"; exit 0; fi
+            sleep $((i * 5))
+          done
+          exit 1
