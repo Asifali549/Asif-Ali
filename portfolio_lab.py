@@ -280,16 +280,6 @@ def main(h4=None):
     for name, (k, mode, size) in runs.items():
         curves[name], taken[name] = portfolio(T[k], closes, mode, size)
 
-    # ---- MAJ: BTC 50% + ETH 50% trend (majors_lab.py jaisa, vol-target 50%) ----
-    import majors_lab as ML
-    for name, (kind, p) in {"MAJ SMA150 vol": ("SMA", (150,)), "MAJ SMA50 vol": ("SMA", (50,))}.items():
-        legs = []
-        for s_ in ("BTC/USDT", "ETH/USDT"):
-            d_ = daily[s_].set_index("timestamp")
-            w_ = (ML.signal(d_, kind, p) * ML.vol_weight(d_)).fillna(0)
-            legs.append(ML.sleeve_returns(d_, w_))
-        r_ = (0.5 * legs[0] + 0.5 * legs[1]).reindex(closes.index).fillna(0)
-        curves[name] = (1 + r_).cumprod()
 
     mixes = {
         "1/3 har ek (ICHI+DON+DIP)": {"ICHI": 1 / 3, "DON": 1 / 3, "DIP": 1 / 3},
@@ -298,9 +288,6 @@ def main(h4=None):
         "ICHI 50 / DIP 50": {"ICHI": .5, "DIP": .5},
         "ICHI 50 / DON 50": {"ICHI": .5, "DON": .5},
         "ICHI 60 / DIP 20% 40": {"ICHI": .6, "DIP 20% size": .4},
-        "ICHI 50/DIP20 30/MAJ150 20": {"ICHI": .5, "DIP 20% size": .3, "MAJ SMA150 vol": .2},
-        "ICHI 40/DIP20 30/MAJ150 30": {"ICHI": .4, "DIP 20% size": .3, "MAJ SMA150 vol": .3},
-        "ICHI 50/DIP20 30/MAJ50 20": {"ICHI": .5, "DIP 20% size": .3, "MAJ SMA50 vol": .2},
     }
     for name, w in mixes.items():
         curves[name] = mix(curves, w)
@@ -322,11 +309,11 @@ def main(h4=None):
         yr = {y.year: v for y, v in stats(eq)["yearly"].items()}
         emit(f"{name:>28} | " + " | ".join(f"{yr.get(y, np.nan)*100:>+5.0f}%" for y in yrs))
 
-    mo = pd.DataFrame({k: stats(curves[k])["monthly"] for k in ("ICHI", "DON", "DIP", "MAJ SMA150 vol")})
+    mo = pd.DataFrame({k: stats(curves[k])["monthly"] for k in ("ICHI", "DON", "DIP")})
     emit("\nMahana return ka correlation (1 = bilkul sath chalte, 0 = alag, manfi = ulta):")
     emit(mo.corr().round(2).to_string())
     bad = mo.sort_values("ICHI").head(6)
-    emit("\nICHI ke 6 sab se bure mahine - us waqt DON, DIP aur MAJ kya kar rahe the:")
+    emit("\nICHI ke 6 sab se bure mahine - us waqt DON aur DIP kya kar rahe the:")
     emit((bad * 100).round(1).to_string())
 
     with open(OUT, "w", encoding="utf-8") as f:

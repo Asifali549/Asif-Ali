@@ -4,6 +4,8 @@
 > Har bara kaam khatam hone par is file ka "Haal / Aglay kaam" hissa update karo aur push karo.
 
 ## User
+- Strategy pasand: signals market ke sath sath milte rahein (rozana), taqatwar trades - saal mein chand trades wali
+  (BTC/ETH trend) strategies NAHI chahiye.
 - Asif, Pakistan (PKT = UTC+5). **Jawab hamesha Urdu mein.** Waqt PKT mein batao.
 - Trading: sirf **spot, buy-only**, daily/swing. Maqsad: ek sach mein qabil-e-aitmaad strategy.
 - Mobile se kaam karta hai (GitHub app + Streamlit dashboard). Coding khud nahi karta - Claude repo mein
@@ -78,6 +80,10 @@ Secrets:
 - **Swing Lab (2026-09-30, 109 coins, 2020-10 -> 2026-09):** SMC_4H FAIL (PF 0.82, 0/8; sirf 67 trades,
   random se bura). SQUEEZE_4H FAIL (PF 1.34 lekin random PF 1.47 - edge entry ka nahi trailing/trend ka,
   MaxDD -49%, 0/7). Natija `swing_lab_RESULTS.txt`.
+- **Majors Trend (BTC/ETH SMA/EMA/Donchian, 2026-10-01):** sab rules B&H se behtar (DD -78% -> -35/-50%) lekin
+  random-timing se sirf thora behtar, 3/20 pass (best SMA150+vol: CAGR 41%, DD -35%, Sharpe 1.21). **User ne
+  REJECT kiya** - saal mein chand trades nahi chahiye; use ziada signals wali taqatwar strategy chahiye.
+  Files `git show 9e0f740:majors_lab.py` / `majors_lab_RESULTS.txt`.
 - Purane research scripts/natije git history mein hain: commit `ec7962f` (cleanup se pehle) par
   `git show ec7962f:<file>` se wapas mil sakte hain (unified_test.py, ichimoku4h_validation.py, strategy_lab.py,
   portfolio_test.py, donchian_regime_test.py, archive/...).
@@ -106,17 +112,12 @@ Secrets:
   (Telegram mein "hisse ka X% = kul capital ka Y%"), Donchian Telegram mein "Sirf PAPER", dashboard sidebar
   "Sarmaye ki taqseem" (kul capital -> har system ka $) aur har signal ka size system ke hisse se.
 
-## Majors Trend Lab natija (2026-10-01, BTC 50% + ETH 50%, 2018-05 -> 2026-09, 8.4 saal)
-`majors_lab.py` / workflow "Majors Trend Test" / `majors_lab_RESULTS.txt`.
-- Buy&hold: CAGR +27.7%, MaxDD -78.5%, Sharpe 0.71 (2018 -70%, 2022 -65%).
-- HAR trend rule ka Sharpe B&H se ooper (0.83-1.25) aur MaxDD bohat kam (-35 se -72%). Random-timing control
-  ke 95th se zyada tar rules thore se ooper - edge asli lekin chhota; sab se wazeh: SMA50 +vol (1.25 vs 0.88) aur
-  SMA50 (1.16 vs 0.84) - magar inka MaxDD -49/-56% (shart -45%) is liye FAIL.
-- PASS 3/20: SMA150 +vol (CAGR +41%, DD -35%, Sharpe 1.21, 2022 -10%), SMA200 +vol (+37%, -44%, 1.10),
-  EMA20/100 +vol (+32%, -43%, 1.02). Donchian 0/6. Vol-target har rule ka DD 10-20 point kam karta hai.
-- Matlab: BTC/ETH ko seedha hold karne ki jagah SMA150+vol-target se hold karna drawdown aadha karta hai.
-  Survivorship-free hai, lekin altcoin bots (ICHI Sharpe ~1.8) se kamzor - akela core nahi, mix mein dekhna hai.
-- portfolio_lab.py mein MAJ sleeve (SMA150 vol / SMA50 vol) aur mixes ICHI/DIP/MAJ shamil kiye - dobara chalana baqi.
+## Zer-e-test (EXPERIMENTAL)
+- **Fast Lab - DIP 4H** (`fast_lab.py`, workflow "Fast Lab Test", natija `fast_lab_RESULTS.txt`): Daily Dip ka edge
+  4H par (rozana kai signals). Daily trend (EMA200/EMA50, band din) + BTC>EMA50 + 4H RSI3<10 -> agli 4H open;
+  exit 4H close > SMA5; stop 3 ATR(4H); max 30 candles; 20%/trade max 10. Variants: RSI 5/15/20, exit 3/8,
+  stop 2/4, hold 12, BTC filter nahi, 4H trend. Daily Dip se muqabla, signals/hafta aur ghante bhi.
+  Truncation test se lookahead 0. Pass ho to Dip 4H bot.
 
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
