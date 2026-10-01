@@ -90,6 +90,12 @@ Secrets:
   Universe note: sirf 175 coins ke paas kaafi history; rozana ausat ~94 coins volume-data wale -> top150/200 = top100 jaisa.
   Daily Dip isi test mein (20% size, 175 coins): top70 PF 2.55 win 73% CAGR +17.6% DD -26%; top100 PF 2.41 CAGR +15.4%
   DD -36% -> top70 thora behtar (sirf ek test; live bot abhi top100). Files `git show f289b1a:dip4h_universe.py` / `_RESULTS.txt`.
+- **SPOT CORE TREND-PULLBACK PRO (user ka spec, 2026-10-01) - FAIL 0/9:** 4H daily+4H trend, ADX, pullback/support,
+  RSI 45-65, candle, volume 1.75x, reclaim, overext, R:R; TP1/TP2/trail. 109 coins 2020-10->2026-09: sirf 41 trades
+  (0.1/hafta!), win 24%, PF 0.48, random PF 0.75 se bhi bura; bull regime mein PF 0.29. ABLATION: filters ulta nuqsan
+  dete hain - volume hatao PF 1.23 (387 trades) magar random 1.14, p5 0.99 -> edge nahi; daily/reclaim hatao PF 1.10.
+  Sabaq: bohat se filters AND karne se "perfect setup" late entry ban jata hai; 4H pullback-reclaim ka crypto mein edge
+  nahi (SMC_4H jaisa). Files `git show 2c353bc:spot_core_lab.py` / `spot_core_RESULTS.txt`; Pine `git show 05f2b7f:spot_core_trend_pullback_pro.pine`.
 - Purane research scripts/natije git history mein hain: commit `ec7962f` (cleanup se pehle) par
   `git show ec7962f:<file>` se wapas mil sakte hain (unified_test.py, ichimoku4h_validation.py, strategy_lab.py,
   portfolio_test.py, donchian_regime_test.py, archive/...).
@@ -117,15 +123,6 @@ Secrets:
   DON 0% - sirf paper par nazar.** Lagu: dip_daily_bot POS_PCT 0.20 + ALLOC 0.40, ichimoku4h_bot ALLOC 0.60
   (Telegram mein "hisse ka X% = kul capital ka Y%"), Donchian Telegram mein "Sirf PAPER", dashboard sidebar
   "Sarmaye ki taqseem" (kul capital -> har system ka $) aur har signal ka size system ke hisse se.
-
-## Zer-e-test (EXPERIMENTAL)
-- **SPOT CORE TREND-PULLBACK PRO** (user ka spec 2026-10-01; `spot_core_lab.py`, workflow "Spot Core Test",
-  natija `spot_core_RESULTS.txt`; Pine Script bana hua hai lekin user ne kaha sirf PASS hone par chahiye - repo se hataya, wapas: `git show 05f2b7f:spot_core_trend_pullback_pro.pine`).
-  4H: daily bias (EMA200/50) + 4H EMA50>200, close>EMA200, ADX>=21 + pullback (8 candles, 1-5 ATR) + support (EMA20
-  touch ya swing-high retest, structure intact) + RSI 45-65 barhta + bullish candle + volume 1.75x + reclaim 5-candle
-  high + overext (<=2 ATR EMA20 se) + resistance >=1R; SL pullback low-0.5ATR; TP1 1.5R 40%, TP2 3R 30%, baqi CE16/5.5
-  trail (TP1 ke baad BE); max 120 candles; divergence sirf ranking. 18 variants: parosi + exits + ABLATION (har filter
-  hata kar). Regimes/bare coins alag. Lookahead truncation 0; exit-sim unit test theek.
 
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
