@@ -1,0 +1,175 @@
+====================================================================================================
+DIP 4H - COIN UNIVERSE TEST (top 70 / 100 / 150 / 200 liquid coins)
+====================================================================================================
+Coins fetch: 175 | Period: 2020-10-02 -> 2026-09-30 | size 20%/trade, max 10
+Har din volume-data wale coins: kam se kam 26, ausat 94, ziada 175 (jab is se kam hon to bara universe = sab dastiyab coins)
+Kharcha: fee 0.10% + slip 0.05% har taraf + stop slip 0.25%
+
+
+####################################################################################################
+UNIVERSE: TOP 70 COINS
+####################################################################################################
+
+[MUQABLA] TOP 70 | DAILY DIP (muqabla)
+   Har trade: n=428 win=72.9% PF=2.55 p5=1.98 Top10-hata=2.11 avg=+2.96% | Random PF=N/A
+   Folds: 2.16(69) / 1.03(13) / 2.47(259) / 3.91(87)
+   Portfolio: CAGR=+17.6% MaxDD=-26.3% Sharpe=0.85
+   Li gayi trades: 196 = 0.6/hafta | trade ~83 ghante | Saal-war: 2020:-5% 2021:+11% 2022:-1% 2023:+10% 2024:+28% 2025:+19% 2026:+50%
+
+[FAIL] TOP 70 | BASELINE
+   Har trade: n=6893 win=61.5% PF=0.99 p5=0.93 Top10-hata=0.96 avg=-0.02% | Random PF=0.84
+   Folds: 1.44(1331) / 0.68(552) / 0.88(3715) / 1.06(1295)
+   Portfolio: CAGR=-25.7% MaxDD=-91.1% Sharpe=-0.57 | Random portfolio: CAGR=-36.1% Sharpe=-1.11
+   Li gayi trades: 2195 = 7.0/hafta | trade ~14 ghante | Saal-war: 2020:-13% 2021:+21% 2022:+6% 2023:+7% 2024:-52% 2025:-70% 2026:-1%
+
+[FAIL] TOP 70 | rsi_lo=5
+   Har trade: n=2206 win=59.1% PF=0.91 p5=0.82 Top10-hata=0.86 avg=-0.17% | Random PF=0.80
+   Folds: 1.39(403) / 0.63(161) / 0.76(1255) / 1.33(387)
+   Portfolio: CAGR=-6.2% MaxDD=-58.8% Sharpe=-0.18 | Random portfolio: CAGR=-17.3% Sharpe=-0.90
+   Li gayi trades: 893 = 2.9/hafta | trade ~14 ghante | Saal-war: 2020:-10% 2021:+27% 2022:+2% 2023:+7% 2024:-1% 2025:-44% 2026:-2%
+
+[FAIL] TOP 70 | rsi_lo=15
+   Har trade: n=13121 win=61.5% PF=0.98 p5=0.94 Top10-hata=0.96 avg=-0.03% | Random PF=0.80
+   Folds: 1.43(2698) / 0.67(1049) / 0.89(6933) / 0.95(2441)
+   Portfolio: CAGR=-47.0% MaxDD=-98.9% Sharpe=-0.85 | Random portfolio: CAGR=-65.0% Sharpe=-1.96
+   Li gayi trades: 3464 = 11.1/hafta | trade ~14 ghante | Saal-war: 2020:-29% 2021:-10% 2022:+2% 2023:+14% 2024:-85% 2025:-80% 2026:-2%
+
+[FAIL] TOP 70 | exit_n=8
+   Har trade: n=6893 win=62.9% PF=1.04 p5=0.98 Top10-hata=1.01 avg=+0.08% | Random PF=0.88
+   Folds: 1.64(1331) / 0.74(552) / 0.90(3715) / 1.04(1295)
+   Portfolio: CAGR=-23.0% MaxDD=-92.7% Sharpe=-0.37 | Random portfolio: CAGR=-38.1% Sharpe=-1.10
+   Li gayi trades: 2005 = 6.4/hafta | trade ~21 ghante | Saal-war: 2020:-8% 2021:+68% 2022:+2% 2023:+35% 2024:-59% 2025:-75% 2026:-5%
+
+
+####################################################################################################
+UNIVERSE: TOP 100 COINS
+####################################################################################################
+
+[MUQABLA] TOP 100 | DAILY DIP (muqabla)
+   Har trade: n=500 win=72.8% PF=2.41 p5=1.91 Top10-hata=2.05 avg=+2.84% | Random PF=N/A
+   Folds: 2.16(69) / 0.85(14) / 2.32(322) / 3.80(95)
+   Portfolio: CAGR=+15.4% MaxDD=-35.8% Sharpe=0.74
+   Li gayi trades: 215 = 0.7/hafta | trade ~84 ghante | Saal-war: 2020:-5% 2021:+11% 2022:-1% 2023:+14% 2024:+19% 2025:+13% 2026:+48%
+
+[FAIL] TOP 100 | BASELINE
+   Har trade: n=8024 win=61.3% PF=0.96 p5=0.91 Top10-hata=0.94 avg=-0.07% | Random PF=0.80
+   Folds: 1.44(1331) / 0.68(572) / 0.85(4578) / 1.08(1543)
+   Portfolio: CAGR=-26.1% MaxDD=-91.7% Sharpe=-0.51 | Random portfolio: CAGR=-44.9% Sharpe=-1.31
+   Li gayi trades: 2378 = 7.6/hafta | trade ~14 ghante | Saal-war: 2020:-13% 2021:+21% 2022:+6% 2023:+12% 2024:-62% 2025:-67% 2026:+3%
+
+[FAIL] TOP 100 | rsi_lo=5
+   Har trade: n=2581 win=58.8% PF=0.87 p5=0.80 Top10-hata=0.83 avg=-0.25% | Random PF=0.73
+   Folds: 1.39(403) / 0.64(170) / 0.73(1546) / 1.32(462)
+   Portfolio: CAGR=-8.4% MaxDD=-63.8% Sharpe=-0.26 | Random portfolio: CAGR=-31.1% Sharpe=-1.49
+   Li gayi trades: 975 = 3.1/hafta | trade ~14 ghante | Saal-war: 2020:-10% 2021:+27% 2022:+2% 2023:+6% 2024:-7% 2025:-50% 2026:+2%
+
+[FAIL] TOP 100 | rsi_lo=15
+   Har trade: n=15166 win=61.3% PF=0.96 p5=0.92 Top10-hata=0.94 avg=-0.07% | Random PF=0.79
+   Folds: 1.43(2698) / 0.66(1083) / 0.87(8496) / 0.98(2889)
+   Portfolio: CAGR=-48.6% MaxDD=-99.1% Sharpe=-0.88 | Random portfolio: CAGR=-63.9% Sharpe=-1.82
+   Li gayi trades: 3677 = 11.8/hafta | trade ~14 ghante | Saal-war: 2020:-29% 2021:-10% 2022:+2% 2023:+12% 2024:-88% 2025:-79% 2026:+4%
+
+[FAIL] TOP 100 | exit_n=8
+   Har trade: n=8024 win=62.2% PF=0.99 p5=0.94 Top10-hata=0.97 avg=-0.01% | Random PF=0.81
+   Folds: 1.64(1331) / 0.73(572) / 0.87(4578) / 1.05(1543)
+   Portfolio: CAGR=-25.4% MaxDD=-94.4% Sharpe=-0.41 | Random portfolio: CAGR=-47.5% Sharpe=-1.33
+   Li gayi trades: 2147 = 6.9/hafta | trade ~21 ghante | Saal-war: 2020:-8% 2021:+68% 2022:+2% 2023:+31% 2024:-72% 2025:-71% 2026:+3%
+
+
+####################################################################################################
+UNIVERSE: TOP 150 COINS
+####################################################################################################
+
+[MUQABLA] TOP 150 | DAILY DIP (muqabla)
+   Har trade: n=521 win=72.0% PF=2.39 p5=1.91 Top10-hata=2.04 avg=+2.81% | Random PF=N/A
+   Folds: 2.16(69) / 0.85(14) / 2.39(329) / 3.08(109)
+   Portfolio: CAGR=+15.3% MaxDD=-35.8% Sharpe=0.72
+   Li gayi trades: 223 = 0.7/hafta | trade ~84 ghante | Saal-war: 2020:-5% 2021:+11% 2022:-1% 2023:+14% 2024:+20% 2025:+14% 2026:+43%
+
+[FAIL] TOP 150 | BASELINE
+   Har trade: n=8326 win=61.0% PF=0.98 p5=0.92 Top10-hata=0.93 avg=-0.04% | Random PF=0.84
+   Folds: 1.44(1331) / 0.68(572) / 0.85(4660) / 1.20(1763)
+   Portfolio: CAGR=-25.3% MaxDD=-92.5% Sharpe=-0.50 | Random portfolio: CAGR=-41.7% Sharpe=-1.22
+   Li gayi trades: 2443 = 7.8/hafta | trade ~15 ghante | Saal-war: 2020:-13% 2021:+21% 2022:+6% 2023:+12% 2024:-56% 2025:-74% 2026:+21%
+
+[FAIL] TOP 150 | rsi_lo=5
+   Har trade: n=2687 win=58.2% PF=0.88 p5=0.79 Top10-hata=0.82 avg=-0.24% | Random PF=0.77
+   Folds: 1.39(403) / 0.64(170) / 0.74(1574) / 1.15(540)
+   Portfolio: CAGR=-9.5% MaxDD=-66.2% Sharpe=-0.31 | Random portfolio: CAGR=-26.0% Sharpe=-1.17
+   Li gayi trades: 1002 = 3.2/hafta | trade ~14 ghante | Saal-war: 2020:-10% 2021:+27% 2022:+2% 2023:+6% 2024:-7% 2025:-53% 2026:+1%
+
+[FAIL] TOP 150 | rsi_lo=15
+   Har trade: n=15733 win=61.0% PF=0.97 p5=0.93 Top10-hata=0.94 avg=-0.05% | Random PF=0.77
+   Folds: 1.43(2698) / 0.66(1083) / 0.86(8645) / 1.08(3307)
+   Portfolio: CAGR=-45.2% MaxDD=-98.9% Sharpe=-0.83 | Random portfolio: CAGR=-71.3% Sharpe=-2.21
+   Li gayi trades: 3756 = 12.0/hafta | trade ~14 ghante | Saal-war: 2020:-29% 2021:-10% 2022:+2% 2023:+12% 2024:-82% 2025:-83% 2026:+26%
+
+[FAIL] TOP 150 | exit_n=8
+   Har trade: n=8326 win=61.8% PF=1.01 p5=0.95 Top10-hata=0.96 avg=+0.02% | Random PF=0.84
+   Folds: 1.64(1331) / 0.73(572) / 0.86(4660) / 1.16(1763)
+   Portfolio: CAGR=-21.8% MaxDD=-94.4% Sharpe=-0.31 | Random portfolio: CAGR=-41.1% Sharpe=-1.08
+   Li gayi trades: 2210 = 7.1/hafta | trade ~21 ghante | Saal-war: 2020:-8% 2021:+68% 2022:+2% 2023:+31% 2024:-68% 2025:-74% 2026:+36%
+
+
+####################################################################################################
+UNIVERSE: TOP 200 COINS
+####################################################################################################
+
+[MUQABLA] TOP 200 | DAILY DIP (muqabla)
+   Har trade: n=522 win=72.0% PF=2.39 p5=1.93 Top10-hata=2.04 avg=+2.81% | Random PF=N/A
+   Folds: 2.16(69) / 0.85(14) / 2.39(329) / 3.11(110)
+   Portfolio: CAGR=+15.5% MaxDD=-35.8% Sharpe=0.73
+   Li gayi trades: 224 = 0.7/hafta | trade ~84 ghante | Saal-war: 2020:-5% 2021:+11% 2022:-1% 2023:+14% 2024:+20% 2025:+14% 2026:+44%
+
+[FAIL] TOP 200 | BASELINE
+   Har trade: n=8346 win=61.0% PF=0.98 p5=0.92 Top10-hata=0.93 avg=-0.04% | Random PF=0.85
+   Folds: 1.44(1331) / 0.68(572) / 0.85(4660) / 1.18(1783)
+   Portfolio: CAGR=-25.1% MaxDD=-92.5% Sharpe=-0.49 | Random portfolio: CAGR=-43.1% Sharpe=-1.26
+   Li gayi trades: 2449 = 7.8/hafta | trade ~15 ghante | Saal-war: 2020:-13% 2021:+21% 2022:+6% 2023:+12% 2024:-56% 2025:-74% 2026:+23%
+
+[FAIL] TOP 200 | rsi_lo=5
+   Har trade: n=2692 win=58.3% PF=0.89 p5=0.80 Top10-hata=0.82 avg=-0.23% | Random PF=0.76
+   Folds: 1.39(403) / 0.64(170) / 0.74(1574) / 1.20(545)
+   Portfolio: CAGR=-8.5% MaxDD=-66.2% Sharpe=-0.26 | Random portfolio: CAGR=-28.8% Sharpe=-1.33
+   Li gayi trades: 1007 = 3.2/hafta | trade ~14 ghante | Saal-war: 2020:-10% 2021:+27% 2022:+2% 2023:+6% 2024:-7% 2025:-53% 2026:+8%
+
+[FAIL] TOP 200 | rsi_lo=15
+   Har trade: n=15777 win=61.0% PF=0.97 p5=0.93 Top10-hata=0.94 avg=-0.05% | Random PF=0.76
+   Folds: 1.43(2698) / 0.66(1083) / 0.86(8645) / 1.08(3351)
+   Portfolio: CAGR=-44.8% MaxDD=-98.8% Sharpe=-0.82 | Random portfolio: CAGR=-68.0% Sharpe=-2.08
+   Li gayi trades: 3771 = 12.1/hafta | trade ~14 ghante | Saal-war: 2020:-29% 2021:-10% 2022:+2% 2023:+12% 2024:-82% 2025:-83% 2026:+31%
+
+[FAIL] TOP 200 | exit_n=8
+   Har trade: n=8346 win=61.8% PF=1.01 p5=0.95 Top10-hata=0.96 avg=+0.02% | Random PF=0.84
+   Folds: 1.64(1331) / 0.73(572) / 0.86(4660) / 1.15(1783)
+   Portfolio: CAGR=-21.7% MaxDD=-94.4% Sharpe=-0.31 | Random portfolio: CAGR=-43.1% Sharpe=-1.14
+   Li gayi trades: 2216 = 7.1/hafta | trade ~21 ghante | Saal-war: 2020:-8% 2021:+68% 2022:+2% 2023:+31% 2024:-68% 2025:-74% 2026:+37%
+
+====================================================================================================
+KHULASA - coins ki tadaad ka asar
+====================================================================================================
+Coins |              Variant | Trades | /hafta | Ghante |  Win% |    PF |    p5 | Random |    CAGR |   MaxDD | Sharpe | Faisla
+   70 |  DAILY DIP (muqabla) |    428 |    0.6 |     83 |  72.9 |  2.55 |  1.98 |    N/A |  +17.6% |  -26.3% |   0.85 | -
+   70 |             BASELINE |   6893 |    7.0 |     14 |  61.5 |  0.99 |  0.93 |   0.84 |  -25.7% |  -91.1% |  -0.57 | FAIL
+   70 |             rsi_lo=5 |   2206 |    2.9 |     14 |  59.1 |  0.91 |  0.82 |   0.80 |   -6.2% |  -58.8% |  -0.18 | FAIL
+   70 |            rsi_lo=15 |  13121 |   11.1 |     14 |  61.5 |  0.98 |  0.94 |   0.80 |  -47.0% |  -98.9% |  -0.85 | FAIL
+   70 |             exit_n=8 |   6893 |    6.4 |     21 |  62.9 |  1.04 |  0.98 |   0.88 |  -23.0% |  -92.7% |  -0.37 | FAIL
+  100 |  DAILY DIP (muqabla) |    500 |    0.7 |     84 |  72.8 |  2.41 |  1.91 |    N/A |  +15.4% |  -35.8% |   0.74 | -
+  100 |             BASELINE |   8024 |    7.6 |     14 |  61.3 |  0.96 |  0.91 |   0.80 |  -26.1% |  -91.7% |  -0.51 | FAIL
+  100 |             rsi_lo=5 |   2581 |    3.1 |     14 |  58.8 |  0.87 |  0.80 |   0.73 |   -8.4% |  -63.8% |  -0.26 | FAIL
+  100 |            rsi_lo=15 |  15166 |   11.8 |     14 |  61.3 |  0.96 |  0.92 |   0.79 |  -48.6% |  -99.1% |  -0.88 | FAIL
+  100 |             exit_n=8 |   8024 |    6.9 |     21 |  62.2 |  0.99 |  0.94 |   0.81 |  -25.4% |  -94.4% |  -0.41 | FAIL
+  150 |  DAILY DIP (muqabla) |    521 |    0.7 |     84 |  72.0 |  2.39 |  1.91 |    N/A |  +15.3% |  -35.8% |   0.72 | -
+  150 |             BASELINE |   8326 |    7.8 |     15 |  61.0 |  0.98 |  0.92 |   0.84 |  -25.3% |  -92.5% |  -0.50 | FAIL
+  150 |             rsi_lo=5 |   2687 |    3.2 |     14 |  58.2 |  0.88 |  0.79 |   0.77 |   -9.5% |  -66.2% |  -0.31 | FAIL
+  150 |            rsi_lo=15 |  15733 |   12.0 |     14 |  61.0 |  0.97 |  0.93 |   0.77 |  -45.2% |  -98.9% |  -0.83 | FAIL
+  150 |             exit_n=8 |   8326 |    7.1 |     21 |  61.8 |  1.01 |  0.95 |   0.84 |  -21.8% |  -94.4% |  -0.31 | FAIL
+  200 |  DAILY DIP (muqabla) |    522 |    0.7 |     84 |  72.0 |  2.39 |  1.93 |    N/A |  +15.5% |  -35.8% |   0.73 | -
+  200 |             BASELINE |   8346 |    7.8 |     15 |  61.0 |  0.98 |  0.92 |   0.85 |  -25.1% |  -92.5% |  -0.49 | FAIL
+  200 |             rsi_lo=5 |   2692 |    3.2 |     14 |  58.3 |  0.89 |  0.80 |   0.76 |   -8.5% |  -66.2% |  -0.26 | FAIL
+  200 |            rsi_lo=15 |  15777 |   12.1 |     14 |  61.0 |  0.97 |  0.93 |   0.76 |  -44.8% |  -98.8% |  -0.82 | FAIL
+  200 |             exit_n=8 |   8346 |    7.1 |     21 |  61.8 |  1.01 |  0.95 |   0.84 |  -21.7% |  -94.4% |  -0.31 | FAIL
+TOP 70: Dip 4H 0/4 PASS
+TOP 100: Dip 4H 0/4 PASS
+TOP 150: Dip 4H 0/4 PASS
+TOP 200: Dip 4H 0/4 PASS
