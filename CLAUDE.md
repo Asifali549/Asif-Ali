@@ -106,6 +106,14 @@ Secrets:
   (Telegram mein "hisse ka X% = kul capital ka Y%"), Donchian Telegram mein "Sirf PAPER", dashboard sidebar
   "Sarmaye ki taqseem" (kul capital -> har system ka $) aur har signal ka size system ke hisse se.
 
+## Zer-e-test (EXPERIMENTAL)
+- **Majors Trend Lab** (`majors_lab.py`, workflow "Majors Trend Test", natija `majors_lab_RESULTS.txt`):
+  BTC 50% + ETH 50% daily trend-following (survivorship-free, 2018+2022 crash shamil). Rules: SMA 50/100/150/200,
+  EMA 10/50 20/100 50/200, Donchian 20/10 50/20 100/50; har ek full aur vol-target (50%) ke sath.
+  Control: random-timing (wahi exposure + switches, 200 baar), B&H, 4 folds. Pass = Sharpe > random 95th aur > B&H,
+  MaxDD > -45%, koi fold < -5%. Pass ho to 4th sleeve (portfolio_lab mein correlation check, phir bot).
+  Momentum rotation (strategy_lab, ec7962f) dobara nahi: survivorship bias sab se ziada, DD -46 se -80%.
+
 ## Aglay kaam
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
