@@ -22,7 +22,7 @@
 | `data_fetcher.py` | KuCoin (ccxt) exchange + top coins list |
 | `live_colorful_dashboard.py` | Streamlit Cloud dashboard (teeno systems) |
 | `loop_watchdog.py` | bot ruk jaye (state ka `last_updated` purana) to workflow dobara chalata hai + Telegram |
-| `telegram_alert.py` | Telegram - token/chat id env ya Streamlit secrets se |
+| `telegram_alert.py` | Telegram (token/chat id env ya Streamlit secrets) + har alert ntfy.sh par bhi (topic `asifali549-strong-signals-9k3m7x`, ya secret `NTFY_TOPIC`) |
 | `*_paper_state.json`, `*_paper_trades.csv`, `*_signals.json` | bots ka data (bots khud commit karte hain) - haath mat lagao |
 
 Workflows (.github/workflows): `ichimoku4h_bot.yml` (cron `10 */4 * * *`), `donchian_daily_bot.yml`

@@ -23,11 +23,12 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: |
           python - <<'PY'
           import sys
           from telegram_alert import send_telegram_alert
-          ok = send_telegram_alert("✅ <b>Telegram Test</b>\nGitHub secrets theek lage hue hain - Ichimoku 4H Bot aur Donchian Daily Bot ke alerts yahan aayenge.")
+          ok = send_telegram_alert("✅ <b>Telegram + ntfy Test</b>\nSecrets theek lage hue hain - Ichimoku 4H, Dip Daily aur Donchian (paper) bots ke alerts Telegram aur ntfy dono par aayenge.")
           print("Telegram test:", "KAMYAB" if ok else "NAKAM")
           sys.exit(0 if ok else 1)
           PY

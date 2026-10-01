@@ -1,6 +1,12 @@
 import os
+import re
 
 import requests
+
+# --- ntfy (mobile push) ---
+# Har Telegram alert ntfy app par bhi jata hai. Ye wahi topic hai jo purane screener mein tha
+# (ntfy app mein isi naam se subscribe hai). Badalna ho to GitHub secret NTFY_TOPIC daal dein.
+NTFY_TOPIC_DEFAULT = "asifali549-strong-signals-9k3m7x"
 
 # --- Bot credentials ---
 # Token aur chat ID ab code mein NAHI likhe - GitHub Secrets se aate hain
@@ -22,11 +28,30 @@ def _get_credentials():
     return token, chat_id
 
 
+def send_ntfy(message: str) -> bool:
+    """Wahi message ntfy.sh par (HTML tags hata kar). Pehli line title ban jati hai."""
+    topic = os.environ.get("NTFY_TOPIC") or NTFY_TOPIC_DEFAULT
+    text = re.sub(r"<[^>]+>", "", message).strip()
+    first, _, rest = text.partition("\n")
+    urgent = any(k in text for k in ("BUY", "BECHEIN", "band", "STOP", "ruk gaya"))
+    try:
+        # JSON publish - title/message mein emoji aur Urdu bhi theek jate hain
+        r = requests.post("https://ntfy.sh/", json={"topic": topic, "title": first, "message": rest.strip() or first,
+                                                   "priority": 4 if urgent else 3, "tags": ["chart_with_upwards_trend"]},
+                          timeout=10)
+        r.raise_for_status()
+        return True
+    except requests.exceptions.RequestException as e:
+        print(f"ntfy alert failed: {e}")
+        return False
+
+
 def send_telegram_alert(message: str) -> bool:
     """
-    Telegram bot ke zariye alert message bhejta hai.
-    Returns True agar successfully bheja gaya, warna False.
+    Telegram bot ke zariye alert message bhejta hai - aur sath hi ntfy app par bhi.
+    Returns True agar Telegram par successfully bheja gaya, warna False.
     """
+    send_ntfy(message)
     token, chat_id = _get_credentials()
     if not (token and chat_id):
         print("Telegram alert NAHI bheja: TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID secrets set nahi hain.")
