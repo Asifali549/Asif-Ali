@@ -155,6 +155,13 @@ def main(h4=None):
         emit(f"7) DIP ke sath overlap (usi coin mein +-3 din DIP trade): {ov}/{len(tr)} = {ov/len(tr)*100:.0f}%")
         # yearly
         emit("   Saal-war PF: " + " | ".join(f"{y}: {pf_of(r[tin.year == y]):.2f} ({int((tin.year == y).sum())})" for y in range(2021, 2027)))
+        # OOS tajziya: kaun se coins / mahine
+        oo = df.assign(t_in=tin)[tin >= OOS]
+        emit(f"   OOS trades {len(oo)} | PF {pf_of(oo['ret'].to_numpy()):.2f} | mahana PF: " + " | ".join(
+            f"{k}: {pf_of(g['ret'].to_numpy()):.2f}({len(g)})" for k, g in oo.groupby(oo['t_in'].dt.strftime('%y-%m'))))
+        worst = oo.sort_values("ret").head(8)
+        emit("   OOS sab se bure: " + " | ".join(f"{a.sym.split('/')[0]} {a.t_in.date()} {a.ret*100:+.0f}%" for a in worst.itertuples()))
+        emit(f"   Coin list (aaj ki top-150) mein coins: {len(A)} -> " + ",".join(sorted(x.split('/')[0] for x in A))[:900])
 
     # 8 portfolio
     emit(f"\n{'#' * 130}\n8) PORTFOLIO (R8% V2.0) - C ka size aur hissa\n{'#' * 130}")
