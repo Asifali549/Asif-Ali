@@ -142,6 +142,15 @@ Secrets:
   RS + D din neeche) 0/6, PF ~1.0-1.1 random p95 ke barabar. Portfolio mein har ek ne Sharpe 1.74 -> 1.39-1.55 giraya.
   RANKING akele (Sharpe): Ichimoku 1.69 (PF 2.34, OOS 1.82) > Donchian 1.10 (DD -37%) > Dip 0.72 (PF 2.36, OOS 3.92)
   > Capitulation 0.41 (OOS 0.83).
+- **RESEARCH LAB 3 (2026-10-02) - koi naya portfolio behtar nahi** (`git show c4e14d9:research_lab3.py`, natija
+  `git show d8fc454:research_lab3_RESULTS.txt`). CONTROL DIP (RSI3<10) har jaanch PASS: PF 1.94 vs random p95 1.20, OOS 5.70,
+  bootstrap p5 1.35, top-10 hata kar 1.48, 2x kharcha 1.77, UNIVERSE 80% 6/6 (PF 1.89-2.25) -> Dip waqai mazboot.
+  RSI3<5: win 79%, PF 3.18 magar sirf 43 trades. M1 IBS: FAIL (random se bura). M2 down-streak 4 din: apna edge PASS
+  (PF 1.35, universe 6/6) LEKIN portfolio kharab (ICHI 50/DIP 30/M2 20 Sharpe 1.44 vs base 1.67, DD -15.5 vs -11.0;
+  DIP+M2 ensemble 1.26). M3 stretch: universe 3/6 FAIL. M4 Dip 12H: plateau 1/3, folds 2/4 FAIL, akela DD -67%.
+  T1 Ichimoku Daily: sirf 52 trades, random p95 ke barabar, top-10 hata kar 0.45 -> FAIL (portfolio mein 1.70/-8.9% magar
+  bharosa nahi). NATIJA: ICHI 60 / DIP 40 (CAGR ~24%, DD -11%, Sharpe ~1.67-1.73) ab tak sab se behtar; 20+ khayal ke
+  baad aur talaash se false-discovery ka khatra barhta hai.
 - Purane research scripts/natije git history mein hain: commit `ec7962f` (cleanup se pehle) par
   `git show ec7962f:<file>` se wapas mil sakte hain (unified_test.py, ichimoku4h_validation.py, strategy_lab.py,
   portfolio_test.py, donchian_regime_test.py, archive/...).
@@ -242,12 +251,6 @@ Secrets:
   SABAQ (bohat ahem): `get_coin_list` har din aaj ke 24h volume se top-150 chunta hai -> backtest universe roz badalta
   hai; kam trades wali strategy (300) ka OOS isi se ulat sakta hai. Aage har validation mein (a) 2 alag din ke coin
   list / ya coins ka 10-20% random hata kar sensitivity, (b) OOS > 1 dono mein - tabhi PASS.
-
-## Zer-e-test
-- **RESEARCH LAB 3** (`research_lab3.py`, push par khud chalta, `research_lab3_RESULTS.txt`): user ne poora waqt diya
-  "overall best / ooncha win-rate strategy" ke liye. Dip khandan ke alag triggers (M1 IBS, M2 down-streak, M3 stretch
-  < SMA10, M4 Dip 12H) + T1 Ichimoku Daily + CONTROL Dip; har ek 3-cell grid, random 20, validation + UNIVERSE
-  SENSITIVITY (6 baar 20% coins hata kar, 5/6 mein PF > 1.2 aur OOS > 1) + portfolio (ensemble DIP+naya ya 20% hissa).
 
 ## Aglay kaam
 - **GitHub cron masla (2026-10-01 dekha):** 30 Sep ~17:30 PKT se scheduled runs bohat kam: Watchdog (har 30 min)
