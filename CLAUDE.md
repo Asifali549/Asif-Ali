@@ -23,11 +23,12 @@
 | `bot_core.py` | dono bots ke helpers: fetch_full, norm, ema, chandelier, ichi_signal, FEE/SLIP/STOP_SLIP, STABLES |
 | `strategies.py`, `config.py` | ichimoku + market_structure signal functions aur unke params (bot_core inhein use karta hai) |
 | `data_fetcher.py` | KuCoin (ccxt) exchange + top coins list |
-| `live_colorful_dashboard.py` | Streamlit Cloud dashboard (teeno systems) |
+| `live_colorful_dashboard.py` | Streamlit dashboard - tabs: 📊 Aaj ka Scoreboard (tamam signals + khuli trades, nafa/nuqsan) / 🤖 Auto Trading (bots, har system ki tab) / ✋ Manual Trading (user ki apni trades, GitHub `manual_trades.json` mein Contents API se) / 🕐 Session |
 | `scheduler.py` | GitHub cron ka mutabadil: ~5h40m chalta, theek waqt par bots dispatch karta (GH_TOKEN), phir khud ko dobara chalata (zanjeer); push par bhi shuru |
 | `loop_watchdog.py` | bot ruk jaye (state ka `last_updated` purana) to workflow dobara chalata hai + Telegram |
 | `telegram_alert.py` | Telegram (token/chat id env ya Streamlit secrets) + har alert ntfy.sh par bhi (topic `asifali549-strong-signals-9k3m7x`, ya secret `NTFY_TOPIC`) |
 | `*_paper_state.json`, `*_paper_trades.csv`, `*_signals.json` | bots ka data (bots khud commit karte hain) - haath mat lagao |
+| `manual_trades.json` | user ki manual trades (dashboard likhta hai) - haath mat lagao |
 
 Workflows (.github/workflows): `ichimoku4h_bot.yml` (cron `10 */4 * * *`), `donchian_daily_bot.yml`
 (cron `15 0 * * *` = 5:15 AM PKT), `dip_daily_bot.yml` (cron `20 0 * * *`), `capit_daily_bot.yml` (cron `25 0 * * *`), `watchdog.yml` (har 30 min), `scheduler.yml` (lagataar; asal waqt-paband trigger - cron ab sirf backup), `telegram_test.yml` (sirf manual).

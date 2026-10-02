@@ -1,15 +1,15 @@
 """
-Live Dashboard - sirf wo 2 strategies jo sakht tests mein PASS huin:
-  1) 📈 Ichimoku 4H   (Ichimoku + Market Structure, 4H, CE 16/5.5 + TP 3R)
-  2) 🐢 Donchian Daily (20-din breakout, BTC>EMA50, CE 22/4x trailing)
-
-Data dono bots ki files se aata hai (GitHub Actions har run ke baad commit karte hain):
-  ichimoku4h_paper_state.json / ichimoku4h_paper_trades.csv / ichimoku4h_signals.json
-  donchian_paper_state.json   / donchian_paper_trades.csv   / donchian_signals.json
+Live Dashboard - 3 hisse (tabs):
+  📊 Aaj ka Scoreboard : aaj ke tamam signals + tamam chal rahi trades - kaun nafa mein, kaun nuqsan mein
+  🤖 Auto Trading      : bots (Ichimoku 4H, Dip, Donchian, Capitulation) khud paper trades lete/bechte hain
+  ✋ Manual Trading    : aap khud jo signal/coin pasand karein us ki trade yahan darj karein (GitHub mein
+                         manual_trades.json mein mehfooz - Streamlit secret GITHUB_TOKEN, Contents: Read and write)
+Data bots ki files se aata hai (GitHub Actions har run ke baad commit karte hain).
 
 Chalayen: streamlit run live_colorful_dashboard.py
 """
 
+import base64
 import json
 import os
 from datetime import datetime
@@ -286,12 +286,75 @@ def position_size_box(coin, entry, sl, key, cfg):
 
 
 # ============================================================
+# Manual trades (GitHub mein mehfooz)
+# ============================================================
+MANUAL_FILE = "manual_trades.json"
+
+
+def gh_token():
+    try:
+        return st.secrets.get("GITHUB_TOKEN")
+    except Exception:
+        return None
+
+
+def manual_load():
+    """GitHub se taaza manual trades (sha ke sath); token na ho to local file."""
+    tok = gh_token()
+    if tok:
+        try:
+            r = requests.get(f"https://api.github.com/repos/{GITHUB_REPO}/contents/{MANUAL_FILE}?ref={GITHUB_BRANCH}",
+                             headers={"Authorization": f"token {tok}", "Accept": "application/vnd.github.v3+json"},
+                             timeout=15)
+            if r.status_code == 200:
+                j = r.json()
+                return json.loads(base64.b64decode(j["content"]).decode() or "[]"), j["sha"]
+            if r.status_code == 404:
+                return [], None
+        except Exception:
+            pass
+    return load_json(MANUAL_FILE, []) or [], None
+
+
+def manual_save(trades, sha, msg):
+    tok = gh_token()
+    if not tok:
+        return False, "GITHUB_TOKEN Streamlit Secrets mein nahi mila (Contents: Read and write chahiye)."
+    body = {"message": msg, "branch": GITHUB_BRANCH,
+            "content": base64.b64encode(json.dumps(trades, indent=2).encode()).decode()}
+    if sha:
+        body["sha"] = sha
+    try:
+        r = requests.put(f"https://api.github.com/repos/{GITHUB_REPO}/contents/{MANUAL_FILE}", json=body, timeout=20,
+                         headers={"Authorization": f"token {tok}", "Accept": "application/vnd.github.v3+json"})
+        if r.status_code in (200, 201):
+            return True, ""
+        if r.status_code == 403:
+            return False, "403: token ko 'Contents: Read and write' ki ijazat chahiye."
+        if r.status_code == 409:
+            return False, "Kisi aur tabdeeli se takraao (409) - page refresh kar ke dobara koshish karein."
+        return False, f"HTTP {r.status_code}: {r.text[:150]}"
+    except Exception as e:
+        return False, str(e)
+
+
+def status_label(pl, live=None, sl=None, tp=None):
+    if live is not None and sl is not None and sl == sl and live <= sl:
+        return "⚠️ SL se neeche"
+    if live is not None and tp is not None and tp == tp and tp and live >= tp:
+        return "🎯 TP par"
+    if pl is None or pl != pl:
+        return "—"
+    return "🟢 Nafa" if pl > 0 else ("🔴 Nuqsan" if pl < 0 else "⚪ Barabar")
+
+
+# ============================================================
 # Page
 # ============================================================
 st.set_page_config(page_title="Live Dashboard", layout="wide")
-st.title("🎯 Live Dashboard — Ichimoku 4H + Dip Daily + Capitulation (+ Donchian paper)")
-st.caption("Sirf wo strategies jo sakht tests (lookahead-free, random-control, portfolio, 2022 crash) mein PASS huin. "
-           "Signals aur paper trades dono bots khud chalate hain (GitHub Actions).")
+st.title("🎯 Live Dashboard")
+st.caption("📊 **Scoreboard** = aaj kya hua (sab systems ek jagah) · 🤖 **Auto Trading** = bots khud paper par "
+           "khareedte/bechte hain · ✋ **Manual Trading** = aap apni marzi se jo trade lein, wo yahan darj karein.")
 
 st.sidebar.header("💼 Sarmaye ki taqseem")
 total_capital = st.sidebar.number_input("Kul Capital ($)", min_value=0.0, value=1000.0, step=100.0)
@@ -301,7 +364,7 @@ for _n, _c in SYSTEMS.items():
                         + ("" if _c["alloc"] else " _(sirf paper)_"))
 st.sidebar.caption("Backtest (6 saal): Ichimoku 60% + Dip 40% — CAGR ~+25%, MaxDD ~-11%, Sharpe ~1.73. "
                    "Donchian (Ichimoku ke sath girti hai) aur Capitulation (2025-26 kamzor) sirf paper par. "
-                   "Har signal ka size neeche khud nikalta hai.")
+                   "Har signal ka size khud nikalta hai.")
 st.sidebar.markdown("---")
 if st.sidebar.button("🔄 Live qeemat taaza karein"):
     fetch_live_prices.clear()
@@ -313,221 +376,441 @@ if fg_val is not None:
 top2.metric("Waqt (PKT)", pd.Timestamp.now(tz="Asia/Karachi").strftime("%d %b %I:%M %p"))
 don_state = load_json(SYSTEMS["Donchian Daily"]["state"], {}) or {}
 if "btc_regime_ok" in don_state:
-    top3.metric("BTC regime (Donchian)", "🟢 BTC > EMA50" if don_state["btc_regime_ok"] else "🔴 BTC < EMA50")
+    top3.metric("BTC regime", "🟢 BTC > EMA50" if don_state["btc_regime_ok"] else "🔴 BTC < EMA50")
 
-# ------------------------------------------------------------
-# System status + manual restart
-# ------------------------------------------------------------
-st.header("🩺 Systems ki halat")
-status_cols = st.columns(len(SYSTEMS) + 1)
-for col, (name, cfg) in zip(status_cols, SYSTEMS.items()):
-    state = load_json(cfg["state"], {}) or {}
-    last = state.get("last_updated")
-    with col:
-        st.markdown(f"**{cfg['badge']}**")
-        st.caption(f"Chalta hai: {cfg['every']}")
-        if last:
-            mins = (pd.Timestamp.now(tz="UTC") - pd.Timestamp(last)).total_seconds() / 60
-            if mins > cfg["stale_min"]:
-                st.error(f"⚠️ Aakhri dafa {mins/60:.1f} ghante pehle chala — shayad ruk gaya")
+# ---------- sab systems ka data ek dafa ----------
+DATA = {}
+for _n, _c in SYSTEMS.items():
+    DATA[_n] = dict(state=load_json(_c["state"], {}) or {}, signals=load_json(_c["signals"], []) or [],
+                    trades=load_csv(_c["trades"]))
+manual, manual_sha = manual_load()
+need = set()
+for _n, _d in DATA.items():
+    need |= set(_d["state"].get("positions", {}))
+    for _sg in _d["signals"]:
+        need.add(_sg["symbol"])
+need |= {m["symbol"] for m in manual if m.get("status") == "open"}
+PRICES = fetch_live_prices(tuple(sorted(need)))
+
+T_SCORE, T_AUTO, T_MANUAL, T_SESS = st.tabs(["📊 Aaj ka Scoreboard", "🤖 Auto Trading (bots)",
+                                              "✋ Manual Trading (meri trades)", "🕐 Session Analysis"])
+
+# ============================================================
+# 📊 SCOREBOARD
+# ============================================================
+with T_SCORE:
+    st.subheader("📊 Aaj ka Scoreboard")
+    hrs = st.radio("Signals ka daur", [24, 48, 168], index=0, horizontal=True,
+                   format_func=lambda h: {24: "Aakhri 24 ghante", 48: "48 ghante", 168: "7 din"}[h], key="score_hrs")
+    cutoff = pd.Timestamp.now(tz="UTC") - pd.Timedelta(hours=hrs)
+    sig_rows = []
+    for _n, _d in DATA.items():
+        for _sg in _d["signals"]:
+            t = pd.to_datetime(_sg.get("signal_time_utc"), errors="coerce", utc=True)
+            if t is pd.NaT or t != t or t < cutoff:
+                continue
+            live = PRICES.get(_sg["symbol"])
+            e = float(_sg["entry_est"])
+            pl = round((live / e - 1) * 100, 2) if live else None
+            sig_rows.append({"System": SYSTEMS[_n]["badge"] + ("" if SYSTEMS[_n]["alloc"] else " (paper)"),
+                             "Coin": _sg["symbol"], "Signal (PKT)": pkt_str(_sg["signal_time_utc"]),
+                             "Entry": fmt_px(e), "Live": fmt_px(live) if live else "—", "P/L %": pl,
+                             "Halat": status_label(pl, live, _sg.get("sl"), _sg.get("tp")),
+                             "SL": fmt_px(_sg.get("sl")),
+                             "Chart": tradingview_url(_sg["symbol"], "240" if _n == "Ichimoku 4H" else "D")})
+    open_rows = []
+    for _n, _d in DATA.items():
+        for sym, p in _d["state"].get("positions", {}).items():
+            live = PRICES.get(sym)
+            ref = live or p.get("last_px")
+            pl = round((ref / p["entry"] - 1) * 100, 2) if ref else None
+            open_rows.append({"Kis ki": "🤖 " + SYSTEMS[_n]["badge"], "Coin": sym, "Entry": fmt_px(p["entry"]),
+                              "Live": fmt_px(live) if live else "—", "P/L %": pl,
+                              "P/L $ (paper)": round(p["qty"] * ref - p["cost"], 2) if ref else None,
+                              "Halat": status_label(pl, ref, p.get("trail"), p.get("tp")),
+                              "SL": fmt_px(p.get("trail")), "Entry waqt": pkt_str(p.get("entry_bar") or p.get("entry_day")),
+                              "Chart": tradingview_url(sym, "240" if _n == "Ichimoku 4H" else "D")})
+    for m in manual:
+        if m.get("status") != "open":
+            continue
+        live = PRICES.get(m["symbol"])
+        pl = round((live / m["entry"] - 1) * 100, 2) if live else None
+        open_rows.append({"Kis ki": "✋ Meri (manual)", "Coin": m["symbol"], "Entry": fmt_px(m["entry"]),
+                          "Live": fmt_px(live) if live else "—", "P/L %": pl,
+                          "P/L $ (paper)": round(m["qty"] * live - m["amount"], 2) if live else None,
+                          "Halat": status_label(pl, live, m.get("sl"), m.get("tp")),
+                          "SL": fmt_px(m.get("sl")), "Entry waqt": m.get("entry_time", ""),
+                          "Chart": tradingview_url(m["symbol"], "D")})
+
+    sg_win = sum(1 for r in sig_rows if (r["P/L %"] or 0) > 0)
+    sg_loss = sum(1 for r in sig_rows if (r["P/L %"] or 0) < 0)
+    op_win = sum(1 for r in open_rows if (r["P/L %"] or 0) > 0)
+    op_loss = sum(1 for r in open_rows if (r["P/L %"] or 0) < 0)
+    m1, m2, m3, m4, m5 = st.columns(5)
+    m1.metric("Naye signals", len(sig_rows))
+    m2.metric("Signals: nafa / nuqsan", f"🟢 {sg_win} / 🔴 {sg_loss}")
+    m3.metric("Chal rahi trades", len(open_rows))
+    m4.metric("Trades: nafa / nuqsan", f"🟢 {op_win} / 🔴 {op_loss}")
+    tot_pl = sum(r["P/L $ (paper)"] or 0 for r in open_rows)
+    m5.metric("Khuli trades ka kul P/L", f"${tot_pl:+,.2f}")
+
+    st.markdown("#### 🟢 Signals (is daur ke) — abhi kahan hain?")
+    if sig_rows:
+        show_table(pd.DataFrame(sig_rows).sort_values("P/L %", ascending=False, na_position="last"), pl_cols=("P/L %",))
+        st.caption("P/L % = signal ki entry qeemat se abhi ki live qeemat tak (agar aap ne signal par khareeda hota).")
+    else:
+        st.info("Is daur mein koi signal nahi aaya.")
+    st.markdown("#### 🔵 Chal rahi trades (bots + meri manual)")
+    if open_rows:
+        show_table(pd.DataFrame(open_rows).sort_values("P/L %", ascending=False, na_position="last"),
+                   pl_cols=("P/L %", "P/L $ (paper)"))
+        st.caption("⚠️ SL se neeche = stop toot chuka — bot agle run mein band karega / manual trade aap khud bech dein.")
+    else:
+        st.info("Abhi koi trade khuli nahi.")
+
+# ============================================================
+# 🤖 AUTO TRADING
+# ============================================================
+with T_AUTO:
+    st.info("🤖 **Auto Trading** — yahan ke bots **khud** signal dhoondte, paper par khareedte aur bechte hain "
+            "(asli paisa nahi). Har system ki apni tab neeche hai. Aap ko kuch nahi karna — sirf dekhna hai. "
+            "Apni asli trade darj karne ke liye ✋ **Manual Trading** tab kholein.")
+    st.subheader("🩺 Systems ki halat")
+    status_cols = st.columns(len(SYSTEMS) + 1)
+    for col, (name, cfg) in zip(status_cols, SYSTEMS.items()):
+        state = DATA[name]["state"]
+        last = state.get("last_updated")
+        with col:
+            st.markdown(f"**{cfg['badge']}**")
+            st.caption(f"Chalta hai: {cfg['every']}")
+            if last:
+                mins = (pd.Timestamp.now(tz="UTC") - pd.Timestamp(last)).total_seconds() / 60
+                if mins > cfg["stale_min"]:
+                    st.error(f"⚠️ Aakhri dafa {mins/60:.1f} ghante pehle chala — shayad ruk gaya")
+                else:
+                    st.success(f"✅ Aakhri dafa {mins/60:.1f} ghante pehle chala")
             else:
-                st.success(f"✅ Aakhri dafa {mins/60:.1f} ghante pehle chala")
-        else:
-            st.warning("Abhi tak pehla run record nahi hua")
-        if st.button("▶️ Abhi chala do", key=f"run_{cfg['workflow']}"):
-            ok, msg = trigger_github_workflow(cfg["workflow"])
+                st.warning("Abhi tak pehla run record nahi hua")
+            if st.button("▶️ Abhi chala do", key=f"run_{cfg['workflow']}"):
+                ok, msg = trigger_github_workflow(cfg["workflow"])
+                if ok:
+                    st.success("✅ GitHub ko command bhej di — 2-3 min baad page refresh karein.")
+                else:
+                    show_dispatch_error(msg)
+    with status_cols[-1]:
+        st.markdown("**🐕 Watchdog**")
+        st.caption("Har 30 min: koi bot ruk jaye to khud dobara chalata hai + Telegram")
+        if st.button("▶️ Abhi chala do", key="run_watchdog"):
+            ok, msg = trigger_github_workflow("watchdog.yml")
             if ok:
-                st.success("✅ GitHub ko command bhej di — 2-3 min baad page refresh karein.")
+                st.success("✅ Bhej diya!")
             else:
                 show_dispatch_error(msg)
-with status_cols[-1]:
-    st.markdown("**🐕 Watchdog**")
-    st.caption("Har 30 min: koi bot ruk jaye to khud dobara chalata hai + Telegram")
-    if st.button("▶️ Abhi chala do", key="run_watchdog"):
-        ok, msg = trigger_github_workflow("watchdog.yml")
-        if ok:
-            st.success("✅ Bhej diya!")
-        else:
-            show_dispatch_error(msg)
 
-# ------------------------------------------------------------
-# Har system alag
-# ------------------------------------------------------------
 all_closed = []
-tabs = st.tabs([cfg["badge"] for cfg in SYSTEMS.values()])
-for tab, (name, cfg) in zip(tabs, SYSTEMS.items()):
-    with tab:
-        state = load_json(cfg["state"], {}) or {}
-        signals = load_json(cfg["signals"], []) or []
-        trades = load_csv(cfg["trades"])
-        interval = "240" if name == "Ichimoku 4H" else "D"
+with T_AUTO:
+    st.markdown('---')
+    # ------------------------------------------------------------
+    # Har system alag
+    # ------------------------------------------------------------
+    tabs = st.tabs([cfg["badge"] for cfg in SYSTEMS.values()])
+    for tab, (name, cfg) in zip(tabs, SYSTEMS.items()):
+        with tab:
+            state = load_json(cfg["state"], {}) or {}
+            signals = load_json(cfg["signals"], []) or []
+            trades = load_csv(cfg["trades"])
+            interval = "240" if name == "Ichimoku 4H" else "D"
 
-        with st.expander("📋 Strategy ke usool", expanded=False):
-            st.table(pd.DataFrame(cfg["rules"], columns=["", "Usool"]))
+            with st.expander("📋 Strategy ke usool", expanded=False):
+                st.table(pd.DataFrame(cfg["rules"], columns=["", "Usool"]))
 
-        # ---------- 1) Naye signals ----------
-        st.subheader("🟢 Naye Signals")
-        sig_df = pd.DataFrame(signals)
-        if len(sig_df):
-            sig_df["_t"] = pd.to_datetime(sig_df["signal_time_utc"], errors="coerce", utc=True)
-            hours = st.slider("Kitne ghante purane signals dikhayen", 4, 24 * 14, cfg["new_signal_hours"],
-                              key=f"hrs_{name}")
-            recent = sig_df[sig_df["_t"] >= pd.Timestamp.now(tz="UTC") - pd.Timedelta(hours=hours)]
-            recent = recent.sort_values("_t", ascending=False)
-        else:
-            recent = pd.DataFrame()
-        if len(recent) == 0:
-            st.info("Is waqt koi naya signal nahi. (Signals kam aate hain - kai din bhi lag sakte hain.)")
-        else:
-            prices = fetch_live_prices(tuple(sorted(recent["symbol"].unique())))
-            show = pd.DataFrame({
-                "Coin": recent["symbol"],
-                "Signal Time (PKT)": recent["signal_time_utc"].map(pkt_str),
-                "Entry (approx)": recent["entry_est"].map(fmt_px),
-                "Live Price": recent["symbol"].map(lambda s: fmt_px(prices.get(s)) if prices.get(s) else "—"),
-                "Live P/L %": [round((prices[s] / e - 1) * 100, 2) if prices.get(s) else None
-                               for s, e in zip(recent["symbol"], recent["entry_est"])],
-                "SL": recent["sl"].map(fmt_px),
-                "TP": recent["tp"].map(lambda v: fmt_px(v) if v is not None and v == v else "Nahi (trailing)"),
-                "SL tak %": recent["risk_pct"],
-                "Size % (equity)": recent["size_pct"],
-                "Chart": recent["symbol"].map(lambda s: tradingview_url(s, interval)),
-            })
-            show_table(show, pl_cols=("Live P/L %",))
-            pick = st.selectbox("Coin chunein (chart / position size / setup copy)", list(recent["symbol"]),
-                                key=f"pick_sig_{name}")
-            row = recent[recent["symbol"] == pick].iloc[0]
-            st.link_button(f"📈 {pick} — TradingView par kholein", tradingview_url(pick, interval))
-            position_size_box(pick, row["entry_est"], row["sl"], f"ps_{name}", cfg)
-            tp_txt = fmt_px(row["tp"]) if row.get("tp") is not None and row["tp"] == row["tp"] else "Nahi (trailing stop)"
-            st.code(f"System: {name}\nCoin: {pick}\nSignal: {pkt_str(row['signal_time_utc'])}\n"
-                    f"Entry (approx): {fmt_px(row['entry_est'])}\nSL: {fmt_px(row['sl'])}\nTP: {tp_txt}", language=None)
-
-        # ---------- 2) Khuli paper trades ----------
-        st.subheader("🔵 Chal Rahi Trades (paper)")
-        positions = state.get("positions", {})
-        cash = float(state.get("cash", 0) or 0)
-        if not positions:
-            st.info("Abhi koi khuli trade nahi.")
-        else:
-            prices = fetch_live_prices(tuple(sorted(positions)))
-            rows = []
-            for sym, p in positions.items():
-                live = prices.get(sym)
-                ref = live if live else p.get("last_px")
-                rows.append({
-                    "Coin": sym,
-                    "Entry": fmt_px(p["entry"]),
-                    "Live Price": fmt_px(live) if live else "—",
-                    "Live P/L %": round((ref / p["entry"] - 1) * 100, 2) if ref else None,
-                    "Live P/L ($)": round(p["qty"] * ref - p["cost"], 2) if ref else None,
-                    "SL (abhi)": fmt_px(p["trail"]),
-                    "SL tak %": round((ref - p["trail"]) / ref * 100, 2) if ref else None,
-                    "TP": fmt_px(p["tp"]) if p.get("tp") else "Nahi (trailing)",
-                    "Entry waqt": pkt_str(p.get("entry_bar") or p.get("entry_day")),
-                    "Halat": ("⚠️ SL se neeche — agle run mein band" if ref and ref <= p["trail"]
-                              else ("🟢 Nafa" if ref and ref >= p["entry"] else "🔴 Nuqsan")),
-                    "Chart": tradingview_url(sym, interval),
+            # ---------- 1) Naye signals ----------
+            st.subheader("🟢 Naye Signals")
+            sig_df = pd.DataFrame(signals)
+            if len(sig_df):
+                sig_df["_t"] = pd.to_datetime(sig_df["signal_time_utc"], errors="coerce", utc=True)
+                hours = st.slider("Kitne ghante purane signals dikhayen", 4, 24 * 14, cfg["new_signal_hours"],
+                                  key=f"hrs_{name}")
+                recent = sig_df[sig_df["_t"] >= pd.Timestamp.now(tz="UTC") - pd.Timedelta(hours=hours)]
+                recent = recent.sort_values("_t", ascending=False)
+            else:
+                recent = pd.DataFrame()
+            if len(recent) == 0:
+                st.info("Is waqt koi naya signal nahi. (Signals kam aate hain - kai din bhi lag sakte hain.)")
+            else:
+                prices = fetch_live_prices(tuple(sorted(recent["symbol"].unique())))
+                show = pd.DataFrame({
+                    "Coin": recent["symbol"],
+                    "Signal Time (PKT)": recent["signal_time_utc"].map(pkt_str),
+                    "Entry (approx)": recent["entry_est"].map(fmt_px),
+                    "Live Price": recent["symbol"].map(lambda s: fmt_px(prices.get(s)) if prices.get(s) else "—"),
+                    "Live P/L %": [round((prices[s] / e - 1) * 100, 2) if prices.get(s) else None
+                                   for s, e in zip(recent["symbol"], recent["entry_est"])],
+                    "SL": recent["sl"].map(fmt_px),
+                    "TP": recent["tp"].map(lambda v: fmt_px(v) if v is not None and v == v else "Nahi (trailing)"),
+                    "SL tak %": recent["risk_pct"],
+                    "Size % (equity)": recent["size_pct"],
+                    "Chart": recent["symbol"].map(lambda s: tradingview_url(s, interval)),
                 })
-            df_open = pd.DataFrame(rows)
-            show_table(df_open, pl_cols=("Live P/L %", "Live P/L ($)"))
-            open_val = sum(p["qty"] * (prices.get(s) or p.get("last_px", p["entry"])) for s, p in positions.items())
-            st.caption(f"💹 Live Equity: **${cash + open_val:,.2f}** · Cash ${cash:,.2f} · "
-                       f"{len(positions)}/10 slots bhare hue · fees shamil nahi")
+                show_table(show, pl_cols=("Live P/L %",))
+                pick = st.selectbox("Coin chunein (chart / position size / setup copy)", list(recent["symbol"]),
+                                    key=f"pick_sig_{name}")
+                row = recent[recent["symbol"] == pick].iloc[0]
+                st.link_button(f"📈 {pick} — TradingView par kholein", tradingview_url(pick, interval))
+                position_size_box(pick, row["entry_est"], row["sl"], f"ps_{name}", cfg)
+                tp_txt = fmt_px(row["tp"]) if row.get("tp") is not None and row["tp"] == row["tp"] else "Nahi (trailing stop)"
+                st.code(f"System: {name}\nCoin: {pick}\nSignal: {pkt_str(row['signal_time_utc'])}\n"
+                        f"Entry (approx): {fmt_px(row['entry_est'])}\nSL: {fmt_px(row['sl'])}\nTP: {tp_txt}", language=None)
 
-        # ---------- 3) Performance ----------
-        st.subheader("📊 Performance — Band Trades")
-        hist = pd.DataFrame(state.get("history", []))
-        start_eq = 1000.0
-        if len(trades) == 0:
-            st.info("Abhi tak koi trade band nahi hui - pehli trade band hone par yahan record banna shuru hoga.")
-        else:
-            r = pd.to_numeric(trades["ret_pct"], errors="coerce").dropna()
-            wins, losses = r[r > 0], r[r <= 0]
-            pf = wins.sum() / abs(losses.sum()) if len(losses) and losses.sum() != 0 else None
-            c1, c2, c3, c4, c5 = st.columns(5)
-            c1.metric("Band trades", len(r))
-            c2.metric("Jeet / Haar", f"{len(wins)} / {len(losses)}")
-            c3.metric("Win Rate", f"{len(wins)/len(r)*100:.1f}%")
-            c4.metric("Profit Factor", f"{pf:.2f}" if pf else "N/A")
-            c5.metric("Kul nafa ($)", f"{pd.to_numeric(trades['pnl_usd'], errors='coerce').sum():+,.2f}")
-            bt = cfg["backtest"]
-            st.info(f"**Backtest:** Win {bt['win']}%, PF {bt['pf']}, CAGR +{bt['cagr']}%, MaxDD {bt['dd']}% — {bt['note']}  \n"
-                    f"**Live (paper):** Win {len(wins)/len(r)*100:.1f}%, PF {pf:.2f}" if pf else
-                    f"**Backtest:** Win {bt['win']}%, PF {bt['pf']} — {bt['note']}")
-            tshow = trades.copy()
-            tshow["Entry waqt"] = tshow[cfg["entry_col"]].map(pkt_str)
-            tshow["Exit waqt"] = tshow[cfg["exit_col"]].map(pkt_str)
-            tshow["Chart"] = tshow["symbol"].map(lambda s: tradingview_url(s, interval))
-            cols = ["symbol", "Entry waqt", "Exit waqt"] + [c for c in ("exit_reason",) if c in tshow.columns] + \
-                   ["entry", "exit", "ret_pct", "pnl_usd", "Chart"]
-            with st.expander(f"📜 Saari band trades ({len(tshow)})"):
-                show_table(tshow[cols].iloc[::-1], pl_cols=("ret_pct", "pnl_usd"))
-                st.download_button("📥 CSV download", trades.to_csv(index=False).encode(), cfg["trades"],
-                                   "text/csv", key=f"dl_{name}")
-            t2 = trades[[cfg["entry_col"], "ret_pct"]].rename(columns={cfg["entry_col"]: "entry_utc"})
-            t2["System"] = name
-            all_closed.append(t2)
-        if len(hist) > 1:
-            eq = hist.set_index(hist.columns[0])["equity"]
-            dd = (eq / eq.cummax() - 1).min() * 100
-            st.caption(f"📈 Paper equity curve (shuru ${start_eq:,.0f}) — ab ${eq.iloc[-1]:,.2f} "
-                       f"({(eq.iloc[-1]/start_eq-1)*100:+.1f}%), Max Drawdown {dd:.1f}%")
-            st.line_chart(eq, height=220)
+            # ---------- 2) Khuli paper trades ----------
+            st.subheader("🔵 Chal Rahi Trades (paper)")
+            positions = state.get("positions", {})
+            cash = float(state.get("cash", 0) or 0)
+            if not positions:
+                st.info("Abhi koi khuli trade nahi.")
+            else:
+                prices = fetch_live_prices(tuple(sorted(positions)))
+                rows = []
+                for sym, p in positions.items():
+                    live = prices.get(sym)
+                    ref = live if live else p.get("last_px")
+                    rows.append({
+                        "Coin": sym,
+                        "Entry": fmt_px(p["entry"]),
+                        "Live Price": fmt_px(live) if live else "—",
+                        "Live P/L %": round((ref / p["entry"] - 1) * 100, 2) if ref else None,
+                        "Live P/L ($)": round(p["qty"] * ref - p["cost"], 2) if ref else None,
+                        "SL (abhi)": fmt_px(p["trail"]),
+                        "SL tak %": round((ref - p["trail"]) / ref * 100, 2) if ref else None,
+                        "TP": fmt_px(p["tp"]) if p.get("tp") else "Nahi (trailing)",
+                        "Entry waqt": pkt_str(p.get("entry_bar") or p.get("entry_day")),
+                        "Halat": ("⚠️ SL se neeche — agle run mein band" if ref and ref <= p["trail"]
+                                  else ("🟢 Nafa" if ref and ref >= p["entry"] else "🔴 Nuqsan")),
+                        "Chart": tradingview_url(sym, interval),
+                    })
+                df_open = pd.DataFrame(rows)
+                show_table(df_open, pl_cols=("Live P/L %", "Live P/L ($)"))
+                open_val = sum(p["qty"] * (prices.get(s) or p.get("last_px", p["entry"])) for s, p in positions.items())
+                st.caption(f"💹 Live Equity: **${cash + open_val:,.2f}** · Cash ${cash:,.2f} · "
+                           f"{len(positions)}/10 slots bhare hue · fees shamil nahi")
 
-# ------------------------------------------------------------
-# Session analysis (PKT)
-# ------------------------------------------------------------
-st.markdown("---")
-st.header("🕐 Trading Session Analysis (Pakistan Time — PKT)")
-st.caption("Har band trade ka ENTRY waqt dekh kar us waqt kaunsa market session khula tha — sab kuch PKT mein. "
-           "Note: Donchian Daily ki entry hamesha subah ~5 AM PKT (daily candle ke baad) hoti hai.")
+            # ---------- 3) Performance ----------
+            st.subheader("📊 Performance — Band Trades")
+            hist = pd.DataFrame(state.get("history", []))
+            start_eq = 1000.0
+            if len(trades) == 0:
+                st.info("Abhi tak koi trade band nahi hui - pehli trade band hone par yahan record banna shuru hoga.")
+            else:
+                r = pd.to_numeric(trades["ret_pct"], errors="coerce").dropna()
+                wins, losses = r[r > 0], r[r <= 0]
+                pf = wins.sum() / abs(losses.sum()) if len(losses) and losses.sum() != 0 else None
+                c1, c2, c3, c4, c5 = st.columns(5)
+                c1.metric("Band trades", len(r))
+                c2.metric("Jeet / Haar", f"{len(wins)} / {len(losses)}")
+                c3.metric("Win Rate", f"{len(wins)/len(r)*100:.1f}%")
+                c4.metric("Profit Factor", f"{pf:.2f}" if pf else "N/A")
+                c5.metric("Kul nafa ($)", f"{pd.to_numeric(trades['pnl_usd'], errors='coerce').sum():+,.2f}")
+                bt = cfg["backtest"]
+                st.info(f"**Backtest:** Win {bt['win']}%, PF {bt['pf']}, CAGR +{bt['cagr']}%, MaxDD {bt['dd']}% — {bt['note']}  \n"
+                        f"**Live (paper):** Win {len(wins)/len(r)*100:.1f}%, PF {pf:.2f}" if pf else
+                        f"**Backtest:** Win {bt['win']}%, PF {bt['pf']} — {bt['note']}")
+                tshow = trades.copy()
+                tshow["Entry waqt"] = tshow[cfg["entry_col"]].map(pkt_str)
+                tshow["Exit waqt"] = tshow[cfg["exit_col"]].map(pkt_str)
+                tshow["Chart"] = tshow["symbol"].map(lambda s: tradingview_url(s, interval))
+                cols = ["symbol", "Entry waqt", "Exit waqt"] + [c for c in ("exit_reason",) if c in tshow.columns] + \
+                       ["entry", "exit", "ret_pct", "pnl_usd", "Chart"]
+                with st.expander(f"📜 Saari band trades ({len(tshow)})"):
+                    show_table(tshow[cols].iloc[::-1], pl_cols=("ret_pct", "pnl_usd"))
+                    st.download_button("📥 CSV download", trades.to_csv(index=False).encode(), cfg["trades"],
+                                       "text/csv", key=f"dl_{name}")
+                t2 = trades[[cfg["entry_col"], "ret_pct"]].rename(columns={cfg["entry_col"]: "entry_utc"})
+                t2["System"] = name
+                all_closed.append(t2)
+            if len(hist) > 1:
+                eq = hist.set_index(hist.columns[0])["equity"]
+                dd = (eq / eq.cummax() - 1).min() * 100
+                st.caption(f"📈 Paper equity curve (shuru ${start_eq:,.0f}) — ab ${eq.iloc[-1]:,.2f} "
+                           f"({(eq.iloc[-1]/start_eq-1)*100:+.1f}%), Max Drawdown {dd:.1f}%")
+                st.line_chart(eq, height=220)
 
+# ============================================================
+# ✋ MANUAL TRADING
+# ============================================================
+with T_MANUAL:
+    st.info("✋ **Manual Trading** — yahan aap **apni marzi** se trade darj karte hain: kisi bhi system ka signal "
+            "chunein ya koi bhi coin likhein. Asli khareed/farokht aap exchange (KuCoin) par khud karein — yahan sirf "
+            "hisaab rakha jata hai (live P/L, SL/TP alert, band trades ka record). Data GitHub mein `manual_trades.json` "
+            "mein mehfooz hota hai.")
+    if not gh_token():
+        st.warning("Streamlit Secrets mein GITHUB_TOKEN nahi mila — trades mehfooz nahi hongi.")
 
-def classify_session(hour_pkt):
-    if 5 <= hour_pkt < 12:
-        return "🌏 Asian (05:00 AM–12:00 PM PKT)"
-    elif 12 <= hour_pkt < 17:
-        return "🇬🇧 London (12:00 PM–05:00 PM PKT)"
-    elif 17 <= hour_pkt < 21:
-        return "🇬🇧+🇺🇸 London+NY Overlap (05:00 PM–09:00 PM PKT)"
-    elif hour_pkt >= 21 or hour_pkt < 2:
-        return "🇺🇸 New York (09:00 PM–02:00 AM PKT)"
+    # ---------- 1) nayi trade ----------
+    st.subheader("➕ Nayi trade darj karein")
+    recent_sigs = []
+    for _n, _d in DATA.items():
+        for _sg in _d["signals"]:
+            t = pd.to_datetime(_sg.get("signal_time_utc"), errors="coerce", utc=True)
+            if t == t and t >= pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=3):
+                recent_sigs.append((_n, _sg))
+    labels = ["✍️ Apni marzi (koi bhi coin)"] + [
+        f"{SYSTEMS[n]['badge']} — {sg['symbol']} ({pkt_str(sg['signal_time_utc'])})" for n, sg in recent_sigs]
+    choice = st.selectbox("Signal chunein (aakhri 3 din) ya apni marzi", range(len(labels)),
+                          format_func=lambda k: labels[k], key="man_pick")
+    if choice == 0:
+        src, sym0, sl0, tp0 = "Apni marzi", "", 0.0, 0.0
     else:
-        return "🌙 Late NY / Off-Hours (02:00 AM–05:00 AM PKT)"
+        n0, sg0 = recent_sigs[choice - 1]
+        src, sym0 = SYSTEMS[n0]["badge"], sg0["symbol"]
+        sl0 = float(sg0.get("sl") or 0)
+        tp0 = float(sg0.get("tp") or 0) if sg0.get("tp") == sg0.get("tp") and sg0.get("tp") else 0.0
+    with st.form("man_new", clear_on_submit=False):
+        c1, c2, c3 = st.columns(3)
+        sym = c1.text_input("Coin (jaise SOL/USDT)", value=sym0).strip().upper()
+        if sym and "/" not in sym:
+            sym = sym + "/USDT"
+        live0 = PRICES.get(sym) or (fetch_live_prices((sym,)).get(sym) if sym else None)
+        entry = c2.number_input("Entry qeemat", min_value=0.0, value=float(live0 or 0.0), format="%.8f")
+        amount = c3.number_input("Kitne $ lagaye", min_value=0.0, value=50.0, step=10.0)
+        c4, c5, c6 = st.columns(3)
+        sl = c4.number_input("Stop-loss (0 = nahi)", min_value=0.0, value=sl0, format="%.8f")
+        tp = c5.number_input("Take-profit (0 = nahi)", min_value=0.0, value=tp0, format="%.8f")
+        note = c6.text_input("Note (ikhtiyari)", value="")
+        if entry and sl and sl < entry and amount:
+            st.caption(f"SL laga to nuqsan ~${amount * (entry - sl) / entry:,.2f} ({(entry - sl) / entry * 100:.1f}%)")
+        submitted = st.form_submit_button("✅ Trade darj karein")
+    if submitted:
+        if not sym or entry <= 0 or amount <= 0:
+            st.error("Coin, entry qeemat aur raqam zaroori hain.")
+        else:
+            rec = {"id": pd.Timestamp.now(tz="UTC").strftime("%Y%m%d%H%M%S"), "source": src, "symbol": sym,
+                   "entry": float(entry), "amount": float(amount), "qty": float(amount) / float(entry),
+                   "sl": float(sl) or None, "tp": float(tp) or None, "note": note, "status": "open",
+                   "entry_time": pd.Timestamp.now(tz="Asia/Karachi").strftime("%Y-%m-%d %I:%M %p PKT")}
+            ok, msg = manual_save(manual + [rec], manual_sha, f"Manual trade: {sym}")
+            if ok:
+                st.success(f"✅ {sym} darj ho gaya. (Page khud taaza ho raha hai)")
+                st.rerun()
+            else:
+                st.error(f"❌ {msg}")
 
-
-SESSION_ORDER = [
-    "🌏 Asian (05:00 AM–12:00 PM PKT)", "🇬🇧 London (12:00 PM–05:00 PM PKT)",
-    "🇬🇧+🇺🇸 London+NY Overlap (05:00 PM–09:00 PM PKT)", "🇺🇸 New York (09:00 PM–02:00 AM PKT)",
-    "🌙 Late NY / Off-Hours (02:00 AM–05:00 AM PKT)",
-]
-
-if not all_closed:
-    st.info("Abhi tak koi band trade nahi — session analysis ke liye pehle kuch trades band honi chahiye.")
-else:
-    comb = pd.concat(all_closed, ignore_index=True)
-    picked = st.multiselect("Kaunse system(s) shamil karein", list(SYSTEMS), default=list(SYSTEMS), key="sess_pick")
-    comb = comb[comb["System"].isin(picked)]
-    if len(comb):
-        comb["hour"] = comb["entry_utc"].map(lambda t: to_pkt(t).hour)
-        comb["session"] = comb["hour"].map(classify_session)
-        comb["win"] = pd.to_numeric(comb["ret_pct"], errors="coerce") > 0
+    # ---------- 2) khuli manual trades ----------
+    st.subheader("🔵 Meri khuli trades")
+    open_m = [m for m in manual if m.get("status") == "open"]
+    if not open_m:
+        st.info("Abhi koi manual trade khuli nahi.")
+    else:
         rows = []
-        for sname in SESSION_ORDER:
-            sub = comb[comb["session"] == sname]
-            if len(sub):
-                w = int(sub["win"].sum())
-                rows.append({"Session": sname, "Total Trades": len(sub), "TP/Win": w, "SL/Loss": len(sub) - w,
-                             "Win Rate %": round(w / len(sub) * 100, 1),
-                             "Avg P/L %": round(pd.to_numeric(sub["ret_pct"], errors="coerce").mean(), 2)})
-        if rows:
-            stretch_df(pd.DataFrame(rows), hide_index=True)
-            best = max(rows, key=lambda r: r["Win Rate %"])
-            worst = min(rows, key=lambda r: r["Win Rate %"])
-            st.caption(f"✅ Sab se behtar: **{best['Session']}** ({best['Win Rate %']}%, {best['Total Trades']} trades) — "
-                       f"⚠️ Sab se kamzor: **{worst['Session']}** ({worst['Win Rate %']}%, {worst['Total Trades']} trades). "
-                       f"Chhota sample (~15 se kam trades) abhi bharosemand nahi.")
+        for m in open_m:
+            live = PRICES.get(m["symbol"])
+            pl = round((live / m["entry"] - 1) * 100, 2) if live else None
+            rows.append({"Coin": m["symbol"], "Source": m.get("source", ""), "Entry": fmt_px(m["entry"]),
+                         "Live": fmt_px(live) if live else "—", "P/L %": pl,
+                         "P/L $": round(m["qty"] * live - m["amount"], 2) if live else None,
+                         "Raqam $": m["amount"], "SL": fmt_px(m.get("sl")), "TP": fmt_px(m.get("tp")),
+                         "Halat": status_label(pl, live, m.get("sl"), m.get("tp")),
+                         "Entry waqt": m.get("entry_time", ""), "Chart": tradingview_url(m["symbol"], "D")})
+        show_table(pd.DataFrame(rows), pl_cols=("P/L %", "P/L $"))
+        hit = [r for r in rows if r["Halat"] in ("⚠️ SL se neeche", "🎯 TP par")]
+        for r in hit:
+            st.warning(f"{r['Halat']}: **{r['Coin']}** — exchange par check kar ke band karein.")
+        st.markdown("**Trade band karein**")
+        k1, k2, k3 = st.columns([2, 2, 1])
+        idx = k1.selectbox("Kaun si", range(len(open_m)), key="man_close_pick",
+                           format_func=lambda k: f"{open_m[k]['symbol']} @ {fmt_px(open_m[k]['entry'])} ({open_m[k].get('entry_time','')})")
+        live_c = PRICES.get(open_m[idx]["symbol"]) or open_m[idx]["entry"]
+        exit_px = k2.number_input("Exit qeemat", min_value=0.0, value=float(live_c), format="%.8f", key="man_exit")
+        if k3.button("🔒 Band karein", key="man_close_btn"):
+            new = []
+            for m in manual:
+                if m["id"] == open_m[idx]["id"]:
+                    m = dict(m, status="closed", exit=float(exit_px),
+                             exit_time=pd.Timestamp.now(tz="Asia/Karachi").strftime("%Y-%m-%d %I:%M %p PKT"),
+                             pnl=round(m["qty"] * float(exit_px) - m["amount"], 2),
+                             ret_pct=round((float(exit_px) / m["entry"] - 1) * 100, 2))
+                new.append(m)
+            ok, msg = manual_save(new, manual_sha, f"Manual trade band: {open_m[idx]['symbol']}")
+            if ok:
+                st.success("✅ Band ho gayi.")
+                st.rerun()
+            else:
+                st.error(f"❌ {msg}")
+
+    # ---------- 3) band manual trades ----------
+    st.subheader("📊 Meri band trades — performance")
+    closed_m = [m for m in manual if m.get("status") == "closed"]
+    if not closed_m:
+        st.info("Abhi koi manual trade band nahi hui.")
+    else:
+        cdf = pd.DataFrame(closed_m)
+        r = pd.to_numeric(cdf["ret_pct"], errors="coerce")
+        w, l = r[r > 0], r[r <= 0]
+        pf = w.sum() / abs(l.sum()) if len(l) and l.sum() != 0 else None
+        a1, a2, a3, a4 = st.columns(4)
+        a1.metric("Band trades", len(r))
+        a2.metric("Jeet / Haar", f"{len(w)} / {len(l)}")
+        a3.metric("Win rate", f"{len(w) / len(r) * 100:.1f}%")
+        a4.metric("Kul nafa ($)", f"{pd.to_numeric(cdf['pnl'], errors='coerce').sum():+,.2f}")
+        st.caption(f"Profit factor: {pf:.2f}" if pf else "Profit factor: —")
+        show_table(cdf[["symbol", "source", "entry_time", "exit_time", "entry", "exit", "ret_pct", "pnl", "note"]]
+                   .iloc[::-1].rename(columns={"symbol": "Coin", "source": "Source", "entry_time": "Entry waqt",
+                                               "exit_time": "Exit waqt", "entry": "Entry", "exit": "Exit",
+                                               "ret_pct": "P/L %", "pnl": "P/L $", "note": "Note"}),
+                   pl_cols=("P/L %", "P/L $"), link_cols=())
+
+with T_SESS:
+    # ------------------------------------------------------------
+    # Session analysis (PKT)
+    # ------------------------------------------------------------
+    st.header("🕐 Trading Session Analysis (Pakistan Time — PKT)")
+    st.caption("Har band trade ka ENTRY waqt dekh kar us waqt kaunsa market session khula tha — sab kuch PKT mein. "
+               "Note: Donchian Daily ki entry hamesha subah ~5 AM PKT (daily candle ke baad) hoti hai.")
+
+
+    def classify_session(hour_pkt):
+        if 5 <= hour_pkt < 12:
+            return "🌏 Asian (05:00 AM–12:00 PM PKT)"
+        elif 12 <= hour_pkt < 17:
+            return "🇬🇧 London (12:00 PM–05:00 PM PKT)"
+        elif 17 <= hour_pkt < 21:
+            return "🇬🇧+🇺🇸 London+NY Overlap (05:00 PM–09:00 PM PKT)"
+        elif hour_pkt >= 21 or hour_pkt < 2:
+            return "🇺🇸 New York (09:00 PM–02:00 AM PKT)"
+        else:
+            return "🌙 Late NY / Off-Hours (02:00 AM–05:00 AM PKT)"
+
+
+    SESSION_ORDER = [
+        "🌏 Asian (05:00 AM–12:00 PM PKT)", "🇬🇧 London (12:00 PM–05:00 PM PKT)",
+        "🇬🇧+🇺🇸 London+NY Overlap (05:00 PM–09:00 PM PKT)", "🇺🇸 New York (09:00 PM–02:00 AM PKT)",
+        "🌙 Late NY / Off-Hours (02:00 AM–05:00 AM PKT)",
+    ]
+
+    if not all_closed:
+        st.info("Abhi tak koi band trade nahi — session analysis ke liye pehle kuch trades band honi chahiye.")
+    else:
+        comb = pd.concat(all_closed, ignore_index=True)
+        picked = st.multiselect("Kaunse system(s) shamil karein", list(SYSTEMS), default=list(SYSTEMS), key="sess_pick")
+        comb = comb[comb["System"].isin(picked)]
+        if len(comb):
+            comb["hour"] = comb["entry_utc"].map(lambda t: to_pkt(t).hour)
+            comb["session"] = comb["hour"].map(classify_session)
+            comb["win"] = pd.to_numeric(comb["ret_pct"], errors="coerce") > 0
+            rows = []
+            for sname in SESSION_ORDER:
+                sub = comb[comb["session"] == sname]
+                if len(sub):
+                    w = int(sub["win"].sum())
+                    rows.append({"Session": sname, "Total Trades": len(sub), "TP/Win": w, "SL/Loss": len(sub) - w,
+                                 "Win Rate %": round(w / len(sub) * 100, 1),
+                                 "Avg P/L %": round(pd.to_numeric(sub["ret_pct"], errors="coerce").mean(), 2)})
+            if rows:
+                stretch_df(pd.DataFrame(rows), hide_index=True)
+                best = max(rows, key=lambda r: r["Win Rate %"])
+                worst = min(rows, key=lambda r: r["Win Rate %"])
+                st.caption(f"✅ Sab se behtar: **{best['Session']}** ({best['Win Rate %']}%, {best['Total Trades']} trades) — "
+                           f"⚠️ Sab se kamzor: **{worst['Session']}** ({worst['Win Rate %']}%, {worst['Total Trades']} trades). "
+                           f"Chhota sample (~15 se kam trades) abhi bharosemand nahi.")
 
 st.markdown("---")
 st.caption("⚠️ Ye paper trading hai. Backtest numbers mein survivorship bias hai (aaj ki coin list) — asal natija kuch kam ho sakta hai.")
