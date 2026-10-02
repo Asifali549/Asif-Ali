@@ -229,6 +229,12 @@ Secrets:
   **LAGU (2026-10-02, user ne kaha "bot mein shamil karo"):** capit_daily_bot + dashboard tab + watchdog;
   taqseem ICHI 60 / DIP 30 / CAPIT 10 (sab se ooncha Sharpe 1.81) - dip_daily_bot ALLOC 0.30, dashboard alloc.
 
+## Zer-e-test
+- **STRATEGY LAB 2** (`strategy_lab2.py`, workflow push par khud chalta, natija `strategy_lab2_RESULTS.txt`): E1 BB
+  reversion, E2 failed breakdown (turtle soup), E3 volume thrust, E4 RS pullback - har ek 6-cell grid + random 20
+  seeds (pool-matched) + validation (bootstrap/top-10/folds/2x kharcha) + portfolio (ICHI 55/DIP 25/CAPIT 10/NAYA 10
+  vs ICHI 60/DIP 30/CAPIT 10) + tamam systems ki ranking. User: "khud chalao, jo pass hon bata do, main chunoon ga".
+
 ## Aglay kaam
 - **GitHub cron masla (2026-10-01 dekha):** 30 Sep ~17:30 PKT se scheduled runs bohat kam: Watchdog (har 30 min)
   din mein sirf ~4 baar, Ichimoku 6 mein se ~2-3, Dip 00:20 UTC ki jagah 05:57 UTC. Ichimoku bot `last_bar` se

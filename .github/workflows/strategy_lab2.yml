@@ -1,0 +1,45 @@
+name: Strategy Lab 2 Test
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths: [strategy_lab2.py]
+
+permissions:
+  contents: write
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run strategy lab 2
+        run: python strategy_lab2.py
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add strategy_lab2_RESULTS.txt
+          git diff --staged --quiet && exit 0
+          git commit -m "Strategy lab 2 results"
+          for i in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              echo "Push kamyab (koshish $i)"; exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            echo "Push nakam, dobara koshish..."; sleep $((i * 5))
+          done
+          echo "Push 5 dafa nakam raha"; exit 1
