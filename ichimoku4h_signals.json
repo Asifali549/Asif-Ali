@@ -8,5 +8,15 @@
     "tp": 0.529903125,
     "risk_pct": 15.57,
     "size_pct": 6.42
+  },
+  {
+    "system": "Ichimoku 4H",
+    "symbol": "WLD/USDT",
+    "signal_time_utc": "2026-10-02 16:00:00",
+    "entry_est": 0.575,
+    "sl": 0.4439875,
+    "tp": 0.9680375,
+    "risk_pct": 22.78,
+    "size_pct": 4.39
   }
 ]
