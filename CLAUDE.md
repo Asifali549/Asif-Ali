@@ -54,7 +54,7 @@ Secrets:
   Agle din open par. Kai signals hon to sab se kam RSI pehle.
 - Exit: close > SMA5 -> agle din open par; stop = signal close - 3x ATR(14) fixed; 10 din baad close par.
   Jis din coin band ho us din usi coin mein nayi entry nahi (backtest jaisa).
-- Size: har trade apne hisse ka 20% (2026-10-01 se; pehle 10%), max 10. Hissa 30% (2026-10-02 se; pehle 40%). Files dip_paper_state.json / dip_paper_trades.csv / dip_signals.json.
+- Size: har trade apne hisse ka 20% (2026-10-01 se; pehle 10%), max 10. Hissa 40% (10-02 ko kuch ghante 30% raha, wapas 40%). Files dip_paper_state.json / dip_paper_trades.csv / dip_signals.json.
 - Backtest (2020-10 -> 2026-09): n=254, win 69%, PF 2.07, p5 1.48, random PF 0.82, CAGR ~6.5%, MaxDD ~-17%.
   Grid RSI 5-12 x exit SMA 3/5/7 sab PF 1.7-4 (random se behtar); fail sirf kam trades / 2022 fold ~1.0 ki wajah se;
   RSI<15 kamzor (PF 1.4). BTC filter hatane se kamzor. Bot ne fake data par 46/46 trades backtest se hubahu milayin.
@@ -64,7 +64,7 @@ Secrets:
 - Entry: coin daily close > EMA200, us din return <= -8%, volume >= 2 x pichle 20 din ka ausat (shift 1), top-100
   liquid; koi BTC filter nahi. Agle din open par. Kai signals hon to sab se gehri girawat pehle.
 - Exit/stop/time: Dip jaisa (close > SMA5 -> agle din open; stop signal close - 3 ATR fixed; 10 din). HISTORY_DAYS 1000
-  (EMA200 pakne ke liye). Size: hisse ka 20% (kul ka 2%), max 10, hissa 10%. Files capit_paper_state.json /
+  (EMA200 pakne ke liye). Size: paper mein 20%/trade, max 10; **hissa 0% - SIRF PAPER (2026-10-02 se)**. Files capit_paper_state.json /
   capit_paper_trades.csv / capit_signals.json.
 - Backtest (new_ideas + capit_validate): 313 trades, win 65%, PF 1.87, OOS 1.59, p5 1.40, 4/4 folds, 3x kharcha 1.66.
 - Bot ne fake data par din-ba-din replay mein 45/45 backtest trades hubahu (entry, exit, return) milayin; 1 extra trade.
@@ -135,6 +135,13 @@ Secrets:
   Sharpe sirf 1.53-1.70 (-0.12..+0.05); DD kam hua to nafa bhi utna hi kam (APNI L20: DD -7.5% magar CAGR 18.1%) =
   bas chhota size. Sabaq: portfolio pehle se mutawazin; vol scaling se muft faida nahi. Files `git show 70675d7:vol_target.py`,
   natija `git show 6ab0786:vol_target_RESULTS.txt`.
+- **STRATEGY LAB 2 (2026-10-02) - 4/4 FAIL** (`git show bfd832f:strategy_lab2.py` / natija commit `strategy_lab2_RESULTS.txt`
+  history mein): E1 BB reversion (uptrend, close < BB lower k, exit SMA5/SMA20) plateau 1/6, validation FAIL (p5 0.83),
+  akela DD -49%; E2 failed breakdown / turtle soup (N 10/20/55, uptrend ya nahi) 0/6, aksar random se bura; E3 volume
+  thrust (+X% din, volume Vx, close upper 25%, chandelier 22/3) 0/6, random jaisa, DD -70%; E4 RS pullback (top-20% L-din
+  RS + D din neeche) 0/6, PF ~1.0-1.1 random p95 ke barabar. Portfolio mein har ek ne Sharpe 1.74 -> 1.39-1.55 giraya.
+  RANKING akele (Sharpe): Ichimoku 1.69 (PF 2.34, OOS 1.82) > Donchian 1.10 (DD -37%) > Dip 0.72 (PF 2.36, OOS 3.92)
+  > Capitulation 0.41 (OOS 0.83).
 - Purane research scripts/natije git history mein hain: commit `ec7962f` (cleanup se pehle) par
   `git show ec7962f:<file>` se wapas mil sakte hain (unified_test.py, ichimoku4h_validation.py, strategy_lab.py,
   portfolio_test.py, donchian_regime_test.py, archive/...).
@@ -228,12 +235,13 @@ Secrets:
   -11.0%, 1.71, 55%). Corr C: ICHI 0.03, DIP 0.06. Khatre: 3 khayalon mein se chuna (multiple testing), survivorship.
   **LAGU (2026-10-02, user ne kaha "bot mein shamil karo"):** capit_daily_bot + dashboard tab + watchdog;
   taqseem ICHI 60 / DIP 30 / CAPIT 10 (sab se ooncha Sharpe 1.81) - dip_daily_bot ALLOC 0.30, dashboard alloc.
-
-## Zer-e-test
-- **STRATEGY LAB 2** (`strategy_lab2.py`, workflow push par khud chalta, natija `strategy_lab2_RESULTS.txt`): E1 BB
-  reversion, E2 failed breakdown (turtle soup), E3 volume thrust, E4 RS pullback - har ek 6-cell grid + random 20
-  seeds (pool-matched) + validation (bootstrap/top-10/folds/2x kharcha) + portfolio (ICHI 55/DIP 25/CAPIT 10/NAYA 10
-  vs ICHI 60/DIP 30/CAPIT 10) + tamam systems ki ranking. User: "khud chalao, jo pass hon bata do, main chunoon ga".
+  **DOBARA CHALANE PAR (2026-10-02 dopahar) KAMZOR:** sirf 1 din baad, aaj ki top-150 coin list badalne se (US, UAI,
+  ALLO, AKE, GTC jaise naye coins) R8 V2.0: PF 1.87 -> 1.47, OOS 1.59 -> **0.83**, 2026 PF 0.62, bear PF 0.37, top10%
+  coins = 77% nafa; V2.5 bootstrap p5 0.92 FAIL. C20 akela 2026 -22%. Portfolio ICHI 60/DIP 30/C 10 Sharpe 1.74 vs
+  ICHI 60/DIP 40 1.73 (koi farq nahi). FAISLA: **Capitulation SIRF PAPER (ALLOC 0), taqseem wapas ICHI 60 / DIP 40.**
+  SABAQ (bohat ahem): `get_coin_list` har din aaj ke 24h volume se top-150 chunta hai -> backtest universe roz badalta
+  hai; kam trades wali strategy (300) ka OOS isi se ulat sakta hai. Aage har validation mein (a) 2 alag din ke coin
+  list / ya coins ka 10-20% random hata kar sensitivity, (b) OOS > 1 dono mein - tabhi PASS.
 
 ## Aglay kaam
 - **GitHub cron masla (2026-10-01 dekha):** 30 Sep ~17:30 PKT se scheduled runs bohat kam: Watchdog (har 30 min)

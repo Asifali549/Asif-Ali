@@ -11,7 +11,7 @@ STRATEGY (new_ideas.py + capit_validate.py mein tasdeeq-shuda, 2020-2026):
   Exit  : jis din daily CLOSE apni 5-din average (SMA5) se ooper band ho -> AGLE din ke open par becho
   Stop  : signal din ke close se 3 x ATR(14) neeche (fixed)
   Time  : 10 din baad bhi na nikla ho to us din ke close par becho
-  Size  : har trade Capitulation hisse (kul ka 10%) ka 20% = kul capital ka 2%, max 10 positions
+  Size  : SIRF PAPER (ALLOC 0) - paper mein har trade 20%, max 10 positions
 Backtest: 313 trades (~1/hafta), win 65%, PF 1.87, OOS PF 1.59, bootstrap p5 1.40, 4/4 folds musbat,
 3x kharche par PF 1.66. ICHI/DIP se correlation ~0. ICHI 60 / DIP 30 / CAPIT 10 -> Sharpe 1.81 (pehle 1.71).
 
@@ -34,7 +34,7 @@ STOP_ATR = 3.0
 MAX_HOLD = 10
 MAX_POSITIONS = 10
 POS_PCT = 0.20                 # Capitulation hisse ka 20% har trade
-ALLOC = 0.10                   # kul capital mein Capitulation ka hissa (ICHI 60 / DIP 30 / CAPIT 10)
+ALLOC = 0.0                    # SIRF PAPER (2026-10-02: dobara test mein OOS 2025+ PF 0.83 - asli paisa nahi)
 UNIVERSE = 100
 TOP_N_COINS = 150
 HISTORY_DAYS = 1000              # EMA200 poora pakne ke liye lambi history (backtest jaisa)
@@ -234,7 +234,8 @@ def main():
               for s in sell_now]
     if chosen:
         L.append(f"\n🟢 <b>NAYE BUY SIGNALS</b> ({len(chosen)}) — aaj open par khareedein:")
-        L.append(f"Size: Capitulation hisse ka {POS_PCT*100:.0f}% = kul capital ka {POS_PCT*ALLOC*100:.0f}%")
+        L.append("⚠️ Sirf PAPER — asli paisa nahi (haaliya test mein 2025-26 kamzor)" if ALLOC == 0 else
+                 f"Size: Capitulation hisse ka {POS_PCT*100:.0f}% = kul capital ka {POS_PCT*ALLOC*100:.0f}%")
         L += [f"• <b>{s}</b> ~{fmt_px(c)} | Stop: {fmt_px(stop)} ({(c - stop) / c * 100:.1f}% neeche) | "
               f"girawat {r*100:.1f}%, volume {v:.1f}x" for s, c, stop, r, v in chosen]
         L.append("Becho: jis din close 5-din average se ooper band ho, agle din open par (max 10 din).")

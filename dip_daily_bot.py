@@ -10,8 +10,8 @@ STRATEGY (dip_focus.py mein tasdeeq-shuda, 2020-2026, 18 mein se 6 variants PASS
   Exit  : jis din daily CLOSE apni 5-din average (SMA5) se ooper band ho -> AGLE din ke open par becho
   Stop  : entry signal ke close se 3 x ATR(14) neeche (fixed, hilta nahi)
   Time  : 10 din baad bhi na nikla ho to us din ke close par becho
-  Size  : har trade Dip hisse (kul capital ka 30%) ka 20% = kul capital ka 6%, max 10 positions
-          (2026-10-02 se: Ichimoku 60% + Dip 30% + Capitulation 10%; Donchian sirf paper)
+  Size  : har trade Dip hisse (kul capital ka 40%) ka 20% = kul capital ka 8%, max 10 positions
+          (Ichimoku 60% + Dip 40%; Donchian aur Capitulation sirf paper)
 Backtest: win ~69%, PF ~2.1, CAGR ~6.5%, MaxDD ~-17%. Kam return lekin baqi 2 bots se ulta
 (wo breakout par khareedte hain, ye girawat par) - portfolio ko santulan deta hai.
 
@@ -34,7 +34,7 @@ MAX_HOLD = 10
 BTC_EMA = 50
 MAX_POSITIONS = 10
 POS_PCT = 0.20                 # Dip hisse ka 20% har trade
-ALLOC = 0.30                   # kul capital mein Dip ka hissa (ICHI 60 / DIP 30 / CAPIT 10)
+ALLOC = 0.40                   # kul capital mein Dip ka hissa (ICHI 60 / DIP 40)
 UNIVERSE = 100
 TOP_N_COINS = 150
 HISTORY_DAYS = 400

@@ -76,7 +76,7 @@ SYSTEMS = {
         "trades": "dip_paper_trades.csv",
         "signals": "dip_signals.json",
         "workflow": "dip_daily_bot.yml",
-        "alloc": 0.30, "sizing": ("fixed", 0.20, 0.20),
+        "alloc": 0.40, "sizing": ("fixed", 0.20, 0.20),
         "stale_min": 1560,
         "every": "rozana 5:20 AM PKT (daily candle band hone ke baad)",
         "entry_col": "entry_day", "exit_col": "exit_day",
@@ -88,7 +88,7 @@ SYSTEMS = {
             ("Stop (SL)", "Signal ke close se 3x ATR(14) neeche — fixed, hilta nahi"),
             ("Exit", "Jis din close 5-din average (SMA5) se ooper band ho, agle din open par becho; max 10 din"),
             ("Exchange par", "Stop-loss order; Telegram 'AAJ OPEN PAR BECHEIN' kahe to market par bech dein"),
-            ("Size", "Har trade Dip hisse ka 20% (kul capital ka 6%), max 10 trades"),
+            ("Size", "Har trade Dip hisse ka 20% (kul capital ka 8%), max 10 trades"),
         ],
         "backtest": {"win": 69.3, "pf": 2.07, "cagr": 9.7, "dd": -27.7,
                      "note": "6 saal (2020-2026), win-rate ooncha lekin return kam; breakout bots ka ulta (girawat par khareed)"},
@@ -99,7 +99,7 @@ SYSTEMS = {
         "trades": "capit_paper_trades.csv",
         "signals": "capit_signals.json",
         "workflow": "capit_daily_bot.yml",
-        "alloc": 0.10, "sizing": ("fixed", 0.20, 0.20),
+        "alloc": 0.0, "sizing": ("fixed", 0.20, 0.20),
         "stale_min": 1560,
         "every": "rozana 5:25 AM PKT (daily candle band hone ke baad)",
         "entry_col": "entry_day", "exit_col": "exit_day",
@@ -111,10 +111,10 @@ SYSTEMS = {
             ("Stop (SL)", "Signal ke close se 3x ATR(14) neeche — fixed, hilta nahi"),
             ("Exit", "Jis din close 5-din average (SMA5) se ooper band ho, agle din open par becho; max 10 din"),
             ("Exchange par", "Stop-loss order; Telegram 'AAJ OPEN PAR BECHEIN' kahe to market par bech dein"),
-            ("Size", "Har trade Capitulation hisse ka 20% (kul capital ka 2%), max 10 trades"),
+            ("Size", "SIRF PAPER — asli paisa nahi (dobara test mein 2025-26 ka nateeja kamzor: OOS PF 0.83)"),
         ],
-        "backtest": {"win": 65.2, "pf": 1.87, "cagr": 14.1, "dd": -20.3,
-                     "note": "6 saal (2020-2026), ~1 trade/hafta, bootstrap p5 1.40, 4/4 folds musbat; Ichimoku/Dip se correlation ~0"},
+        "backtest": {"win": 63.5, "pf": 1.47, "cagr": 7.4, "dd": -23.2,
+                     "note": "6 saal, ~1 trade/hafta; 2021-24 acha lekin 2025-26 kamzor (OOS PF 0.83) - sirf paper par nazar"},
     },
 }
 
@@ -299,9 +299,8 @@ for _n, _c in SYSTEMS.items():
     _amt = total_capital * _c["alloc"]
     st.sidebar.markdown(f"**{_c['badge']}** — {_c['alloc']*100:.0f}% = **${_amt:,.0f}**"
                         + ("" if _c["alloc"] else " _(sirf paper)_"))
-st.sidebar.caption("Backtest (6 saal): Ichimoku 60% + Dip 30% + Capitulation 10% — CAGR ~+26%, MaxDD ~-10%, "
-                   "Sharpe 1.81 (pehle ICHI 60 / DIP 40: 1.71). Capitulation baqi dono se bilkul alag chalti hai. "
-                   "Donchian Ichimoku ke sath girti hai (correlation 0.72), is liye asli paisa nahi. "
+st.sidebar.caption("Backtest (6 saal): Ichimoku 60% + Dip 40% — CAGR ~+25%, MaxDD ~-11%, Sharpe ~1.73. "
+                   "Donchian (Ichimoku ke sath girti hai) aur Capitulation (2025-26 kamzor) sirf paper par. "
                    "Har signal ka size neeche khud nikalta hai.")
 st.sidebar.markdown("---")
 if st.sidebar.button("🔄 Live qeemat taaza karein"):
