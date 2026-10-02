@@ -243,6 +243,12 @@ Secrets:
   hai; kam trades wali strategy (300) ka OOS isi se ulat sakta hai. Aage har validation mein (a) 2 alag din ke coin
   list / ya coins ka 10-20% random hata kar sensitivity, (b) OOS > 1 dono mein - tabhi PASS.
 
+## Zer-e-test
+- **RESEARCH LAB 3** (`research_lab3.py`, push par khud chalta, `research_lab3_RESULTS.txt`): user ne poora waqt diya
+  "overall best / ooncha win-rate strategy" ke liye. Dip khandan ke alag triggers (M1 IBS, M2 down-streak, M3 stretch
+  < SMA10, M4 Dip 12H) + T1 Ichimoku Daily + CONTROL Dip; har ek 3-cell grid, random 20, validation + UNIVERSE
+  SENSITIVITY (6 baar 20% coins hata kar, 5/6 mein PF > 1.2 aur OOS > 1) + portfolio (ensemble DIP+naya ya 20% hissa).
+
 ## Aglay kaam
 - **GitHub cron masla (2026-10-01 dekha):** 30 Sep ~17:30 PKT se scheduled runs bohat kam: Watchdog (har 30 min)
   din mein sirf ~4 baar, Ichimoku 6 mein se ~2-3, Dip 00:20 UTC ki jagah 05:57 UTC. Ichimoku bot `last_bar` se
