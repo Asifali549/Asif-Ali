@@ -18,5 +18,25 @@
     "tp": null,
     "risk_pct": 24.47,
     "size_pct": 4.09
+  },
+  {
+    "system": "Donchian Daily",
+    "symbol": "MEGA/USDT",
+    "signal_time_utc": "2026-10-02 00:00:00",
+    "entry_est": 0.05016,
+    "sl": 0.0412890909,
+    "tp": null,
+    "risk_pct": 17.69,
+    "size_pct": 5.65
+  },
+  {
+    "system": "Donchian Daily",
+    "symbol": "RE/USDT",
+    "signal_time_utc": "2026-10-02 00:00:00",
+    "entry_est": 0.51539,
+    "sl": 0.4111109091,
+    "tp": null,
+    "risk_pct": 20.23,
+    "size_pct": 4.94
   }
 ]
