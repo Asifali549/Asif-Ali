@@ -24,12 +24,13 @@
 | `strategies.py`, `config.py` | ichimoku + market_structure signal functions aur unke params (bot_core inhein use karta hai) |
 | `data_fetcher.py` | KuCoin (ccxt) exchange + top coins list |
 | `live_colorful_dashboard.py` | Streamlit Cloud dashboard (teeno systems) |
+| `scheduler.py` | GitHub cron ka mutabadil: ~5h40m chalta, theek waqt par bots dispatch karta (GH_TOKEN), phir khud ko dobara chalata (zanjeer); push par bhi shuru |
 | `loop_watchdog.py` | bot ruk jaye (state ka `last_updated` purana) to workflow dobara chalata hai + Telegram |
 | `telegram_alert.py` | Telegram (token/chat id env ya Streamlit secrets) + har alert ntfy.sh par bhi (topic `asifali549-strong-signals-9k3m7x`, ya secret `NTFY_TOPIC`) |
 | `*_paper_state.json`, `*_paper_trades.csv`, `*_signals.json` | bots ka data (bots khud commit karte hain) - haath mat lagao |
 
 Workflows (.github/workflows): `ichimoku4h_bot.yml` (cron `10 */4 * * *`), `donchian_daily_bot.yml`
-(cron `15 0 * * *` = 5:15 AM PKT), `dip_daily_bot.yml` (cron `20 0 * * *`), `capit_daily_bot.yml` (cron `25 0 * * *`), `watchdog.yml` (har 30 min), `telegram_test.yml` (sirf manual).
+(cron `15 0 * * *` = 5:15 AM PKT), `dip_daily_bot.yml` (cron `20 0 * * *`), `capit_daily_bot.yml` (cron `25 0 * * *`), `watchdog.yml` (har 30 min), `scheduler.yml` (lagataar; asal waqt-paband trigger - cron ab sirf backup), `telegram_test.yml` (sirf manual).
 
 Secrets:
 - GitHub Actions secrets: `GH_TOKEN` (watchdog ke liye), `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`.
@@ -253,10 +254,11 @@ Secrets:
   list / ya coins ka 10-20% random hata kar sensitivity, (b) OOS > 1 dono mein - tabhi PASS.
 
 ## Aglay kaam
-- **GitHub cron masla (2026-10-01 dekha):** 30 Sep ~17:30 PKT se scheduled runs bohat kam: Watchdog (har 30 min)
-  din mein sirf ~4 baar, Ichimoku 6 mein se ~2-3, Dip 00:20 UTC ki jagah 05:57 UTC. Ichimoku bot `last_bar` se
-  chhoote 4H bars khud pakar leta hai (paper data zaya nahi) magar alert der se. Hal: bahar se trigger (cron-job.org
-  -> workflow_dispatch API, PAT ke sath) - user ki manzoori ka intezar.
+- **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
+  `scheduler.py` + `scheduler.yml`: ek workflow ~5h40m lagataar chalta, har minute: Ichimoku har 4h :10, Donchian 00:15,
+  Dip 00:20, Capit 00:25, Watchdog :05/:35 UTC ko workflow_dispatch (foran chalta, der nahi); aakhir mein khud ko dobara
+  dispatch (concurrency group = ek waqt mein ek). Watchdog `ensure_scheduler()` - scheduler band ho to chala deta hai.
+  Purane cron backup; bots idempotent (last_bar/last_day). Public repo -> Actions minutes muft.
 - Naye khayal (Donchian khandan se bahar), user ko diye: (1) BTC lead-lag catch-up (2) volume capitulation dip
   (3) market-wide panic ke baad khareed (4) VOLATILITY TARGETING ICHI+DIP portfolio par (meri pehli tarjeeh)
   (5) funding rate (6) seasonality. Pass ka paimana: portfolio_lab mein ICHI60/DIP40 ke sath.

@@ -74,9 +74,30 @@ def trigger_workflow(workflow_file):
         return False, str(e)
 
 
+def ensure_scheduler():
+    """Scheduler (bots ko waqt par chalane wali zanjeer) zinda hai? Nahi to dobara chalao."""
+    if not GH_TOKEN:
+        return
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/actions/workflows/scheduler.yml/runs?per_page=5"
+    headers = {"Authorization": f"token {GH_TOKEN}", "Accept": "application/vnd.github.v3+json"}
+    try:
+        runs = requests.get(url, headers=headers, timeout=15).json().get("workflow_runs", [])
+    except Exception as e:
+        print(f"[SCHEDULER] status nahi mila: {e}")
+        return
+    if any(r.get("status") in ("in_progress", "queued", "waiting", "pending", "requested") for r in runs):
+        print("[OK] Scheduler chal raha hai.")
+        return
+    ok, msg = trigger_workflow("scheduler.yml")
+    print(f"[SCHEDULER] band mila - dobara chalaya: {ok} {msg}")
+    if not ok:
+        send_telegram_alert(f"🐕⚠️ Watchdog: Scheduler band hai aur dobara chalana nakam ({msg}).")
+
+
 def main():
     now = datetime.now(timezone.utc)
     any_stale = False
+    ensure_scheduler()
 
     for state_file, key_path, workflow_file, stale_minutes, label in LOOPS:
         ts = get_timestamp(state_file, key_path)

@@ -1,0 +1,35 @@
+name: Scheduler
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths: [scheduler.py, .github/workflows/scheduler.yml]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: scheduler
+  cancel-in-progress: false
+
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run scheduler (bots ko theek waqt par chalata hai)
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: python -u scheduler.py
