@@ -1,49 +1,55 @@
 ==================================================================================================================================
 VOLUME CAPITULATION - VALIDATION
 ==================================================================================================================================
-Coins: 102 | 2020-10-02 -> 2026-09-30 | top-100 point-in-time
+Coins: 104 | 2020-10-03 -> 2026-10-01 | top-100 point-in-time
 
 ##################################################################################################################################
-R8% V2.0: 313 trades (1.00/hafta) | win 65.2% | avg +3.10% | PF 1.87 | OOS PF 1.59
+R8% V2.0: 323 trades (1.03/hafta) | win 63.5% | avg +1.86% | PF 1.47 | OOS PF 0.83
 ##################################################################################################################################
-1) Bootstrap PF: p5 1.40 | p50 1.86 -> PASS
-2) Top-10 trades hata kar PF: 1.38 | top-20 hata kar: 1.19 -> PASS
-3) 4 time-folds: 2020-11-23: PF 1.97 (79) | 2021-09-08: PF 2.61 (78) | 2024-03-06: PF 1.55 (78) | 2025-01-20: PF 1.67 (78) -> 4/4 musbat
-4) Coins: 73 | nafa wale 48, nuqsan wale 25 | top 10% (7) coins = net nafa ka 70% | median coin PF (3+ trades) 2.76
-5) Kharcha: 1x PF 1.87 | 2x PF 1.76 | 3x PF 1.66
-6) BTC regime: bull: PF 2.21 (255) | bear: PF 1.08 (30) | sideways: PF 1.39 (28)
-7) DIP ke sath overlap (usi coin mein +-3 din DIP trade): 23/313 = 7%
-   Saal-war PF: 2021: 2.13 (94) | 2022: 0.55 (7) | 2023: 2.31 (26) | 2024: 2.01 (85) | 2025: 1.16 (52) | 2026: 2.03 (36)
+1) Bootstrap PF: p5 1.15 | p50 1.47 -> PASS
+2) Top-10 trades hata kar PF: 1.20 | top-20 hata kar: 1.05 -> PASS
+3) 4 time-folds: 2020-11-23: PF 1.98 (81) | 2021-09-08: PF 2.36 (81) | 2024-02-21: PF 1.38 (81) | 2025-01-20: PF 0.85 (80) -> 3/4 musbat
+4) Coins: 76 | nafa wale 47, nuqsan wale 29 | top 10% (8) coins = net nafa ka 77% | median coin PF (3+ trades) 2.54
+5) Kharcha: 1x PF 1.47 | 2x PF 1.38 | 3x PF 1.30
+6) BTC regime: bull: PF 1.88 (263) | bear: PF 0.37 (27) | sideways: PF 1.54 (33)
+7) DIP ke sath overlap (usi coin mein +-3 din DIP trade): 25/323 = 8%
+   Saal-war PF: 2021: 2.26 (96) | 2022: 0.55 (7) | 2023: 2.31 (30) | 2024: 1.47 (87) | 2025: 1.10 (52) | 2026: 0.62 (36)
+   OOS trades 88 | PF 0.83 | mahana PF: 25-01: 1.07(17) | 25-02: 0.00(2) | 25-03: 0.58(5) | 25-05: inf(1) | 25-06: inf(2) | 25-07: 0.24(3) | 25-08: 2.79(4) | 25-09: 0.20(3) | 25-10: 37.77(8) | 25-11: 0.18(7) | 26-01: 0.00(2) | 26-02: inf(1) | 26-04: 0.46(5) | 26-05: 0.33(4) | 26-06: 0.87(3) | 26-07: 0.65(3) | 26-08: 0.16(5) | 26-09: 3.25(13)
+   OOS sab se bure: US 2026-08-10 -63% | AKE 2026-04-17 -44% | FARTCOIN 2025-07-24 -33% | UAI 2026-08-04 -33% | ALLO 2026-07-26 -31% | DATA 2025-09-24 -30% | ICP 2025-11-10 -27% | GTC 2026-05-13 -25%
+   Coin list (aaj ki top-150) mein coins: 104 -> AAVE,ADA,ADI,AERO,AGT,AKE,AKT,ALGO,ALICE,ALLO,APT,AR,ARB,ASTER,ATOM,AVAX,AXL,BCH,BIO,BNB,BSV,CC,COTI,CRV,DASH,DATA,DOT,ENA,ETC,ETH,FARTCOIN,FET,FIL,GALA,GRAM,GRASS,GTC,HBAR,HOME,HYPE,ICP,INJ,JASMY,KAS,KCS,KITE,LINK,LIT,LTC,LYN,MET,MON,MOVR,NEAR,NIGHT,NOM,ONDO,ONE,OP,PENDLE,PENGU,PLUME,POL,PROMPT,PUMP,QNT,RAIN,RENDER,S,SCR,SEI,SKY,SOL,SOON,SPK,STRK,STX,SUI,SUPER,SYN,TAO,TEL,TRAC,TRUMP,TRX,UAI,UNI,US,USELESS,VELO,VIRTUAL,VR,VVV,WLD,XDC,XLM,XMR,XPL,XPR,XRP,ZBCN,ZBT,ZEC,ZRO
 
 ##################################################################################################################################
-R8% V2.5: 186 trades (0.59/hafta) | win 63.4% | avg +3.12% | PF 1.79 | OOS PF 1.88
+R8% V2.5: 192 trades (0.61/hafta) | win 60.9% | avg +1.22% | PF 1.28 | OOS PF 0.92
 ##################################################################################################################################
-1) Bootstrap PF: p5 1.22 | p50 1.80 -> PASS
-2) Top-10 trades hata kar PF: 1.13 | top-20 hata kar: 0.89 -> PASS
-3) 4 time-folds: 2020-11-23: PF 2.25 (47) | 2021-09-08: PF 1.58 (47) | 2024-03-06: PF 1.26 (46) | 2025-03-04: PF 1.93 (46) -> 4/4 musbat
-4) Coins: 66 | nafa wale 41, nuqsan wale 25 | top 10% (7) coins = net nafa ka 107% | median coin PF (3+ trades) 2.20
-5) Kharcha: 1x PF 1.79 | 2x PF 1.70 | 3x PF 1.60
-6) BTC regime: bull: PF 2.28 (145) | bear: PF 0.98 (22) | sideways: PF 1.31 (19)
-7) DIP ke sath overlap (usi coin mein +-3 din DIP trade): 14/186 = 8%
-   Saal-war PF: 2021: 1.62 (59) | 2022: 0.21 (4) | 2023: 2.76 (15) | 2024: 1.52 (49) | 2025: 1.23 (26) | 2026: 2.37 (27)
+1) Bootstrap PF: p5 0.92 | p50 1.28 -> FAIL
+2) Top-10 trades hata kar PF: 0.95 | top-20 hata kar: 0.75 -> FAIL
+3) 4 time-folds: 2020-11-23: PF 2.01 (48) | 2021-09-08: PF 1.46 (48) | 2024-02-23: PF 1.09 (48) | 2025-01-26: PF 0.92 (48) -> 3/4 musbat
+4) Coins: 67 | nafa wale 40, nuqsan wale 27 | top 10% (7) coins = net nafa ka 152% | median coin PF (3+ trades) 1.94
+5) Kharcha: 1x PF 1.28 | 2x PF 1.20 | 3x PF 1.13
+6) BTC regime: bull: PF 1.73 (149) | bear: PF 0.30 (21) | sideways: PF 1.57 (22)
+7) DIP ke sath overlap (usi coin mein +-3 din DIP trade): 14/192 = 7%
+   Saal-war PF: 2021: 1.61 (59) | 2022: 0.21 (4) | 2023: 2.36 (17) | 2024: 1.07 (51) | 2025: 1.12 (26) | 2026: 0.78 (27)
+   OOS trades 53 | PF 0.92 | mahana PF: 25-01: 1.61(6) | 25-02: 0.00(1) | 25-03: 2.25(3) | 25-05: inf(1) | 25-06: inf(1) | 25-07: 0.00(2) | 25-08: 0.54(2) | 25-09: 0.05(2) | 25-10: inf(4) | 25-11: 0.27(4) | 26-01: 0.00(1) | 26-02: inf(1) | 26-04: 0.02(3) | 26-05: 0.33(4) | 26-06: 4.02(2) | 26-07: 0.65(3) | 26-08: 0.25(4) | 26-09: 19.28(9)
+   OOS sab se bure: US 2026-08-10 -63% | AKE 2026-04-17 -44% | FARTCOIN 2025-07-24 -33% | ALLO 2026-07-26 -31% | DATA 2025-09-24 -30% | GTC 2026-05-13 -25% | VELO 2025-01-19 -21% | AERO 2025-11-13 -14%
+   Coin list (aaj ki top-150) mein coins: 104 -> AAVE,ADA,ADI,AERO,AGT,AKE,AKT,ALGO,ALICE,ALLO,APT,AR,ARB,ASTER,ATOM,AVAX,AXL,BCH,BIO,BNB,BSV,CC,COTI,CRV,DASH,DATA,DOT,ENA,ETC,ETH,FARTCOIN,FET,FIL,GALA,GRAM,GRASS,GTC,HBAR,HOME,HYPE,ICP,INJ,JASMY,KAS,KCS,KITE,LINK,LIT,LTC,LYN,MET,MON,MOVR,NEAR,NIGHT,NOM,ONDO,ONE,OP,PENDLE,PENGU,PLUME,POL,PROMPT,PUMP,QNT,RAIN,RENDER,S,SCR,SEI,SKY,SOL,SOON,SPK,STRK,STX,SUI,SUPER,SYN,TAO,TEL,TRAC,TRUMP,TRX,UAI,UNI,US,USELESS,VELO,VIRTUAL,VR,VVV,WLD,XDC,XLM,XMR,XPL,XPR,XRP,ZBCN,ZBT,ZEC,ZRO
 
 ##################################################################################################################################
 8) PORTFOLIO (R8% V2.0) - C ka size aur hissa
 ##################################################################################################################################
                    Portfolio |    CAGR |   MaxDD | Sharpe | +mahine | Bura mah | 2021 | 2022 | 2023 | 2024 | 2025 | 2026
-                        ICHI |  +31.5% |  -11.5% |   1.68 |     54% |    -3.4% |  +63% |   -1% |  +50% |  +55% |   +8% |  +13%
-                         DIP |  +13.7% |  -24.1% |   0.73 |     37% |   -14.4% |  +10% |   -1% |   +4% |  +25% |  +15% |  +41%
-                         C10 |  +14.1% |  -20.3% |   0.76 |     48% |   -11.0% |  +28% |   -3% |  +10% |  +15% |   +2% |  +23%
-                         C20 |  +19.6% |  -25.1% |   0.72 |     46% |   -13.1% |  +32% |   -5% |  +15% |  +25% |   -1% |  +47%
-       BASE ICHI 60 / DIP 40 |  +24.9% |  -11.0% |   1.71 |     55% |    -6.9% |  +40% |   -1% |  +30% |  +44% |  +11% |  +24%
-   ICHI 60 / DIP 30 / C20 10 |  +25.9% |   -9.6% |   1.81 |     62% |    -6.7% |  +44% |   -1% |  +32% |  +44% |   +9% |  +26%
-   ICHI 60 / DIP 20 / C20 20 |  +26.8% |   -8.4% |   1.79 |     66% |    -6.6% |  +48% |   -2% |  +33% |  +44% |   +8% |  +27%
-   ICHI 50 / DIP 30 / C20 20 |  +25.0% |  -10.5% |   1.72 |     66% |    -7.8% |  +42% |   -2% |  +29% |  +41% |   +9% |  +30%
-   ICHI 50 / DIP 25 / C20 25 |  +25.4% |   -9.9% |   1.69 |     65% |    -7.8% |  +43% |   -2% |  +29% |  +41% |   +8% |  +30%
-   ICHI 50 / DIP 30 / C10 20 |  +23.4% |  -10.8% |   1.77 |     66% |    -7.4% |  +40% |   -1% |  +27% |  +38% |   +9% |  +24%
+                        ICHI |  +32.2% |  -11.2% |   1.69 |     51% |    -4.1% |  +64% |   -2% |  +60% |  +58% |   +4% |  +11%
+                         DIP |  +12.7% |  -24.7% |   0.72 |     38% |   -16.0% |  +13% |   -1% |   +2% |  +25% |  +17% |  +28%
+                         C10 |   +7.4% |  -23.2% |   0.46 |     44% |   -11.7% |  +33% |   -3% |  +10% |   +6% |   +1% |  -11%
+                         C20 |   +8.0% |  -40.4% |   0.41 |     43% |   -16.7% |  +52% |   -5% |  +16% |  +10% |   -2% |  -22%
+       BASE ICHI 60 / DIP 40 |  +24.8% |  -11.4% |   1.73 |     57% |    -7.5% |  +43% |   -1% |  +35% |  +46% |  +10% |  +18%
+   ICHI 60 / DIP 30 / C20 10 |  +24.6% |  -10.4% |   1.74 |     60% |    -7.2% |  +48% |   -2% |  +37% |  +44% |   +8% |  +12%
+   ICHI 60 / DIP 20 / C20 20 |  +24.2% |   -9.5% |   1.66 |     62% |    -7.0% |  +54% |   -2% |  +39% |  +42% |   +6% |   +7%
+   ICHI 50 / DIP 30 / C20 20 |  +22.3% |  -11.7% |   1.59 |     61% |    -8.4% |  +48% |   -2% |  +33% |  +39% |   +7% |   +9%
+   ICHI 50 / DIP 25 / C20 25 |  +22.2% |  -11.4% |   1.53 |     62% |    -8.3% |  +51% |   -2% |  +33% |  +38% |   +6% |   +6%
+   ICHI 50 / DIP 30 / C10 20 |  +21.9% |  -11.2% |   1.67 |     61% |    -8.0% |  +43% |   -2% |  +31% |  +38% |   +8% |  +11%
 
 Mahana correlation:
       ICHI   DIP   C20
-ICHI  1.00  0.22  0.03
-DIP   0.22  1.00  0.06
-C20   0.03  0.06  1.00
+ICHI  1.00  0.23  0.11
+DIP   0.23  1.00  0.07
+C20   0.11  0.07  1.00
