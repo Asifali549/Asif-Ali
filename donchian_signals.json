@@ -38,5 +38,25 @@
     "tp": null,
     "risk_pct": 20.23,
     "size_pct": 4.94
+  },
+  {
+    "system": "Donchian Daily",
+    "symbol": "NIGHT/USDT",
+    "signal_time_utc": "2026-10-03 00:00:00",
+    "entry_est": 0.04892,
+    "sl": 0.0381463636,
+    "tp": null,
+    "risk_pct": 22.02,
+    "size_pct": 4.54
+  },
+  {
+    "system": "Donchian Daily",
+    "symbol": "CARDS/USDT",
+    "signal_time_utc": "2026-10-03 00:00:00",
+    "entry_est": 0.2857,
+    "sl": 0.1647454545,
+    "tp": null,
+    "risk_pct": 42.34,
+    "size_pct": 2.36
   }
 ]
