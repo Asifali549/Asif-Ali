@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "system": "Volume Capitulation",
+    "symbol": "SOON/USDT",
+    "signal_time_utc": "2026-10-03 00:00:00",
+    "entry_est": 0.3679,
+    "sl": 0.2186882194,
+    "tp": null,
+    "risk_pct": 40.56,
+    "size_pct": 20.0
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "US/USDT",
+    "signal_time_utc": "2026-10-03 00:00:00",
+    "entry_est": 0.024443,
+    "sl": 0.0026610353,
+    "tp": null,
+    "risk_pct": 89.11,
+    "size_pct": 20.0
+  }
+]
