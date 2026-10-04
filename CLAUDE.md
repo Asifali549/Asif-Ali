@@ -7,6 +7,9 @@
 - Strategy pasand: signals market ke sath sath milte rahein (rozana), taqatwar trades - saal mein chand trades wali
   (BTC/ETH trend) strategies NAHI chahiye.
 - Asif, Pakistan (PKT = UTC+5). **Jawab hamesha Urdu mein.** Waqt PKT mein batao.
+- **Urdu likhai (2026-10-04, user ki shikayat):** Urdu jumlon mein English alfaaz, minus/% wale numbers mix karne se mobile par
+  alfaaz aage peeche ho jate hain. Is liye: naam Urdu rasm-ul-khat mein (اچیموکو، ڈپ، ڈونچین، کیپیچولیشن، ٹی پی، ایس ایل، پی ایف)،
+  "%" ki jagah "فیصد"، minus ki jagah "نقصان/کمی" lafz; bullet/line English lafz ya number se shuru na ho.
 - Trading: sirf **spot, buy-only**, daily/swing. Maqsad: ek sach mein qabil-e-aitmaad strategy.
 - Mobile se kaam karta hai (GitHub app + Streamlit dashboard). Coding khud nahi karta - Claude repo mein
   seedha commit/push karta hai (Claude GitHub App installed).
