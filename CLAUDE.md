@@ -254,6 +254,17 @@ Secrets:
   hai; kam trades wali strategy (300) ka OOS isi se ulat sakta hai. Aage har validation mein (a) 2 alag din ke coin
   list / ya coins ka 10-20% random hata kar sensitivity, (b) OOS > 1 dono mein - tabhi PASS.
 
+## MFE Study natija (2026-10-04) - `mfe_study.py` / workflow "MFE Study Test" / `mfe_study_RESULTS.txt`
+User ka sawal: harne wali trades pehle 2-4% ooper ja kar wapas SL hit karti hain? Chhota TP / breakeven madad karega?
+- ICHI: haan - harne walon ka median MFE 7.8%, 91% pehle >2% ooper gayin (jeetne walon ka median MFE 32%).
+  BASE CAGR 35.3% DD -12.5% Sharpe 1.82. P2-P8 (aadhi bechna): CAGR 21-25%, Sharpe 1.30-1.53 (BURA).
+  BE2/BE3: win 75%, CAGR 16-19%, DD -6/-8%, Sharpe 1.90. **TP5 (poori 5% par): win 83%, CAGR 15.6%, DD -4.6%,
+  Sharpe 2.60, OOS PF 2.57 (base 1.99)**; TP3 Sharpe 2.28 CAGR 9%. Matlab: nafa kam magar bohat hamwar ->
+  aage test: TP4-7 plateau + 1.5-2% risk (size barha kar CAGR wapas?), folds, kharcha. Live bot NAHI badla.
+- DON: losers median MFE 9.4%, lekin har variant Sharpe/CAGR girata (bare winners median 62% kat jate); sirf TP5 DD -40 -> -29.
+- DIP: harne wali aksar foran ulat jati (median MFE 2.4%, 30% <1%) - user ka khayal yahan sahi nahi; variants ~barabar/bure
+  (BE2 thora behtar: CAGR 13.3 vs 12.3, DD -23.8 vs -26.9 - kamzor faida). CAPIT: har variant bura.
+
 ## Aglay kaam
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
   `scheduler.py` + `scheduler.yml`: ek workflow ~5h40m lagataar chalta, har minute: Ichimoku har 4h :10, Donchian 00:15,
