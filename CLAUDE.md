@@ -329,5 +329,8 @@ Rozana asal eligible coins: top-100 -> 86, top-150 -> 103, top-200 -> 112 (puran
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
 - 2-3 mahine paper trading ke natije backtest se milao, phir asli paisa.
 - Ichimoku TP5 (paper) vs live Ichimoku: dono ka win%, PF, DD dashboard se milao; TP5 behtar rahe to user se poochh kar live par lao.
-- 2026-10-04: Dip v2 + TP5 top-200 dono pehle run kamyab (Dip v2 pehla signal BR/USDT). User ko baqi systems (purana Ichimoku,
-  Donchian, Capitulation) ki halat batayi - band / Telegram khamosh karne ka faisla user se baqi.
+- 2026-10-04: Dip v2 + TP5 top-200 dono pehle run kamyab (Dip v2 pehla signal BR/USDT).
+- **FAISLA (2026-10-04, user): sab 6 bots chalte rahein (har ek ka alag record/dashboard tab), lekin TELEGRAM par sirf
+  Ichimoku TP5 + Dip v2.** Lagu: `TELEGRAM_ON = False` purane Ichimoku (`ichimoku4h_bot.py`), Donchian, Capitulation mein
+  (send() sirf print karta hai); `ichi_tp5_bot.py` mein `B.TELEGRAM_ON = True`; Dip bot ka send() pehle jaisa. Watchdog
+  alerts chalu (system sehat). Kisi ko wapas chalu karna ho to us file mein TELEGRAM_ON = True.

@@ -23,6 +23,7 @@ B.TRADES_CSV = "ichi_tp5_paper_trades.csv"
 B.SIGNALS_FILE = "ichi_tp5_signals.json"
 B.UNIVERSE = 200          # universe_test (2026-10-04): top-200 par win 78%, Sharpe 2.81 (top-100: 2.48)
 B.TOP_N_COINS = 260
+B.TELEGRAM_ON = True      # kaam ka system - Telegram par aata hai (purana Ichimoku khamosh)
 
 if __name__ == "__main__":
     B.main()

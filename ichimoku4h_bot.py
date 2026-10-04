@@ -105,7 +105,13 @@ def append_signals(new_rows, keep=300):
         json.dump(rows, f, indent=2)
 
 
+TELEGRAM_ON = False   # 2026-10-04: user - Telegram par sirf kaam ke 2 systems (Ichimoku TP5 + Dip v2); ye bot khamosh, record chalta rahe
+
+
 def send(msg):
+    if not TELEGRAM_ON:
+        print("[Telegram khamosh]\n" + msg)
+        return
     try:
         from telegram_alert import send_telegram_alert
         send_telegram_alert(msg)
