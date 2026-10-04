@@ -291,6 +291,18 @@ User: "win rate ziada chahiye, jo mumkin hai test karo". 31 ICHI exit variants +
 - LAGU: paper bot `ichi_tp5_bot.py` live Ichimoku ke SATH (pehla run 2026-10-04 07:55 UTC kamyab). Live bot/taqseem NAHI badli.
   Faisla 2-3 mahine paper muqable ke baad (user se poochh kar): live Ichimoku ko TP5 se badalna + taqseem (80/20?).
 
+## Dip v2 Validation natija (2026-10-04) - `dip_v2_validate.py` / workflow "Dip v2 Validation Test" / `dip_v2_validate_RESULTS.txt` - **PASS (sab)**
+Naya Dip = RSI3<7, exit close>SMA3, TP +5% (stop/10-din wahi). Live = RSI3<10, SMA5, TP nahi.
+- Padosi grid (RSI 6-8, SMA3, TP 4-6): 9/9 PF>2 + OOS>1.5. Naya: n 167 (0.54/hafta, live 1.29), win 80.8% (live 69.7),
+  PF 3.99 (2.35), OOS 4.04 (2.99), CAGR 10.7% (13.6), DD -18.3% (-27.2), Sharpe 0.91 (0.70), **bura mahina -1.4% (live -18.4%)**.
+- Random (same uptrend din, random entry) x20: naya PF 3.99 vs p95 1.29; live 2.35 vs 1.22 - dono asli edge.
+- Folds naya 14.7/inf/3.45/2.81 (live 2.53/0.88/2.61/2.00); boot p5 2.51 (1.80); -top10 3.64; 3x kharcha 3.02.
+- Universe 8/8 PASS (naya PF 3.65-7.36, DD -12..-19%; live DD -16..-28%).
+- Portfolio ICHI TP5 2% ke sath: 80/naya20 28.3% / -5.3% / 2.69 / +mahine 78%; 80/live20 29.3% / -5.5% / 2.60;
+  70/naya30 26.1% / -5.9% / 2.67; 60/naya40 23.8% / -7.8% / 2.57 (60/live40 25.6% / -10.7% / 2.12).
+  Kamzori: naya kam signals -> 2025 +10% / 2026 +3% (live +21/+22).
+- Live Dip bot NAHI badla - user ka faisla baqi.
+
 ## Aglay kaam
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
   `scheduler.py` + `scheduler.yml`: ek workflow ~5h40m lagataar chalta, har minute: Ichimoku har 4h :10, Donchian 00:15,
