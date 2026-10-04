@@ -27,7 +27,7 @@
 | `bot_core.py` | dono bots ke helpers: fetch_full, norm, ema, chandelier, ichi_signal, FEE/SLIP/STOP_SLIP, STABLES |
 | `strategies.py`, `config.py` | ichimoku + market_structure signal functions aur unke params (bot_core inhein use karta hai) |
 | `data_fetcher.py` | KuCoin (ccxt) exchange + top coins list |
-| `live_colorful_dashboard.py` | Streamlit dashboard - tabs: 📊 Aaj ka Scoreboard (tamam signals + khuli trades, nafa/nuqsan) / 🤖 Auto Trading (bots, har system ki tab) / ✋ Manual Trading (user ki apni trades, GitHub `manual_trades.json` mein Contents API se) / 🕐 Session |
+| `live_colorful_dashboard.py` | Streamlit dashboard - tabs: 📊 Aaj ka Scoreboard (tamam signals + khuli trades, nafa/nuqsan) / 🏁 Muqabla (5 systems ek table: equity, win/PF/DD live vs test, asli paise ki 4 shartein - GOLIVE dict, mushtarka equity chart; 🔔 Telegram / 🔕 khamosh) / 🤖 Auto Trading (bots, har system ki tab) / ✋ Manual Trading (user ki apni trades, GitHub `manual_trades.json` mein Contents API se) / 🕐 Session |
 | `scheduler.py` | GitHub cron ka mutabadil: ~5h40m chalta, theek waqt par bots dispatch karta (GH_TOKEN), phir khud ko dobara chalata (zanjeer); push par bhi shuru |
 | `loop_watchdog.py` | bot ruk jaye (state ka `last_updated` purana) to workflow dobara chalata hai + Telegram |
 | `telegram_alert.py` | Telegram (token/chat id env ya Streamlit secrets) + har alert ntfy.sh par bhi (topic `asifali549-strong-signals-9k3m7x`, ya secret `NTFY_TOPIC`) |
@@ -350,3 +350,5 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
 - **NAYI SHURUAT (2026-10-04 shaam, user):** purana Ichimoku, Donchian, Capitulation ka record bhi naye usoolon ke liye saaf:
   purani files `ichimoku4h_v1_*`, `donchian_v1_*`, `capit_v1_*` (git mv). Ab paanchon systems (TP5, Dip v2, purana Ichimoku,
   Donchian maxSL20, Capitulation 2% risk) ka record 2026-10-04 se ek sath shuru -> barabar muqabla.
+- **Dashboard 🏁 Muqabla tab (2026-10-04):** go-live shartein har system: 20 band trades, 60 din, win hadaf (TP5 70, Dip 60), DD test ke 2x se kam. Dip badge ab 🪂.
+  Mashwara diya (user ki ijazat baqi): sidebar taqseem TP5 80 / Dip 20 (abhi purana Ichimoku 60 / Dip 40 dikhata hai).

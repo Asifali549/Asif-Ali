@@ -93,7 +93,7 @@ SYSTEMS = {
                      "note": "6.5 saal (2020-2026, 2022 crash samet), 3 alag tests mein PASS"},
     },
     "Dip Daily": {
-        "badge": "🎯 Dip Daily",
+        "badge": "🪂 Dip Daily",
         "state": "dip_paper_state.json",
         "trades": "dip_paper_trades.csv",
         "signals": "dip_signals.json",
@@ -140,6 +140,12 @@ SYSTEMS = {
                      "note": "6 saal, ~1 trade/hafta; 2021-24 acha lekin 2025-26 kamzor (OOS PF 0.83) - sirf paper par nazar"},
     },
 }
+
+# Muqabla (2026-10-04 se sab ka naya record): Telegram kaun bhejta hai + asli paise se pehle kya shart puri honi chahiye
+START_DAY = "2026-10-04"
+TELEGRAM = {"Ichimoku TP5": True, "Dip Daily": True}          # baqi khamosh (sirf record)
+GOLIVE = {"min_trades": 20, "min_days": 60,
+          "win": {"Ichimoku TP5": 70, "Dip Daily": 60, "Ichimoku 4H": 35, "Donchian Daily": 30, "Volume Capitulation": 55}}
 
 
 # ============================================================
@@ -383,7 +389,7 @@ st.sidebar.header("💼 Sarmaye ki taqseem")
 total_capital = st.sidebar.number_input("Kul Capital ($)", min_value=0.0, value=1000.0, step=100.0)
 for _n, _c in SYSTEMS.items():
     _amt = total_capital * _c["alloc"]
-    st.sidebar.markdown(f"**{_c['badge']}** — {_c['alloc']*100:.0f}% = **${_amt:,.0f}**"
+    st.sidebar.markdown(("🔔 " if TELEGRAM.get(_n) else "🔕 ") + f"**{_c['badge']}** — {_c['alloc']*100:.0f}% = **${_amt:,.0f}**"
                         + ("" if _c["alloc"] else " _(sirf paper)_"))
 st.sidebar.caption("Backtest (6 saal): Ichimoku 60% + Dip 40% — CAGR ~+25%, MaxDD ~-11%, Sharpe ~1.73. "
                    "Donchian (Ichimoku ke sath girti hai) aur Capitulation (2025-26 kamzor) sirf paper par. "
@@ -415,8 +421,92 @@ for _n, _d in DATA.items():
 need |= {m["symbol"] for m in manual if m.get("status") == "open"}
 PRICES = fetch_live_prices(tuple(sorted(need)))
 
-T_SCORE, T_AUTO, T_MANUAL, T_SESS = st.tabs(["📊 Aaj ka Scoreboard", "🤖 Auto Trading (bots)",
-                                              "✋ Manual Trading (meri trades)", "🕐 Session Analysis"])
+T_SCORE, T_RACE, T_AUTO, T_MANUAL, T_SESS = st.tabs(["📊 Aaj ka Scoreboard", "🏁 Muqabla", "🤖 Auto Trading (bots)",
+                                                      "✋ Manual Trading (meri trades)", "🕐 Session Analysis"])
+
+
+def system_report(name):
+    """Ek system ka paper record: equity, band trades, win, PF, DD + asli paise wali shartein."""
+    cfg, d = SYSTEMS[name], DATA[name]
+    st_, tr = d["state"], d["trades"]
+    pos = st_.get("positions", {})
+    cash = float(st_.get("cash", 1000) or 0)
+    eq = cash + sum(p["qty"] * (PRICES.get(s) or p.get("last_px", p["entry"])) for s, p in pos.items())
+    r = pd.to_numeric(tr["ret_pct"], errors="coerce").dropna() if len(tr) and "ret_pct" in tr else pd.Series(dtype=float)
+    wins, losses = r[r > 0.5], r[r <= 0.5]
+    pf = wins.sum() / abs(r[r < 0].sum()) if (r < 0).any() else None
+    hist = pd.DataFrame(st_.get("history", []))
+    curve = list(hist["equity"]) + [eq] if len(hist) else [1000.0, eq]
+    s = pd.Series(curve, dtype=float)
+    dd = float((s / s.cummax() - 1).min() * 100)
+    days = (pd.Timestamp.now(tz="UTC").normalize() - pd.Timestamp(START_DAY, tz="UTC")).days
+    bt = cfg["backtest"]
+    win = len(wins) / len(r) * 100 if len(r) else None
+    goal_win = GOLIVE["win"].get(name, 50)
+    checks = [len(r) >= GOLIVE["min_trades"], days >= GOLIVE["min_days"],
+              win is not None and win >= goal_win, dd >= 2 * bt["dd"]]
+    return dict(eq=eq, ret=(eq / 1000 - 1) * 100, n=len(r), open=len(pos), win=win, pf=pf,
+                avg_w=wins.mean() if len(wins) else None, avg_l=losses.mean() if len(losses) else None,
+                dd=dd, days=days, goal_win=goal_win, checks=checks, bt=bt)
+
+
+# ============================================================
+# 🏁 MUQABLA - paanchon systems ek hi din (2026-10-04) se, $1000 se
+# ============================================================
+with T_RACE:
+    st.subheader("🏁 Systems ka muqabla")
+    st.caption(f"Sab systems {START_DAY} ko $1,000 paper se ek sath shuru hue — barabar muqabla. "
+               "🔔 = Telegram par signal aata hai · 🔕 = khamosh (sirf record).")
+    REP = {n: system_report(n) for n in SYSTEMS}
+    order = sorted(SYSTEMS, key=lambda n: -REP[n]["ret"])
+    rows = []
+    for rank, n in enumerate(order, 1):
+        R = REP[n]
+        rows.append({
+            "#": rank,
+            "System": ("🔔 " if TELEGRAM.get(n) else "🔕 ") + SYSTEMS[n]["badge"],
+            "Equity $": round(R["eq"], 2),
+            "Nafa %": round(R["ret"], 2),
+            "Band trades": R["n"],
+            "Khuli": R["open"],
+            "Win % (live)": round(R["win"], 1) if R["win"] is not None else None,
+            "Win % (test)": R["bt"]["win"],
+            "PF (live)": round(R["pf"], 2) if R["pf"] else None,
+            "PF (test)": R["bt"]["pf"],
+            "Ausat jeet %": round(R["avg_w"], 2) if R["avg_w"] is not None else None,
+            "Ausat haar %": round(R["avg_l"], 2) if R["avg_l"] is not None else None,
+            "MaxDD % (live)": round(R["dd"], 1),
+            "MaxDD % (test)": R["bt"]["dd"],
+        })
+    show_table(pd.DataFrame(rows), pl_cols=("Nafa %",), link_cols=())
+    st.caption("Win = trade +0.5% se ziada nafa par band hui. Shuru ke hafton mein live number bohat oopar neeche honge — "
+               "kam az kam 20 band trades ke baad hi test se milayein.")
+
+    st.markdown("#### ✅ Asli paise se pehle — shartein")
+    st.caption(f"Har system ke liye: kam az kam {GOLIVE['min_trades']} band trades · {GOLIVE['min_days']} din · "
+               "win % hadaf se ooper · drawdown test ke 2 guna se kam. Charon puri hon to bhi chhoti raqam se shuru karein.")
+    for n in order:
+        R = REP[n]
+        ok = sum(R["checks"])
+        c1, c2 = st.columns([1, 3])
+        c1.markdown(f"**{SYSTEMS[n]['badge']}**  \n{'🟢 TAYYAR' if ok == 4 else f'⏳ {ok}/4 shartein'}")
+        marks = ["✅" if x else "⬜" for x in R["checks"]]
+        c2.markdown(
+            f"{marks[0]} Trades {R['n']}/{GOLIVE['min_trades']} &nbsp; "
+            f"{marks[1]} Din {R['days']}/{GOLIVE['min_days']} &nbsp; "
+            f"{marks[2]} Win {('%.0f%%' % R['win']) if R['win'] is not None else '—'} (hadaf {R['goal_win']}%) &nbsp; "
+            f"{marks[3]} DD {R['dd']:.1f}% (had {2 * R['bt']['dd']:.0f}%)")
+        c2.progress(min(R["n"] / GOLIVE["min_trades"], 1.0))
+
+    curves = {}
+    for n in SYSTEMS:
+        h = pd.DataFrame(DATA[n]["state"].get("history", []))
+        if len(h):
+            idx = pd.to_datetime(h[h.columns[0]], errors="coerce").dt.normalize()
+            curves[SYSTEMS[n]["badge"]] = pd.Series(h["equity"].values, index=idx).groupby(level=0).last()
+    if curves:
+        st.markdown("#### 📈 Equity — sab ek chart par (rozana)")
+        st.line_chart(pd.DataFrame(curves).sort_index().ffill(), height=280)
 
 # ============================================================
 # 📊 SCOREBOARD
