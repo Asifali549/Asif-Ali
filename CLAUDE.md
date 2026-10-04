@@ -20,6 +20,7 @@
 | `dip_daily_bot.py` | Dip Daily bot - signals + paper trading + Telegram |
 | `donchian_daily_bot.py` | Donchian Daily bot - signals + paper trading + Telegram |
 | `capit_daily_bot.py` | Volume Capitulation bot - signals + paper trading + Telegram (2026-10-02 se) |
+| `ichi_tp5_bot.py` | **Ichimoku TP5 - SIRF PAPER** (2026-10-04 se): `ichimoku4h_bot` import kar ke CE_M 4, TP_PCT 5%, RISK 2%, ALLOC 0, apni files `ichi_tp5_*` |
 | `bot_core.py` | dono bots ke helpers: fetch_full, norm, ema, chandelier, ichi_signal, FEE/SLIP/STOP_SLIP, STABLES |
 | `strategies.py`, `config.py` | ichimoku + market_structure signal functions aur unke params (bot_core inhein use karta hai) |
 | `data_fetcher.py` | KuCoin (ccxt) exchange + top coins list |
@@ -31,7 +32,7 @@
 | `manual_trades.json` | user ki manual trades (dashboard likhta hai) - haath mat lagao |
 
 Workflows (.github/workflows): `ichimoku4h_bot.yml` (cron `10 */4 * * *`), `donchian_daily_bot.yml`
-(cron `15 0 * * *` = 5:15 AM PKT), `dip_daily_bot.yml` (cron `20 0 * * *`), `capit_daily_bot.yml` (cron `25 0 * * *`), `watchdog.yml` (har 30 min), `scheduler.yml` (lagataar; asal waqt-paband trigger - cron ab sirf backup), `telegram_test.yml` (sirf manual).
+(cron `15 0 * * *` = 5:15 AM PKT), `dip_daily_bot.yml` (cron `20 0 * * *`), `capit_daily_bot.yml` (cron `25 0 * * *`), `ichi_tp5_bot.yml` (cron `12 */4 * * *`, scheduler :12), `watchdog.yml` (har 30 min), `scheduler.yml` (lagataar; asal waqt-paband trigger - cron ab sirf backup), `telegram_test.yml` (sirf manual).
 
 Secrets:
 - GitHub Actions secrets: `GH_TOKEN` (watchdog ke liye), `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`.
@@ -279,6 +280,17 @@ User: "win rate ziada chahiye, jo mumkin hai test karo". 31 ICHI exit variants +
 - Khatra: 31 variants mein se chuna (multiple testing) - lekin poora padosi khandan acha hai. Live NAHI badla.
   Aglay: CE 3.5/4/4.5 x TP 4/5/6 grid + coin-universe sensitivity (20% coins hata kar) + paper bot "ICHI TP5" live ke sath.
 
+## TP5 Validation natija (2026-10-04) - `tp5_validate.py` / workflow "TP5 Validation Test" / `tp5_validate_RESULTS.txt` - **PASS (sab)**
+- Grid CE 3.5/4/4.5/5 x TP 4/5/6/7: **16/16** cells PF>1.5, OOS>1, random p95 se behtar (win 61-85%, 2% risk CAGR 22-33%, DD -6..-11%).
+- Random 20 seeds (CE4 TP5): asli win 77.8% / PF 2.04 / Sharpe 2.51 vs random p95 win 47.5% / PF 0.99 / Sharpe -0.11.
+- 4 folds PF 2.10/1.72/1.97/2.30; boot p5 1.70; -top10 2.00; 3x kharcha PF 1.57 (win 77% barqarar).
+- Universe (20% coins hata kar x8): **8/8 PASS** (PF 1.90-2.15, OOS 1.92-2.39, CAGR 23-27%, DD -6..-10%).
+- Portfolio: TP5 2% 31.8% / -6.6% / Sharpe 2.51 / +mahine 74%; live ICHI 1% 35.0% / -14.0% / 1.80 / 58%.
+  Saal-war TP5 2%: 2021 +41, 2022 +3, 2023 +41, 2024 +41, **2025 +23 (live +4)**, 2026 +41 - koi saal manfi nahi.
+  Mix: TP5 80/DIP20 28.3% / -5.5% / 2.54; TP5 60/DIP40 24.6% / -9.8% / 2.11; live ICHI60/DIP40 26.7% / -11.3% / 1.80.
+- LAGU: paper bot `ichi_tp5_bot.py` live Ichimoku ke SATH (pehla run 2026-10-04 07:55 UTC kamyab). Live bot/taqseem NAHI badli.
+  Faisla 2-3 mahine paper muqable ke baad (user se poochh kar): live Ichimoku ko TP5 se badalna + taqseem (80/20?).
+
 ## Aglay kaam
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
   `scheduler.py` + `scheduler.yml`: ek workflow ~5h40m lagataar chalta, har minute: Ichimoku har 4h :10, Donchian 00:15,
@@ -291,3 +303,4 @@ User: "win rate ziada chahiye, jo mumkin hai test karo". 31 ICHI exit variants +
 - Dip Daily bot naya (2026-09-30) - pehle run ke baad dashboard/Telegram check karo.
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
 - 2-3 mahine paper trading ke natije backtest se milao, phir asli paisa.
+- Ichimoku TP5 (paper) vs live Ichimoku: dono ka win%, PF, DD dashboard se milao; TP5 behtar rahe to user se poochh kar live par lao.
