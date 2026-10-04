@@ -1,0 +1,14 @@
+{
+  "cash": 1000.0,
+  "positions": {},
+  "pending": [],
+  "last_day": "2026-10-03",
+  "history": [
+    {
+      "day": "2026-10-03",
+      "equity": 1000.0
+    }
+  ],
+  "last_updated": "2026-10-04T13:14:56.011236+00:00",
+  "btc_regime_ok": true
+}
