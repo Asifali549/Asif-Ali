@@ -352,3 +352,7 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   Donchian maxSL20, Capitulation 2% risk) ka record 2026-10-04 se ek sath shuru -> barabar muqabla.
 - **Dashboard 🏁 Muqabla tab (2026-10-04):** go-live shartein har system: 20 band trades, 60 din, win hadaf (TP5 70, Dip 60), DD test ke 2x se kam. Dip badge ab 🪂.
   Mashwara diya (user ki ijazat baqi): sidebar taqseem TP5 80 / Dip 20 (abhi purana Ichimoku 60 / Dip 40 dikhata hai).
+- **ALLOC TEST (2026-10-04, `alloc_test.py` / `alloc_test_RESULTS.txt`, 219 coins):** naye systems ki taqseem. TP5 akela 51.2% / -13.5% / Sharpe 2.78;
+  TP5 90/DIP10 2.86; **80/20 43.6% / -10.6% / 2.91; 70/30 39.8% / -9.1% / 2.92**; 60/40 36.0% / -9.0% / 2.85; 50/50 2.67 (plateau 90-60).
+  CAPIT 10 ya DON 10 milane se koi faida nahi (2.85-2.93). Purana ICHI60/DIPv2 40: 28.6% / -9.5% / 1.80. Corr TP5-DIP 0.18.
+  CAPIT 2% akela OOS 1.00, CAGR 7% - kamzor. Mashwara: TP5 70 / DIP 30 (ya 80/20) - user ki ijazat baqi, sidebar abhi nahi badla.
