@@ -361,3 +361,5 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   TP7 67% 56.7% -13.5% 2.48 | TP8 63% 56% 2.32 | TP10 56% 58.6% -18.6% 2.16 | trail 38% 48% -28.9% 1.13. -> TP 4-7 sab ek jaise, TP barhane se
   nafa thora, jhatke ziada. Asal lever SIZE: TP5 r2 cap30 59.8% / -15.1% / 2.84 (cap20 51.5 / -14.4); r3 cap30 80% / -21%.
   Mix 70 TP5 r3c30 / 30 DIP 59% / -14.9% / 2.97 (r2c20 70/30: 40% / -9.8% / 2.92). Mashwara: TP5 rakho, cap 30% (paper) - user ki ijazat baqi.
+- **🤝 Group khaana (2026-10-04, user):** Muqabla tab ke ooper 3 khaane, har ek $1000: TP5 akela, Dip akela, Group (GROUP_SPLIT 70/30 =
+  0.7 x TP5 equity + 0.3 x Dip equity, dono paper records se hisab - alag bot nahi). Chart mein Group line bhi.

@@ -144,6 +144,7 @@ SYSTEMS = {
 # Muqabla (2026-10-04 se sab ka naya record): Telegram kaun bhejta hai + asli paise se pehle kya shart puri honi chahiye
 START_DAY = "2026-10-04"
 TELEGRAM = {"Ichimoku TP5": True, "Dip Daily": True}          # baqi khamosh (sirf record)
+GROUP_SPLIT = (0.70, 0.30)   # 🤝 Group khaana: $1000 ka 70% TP5 + 30% Dip (Alloc Test ka behtareen Sharpe)
 GOLIVE = {"min_trades": 20, "min_days": 60,
           "win": {"Ichimoku TP5": 70, "Dip Daily": 60, "Ichimoku 4H": 35, "Donchian Daily": 30, "Volume Capitulation": 55}}
 
@@ -458,6 +459,33 @@ with T_RACE:
     st.caption(f"Sab systems {START_DAY} ko $1,000 paper se ek sath shuru hue — barabar muqabla. "
                "🔔 = Telegram par signal aata hai · 🔕 = khamosh (sirf record).")
     REP = {n: system_report(n) for n in SYSTEMS}
+
+    def daily_curve(n):
+        h = pd.DataFrame(DATA[n]["state"].get("history", []))
+        if not len(h):
+            return pd.Series(dtype=float)
+        idx = pd.to_datetime(h[h.columns[0]], errors="coerce").dt.normalize()
+        return pd.Series(h["equity"].values, index=idx).groupby(level=0).last()
+
+    # ---------- 🤝 Group: $1000 mein se TP5 ko 70% ($700) + Dip ko 30% ($300) ----------
+    GW = {"Ichimoku TP5": GROUP_SPLIT[0], "Dip Daily": GROUP_SPLIT[1]}
+    g_now = sum(w * REP[n]["eq"] for n, w in GW.items())
+    gc = pd.DataFrame({n: daily_curve(n) for n in GW}).sort_index().ffill().fillna(1000.0)
+    g_curve = pd.concat([sum(w * gc[n] for n, w in GW.items()), pd.Series([g_now])], ignore_index=True)
+    g_dd = float((g_curve / g_curve.cummax() - 1).min() * 100)
+    st.markdown("#### 🤝 Teen khaane — har ek $1,000 se")
+    k1, k2, k3 = st.columns(3)
+    for col, n in ((k1, "Ichimoku TP5"), (k2, "Dip Daily")):
+        R = REP[n]
+        col.metric(f"{SYSTEMS[n]['badge']} akela", f"${R['eq']:,.2f}", f"{R['ret']:+.2f}%")
+        col.caption(f"Band trades {R['n']} · khuli {R['open']} · MaxDD {R['dd']:.1f}%")
+    k3.metric(f"🤝 Group: TP5 {GROUP_SPLIT[0]*100:.0f}% + Dip {GROUP_SPLIT[1]*100:.0f}%", f"${g_now:,.2f}",
+              f"{(g_now / 1000 - 1) * 100:+.2f}%")
+    k3.caption(f"${GROUP_SPLIT[0]*1000:.0f} TP5 mein + ${GROUP_SPLIT[1]*1000:.0f} Dip mein · "
+               f"band trades {REP['Ichimoku TP5']['n'] + REP['Dip Daily']['n']} · MaxDD {g_dd:.1f}%")
+    st.caption("Backtest (6 saal): TP5 akela ~51% saalana, sab se bari kami ~13.5% · Group 70/30 ~40% saalana, kami ~9% "
+               "(nafa kam, jhatke kam). Teenon ka asli muqabla yahan paper par hoga.")
+    st.markdown("---")
     order = sorted(SYSTEMS, key=lambda n: -REP[n]["ret"])
     rows = []
     for rank, n in enumerate(order, 1):
@@ -498,12 +526,9 @@ with T_RACE:
             f"{marks[3]} DD {R['dd']:.1f}% (had {2 * R['bt']['dd']:.0f}%)")
         c2.progress(min(R["n"] / GOLIVE["min_trades"], 1.0))
 
-    curves = {}
-    for n in SYSTEMS:
-        h = pd.DataFrame(DATA[n]["state"].get("history", []))
-        if len(h):
-            idx = pd.to_datetime(h[h.columns[0]], errors="coerce").dt.normalize()
-            curves[SYSTEMS[n]["badge"]] = pd.Series(h["equity"].values, index=idx).groupby(level=0).last()
+    curves = {SYSTEMS[n]["badge"]: daily_curve(n) for n in SYSTEMS if len(daily_curve(n))}
+    if len(gc):
+        curves["🤝 Group TP5+Dip"] = sum(w * gc[n] for n, w in GW.items())
     if curves:
         st.markdown("#### 📈 Equity — sab ek chart par (rozana)")
         st.line_chart(pd.DataFrame(curves).sort_index().ffill(), height=280)
