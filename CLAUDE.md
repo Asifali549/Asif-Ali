@@ -20,7 +20,7 @@
 | `dip_daily_bot.py` | Dip Daily bot - signals + paper trading + Telegram |
 | `donchian_daily_bot.py` | Donchian Daily bot - signals + paper trading + Telegram |
 | `capit_daily_bot.py` | Volume Capitulation bot - signals + paper trading + Telegram (2026-10-02 se) |
-| `ichi_tp5_bot.py` | **Ichimoku TP5 - SIRF PAPER** (2026-10-04 se): `ichimoku4h_bot` import kar ke CE_M 4, TP_PCT 5%, RISK 2%, ALLOC 0, apni files `ichi_tp5_*` |
+| `ichi_tp5_bot.py` | **Ichimoku TP5 - SIRF PAPER** (2026-10-04 se): `ichimoku4h_bot` import kar ke CE_M 4, TP_PCT 5%, RISK 2%, ALLOC 0, **UNIVERSE 200 / TOP_N 260**, apni files `ichi_tp5_*` |
 | `bot_core.py` | dono bots ke helpers: fetch_full, norm, ema, chandelier, ichi_signal, FEE/SLIP/STOP_SLIP, STABLES |
 | `strategies.py`, `config.py` | ichimoku + market_structure signal functions aur unke params (bot_core inhein use karta hai) |
 | `data_fetcher.py` | KuCoin (ccxt) exchange + top coins list |
@@ -53,6 +53,8 @@ Secrets:
 - Backtest (~6.5 saal): PF ~1.5, CAGR 20-29%, MaxDD -28 se -33%.
 
 **3) Dip Daily** (`dip_daily_bot.py`, workflow `dip_daily_bot.yml` cron `20 0 * * *` = 5:20 AM PKT)
+- **v2 (2026-10-04 se, user ne kaha "badal do"): RSI3 < 7, exit close > SMA3, TP +5% (stop TP se pehle check), baqi wahi.
+  Naya record shuru; v1 ka record `dip_v1_paper_state.json` / `dip_v1_signals.json` mein (git mv). Neeche v1 ki tafseel.**
 - Entry: coin daily close > EMA200 aur EMA50 > EMA200, BTC close > EMA50, RSI(3) < 10, top-100 liquid.
   Agle din open par. Kai signals hon to sab se kam RSI pehle.
 - Exit: close > SMA5 -> agle din open par; stop = signal close - 3x ATR(14) fixed; 10 din baad close par.
