@@ -356,3 +356,8 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   TP5 90/DIP10 2.86; **80/20 43.6% / -10.6% / 2.91; 70/30 39.8% / -9.1% / 2.92**; 60/40 36.0% / -9.0% / 2.85; 50/50 2.67 (plateau 90-60).
   CAPIT 10 ya DON 10 milane se koi faida nahi (2.85-2.93). Purana ICHI60/DIPv2 40: 28.6% / -9.5% / 1.80. Corr TP5-DIP 0.18.
   CAPIT 2% akela OOS 1.00, CAGR 7% - kamzor. Mashwara: TP5 70 / DIP 30 (ya 80/20) - user ki ijazat baqi, sidebar abhi nahi badla.
+- **TP MARGIN TEST (2026-10-04, `tp_margin_test.py` / `_RESULTS.txt`, top-200, 888 trades):** user: "TP5 margin kam". SL ausat 12.1% door ->
+  2% risk = size ~16%; $1000 par ek jeet ~$7.6. Bara TP: TP4 win 82% CAGR 44.5% Sharpe 3.03 | TP5 77.5% 51.5% -14.4% 2.78 | TP6 72% 54% -12.9% 2.60 |
+  TP7 67% 56.7% -13.5% 2.48 | TP8 63% 56% 2.32 | TP10 56% 58.6% -18.6% 2.16 | trail 38% 48% -28.9% 1.13. -> TP 4-7 sab ek jaise, TP barhane se
+  nafa thora, jhatke ziada. Asal lever SIZE: TP5 r2 cap30 59.8% / -15.1% / 2.84 (cap20 51.5 / -14.4); r3 cap30 80% / -21%.
+  Mix 70 TP5 r3c30 / 30 DIP 59% / -14.9% / 2.97 (r2c20 70/30: 40% / -9.8% / 2.92). Mashwara: TP5 rakho, cap 30% (paper) - user ki ijazat baqi.
