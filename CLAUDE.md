@@ -329,3 +329,5 @@ Rozana asal eligible coins: top-100 -> 86, top-150 -> 103, top-200 -> 112 (puran
 - User dashboard review kar ke mazeed tabdeeliyan batayega.
 - 2-3 mahine paper trading ke natije backtest se milao, phir asli paisa.
 - Ichimoku TP5 (paper) vs live Ichimoku: dono ka win%, PF, DD dashboard se milao; TP5 behtar rahe to user se poochh kar live par lao.
+- 2026-10-04: Dip v2 + TP5 top-200 dono pehle run kamyab (Dip v2 pehla signal BR/USDT). User ko baqi systems (purana Ichimoku,
+  Donchian, Capitulation) ki halat batayi - band / Telegram khamosh karne ka faisla user se baqi.
