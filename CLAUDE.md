@@ -265,6 +265,20 @@ User ka sawal: harne wali trades pehle 2-4% ooper ja kar wapas SL hit karti hain
 - DIP: harne wali aksar foran ulat jati (median MFE 2.4%, 30% <1%) - user ka khayal yahan sahi nahi; variants ~barabar/bure
   (BE2 thora behtar: CAGR 13.3 vs 12.3, DD -23.8 vs -26.9 - kamzor faida). CAPIT: har variant bura.
 
+## Winrate Lab natija (2026-10-04) - `winrate_lab.py` / workflow "Winrate Lab Test" / `winrate_lab_RESULTS.txt`
+User: "win rate ziada chahiye, jo mumkin hai test karo". 31 ICHI exit variants + random control + mazbooti + size.
+(win = +0.5% se ziada; BE exits "brbr" alag - MFE study ke BE "75% win" asal mein ~11% jeet + 68% barabar thay.)
+- **CE4_TP5 (stop CE 16 / 4x ATR + poori position +5% par): win 78%, PF 2.07, OOS 2.40, RND PF p95 0.92 (entry edge
+  asli), saal-war PF 2021-26 sab >1 (2022 1.31, BASE 0.85), 2x kharcha 1.80, boot p5 1.75, -top10 2.03.**
+  Portfolio: 1% risk CAGR 19.5% DD -4.4% Sharpe 2.67; **2% risk CAGR 32.6% DD -6.6% Sharpe 2.53**; 3%/15/30% 49% DD -10%.
+  BASE 1%: 35% / -12.5% / 1.81; BASE 1.5%: 51% / -16%. Matlab: same nafa adhe drawdown par, win 42% -> 78%.
+- Plateau: TP3-TP6 aur TPR0.25-0.5 sab win 74-90%, Sharpe 2.2-2.6, sab random p95 se behtar. TP5: win 83%, 2% risk 28.5% / -9%.
+- BE akela: asli jeet sirf 10-17% (baqi barabar). TS (time stop) = BASE jaisa. P{x}BE Sharpe gira.
+- DIP: RSI<7 SMA3 TP5 win 81%, CAGR 10.8%, DD -17.6%, Sharpe 0.93 (live RSI<10 SMA5: 12.3% / -26.9% / 0.67); RSI<5 SMA3 win 81%
+  PF 6.4 magar sirf 68 trades (CAGR 5%).
+- Khatra: 31 variants mein se chuna (multiple testing) - lekin poora padosi khandan acha hai. Live NAHI badla.
+  Aglay: CE 3.5/4/4.5 x TP 4/5/6 grid + coin-universe sensitivity (20% coins hata kar) + paper bot "ICHI TP5" live ke sath.
+
 ## Aglay kaam
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
   `scheduler.py` + `scheduler.yml`: ek workflow ~5h40m lagataar chalta, har minute: Ichimoku har 4h :10, Donchian 00:15,
