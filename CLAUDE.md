@@ -316,6 +316,16 @@ Rozana asal eligible coins: top-100 -> 86, top-150 -> 103, top-200 -> 112 (puran
   naye coins ki 25 trades PF 1.23, OOS 0.39 (KAMZOR). DIP live naye coins bhi kamzor (PF 1.43, OOS 0.67). -> Dip top-100 par raho.
 - Is bare data mein DIP live DD -36.6% / bura mahina -19.5% vs DIP naya -19.4% / -3.1%.
 
+## Stop Fix Lab natija (2026-10-04) - `stop_fix_lab.py` / workflow "Stop Fix Lab Test" / `stop_fix_lab_RESULTS.txt`
+User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 89% door, $-49.8 = 5% account) - "account wash".
+- **SL tang karna har system ko BURA karta hai** (DON CE3/2.5/2: PF 1.37/1.23/1.19; CAPIT 2x/1.5x/1x PF 1.60/1.34/1.21;
+  DIP v2 2x/1.5x/1x PF 2.74/2.14/1.05). Door SL hi strategy ka hissa hai; masla SIZE hai, stop nahi.
+- TP5/TP8 Donchian/Capitulation ko kharab (PF ~1.0-1.3). DIP v2 live (3x, TP5, fixed 20%) best: Sharpe 0.88, 1 trade max -5.8%
+  (portfolio 80/20 mein kul account ka ~-1.2%); risk 2% size: 1 trade max -2.1% magar CAGR 10.4 -> 3.3%. Dip v2 NAHI badla.
+- CAPIT: risk 2% size -> 1 trade max -12.6% -> -2.0%, DD -31 -> -14%, Sharpe 0.77 -> 0.86 (CAGR 24.8 -> 9.3%). **LAGU** (RISK_PCT 0.02).
+- DON: maxSL 20% filter -> PF 1.75 -> 2.30, OOS 1.12 -> 1.48, DD -40 -> -33%, Sharpe 1.00 -> 1.18, CAGR 31.5 -> 36.6% (1% risk);
+  2022 PF 0.11, 2025 0.59 phir bhi kamzor. **LAGU** (MAX_SL_PCT 0.20). Dono abhi bhi SIRF PAPER + Telegram khamosh.
+
 ## Aglay kaam
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
   `scheduler.py` + `scheduler.yml`: ek workflow ~5h40m lagataar chalta, har minute: Ichimoku har 4h :10, Donchian 00:15,

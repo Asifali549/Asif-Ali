@@ -40,6 +40,7 @@ BTC_EMA = 50
 MAX_POSITIONS = 10
 RISK_PCT = 0.01
 MAX_POS_PCT = 0.20
+MAX_SL_PCT = 0.20      # 2026-10-04 stop_fix_lab: SL entry se 20% se ziada door ho to signal chhor do (PF 1.75->2.30, DD -40->-33%)
 UNIVERSE = 100
 TOP_N_COINS = 150
 HISTORY_DAYS = 300
@@ -215,6 +216,8 @@ def main():
             stop = di.at[D, "stop"]
             close = di.at[D, "close"]
             if np.isnan(stop) or stop >= close:
+                continue
+            if (close - stop) / close > MAX_SL_PCT:
                 continue
             cands.append((s, float(close), float(stop), float(di.at[D, "mom60"]) if not np.isnan(di.at[D, "mom60"]) else -9))
     cands.sort(key=lambda x: -x[3])

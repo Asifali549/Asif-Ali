@@ -33,7 +33,8 @@ EXIT_SMA = 5
 STOP_ATR = 3.0
 MAX_HOLD = 10
 MAX_POSITIONS = 10
-POS_PCT = 0.20                 # Capitulation hisse ka 20% har trade
+POS_PCT = 0.20                 # ziada se ziada 20% ek trade mein
+RISK_PCT = 0.02                # 2026-10-04 stop_fix_lab: size = 2% risk / SL doori (cap 20%) - ek trade max -2% (pehle -12.6%)
 ALLOC = 0.0                    # SIRF PAPER (2026-10-02: dobara test mein OOS 2025+ PF 0.83 - asli paisa nahi)
 UNIVERSE = 100
 TOP_N_COINS = 150
@@ -175,7 +176,7 @@ def main():
             if p["stop"] >= entry:
                 continue
             eq_now = st["cash"] + sum(q["qty"] * q["last_px"] for q in st["positions"].values())
-            val = min(POS_PCT * eq_now, st["cash"] / (1 + FEE))
+            val = min(eq_now * RISK_PCT * entry / (entry - p["stop"]), POS_PCT * eq_now, st["cash"] / (1 + FEE))
             if val < 5:
                 continue
             st["cash"] -= val * (1 + FEE)
@@ -228,7 +229,7 @@ def main():
     save_state(st)
     append_signals([{"system": "Volume Capitulation", "symbol": s, "signal_time_utc": str(D + pd.Timedelta(days=1)),
                      "entry_est": round(c, 10), "sl": round(stop, 10), "tp": None,
-                     "risk_pct": round((c - stop) / c * 100, 2), "size_pct": POS_PCT * 100}
+                     "risk_pct": round((c - stop) / c * 100, 2), "size_pct": round(min(RISK_PCT / ((c - stop) / c), POS_PCT) * 100, 2)}
                     for s, c, stop, _, _ in chosen])
 
     # ---------- Telegram ----------
@@ -241,7 +242,7 @@ def main():
     if chosen:
         L.append(f"\n🟢 <b>NAYE BUY SIGNALS</b> ({len(chosen)}) — aaj open par khareedein:")
         L.append("⚠️ Sirf PAPER — asli paisa nahi (haaliya test mein 2025-26 kamzor)" if ALLOC == 0 else
-                 f"Size: Capitulation hisse ka {POS_PCT*100:.0f}% = kul capital ka {POS_PCT*ALLOC*100:.0f}%")
+                 f"Size: {RISK_PCT*100:.0f}% risk (SL doori ke hisab se, max {POS_PCT*100:.0f}%)")
         L += [f"• <b>{s}</b> ~{fmt_px(c)} | Stop: {fmt_px(stop)} ({(c - stop) / c * 100:.1f}% neeche) | "
               f"girawat {r*100:.1f}%, volume {v:.1f}x" for s, c, stop, r, v in chosen]
         L.append("Becho: jis din close 5-din average se ooper band ho, agle din open par (max 10 din).")
