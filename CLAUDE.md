@@ -303,6 +303,17 @@ Naya Dip = RSI3<7, exit close>SMA3, TP +5% (stop/10-din wahi). Live = RSI3<10, S
   Kamzori: naya kam signals -> 2025 +10% / 2026 +3% (live +21/+22).
 - Live Dip bot NAHI badla - user ka faisla baqi.
 
+## Universe Test natija (2026-10-04) - `universe_test.py` / workflow "Universe Test" / `universe_test_RESULTS.txt`
+KuCoin top-260 fetch (221 coins, min 120 din) - is liye numbers pichle teston (111 coins, min 250 din) se thore alag.
+Rozana asal eligible coins: top-100 -> 86, top-150 -> 103, top-200 -> 112 (purane coins kam, 2025+ ausat 183 data wale).
+- ICHI TP5: top-100 754 trades (2.4/hafta) win 77% CAGR 38.6% DD -9.3% Sharpe 2.48 | top-150 2.7/hafta 47.5% / -9.4% / 2.71 |
+  **top-200 2.9/hafta win 78% PF 1.94 OOS 1.80 CAGR 50.7% DD -9.4% Sharpe 2.81**. Naye coins (rank 101-200) ki 143 trades:
+  win 81%, PF 2.50, OOS 2.22 - top-100 se BEHTAR. -> ICHI ke liye bara universe faida mand.
+- ICHI live bhi top-200 par 48.8% / -15.7% / 1.86. TP5 har universe par Sharpe 2.4-2.8 vs live 1.7-1.9.
+- DIP naya: top-100 0.69/hafta win 80% CAGR 14.2% DD -19.4% Sharpe 1.01; top-200 sirf 0.77/hafta, OOS 3.62 -> 1.93 gira;
+  naye coins ki 25 trades PF 1.23, OOS 0.39 (KAMZOR). DIP live naye coins bhi kamzor (PF 1.43, OOS 0.67). -> Dip top-100 par raho.
+- Is bare data mein DIP live DD -36.6% / bura mahina -19.5% vs DIP naya -19.4% / -3.1%.
+
 ## Aglay kaam
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
   `scheduler.py` + `scheduler.yml`: ek workflow ~5h40m lagataar chalta, har minute: Ichimoku har 4h :10, Donchian 00:15,
