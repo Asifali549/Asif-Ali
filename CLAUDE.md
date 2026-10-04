@@ -347,3 +347,6 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   Ichimoku TP5 + Dip v2.** Lagu: `TELEGRAM_ON = False` purane Ichimoku (`ichimoku4h_bot.py`), Donchian, Capitulation mein
   (send() sirf print karta hai); `ichi_tp5_bot.py` mein `B.TELEGRAM_ON = True`; Dip bot ka send() pehle jaisa. Watchdog
   alerts chalu (system sehat). Kisi ko wapas chalu karna ho to us file mein TELEGRAM_ON = True.
+- **NAYI SHURUAT (2026-10-04 shaam, user):** purana Ichimoku, Donchian, Capitulation ka record bhi naye usoolon ke liye saaf:
+  purani files `ichimoku4h_v1_*`, `donchian_v1_*`, `capit_v1_*` (git mv). Ab paanchon systems (TP5, Dip v2, purana Ichimoku,
+  Donchian maxSL20, Capitulation 2% risk) ka record 2026-10-04 se ek sath shuru -> barabar muqabla.
