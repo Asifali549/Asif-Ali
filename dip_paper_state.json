@@ -1,0 +1,20 @@
+{
+  "cash": 1000.0,
+  "positions": {},
+  "pending": [
+    {
+      "symbol": "BR/USDT",
+      "signal_day": "2026-10-03",
+      "stop": 0.014599979137539743
+    }
+  ],
+  "last_day": "2026-10-03",
+  "history": [
+    {
+      "day": "2026-10-03",
+      "equity": 1000.0
+    }
+  ],
+  "last_updated": "2026-10-04T09:27:18.187215+00:00",
+  "btc_regime_ok": true
+}
