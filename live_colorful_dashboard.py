@@ -47,6 +47,28 @@ SYSTEMS = {
         "backtest": {"win": 41.4, "pf": 1.90, "cagr": 26.6, "dd": -11.0,
                      "note": "5.3 saal (2021-2026, 2022 crash samet), sakht usool, random-control se behtar"},
     },
+    "Ichimoku TP5": {
+        "badge": "🎯 Ichimoku TP5",
+        "state": "ichi_tp5_paper_state.json",
+        "trades": "ichi_tp5_paper_trades.csv",
+        "signals": "ichi_tp5_signals.json",
+        "workflow": "ichi_tp5_bot.yml",
+        "alloc": 0.0, "sizing": ("risk", 0.02, 0.20),
+        "stale_min": 330,
+        "every": "har 4 ghante (live Ichimoku ke 2 min baad)",
+        "entry_col": "entry_bar", "exit_col": "exit_bar",
+        "new_signal_hours": 8,
+        "rules": [
+            ("Timeframe", "4H candle"),
+            ("Entry", "Bilkul live Ichimoku 4H jaisi (Ichimoku + Market Structure ek hi candle par)"),
+            ("Stop (SL)", "Chandelier 16 candles, 4x ATR (live 5.5x se tang) - sirf ooper jata hai"),
+            ("Take Profit", "Poori position entry se +5% par"),
+            ("Exchange par", "OCO order (TP +5% ooper, SL neeche); 🔼 aaye to SL ooper karein"),
+            ("Size", "SIRF PAPER — har trade 2% risk; live Ichimoku se 2-3 mahine muqabla, phir faisla"),
+        ],
+        "backtest": {"win": 77.8, "pf": 2.07, "cagr": 32.6, "dd": -6.6,
+                     "note": "6 saal, 2% risk; win-rate version (Winrate Lab 2026-10-04), random-control se behtar, har saal PF > 1"},
+    },
     "Donchian Daily": {
         "badge": "🐢 Donchian Daily",
         "state": "donchian_paper_state.json",
@@ -417,7 +439,7 @@ with T_SCORE:
                              "Entry": fmt_px(e), "Live": fmt_px(live) if live else "—", "P/L %": pl,
                              "Halat": status_label(pl, live, _sg.get("sl"), _sg.get("tp")),
                              "SL": fmt_px(_sg.get("sl")),
-                             "Chart": tradingview_url(_sg["symbol"], "240" if _n == "Ichimoku 4H" else "D")})
+                             "Chart": tradingview_url(_sg["symbol"], "240" if _n.startswith("Ichimoku") else "D")})
     open_rows = []
     for _n, _d in DATA.items():
         for sym, p in _d["state"].get("positions", {}).items():
@@ -429,7 +451,7 @@ with T_SCORE:
                               "P/L $ (paper)": round(p["qty"] * ref - p["cost"], 2) if ref else None,
                               "Halat": status_label(pl, ref, p.get("trail"), p.get("tp")),
                               "SL": fmt_px(p.get("trail")), "Entry waqt": pkt_str(p.get("entry_bar") or p.get("entry_day")),
-                              "Chart": tradingview_url(sym, "240" if _n == "Ichimoku 4H" else "D")})
+                              "Chart": tradingview_url(sym, "240" if _n.startswith("Ichimoku") else "D")})
     for m in manual:
         if m.get("status") != "open":
             continue
@@ -519,7 +541,7 @@ with T_AUTO:
             state = load_json(cfg["state"], {}) or {}
             signals = load_json(cfg["signals"], []) or []
             trades = load_csv(cfg["trades"])
-            interval = "240" if name == "Ichimoku 4H" else "D"
+            interval = "240" if name.startswith("Ichimoku") else "D"
 
             with st.expander("📋 Strategy ke usool", expanded=False):
                 st.table(pd.DataFrame(cfg["rules"], columns=["", "Usool"]))

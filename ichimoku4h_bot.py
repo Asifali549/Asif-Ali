@@ -46,6 +46,16 @@ START_EQUITY = 1000.0
 STATE_FILE = "ichimoku4h_paper_state.json"
 TRADES_CSV = "ichimoku4h_paper_trades.csv"
 SIGNALS_FILE = "ichimoku4h_signals.json"    # dashboard ke liye signals ka record
+# Variant settings (ichi_tp5_bot.py inhein badalta hai; live bot ke liye yahi rehti hain)
+TP_PCT = None                 # diya ho to TP = entry x (1 + TP_PCT) (R wala TP nahi)
+SYSTEM_NAME = "Ichimoku 4H"
+PAPER_ONLY = False
+
+
+def tp_price(entry, stop):
+    if TP_PCT:
+        return entry * (1 + TP_PCT)
+    return entry + TP_R * (entry - stop)
 
 
 def load_state():
@@ -152,7 +162,7 @@ def main():
         val = min(eq_now * RISK_PCT * entry / (entry - stop), MAX_POS_PCT * eq_now, st["cash"] / (1 + FEE))
         if val < 5:
             continue
-        tp = entry + TP_R * (entry - stop)
+        tp = tp_price(entry, stop)
         st["cash"] -= val * (1 + FEE)
         st["positions"][sym] = {"qty": val / entry, "entry": entry, "entry_bar": str(nxt), "trail": stop,
                                 "init_stop": stop, "tp": tp, "last_px": entry, "cost": val * (1 + FEE)}
@@ -220,8 +230,8 @@ def main():
     st["last_updated"] = pd.Timestamp.now(tz="UTC").isoformat()
     save_state(st)
     append_signals([{
-        "system": "Ichimoku 4H", "symbol": s, "signal_time_utc": str(D + pd.Timedelta(hours=4)),
-        "entry_est": round(close, 10), "sl": round(stop, 10), "tp": round(close + TP_R * (close - stop), 10),
+        "system": SYSTEM_NAME, "symbol": s, "signal_time_utc": str(D + pd.Timedelta(hours=4)),
+        "entry_est": round(close, 10), "sl": round(stop, 10), "tp": round(tp_price(close, stop), 10),
         "risk_pct": round((close - stop) / close * 100, 2),
         "size_pct": round(min(RISK_PCT / ((close - stop) / close), MAX_POS_PCT) * 100, 2),
     } for s, close, stop, _ in chosen])
@@ -231,15 +241,18 @@ def main():
     if not (chosen or fills_msg or exits_msg or moved or daily_summary):
         print("Koi naya waqia nahi - Telegram nahi bheja.")
         return
-    L = [f"📈 <b>Ichimoku 4H Bot</b> — candle band: {pkt(D + pd.Timedelta(hours=4))}"]
+    L = [f"📈 <b>{SYSTEM_NAME} Bot</b> — candle band: {pkt(D + pd.Timedelta(hours=4))}"]
+    if PAPER_ONLY:
+        L.append("🧪 <i>Sirf PAPER test (win-rate version: tang SL + 5% TP) - asli paisa nahi</i>")
     if chosen:
         L.append(f"\n🟢 <b>NAYE BUY SIGNALS</b> ({len(chosen)}) — abhi khareedein:")
         for s, close, stop, _ in chosen:
             risk = (close - stop) / close
-            tp = close + TP_R * (close - stop)
+            tp = tp_price(close, stop)
             size = min(RISK_PCT / risk, MAX_POS_PCT) * 100
+            sz = "Sirf PAPER" if PAPER_ONLY else f"Ichimoku hisse ka {size:.1f}% = kul capital ka {size*ALLOC:.1f}%"
             L.append(f"• <b>{s}</b> ~{fmt_px(close)}\n   SL: {fmt_px(stop)} ({risk*100:.1f}% neeche) | "
-                     f"TP: {fmt_px(tp)} (+{risk*TP_R*100:.1f}%) | Size: Ichimoku hisse ka {size:.1f}% = kul capital ka {size*ALLOC:.1f}%")
+                     f"TP: {fmt_px(tp)} (+{(tp/close-1)*100:.1f}%) | Size: {sz}")
         L.append("   (OCO order: upar TP, neeche SL)")
     if len(cands) > len(chosen):
         L.append(f"({len(cands) - len(chosen)} aur signals the, slots bhare hue)")
