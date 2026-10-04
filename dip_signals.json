@@ -8,5 +8,15 @@
     "tp": null,
     "risk_pct": 35.45,
     "size_pct": 10.0
+  },
+  {
+    "system": "Dip Daily",
+    "symbol": "BR/USDT",
+    "signal_time_utc": "2026-10-04 00:00:00",
+    "entry_est": 0.5258,
+    "sl": 0.0145999791,
+    "tp": null,
+    "risk_pct": 97.22,
+    "size_pct": 20.0
   }
 ]
