@@ -351,6 +351,18 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   jaanch) -> engine bias nahi, trailing-exit + log-price ka asar (purana sabaq: Donchian ka asal faida sirf random se +0.2-0.35 PF).
   Usool: koi bhi naya signal/strategy is test se guzre (strategies.py / stop_fix_lab.py / bot_core.py badalne par khud chalta hai).
 
+- **STRATEGY LAB 5 (2026-10-05, `strategy_lab5.py` / workflow "Strategy Lab 5 Test" / `strategy_lab5_RESULTS.txt`, 145 coins daily):**
+  3 naye daily mean-reversion khayal, Dip exit (TP5 / close>SMA3 / SL 3 ATR / 10 din), top-100, BTC>EMA50, close>EMA200, 20%/trade.
+  Andar sachai test: sab 10 configs 0 farq. REF DIP: 198 trades, win 79%, PF 2.84, OOS 2.75, CAGR 12.1%, DD -18.9%, Sharpe 0.94.
+  **R1 RESID z-2.0 = PASS (sab 11 shartein + universe 6/6):** 3-din residual return (coin - beta60 x BTC) ka z-score (60-din std) < -2.
+  561 trades (1.8/hafta), win 67%, PF 2.14 (random p95 1.01), OOS 1.60, folds 1.36/3.37/2.30/1.90, boot p5 1.75, -top10 2.08,
+  2x kharcha 1.84, CAGR 22.8%, DD -13.8%, Sharpe 1.03, bura mahina -4.1%, sirf 43% mahine musbat (baqi aksar khali).
+  Saal: 2021 +4 / 2022 -2 / 2023 +45 / 2024 +100 / 2025 +3 / 2026 +4 (KAMZORI: nafa 2023-24 mein mehdood). Padosi z-1.5 PF 1.42
+  (DD -48%), z-2.5 PF 2.16. Corr DIP 0.62. DIP 50 / R1 50: CAGR 17.6%, DD -9.9%, Sharpe 1.23 (DIP akela 0.94).
+  R2 LOSER (har din sab se ziada girne wale): win 70% magar OOS ~1.0, 2x kharcha 1.14, DD -54..-72% FAIL.
+  R3 PULLBACK (daily EMA10/20/30 par wapsi): PF 0.88-0.99 = random se bura FAIL.
+  Agla qadam (user se poochh kar): R1 ka paper bot (dip_daily_bot jaisa).
+
 ## Aglay kaam
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
   `scheduler.py` + `scheduler.yml`: ek workflow ~5h40m lagataar chalta, har minute: Ichimoku har 4h :10, Donchian 00:15,
