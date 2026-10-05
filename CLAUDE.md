@@ -343,6 +343,14 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   Pine (2026-10-05, user ki darkhast): `pine/asif_4h_tp5_ms.pine` (TP5 + MS ek sath, 4H, causal, chandelier 16/4 trail, TP 5%,
   2% risk cap 20%) aur `pine/asif_dip_daily.pine` (Dip v2 daily). User TradingView par live/history dekhega.
 
+- **CAUSALITY (SACHAI) TEST (2026-10-05, `causality_test.py` / workflow "Causality Test" / `causality_test_RESULTS.txt`) - LAZMI:**
+  backtest ki har value ko "data us din tak kaat kar" dobara hisaab se milata hai (live jaisa). Purane market-structure bug
+  ko pakarta hai (fake data par 15/58 farq). Asli data (156 coins): Dip / Donchian / Capitulation signals, top-100 liquidity,
+  ATR SL, SMA3/SMA5 exit, chandelier 22/4 - 8756 jaanch, 0 farq. 4H Ichimoku+MS (fix ke baad), market structure, chandelier
+  16/4 - 7200 bars, 0 farq. Random-walk: DIP PF 1.04, CAPIT 1.04 (sahi); DON 1.64 lekin RANDOM entries bhi 1.74/1.36 (local
+  jaanch) -> engine bias nahi, trailing-exit + log-price ka asar (purana sabaq: Donchian ka asal faida sirf random se +0.2-0.35 PF).
+  Usool: koi bhi naya signal/strategy is test se guzre (strategies.py / stop_fix_lab.py / bot_core.py badalne par khud chalta hai).
+
 ## Aglay kaam
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
   `scheduler.py` + `scheduler.yml`: ek workflow ~5h40m lagataar chalta, har minute: Ichimoku har 4h :10, Donchian 00:15,
