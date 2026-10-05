@@ -8,5 +8,15 @@
     "tp": 0.6216,
     "risk_pct": 5.79,
     "size_pct": 20.0
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "GTC/USDT",
+    "signal_time_utc": "2026-10-05 04:00:00",
+    "entry_est": 0.1894,
+    "sl": 0.164975,
+    "tp": 0.19887,
+    "risk_pct": 12.9,
+    "size_pct": 15.51
   }
 ]
