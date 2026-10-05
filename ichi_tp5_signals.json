@@ -18,5 +18,25 @@
     "tp": 0.19887,
     "risk_pct": 12.9,
     "size_pct": 15.51
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "PENDLE/USDT",
+    "signal_time_utc": "2026-10-05 08:00:00",
+    "entry_est": 2.5,
+    "sl": 2.325225,
+    "tp": 2.625,
+    "risk_pct": 6.99,
+    "size_pct": 20.0
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "KCS/USDT",
+    "signal_time_utc": "2026-10-05 08:00:00",
+    "entry_est": 7.545,
+    "sl": 7.3035,
+    "tp": 7.92225,
+    "risk_pct": 3.2,
+    "size_pct": 20.0
   }
 ]
