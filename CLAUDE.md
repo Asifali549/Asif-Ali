@@ -23,7 +23,7 @@
 | `dip_daily_bot.py` | Dip Daily bot - signals + paper trading + Telegram |
 | `donchian_daily_bot.py` | Donchian Daily bot - signals + paper trading + Telegram |
 | `capit_daily_bot.py` | Volume Capitulation bot - signals + paper trading + Telegram (2026-10-02 se) |
-| `ichi_tp5_bot.py` | **Ichimoku TP5 - SIRF PAPER** (2026-10-04 se): `ichimoku4h_bot` import kar ke CE_M 4, TP_PCT 5%, RISK 2%, ALLOC 0, **UNIVERSE 200 / TOP_N 260**, apni files `ichi_tp5_*` |
+| `ichi_tp5_bot.py` | **Ichimoku TP5 - SIRF PAPER** (2026-10-04 se): `ichimoku4h_bot` import kar ke CE_M 4, TP_PCT 5%, RISK 2%, ALLOC 0, **UNIVERSE 250 / TOP_N 330** (2026-10-05 se; pehle 200/260), apni files `ichi_tp5_*` |
 | `bot_core.py` | dono bots ke helpers: fetch_full, norm, ema, chandelier, ichi_signal, FEE/SLIP/STOP_SLIP, STABLES |
 | `strategies.py`, `config.py` | ichimoku + market_structure signal functions aur unke params (bot_core inhein use karta hai) |
 | `data_fetcher.py` | KuCoin (ccxt) exchange + top coins list |
@@ -366,4 +366,4 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
 - **UNIVERSE 2 TEST (2026-10-05, `universe2_test.py` / `_RESULTS.txt`, 542 coins, KuCoin top-600):** TP5 top-U. Signals/hafta: 100 2.8 | 200 4.4 |
   250 4.8 | 300 5.0 | 350 5.2 | 400 5.3. Sharpe 2.70 / 2.88 / 2.99 / 3.02 / 2.92 / 2.89; CAGR 45 / 75 / 86 / 90 / 89 / 89%; DD -8..-12% sab.
   Rank-band: 201-250 PF 1.95 OOS 2.32 (vol ~$75k/din); 251-300 PF 1.60 OOS 1.32 ($43k); **301-400 win 67% PF 1.11, 2x kharcha 1.00 = edge nahi** ($24k).
-  Mashwara: 250 (ya max 300); 350/400 nahi. Bot mein lagane ke liye UNIVERSE 250 + TOP_N_COINS ~330 - user ki ijazat baqi.
+  Mashwara: 250 (ya max 300); 350/400 nahi. **LAGU (2026-10-05, user ne kaha): UNIVERSE 250, TOP_N_COINS 330.**

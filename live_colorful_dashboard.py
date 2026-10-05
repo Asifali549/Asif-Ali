@@ -60,7 +60,7 @@ SYSTEMS = {
         "new_signal_hours": 8,
         "rules": [
             ("Timeframe", "4H candle"),
-            ("Entry", "Bilkul live Ichimoku 4H jaisi (Ichimoku + Market Structure ek hi candle par) - lekin top-200 liquid coins"),
+            ("Entry", "Bilkul live Ichimoku 4H jaisi (Ichimoku + Market Structure ek hi candle par) - lekin top-250 liquid coins (2026-10-05 se; pehle 200)"),
             ("Stop (SL)", "Chandelier 16 candles, 4x ATR (live 5.5x se tang) - sirf ooper jata hai"),
             ("Take Profit", "Poori position entry se +5% par"),
             ("Exchange par", "OCO order (TP +5% ooper, SL neeche); 🔼 aaye to SL ooper karein"),
