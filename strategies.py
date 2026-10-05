@@ -151,16 +151,20 @@ def market_structure(df, params):
     prev_pivot_high_val = None
     structure_bullish = False
 
+    # LOOKAHEAD FIX (2026-10-05): pivot high bar p ka pata sirf bar p+n band hone par chalta hai.
+    # Pehle pivot ko bar p par hi istemal kiya jata tha -> backtest un breakouts ko gira deta tha jo baad mein
+    # naya high na bana sakein (jhoota behtar natija). Live bot par asar nahi (wahan aakhri n bars pivot nahi bante).
     for i in range(length):
-        if is_pivot_high[i]:
-            val = high[i]
+        p = i - n
+        if p >= 0 and is_pivot_high[p]:
+            val = high[p]
             if prev_pivot_high_val is not None:
                 swing_pct = abs(val - prev_pivot_high_val) / prev_pivot_high_val
                 if swing_pct >= min_swing:
                     structure_bullish = val > prev_pivot_high_val
             prev_pivot_high_val = last_pivot_high_val
             last_pivot_high_val = val
-            last_pivot_high = i
+            last_pivot_high = p
 
         # Break of Structure: close crosses above the last confirmed pivot high
         if last_pivot_high_val is not None and structure_bullish:

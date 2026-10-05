@@ -4,7 +4,7 @@ on:
   workflow_dispatch: {}
   push:
     branches: [main]
-    paths: ['highwin_lab.py', '.github/workflows/highwin_lab.yml']
+    paths: ['highwin_lab.py', 'strategies.py', '.github/workflows/highwin_lab.yml']
 
 permissions:
   contents: write
