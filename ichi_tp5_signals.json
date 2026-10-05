@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "HNT/USDT",
+    "signal_time_utc": "2026-10-05 00:00:00",
+    "entry_est": 0.592,
+    "sl": 0.55775,
+    "tp": 0.6216,
+    "risk_pct": 5.79,
+    "size_pct": 20.0
+  }
+]
