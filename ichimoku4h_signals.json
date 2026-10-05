@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "system": "Ichimoku 4H",
+    "symbol": "KCS/USDT",
+    "signal_time_utc": "2026-10-05 08:00:00",
+    "entry_est": 7.545,
+    "sl": 7.2076875,
+    "tp": 8.5569375,
+    "risk_pct": 4.47,
+    "size_pct": 20.0
+  }
+]
