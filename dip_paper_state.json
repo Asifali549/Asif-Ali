@@ -1,20 +1,31 @@
 {
-  "cash": 1000.0,
-  "positions": {},
-  "pending": [
-    {
-      "symbol": "BR/USDT",
-      "signal_day": "2026-10-03",
-      "stop": 0.014599979137539743
+  "cash": 799.8,
+  "positions": {
+    "BR/USDT": {
+      "qty": 380.5083277339155,
+      "entry": 0.525612675,
+      "entry_day": "2026-10-04",
+      "trail": 0.014599979137539743,
+      "init_stop": 0.014599979137539743,
+      "tp": 0.55189330875,
+      "last_px": 0.43418,
+      "cost": 200.2,
+      "bars": 1,
+      "exit_next": false
     }
-  ],
-  "last_day": "2026-10-03",
+  },
+  "pending": [],
+  "last_day": "2026-10-04",
   "history": [
     {
       "day": "2026-10-03",
       "equity": 1000.0
+    },
+    {
+      "day": "2026-10-04",
+      "equity": 965.01
     }
   ],
-  "last_updated": "2026-10-04T09:27:18.187215+00:00",
+  "last_updated": "2026-10-05T00:21:06.464510+00:00",
   "btc_regime_ok": true
 }
