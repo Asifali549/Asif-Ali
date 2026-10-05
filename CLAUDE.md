@@ -329,20 +329,19 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
 - DON: maxSL 20% filter -> PF 1.75 -> 2.30, OOS 1.12 -> 1.48, DD -40 -> -33%, Sharpe 1.00 -> 1.18, CAGR 31.5 -> 36.6% (1% risk);
   2022 PF 0.11, 2025 0.59 phir bhi kamzor. **LAGU** (MAX_SL_PCT 0.20). Dono abhi bhi SIRF PAPER + Telegram khamosh.
 
-- **HIGH-WIN LAB (2026-10-05, `highwin_lab.py` / workflow "High-Win Lab Test" / `highwin_lab_RESULTS.txt`, 281 coins, top-250):**
-  user: "apne taur par nayi achi strategy dhoondo". 9 naye 4H entry khandan, sab ke sath TP5 exit (CE 16/4 + TP 5%), 2% risk;
-  10 pehle se tay shartein (win>=65, PF > trend-random p95, OOS>=1.3, 4/4 folds, boot p5>=1.2, -top10>=1.2, 2x kharcha>=1.2,
-  >=0.5/hafta, portfolio Sharpe behtar, universe 5/6). Fake random-walk data par sab PF ~1 (lookahead nahi).
-  REF TP5: 1071 trades, win 76.8%, PF 1.78, OOS 1.62, CAGR 58.6%, DD -11.7%, Sharpe 2.71 - PASS.
-  **MS_EXTRA = market structure BOS + volume 2x, JAHAN Ichimoku signal NAHI (TP5 se alag trades): PASS 10/10** -
-  1132 trades (3.6/hafta), win 77.6%, PF 1.81 (trend-random p95 1.07), OOS 1.58, folds 3.14/1.58/1.79/1.57, boot p5 1.59,
-  -top10 1.77, 2x kharcha 1.58, universe 6/6; akela CAGR 55.8%, DD -19%, Sharpe 2.49, +mahine 61%, bura mahina -8.8%,
-  saal-war 2021 +73 / 2022 +17 / 2023 +105 / 2024 +47 / 2025 +25 / 2026 +73. Corr TP5 0.69 (wohi khandan).
-  Portfolio: TP5 70/DIP 30 43.9% / -8.6% / Sharpe 2.80 -> TP5 60/DIP 25/MS 15 46.2% / -7.4% / 3.06 -> **50/20/30 48.3% / -8.1% / 3.19**.
-  FAIL (random jaise, DD -79..-98%): ICHI_EXTRA (Ichimoku baghair MS), breakout 30/42, momentum-volume, EMA cross, FVG,
-  Supertrend, RSI thrust - sab 10-31 trades/hafta, kharcha kha jata hai. Sabaq: is project mein asal edge MARKET STRUCTURE
-  (BOS) + volume mein hai; Ichimoku akela bekaar. Khatra: 9 mein se chuna (lekin TP5 ka sagga bhai). Agla qadam (user se poochh kar):
-  paper bot "MS TP5" (ichi_tp5_bot jaisa) live TP5 ke sath.
+- **🚨 LOOKAHEAD BUG (2026-10-05) - ICHIMOKU/TP5 KA SAARA BACKTEST JHOOTA THA:** `strategies.market_structure` pivot high
+  ko USI bar par istemal karta tha (pivot ke liye agle 5 bars chahiye) -> backtest har us breakout ko gira deta tha jis ke
+  baad 5 candle mein naya high na bane (fake data: gire signals ka agle-5-bar max high +0.8% vs baqi +5%). Live bot par asar
+  nahi tha (wahan aakhri 5 bars pivot nahi bante) - yani LIVE bot asal mein "sahi" (causal) signals deta hai, backtest nahi.
+  FIX: pivot p sirf bar p+n par istemal (commit "Market structure lookahead fix"); fake data par live aakhri-bar signal 0 farq.
+  **Fix ke baad High-Win Lab (281 coins, top-250, TP5 exit, 2% risk):** REF TP5: 1394 trades, win 65.6%, PF 1.01 (trend-random
+  p95 1.02 = KOI EDGE NAHI), OOS 0.88, CAGR +2%, MaxDD -55%, 2022 -14%, 2025 -39%. MS_EXTRA: PF 1.06, OOS 0.96, CAGR 3.5%, DD -52% FAIL.
+  Baqi 8 entry khandan pehle bhi fail (random jaise). TP5 70/DIP 30: CAGR 6.3%, DD -33.5%, Sharpe 0.44.
+  Matlab: Ichimoku TP5, purana Ichimoku (CE 5.5/TP3R) aur un par mabni tamam purane natije (Winrate Lab, TP5 Validation,
+  Universe 1/2, Alloc, TP Margin, MFE ICHI hissa, Portfolio Lab ICHI) BHAROSE ke qabil NAHI. Dip v2, Donchian, Capitulation
+  market structure use nahi karte -> un par asar nahi. Aage: har Ichimoku natija sirf fixed `strategies.py` se.
+  Pine (2026-10-05, user ki darkhast): `pine/asif_4h_tp5_ms.pine` (TP5 + MS ek sath, 4H, causal, chandelier 16/4 trail, TP 5%,
+  2% risk cap 20%) aur `pine/asif_dip_daily.pine` (Dip v2 daily). User TradingView par live/history dekhega.
 
 ## Aglay kaam
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).

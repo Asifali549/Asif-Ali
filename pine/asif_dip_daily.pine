@@ -1,0 +1,125 @@
+//@version=6
+// This Pine Script® code is subject to the terms of the Mozilla Public License 2.0
+// Asif Dip v2 - DAILY  -  sirf BUY, spot (dip_daily_bot.py ke bilkul wahi usool)
+// ---------------------------------------------------------------------------------
+//   Entry : coin daily close > EMA200 AUR EMA50 > EMA200 (mazboot uptrend)
+//           AUR BTC daily close > BTC EMA50  AUR  RSI(3) < 7
+//           -> AGLE din ke open par khareed
+//   TP    : entry se +5% par poori position
+//   Exit  : jis din close apni 3-din average (SMA3) se ooper band ho -> AGLE din ke open par
+//   SL    : signal ke close se 3 x ATR(14) neeche - FIXED (hilta nahi)
+//   Time  : 10 din baad bhi na nikle to us din ke close par
+//   Size  : account ka 20% har trade. Ek waqt mein ek trade. Jis din trade band ho us din nayi entry nahi.
+// Signal sirf BAND daily candle par - koi repaint nahi.
+// Coins: bot top-100 liquid coins par chalta hai.
+strategy("Asif Dip v2 Daily", shorttitle = "Dip v2", overlay = true, pyramiding = 0,
+     initial_capital = 1000, currency = currency.USD,
+     default_qty_type = strategy.percent_of_equity, default_qty_value = 20,
+     commission_type = strategy.commission.percent, commission_value = 0.15,
+     process_orders_on_close = false, calc_on_every_tick = false,
+     max_labels_count = 500, max_bars_back = 400)
+
+grpE = "Entry"
+rsiLen  = input.int(3,   "RSI length", group = grpE)
+rsiLo   = input.float(7, "RSI neeche (<)", step = 0.5, group = grpE)
+emaLong = input.int(200, "Trend EMA", group = grpE)
+emaMid  = input.int(50,  "Golden EMA", group = grpE)
+btcSym  = input.symbol("KUCOIN:BTCUSDT", "BTC symbol", group = grpE)
+btcEma  = input.int(50,  "BTC EMA", group = grpE)
+useBtc  = input.bool(true, "BTC filter", group = grpE)
+
+grpX = "Exit"
+atrLen  = input.int(14,    "ATR length", group = grpX)
+atrMult = input.float(3.0, "SL = close - ATR x", step = 0.5, group = grpX)
+tpPct   = input.float(5.0, "TP %", step = 0.5, group = grpX)
+smaLen  = input.int(3,     "Exit: close > SMA", group = grpX)
+maxHold = input.int(10,    "Max din", group = grpX)
+
+grpV = "Display"
+showLbl   = input.bool(true, "Buy labels (entry / SL / TP)", group = grpV)
+showTable = input.bool(true, "Status table", group = grpV)
+
+if timeframe.period != "D"
+    runtime.error("Ye script sirf DAILY (1D) chart ke liye hai.")
+
+// ---------------- Indicators ----------------
+e200    = ta.ema(close, emaLong)
+e50     = ta.ema(close, emaMid)
+rsiV    = ta.rsi(close, rsiLen)
+atrV    = ta.atr(atrLen)
+smaV    = ta.sma(close, smaLen)
+slCalc  = close - atrMult * atrV
+btcOK   = request.security(btcSym, "D", close > ta.ema(close, btcEma), lookahead = barmerge.lookahead_off)
+uptrend = close > e200 and e50 > e200
+sig     = uptrend and (not useBtc or btcOK) and rsiV < rsiLo and slCalc < close
+
+// ---------------- Trade management ----------------
+var float slPx     = na
+var float tpPx     = na
+var int   entryBar = na
+var int   exitBar  = na
+inPos = strategy.position_size > 0
+
+if strategy.closedtrades > strategy.closedtrades[1]
+    exitBar := bar_index
+
+if inPos and strategy.position_size[1] == 0
+    entryBar := bar_index
+    tpPx := strategy.position_avg_price * (1 + tpPct / 100)
+
+if inPos
+    strategy.exit("X", "BUY", stop = slPx, limit = tpPx, comment_loss = "SL", comment_profit = "TP 5%")
+    if close > smaV
+        strategy.close("BUY", comment = "SMA" + str.tostring(smaLen) + " uchhal")          // agle din open par
+    else if bar_index - entryBar >= maxHold
+        strategy.close("BUY", comment = str.tostring(maxHold) + " din", immediately = true)  // aaj ke close par
+
+canEnter = not inPos and sig and bar_index != exitBar
+if canEnter
+    slPx := slCalc
+    tpPx := close * (1 + tpPct / 100)
+    strategy.entry("BUY", strategy.long, comment = "DIP")
+    strategy.exit("X", "BUY", stop = slCalc, profit = math.round(close * tpPct / 100 / syminfo.mintick),
+         comment_loss = "SL", comment_profit = "TP 5%")
+    if showLbl
+        riskP = (close - slCalc) / close * 100
+        label.new(bar_index, low, "DIP BUY\nEntry ~" + str.tostring(close, format.mintick) +
+             "\nSL " + str.tostring(slCalc, format.mintick) + " (" + str.tostring(riskP, "#.0") + "% neeche)" +
+             "\nTP " + str.tostring(close * (1 + tpPct / 100), format.mintick) + " (+" + str.tostring(tpPct, "#.#") + "%)" +
+             "\nRSI3 " + str.tostring(rsiV, "#.0"),
+             style = label.style_label_up, yloc = yloc.belowbar, color = color.new(color.purple, 0),
+             textcolor = color.white, size = size.small)
+    alert(syminfo.ticker + " DIP BUY (Daily) | entry ~" + str.tostring(close, format.mintick) +
+         " | SL " + str.tostring(slCalc, format.mintick) + " | TP +" + str.tostring(tpPct) + "%", alert.freq_once_per_bar_close)
+
+// ---------------- Plots ----------------
+plot(inPos ? slPx : na, "SL", color.new(color.red, 0), 2, plot.style_linebr)
+plot(inPos ? tpPx : na, "TP", color.new(color.green, 0), 2, plot.style_linebr)
+plot(inPos ? strategy.position_avg_price : na, "Entry", color.new(color.gray, 0), 1, plot.style_linebr)
+plot(e200, "EMA 200", color.new(color.orange, 60), 1)
+plot(e50,  "EMA 50",  color.new(color.blue, 70), 1)
+
+alertcondition(canEnter, "DIP BUY", "{{ticker}} DIP BUY Daily - entry kal open, SL 3 ATR, TP +5%")
+
+// ---------------- Status table ----------------
+var table tb = table.new(position.top_right, 2, 8, bgcolor = color.new(color.black, 20), border_width = 1)
+if showTable and barstate.islast
+    closedN = strategy.closedtrades
+    pf      = strategy.grossloss > 0 ? strategy.grossprofit / strategy.grossloss : na
+    table.cell(tb, 0, 0, "Dip v2 (Daily)", text_color = color.white, text_size = size.small)
+    table.cell(tb, 1, 0, inPos ? "TRADE KHULI (din " + str.tostring(bar_index - entryBar) + ")" : "intezar",
+         text_color = inPos ? color.lime : color.silver, text_size = size.small)
+    table.cell(tb, 0, 1, "Entry", text_color = color.white, text_size = size.small)
+    table.cell(tb, 1, 1, inPos ? str.tostring(strategy.position_avg_price, format.mintick) : "-", text_color = color.white, text_size = size.small)
+    table.cell(tb, 0, 2, "SL (fixed)", text_color = color.white, text_size = size.small)
+    table.cell(tb, 1, 2, inPos ? str.tostring(slPx, format.mintick) : "-", text_color = color.red, text_size = size.small)
+    table.cell(tb, 0, 3, "TP", text_color = color.white, text_size = size.small)
+    table.cell(tb, 1, 3, inPos ? str.tostring(tpPx, format.mintick) : "-", text_color = color.lime, text_size = size.small)
+    table.cell(tb, 0, 4, "RSI3 aaj", text_color = color.white, text_size = size.small)
+    table.cell(tb, 1, 4, str.tostring(rsiV, "#.0"), text_color = color.white, text_size = size.small)
+    table.cell(tb, 0, 5, "Band trades", text_color = color.white, text_size = size.small)
+    table.cell(tb, 1, 5, str.tostring(closedN), text_color = color.white, text_size = size.small)
+    table.cell(tb, 0, 6, "Win %", text_color = color.white, text_size = size.small)
+    table.cell(tb, 1, 6, closedN > 0 ? str.tostring(float(strategy.wintrades) / closedN * 100, "#.#") : "-", text_color = color.white, text_size = size.small)
+    table.cell(tb, 0, 7, "PF", text_color = color.white, text_size = size.small)
+    table.cell(tb, 1, 7, na(pf) ? "-" : str.tostring(pf, "#.##"), text_color = color.white, text_size = size.small)

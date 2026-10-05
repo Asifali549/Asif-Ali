@@ -1,0 +1,200 @@
+//@version=6
+// This Pine Script® code is subject to the terms of the Mozilla Public License 2.0
+// Asif 4H: Ichimoku TP5 + Market Structure Break (MS)  -  sirf BUY, spot
+// ---------------------------------------------------------------------------------
+// Chart: koi bhi crypto coin, timeframe 4 GHANTE (240). Bot (ichi_tp5_bot.py) aur High-Win Lab ke
+// bilkul wahi usool:
+//   TP5 signal : Ichimoku (tenkan 9 > kijun 26, close cloud ke ooper, close > EMA200, EMA50 > EMA200,
+//                volume > 2 x 20-candle ausat, "fresh") AUR Market Structure BOS (pivot 5, swing 1.5%)
+//                ek hi candle par; dono ka alag cooldown 15 candle.
+//   MS signal  : Market Structure BOS + volume 2x, jab usi candle par Ichimoku signal NA ho
+//                (apna cooldown 15 candle).
+//   Entry      : signal candle band hone ke baad AGLI candle ke open par.
+//   SL         : Chandelier 16 / 4 x ATR(16) - har candle sirf ooper jata hai (trailing).
+//   TP         : entry se +5% par poori position.
+//   Size       : 2% account risk (SL tak), ek trade max 20% account.  Ek waqt mein ek trade.
+// Note: market structure ka pivot sirf 5 candle baad tasdeeq hota hai - is liye yahan koi
+//       lookahead / repaint NAHI. Signal sirf BAND candle par.
+// Coins: bot top-250 liquid coins par chalta hai - bohat kam volume wale coins par mat parkhein.
+strategy("Asif 4H: TP5 + MS Break", shorttitle = "TP5+MS", overlay = true, pyramiding = 0,
+     initial_capital = 1000, currency = currency.USD,
+     commission_type = strategy.commission.percent, commission_value = 0.15,
+     process_orders_on_close = false, calc_on_every_tick = false,
+     max_labels_count = 500, max_lines_count = 500, max_bars_back = 600)
+
+// ---------------- Inputs ----------------
+grpS = "Signals"
+useTP5   = input.bool(true,  "TP5 signal (Ichimoku + Structure)", group = grpS)
+useMS    = input.bool(true,  "MS signal (Structure + Volume)",    group = grpS)
+cooldown = input.int(15, "Cooldown (candles)", minval = 0, group = grpS)
+
+grpI = "Ichimoku"
+tenkanLen = input.int(9,  "Tenkan",   group = grpI)
+kijunLen  = input.int(26, "Kijun",    group = grpI)
+senkouLen = input.int(52, "Senkou B", group = grpI)
+dispLen   = input.int(26, "Displacement", group = grpI)
+
+grpM = "Market Structure"
+pivN     = input.int(5,     "Pivot lookback", minval = 1, group = grpM)
+swingPct = input.float(1.5, "Min swing %", step = 0.1, group = grpM)
+
+grpF = "Filters"
+trendLen  = input.int(200, "Trend EMA",  group = grpF)
+goldenLen = input.int(50,  "Golden EMA", group = grpF)
+volLen    = input.int(20,  "Volume average", group = grpF)
+volMult   = input.float(2.0, "Volume x", step = 0.1, group = grpF)
+
+grpX = "Exit / Size"
+ceLen    = input.int(16,    "Chandelier length", group = grpX)
+ceMult   = input.float(4.0, "Chandelier ATR x", step = 0.1, group = grpX)
+tpPct    = input.float(5.0, "TP %", step = 0.5, group = grpX)
+riskPct  = input.float(2.0, "Risk % per trade", step = 0.5, group = grpX)
+capPct   = input.float(20.0, "Max position % of account", step = 5, group = grpX)
+maxHold  = input.int(500, "Max candles in trade", group = grpX)
+
+grpV = "Display"
+showLbl   = input.bool(true, "Buy labels (entry / SL / TP)", group = grpV)
+showSkip  = input.bool(true, "Show signals skipped (trade already open)", group = grpV)
+showTable = input.bool(true, "Status table", group = grpV)
+
+if timeframe.period != "240"
+    runtime.error("Ye script sirf 4H (240) chart ke liye hai. Timeframe 4 ghante karein.")
+
+// ---------------- Common ----------------
+emaT    = ta.ema(close, trendLen)
+emaG    = ta.ema(close, goldenLen)
+trendOK = close > emaT and emaG > emaT
+volOK   = volume > ta.sma(volume, volLen) * volMult
+
+// Chandelier (bot: highest high 16 - 4 x SMA(TR,16))
+atrCE = ta.sma(ta.tr(true), ceLen)
+ceVal = ta.highest(high, ceLen) - ceMult * atrCE
+
+// ---------------- Ichimoku ----------------
+donMid(len) => (ta.highest(high, len) + ta.lowest(low, len)) / 2
+tenkan   = donMid(tenkanLen)
+kijun    = donMid(kijunLen)
+spanA    = ((tenkan + kijun) / 2)[dispLen]
+spanB    = donMid(senkouLen)[dispLen]
+cloudTop = math.max(spanA, spanB)
+ichiCond = tenkan > kijun and close > cloudTop and trendOK and volOK
+ichiRaw  = ichiCond and not ichiCond[1]
+
+// ---------------- Market Structure (causal) ----------------
+// Pivot high bar p tab tasdeeq hota hai jab p ke dono taraf pivN candles ho jayen (yani abhi, p = pivN candle pehle).
+hiWin = ta.highest(high, 2 * pivN + 1)   // har candle par hisaab (Pine ka "and" lazy hai)
+isPH  = bar_index >= 2 * pivN and high[pivN] == hiWin
+var float lastPH = na
+var float prevPH = na
+var bool  bullStruct = false
+if isPH
+    val = high[pivN]
+    if not na(prevPH)
+        if math.abs(val - prevPH) / prevPH >= swingPct / 100
+            bullStruct := val > prevPH
+    prevPH := lastPH
+    lastPH := val
+bos   = not na(lastPH) and bullStruct and close > lastPH and close[1] <= lastPH
+msRaw = bos and trendOK
+
+// ---------------- Cooldowns (har signal ka apna) ----------------
+var int lastIchi = -1000000
+var int lastMs   = -1000000
+var int lastMsV  = -1000000
+ichiC = false
+msC   = false
+msVC  = false
+if ichiRaw
+    if bar_index - lastIchi > cooldown
+        ichiC := true
+        lastIchi := bar_index
+if msRaw
+    if bar_index - lastMs > cooldown
+        msC := true
+        lastMs := bar_index
+if msRaw and volOK
+    if bar_index - lastMsV > cooldown
+        msVC := true
+        lastMsV := bar_index
+
+tp5Sig = useTP5 and ichiC and msC
+msSig  = useMS and msVC and not ichiC   // Ichimoku signal wali candle TP5 ki hai, MS ki nahi
+anySig = (tp5Sig or msSig) and ceVal < close
+
+// ---------------- Trade management ----------------
+var float trail    = na
+var float tpPx     = na
+var int   entryBar = na
+var string kind    = ""
+inPos = strategy.position_size > 0
+
+// naya fill pakra: entry bar, TP asal entry qeemat se
+if inPos and strategy.position_size[1] == 0
+    entryBar := bar_index
+    tpPx := strategy.position_avg_price * (1 + tpPct / 100)
+
+if inPos
+    // pehle is candle par purane SL se check ho chuka (broker); ab agli candle ke liye SL ooper karo
+    trail := math.max(trail, ceVal)
+    strategy.exit("X", "BUY", stop = trail, limit = tpPx, comment_loss = "SL", comment_profit = "TP 5%")
+    if bar_index - entryBar >= maxHold
+        strategy.close("BUY", comment = "Time", immediately = true)
+
+if not inPos and anySig
+    eq     = strategy.equity
+    riskD  = close - ceVal
+    qtyR   = eq * riskPct / 100 / riskD
+    qtyCap = eq * capPct / 100 / close
+    qty    = math.min(qtyR, qtyCap)
+    kind   := tp5Sig ? "TP5" : "MS"
+    trail  := ceVal
+    tpPx   := close * (1 + tpPct / 100)
+    strategy.entry("BUY", strategy.long, qty = qty, comment = kind)
+    // pehli candle ke liye: SL = signal ka chandelier, TP = fill + 5% (ticks mein)
+    strategy.exit("X", "BUY", stop = ceVal, profit = math.round(close * tpPct / 100 / syminfo.mintick),
+         comment_loss = "SL", comment_profit = "TP 5%")
+    if showLbl
+        riskP = (close - ceVal) / close * 100
+        label.new(bar_index, low, kind + " BUY\nEntry ~" + str.tostring(close, format.mintick) +
+             "\nSL " + str.tostring(ceVal, format.mintick) + " (" + str.tostring(riskP, "#.0") + "% neeche)" +
+             "\nTP " + str.tostring(close * (1 + tpPct / 100), format.mintick) + " (+" + str.tostring(tpPct, "#.#") + "%)",
+             style = label.style_label_up, yloc = yloc.belowbar,
+             color = tp5Sig ? color.new(color.teal, 0) : color.new(color.blue, 0), textcolor = color.white, size = size.small)
+    alert(syminfo.ticker + " " + kind + " BUY (4H) | entry ~" + str.tostring(close, format.mintick) +
+         " | SL " + str.tostring(ceVal, format.mintick) + " | TP +" + str.tostring(tpPct) + "%", alert.freq_once_per_bar_close)
+
+plotshape(showSkip and inPos and (tp5Sig or msSig), "Signal (trade pehle se khuli)", shape.circle,
+     location.belowbar, color.new(color.gray, 30), size = size.tiny)
+
+// ---------------- Plots ----------------
+plot(inPos ? trail : na, "Trailing SL", color.new(color.red, 0), 2, plot.style_linebr)
+plot(inPos ? tpPx  : na, "TP",          color.new(color.green, 0), 2, plot.style_linebr)
+plot(inPos ? strategy.position_avg_price : na, "Entry", color.new(color.gray, 0), 1, plot.style_linebr)
+plot(emaT, "EMA 200", color.new(color.orange, 60), 1)
+
+alertcondition(tp5Sig and ceVal < close, "TP5 BUY", "{{ticker}} TP5 BUY 4H - entry agli candle open, SL chandelier, TP +5%")
+alertcondition(msSig and ceVal < close,  "MS BUY",  "{{ticker}} MS BUY 4H - entry agli candle open, SL chandelier, TP +5%")
+
+// ---------------- Status table ----------------
+var table tb = table.new(position.top_right, 2, 8, bgcolor = color.new(color.black, 20), border_width = 1)
+if showTable and barstate.islast
+    closedN = strategy.closedtrades
+    wins    = strategy.wintrades
+    pf      = strategy.grossloss > 0 ? strategy.grossprofit / strategy.grossloss : na
+    pnlPct  = inPos ? (close / strategy.position_avg_price - 1) * 100 : na
+    table.cell(tb, 0, 0, "TP5 + MS (4H)", text_color = color.white, text_size = size.small)
+    table.cell(tb, 1, 0, inPos ? "TRADE KHULI (" + kind + ")" : "intezar", text_color = inPos ? color.lime : color.silver, text_size = size.small)
+    table.cell(tb, 0, 1, "Entry", text_color = color.white, text_size = size.small)
+    table.cell(tb, 1, 1, inPos ? str.tostring(strategy.position_avg_price, format.mintick) : "-", text_color = color.white, text_size = size.small)
+    table.cell(tb, 0, 2, "SL (trailing)", text_color = color.white, text_size = size.small)
+    table.cell(tb, 1, 2, inPos ? str.tostring(trail, format.mintick) : "-", text_color = color.red, text_size = size.small)
+    table.cell(tb, 0, 3, "TP", text_color = color.white, text_size = size.small)
+    table.cell(tb, 1, 3, inPos ? str.tostring(tpPx, format.mintick) : "-", text_color = color.lime, text_size = size.small)
+    table.cell(tb, 0, 4, "Abhi nafa/nuqsan %", text_color = color.white, text_size = size.small)
+    table.cell(tb, 1, 4, inPos ? str.tostring(pnlPct, "#.##") : "-", text_color = color.white, text_size = size.small)
+    table.cell(tb, 0, 5, "Band trades", text_color = color.white, text_size = size.small)
+    table.cell(tb, 1, 5, str.tostring(closedN), text_color = color.white, text_size = size.small)
+    table.cell(tb, 0, 6, "Win %", text_color = color.white, text_size = size.small)
+    table.cell(tb, 1, 6, closedN > 0 ? str.tostring(float(wins) / closedN * 100, "#.#") : "-", text_color = color.white, text_size = size.small)
+    table.cell(tb, 0, 7, "PF", text_color = color.white, text_size = size.small)
+    table.cell(tb, 1, 7, na(pf) ? "-" : str.tostring(pf, "#.##"), text_color = color.white, text_size = size.small)
