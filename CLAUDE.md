@@ -367,3 +367,8 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   250 4.8 | 300 5.0 | 350 5.2 | 400 5.3. Sharpe 2.70 / 2.88 / 2.99 / 3.02 / 2.92 / 2.89; CAGR 45 / 75 / 86 / 90 / 89 / 89%; DD -8..-12% sab.
   Rank-band: 201-250 PF 1.95 OOS 2.32 (vol ~$75k/din); 251-300 PF 1.60 OOS 1.32 ($43k); **301-400 win 67% PF 1.11, 2x kharcha 1.00 = edge nahi** ($24k).
   Mashwara: 250 (ya max 300); 350/400 nahi. **LAGU (2026-10-05, user ne kaha): UNIVERSE 250, TOP_N_COINS 330.**
+- **DIP MAXSL TEST (2026-10-05, `dip_maxsl_test.py` / `_RESULTS.txt`, 286 coins, 231 Dip v2 trades):** live BR/USDT SL 97% door.
+  SL faasla median 31% (p90 52%, p99 68%). ULTA natija: door SL wali trades BEHTAR - SL 0-20%: PF 1.27 | 20-30%: 1.44 | 30-40%: 3.67 |
+  40-50%: 5.10 | 50-60%: 6.94 (win 90%) | 60-80%: 2.68 | 80%+: sirf 1 trade (-17.6%). maxSL 30/40/50%: CAGR 11.1 -> 1.9/7.7/9.9% (BURA).
+  maxSL 70%: 11.6% / -19.4% / Sharpe 0.84 (live 0.81) - sirf 2 trades hatin. Chhota size (R4-8%) bhi bura. Portfolio TP5 70/Dip 30 sab ~2.78-2.80.
+  FAISLA/mashwara: SL tang ya filter NAHI; zyada se zyada hifazati had maxSL 70-80% (sirf 1-2 trades ka saboot, kamzor) - user ki ijazat baqi.
