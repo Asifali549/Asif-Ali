@@ -1,0 +1,29 @@
+==============================================================================================================
+CAUSALITY (SACHAI) TEST - backtest ko mustaqbil ka pata to nahi?
+==============================================================================================================
+Coins: 156 | daily 2020-03-10 -> 2026-10-04
+
+# DAILY - 100 random din x tamam coins (live jaisa data kaat kar dobara hisaab)
+                    Dip signal:   8756 jaanch | farq    0 -> SAHI | in dinon ke signals: 8
+               Donchian signal:   8756 jaanch | farq    0 -> SAHI | in dinon ke signals: 197
+           Capitulation signal:   8756 jaanch | farq    0 -> SAHI | in dinon ke signals: 11
+             top-100 liquidity:   8756 jaanch | farq    0 -> SAHI
+                      ATR (SL):   8756 jaanch | farq    0 -> SAHI
+               SMA3 exit (Dip):   8756 jaanch | farq    0 -> SAHI
+             SMA5 exit (Capit):   8756 jaanch | farq    0 -> SAHI
+ Chandelier 22/4 (Donchian SL):   8756 jaanch | farq    0 -> SAHI
+
+# 4H ICHIMOKU / TP5 (market structure fix ke baad) - 12 coins, 7200 bars (2 signal bars)
+            Ichimoku+MS signal: farq 0 -> SAHI
+      Market structure (akela): farq 0 (33 signal bars) -> SAHI
+      Chandelier 16/4 (TP5 SL): farq 0 -> SAHI
+
+# RANDOM-WALK (nakli data, koi edge nahi) - engine bias check: PF ~1.0 hona chahiye (koi bhi > 1.3 = khatra)
+                           DIP: PF har seed 1.10 1.18 0.90 1.08 0.91 | ausat 1.04 -> SAHI
+                           DON: PF har seed 1.52 1.58 1.72 1.61 1.81 | ausat 1.64 -> KHATRA
+                         CAPIT: PF har seed 1.04 1.13 0.88 1.17 0.96 | ausat 1.04 -> SAHI
+
+# KHULASA
+Dip / Donchian / Capitulation backtest (daily): SAHI - koi lookahead nahi
+Ichimoku / TP5 backtest (4H, fix ke baad): SAHI - koi lookahead nahi
+Engine random-walk par: KHATRA
