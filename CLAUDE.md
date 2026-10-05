@@ -329,6 +329,21 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
 - DON: maxSL 20% filter -> PF 1.75 -> 2.30, OOS 1.12 -> 1.48, DD -40 -> -33%, Sharpe 1.00 -> 1.18, CAGR 31.5 -> 36.6% (1% risk);
   2022 PF 0.11, 2025 0.59 phir bhi kamzor. **LAGU** (MAX_SL_PCT 0.20). Dono abhi bhi SIRF PAPER + Telegram khamosh.
 
+- **HIGH-WIN LAB (2026-10-05, `highwin_lab.py` / workflow "High-Win Lab Test" / `highwin_lab_RESULTS.txt`, 281 coins, top-250):**
+  user: "apne taur par nayi achi strategy dhoondo". 9 naye 4H entry khandan, sab ke sath TP5 exit (CE 16/4 + TP 5%), 2% risk;
+  10 pehle se tay shartein (win>=65, PF > trend-random p95, OOS>=1.3, 4/4 folds, boot p5>=1.2, -top10>=1.2, 2x kharcha>=1.2,
+  >=0.5/hafta, portfolio Sharpe behtar, universe 5/6). Fake random-walk data par sab PF ~1 (lookahead nahi).
+  REF TP5: 1071 trades, win 76.8%, PF 1.78, OOS 1.62, CAGR 58.6%, DD -11.7%, Sharpe 2.71 - PASS.
+  **MS_EXTRA = market structure BOS + volume 2x, JAHAN Ichimoku signal NAHI (TP5 se alag trades): PASS 10/10** -
+  1132 trades (3.6/hafta), win 77.6%, PF 1.81 (trend-random p95 1.07), OOS 1.58, folds 3.14/1.58/1.79/1.57, boot p5 1.59,
+  -top10 1.77, 2x kharcha 1.58, universe 6/6; akela CAGR 55.8%, DD -19%, Sharpe 2.49, +mahine 61%, bura mahina -8.8%,
+  saal-war 2021 +73 / 2022 +17 / 2023 +105 / 2024 +47 / 2025 +25 / 2026 +73. Corr TP5 0.69 (wohi khandan).
+  Portfolio: TP5 70/DIP 30 43.9% / -8.6% / Sharpe 2.80 -> TP5 60/DIP 25/MS 15 46.2% / -7.4% / 3.06 -> **50/20/30 48.3% / -8.1% / 3.19**.
+  FAIL (random jaise, DD -79..-98%): ICHI_EXTRA (Ichimoku baghair MS), breakout 30/42, momentum-volume, EMA cross, FVG,
+  Supertrend, RSI thrust - sab 10-31 trades/hafta, kharcha kha jata hai. Sabaq: is project mein asal edge MARKET STRUCTURE
+  (BOS) + volume mein hai; Ichimoku akela bekaar. Khatra: 9 mein se chuna (lekin TP5 ka sagga bhai). Agla qadam (user se poochh kar):
+  paper bot "MS TP5" (ichi_tp5_bot jaisa) live TP5 ke sath.
+
 ## Aglay kaam
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
   `scheduler.py` + `scheduler.yml`: ek workflow ~5h40m lagataar chalta, har minute: Ichimoku har 4h :10, Donchian 00:15,
