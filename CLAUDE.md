@@ -363,3 +363,7 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   Mix 70 TP5 r3c30 / 30 DIP 59% / -14.9% / 2.97 (r2c20 70/30: 40% / -9.8% / 2.92). Mashwara: TP5 rakho, cap 30% (paper) - user ki ijazat baqi.
 - **🤝 Group khaana (2026-10-04, user):** Muqabla tab ke ooper 3 khaane, har ek $1000: TP5 akela, Dip akela, Group (GROUP_SPLIT 70/30 =
   0.7 x TP5 equity + 0.3 x Dip equity, dono paper records se hisab - alag bot nahi). Chart mein Group line bhi.
+- **UNIVERSE 2 TEST (2026-10-05, `universe2_test.py` / `_RESULTS.txt`, 542 coins, KuCoin top-600):** TP5 top-U. Signals/hafta: 100 2.8 | 200 4.4 |
+  250 4.8 | 300 5.0 | 350 5.2 | 400 5.3. Sharpe 2.70 / 2.88 / 2.99 / 3.02 / 2.92 / 2.89; CAGR 45 / 75 / 86 / 90 / 89 / 89%; DD -8..-12% sab.
+  Rank-band: 201-250 PF 1.95 OOS 2.32 (vol ~$75k/din); 251-300 PF 1.60 OOS 1.32 ($43k); **301-400 win 67% PF 1.11, 2x kharcha 1.00 = edge nahi** ($24k).
+  Mashwara: 250 (ya max 300); 350/400 nahi. Bot mein lagane ke liye UNIVERSE 250 + TOP_N_COINS ~330 - user ki ijazat baqi.
