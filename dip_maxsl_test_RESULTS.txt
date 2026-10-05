@@ -1,0 +1,50 @@
+=============================================================================================================================
+DIP MAX-SL TEST - Dip v2 (RSI3<7, SMA3, TP5, stop 3 ATR, top-100): door SL ka ilaaj
+=============================================================================================================================
+Coins: 286 | 2020-10-06 -> 2026-10-04 | win = +0.5% se ziada | OOS = 2025+
+
+# SL KA FAASLA (entry se, %) - 231 Dip trades
+percentile: p10 17% | p25 23% | p50 31% | p75 39% | p90 52% | p95 59% | p99 68% | max 127%
+  SL  0-20 %:  45 trades | win  68.9% | PF  1.27 | avg +0.36% | sab se buri trade -19.9%
+  SL 20-30 %:  59 trades | win  69.5% | PF  1.44 | avg +0.90% | sab se buri trade -28.8%
+  SL 30-40 %:  71 trades | win  81.7% | PF  3.67 | avg +2.56% | sab se buri trade -15.1%
+  SL 40-50 %:  26 trades | win  84.6% | PF  5.10 | avg +3.22% | sab se buri trade -12.5%
+  SL 50-60 %:  20 trades | win  90.0% | PF  6.94 | avg +3.65% | sab se buri trade -6.4%
+  SL 60-80 %:   8 trades | win  75.0% | PF  2.68 | avg +2.23% | sab se buri trade -5.4%
+  SL 80-101%:   1 trades | win   0.0% | PF  0.00 | avg -17.60% | sab se buri trade -17.6%
+
+               tareeqa |    n |  win% |    PF |   OOS | 1 trade max |    CAGR |   MaxDD | Sharpe | bura mah |  2021 |  2022 |  2023 |  2024 |  2025 |  2026
+    LIVE: koi had nahi |  231 |  76.6 |  2.33 |  1.84 |       -5.8% |  +11.1% |  -19.4% |   0.81 |    -4.3% |  +13% |   +0% |   +1% |  +50% |   +5% |   +2%
+          A: maxSL 30% |  106 |  69.8 |  1.41 |  1.67 |       -5.8% |   +1.9% |  -10.1% |   0.28 |    -5.5% |   +2% |   +0% |   -4% |   +9% |   -1% |   +4%
+          A: maxSL 40% |  175 |  74.3 |  2.00 |  2.19 |       -5.8% |   +7.7% |  -17.8% |   0.67 |    -7.0% |   +9% |   +0% |   -1% |  +33% |   +2% |   +5%
+          A: maxSL 50% |  201 |  75.6 |  2.24 |  2.38 |       -5.8% |   +9.9% |  -18.6% |   0.76 |    -3.4% |  +10% |   +0% |   +0% |  +44% |   +4% |   +5%
+          A: maxSL 60% |  221 |  76.9 |  2.44 |  2.39 |       -5.8% |  +11.1% |  -19.4% |   0.82 |    -3.1% |  +12% |   +0% |   +0% |  +48% |   +5% |   +5%
+          A: maxSL 70% |  229 |  76.9 |  2.45 |  2.27 |       -5.8% |  +11.6% |  -19.4% |   0.84 |    -3.1% |  +13% |   +0% |   +1% |  +50% |   +5% |   +5%
+     B: size R4% cap20 |  231 |  76.6 |  2.33 |  1.84 |       -4.1% |   +6.9% |  -16.5% |   0.66 |    -4.0% |   +8% |   +0% |   -1% |  +31% |   +2% |   +4%
+     B: size R6% cap20 |  231 |  76.6 |  2.33 |  1.84 |       -5.8% |   +9.2% |  -19.3% |   0.74 |    -4.6% |  +11% |   +0% |   -0% |  +40% |   +3% |   +4%
+     B: size R8% cap20 |  231 |  76.6 |  2.33 |  1.84 |       -5.8% |  +10.5% |  -19.3% |   0.79 |    -3.1% |  +12% |   +0% |   +1% |  +46% |   +4% |   +4%
+           A50 + B R6% |  201 |  75.6 |  2.24 |  2.38 |       -5.8% |   +8.7% |  -18.2% |   0.71 |    -5.5% |   +9% |   +0% |   -0% |  +39% |   +3% |   +5%
+
+# RANDOM CONTROL (8 seeds, wohi stop/TP/filter) - sirf entry ka edge
+    LIVE: koi had nahi: PF 2.33 vs random p95 1.13 -> behtar
+          A: maxSL 30%: PF 1.41 vs random p95 1.17 -> behtar
+          A: maxSL 40%: PF 2.00 vs random p95 1.24 -> behtar
+          A: maxSL 50%: PF 2.24 vs random p95 1.16 -> behtar
+          A: maxSL 60%: PF 2.44 vs random p95 1.10 -> behtar
+          A: maxSL 70%: PF 2.45 vs random p95 1.12 -> behtar
+     B: size R4% cap20: PF 2.33 vs random p95 1.13 -> behtar
+     B: size R6% cap20: PF 2.33 vs random p95 1.13 -> behtar
+     B: size R8% cap20: PF 2.33 vs random p95 1.13 -> behtar
+           A50 + B R6%: PF 2.24 vs random p95 1.16 -> behtar
+
+# PORTFOLIO: TP5 (top-250, 2% risk) 70% + Dip 30%
+     TP5 70 / LIVE: koi had nahi | CAGR +44.1% | MaxDD -8.6% | Sharpe 2.79 | bura mahina -3.0%
+           TP5 70 / A: maxSL 30% | CAGR +40.5% | MaxDD -8.6% | Sharpe 2.70 | bura mahina -3.0%
+           TP5 70 / A: maxSL 40% | CAGR +42.8% | MaxDD -8.6% | Sharpe 2.76 | bura mahina -3.5%
+           TP5 70 / A: maxSL 50% | CAGR +43.7% | MaxDD -8.6% | Sharpe 2.78 | bura mahina -3.0%
+           TP5 70 / A: maxSL 60% | CAGR +44.1% | MaxDD -8.6% | Sharpe 2.80 | bura mahina -3.0%
+           TP5 70 / A: maxSL 70% | CAGR +44.3% | MaxDD -8.6% | Sharpe 2.80 | bura mahina -3.0%
+      TP5 70 / B: size R4% cap20 | CAGR +42.5% | MaxDD -8.6% | Sharpe 2.77 | bura mahina -3.0%
+      TP5 70 / B: size R6% cap20 | CAGR +43.4% | MaxDD -8.6% | Sharpe 2.78 | bura mahina -3.0%
+      TP5 70 / B: size R8% cap20 | CAGR +43.9% | MaxDD -8.6% | Sharpe 2.79 | bura mahina -3.0%
+            TP5 70 / A50 + B R6% | CAGR +43.2% | MaxDD -8.6% | Sharpe 2.77 | bura mahina -3.0%
