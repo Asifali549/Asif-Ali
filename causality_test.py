@@ -205,9 +205,17 @@ def main(h4=None):
     emit("=" * 110)
     emit(f"Coins: {len(h4)} | daily {min(d['timestamp'].iloc[0] for d in daily.values()).date()} -> "
          f"{max(d['timestamp'].iloc[-1] for d in daily.values()).date()}")
-    a = daily_check(daily, emit, rng)
-    b = h4_check(h4, emit, rng)
-    c = random_walk_check(emit)
+    import traceback
+
+    def safe(fn, *a):
+        try:
+            return fn(*a)
+        except Exception:
+            emit("\n!! GHALTI (code crash):\n" + traceback.format_exc())
+            return False
+    a = safe(daily_check, daily, emit, rng)
+    b = safe(h4_check, h4, emit, rng)
+    c = safe(random_walk_check, emit)
     emit("\n# KHULASA")
     emit(f"Dip / Donchian / Capitulation backtest (daily): {'SAHI - koi lookahead nahi' if a else 'GHALAT'}")
     emit(f"Ichimoku / TP5 backtest (4H, fix ke baad): {'SAHI - koi lookahead nahi' if b else 'GHALAT'}")
