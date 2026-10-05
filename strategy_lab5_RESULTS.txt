@@ -1,0 +1,58 @@
+=============================================================================================================================
+STRATEGY LAB 5 - daily mean-reversion ke 3 naye khayal (Dip exit), top-100, BTC>EMA50, uptrend, 20% / trade, max 10
+=============================================================================================================================
+Coins: 145 | 2020-10-07 -> 2026-10-04 (313 hafte) | win = +0.5% se ziada | OOS = 2025+
+
+# SACHAI TEST - 30 random din, data kaat kar dobara hisaab (farq 0 hona chahiye)
+               REF_DIP: farq 0 (0 signals) -> SAHI
+        R1_RESID z-1.5: farq 0 (16 signals) -> SAHI
+        R1_RESID z-2.0: farq 0 (4 signals) -> SAHI
+        R1_RESID z-2.5: farq 0 (2 signals) -> SAHI
+        R2_LOSER K3 X4: farq 0 (22 signals) -> SAHI
+        R2_LOSER K5 X4: farq 0 (30 signals) -> SAHI
+        R2_LOSER K3 X6: farq 0 (16 signals) -> SAHI
+     R3_PULLBACK EMA10: farq 0 (26 signals) -> SAHI
+     R3_PULLBACK EMA20: farq 0 (14 signals) -> SAHI
+     R3_PULLBACK EMA30: farq 0 (10 signals) -> SAHI
+
+             candidate |    n | /hafta |  win% |    PF | rnd95 |   OOS |                   folds | boot5 | -top10 | 2xcost |    CAGR |  MaxDD | Sharpe | +mah% | bura mah
+               REF_DIP |  198 |   0.63 |  79.3 |  2.84 |  1.31 |  2.75 | 14.72 10.25  2.51  3.84 |  1.88 |   2.63 |   2.52 |  +12.1% | -18.9% |   0.94 |    42 |    -4.3%
+        R1_RESID z-1.5 | 1582 |   5.06 |  64.9 |  1.42 |  0.98 |  1.29 |  1.42  2.51  1.36  1.38 |  1.25 |   1.40 |   1.24 |  +38.3% | -47.9% |   0.97 |    44 |   -35.9%
+        R1_RESID z-2.0 |  561 |   1.79 |  67.2 |  2.14 |  1.01 |  1.60 |  1.36  3.37  2.30  1.90 |  1.75 |   2.08 |   1.84 |  +22.8% | -13.8% |   1.03 |    43 |    -4.1%
+        R1_RESID z-2.5 |  180 |   0.58 |  66.1 |  2.16 |  1.29 |  1.46 |  1.89  6.74  2.20  1.47 |  1.54 |   1.96 |   1.84 |   +7.7% |  -9.4% |   0.80 |    29 |    -1.3%
+        R2_LOSER K3 X4 | 1775 |   5.68 |  70.6 |  1.25 |  1.03 |  1.02 |  1.30  1.39  1.33  1.07 |  1.12 |   1.24 |   1.14 |  +14.5% | -65.2% |   0.54 |    40 |   -36.3%
+        R2_LOSER K5 X4 | 2399 |   7.68 |  69.9 |  1.19 |  0.99 |  0.92 |  1.35  1.47  1.19  0.97 |  1.07 |   1.18 |   1.07 |  +20.0% | -71.6% |   0.62 |    47 |   -48.6%
+        R2_LOSER K3 X6 | 1142 |   3.65 |  73.2 |  1.38 |  1.11 |  0.97 |  1.74  1.89  1.41  1.01 |  1.19 |   1.36 |   1.25 |  +28.3% | -53.7% |   0.88 |    50 |   -33.1%
+     R3_PULLBACK EMA10 | 2250 |   7.20 |  63.9 |  0.99 |  1.01 |  0.73 |  1.52  1.51  0.89  0.76 |  0.89 |   0.98 |   0.88 |  +18.8% | -73.6% |   0.62 |    40 |   -41.3%
+     R3_PULLBACK EMA20 | 1497 |   4.79 |  62.3 |  0.89 |  1.00 |  0.71 |  2.13  1.11  0.75  0.76 |  0.79 |   0.88 |   0.79 |   +0.7% | -76.0% |   0.20 |    43 |   -47.3%
+     R3_PULLBACK EMA30 | 1029 |   3.29 |  59.6 |  0.88 |  1.07 |  0.72 |  1.75  0.88  0.76  0.78 |  0.76 |   0.86 |   0.77 |   -1.9% | -61.8% |   0.08 |    43 |   -37.6%
+
+# SAAL-WAR NAFA (akela, 20% / trade)
+             candidate |  2021 |  2022 |  2023 |  2024 |  2025 |  2026
+               REF_DIP |  +13% |   +0% |   +5% |  +45% |  +11% |   +1%
+        R1_RESID z-1.5 |  +37% |   -4% |  +99% |  +92% |   +6% |  +17%
+        R1_RESID z-2.0 |   +4% |   -2% |  +45% | +100% |   +3% |   +4%
+        R1_RESID z-2.5 |   +3% |   +0% |   +7% |  +34% |   -0% |   +3%
+        R2_LOSER K3 X4 |  +66% |  -19% | +161% |   +1% |  -23% |   -7%
+        R2_LOSER K5 X4 |  +85% |  -24% | +233% |   -9% |  -31% |   +3%
+        R2_LOSER K3 X6 | +108% |   -9% | +154% |  +15% |  -15% |   -0%
+     R3_PULLBACK EMA10 | +112% |   -3% | +179% |  -47% |  -32% |  +30%
+     R3_PULLBACK EMA20 | +123% |   -1% |  +56% |  -54% |  -42% |  +18%
+     R3_PULLBACK EMA30 |  +56% |   -3% |  +21% |  -26% |  -33% |   +3%
+
+# PORTFOLIO: DIP akela vs DIP 50 / NEW 50 (mahana rebalance)
+             DIP akela | CAGR +12.1% | MaxDD -18.9% | Sharpe 0.94
+           DIP 50 / R1_RESID z-1.5 | corr +0.53 | CAGR +26.3% | MaxDD -29.6% | Sharpe 1.10
+           DIP 50 / R1_RESID z-2.0 | corr +0.62 | CAGR +17.6% | MaxDD -9.9% | Sharpe 1.23
+           DIP 50 / R1_RESID z-2.5 | corr +0.51 | CAGR +10.0% | MaxDD -10.0% | Sharpe 1.14
+           DIP 50 / R2_LOSER K3 X4 | corr +0.12 | CAGR +16.0% | MaxDD -31.1% | Sharpe 0.72
+           DIP 50 / R2_LOSER K5 X4 | corr +0.17 | CAGR +19.8% | MaxDD -37.8% | Sharpe 0.78
+           DIP 50 / R2_LOSER K3 X6 | corr +0.23 | CAGR +21.9% | MaxDD -28.8% | Sharpe 1.04
+        DIP 50 / R3_PULLBACK EMA10 | corr +0.19 | CAGR +18.3% | MaxDD -39.6% | Sharpe 0.82
+        DIP 50 / R3_PULLBACK EMA20 | corr +0.21 | CAGR +8.5% | MaxDD -34.8% | Sharpe 0.50
+        DIP 50 / R3_PULLBACK EMA30 | corr +0.20 | CAGR +5.8% | MaxDD -30.9% | Sharpe 0.41
+
+# PASS / FAIL (beech wali setting; padosi: PF > random p95 aur OOS > 1.1)
+        R1_RESID z-2.0: PASS | universe 6/6 (2.32/1.60 2.01/1.94 2.08/2.08 2.08/1.22 1.91/1.49 2.33/1.78)
+        R2_LOSER K3 X4: FAIL: OOS>=1.3, boot>=1.2, 2xcost>=1.2, portfolio+, padosi
+     R3_PULLBACK EMA20: FAIL: win>=65, PF>rnd95, OOS>=1.3, folds4/4, boot>=1.2, -top10>=1.2, 2xcost>=1.2, portfolio+, padosi
