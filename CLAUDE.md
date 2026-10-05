@@ -363,6 +363,14 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   R3 PULLBACK (daily EMA10/20/30 par wapsi): PF 0.88-0.99 = random se bura FAIL.
   Agla qadam (user se poochh kar): R1 ka paper bot (dip_daily_bot jaisa).
 
+- **COMBO LAB 6 (2026-10-05, `combo_lab6.py` / workflow "Combo Lab 6 Test" / `combo_lab6_RESULTS.txt`, 148 coins):** user: "is se kaam
+  nahi banega, kuch best karo". DIP + RESID ek hi khate (mushtarka sarmaya) mein - alag sleeves (50/50) se kahin behtar kyunke
+  paisa khali kam bethta. **BEHTAREEN: DIP+RESID z-2.0, 20%/trade, max 10: 2.5 signals/hafta, win 70.5%, PF 2.30, OOS 1.94,
+  CAGR 37.0%, MaxDD -14.5%, Sharpe 1.27, 2x kharcha CAGR 29.9%, ausat mahana +2.9%, bura mahina -4.8%, 47% mahine musbat.**
+  Saal: 2021 +17 / 2022 -2 / 2023 +54 / 2024 +179 / 2025 +16 / 2026 +3 (2024 ka bara hissa - khatra). 25%/max4: 42.8% / -19.5% / 1.26.
+  z-1.75 20%: 45.5% / -24.8% / 1.18. Bare size (33/50%) par DD 25-48% - mashwara nahi. DIP akela 20%: 12.3% / -19.8% / 0.93.
+  Agla qadam (user se poochh kar): paper bot "Dip+Resid" (ek khata) Dip bot jaisa.
+
 ## Aglay kaam
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
   `scheduler.py` + `scheduler.yml`: ek workflow ~5h40m lagataar chalta, har minute: Ichimoku har 4h :10, Donchian 00:15,
