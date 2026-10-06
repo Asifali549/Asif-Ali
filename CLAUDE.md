@@ -434,6 +434,12 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   **P DOWN_STREAK 4 (4 din lagataar neeche, EMA50>EMA200, Dip exit): DEV sirf "5d fark" fail (BORDERLINE), TAALA PASS: 46 trades jeet 7.2/10
   PF 3.42 vs rnd95 2.15; poora 588 trades jeet 6.9 PF 1.67; 10%: CAGR 10.5% DD -16% Sharpe 0.80, 2026 +10%, corr Dip v2 0.71.** Padosi taale mein
   kamzor (3 din PF 0.82, 5 din 1.22). LAGU: `streak_bot.py` SIRF PAPER (fake replay 181/182 hubahu).
+  **STREAK ATTACK (2026-10-06, `streak_attack.py` / `_RESULTS.txt`, user: "contrarian ban kar check karo"):** BACHA: sakht random (utni hi
+  girawat magar lagataar nahi) poora PF 1.09/p95 1.23 vs asal 1.57, taala 0.71/1.59 vs 3.42 -> "lagataar" ka asli faida; Dip v2 se sirf 9% overlap
+  (alag trades PF 1.55); 20% coins hata kar 8/8 (poora 1.35-1.76, taala 2.7-7.0); 78/101 coins nafa, top-5 coins = 32%; 3x kharcha PF 1.21.
+  KAMZORIYAN: taale ka nafa ek mahine par (2026-09: 19 trades +56%, 11 Sep ko 7 trades), Jan 2026 -13%; EK DIN DER = edge khatam (taala PF 0.67,
+  2 din der poora 1.00) -> entry bilkul agle open par lazmi; saal 2024 1.41 / 2025 1.20 kamzor, 2022 sirf 1 trade (bear ka imtihan nahi);
+  BTC filter lazmi (BTC kamzor dinon ke signals PF 0.77). TP/SL hata kar PF 1.64/1.79 - magar tuning NAHI ki (overfit). Faisla: paper jaari, koi tabdeeli nahi.
 
 ## Aglay kaam
 - **2026-10-06 user ne kaha 'bna do': Dip+ aur W52 paper bots LAGU.** Talaash bhi jaari (user: behtareen ki talaash nahi chhorni).
