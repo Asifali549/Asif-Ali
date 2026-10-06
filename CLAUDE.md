@@ -505,6 +505,21 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   andha nahi - har trade ~3% ya ziada ka chhupa faida hamesha pakarta; ~1% wala aksar chhoot jata (kharche ke baad waise bhi kamzor).
   Hadein: aksar khayal sirf Dip exit + daily par jaanche; concepts ko mechanical rule banaya (VPOC daily se andaza); survivorship.
 
+- **REALITY LAB 20 (2026-10-06, `reality_lab20.py` / `_RESULTS.txt`, user: "jo shak hain sab door karo"):** Binance spot archive (S3 listing
+  data.binance.vision GitHub se chalti hai) 641 coins = 452 zinda + 189 doobe/band; point-in-time top-100 mein doobe coins ~19%. (Binance universe -
+  KuCoin numbers se seedha muqabla nahi, sirf andar ka farq dekho.) (1) SURVIVORSHIP (zinda -> sab, PF / CAGR): Donchian 2.55->2.14 / 47->35%;
+  Dip v2 2.49->2.18 / 11->11.5% (doobe coins ki trades PF 1.92 - mazboot); Dip+ 2.00->1.86 / 42->40%; W52 2.29->2.18 / 86->81% (DD -28->-36);
+  W52 chalta SL 1.89->1.73; 4-din 1.30->1.25; **Capitulation 1.21->1.04 (edge khatam), Market safai 1.62->1.11 (DD -55%, bura mahina -30%)**.
+  Binance taale mein Dip v2 13 trades PF 0.47, Dip+ 67 PF 0.76, 4-din 43 PF 0.80 (kamzor); W52 25 PF 3.39, Donchian +38%.
+  (2) KHAREED KA WAQT (din ke open 5 AM PKT vs 6/7/9/12 baje; nafa x open/naya px): W52 CAGR 81->74 (6 AM) ->69 (9 AM) ->64 (12 PM);
+  W52 chalta SL 40->31->27->23 (sab se nazuk); Donchian 35->34->34->33; Dip v2 / Dip+ der se BEHTAR ya barabar (Dip+ 9 AM PF 2.21 vs 1.86);
+  Market safai 7 AM ke baad edge khatam (12 PM PF 0.96). Paper bots open par khareedte hain -> paper ye nuqsan NAHI dikhata.
+  (3) SAB 8 EK SATH (1/8 har ek, mahana barabar): 5 AM CAGR 39% DD -19.5% Sharpe 1.84 | 9 AM 30% / -19% / 1.59 | 12 PM 24% / -20% / 1.37;
+  2021 +276% (bara hissa), taala sirf +5..+9%. Correlation kam (W52 jora 0.92, Donchian-W52 0.58-0.69, baqi 0.0-0.5); 21% khareedain 2+ systems
+  mein wohi coin (zyada Dip/Dip+ ka mushtarka hissa); sab se bura din -8.4%.
+- **2026-10-06 tabdeeliyan:** Ichimoku TP5 Telegram KHAMOSH (fix ke baad edge nahi; dashboard backtest number theek kiye). `paper_report.py` +
+  `paper_report.yml` (har peer 03:00 UTC, scheduler bhi): har system ki band paper trades vs backtest (jeet/10, PF, binomial jaanch) -> Telegram Urdu.
+
 ## Aglay kaam
 - **2026-10-06 user ne kaha 'bna do': Dip+ aur W52 paper bots LAGU.** Talaash bhi jaari (user: behtareen ki talaash nahi chhorni).
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
