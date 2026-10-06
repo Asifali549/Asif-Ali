@@ -1,0 +1,7 @@
+   DefiLlama stablecoins total: HTTP 200 | 1274 KB | shuru: '[{"date":"1511913600","totalCirculating":{"peggedUSD":109970},"totalCirculatingUSD":{"peggedUSD":110105}},{"date":"1512000000","totalCirculating":{"peggedUSD":1' | aakhir: 'AR":0,"peggedNGN":0,"peggedXOF":0,"peggedGHS":0,"peggedCLP":0,"peggedPEN":0,"peggedMYR":0,"peggedKRW":0,"peggedHKD":0}}]'
+     Fear&Greed alternative.me: HTTP 200 | 291 KB | shuru: '{\n\t"name": "Fear and Greed Index",\n\t"data": [\n\t\t{\n\t\t\t"value": "73",\n\t\t\t"value_classification": "Greed",\n\t\t\t"timestamp": "1791244800",\n\t\t\t"time_until_update": "4' | aakhir: 'alue": "30",\n\t\t\t"value_classification": "Fear",\n\t\t\t"timestamp": "1517443200"\n\t\t}\n\t],\n\t"metadata": {\n\t\t"error": null\n\t}\n}'
+           FRED DXY (DTWEXBGS): FAIL HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=60)
+              FRED 10y (DGS10): FAIL HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=60)
+       FRED Nasdaq (NASDAQCOM): FAIL HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=60)
+      FRED Fed balance (WALCL): FAIL HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=60)
+          FRED RRP (RRPONTSYD): FAIL HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=60)
