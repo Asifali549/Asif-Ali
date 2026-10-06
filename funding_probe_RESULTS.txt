@@ -1,0 +1,11 @@
+   binanceusdm: FAIL ExchangeNotAvailable: binanceusdm GET https://fapi.binance.com/fapi/v1/exchangeInfo 451  {
+  "code": 0,
+  "msg": "Service unavailable from a restricted location according t
+         bybit: FAIL RateLimitExceeded: bybit GET https://api.bybit.com/v5/market/instruments-info?category=spot 403 Forbidden {
+    error:The Amazon CloudFront distribution is configured to
+           okx: OK has=True | pehla 2026-06-29 08:00:00 | 1st page aakhri 2026-09-03 16:00:00 | 4 pages 297 rows | USDT swaps 485
+        bitget: OK has=True | pehla 2026-09-03 00:00:00 | 1st page aakhri 2026-10-06 00:00:00 | 4 pages 100 rows | USDT swaps 813
+        gateio: FAIL AttributeError: module 'ccxt' has no attribute 'gateio'
+ kucoinfutures: OK has=True | pehla 2026-09-03 00:00:00 | 1st page aakhri 2026-10-06 00:00:00 | 4 pages 100 rows | USDT swaps 682
+          mexc: OK has=True | pehla 2026-07-31 16:00:00 | 1st page aakhri 2026-10-06 00:00:00 | 4 pages 200 rows | USDT swaps 1075
+           htx: OK has=True | pehla 2026-09-03 00:00:00 | 1st page aakhri 2026-10-06 00:00:00 | 4 pages 100 rows | USDT swaps 374
