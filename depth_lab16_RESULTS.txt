@@ -1,0 +1,31 @@
+==================================================================================================================================
+DEPTH LAB 16 - order book imbalance | 25 coins | 2024-01-01 -> 2026-09-29 (har 3rd din) | TAALA 2025-10-01 se
+==================================================================================================================================
+IMB = (khareedar - bechne wale) / kul, qeemat ke 1% (IMB1) ya 5% (IMB5) ke andar. + IC = khareedar ziada -> qeemat ooper
+bps = 1% ka sauwan hissa (100 bps = 1%). Aana-jana kharcha ~30 bps.
+
+IMB ki aam halat: IMB1 ausat +0.093 (beech ke 80%: -0.04 .. +0.24) | IMB5 ausat +0.129 (+0.02 .. +0.26)
+
+# SAWAL 1 - GHANTE: ghante ke aakhir ka IMB -> agla 1 ghanta / 4 ghante
+             IMB1 -> agla 1 ghanta   DEV: n 127487 | cross IC -0.008 (t -2.6) | coin-apna IC +0.013 (t +3.2) | ooper 20% +3 bps, neeche 20% +1 bps, farq +2 bps
+             IMB1 -> agla 1 ghanta TAALA: n  72984 | cross IC -0.012 (t -2.9) | coin-apna IC -0.001 (t -0.4) | ooper 20% -1 bps, neeche 20% -1 bps, farq -0 bps
+             IMB1 -> agle 4 ghante   DEV: n 127487 | cross IC -0.016 (t -5.4) | coin-apna IC -0.000 (t -0.1) | ooper 20% +4 bps, neeche 20% +10 bps, farq -6 bps
+             IMB1 -> agle 4 ghante TAALA: n  72984 | cross IC -0.016 (t -3.9) | coin-apna IC +0.006 (t +1.5) | ooper 20% -2 bps, neeche 20% -4 bps, farq +3 bps
+             IMB5 -> agla 1 ghanta   DEV: n 127487 | cross IC -0.009 (t -2.3) | coin-apna IC +0.019 (t +6.1) | ooper 20% +1 bps, neeche 20% -1 bps, farq +1 bps
+             IMB5 -> agla 1 ghanta TAALA: n  72984 | cross IC -0.013 (t -2.8) | coin-apna IC -0.001 (t -0.2) | ooper 20% -2 bps, neeche 20% -1 bps, farq -1 bps
+             IMB5 -> agle 4 ghante   DEV: n 127487 | cross IC -0.028 (t -7.7) | coin-apna IC +0.007 (t +1.2) | ooper 20% -2 bps, neeche 20% +6 bps, farq -8 bps
+             IMB5 -> agle 4 ghante TAALA: n  72984 | cross IC -0.020 (t -4.3) | coin-apna IC +0.007 (t +1.1) | ooper 20% -6 bps, neeche 20% -2 bps, farq -4 bps
+
+# SAWAL 2 - DIN: din ke aakhri 3 ghante ka ausat IMB -> agla din / agle 5 din (daily trading)
+            IMB1 (din) -> agla din   DEV: n   5312 | cross IC -0.029 (t -1.8) | coin-apna IC -0.054 (t -4.5) | ooper 20% -11 bps, neeche 20% +47 bps, farq -58 bps
+            IMB1 (din) -> agla din TAALA: n   3041 | cross IC +0.015 (t +0.7) | coin-apna IC +0.021 (t +1.3) | ooper 20% +8 bps, neeche 20% +3 bps, farq +5 bps
+          IMB1 (din) -> agle 5 din   DEV: n   5312 | cross IC -0.031 (t -2.2) | coin-apna IC +0.007 (t +0.6) | ooper 20% +66 bps, neeche 20% +65 bps, farq +1 bps
+          IMB1 (din) -> agle 5 din TAALA: n   2991 | cross IC +0.002 (t +0.1) | coin-apna IC +0.003 (t +0.1) | ooper 20% -40 bps, neeche 20% -28 bps, farq -12 bps
+            IMB5 (din) -> agla din   DEV: n   5312 | cross IC -0.042 (t -2.2) | coin-apna IC -0.003 (t -0.2) | ooper 20% +40 bps, neeche 20% +35 bps, farq +5 bps
+            IMB5 (din) -> agla din TAALA: n   3041 | cross IC -0.015 (t -0.6) | coin-apna IC +0.041 (t +2.1) | ooper 20% +23 bps, neeche 20% +15 bps, farq +8 bps
+          IMB5 (din) -> agle 5 din   DEV: n   5312 | cross IC -0.077 (t -4.0) | coin-apna IC -0.013 (t -0.9) | ooper 20% +25 bps, neeche 20% +79 bps, farq -54 bps
+          IMB5 (din) -> agle 5 din TAALA: n   2991 | cross IC -0.049 (t -2.1) | coin-apna IC -0.034 (t -1.3) | ooper 20% -158 bps, neeche 20% +9 bps, farq -167 bps
+
+# SAWAL 3 - kya IMB qeemat ke PEECHE chalta hai? (pichle 4 ghante ka nafa -> abhi ka IMB)
+            pichla 4h nafa -> IMB1   DEV: n 127387 | cross IC -0.079 (t -24.5) | coin-apna IC -0.144 (t -6.3) | ooper 20% +718 bps, neeche 20% +1151 bps, farq -433 bps
+            pichla 4h nafa -> IMB1 TAALA: n  72984 | cross IC -0.045 (t -10.7) | coin-apna IC -0.103 (t -4.0) | ooper 20% +721 bps, neeche 20% +934 bps, farq -213 bps
