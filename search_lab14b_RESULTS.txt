@@ -1,0 +1,14 @@
+========================================================================================================================
+SEARCH LAB 14b | coins 149 | TAALA 2025-10-01 -> 2026-10-05
+========================================================================================================================
+
+# TAALA KHULA (ek dafa)
+D_BTC_FEAR 35: taale mein sirf 0 trades - faisla mumkin nahi
+   padosi D_BTC_FEAR 40: 23 trades | jeet/10 6.1 | PF 3.07
+
+# POORA 6 SAAL - signal din, Flush se overlap
+D_BTC_FEAR 35: 112 trades | jeet/10 8.2 | PF 4.08 | ausat +2.53% | 6 signal din | Flush ke +-3 din mein 3 (50%)
+   Flush se ALAG din ki trades: 45 | jeet/10 7.6 | PF 9.94
+   saal: 2021: 54tr PF 4.24 | 2024: 45tr PF 9.94 | 2025: 13tr PF 1.02
+   10%: CAGR +2.7% | DD -7.5% | Sharpe 0.39 | bura mahina -0.4% | corr Flush 0.23 Dip -0.09 | saal 2021:+12 2022:+0 2023:+0 2024:+5 2025:-0 2026:+0
+   20%: CAGR +3.6% | DD -7.3% | Sharpe 0.33 | bura mahina -3.4% | corr Flush 0.26 Dip -0.05 | saal 2021:+22 2022:+0 2023:+0 2024:+4 2025:-3 2026:+0
