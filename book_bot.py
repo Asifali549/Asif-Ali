@@ -4,6 +4,7 @@ BOOK BOT - daily "khata" paper bots ka mushtarka engine (2026-10-06)
 Do bots isi engine par chalte hain (har ek ki apni chhoti file + workflow + files):
   dipplus_bot.py : DIP+ = Dip v2 (RSI3 < 7) + Residual Dip (BTC ke muqable z < -2) EK khate mein  (Combo Lab 6)
   w52_bot.py     : W52  = sal ki chouti ke 5% andar pehli dafa, 5 din baad becho                (W52 Lab 10 / Combo)
+  flush_bot.py   : market safai (top-100 ke 40%+ coins 3 din mein -10%), BTC > EMA200, Dip exit   (Search Lab 13/13b)
   streak_bot.py  : 4 din lagataar neeche close, EMA50 > EMA200, Dip exit                         (Search Lab 12/12b)
   w52trail_bot.py: W52 + chalta SL (nafa 5% par chale, chouti se 2% neeche), 5 din               (W52 Combo Test)
 Hisaab bilkul backtest jaisa (strategy_lab5 / search_lab9 / winrate_lab.sim):
@@ -87,6 +88,8 @@ def signal_today(r):
         return bool(tags), "+".join(tags), prio
     if kind == "streak":
         return bool(r["up"]) and bool(r["golden"]) and bool(r["streak4"]), "4-DIN", 0.0
+    if kind == "flush":
+        return bool(r["up"]) and bool(r["golden"]) and bool(r.get("flush", False)), "SAFAI", 0.0
     if kind == "w52":
         return bool(r["up"]) and bool(r["w52"]), "W52", 0.0
     raise ValueError(kind)
@@ -217,7 +220,7 @@ def process_day(st, ind, day, exits, fills):
 
 def new_signals(st, ind, D):
     btc = ind["BTC/USDT"]
-    btc_ok = bool(btc.at[D, "close"] > ema(btc["close"], 50).loc[D])
+    btc_ok = bool(btc.at[D, "close"] > ema(btc["close"], CFG.get("btc_ema", 50)).loc[D])
     Ds = str(D.date())
     liq = sorted([(s, di.at[D, "dvol30"]) for s, di in ind.items()
                   if D in di.index and np.isfinite(di.at[D, "dvol30"])], key=lambda x: -x[1])[:UNIVERSE]
@@ -243,7 +246,16 @@ def new_signals(st, ind, D):
 def build_ind(daily):
     btc = norm(daily["BTC/USDT"]).set_index("timestamp")["close"]
     btc_lr = np.log(btc).diff()
-    return {s: indicators(norm(d).copy(), btc_lr).set_index("timestamp") for s, d in daily.items()}
+    ind = {s: indicators(norm(d).copy(), btc_lr).set_index("timestamp") for s, d in daily.items()}
+    # market safai (search_lab13 F_FLUSH): top-100 (dvol30) mein kitne % coins ka 3-din nafa <= -10%
+    dv = pd.DataFrame({s: di["dvol30"] for s, di in ind.items()}).sort_index()
+    r3 = pd.DataFrame({s: di["close"] / di["close"].shift(3) - 1 for s, di in ind.items()}).sort_index()
+    in100 = dv.rank(axis=1, ascending=False) <= UNIVERSE
+    breadth = ((r3 <= -0.10) & in100).sum(axis=1) / in100.sum(axis=1).replace(0, np.nan) * 100
+    for s, di in ind.items():
+        hit = (breadth.reindex(di.index).fillna(0) >= CFG.get("flush_pct", 40))
+        di["flush"] = hit & ~hit.shift(1, fill_value=False)
+    return ind
 
 
 def main():

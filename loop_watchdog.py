@@ -42,6 +42,7 @@ LOOPS = [
     ("w52_paper_state.json", ["last_updated"], "w52_bot.yml", 1560, "W52 Bot (paper)"),
     ("w52trail_paper_state.json", ["last_updated"], "w52trail_bot.yml", 1560, "W52 + chalta SL Bot (paper)"),
     ("streak_paper_state.json", ["last_updated"], "streak_bot.yml", 1560, "4 din girawat Bot (paper)"),
+    ("flush_paper_state.json", ["last_updated"], "flush_bot.yml", 1560, "Market safai Bot (paper)"),
 ]
 
 

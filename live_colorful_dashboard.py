@@ -229,15 +229,37 @@ SYSTEMS = {
         "backtest": {"win": 69.0, "pf": 1.67, "cagr": 10.5, "dd": -16.0,
                      "note": "Search Lab 12/12b (148 coins, 2020-26); aakhri 12 mahine 46 trades jeet 7.2/10 PF 3.42"},
     },
+    "Flush": {
+        "badge": "🌊 Market safai",
+        "state": "flush_paper_state.json",
+        "trades": "flush_paper_trades.csv",
+        "signals": "flush_signals.json",
+        "workflow": "flush_bot.yml",
+        "alloc": 0.0, "sizing": ("fixed", 0.10, 0.10),
+        "stale_min": 1560,
+        "every": "rozana 5:50 AM PKT (signal saal mein sirf ~9 dafa)",
+        "entry_col": "entry_day", "exit_col": "exit_day",
+        "new_signal_hours": 30,
+        "rules": [
+            ("Timeframe", "Daily candle"),
+            ("Entry", "Top-100 mein se 40%+ coins 3 din mein -10% (market ki safai, pehla din); coin EMA50 > EMA200, close > EMA200"),
+            ("Market filter", "BTC daily close > BTC EMA200; sab se liquid coins pehle, max 10"),
+            ("Stop (SL)", "Signal close - 3 x ATR(14), fixed"),
+            ("Exit", "TP +5%, ya close 3-din average se ooper -> agle din open par; max 10 din"),
+            ("Size", "SIRF PAPER — har trade 10%, max 10. Kamzor saboot: 6 saal mein sirf 54 safai din, taala sirf 2 din"),
+        ],
+        "backtest": {"win": 70.0, "pf": 1.83, "cagr": 23.8, "dd": -23.8,
+                     "note": "Search Lab 13/13b (149 coins, 2020-26); nafa chand dinon par (2021 +137%, 2023 -6%)"},
+    },
 }
 
 # Muqabla (2026-10-04 se sab ka naya record): Telegram kaun bhejta hai + asli paise se pehle kya shart puri honi chahiye
 START_DAY = "2026-10-04"
-TELEGRAM = {"Ichimoku TP5": True, "Dip Daily": True, "Dip+": True, "W52": True, "W52 Trail": True, "Streak": True}          # baqi khamosh (sirf record)
+TELEGRAM = {"Ichimoku TP5": True, "Dip Daily": True, "Dip+": True, "W52": True, "W52 Trail": True, "Streak": True, "Flush": True}          # baqi khamosh (sirf record)
 GROUP_SPLIT = (0.70, 0.30)   # 🤝 Group khaana: $1000 ka 70% TP5 + 30% Dip (Alloc Test ka behtareen Sharpe)
 GOLIVE = {"min_trades": 20, "min_days": 60,
           "win": {"Ichimoku TP5": 70, "Dip Daily": 60, "Ichimoku 4H": 35, "Donchian Daily": 30, "Volume Capitulation": 55,
-                  "Dip+": 60, "W52": 45, "W52 Trail": 55, "Streak": 60}}
+                  "Dip+": 60, "W52": 45, "W52 Trail": 55, "Streak": 60, "Flush": 60}}
 
 
 # ============================================================

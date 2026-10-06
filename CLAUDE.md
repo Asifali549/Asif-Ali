@@ -26,7 +26,7 @@
 | `donchian_daily_bot.py` | Donchian Daily bot - signals + paper trading + Telegram |
 | `capit_daily_bot.py` | Volume Capitulation bot - signals + paper trading + Telegram (2026-10-02 se) |
 | `ichi_tp5_bot.py` | **Ichimoku TP5 - SIRF PAPER** (2026-10-04 se): `ichimoku4h_bot` import kar ke CE_M 4, TP_PCT 5%, RISK 2%, ALLOC 0, **UNIVERSE 250 / TOP_N 330** (2026-10-05 se; pehle 200/260), apni files `ichi_tp5_*` |
-| `book_bot.py` | **Daily khata engine (2026-10-06)** - `streak_bot.py` (🪜 4 din lagataar girawat, Dip exit, 10%/trade, files `streak_*`, 00:45 UTC) bhi; `w52trail_bot.py` (W52 + chalta SL A5 G2, 5 din, files `w52trail_*`, 00:40 UTC) bhi; `dipplus_bot.py` (DIP+RESID, 20%/trade, max 10, files `dipplus_*`) aur `w52_bot.py` (sal ki chouti, **5 din hold** (2026-10-06 se; pehle 10), SL/TP nahi, 10%/trade, files `w52_*`) isi par; dono SIRF PAPER + Telegram; workflows `dipplus_bot.yml` (00:30 UTC) / `w52_bot.yml` (00:35 UTC), scheduler + watchdog + dashboard mein shamil. Fake data replay: har mushtarka trade ka return backtest se hubahu (sirf ~5% trades ka farq: backtest portfolio usi din exit+entry allow karta) |
+| `book_bot.py` | **Daily khata engine (2026-10-06)** - `flush_bot.py` (🌊 market safai, BTC>EMA200 via CFG btc_ema, files `flush_*`, 00:50 UTC) bhi; `streak_bot.py` (🪜 4 din lagataar girawat, Dip exit, 10%/trade, files `streak_*`, 00:45 UTC) bhi; `w52trail_bot.py` (W52 + chalta SL A5 G2, 5 din, files `w52trail_*`, 00:40 UTC) bhi; `dipplus_bot.py` (DIP+RESID, 20%/trade, max 10, files `dipplus_*`) aur `w52_bot.py` (sal ki chouti, **5 din hold** (2026-10-06 se; pehle 10), SL/TP nahi, 10%/trade, files `w52_*`) isi par; dono SIRF PAPER + Telegram; workflows `dipplus_bot.yml` (00:30 UTC) / `w52_bot.yml` (00:35 UTC), scheduler + watchdog + dashboard mein shamil. Fake data replay: har mushtarka trade ka return backtest se hubahu (sirf ~5% trades ka farq: backtest portfolio usi din exit+entry allow karta) |
 | `bot_core.py` | dono bots ke helpers: fetch_full, norm, ema, chandelier, ichi_signal, FEE/SLIP/STOP_SLIP, STABLES |
 | `strategies.py`, `config.py` | ichimoku + market_structure signal functions aur unke params (bot_core inhein use karta hai) |
 | `data_fetcher.py` | KuCoin (ccxt) exchange + top coins list |
@@ -440,6 +440,16 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   KAMZORIYAN: taale ka nafa ek mahine par (2026-09: 19 trades +56%, 11 Sep ko 7 trades), Jan 2026 -13%; EK DIN DER = edge khatam (taala PF 0.67,
   2 din der poora 1.00) -> entry bilkul agle open par lazmi; saal 2024 1.41 / 2025 1.20 kamzor, 2022 sirf 1 trade (bear ka imtihan nahi);
   BTC filter lazmi (BTC kamzor dinon ke signals PF 0.77). TP/SL hata kar PF 1.64/1.79 - magar tuning NAHI ki (overfit). Faisla: paper jaari, koi tabdeeli nahi.
+
+- **SEARCH LAB 13 + 13b (2026-10-06, `search_lab13.py` / `search_lab13b.py` + `_RESULTS.txt`, 148-149 coins, taala-band):** user: "quant trader ki
+  tarah quality systems". V VOL_BRK (Williams breakout, 1 din) random jaisa FAIL; S SQUEEZE_D (BB khamoshi + breakout, H7) random se kam FAIL;
+  R RVOL_UP (volume 2-4x, +3..12% din, H5): beech V3 kam trades FAIL, V2 (baad mein chuna) DEV acha (PF 2.10) magar TAALA FAIL (PF 1.51 < rnd95 2.67,
+  top-5 hata kar 0.63). **F FLUSH 40 (top-100 ke 40%+ coins 3 din -10%, BTC>EMA200, golden, Dip exit): DEV sirf fold 2 (2022, 27 trades PF 0.88) fail
+  -> BORDERLINE; TAALA PASS 25 trades jeet 6.4/10 PF 7.66 vs rnd95 1.27, padosi 30/50 bhi 7.7-8.2 - MAGAR sirf 2 din (Oct 2025 crash).** Poora 1376
+  trades / sirf 54 safai din, jeet 7/10 PF 1.83; 10%: CAGR 23.8% DD -23.8% Sharpe 1.08, saal 2021 +137 / 2023 -6 / 2024 +3 / 2025 +43 (lumpy);
+  corr Dip v2 0.30 / Resid 0.06 / Streak 0.12 (asli diversifier). LAGU `flush_bot.py` SIRF PAPER (fake replay 466/473, farq ek din same-day re-entry).
+  KHATA TEST: Dip+ (Dip v2 + RESID) 20%x10: CAGR 31% DD -27% Sharpe 1.12, taala 9%; + Streak milane se CAGR 39% magar DD -36%, Sharpe 1.06
+  (taala 24% / Sharpe 1.81) -> milaya NAHI, alag bots behtar.
 
 ## Aglay kaam
 - **2026-10-06 user ne kaha 'bna do': Dip+ aur W52 paper bots LAGU.** Talaash bhi jaari (user: behtareen ki talaash nahi chhorni).
