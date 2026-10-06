@@ -469,6 +469,14 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   TAALA 4.68 vs 2.77 (10 vs 23 trades); W52 funding baqi 70% DEV 1.95 vs bheer 1.57, TAALA 5.19 vs 3.74 - dono rukh ek jaise magar 18 splits mein se
   chune (multiple testing), aur live delta ke liye Binance API band (archive / OKX alag rasta). Koi bot NAHI badla.
 
+- **DEPTH LAB 16 (2026-10-06, `depth_lab16.py` / `_RESULTS.txt`; probe `depth_probe_RESULTS.txt`):** user: "bid/ask ka buy/sell par asar?".
+  Data: Binance archive futures `bookDepth` (har ~30 sec, qeemat se +-1..5% tak kul bid/ask notional, 2023+; bookTicker 404). 25 bare perps,
+  2024-01 -> 2026-09 har 3rd din. IMB = (bid-ask)/(bid+ask), aam taur par musbat (+0.09 / +0.13). NATIJA: (1) GHANTE: asar 1-10 bps (kharcha 30 bps)
+  -> bekaar; cross-section IC halka manfi (t -4..-8, dono dauron mein). (2) DIN: IMB5 -> 5 din cross IC -0.077 (t -4.0) DEV, -0.049 (t -2.1) TAALA:
+  bhari BID wale coins aage KAMZOR (DEV -54 bps, TAALA -167 bps farq) - "bid wall = support" ghalat; magar 25 coins, overlapping returns (t phula hua).
+  (3) Book qeemat ke PEECHE chalta hai: pichle 4h nafa -> IMB1 IC -0.08/-0.14 (t -24) - qeemat chadhi to ask bhari, giri to bid bhari.
+  Faisla: order book se koi tradeable signal nahi; koi bot NAHI.
+
 ## Aglay kaam
 - **2026-10-06 user ne kaha 'bna do': Dip+ aur W52 paper bots LAGU.** Talaash bhi jaari (user: behtareen ki talaash nahi chhorni).
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
