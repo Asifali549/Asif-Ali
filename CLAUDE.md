@@ -394,6 +394,20 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   Khata DIP+RESID is run mein: CAGR 39.8%, DD -14.5%, Sharpe 1.38. Kuch bhi milane se DD 26-72% (Sharpe gira).
   Sabaq: 40+ khayalon ke baad bhi sirf DIP aur RESID sachche; mazeed talaash se false-discovery ka khatra. Mashwara: Dip+ paper bot.
 
+- **SEARCH LAB 9 + W52 LAB 10 + W52 HOLDOUT (2026-10-06)** (`search_lab9.py`, `w52_lab10.py`, `w52_holdout.py` + `_RESULTS.txt`):
+  user: "behtar se behtareen ki talaash nahi chhor sakta; 2 mahine intezar = waqt zaya". Naya usool: aakhri 12 mahine (2025-10-01+)
+  TAALA-BAND holdout; chunao sirf DEV par. Funding-rate: GitHub se sirf 1-3 mahine history (`funding_probe_RESULTS.txt`) -> chhora.
+  Lab 9 (4 khayal): OBV_DIV, WEEKLY_DIP, NR_DIP FAIL (random jaise). **A W52_HIGH** (close 365-din high se 5% ke andar pehli dafa,
+  BTC>EMA50, top-100, uptrend): 5-din fark +4.8% (shor 0.8%) magar chandelier 22/3 exit se PF 1.05 FAIL.
+  Lab 10 (sirf chhoti muddat exits, DEV): median 5d +1.5%, top-10 hata kar ausat +4.7% (pump coins ka kamal nahi).
+  **P5% H10 (10 din baad close par, koi SL/TP nahi): jeet 5.1/10, PF 2.42 (rnd p95 1.80), boot p5 2.03, -top10 2.03, 2x kharcha 2.34,
+  ausat +8.6%/trade**; sirf jeet>=55% aur fold-2 (2022, trades nahi) par ruka. SL/TP lagane se bura (S2_T10 PF ~1.0).
+  TAALA (ek dafa khola, 37 trades): P5% H10 PF 1.94 > random median 1.56 magar < random p95 3.11 -> TAALA FAIL (kam trades, kamzor
+  saboot); P5% H7 PF 1.70 FAIL; padosi P8% PASS (PF 3.9-4.8) magar baad mein chunna = dhoka, shumaar NAHI. Portfolio P5% H10 10%/trade:
+  CAGR 67%, DD -21%, Sharpe 1.68, +mahine 40%, 2021 +225 / 2022 0 / 2023 +114 / 2024 +147 / 2025 +2 / 2026 +2 (2025-26 kamzor!).
+  Khata DIP+RESID+W52: CAGR 137%, DD -32%, Sharpe 1.93. KHATRE: survivorship (aaj ki coin list) momentum ko sab se ziada phulata hai;
+  nafa 2021/23/24 bull mein. Taala istemal ho chuka - is khayal ka agla imtihan sirf LIVE paper. Faisla: "PROMISING, NA-SABIT".
+
 ## Aglay kaam
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
   `scheduler.py` + `scheduler.yml`: ek workflow ~5h40m lagataar chalta, har minute: Ichimoku har 4h :10, Donchian 00:15,
