@@ -8,5 +8,15 @@
     "tp": 8.5569375,
     "risk_pct": 4.47,
     "size_pct": 20.0
+  },
+  {
+    "system": "Ichimoku 4H",
+    "symbol": "CAP/USDT",
+    "signal_time_utc": "2026-10-06 16:00:00",
+    "entry_est": 0.089975,
+    "sl": 0.0757573125,
+    "tp": 0.1326280625,
+    "risk_pct": 15.8,
+    "size_pct": 6.33
   }
 ]
