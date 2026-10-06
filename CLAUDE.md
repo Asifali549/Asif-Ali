@@ -492,6 +492,13 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   DEV ON PF 2.03 vs OFF 1.16, DD -25.5 -> -14.2%, Sharpe 0.98 -> 1.12 (khiske max 1.01) magar taale ki sab 27 trades ON (jaanch nahi ho saki) ->
   sirf ishara. Isi run mein Donchian (live jaisa) poora CAGR 40% DD -35% Sharpe 1.21, taala +36% Sharpe 1.43. FAISLA: filter kahin NAHI lagaya.
 
+- **FLOW LAB 19 (2026-10-06, `flow_lab19.py` / `_RESULTS.txt`, KuCoin 150 + Binance 100 coins, sachai 0 farq):** user ki 8 "order flow / money flow"
+  cheezein, Dip exit, taala-band. **0/8 DEV PASS, koi borderline nahi, taala nahi khula.** VWAP_BACK (10/20/50) PF 0.82-1.02 random se BURA; AVWAP
+  (60/120/30) 0.86-1.03 random jaisa; VPOC (daily se volume profile) 0.98-1.06 random jaisa; FVG 1.10-1.15 vs rnd95 0.98-1.10 (halka) magar 2x kharcha
+  ~1.0, 10/hafta trades -> bekaar; SWEEP (low pichle N din ke neeche + wapas ooper + 1.5x volume) 1.04-1.24 random jaisa; MFI (<20) PF 0.56 bura;
+  CMF girawat mein musbat 0.98-1.00 random; CVD divergence (Binance) kam trades / PF 0.72. Sabaq: YouTube ke mashhoor SMC/order-flow tools crypto daily
+  par koi edge nahi dete (Dip v2 isi run mein PF 2.86, jeet 8/10). Koi bot NAHI.
+
 ## Aglay kaam
 - **2026-10-06 user ne kaha 'bna do': Dip+ aur W52 paper bots LAGU.** Talaash bhi jaari (user: behtareen ki talaash nahi chhorni).
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
