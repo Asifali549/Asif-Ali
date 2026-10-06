@@ -1,0 +1,34 @@
+name: Deriv Probe
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths: ['deriv_probe.py', '.github/workflows/deriv_probe.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - run: python deriv_probe.py
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add deriv_probe_RESULTS.txt
+          git diff --staged --quiet && exit 0
+          git commit -m "Deriv probe results"
+          for i in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push origin HEAD:main; then exit 0; fi
+            git rebase --abort 2>/dev/null || true; sleep $((i * 5))
+          done
+          exit 1
