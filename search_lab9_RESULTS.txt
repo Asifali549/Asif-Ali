@@ -1,0 +1,46 @@
+============================================================================================================================================
+SEARCH LAB 9 - naye entry khandan, aakhri 12 mahine TAALA-BAND (holdout)
+============================================================================================================================================
+Coins: 148 | DEV 2020-10-08 -> 2025-10-01 (260 hafte) | TAALA 2025-10-01 -> 2026-10-05 (53 hafte)
+jeet/10 = 10 mein se nafa wali | PF = har 1 rupay nuqsan par kitna nafa | 5d fark = 5-din nafa minus random
+
+# SACHAI TEST - 30 din (aadhe itwar), data kaat kar (farq 0 hona chahiye)
+             REF_DIP: farq 0 (3 signals) -> SAHI
+     A_W52_HIGH 0.03: farq 0 (12 signals) -> SAHI
+     A_W52_HIGH 0.05: farq 0 (13 signals) -> SAHI
+     A_W52_HIGH 0.08: farq 0 (11 signals) -> SAHI
+      B_OBV_DIV 0.05: farq 0 (4 signals) -> SAHI
+      B_OBV_DIV 0.08: farq 0 (2 signals) -> SAHI
+      B_OBV_DIV 0.12: farq 0 (0 signals) -> SAHI
+     C_WEEKLY_DIP 10: farq 0 (18 signals) -> SAHI
+     C_WEEKLY_DIP 20: farq 0 (42 signals) -> SAHI
+     C_WEEKLY_DIP 30: farq 0 (76 signals) -> SAHI
+       D_NR_DIP 0.05: farq 0 (16 signals) -> SAHI
+       D_NR_DIP 0.08: farq 0 (7 signals) -> SAHI
+       D_NR_DIP 0.12: farq 0 (3 signals) -> SAHI
+
+# DEV hissa (taala-band data shamil NAHI)
+               entry |    n | /hafta | 5d fark | shor95 | jeet/10 |    PF | rnd95 |                   folds | boot5 | -top10 | 2xcost |  ausat
+             REF_DIP |  195 |   0.75 |  +2.33% | +0.60% |     8.1 |  3.09 |  1.19 | 15.43   inf  1.83  5.34 |  2.06 |   2.87 |   2.75 | +2.26%
+     A_W52_HIGH 0.03 |  465 |   1.79 |  +5.43% | +0.70% |     3.7 |  0.90 |  1.52 |  1.25   inf  0.83  0.60 |  0.74 |   0.73 |   0.84 | -0.76%
+     A_W52_HIGH 0.05 |  626 |   2.41 |  +4.77% | +0.76% |     3.7 |  1.05 |  1.52 |  1.91   inf  0.84  0.66 |  0.88 |   0.88 |   0.98 | +0.42%
+     A_W52_HIGH 0.08 |  758 |   2.92 |  +4.75% | +0.73% |     3.4 |  1.04 |  1.53 |  2.06  0.32  0.80  0.62 |  0.89 |   0.89 |   0.98 | +0.37%
+      B_OBV_DIV 0.05 |  647 |   2.49 |  -1.96% | +1.14% |     5.9 |  0.91 |  1.08 |  1.71  1.25  0.87  0.70 |  0.75 |   0.88 |   0.80 | -0.24%
+      B_OBV_DIV 0.08 |  344 |   1.32 |  -1.29% | +0.96% |     6.2 |  1.04 |  1.00 |  1.68  1.87  0.99  0.88 |  0.79 |   0.98 |   0.91 | +0.10%
+      B_OBV_DIV 0.12 |  142 |   0.55 |  -2.72% | +2.77% |     6.2 |  0.82 |  1.17 |  1.33  2.63  1.13  0.60 |  0.58 |   0.72 |   0.73 | -0.58%
+     C_WEEKLY_DIP 10 |  113 |   0.43 |  -0.23% | +1.15% |     6.5 |  1.78 |  1.78 |   inf 140.43  1.05  1.80 |  1.11 |   1.39 |   1.58 | +1.38%
+     C_WEEKLY_DIP 20 |  423 |   1.63 |  -1.81% | +1.11% |     5.9 |  1.26 |  1.00 |  1.04  0.45  1.09  2.44 |  1.00 |   1.18 |   1.11 | +0.57%
+     C_WEEKLY_DIP 30 |  837 |   3.22 |  -1.61% | +0.80% |     6.2 |  1.28 |  1.02 |  0.87  0.48  1.21  2.26 |  1.08 |   1.24 |   1.13 | +0.64%
+       D_NR_DIP 0.05 |  704 |   2.71 |  -1.35% | +0.87% |     5.7 |  0.83 |  1.17 |  1.44  0.47  0.96  0.54 |  0.69 |   0.80 |   0.72 | -0.44%
+       D_NR_DIP 0.08 |  433 |   1.67 |  -0.10% | +0.99% |     5.9 |  1.02 |  1.09 |  2.44  0.96  1.35  0.50 |  0.81 |   0.97 |   0.89 | +0.04%
+       D_NR_DIP 0.12 |  209 |   0.80 |  +0.06% | +2.53% |     6.0 |  1.15 |  1.08 |  3.04  2.75  4.16  0.40 |  0.82 |   1.04 |   1.00 | +0.32%
+
+# DEV PASS / FAIL (beech wali setting) -> sirf PASS par taala khulta hai
+       A_W52_HIGH 0.05: FAIL: jeet>=55, PF>rnd95, PF>=1.4, folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2, padosi
+        B_OBV_DIV 0.08: FAIL: PF>=1.4, folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2, 5d fark, padosi
+       C_WEEKLY_DIP 20: FAIL: PF>=1.4, folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2, 5d fark
+         D_NR_DIP 0.08: FAIL: PF>rnd95, PF>=1.4, folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2, 5d fark
+
+# TAALA KHULA (holdout, aakhri 12 mahine) - REF DIP hamesha muqable ke liye
+               REF_DIP: 14 trades | jeet/10 7.9 | PF 1.95 | random p95 1.41 | ausat +1.44% -> TAALA PASS (sirf muqabla)
+koi khayal DEV pass nahi hua - taala kisi ke liye nahi khula
