@@ -3,7 +3,8 @@ BOOK BOT - daily "khata" paper bots ka mushtarka engine (2026-10-06)
 ====================================================================
 Do bots isi engine par chalte hain (har ek ki apni chhoti file + workflow + files):
   dipplus_bot.py : DIP+ = Dip v2 (RSI3 < 7) + Residual Dip (BTC ke muqable z < -2) EK khate mein  (Combo Lab 6)
-  w52_bot.py     : W52  = sal ki chouti ke 5% andar pehli dafa, 10 din baad becho               (W52 Lab 10)
+  w52_bot.py     : W52  = sal ki chouti ke 5% andar pehli dafa, 5 din baad becho                (W52 Lab 10 / Combo)
+  w52trail_bot.py: W52 + chalta SL (nafa 5% par chale, chouti se 2% neeche), 5 din               (W52 Combo Test)
 Hisaab bilkul backtest jaisa (strategy_lab5 / search_lab9 / winrate_lab.sim):
   - signal BAND daily candle par, khareed AGLE din ke open par (+ slippage)
   - liquidity: pichle 30 din ka ausat dollar volume (kal tak) -> top-100
@@ -143,6 +144,7 @@ def close_pos(st, sym, px, day, why, msgs):
 # ------------------------------------------------------------------ ek din ka hisaab (replay mein bhi istemal)
 def process_day(st, ind, day, exits, fills):
     stop_k, tp, hold, use_sma = CFG["stop_atr"], CFG["tp"], CFG["hold"], CFG["sma_exit"]
+    act, gap = CFG.get("trail_act"), CFG.get("trail_gap")
     # 1) kal SMA3 se ooper band -> aaj open par becho
     for sym in list(st["positions"]):
         pos, di = st["positions"][sym], ind.get(sym)
@@ -184,12 +186,20 @@ def process_day(st, ind, day, exits, fills):
             continue
         row = di.loc[day]
         if pos.get("trail") is not None and row["low"] <= pos["trail"]:
-            close_pos(st, sym, min(pos["trail"] * (1 - STOP_SLIP), row["open"]) * (1 - SLIP), day, "STOP", exits)
+            close_pos(st, sym, min(pos["trail"] * (1 - STOP_SLIP), row["open"]) * (1 - SLIP), day,
+                      "CHALTA SL" if pos["trail"] > pos["entry"] else "STOP", exits)
             continue
         if pos.get("tp") and row["high"] >= pos["tp"]:
             close_pos(st, sym, max(pos["tp"], row["open"]) * (1 - SLIP), day, f"TP +{tp*100:.0f}%", exits)
             continue
         pos["last_px"] = float(row["close"])
+        if act is not None:      # chalta SL (Trail Lab 11): chouti A% par pohnche -> SL = entry x (1 + nafa - G), agle din se
+            pos["peak"] = max(pos.get("peak", pos["entry"]), float(row["high"]))
+            gain = pos["peak"] / pos["entry"] - 1
+            if gain >= act:
+                new_sl = pos["entry"] * (1 + gain - gap)
+                if pos.get("trail") is None or new_sl > pos["trail"]:
+                    pos["trail"] = new_sl
         if use_sma and bool(row["sma3_up"]):
             pos["exit_next"] = True
         elif pos["bars"] >= hold:

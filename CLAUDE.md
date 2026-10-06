@@ -26,7 +26,7 @@
 | `donchian_daily_bot.py` | Donchian Daily bot - signals + paper trading + Telegram |
 | `capit_daily_bot.py` | Volume Capitulation bot - signals + paper trading + Telegram (2026-10-02 se) |
 | `ichi_tp5_bot.py` | **Ichimoku TP5 - SIRF PAPER** (2026-10-04 se): `ichimoku4h_bot` import kar ke CE_M 4, TP_PCT 5%, RISK 2%, ALLOC 0, **UNIVERSE 250 / TOP_N 330** (2026-10-05 se; pehle 200/260), apni files `ichi_tp5_*` |
-| `book_bot.py` | **Daily khata engine (2026-10-06)** - `dipplus_bot.py` (DIP+RESID, 20%/trade, max 10, files `dipplus_*`) aur `w52_bot.py` (sal ki chouti, **5 din hold** (2026-10-06 se; pehle 10), SL/TP nahi, 10%/trade, files `w52_*`) isi par; dono SIRF PAPER + Telegram; workflows `dipplus_bot.yml` (00:30 UTC) / `w52_bot.yml` (00:35 UTC), scheduler + watchdog + dashboard mein shamil. Fake data replay: har mushtarka trade ka return backtest se hubahu (sirf ~5% trades ka farq: backtest portfolio usi din exit+entry allow karta) |
+| `book_bot.py` | **Daily khata engine (2026-10-06)** - `w52trail_bot.py` (W52 + chalta SL A5 G2, 5 din, files `w52trail_*`, 00:40 UTC) bhi; `dipplus_bot.py` (DIP+RESID, 20%/trade, max 10, files `dipplus_*`) aur `w52_bot.py` (sal ki chouti, **5 din hold** (2026-10-06 se; pehle 10), SL/TP nahi, 10%/trade, files `w52_*`) isi par; dono SIRF PAPER + Telegram; workflows `dipplus_bot.yml` (00:30 UTC) / `w52_bot.yml` (00:35 UTC), scheduler + watchdog + dashboard mein shamil. Fake data replay: har mushtarka trade ka return backtest se hubahu (sirf ~5% trades ka farq: backtest portfolio usi din exit+entry allow karta) |
 | `bot_core.py` | dono bots ke helpers: fetch_full, norm, ema, chandelier, ichi_signal, FEE/SLIP/STOP_SLIP, STABLES |
 | `strategies.py`, `config.py` | ichimoku + market_structure signal functions aur unke params (bot_core inhein use karta hai) |
 | `data_fetcher.py` | KuCoin (ccxt) exchange + top coins list |
@@ -425,7 +425,7 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   Sharpe 1.69 jeet 5.2 | **5 din 65.6% / -21.6% / 1.88, jeet 5.5, PF 2.77, ausat +7.1%** | 7 din 66.0% / -21.2% / 1.75 | 5 din + A5G2: jeet 6.2,
   PF 2.30, ausat +3.7%, CAGR 42.4%, DD -19.6% (sab se kam), Sharpe 1.92 | A5G3 41.5% / -18.9% / 1.88 | A3G2 33.5% / 1.70 | A10G5 38% / -26%.
   Natija: chalta SL jeet barhata (6.2/10), DD thora kam, magar nafa ~ek tihai kam; Sharpe barabar. **FAISLA (user: "5 din pe hi rakho"):
-  w52_bot hold=5, SL nahi.** A5G2 ka option baqi (book_bot mein abhi trailing support nahi).
+  w52_bot hold=5, SL nahi.** **User ne kaha 'chalta SL bhi sath test ke liye bana do' -> `w52trail_bot.py` (🧗 W52 + chalta SL: 5 din + A5 G2, files `w52trail_*`, workflow `w52trail_bot.yml` 00:40 UTC, scheduler/watchdog/dashboard/Telegram) SIRF PAPER, W52 ke sath muqabla.** book_bot mein `trail_act`/`trail_gap` CFG (high se chouti, stop check ke baad update, agle din se lagu); fake data par 400/400 trades sim_trail se hubahu.
 
 ## Aglay kaam
 - **2026-10-06 user ne kaha 'bna do': Dip+ aur W52 paper bots LAGU.** Talaash bhi jaari (user: behtareen ki talaash nahi chhorni).

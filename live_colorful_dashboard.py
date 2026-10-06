@@ -185,15 +185,37 @@ SYSTEMS = {
         "backtest": {"win": 55.0, "pf": 2.77, "cagr": 65.6, "dd": -21.6,
                      "note": "W52 Combo Test, 5 din (2020-26 poora); aakhri 12 mahine PF 1.94 (37 trades, sabit nahi); 2025-26 kamzor"},
     },
+    "W52 Trail": {
+        "badge": "🧗 W52+SL",
+        "state": "w52trail_paper_state.json",
+        "trades": "w52trail_paper_trades.csv",
+        "signals": "w52trail_signals.json",
+        "workflow": "w52trail_bot.yml",
+        "alloc": 0.0, "sizing": ("fixed", 0.10, 0.10),
+        "stale_min": 1560,
+        "every": "rozana 5:40 AM PKT (daily candle band hone ke baad)",
+        "entry_col": "entry_day", "exit_col": "exit_day",
+        "new_signal_hours": 30,
+        "rules": [
+            ("Timeframe", "Daily candle"),
+            ("Entry", "W52 jaisa: close 365 din ke high se 5% ke andar PEHLI dafa; close > EMA200"),
+            ("Market filter", "BTC daily close > BTC EMA50; coin top-100 liquid"),
+            ("Stop (SL)", "Shuru mein nahi; coin 5% ooper jaye to chalta SL = chouti nafa se 2% neeche (sirf ooper, agle din se)"),
+            ("Exit", "Chalta SL lage ya khareed ke 5 din baad us din ke close par"),
+            ("Size", "SIRF PAPER — har trade khate ka 10%, max 10. W52 (sada 5 din) ke sath muqabla"),
+        ],
+        "backtest": {"win": 62.0, "pf": 2.30, "cagr": 42.4, "dd": -19.6,
+                     "note": "W52 Combo Test, 5 din + chalta SL A5 G2 (2020-26 poora); sada W52 se jeet ziada, nafa kam"},
+    },
 }
 
 # Muqabla (2026-10-04 se sab ka naya record): Telegram kaun bhejta hai + asli paise se pehle kya shart puri honi chahiye
 START_DAY = "2026-10-04"
-TELEGRAM = {"Ichimoku TP5": True, "Dip Daily": True, "Dip+": True, "W52": True}          # baqi khamosh (sirf record)
+TELEGRAM = {"Ichimoku TP5": True, "Dip Daily": True, "Dip+": True, "W52": True, "W52 Trail": True}          # baqi khamosh (sirf record)
 GROUP_SPLIT = (0.70, 0.30)   # 🤝 Group khaana: $1000 ka 70% TP5 + 30% Dip (Alloc Test ka behtareen Sharpe)
 GOLIVE = {"min_trades": 20, "min_days": 60,
           "win": {"Ichimoku TP5": 70, "Dip Daily": 60, "Ichimoku 4H": 35, "Donchian Daily": 30, "Volume Capitulation": 55,
-                  "Dip+": 60, "W52": 45}}
+                  "Dip+": 60, "W52": 45, "W52 Trail": 55}}
 
 
 # ============================================================

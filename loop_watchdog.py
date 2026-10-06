@@ -40,6 +40,7 @@ LOOPS = [
     ("capit_paper_state.json", ["last_updated"], "capit_daily_bot.yml", 1560, "Capitulation Bot"),
     ("dipplus_paper_state.json", ["last_updated"], "dipplus_bot.yml", 1560, "Dip+ Bot (paper)"),
     ("w52_paper_state.json", ["last_updated"], "w52_bot.yml", 1560, "W52 Bot (paper)"),
+    ("w52trail_paper_state.json", ["last_updated"], "w52trail_bot.yml", 1560, "W52 + chalta SL Bot (paper)"),
 ]
 
 
