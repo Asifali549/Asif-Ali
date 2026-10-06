@@ -1,0 +1,49 @@
+============================================================================================================================================
+DERIV LAB 15 - funding rate / volume delta / open interest (Binance archive) | TAALA-BAND
+============================================================================================================================================
+Coins 97 (funding wale 97, OI wale 40 - OI 2024-04-01 se) | 2021-01-27 -> 2026-09-30 | TAALA 2025-10-01 se
+jeet/10 = 10 mein se nafa wali | PF = har 1 rupay nuqsan par kitna nafa
+
+# HISSA 1 - KYA KOI CURRENT HAI? (har din coins ko feature se 10 hisson mein; agle 5 din ka nafa market se farq)
+IC = feature aur agle nafe ka rishta (+ = feature ooper to nafa ooper); |t| > 2 = asli, warna shor
+    FUND3   dev:  777 din | IC -0.055 (t -6.1) | decile neeche->ooper (5d, market se farq %): +0.21 +0.07 +0.02 +0.13 -0.08 +0.12 +0.64 -0.42 -0.28 -0.37 | ooper-neeche -0.58%
+    FUND3  hold:   99 din | IC +0.019 (t +0.7) | decile neeche->ooper (5d, market se farq %): -2.89 -0.10 +0.53 -1.78 -2.75 -1.45 -1.04 +1.66 +2.96 +4.80 | ooper-neeche +7.69%
+   DELTA3   dev:  777 din | IC +0.031 (t +3.3) | decile neeche->ooper (5d, market se farq %): -0.50 -0.16 -0.26 -0.06 -0.51 +0.32 +0.42 +0.08 +0.35 +0.44 | ooper-neeche +0.94%
+   DELTA3  hold:   99 din | IC +0.030 (t +1.2) | decile neeche->ooper (5d, market se farq %): -0.40 -0.38 -0.99 -0.39 -1.15 -0.11 -3.15 -0.01 +4.25 +2.07 | ooper-neeche +2.47%
+   DELTA1   dev:  777 din | IC +0.026 (t +2.8) | decile neeche->ooper (5d, market se farq %): -0.29 +0.14 -0.70 +0.21 -0.19 -0.04 +0.29 -0.22 +0.36 +0.44 | ooper-neeche +0.73%
+   DELTA1  hold:   99 din | IC +0.005 (t +0.2) | decile neeche->ooper (5d, market se farq %): +0.10 -0.76 +1.23 -1.76 -0.20 -1.47 -0.37 -0.93 +3.64 +0.47 | ooper-neeche +0.37%
+      OI3   dev:  243 din | IC +0.010 (t +0.5) | decile neeche->ooper (5d, market se farq %): +0.27 -0.51 -0.48 -0.68 -0.40 -0.28 -0.58 -0.37 +0.64 +1.96 | ooper-neeche +1.70%
+      OI3  hold:   50 din | IC +0.019 (t +0.4) | decile neeche->ooper (5d, market se farq %): +2.32 -3.62 -3.68 -1.62 -4.39 +0.46 -3.93 +2.12 -0.24 +10.32 | ooper-neeche +8.00%
+ OI_PRICE   dev:  243 din | IC -0.024 (t -1.4) | decile neeche->ooper (5d, market se farq %): +1.29 -0.36 -0.06 -0.78 -1.01 +0.02 -0.71 +0.04 +0.06 +1.02 | ooper-neeche -0.27%
+ OI_PRICE  hold:   50 din | IC +0.029 (t +0.7) | decile neeche->ooper (5d, market se farq %): +1.97 -1.97 -3.12 -0.34 -3.30 -4.23 -2.91 +1.38 +3.64 +6.99 | ooper-neeche +5.02%
+
+# HISSA 2 - TRADING KHAYAL (DEV)
+             entry |     n | jeet/10 |    PF | rnd95 |                    folds (trades/PF) | boot5 | -top10 | 2xcost |  ausat
+           REF_DIP |    97 |     7.7 |  2.85 |  1.57 |        16/9.17 0/inf 48/1.44 33/6.66 |  1.75 |   2.41 |   2.48 | +2.04%
+     F_NEGFUND 0.0 |   235 |     6.1 |  1.66 |  1.21 |     26/4.98 27/2.72 64/0.89 117/1.67 |  1.19 |   1.50 |   1.39 | +0.83%
+ F_NEGFUND -0.0001 |   124 |     5.7 |  1.47 |  1.06 |      15/6.79 22/1.87 43/0.62 44/2.38 |  0.95 |   1.18 |   1.22 | +0.62%
+ F_NEGFUND -0.0003 |    57 |     6.3 |  1.86 |  1.36 |       8/2.07 10/8.03 22/2.11 17/1.02 |  1.00 |   1.19 |   1.56 | +1.07%
+      V_ABSORB 0.5 | sirf 21 trades
+     V_ABSORB 0.52 | sirf 2 trades
+     V_ABSORB 0.54 | sirf 0 trades
+    P_BUYPUSH 0.54 |    30 |     6.3 |  7.72 |  2.71 |          0/inf 1/inf 6/28.33 23/4.97 |  3.10 |   0.76 |   6.74 | +6.43%
+    P_BUYPUSH 0.56 | sirf 3 trades
+    P_BUYPUSH 0.58 | sirf 1 trades
+       O_DELEV 0.1 |   334 |     5.8 |  0.85 |  0.80 |     32/0.37 150/1.42 46/1.48 86/0.77 |  0.66 |   0.79 |   0.75 | -0.39%
+      O_DELEV 0.15 |   202 |     6.5 |  1.30 |  1.15 |      16/0.39 97/2.34 33/2.75 44/0.98 |  0.94 |   1.18 |   1.14 | +0.59%
+       O_DELEV 0.2 |   124 |     7.3 |  2.00 |  1.04 |       7/0.51 68/6.30 20/1.31 23/2.29 |  1.32 |   1.75 |   1.78 | +1.55%
+
+# DEV PASS / FAIL (beech wali setting)
+   F_NEGFUND -0.0001: FAIL: folds, boot>=1.15, -top10>=1.2
+       V_ABSORB 0.52: FAIL (kam trades)
+      P_BUYPUSH 0.56: FAIL (kam trades)
+        O_DELEV 0.15: FAIL: folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2
+
+# TAALA (aakhri 12 mahine) - DEV pass + REF DIP
+             REF_DIP: 5 trades (4 din) | jeet/10 8.0 | PF 6.03 | random p95 16.60 -> TAALA FAIL (muqabla)
+koi khayal DEV pass nahi hua
+
+# HISSA 3 - DIP v2 ko funding / delta se baant kar (behtari ka imkan?)
+   DEV: sab: 97tr jeet 7.7 PF 2.85 | funding < 0: 5tr jeet 6.0 PF 1.13 | funding >= 0: 92tr jeet 7.8 PF 3.01 | delta3 >= 50%: 1tr jeet 0.0 PF 0.00 | delta3 < 50%: 96tr jeet 7.8 PF 2.86
+ TAALA: sab: 5tr jeet 8.0 PF 6.03 | funding < 0: 1tr jeet 10.0 PF inf | funding >= 0: 4tr jeet 7.5 PF 4.52 | delta3 >= 50%: 0tr jeet 0.0 PF 0.00 | delta3 < 50%: 5tr jeet 8.0 PF 6.03
+ POORA: sab: 102tr jeet 7.7 PF 2.94 | funding < 0: 6tr jeet 6.7 PF 1.67 | funding >= 0: 96tr jeet 7.8 PF 3.05 | delta3 >= 50%: 1tr jeet 0.0 PF 0.00 | delta3 < 50%: 101tr jeet 7.8 PF 2.95
