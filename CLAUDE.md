@@ -477,6 +477,15 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   (3) Book qeemat ke PEECHE chalta hai: pichle 4h nafa -> IMB1 IC -0.08/-0.14 (t -24) - qeemat chadhi to ask bhari, giri to bid bhari.
   Faisla: order book se koi tradeable signal nahi; koi bot NAHI.
 
+- **MACRO LAB 17 (2026-10-06, `macro_lab17.py` / `_RESULTS.txt`; probe `macro_probe_RESULTS.txt`):** user: "market ko kya ooper/neeche le jata hai
+  us par kaam karo". Data: DefiLlama stablecoins (STABLE30 = 30-din growth), alternative.me Fear&Greed, Yahoo chart API (Nasdaq trend vs SMA50,
+  DXY 20d, US10y 20d) - FRED GitHub se timeout. (A) Agle 5/20 din ka market nafa (bina overlap): koi quwwat saaf nahi - sab |t| < 2.2, TAALA mein
+  rukh palat jata (FNG->ALT 5d DEV t 2.2, TAALA 0). (B) Systems ki trades tihai se: koi saaf/mustaqil filter nahi (4-din girawat aur Market safai
+  STABLE30 neechi tihai mein kamzor - DEV PF 1.14/0.71, 4-din TAALA 0.76 - magar Dip v2 ulta). (C) HALAT FILTER (sirf jab STABLE30 > 0 AUR
+  Nasdaq > SMA50): ALT index DEV CAGR 54.5 -> 74.5%, DD -84 -> -58%; TAALA -24.9 -> -0.9%, DD -64 -> -40% (market mein ~50% din); BTC DD -77 -> -61 /
+  -53 -> -29 magar DEV CAGR 61 -> 42. Matlab: bari quwwatein din-ba-din trade nahi batatin, magar "kab market mein na raho" ka kaam kar sakti hain
+  (trend/hold ke liye). Aglay: isi pehle se tay filter ko trend systems (Donchian, W52, Ichimoku) par aazmana - user se poochh kar.
+
 ## Aglay kaam
 - **2026-10-06 user ne kaha 'bna do': Dip+ aur W52 paper bots LAGU.** Talaash bhi jaari (user: behtareen ki talaash nahi chhorni).
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
