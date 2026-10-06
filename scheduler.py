@@ -45,6 +45,8 @@ def due(t):
         out.append("streak_bot.yml")
     if t.hour == 0 and t.minute == 50:
         out.append("flush_bot.yml")
+    if t.weekday() == 0 and t.hour == 3 and t.minute == 0:
+        out.append("paper_report.yml")          # har peer 8 AM PKT: paper vs backtest
     if t.minute in (5, 35):
         out.append("watchdog.yml")
     return out
