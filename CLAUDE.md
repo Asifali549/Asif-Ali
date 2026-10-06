@@ -517,6 +517,8 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   (3) SAB 8 EK SATH (1/8 har ek, mahana barabar): 5 AM CAGR 39% DD -19.5% Sharpe 1.84 | 9 AM 30% / -19% / 1.59 | 12 PM 24% / -20% / 1.37;
   2021 +276% (bara hissa), taala sirf +5..+9%. Correlation kam (W52 jora 0.92, Donchian-W52 0.58-0.69, baqi 0.0-0.5); 21% khareedain 2+ systems
   mein wohi coin (zyada Dip/Dip+ ka mushtarka hissa); sab se bura din -8.4%.
+- **FAISLA (2026-10-06 shaam, user):** Capitulation aur Market safai board se NAHI hatane - sab bots paper par chalte rahein; user ne abhi
+  koi signal asal mein nahi liya; khareed ka waqt paper natije aane ke baad tay hoga.
 - **2026-10-06 tabdeeliyan:** Ichimoku TP5 Telegram KHAMOSH (fix ke baad edge nahi; dashboard backtest number theek kiye). `paper_report.py` +
   `paper_report.yml` (har peer 03:00 UTC, scheduler bhi): har system ki band paper trades vs backtest (jeet/10, PF, binomial jaanch) -> Telegram Urdu.
 
