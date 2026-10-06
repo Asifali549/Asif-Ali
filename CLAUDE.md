@@ -409,6 +409,12 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   Khata DIP+RESID+W52: CAGR 137%, DD -32%, Sharpe 1.93. KHATRE: survivorship (aaj ki coin list) momentum ko sab se ziada phulata hai;
   nafa 2021/23/24 bull mein. Taala istemal ho chuka - is khayal ka agla imtihan sirf LIVE paper. Faisla: "PROMISING, NA-SABIT".
 
+- **TRAIL LAB 11 (2026-10-06, `trail_lab11.py` / `_RESULTS.txt`):** user ka "chalta SL" (nafa A% hone par SL = entry x (1 + chouti nafa - G%),
+  sirf ooper, agle din se; pehle stop check). W52 (sirf DEV): ASAL 10 din: jeet 5.1/10, PF 2.39 (rnd95 2.08), ausat +8.4%, CAGR 82%, DD -21%,
+  Sharpe 1.83. **A5 G2 10 din: jeet 6.5/10, PF 2.14 (rnd95 1.34 - random se faasla BARA), ausat +3.6%, CAGR 47%, DD -22%, Sharpe 1.85**
+  (nafa aadha, hamwari barabar). A10 / 3 ATR SL / 30 din sab bure ya barabar. DIP+: chalta SL TP5 se BURA (Sharpe 1.25 -> 0.85,
+  CAGR 39 -> 18%); TP5 + chalta A3G2 bhi thora bura -> DIP+ asal hi rahe. Faisla user par: W52 ko A5G2 karein ya dono paper par.
+
 ## Aglay kaam
 - **2026-10-06 user ne kaha 'bna do': Dip+ aur W52 paper bots LAGU.** Talaash bhi jaari (user: behtareen ki talaash nahi chhorni).
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
