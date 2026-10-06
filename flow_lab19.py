@@ -260,7 +260,15 @@ def main(kdaily=None, bdaily=None):
             import data_fetcher
             data_fetcher.AUTO_TOP_N_COINS = S9.TOP_FETCH
             ex = data_fetcher.get_exchange()
-            coins = [s for s in data_fetcher.get_coin_list(ex) if s.split("/")[0].upper() not in STABLES][:S9.TOP_FETCH]
+            import time
+            for attempt in range(6):
+                try:
+                    cl = data_fetcher.get_coin_list(ex)
+                    break
+                except Exception as e:
+                    print(f"coin list koshish {attempt + 1}: {e}", flush=True)
+                    time.sleep(60)
+            coins = [s for s in cl if s.split("/")[0].upper() not in STABLES][:S9.TOP_FETCH]
             if "BTC/USDT" not in coins:
                 coins.insert(0, "BTC/USDT")
             kdaily = {}
