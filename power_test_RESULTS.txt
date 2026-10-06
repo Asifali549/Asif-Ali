@@ -1,0 +1,8 @@
+POWER TEST - nakli market mein chhupaya hua faida: hamara imtihan pakarta hai ya nahi?
+G = har signal ke baad agle 3 din mein chhupaya gaya ooper ka dhakka. 8 markets har G par.
+
+G   0% | PASS 0/8 | ausat 440 trades | jeet/10 5.5 | PF 1.00 | random p95 1.06 | fail ki wajahen: PF>=1.3 8, folds 8, boot>=1.15 8, 2xcost>=1.2 8, -top10>=1.2 7, jeet>=55 4, PF>rnd95 4
+G   1% | PASS 1/8 | ausat 453 trades | jeet/10 5.9 | PF 1.30 | random p95 1.07 | fail ki wajahen: boot>=1.15 7, 2xcost>=1.2 7, PF>=1.3 5, folds 4, -top10>=1.2 4
+G   2% | PASS 5/8 | ausat 464 trades | jeet/10 6.3 | PF 1.74 | random p95 1.15 | fail ki wajahen: boot>=1.15 2, folds 1, 2xcost>=1.2 1
+G   3% | PASS 8/8 | ausat 473 trades | jeet/10 6.7 | PF 2.22 | random p95 1.11 | fail ki wajahen: -
+G   5% | PASS 8/8 | ausat 495 trades | jeet/10 7.3 | PF 3.89 | random p95 1.13 | fail ki wajahen: -

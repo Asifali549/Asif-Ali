@@ -499,6 +499,12 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   CMF girawat mein musbat 0.98-1.00 random; CVD divergence (Binance) kam trades / PF 0.72. Sabaq: YouTube ke mashhoor SMC/order-flow tools crypto daily
   par koi edge nahi dete (Dip v2 isi run mein PF 2.86, jeet 8/10). Koi bot NAHI.
 
+- **POWER TEST (2026-10-06, `power_test.py` / `_RESULTS.txt`, user: "kahin tareeqa to ghalat nahi?"):** nakli market (100 coins x 1500 din) mein
+  random signal dinon ke baad agle 3 din G% chhupa dhakka, phir wohi DEV imtihan (Dip exit, random p95, folds, boot, -top10, 2x kharcha), 8 seeds:
+  G 0%: PASS 0/8 (jhoota pass nahi) | G 1%: 1/8 (PF 1.30) | G 2%: 5/8 (PF 1.74) | G 3%: 8/8 | G 5%: 8/8. Matlab: tareeqa sakht magar
+  andha nahi - har trade ~3% ya ziada ka chhupa faida hamesha pakarta; ~1% wala aksar chhoot jata (kharche ke baad waise bhi kamzor).
+  Hadein: aksar khayal sirf Dip exit + daily par jaanche; concepts ko mechanical rule banaya (VPOC daily se andaza); survivorship.
+
 ## Aglay kaam
 - **2026-10-06 user ne kaha 'bna do': Dip+ aur W52 paper bots LAGU.** Talaash bhi jaari (user: behtareen ki talaash nahi chhorni).
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
