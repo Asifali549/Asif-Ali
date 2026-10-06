@@ -1,0 +1,53 @@
+========================================================================================================================
+STREAK ATTACK - 4 din ki girawat ko torne ki koshish | coins 148 | taala 2025-10-01 se
+========================================================================================================================
+                                ASAL (poora):  591 trades | jeet/10 6.8 | PF 1.57 | ausat +0.95%
+                                ASAL (taala):   46 trades | jeet/10 7.2 | PF 3.42 | ausat +2.06%
+
+# 1) SAKHT RANDOM - utni hi girawat (4-din), golden + pool, magar 4 din LAGATAAR nahi (10 dafa)
+signal ka 4-din nafa: median -11.9% (beech ke 80%: -23.1% se -5.0%)
+ poora: ASAL PF 1.57 jeet 6.8 | sakht random PF p50 1.09 p95 1.23 jeet 6.2 -> lagataar ka FAIDA
+ taala: ASAL PF 3.42 jeet 7.2 | sakht random PF p50 0.71 p95 1.59 jeet 6.5 -> lagataar ka FAIDA
+
+# 2) DIP v2 KA SAYA - kya ye Dip hi hai?
+poora: Dip ke qareeb 52 / 591 (9%)
+                  poora - Dip se ALAG trades:  539 trades | jeet/10 6.7 | PF 1.55 | ausat +0.91%
+                poora - Dip ke qareeb trades:   52 trades | jeet/10 7.5 | PF 1.79 | ausat +1.38%
+taala: Dip ke qareeb 2 / 46 (4%)
+                  taala - Dip se ALAG trades:   44 trades | jeet/10 7.0 | PF 3.18 | ausat +1.94%
+                taala - Dip ke qareeb trades: sirf 2 trades
+
+# 3) EK DIN DER SE ENTRY (nazuk to nahi?)
+                           1 din der (poora):  592 trades | jeet/10 6.2 | PF 1.35 | ausat +0.63%
+                           1 din der (taala):   47 trades | jeet/10 4.5 | PF 0.67 | ausat -0.89%
+                           2 din der (poora):  592 trades | jeet/10 6.1 | PF 1.00 | ausat +0.01%
+
+# 4) TAALA KI TRADES - kitne alag din / coins, top-5 hata kar
+46 trades | 31 alag din | 31 alag coins | sab se bhare din: 2026-09-11 (7), 2026-10-02 (3), 2026-10-01 (3), 2026-01-19 (2), 2026-09-17 (2)
+                      taala - top-5 hata kar:   41 trades | jeet/10 6.8 | PF 2.81 | ausat +1.73%
+                     taala - top-10 hata kar:   36 trades | jeet/10 6.4 | PF 2.21 | ausat +1.32%
+taala mahana: 2025-10: 4tr +6% | 2026-01: 4tr -13% | 2026-04: 3tr +4% | 2026-05: 7tr +25% | 2026-07: 1tr -2% | 2026-08: 2tr +9% | 2026-09: 19tr +56% | 2026-10: 6tr +8%
+
+# 5) COINS - 20% coins random hata kar (8 dafa)
+  1: poora PF 1.70 (493) | taala PF 4.12 (42)
+  2: poora PF 1.64 (474) | taala PF 5.76 (37)
+  3: poora PF 1.69 (472) | taala PF 3.04 (39)
+  4: poora PF 1.76 (467) | taala PF 4.24 (35)
+  5: poora PF 1.43 (483) | taala PF 3.06 (39)
+  6: poora PF 1.42 (441) | taala PF 2.73 (36)
+  7: poora PF 1.47 (437) | taala PF 7.00 (30)
+  8: poora PF 1.35 (445) | taala PF 5.03 (39)
+coins: 101 | nafa wale 78 | nuqsan wale 23 | top-5 coins = kul nafa ka 32% (STX/USDT, XDC/USDT, TEL/USDT, NAKA/USDT, ATOM/USDT)
+
+# 6) KHARCHA aur EXIT ka hissa
+                          kharcha 3x (poora):  591 trades | jeet/10 6.3 | PF 1.21 | ausat +0.38%
+                          kharcha 3x (taala):   46 trades | jeet/10 7.0 | PF 2.49 | ausat +1.50%
+                                  TP 5% NAHI:  591 trades | jeet/10 6.2 | PF 1.64 | ausat +1.25%
+                              SMA3 exit NAHI:  591 trades | jeet/10 7.9 | PF 1.43 | ausat +1.11%
+                  sirf 5 din, koi SL/TP nahi:  595 trades | jeet/10 4.6 | PF 1.42 | ausat +1.68%
+               SL NAHI (sirf TP/SMA3/10 din):  595 trades | jeet/10 6.8 | PF 1.79 | ausat +1.16%
+
+# 7) SAAL-WAR PF (asal) + BTC filter ke BAGHAIR
+saal: 2020: 16tr PF 0.22 | 2021: 68tr PF 6.16 | 2022: 1tr PF inf | 2023: 86tr PF 1.95 | 2024: 270tr PF 1.41 | 2025: 108tr PF 1.20 | 2026: 42tr PF 3.35
+(pool mein BTC > EMA50 pehle se shamil; BTC kamzor dinon ki jaanch ke liye niche wala hissa)
+ BTC KAMZOR dinon ke signals (bot nahi leta):  316 trades | jeet/10 5.9 | PF 0.77 | ausat -0.67%
