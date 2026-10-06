@@ -459,6 +459,16 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   (padosi 40 taala PF 3.07 baad mein chuna, shumaar nahi). Sabaq: chart patterns (support/engulfing) ka crypto daily par koi edge nahi; contrarian
   ka asli edge pehle se board par (Dip, Streak, Flush). Koi naya bot NAHI.
 
+- **DERIV LAB 15 + 15b (2026-10-06, `deriv_lab15.py` / `deriv_lab15b.py` + `_RESULTS.txt`; probe `deriv_probe_RESULTS.txt`):** user: "funding, OI,
+  volume delta jitna data mile check karo". DATA: Binance archive data.binance.vision GitHub se khulta hai (fapi 451 band) - futures 1d klines
+  (taker_buy_volume = delta) aur fundingRate monthly 2020+; metrics (OI) daily files 2021-12+ (bhari - 40 coins, 2024-04 se). OKX rubik bhi chalta
+  (OI / taker vol 1D ~100 din). 96-97 coins (KuCoin top-150 jin ka Binance perp). DECILE/IC (5-din nafa market se farq): FUND3 DEV IC -0.055 (t -6.1,
+  bheer wale coins peeche) magar TAALA ulta (+0.019) -> pakka nahi; DELTA3 DEV IC +0.031 (t 3.3, ooper-neeche +0.94%), TAALA +0.030 (t 1.2, +2.47%)
+  -> halka magar dono mein ek rukh; OI 2024+ shor. TRADING: NEGFUND / ABSORB / BUYPUSH / DELEV (pakki hadein - delta aksar 49-51% to trades nahi bane)
+  aur rank wale TOPDELTA / LOWFUND sab FAIL. FILTER (mojooda systems, Binance coins par): 4-din girawat + delta ooper aadha DEV PF 2.31 vs neeche 0.98,
+  TAALA 4.68 vs 2.77 (10 vs 23 trades); W52 funding baqi 70% DEV 1.95 vs bheer 1.57, TAALA 5.19 vs 3.74 - dono rukh ek jaise magar 18 splits mein se
+  chune (multiple testing), aur live delta ke liye Binance API band (archive / OKX alag rasta). Koi bot NAHI badla.
+
 ## Aglay kaam
 - **2026-10-06 user ne kaha 'bna do': Dip+ aur W52 paper bots LAGU.** Talaash bhi jaari (user: behtareen ki talaash nahi chhorni).
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
