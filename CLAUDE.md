@@ -26,6 +26,7 @@
 | `donchian_daily_bot.py` | Donchian Daily bot - signals + paper trading + Telegram |
 | `capit_daily_bot.py` | Volume Capitulation bot - signals + paper trading + Telegram (2026-10-02 se) |
 | `ichi_tp5_bot.py` | **Ichimoku TP5 - SIRF PAPER** (2026-10-04 se): `ichimoku4h_bot` import kar ke CE_M 4, TP_PCT 5%, RISK 2%, ALLOC 0, **UNIVERSE 250 / TOP_N 330** (2026-10-05 se; pehle 200/260), apni files `ichi_tp5_*` |
+| `book_bot.py` | **Daily khata engine (2026-10-06)** - `dipplus_bot.py` (DIP+RESID, 20%/trade, max 10, files `dipplus_*`) aur `w52_bot.py` (sal ki chouti, 10 din hold, SL/TP nahi, 10%/trade, files `w52_*`) isi par; dono SIRF PAPER + Telegram; workflows `dipplus_bot.yml` (00:30 UTC) / `w52_bot.yml` (00:35 UTC), scheduler + watchdog + dashboard mein shamil. Fake data replay: har mushtarka trade ka return backtest se hubahu (sirf ~5% trades ka farq: backtest portfolio usi din exit+entry allow karta) |
 | `bot_core.py` | dono bots ke helpers: fetch_full, norm, ema, chandelier, ichi_signal, FEE/SLIP/STOP_SLIP, STABLES |
 | `strategies.py`, `config.py` | ichimoku + market_structure signal functions aur unke params (bot_core inhein use karta hai) |
 | `data_fetcher.py` | KuCoin (ccxt) exchange + top coins list |
@@ -409,6 +410,7 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   nafa 2021/23/24 bull mein. Taala istemal ho chuka - is khayal ka agla imtihan sirf LIVE paper. Faisla: "PROMISING, NA-SABIT".
 
 ## Aglay kaam
+- **2026-10-06 user ne kaha 'bna do': Dip+ aur W52 paper bots LAGU.** Talaash bhi jaari (user: behtareen ki talaash nahi chhorni).
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
   `scheduler.py` + `scheduler.yml`: ek workflow ~5h40m lagataar chalta, har minute: Ichimoku har 4h :10, Donchian 00:15,
   Dip 00:20, Capit 00:25, Watchdog :05/:35 UTC ko workflow_dispatch (foran chalta, der nahi); aakhir mein khud ko dobara

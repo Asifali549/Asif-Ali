@@ -139,14 +139,61 @@ SYSTEMS = {
         "backtest": {"win": 63.5, "pf": 1.47, "cagr": 7.4, "dd": -23.2,
                      "note": "6 saal, ~1 trade/hafta; 2021-24 acha lekin 2025-26 kamzor (OOS PF 0.83) - sirf paper par nazar"},
     },
+    "Dip+": {
+        "badge": "🪂➕ Dip+",
+        "state": "dipplus_paper_state.json",
+        "trades": "dipplus_paper_trades.csv",
+        "signals": "dipplus_signals.json",
+        "workflow": "dipplus_bot.yml",
+        "alloc": 0.0, "sizing": ("fixed", 0.20, 0.20),
+        "stale_min": 1560,
+        "every": "rozana 5:30 AM PKT (daily candle band hone ke baad)",
+        "entry_col": "entry_day", "exit_col": "exit_day",
+        "new_signal_hours": 30,
+        "rules": [
+            ("Timeframe", "Daily candle"),
+            ("Entry (DIP)", "Uptrend (close > EMA200, EMA50 > EMA200) mein RSI(3) < 7"),
+            ("Entry (RESID)", "Uptrend coin ki 3-din 'apni' girawat (BTC ka hissa nikaal kar) aam se 2 guna (z < -2)"),
+            ("Market filter", "BTC daily close > BTC EMA50; coin top-100 liquid"),
+            ("Stop (SL)", "Signal ke close se 3x ATR(14) neeche — fixed"),
+            ("Take Profit", "Entry se +5%"),
+            ("Exit", "Ya close 3-din average se ooper band ho to agle din open par; max 10 din"),
+            ("Size", "SIRF PAPER — har trade khate ka 20%, max 10 (dono ek hi khate mein)"),
+        ],
+        "backtest": {"win": 70.5, "pf": 2.30, "cagr": 37.0, "dd": -14.5,
+                     "note": "Combo Lab 6 (6 saal, 148 coins, sachai test pass); nafa 2024 mein ziada, 2026 kamzor"},
+    },
+    "W52": {
+        "badge": "🏔️ W52",
+        "state": "w52_paper_state.json",
+        "trades": "w52_paper_trades.csv",
+        "signals": "w52_signals.json",
+        "workflow": "w52_bot.yml",
+        "alloc": 0.0, "sizing": ("fixed", 0.10, 0.10),
+        "stale_min": 1560,
+        "every": "rozana 5:35 AM PKT (daily candle band hone ke baad)",
+        "entry_col": "entry_day", "exit_col": "exit_day",
+        "new_signal_hours": 30,
+        "rules": [
+            ("Timeframe", "Daily candle"),
+            ("Entry", "Close pichle 365 din ke sab se oonche high se 5% ke andar PEHLI dafa; close > EMA200"),
+            ("Market filter", "BTC daily close > BTC EMA50; coin top-100 liquid"),
+            ("Stop (SL)", "Koi nahi (backtest mein SL lagane se nateeja bigra)"),
+            ("Exit", "Khareed ke 10 din baad us din ke close par"),
+            ("Size", "SIRF PAPER — har trade khate ka 10%, max 10. 'Promising, na-sabit' - taala test mein random se saaf behtar nahi"),
+        ],
+        "backtest": {"win": 51.0, "pf": 2.42, "cagr": 67.0, "dd": -21.4,
+                     "note": "W52 Lab 10 dev (2020-25); aakhri 12 mahine PF 1.94 (37 trades, sabit nahi); 2025-26 kamzor"},
+    },
 }
 
 # Muqabla (2026-10-04 se sab ka naya record): Telegram kaun bhejta hai + asli paise se pehle kya shart puri honi chahiye
 START_DAY = "2026-10-04"
-TELEGRAM = {"Ichimoku TP5": True, "Dip Daily": True}          # baqi khamosh (sirf record)
+TELEGRAM = {"Ichimoku TP5": True, "Dip Daily": True, "Dip+": True, "W52": True}          # baqi khamosh (sirf record)
 GROUP_SPLIT = (0.70, 0.30)   # 🤝 Group khaana: $1000 ka 70% TP5 + 30% Dip (Alloc Test ka behtareen Sharpe)
 GOLIVE = {"min_trades": 20, "min_days": 60,
-          "win": {"Ichimoku TP5": 70, "Dip Daily": 60, "Ichimoku 4H": 35, "Donchian Daily": 30, "Volume Capitulation": 55}}
+          "win": {"Ichimoku TP5": 70, "Dip Daily": 60, "Ichimoku 4H": 35, "Donchian Daily": 30, "Volume Capitulation": 55,
+                  "Dip+": 60, "W52": 45}}
 
 
 # ============================================================
@@ -718,11 +765,11 @@ with T_AUTO:
                         "Live Price": fmt_px(live) if live else "—",
                         "Live P/L %": round((ref / p["entry"] - 1) * 100, 2) if ref else None,
                         "Live P/L ($)": round(p["qty"] * ref - p["cost"], 2) if ref else None,
-                        "SL (abhi)": fmt_px(p["trail"]),
-                        "SL tak %": round((ref - p["trail"]) / ref * 100, 2) if ref else None,
-                        "TP": fmt_px(p["tp"]) if p.get("tp") else "Nahi (trailing)",
+                        "SL (abhi)": fmt_px(p["trail"]) if p.get("trail") else "Nahi",
+                        "SL tak %": round((ref - p["trail"]) / ref * 100, 2) if ref and p.get("trail") else None,
+                        "TP": fmt_px(p["tp"]) if p.get("tp") else ("Nahi (10 din)" if not p.get("trail") else "Nahi (trailing)"),
                         "Entry waqt": pkt_str(p.get("entry_bar") or p.get("entry_day")),
-                        "Halat": ("⚠️ SL se neeche — agle run mein band" if ref and ref <= p["trail"]
+                        "Halat": ("⚠️ SL se neeche — agle run mein band" if ref and p.get("trail") and ref <= p["trail"]
                                   else ("🟢 Nafa" if ref and ref >= p["entry"] else "🔴 Nuqsan")),
                         "Chart": tradingview_url(sym, interval),
                     })
