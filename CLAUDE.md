@@ -451,6 +451,14 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   KHATA TEST: Dip+ (Dip v2 + RESID) 20%x10: CAGR 31% DD -27% Sharpe 1.12, taala 9%; + Streak milane se CAGR 39% magar DD -36%, Sharpe 1.06
   (taala 24% / Sharpe 1.81) -> milaya NAHI, alag bots behtar.
 
+- **SEARCH LAB 14 + 14b (2026-10-06, `search_lab14.py` / `search_lab14b.py` + `_RESULTS.txt`, 149 coins, taala-band):** user: "price action
+  (6th) aur contrarian (7th) trader ki qisam par kaam karo". PRICE ACTION: A SUPPORT (pakka pivot-low support se uchhal) random se BURA (PF 0.81-0.87,
+  5d fark -3%) FAIL; B ENGULF (girawat ke baad bullish engulfing) random jaisa (PF 1.05) FAIL; C RETEST (20-din breakout ke baad retest, H7) PF 1.70 vs
+  rnd95 1.60 (sirf +0.1), jeet 4.6/10, 2022 fold 0.77 FAIL. CONTRARIAN: E LOSER30 (30 din ka sab se bura magar EMA200 se ooper) random se bura FAIL;
+  D BTC_FEAR 35 (BTC>EMA200 + BTC RSI14<35): DEV jeet 8.2 PF 4.08 magar 6 saal mein sirf 6 signal din, taale mein 0 trades, CAGR 2.7% -> system nahi
+  (padosi 40 taala PF 3.07 baad mein chuna, shumaar nahi). Sabaq: chart patterns (support/engulfing) ka crypto daily par koi edge nahi; contrarian
+  ka asli edge pehle se board par (Dip, Streak, Flush). Koi naya bot NAHI.
+
 ## Aglay kaam
 - **2026-10-06 user ne kaha 'bna do': Dip+ aur W52 paper bots LAGU.** Talaash bhi jaari (user: behtareen ki talaash nahi chhorni).
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
