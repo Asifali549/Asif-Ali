@@ -486,6 +486,12 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   -53 -> -29 magar DEV CAGR 61 -> 42. Matlab: bari quwwatein din-ba-din trade nahi batatin, magar "kab market mein na raho" ka kaam kar sakti hain
   (trend/hold ke liye). Aglay: isi pehle se tay filter ko trend systems (Donchian, W52, Ichimoku) par aazmana - user se poochh kar.
 
+- **REGIME LAB 18 (2026-10-06, `regime_lab18.py` / `_RESULTS.txt`):** Macro 17 ka pehle se tay filter (STABLE30 > 0 AUR Nasdaq > SMA50, ~50% din)
+  7 systems par, control = wohi filter waqt mein khiska kar (8x). NATIJA: kisi trend system ki madad NAHI - Donchian OFF trades behtar (DEV PF 2.70 vs
+  ON 2.12; TAALA 2.81 vs 1.49), portfolio CAGR 40 -> 33%, taala 36 -> 17%; W52 63.7 -> 52%; Dip v2 / Resid / 4-din bhi thore bure. Sirf Market safai:
+  DEV ON PF 2.03 vs OFF 1.16, DD -25.5 -> -14.2%, Sharpe 0.98 -> 1.12 (khiske max 1.01) magar taale ki sab 27 trades ON (jaanch nahi ho saki) ->
+  sirf ishara. Isi run mein Donchian (live jaisa) poora CAGR 40% DD -35% Sharpe 1.21, taala +36% Sharpe 1.43. FAISLA: filter kahin NAHI lagaya.
+
 ## Aglay kaam
 - **2026-10-06 user ne kaha 'bna do': Dip+ aur W52 paper bots LAGU.** Talaash bhi jaari (user: behtareen ki talaash nahi chhorni).
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
