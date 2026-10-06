@@ -1,0 +1,61 @@
+==================================================================================================================================
+REGIME LAB 18 - halat filter (STABLE30 > 0 AUR Nasdaq > SMA50) | coins 149 | 2020-10-08 -> 2026-10-05 | TAALA 2025-10-01 se
+==================================================================================================================================
+Filter ON din: poora 51% | DEV 52% | TAALA 46%
+jeet/10 = 10 mein se nafa wali | PF = 1 rupay nuqsan par nafa
+
+## Donchian (1629 trades)
+     DEV: sab 1307tr jeet 4.0 PF 2.32 ausat +8.31% | ON 820tr jeet 3.9 PF 2.12 ausat +7.37% | OFF 487tr jeet 4.2 PF 2.70 ausat +9.90%
+   TAALA: sab 322tr jeet 4.2 PF 2.02 ausat +5.61% | ON 189tr jeet 3.7 PF 1.49 ausat +2.73% | OFF 133tr jeet 4.9 PF 2.81 ausat +9.72%
+   POORA portfolio: SAB CAGR +40.0% DD -34.9% Sharpe 1.21 | FILTER CAGR +32.6% DD -32.1% Sharpe 1.19 | khiske filter Sharpe p50 1.03 max 1.36
+      saal SAB:    2021:+58 2022:-18 2023:+119 2024:+16 2025:+18 2026:+44
+      saal FILTER: 2021:+59 2022:-9 2023:+53 2024:+20 2025:+23 2026:+22
+   TAALA portfolio: SAB CAGR +36.4% DD -15.5% Sharpe 1.43 | FILTER CAGR +16.6% DD -14.9% Sharpe 0.96
+
+## W52 5 din (671 trades)
+     DEV: sab 634tr jeet 5.4 PF 2.30 ausat +6.03% | ON 549tr jeet 5.4 PF 2.29 ausat +6.02% | OFF 85tr jeet 5.4 PF 2.43 ausat +6.05%
+   TAALA: sab 37tr jeet 5.4 PF 2.26 ausat +5.15% | ON 32tr jeet 5.0 PF 2.25 ausat +5.10% | OFF 5tr jeet 8.0 PF 2.32 ausat +5.49%
+   POORA portfolio: SAB CAGR +63.7% DD -18.3% Sharpe 1.89 | FILTER CAGR +52.0% DD -14.5% Sharpe 1.68 | khiske filter Sharpe p50 1.39 max 1.80
+      saal SAB:    2021:+250 2022:+0 2023:+52 2024:+153 2025:+3 2026:+10
+      saal FILTER: 2021:+161 2022:+0 2023:+32 2024:+148 2025:+8 2026:+7
+   TAALA portfolio: SAB CAGR +17.2% DD -6.7% Sharpe 1.55 | FILTER CAGR +13.1% DD -7.7% Sharpe 1.24
+
+## W52 + chalta SL (671 trades)
+     DEV: sab 634tr jeet 6.1 PF 2.05 ausat +3.14% | ON 549tr jeet 6.1 PF 2.07 ausat +3.17% | OFF 85tr jeet 6.1 PF 1.97 ausat +2.92%
+   TAALA: sab 37tr jeet 6.8 PF 2.31 ausat +3.19% | ON 32tr jeet 6.2 PF 2.04 ausat +2.92% | OFF 5tr jeet 10.0 PF inf ausat +4.91%
+   POORA portfolio: SAB CAGR +38.7% DD -21.9% Sharpe 1.89 | FILTER CAGR +33.1% DD -19.6% Sharpe 1.74 | khiske filter Sharpe p50 1.26 max 1.91
+      saal SAB:    2021:+134 2022:+0 2023:+23 2024:+70 2025:+10 2026:+11
+      saal FILTER: 2021:+104 2022:+0 2023:+9 2024:+71 2025:+13 2026:+8
+   TAALA portfolio: SAB CAGR +14.0% DD -3.2% Sharpe 2.00 | FILTER CAGR +11.3% DD -3.2% Sharpe 1.68
+
+## Dip v2 (203 trades)
+     DEV: sab 192tr jeet 7.9 PF 2.77 ausat +2.10% | ON 153tr jeet 7.5 PF 2.13 ausat +1.66% | OFF 39tr jeet 9.7 PF 104.14 ausat +3.83%
+   TAALA: sab 11tr jeet 7.3 PF 1.40 ausat +0.77% | ON 8tr jeet 6.2 PF 0.87 ausat -0.33% | OFF 3tr -
+   POORA portfolio: SAB CAGR +9.8% DD -19.9% Sharpe 0.78 | FILTER CAGR +5.2% DD -19.9% Sharpe 0.47 | khiske filter Sharpe p50 0.50 max 1.07
+      saal SAB:    2021:+14 2022:+0 2023:+5 2024:+32 2025:+6 2026:+1
+      saal FILTER: 2021:+7 2022:+0 2023:+2 2024:+23 2025:+1 2026:-1
+   TAALA portfolio: SAB CAGR +0.8% DD -4.2% Sharpe 0.20 | FILTER CAGR -1.4% DD -4.2% Sharpe -0.37
+
+## Resid (614 trades)
+     DEV: sab 576tr jeet 6.8 PF 2.30 ausat +1.61% | ON 454tr jeet 7.1 PF 2.48 ausat +1.82% | OFF 122tr jeet 5.5 PF 1.66 ausat +0.83%
+   TAALA: sab 38tr jeet 7.9 PF 2.12 ausat +1.48% | ON 34tr jeet 7.9 PF 1.83 ausat +1.23% | OFF 4tr -
+   POORA portfolio: SAB CAGR +26.2% DD -24.7% Sharpe 0.97 | FILTER CAGR +23.6% DD -22.6% Sharpe 0.92 | khiske filter Sharpe p50 0.76 max 1.08
+      saal SAB:    2021:+7 2022:-4 2023:+59 2024:+107 2025:+3 2026:+3
+      saal FILTER: 2021:+5 2022:+0 2023:+37 2024:+113 2025:+3 2026:-0
+   TAALA portfolio: SAB CAGR +9.0% DD -4.5% Sharpe 1.19 | FILTER CAGR +6.0% DD -5.6% Sharpe 0.84
+
+## 4-din girawat (620 trades)
+     DEV: sab 576tr jeet 6.8 PF 1.56 ausat +0.94% | ON 462tr jeet 6.9 PF 1.61 ausat +1.00% | OFF 114tr jeet 6.5 PF 1.39 ausat +0.68%
+   TAALA: sab 44tr jeet 7.3 PF 5.48 ausat +2.40% | ON 38tr jeet 7.1 PF 5.04 ausat +2.33% | OFF 6tr jeet 8.3 PF 11.19 ausat +2.84%
+   POORA portfolio: SAB CAGR +10.9% DD -16.3% Sharpe 0.79 | FILTER CAGR +9.5% DD -16.2% Sharpe 0.75 | khiske filter Sharpe p50 0.45 max 0.72
+      saal SAB:    2021:+27 2022:+0 2023:+8 2024:+27 2025:+2 2026:+12
+      saal FILTER: 2021:+17 2022:+0 2023:+10 2024:+30 2025:+1 2026:+10
+   TAALA portfolio: SAB CAGR +11.0% DD -1.4% Sharpe 2.20 | FILTER CAGR +9.1% DD -1.4% Sharpe 1.89
+
+## Market safai (1367 trades)
+     DEV: sab 1340tr jeet 7.0 PF 1.69 ausat +1.20% | ON 969tr jeet 7.1 PF 2.03 ausat +1.51% | OFF 371tr jeet 7.0 PF 1.16 ausat +0.40%
+   TAALA: sab 27tr jeet 7.0 PF 10.20 ausat +2.81% | ON 27tr jeet 7.0 PF 10.20 ausat +2.81% | OFF 0tr -
+   POORA portfolio: SAB CAGR +20.9% DD -25.5% Sharpe 0.98 | FILTER CAGR +20.2% DD -14.2% Sharpe 1.12 | khiske filter Sharpe p50 0.67 max 1.01
+      saal SAB:    2021:+119 2022:+0 2023:-14 2024:+5 2025:+43 2026:+0
+      saal FILTER: 2021:+75 2022:+0 2023:+0 2024:+4 2025:+51 2026:+0
+   TAALA portfolio: SAB CAGR +7.7% DD -0.1% Sharpe 1.75 | FILTER CAGR +7.7% DD -0.1% Sharpe 1.75
