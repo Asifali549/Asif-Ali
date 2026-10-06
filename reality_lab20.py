@@ -152,15 +152,15 @@ def load_binance(emit):
 
 
 def first_hour(pairs, fake_daily=None):
-    """pairs: set of (sym, month). return {(sym, day): (open, close)} pehle ghante (00:00-01:00 UTC) ka."""
+    """pairs: set of (sym, month). return {(sym, day): {ghanta UTC: qeemat}} 00:00-08:00 UTC (har ghante ke shuru ki qeemat)."""
     out = {}
     if fake_daily is not None:                       # local nakli jaanch
         rng = np.random.default_rng(5)
         for sym, m in pairs:
             d = fake_daily[sym]
             for _, r in d[(d["timestamp"] >= m) & (d["timestamp"] < m + pd.offsets.MonthBegin(1))].iterrows():
-                c1 = r["open"] * np.exp(rng.normal(0, 0.01))
-                out[(sym, r["timestamp"])] = (r["open"], c1)
+                px = r["open"] * np.exp(np.cumsum(rng.normal(0, 0.008, 9)))
+                out[(sym, r["timestamp"])] = {h: (r["open"] if h == 0 else px[h - 1]) for h in range(9)}
         return out
 
     def one(p):
@@ -169,8 +169,13 @@ def first_hour(pairs, fake_daily=None):
         k = parse_k(fetch_zip(f"{BASE}/{b}/1h/{b}-1h-{m:%Y-%m}.zip"))
         if k is None:
             return {}
-        k = k[k["ts"].dt.hour == 0]
-        return {(sym, t.floor("1D")): (float(o), float(c)) for t, o, c in zip(k["ts"], k["open"], k["close"])}
+        k = k[k["ts"].dt.hour <= 7]
+        res = {}
+        for t, o, c in zip(k["ts"], k["open"], k["close"]):
+            dct = res.setdefault((sym, t.floor("1D")), {})
+            dct[t.hour] = float(o)
+            dct[t.hour + 1] = dct.get(t.hour + 1, float(c))     # agle ghante ka open na mile to is ka close
+        return res
     with ThreadPoolExecutor(24) as ex:
         for dct in ex.map(one, sorted(pairs)):
             out.update(dct)
@@ -268,39 +273,34 @@ def main(daily_all=None, fake=False):
             emit(f"   portfolio SAB taala: {ph}")
 
         # ---------------- 2) entry timing
-        emit("\n# 2) KHAREED KA ASAL WAQT (SAB coins) - din ke open (5 AM PKT) vs ~5:30 AM vs 6 AM PKT")
+        emit("\n# 2) KHAREED KA ASAL WAQT (SAB coins) - backtest 5 AM PKT (din ka open) vs baad mein khareed")
+        emit("   naya nafa = (1 + nafa) x open / us waqt ki qeemat - 1 (exit wahi)")
         pairs = {(t["sym"], pd.Timestamp(t["t_in"]).floor("1D").replace(day=1)) for tr in SY_a.values() for t in tr}
         fh = first_hour(pairs, fake_daily=daily_all if fake else None)
         emit(f"1h data mila: {len(fh)} din (zaroorat {len(pairs)} mahine)")
-        SY_t = {}
+        TIMES = [("5 AM (backtest)", 0), ("6 AM", 1), ("7 AM", 2), ("9 AM", 4), ("12 PM", 7)]
+        SY_t = {h: {} for _, h in TIMES}
         for name in SIZES:
-            base, mid, late, moves = [], [], [], []
+            got = {h: [] for _, h in TIMES}
             for t in SY_a[name]:
                 key = (t["sym"], pd.Timestamp(t["t_in"]).floor("1D"))
-                if key not in fh:
+                px = fh.get(key)
+                if not px or not all(px.get(h, 0) > 0 for _, h in TIMES):
                     continue
-                o1, c1 = fh[key]
-                if not (o1 > 0 and c1 > 0):
-                    continue
-                m1 = (o1 + c1) / 2
-                base.append(t)
-                mid.append(dict(t, ret=(1 + t["ret"]) * o1 / m1 - 1))
-                late.append(dict(t, ret=(1 + t["ret"]) * o1 / c1 - 1))
-                moves.append(c1 / o1 - 1)
-            SY_t[name] = late
-            emit(f"\n## {name} ({len(base)} trades jin ka 1h data mila; pehle ghante mein ausat chaal {np.mean(moves)*100 if moves else 0:+.2f}%)")
-            emit(f"   5 AM (backtest): {tline(base)}")
-            emit(f"   5:30 AM:         {tline(mid)}")
-            emit(f"   6 AM:            {tline(late)}")
-            _, p0 = pline(base, name, cl)
-            _, p2 = pline(late, name, cl)
-            emit(f"   portfolio 5 AM: {p0}")
-            emit(f"   portfolio 6 AM: {p2}")
+                for _, h in TIMES:
+                    got[h].append(dict(t, ret=(1 + t["ret"]) * px[0] / px[h] - 1))
+            for _, h in TIMES:
+                SY_t[h][name] = got[h]
+            emit(f"\n## {name} ({len(got[0])} trades jin ka 1h data mila)")
+            for lab, h in TIMES:
+                _, pp = pline(got[h], name, cl)
+                emit(f"   {lab:>15}: {tline(got[h])} | {pp}")
 
         # ---------------- 3) all together
-        emit("\n# 3) SAB 8 BOTS EK SATH (SAB coins, har system 1/8 hissa, mahana barabar) - 5 AM aur 6 AM entry")
-        curves_late = {n: pline(SY_t[n], n, cl)[0] for n in SIZES if SY_t[n]}
-        for lab, cv in (("5 AM", curves), ("6 AM", curves_late)):
+        emit("\n# 3) SAB 8 BOTS EK SATH (SAB coins, har system 1/8 hissa, mahana barabar) - mukhtalif khareed ke waqt")
+        sets = [("5 AM", curves)] + [(lab, {n: pline(SY_t[h][n], n, cl)[0] for n in SIZES if SY_t[h][n]})
+                                     for lab, h in TIMES[1:] if lab in ("6 AM", "9 AM", "12 PM")]
+        for lab, cv in sets:
             cv = {k: v for k, v in cv.items() if v is not None}
             w = {k: 1 / len(cv) for k in cv}
             m = mix(cv, w)
