@@ -415,6 +415,12 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   (nafa aadha, hamwari barabar). A10 / 3 ATR SL / 30 din sab bure ya barabar. DIP+: chalta SL TP5 se BURA (Sharpe 1.25 -> 0.85,
   CAGR 39 -> 18%); TP5 + chalta A3G2 bhi thora bura -> DIP+ asal hi rahe. Faisla user par: W52 ko A5G2 karein ya dono paper par.
 
+- **W52 HOLD TEST (2026-10-06, `w52_hold_test.py` / `_RESULTS.txt`):** user: "5 din mein becho to paisa jaldi azad, nafa double?". Signals
+  jhurmut mein aate hain -> slots bharte hain: H10 10%x10 mein 622 mein se 314 signals chhoote, H5 mein sirf 192 (40% ziada trades).
+  DEV: H5 jeet 5.6/10, ausat +7.1%/trade, CAGR 75%, DD -22.5%, Sharpe 1.98 | H7 74% / -22% / 1.80 | H10 jeet 5.3, +11.1%, 82% / -21% / 1.83.
+  Poora (taala samet): H5 63.6% / -22.5% / 1.88 vs H10 66.0% / -21.4% / 1.67. Ausat khuli trades sirf ~1.3-1.9 (paisa aksar khali).
+  Natija: double NAHI (ausat nafa/trade kam), magar H5 = lagbhag wohi nafa, behtar Sharpe, paisa aadha waqt. 20%x5: CAGR 95-110% magar DD -29..-37%.
+
 ## Aglay kaam
 - **2026-10-06 user ne kaha 'bna do': Dip+ aur W52 paper bots LAGU.** Talaash bhi jaari (user: behtareen ki talaash nahi chhorni).
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
