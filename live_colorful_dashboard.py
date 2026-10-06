@@ -207,15 +207,37 @@ SYSTEMS = {
         "backtest": {"win": 62.0, "pf": 2.30, "cagr": 42.4, "dd": -19.6,
                      "note": "W52 Combo Test, 5 din + chalta SL A5 G2 (2020-26 poora); sada W52 se jeet ziada, nafa kam"},
     },
+    "Streak": {
+        "badge": "🪜 4 din girawat",
+        "state": "streak_paper_state.json",
+        "trades": "streak_paper_trades.csv",
+        "signals": "streak_signals.json",
+        "workflow": "streak_bot.yml",
+        "alloc": 0.0, "sizing": ("fixed", 0.10, 0.10),
+        "stale_min": 1560,
+        "every": "rozana 5:45 AM PKT (daily candle band hone ke baad)",
+        "entry_col": "entry_day", "exit_col": "exit_day",
+        "new_signal_hours": 30,
+        "rules": [
+            ("Timeframe", "Daily candle"),
+            ("Entry", "Close 4 din LAGATAAR pichle din se neeche (sirf 4th din); close > EMA200 aur EMA50 > EMA200"),
+            ("Market filter", "BTC daily close > BTC EMA50; coin top-100 liquid"),
+            ("Stop (SL)", "Signal close - 3 x ATR(14), fixed"),
+            ("Exit", "TP +5%, ya close 3-din average se ooper -> agle din open par; max 10 din"),
+            ("Size", "SIRF PAPER — har trade khate ka 10%, max 10. Borderline: taala pass, magar DEV ki ek shart fail"),
+        ],
+        "backtest": {"win": 69.0, "pf": 1.67, "cagr": 10.5, "dd": -16.0,
+                     "note": "Search Lab 12/12b (148 coins, 2020-26); aakhri 12 mahine 46 trades jeet 7.2/10 PF 3.42"},
+    },
 }
 
 # Muqabla (2026-10-04 se sab ka naya record): Telegram kaun bhejta hai + asli paise se pehle kya shart puri honi chahiye
 START_DAY = "2026-10-04"
-TELEGRAM = {"Ichimoku TP5": True, "Dip Daily": True, "Dip+": True, "W52": True, "W52 Trail": True}          # baqi khamosh (sirf record)
+TELEGRAM = {"Ichimoku TP5": True, "Dip Daily": True, "Dip+": True, "W52": True, "W52 Trail": True, "Streak": True}          # baqi khamosh (sirf record)
 GROUP_SPLIT = (0.70, 0.30)   # 🤝 Group khaana: $1000 ka 70% TP5 + 30% Dip (Alloc Test ka behtareen Sharpe)
 GOLIVE = {"min_trades": 20, "min_days": 60,
           "win": {"Ichimoku TP5": 70, "Dip Daily": 60, "Ichimoku 4H": 35, "Donchian Daily": 30, "Volume Capitulation": 55,
-                  "Dip+": 60, "W52": 45, "W52 Trail": 55}}
+                  "Dip+": 60, "W52": 45, "W52 Trail": 55, "Streak": 60}}
 
 
 # ============================================================

@@ -4,6 +4,7 @@ BOOK BOT - daily "khata" paper bots ka mushtarka engine (2026-10-06)
 Do bots isi engine par chalte hain (har ek ki apni chhoti file + workflow + files):
   dipplus_bot.py : DIP+ = Dip v2 (RSI3 < 7) + Residual Dip (BTC ke muqable z < -2) EK khate mein  (Combo Lab 6)
   w52_bot.py     : W52  = sal ki chouti ke 5% andar pehli dafa, 5 din baad becho                (W52 Lab 10 / Combo)
+  streak_bot.py  : 4 din lagataar neeche close, EMA50 > EMA200, Dip exit                         (Search Lab 12/12b)
   w52trail_bot.py: W52 + chalta SL (nafa 5% par chale, chouti se 2% neeche), 5 din               (W52 Combo Test)
 Hisaab bilkul backtest jaisa (strategy_lab5 / search_lab9 / winrate_lab.sim):
   - signal BAND daily candle par, khareed AGLE din ke open par (+ slippage)
@@ -62,6 +63,10 @@ def indicators(d, btc_lr):
     beta = (s_rc.rolling(60, min_periods=40).cov(s_rb) / s_rb.rolling(60, min_periods=40).var()).clip(-1, 3)
     res = s_rc - beta * s_rb
     d["z"] = (res.rolling(3).sum() / (res.rolling(60, min_periods=40).std() * np.sqrt(3))).to_numpy()
+    # 4 din lagataar girawat (search_lab12 P_DOWN_STREAK 4): aaj 4th neeche close (5th par dobara nahi)
+    down = (c < c.shift(1)).astype(float)
+    st4 = down.rolling(4, min_periods=4).sum() >= 4
+    d["streak4"] = st4 & ~st4.shift(1, fill_value=False)
     # W52 (search_lab9.build)
     hi365 = h.rolling(365, min_periods=250).max()
     near = c >= hi365 * (1 - CFG.get("w52_p", 0.05))
@@ -80,6 +85,8 @@ def signal_today(r):
             tags.append("RESID")
         prio = r["rsi3"] - 100 if "DIP" in tags else (r["z"] if tags else 0)
         return bool(tags), "+".join(tags), prio
+    if kind == "streak":
+        return bool(r["up"]) and bool(r["golden"]) and bool(r["streak4"]), "4-DIN", 0.0
     if kind == "w52":
         return bool(r["up"]) and bool(r["w52"]), "W52", 0.0
     raise ValueError(kind)

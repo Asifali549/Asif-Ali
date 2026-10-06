@@ -26,7 +26,7 @@
 | `donchian_daily_bot.py` | Donchian Daily bot - signals + paper trading + Telegram |
 | `capit_daily_bot.py` | Volume Capitulation bot - signals + paper trading + Telegram (2026-10-02 se) |
 | `ichi_tp5_bot.py` | **Ichimoku TP5 - SIRF PAPER** (2026-10-04 se): `ichimoku4h_bot` import kar ke CE_M 4, TP_PCT 5%, RISK 2%, ALLOC 0, **UNIVERSE 250 / TOP_N 330** (2026-10-05 se; pehle 200/260), apni files `ichi_tp5_*` |
-| `book_bot.py` | **Daily khata engine (2026-10-06)** - `w52trail_bot.py` (W52 + chalta SL A5 G2, 5 din, files `w52trail_*`, 00:40 UTC) bhi; `dipplus_bot.py` (DIP+RESID, 20%/trade, max 10, files `dipplus_*`) aur `w52_bot.py` (sal ki chouti, **5 din hold** (2026-10-06 se; pehle 10), SL/TP nahi, 10%/trade, files `w52_*`) isi par; dono SIRF PAPER + Telegram; workflows `dipplus_bot.yml` (00:30 UTC) / `w52_bot.yml` (00:35 UTC), scheduler + watchdog + dashboard mein shamil. Fake data replay: har mushtarka trade ka return backtest se hubahu (sirf ~5% trades ka farq: backtest portfolio usi din exit+entry allow karta) |
+| `book_bot.py` | **Daily khata engine (2026-10-06)** - `streak_bot.py` (🪜 4 din lagataar girawat, Dip exit, 10%/trade, files `streak_*`, 00:45 UTC) bhi; `w52trail_bot.py` (W52 + chalta SL A5 G2, 5 din, files `w52trail_*`, 00:40 UTC) bhi; `dipplus_bot.py` (DIP+RESID, 20%/trade, max 10, files `dipplus_*`) aur `w52_bot.py` (sal ki chouti, **5 din hold** (2026-10-06 se; pehle 10), SL/TP nahi, 10%/trade, files `w52_*`) isi par; dono SIRF PAPER + Telegram; workflows `dipplus_bot.yml` (00:30 UTC) / `w52_bot.yml` (00:35 UTC), scheduler + watchdog + dashboard mein shamil. Fake data replay: har mushtarka trade ka return backtest se hubahu (sirf ~5% trades ka farq: backtest portfolio usi din exit+entry allow karta) |
 | `bot_core.py` | dono bots ke helpers: fetch_full, norm, ema, chandelier, ichi_signal, FEE/SLIP/STOP_SLIP, STABLES |
 | `strategies.py`, `config.py` | ichimoku + market_structure signal functions aur unke params (bot_core inhein use karta hai) |
 | `data_fetcher.py` | KuCoin (ccxt) exchange + top coins list |
@@ -426,6 +426,14 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   PF 2.30, ausat +3.7%, CAGR 42.4%, DD -19.6% (sab se kam), Sharpe 1.92 | A5G3 41.5% / -18.9% / 1.88 | A3G2 33.5% / 1.70 | A10G5 38% / -26%.
   Natija: chalta SL jeet barhata (6.2/10), DD thora kam, magar nafa ~ek tihai kam; Sharpe barabar. **FAISLA (user: "5 din pe hi rakho"):
   w52_bot hold=5, SL nahi.** **User ne kaha 'chalta SL bhi sath test ke liye bana do' -> `w52trail_bot.py` (🧗 W52 + chalta SL: 5 din + A5 G2, files `w52trail_*`, workflow `w52trail_bot.yml` 00:40 UTC, scheduler/watchdog/dashboard/Telegram) SIRF PAPER, W52 ke sath muqabla.** book_bot mein `trail_act`/`trail_gap` CFG (high se chouti, stop check ke baad update, agle din se lagu); fake data par 400/400 trades sim_trail se hubahu.
+
+- **SEARCH LAB 12 + 12b (2026-10-06, `search_lab12.py` / `search_lab12b.py` + `_RESULTS.txt`, 148 coins, taala-band):** user: "ziada se ziada
+  systems board par". 6 khayal, sachai 0 farq. DEV: G VOL_DRY (3 din girawat kam volume) random jaisa FAIL; H MONTH_END K0 PF 2.53 magar K1 random
+  jaisa (plateau nahi) FAIL; M EMA50_BACK random se bura FAIL; O RESID_LONG (7/10/20 din) FAIL; E W52_DIP (30 din mein W52 + RSI3<15): DEV sab pass
+  (jeet 7.1, PF 1.76 vs rnd95 1.29; "folds" sirf inf ki hisaabi ghalti - fold 2 mein 1 trade) magar TAALA FAIL (8 trades PF 0.49).
+  **P DOWN_STREAK 4 (4 din lagataar neeche, EMA50>EMA200, Dip exit): DEV sirf "5d fark" fail (BORDERLINE), TAALA PASS: 46 trades jeet 7.2/10
+  PF 3.42 vs rnd95 2.15; poora 588 trades jeet 6.9 PF 1.67; 10%: CAGR 10.5% DD -16% Sharpe 0.80, 2026 +10%, corr Dip v2 0.71.** Padosi taale mein
+  kamzor (3 din PF 0.82, 5 din 1.22). LAGU: `streak_bot.py` SIRF PAPER (fake replay 181/182 hubahu).
 
 ## Aglay kaam
 - **2026-10-06 user ne kaha 'bna do': Dip+ aur W52 paper bots LAGU.** Talaash bhi jaari (user: behtareen ki talaash nahi chhorni).

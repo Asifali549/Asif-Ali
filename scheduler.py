@@ -8,7 +8,7 @@ bots ko GitHub API (workflow_dispatch, GH_TOKEN) se chalata hai - dispatch foran
 der nahi hoti. Waqt khatam hone se pehle ye KHUD ko dobara chala deta hai (zanjeer). Agar zanjeer kabhi
 toote to Watchdog (jo yahi scheduler har 30 min chalata hai, aur apna cron bhi rakhta hai) isay dobara chala deta hai.
 Purane cron bhi backup ke taur par maujood hain - bots ek hi candle do baar process nahi karte (last_bar / last_day).
-Waqt (UTC): Ichimoku har 4 ghante :10 | Ichimoku TP5 (paper) :12 | Donchian 00:15 | Dip 00:20 | Capitulation 00:25 | Dip+ 00:30 | W52 00:35 | W52 chalta SL 00:40 | Watchdog har :05 aur :35
+Waqt (UTC): Ichimoku har 4 ghante :10 | Ichimoku TP5 (paper) :12 | Donchian 00:15 | Dip 00:20 | Capitulation 00:25 | Dip+ 00:30 | W52 00:35 | W52 chalta SL 00:40 | 4 din girawat 00:45 | Watchdog har :05 aur :35
 """
 import os
 import time
@@ -41,6 +41,8 @@ def due(t):
         out.append("w52_bot.yml")
     if t.hour == 0 and t.minute == 40:
         out.append("w52trail_bot.yml")
+    if t.hour == 0 and t.minute == 45:
+        out.append("streak_bot.yml")
     if t.minute in (5, 35):
         out.append("watchdog.yml")
     return out
