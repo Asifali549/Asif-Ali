@@ -179,11 +179,11 @@ SYSTEMS = {
             ("Entry", "Close pichle 365 din ke sab se oonche high se 5% ke andar PEHLI dafa; close > EMA200"),
             ("Market filter", "BTC daily close > BTC EMA50; coin top-100 liquid"),
             ("Stop (SL)", "Koi nahi (backtest mein SL lagane se nateeja bigra)"),
-            ("Exit", "Khareed ke 10 din baad us din ke close par"),
+            ("Exit", "Khareed ke 5 din baad us din ke close par (2026-10-06 se; pehle 10)"),
             ("Size", "SIRF PAPER — har trade khate ka 10%, max 10. 'Promising, na-sabit' - taala test mein random se saaf behtar nahi"),
         ],
-        "backtest": {"win": 51.0, "pf": 2.42, "cagr": 67.0, "dd": -21.4,
-                     "note": "W52 Lab 10 dev (2020-25); aakhri 12 mahine PF 1.94 (37 trades, sabit nahi); 2025-26 kamzor"},
+        "backtest": {"win": 55.0, "pf": 2.77, "cagr": 65.6, "dd": -21.6,
+                     "note": "W52 Combo Test, 5 din (2020-26 poora); aakhri 12 mahine PF 1.94 (37 trades, sabit nahi); 2025-26 kamzor"},
     },
 }
 
@@ -767,7 +767,7 @@ with T_AUTO:
                         "Live P/L ($)": round(p["qty"] * ref - p["cost"], 2) if ref else None,
                         "SL (abhi)": fmt_px(p["trail"]) if p.get("trail") else "Nahi",
                         "SL tak %": round((ref - p["trail"]) / ref * 100, 2) if ref and p.get("trail") else None,
-                        "TP": fmt_px(p["tp"]) if p.get("tp") else ("Nahi (10 din)" if not p.get("trail") else "Nahi (trailing)"),
+                        "TP": fmt_px(p["tp"]) if p.get("tp") else ("Nahi (din poore hone par)" if not p.get("trail") else "Nahi (trailing)"),
                         "Entry waqt": pkt_str(p.get("entry_bar") or p.get("entry_day")),
                         "Halat": ("⚠️ SL se neeche — agle run mein band" if ref and p.get("trail") and ref <= p["trail"]
                                   else ("🟢 Nafa" if ref and ref >= p["entry"] else "🔴 Nuqsan")),
