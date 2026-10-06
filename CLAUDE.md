@@ -383,6 +383,17 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   random jaise. 4H TP5 entry 2A/4x: PF 1.30 vs rnd 1.18, OOS 1.30 - borderline (PF 1.297 < 1.3), TP5 ke 5% exit se behtar magar FAIL.
   Sabaq: chhota SL + bara TP se jeet 2-5/10 hi aati hai (riyazi taur par); edge entry se aata hai, R:R se nahi.
 
+- **TIMING LAB 8 (2026-10-06, `timing_lab8.py` / workflow "Timing Lab 8 Test" / `timing_lab8_RESULTS.txt`, 148 coins daily):** user:
+  "naye system jo KAB khareedna ko tarjeeh dein". 5 naye entry khayal x 3 settings; saaf 5-din waqt-paimana (koi SL/TP nahi) vs random
+  + Dip exit + DIP+RESID khate mein milana. Sachai 0 farq. **0/5 PASS.** REF DIP sab se mazboot entry: 5-din fark +3.11% (shor 1.31%),
+  jeet 8/10, PF 2.99 (rnd 0.93). A HAMMER: 5d fark +1.4..2.3% magar median manfi (5d ooper sirf 4.8/10, lottery), Dip exit PF ~1.0 FAIL.
+  B RS_SELLOFF X5% (BTC 3 din -5%, coin musbat): PF 1.46 vs rnd 0.93, OOS 5.62, jeet 7.2/10, fark +2.48% LEKIN boot p5 1.15, padosi
+  X3% 1.09 / X7% 0.96 (plateau nahi), khate mein DD -14.5 -> -57% (sab signals ek sath crash mein) FAIL. C DIP_CONFIRM (ulatne ki
+  tasdeeq ka intezar) DIP se BURA (fark manfi) - intezar edge kha jata hai. D LOWVOL_PULL PF 1.27-1.35 magar 2x kharcha/fark kamzor
+  FAIL. E BTC_DIP_LEAD Q15: PF 1.79, jeet 8.2/10, OOS 3.38 magar beech wali Q10 fail, folds ghair-mustaqil FAIL.
+  Khata DIP+RESID is run mein: CAGR 39.8%, DD -14.5%, Sharpe 1.38. Kuch bhi milane se DD 26-72% (Sharpe gira).
+  Sabaq: 40+ khayalon ke baad bhi sirf DIP aur RESID sachche; mazeed talaash se false-discovery ka khatra. Mashwara: Dip+ paper bot.
+
 ## Aglay kaam
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
   `scheduler.py` + `scheduler.yml`: ek workflow ~5h40m lagataar chalta, har minute: Ichimoku har 4h :10, Donchian 00:15,
