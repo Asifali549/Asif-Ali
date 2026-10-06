@@ -1,0 +1,24 @@
+========================================================================================================================
+SEARCH LAB 13b | coins 149 | TAALA 2025-10-01 -> 2026-10-05
+========================================================================================================================
+
+# TAALA KHULA (ek dafa)
+    F_FLUSH 40: 25 trades (2 alag din) | jeet/10 6.4 | PF 7.66 | random p50 0.73 p95 1.27 | ausat +2.43% | top-5 hata kar PF 5.06 -> TAALA PASS
+    mahana: 2025-10: 25tr +2.4%
+         padosi F_FLUSH 30: 50 trades | jeet/10 7.6 | PF 8.15
+         padosi F_FLUSH 50: 25 trades | jeet/10 6.4 | PF 7.66
+   R_RVOL_UP 2: 37 trades (22 alag din) | jeet/10 5.4 | PF 1.51 | random p50 1.27 p95 2.67 | ausat +1.79% | top-5 hata kar PF 0.63 -> TAALA FAIL
+    mahana: 2025-10: 6tr +1.0% | 2026-01: 2tr -12.2% | 2026-04: 1tr -8.5% | 2026-07: 1tr -7.4% | 2026-08: 12tr -0.1% | 2026-09: 15tr +6.8%
+        padosi R_RVOL_UP 3: 8 trades | jeet/10 5.0 | PF 4.60
+
+# PORTFOLIO (poora 6 saal, max 10) + jhurmut
+F_FLUSH 40: 1376 trades | jeet/10 7.0 | PF 1.83 | ausat +1.33% | 54 signal din, ek din mein ausat 25.5, max 80
+   10%: CAGR +23.8% | DD -23.8% | Sharpe 1.08 | bura mahina -15.0% | corr Dip v2 0.30 Resid 0.06 Streak 0.12
+        saal 2021:+137 2022:+0 2023:-6 2024:+3 2025:+43 2026:+0
+   20%: CAGR +45.6% | DD -27.3% | Sharpe 1.19 | bura mahina -15.3% | corr Dip v2 0.25 Resid 0.07 Streak 0.06
+        saal 2021:+366 2022:+0 2023:-8 2024:+13 2025:+69 2026:+0
+R_RVOL_UP 2: 369 trades | jeet/10 5.1 | PF 2.10 | ausat +4.13% | 216 signal din, ek din mein ausat 1.7, max 25
+   10%: CAGR +24.4% | DD -21.6% | Sharpe 1.30 | bura mahina -11.1% | corr Dip v2 0.24 Resid 0.54 Streak 0.24
+        saal 2021:+32 2022:-2 2023:+51 2024:+97 2025:-2 2026:+4
+   20%: CAGR +37.1% | DD -31.0% | Sharpe 1.23 | bura mahina -12.0% | corr Dip v2 0.13 Resid 0.41 Streak 0.21
+        saal 2021:+68 2022:-4 2023:+100 2024:+105 2025:+5 2026:+5
