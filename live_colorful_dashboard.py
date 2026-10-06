@@ -64,10 +64,10 @@ SYSTEMS = {
             ("Stop (SL)", "Chandelier 16 candles, 4x ATR (live 5.5x se tang) - sirf ooper jata hai"),
             ("Take Profit", "Poori position entry se +5% par"),
             ("Exchange par", "OCO order (TP +5% ooper, SL neeche); 🔼 aaye to SL ooper karein"),
-            ("Size", "SIRF PAPER — har trade 2% risk; live Ichimoku se 2-3 mahine muqabla, phir faisla"),
+            ("Size", "SIRF PAPER — har trade 2% risk; ⚠️ fix ke baad backtest mein edge nahi, sirf record ke liye"),
         ],
-        "backtest": {"win": 77.8, "pf": 2.07, "cagr": 32.6, "dd": -6.6,
-                     "note": "6 saal, 2% risk; win-rate version (Winrate Lab 2026-10-04), random-control se behtar, har saal PF > 1"},
+        "backtest": {"win": 65.6, "pf": 1.01, "cagr": 2.0, "dd": -55.0,
+                     "note": "⚠️ lookahead fix (2026-10-05) ke baad: random jaisa, KOI EDGE NAHI - sirf paper record, Telegram khamosh"},
     },
     "Donchian Daily": {
         "badge": "🐢 Donchian Daily",
@@ -255,7 +255,7 @@ SYSTEMS = {
 
 # Muqabla (2026-10-04 se sab ka naya record): Telegram kaun bhejta hai + asli paise se pehle kya shart puri honi chahiye
 START_DAY = "2026-10-04"
-TELEGRAM = {"Ichimoku TP5": True, "Dip Daily": True, "Dip+": True, "W52": True, "W52 Trail": True, "Streak": True, "Flush": True}          # baqi khamosh (sirf record)
+TELEGRAM = {"Ichimoku TP5": False, "Dip Daily": True, "Dip+": True, "W52": True, "W52 Trail": True, "Streak": True, "Flush": True}          # baqi khamosh (sirf record)
 GROUP_SPLIT = (0.70, 0.30)   # 🤝 Group khaana: $1000 ka 70% TP5 + 30% Dip (Alloc Test ka behtareen Sharpe)
 GOLIVE = {"min_trades": 20, "min_days": 60,
           "win": {"Ichimoku TP5": 70, "Dip Daily": 60, "Ichimoku 4H": 35, "Donchian Daily": 30, "Volume Capitulation": 55,
@@ -596,8 +596,8 @@ with T_RACE:
               f"{(g_now / 1000 - 1) * 100:+.2f}%")
     k3.caption(f"${GROUP_SPLIT[0]*1000:.0f} TP5 mein + ${GROUP_SPLIT[1]*1000:.0f} Dip mein · "
                f"band trades {REP['Ichimoku TP5']['n'] + REP['Dip Daily']['n']} · MaxDD {g_dd:.1f}%")
-    st.caption("Backtest (6 saal): TP5 akela ~51% saalana, sab se bari kami ~13.5% · Group 70/30 ~40% saalana, kami ~9% "
-               "(nafa kam, jhatke kam). Teenon ka asli muqabla yahan paper par hoga.")
+    st.caption("⚠️ TP5 ke purane backtest number (51% saalana) lookahead bug ki wajah se jhoote thay; fix ke baad TP5 random jaisa. "
+               "Ye khaana sirf paper record ke liye.")
     st.markdown("---")
     order = sorted(SYSTEMS, key=lambda n: -REP[n]["ret"])
     rows = []
