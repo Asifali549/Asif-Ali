@@ -373,6 +373,16 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   z-1.75 20%: 45.5% / -24.8% / 1.18. Bare size (33/50%) par DD 25-48% - mashwara nahi. DIP akela 20%: 12.3% / -19.8% / 0.93.
   Agla qadam (user se poochh kar): paper bot "Dip+Resid" (ek khata) Dip bot jaisa.
 
+- **RR LAB 7 (2026-10-06, `rr_lab7.py` / workflow "RR Lab 7 Test" / `rr_lab7_RESULTS.txt`, 166 coins):** user: "SL chhota, TP bara karo,
+  10 mein se 5-6 jeetein to bhi nafa; fail strategies ki setting/tarteeb badal kar dekho". 8 entries x SL 1/1.5/2 ATR x TP 2/3/4 guna SL
+  (fixed, koi trailing nahi; daily 20 din / 4H 90 candle time stop). 4H sachai test 0 farq. **Koi bhi cell 10 mein se 5 jeet tak nahi
+  pohncha** (sab 2.2-4.9). Sirf **D DONCHIAN SL 2 ATR / TP 4x PASS**: 4371 trades (14/hafta, sab coins), jeet 3.8/10, PF 1.59 (rnd p95 1.09),
+  OOS 1.23, folds 2.15/1.00/1.67/1.31, 2x kharcha 1.52; LEKIN portfolio 1% risk: CAGR 60.6%, DD -45.8%, bura mahina -20.8%, 2021 +382%
+  2022 -33% (nafa 2021 par tika) -> jaisa hai qabil-e-istemal NAHI. RESID 2A/3-4x: jeet 4.8/10, PF 2.1-2.2 magar OOS 0.36-0.43 (2025+ mein
+  NUQSAN) FAIL. DIP chhote SL par random jaisa (PF 1.37 vs rnd 1.34) - DIP ka asal exit (SMA3/TP5/3 ATR) hi theek. CAPIT, STREND, BRK42
+  random jaise. 4H TP5 entry 2A/4x: PF 1.30 vs rnd 1.18, OOS 1.30 - borderline (PF 1.297 < 1.3), TP5 ke 5% exit se behtar magar FAIL.
+  Sabaq: chhota SL + bara TP se jeet 2-5/10 hi aati hai (riyazi taur par); edge entry se aata hai, R:R se nahi.
+
 ## Aglay kaam
 - **GitHub cron masla - HAL (2026-10-02):** 30 Sep se cron runs ghanton der se / gayab (Watchdog 48 ki jagah ~4/din).
   `scheduler.py` + `scheduler.yml`: ek workflow ~5h40m lagataar chalta, har minute: Ichimoku har 4h :10, Donchian 00:15,
