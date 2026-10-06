@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "system": "Donchian Daily",
+    "symbol": "KCS/USDT",
+    "signal_time_utc": "2026-10-06 00:00:00",
+    "entry_est": 7.599,
+    "sl": 6.7814545455,
+    "tp": null,
+    "risk_pct": 10.76,
+    "size_pct": 9.29
+  }
+]
