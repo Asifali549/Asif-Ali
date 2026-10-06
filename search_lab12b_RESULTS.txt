@@ -1,0 +1,30 @@
+========================================================================================================================
+SEARCH LAB 12b | coins 148 | DEV 2020-10-08 -> 2025-10-01 | TAALA 2025-10-01 -> 2026-10-05
+========================================================================================================================
+           REF_DIP folds: 27tr/2haar PF 15.43 | 0tr/0haar PF inf | 87tr/20haar PF 1.67 | 76tr/9haar PF 5.34
+      E_W52_DIP 15 folds: 45tr/5haar PF 2.98 | 1tr/0haar PF inf | 118tr/32haar PF 1.88 | 65tr/25haar PF 1.09
+   P_DOWN_STREAK 4 folds: 84tr/16haar PF 1.79 | 19tr/4haar PF 1.32 | 241tr/72haar PF 1.37 | 198tr/61haar PF 1.84
+      E_W52_DIP 10 folds: 13tr/2haar PF 0.89 | 1tr/0haar PF inf | 59tr/15haar PF 2.31 | 30tr/7haar PF 4.50
+      E_W52_DIP 20 folds: 77tr/10haar PF 3.05 | 2tr/0haar PF inf | 193tr/66haar PF 1.06 | 107tr/42haar PF 1.08
+   P_DOWN_STREAK 3 folds: 251tr/60haar PF 1.80 | 43tr/11haar PF 2.23 | 657tr/192haar PF 0.86 | 479tr/164haar PF 1.15
+   P_DOWN_STREAK 5 folds: 28tr/5haar PF 3.71 | 6tr/3haar PF 0.25 | 95tr/14haar PF 3.23 | 77tr/25haar PF 1.61
+
+# TAALA KHULA (ek dafa)
+           REF_DIP: 14 trades | jeet/10 7.9 | PF 1.95 | random p50 0.95 p95 2.29 | ausat +1.44% -> TAALA FAIL
+      E_W52_DIP 15: 8 trades | jeet/10 7.5 | PF 0.49 | random p50 0.94 p95 2.76 | ausat -3.26% -> TAALA FAIL
+           padosi E_W52_DIP 10: 5 trades | jeet/10 8.0 | PF 0.95 (sirf maloomat)
+           padosi E_W52_DIP 20: 12 trades | jeet/10 6.7 | PF 0.54 (sirf maloomat)
+   P_DOWN_STREAK 4: 46 trades | jeet/10 7.2 | PF 3.42 | random p50 1.06 p95 2.15 | ausat +2.06% -> TAALA PASS
+        padosi P_DOWN_STREAK 3: 103 trades | jeet/10 5.9 | PF 0.82 (sirf maloomat)
+        padosi P_DOWN_STREAK 5: 19 trades | jeet/10 7.4 | PF 1.22 (sirf maloomat)
+
+# PORTFOLIO (poora 6 saal, max 10)
+REF_DIP: 204 trades | jeet/10 8.0 | PF 2.88 | ausat +2.14%
+   10%: CAGR +6.7% | DD -15.9% | Sharpe 0.72 | corr DIP 0.92 | bura mahina -2.8% | saal 2021:+7 2022:+0 2023:+2 2024:+26 2025:+5 2026:+1
+   20%: CAGR +11.0% | DD -19.9% | Sharpe 0.86 | corr DIP 1.00 | bura mahina -4.0% | saal 2021:+13 2022:+0 2023:+5 2024:+37 2025:+9 2026:+1
+E_W52_DIP 15: 237 trades | jeet/10 7.1 | PF 1.61 | ausat +1.13%
+   10%: CAGR +2.7% | DD -12.2% | Sharpe 0.34 | corr DIP 0.50 | bura mahina -5.2% | saal 2021:+16 2022:+0 2023:+7 2024:+1 2025:-1 2026:-2
+   20%: CAGR +6.3% | DD -18.6% | Sharpe 0.45 | corr DIP 0.58 | bura mahina -10.8% | saal 2021:+33 2022:+0 2023:+14 2024:+7 2025:-1 2026:-4
+P_DOWN_STREAK 4: 588 trades | jeet/10 6.9 | PF 1.67 | ausat +1.06%
+   10%: CAGR +10.5% | DD -16.0% | Sharpe 0.80 | corr DIP 0.71 | bura mahina -8.7% | saal 2021:+22 2022:+0 2023:+10 2024:+27 2025:+5 2026:+10
+   20%: CAGR +16.1% | DD -19.5% | Sharpe 0.81 | corr DIP 0.61 | bura mahina -17.0% | saal 2021:+49 2022:+1 2023:+15 2024:+30 2025:+8 2026:+19
