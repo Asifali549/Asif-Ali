@@ -1,0 +1,152 @@
+Binance spot archive: 680 USDT jore (stable/leveraged ke baghair)
+==================================================================================================================================
+REALITY LAB 20 | coins: SAB 641 (zinda 452, doob/band 189) | 2020-07-29 -> 2026-09-30 | TAALA 2025-10-01 se
+==================================================================================================================================
+jeet/10 = 10 trades mein se nafa wali | PF = 1 rupay nuqsan par kitna nafa | ausat = har trade ka ausat nafa (kharche ke baad)
+
+# 1) DOOB CHUKE COINS - sirf zinda coins (purane tests jaisa) vs delisted samet (asal duniya)
+top-100 (point-in-time) mein delisted coins ka hissa: 19.1% (din x coin)
+
+## Donchian
+   ZINDA  poora: 1545 tr jeet 4.1/10 PF  2.55 ausat +9.57% | taala:  236 tr jeet 3.3/10 PF  1.32 ausat +2.00%
+   SAB    poora: 1437 tr jeet 4.0/10 PF  2.14 ausat +7.26% | taala:  236 tr jeet 3.4/10 PF  1.35 ausat +2.18%
+   sirf doobe coins ki trades:  157 tr jeet 4.1/10 PF  1.30 ausat +2.11%
+   portfolio ZINDA: CAGR  +47.0% DD  -31.2% Sharpe 1.27 bura mahina -12.4%
+   portfolio SAB:   CAGR  +34.9% DD  -35.1% Sharpe 1.07 bura mahina -10.5%
+   portfolio SAB taala: CAGR  +37.6% DD  -16.4% Sharpe 1.26 bura mahina -9.3%
+
+## Capitulation
+   ZINDA  poora:  670 tr jeet 5.8/10 PF  1.21 ausat +1.11% | taala:   79 tr jeet 4.6/10 PF  0.68 ausat -3.97%
+   SAB    poora:  744 tr jeet 5.5/10 PF  1.04 ausat +0.27% | taala:   81 tr jeet 4.6/10 PF  0.69 ausat -3.81%
+   sirf doobe coins ki trades:  169 tr jeet 4.5/10 PF  0.77 ausat -1.90%
+   portfolio ZINDA: CAGR   +5.0% DD  -15.5% Sharpe 0.44 bura mahina -10.2%
+   portfolio SAB:   CAGR   +0.9% DD  -24.5% Sharpe 0.14 bura mahina -12.2%
+   portfolio SAB taala: CAGR   -8.0% DD  -15.2% Sharpe -0.75 bura mahina -3.8%
+
+## Dip v2
+   ZINDA  poora:  220 tr jeet 7.8/10 PF  2.49 ausat +2.00% | taala:   13 tr jeet 6.9/10 PF  0.47 ausat -3.66%
+   SAB    poora:  267 tr jeet 7.8/10 PF  2.18 ausat +1.79% | taala:   13 tr jeet 6.9/10 PF  0.47 ausat -3.66%
+   sirf doobe coins ki trades:   67 tr jeet 7.9/10 PF  1.92 ausat +1.61%
+   portfolio ZINDA: CAGR  +10.9% DD  -14.7% Sharpe 0.82 bura mahina -10.4%
+   portfolio SAB:   CAGR  +11.5% DD  -14.7% Sharpe 0.76 bura mahina -10.4%
+   portfolio SAB taala: CAGR  -10.5% DD  -14.7% Sharpe -0.83 bura mahina -10.4%
+
+## Dip+
+   ZINDA  poora: 1015 tr jeet 7.0/10 PF  2.00 ausat +1.42% | taala:   67 tr jeet 7.5/10 PF  0.76 ausat -0.91%
+   SAB    poora: 1089 tr jeet 7.0/10 PF  1.86 ausat +1.31% | taala:   67 tr jeet 7.5/10 PF  0.76 ausat -0.91%
+   sirf doobe coins ki trades:  185 tr jeet 7.3/10 PF  1.68 ausat +1.25%
+   portfolio ZINDA: CAGR  +42.0% DD  -19.7% Sharpe 1.37 bura mahina -15.7%
+   portfolio SAB:   CAGR  +39.9% DD  -19.7% Sharpe 1.29 bura mahina -15.7%
+   portfolio SAB taala: CAGR   -1.1% DD  -19.8% Sharpe 0.02 bura mahina -15.7%
+
+## W52 5 din
+   ZINDA  poora:  863 tr jeet 5.2/10 PF  2.29 ausat +6.89% | taala:   25 tr jeet 6.8/10 PF  3.39 ausat +6.81%
+   SAB    poora:  919 tr jeet 5.1/10 PF  2.18 ausat +6.45% | taala:   25 tr jeet 6.8/10 PF  3.39 ausat +6.81%
+   sirf doobe coins ki trades:  131 tr jeet 4.7/10 PF  1.69 ausat +4.89%
+   portfolio ZINDA: CAGR  +86.1% DD  -28.0% Sharpe 1.76 bura mahina -13.5%
+   portfolio SAB:   CAGR  +81.3% DD  -35.8% Sharpe 1.63 bura mahina -15.1%
+   portfolio SAB taala: CAGR  +13.8% DD   -2.7% Sharpe 1.60 bura mahina -0.2%
+
+## W52 chalta SL
+   ZINDA  poora:  863 tr jeet 5.9/10 PF  1.89 ausat +2.93% | taala:   25 tr jeet 7.2/10 PF  1.97 ausat +2.34%
+   SAB    poora:  919 tr jeet 5.8/10 PF  1.73 ausat +2.53% | taala:   25 tr jeet 7.2/10 PF  1.97 ausat +2.34%
+   sirf doobe coins ki trades:  131 tr jeet 5.1/10 PF  1.12 ausat +0.55%
+   portfolio ZINDA: CAGR  +45.7% DD  -23.4% Sharpe 1.71 bura mahina -10.4%
+   portfolio SAB:   CAGR  +40.3% DD  -22.5% Sharpe 1.47 bura mahina -9.6%
+   portfolio SAB taala: CAGR   +7.4% DD   -1.8% Sharpe 1.42 bura mahina +0.0%
+
+## 4-din girawat
+   ZINDA  poora:  806 tr jeet 7.0/10 PF  1.30 ausat +0.64% | taala:   43 tr jeet 6.5/10 PF  0.80 ausat -0.67%
+   SAB    poora:  927 tr jeet 7.0/10 PF  1.25 ausat +0.55% | taala:   43 tr jeet 6.5/10 PF  0.80 ausat -0.67%
+   sirf doobe coins ki trades:  208 tr jeet 7.2/10 PF  1.31 ausat +0.72%
+   portfolio ZINDA: CAGR   +6.0% DD  -30.0% Sharpe 0.41 bura mahina -13.8%
+   portfolio SAB:   CAGR   +5.6% DD  -29.3% Sharpe 0.37 bura mahina -20.9%
+   portfolio SAB taala: CAGR   -3.5% DD   -9.8% Sharpe -0.49 bura mahina -6.7%
+
+## Market safai
+   ZINDA  poora: 2542 tr jeet 7.5/10 PF  1.62 ausat +1.25% | taala:   27 tr jeet 7.0/10 PF  5.37 ausat +2.16%
+   SAB    poora: 2846 tr jeet 7.2/10 PF  1.11 ausat +0.32% | taala:   27 tr jeet 7.0/10 PF  5.37 ausat +2.16%
+   sirf doobe coins ki trades:  535 tr jeet 7.8/10 PF  1.18 ausat +0.54%
+   portfolio ZINDA: CAGR  +69.1% DD  -48.0% Sharpe 1.28 bura mahina -30.5%
+   portfolio SAB:   CAGR  +60.6% DD  -54.9% Sharpe 1.18 bura mahina -29.5%
+   portfolio SAB taala: CAGR   +5.0% DD   -1.5% Sharpe 1.24 bura mahina +0.0%
+
+# 2) KHAREED KA ASAL WAQT (SAB coins) - din ke open (5 AM PKT) vs ~5:30 AM vs 6 AM PKT
+1h data mila: 91261 din (zaroorat 2997 mahine)
+
+## Donchian (1437 trades jin ka 1h data mila; pehle ghante mein ausat chaal +0.15%)
+   5 AM (backtest): 1437 tr jeet 4.0/10 PF  2.14 ausat +7.26%
+   5:30 AM:         1437 tr jeet 4.0/10 PF  2.12 ausat +7.17%
+   6 AM:            1437 tr jeet 4.0/10 PF  2.11 ausat +7.10%
+   portfolio 5 AM: CAGR  +34.9% DD  -35.1% Sharpe 1.07 bura mahina -10.5%
+   portfolio 6 AM: CAGR  +34.4% DD  -36.6% Sharpe 1.06 bura mahina -10.5%
+
+## Capitulation (744 trades jin ka 1h data mila; pehle ghante mein ausat chaal -0.57%)
+   5 AM (backtest):  744 tr jeet 5.5/10 PF  1.04 ausat +0.27%
+   5:30 AM:          744 tr jeet 5.4/10 PF  1.09 ausat +0.52%
+   6 AM:             744 tr jeet 5.5/10 PF  1.14 ausat +0.83%
+   portfolio 5 AM: CAGR   +0.9% DD  -24.5% Sharpe 0.14 bura mahina -12.2%
+   portfolio 6 AM: CAGR   +2.6% DD  -22.3% Sharpe 0.26 bura mahina -11.2%
+
+## Dip v2 (267 trades jin ka 1h data mila; pehle ghante mein ausat chaal -0.03%)
+   5 AM (backtest):  267 tr jeet 7.8/10 PF  2.18 ausat +1.79%
+   5:30 AM:          267 tr jeet 7.8/10 PF  2.25 ausat +1.80%
+   6 AM:             267 tr jeet 7.5/10 PF  2.36 ausat +1.83%
+   portfolio 5 AM: CAGR  +11.5% DD  -14.7% Sharpe 0.76 bura mahina -10.4%
+   portfolio 6 AM: CAGR  +12.4% DD  -12.9% Sharpe 0.85 bura mahina -10.4%
+
+## Dip+ (1089 trades jin ka 1h data mila; pehle ghante mein ausat chaal -0.14%)
+   5 AM (backtest): 1089 tr jeet 7.0/10 PF  1.86 ausat +1.31%
+   5:30 AM:         1089 tr jeet 7.0/10 PF  1.94 ausat +1.38%
+   6 AM:            1089 tr jeet 6.9/10 PF  2.03 ausat +1.46%
+   portfolio 5 AM: CAGR  +39.9% DD  -19.7% Sharpe 1.29 bura mahina -15.7%
+   portfolio 6 AM: CAGR  +43.5% DD  -16.1% Sharpe 1.33 bura mahina -16.1%
+
+## W52 5 din (919 trades jin ka 1h data mila; pehle ghante mein ausat chaal +0.51%)
+   5 AM (backtest):  919 tr jeet 5.1/10 PF  2.18 ausat +6.45%
+   5:30 AM:          919 tr jeet 5.1/10 PF  2.12 ausat +6.16%
+   6 AM:             919 tr jeet 5.1/10 PF  2.06 ausat +5.94%
+   portfolio 5 AM: CAGR  +81.3% DD  -35.8% Sharpe 1.63 bura mahina -15.1%
+   portfolio 6 AM: CAGR  +73.8% DD  -37.0% Sharpe 1.52 bura mahina -14.1%
+
+## W52 chalta SL (919 trades jin ka 1h data mila; pehle ghante mein ausat chaal +0.51%)
+   5 AM (backtest):  919 tr jeet 5.8/10 PF  1.73 ausat +2.53%
+   5:30 AM:          919 tr jeet 5.7/10 PF  1.64 ausat +2.24%
+   6 AM:             919 tr jeet 5.5/10 PF  1.56 ausat +2.02%
+   portfolio 5 AM: CAGR  +40.3% DD  -22.5% Sharpe 1.47 bura mahina -9.6%
+   portfolio 6 AM: CAGR  +31.5% DD  -23.4% Sharpe 1.19 bura mahina -8.2%
+
+## 4-din girawat (927 trades jin ka 1h data mila; pehle ghante mein ausat chaal +0.03%)
+   5 AM (backtest):  927 tr jeet 7.0/10 PF  1.25 ausat +0.55%
+   5:30 AM:          927 tr jeet 6.9/10 PF  1.25 ausat +0.54%
+   6 AM:             927 tr jeet 6.7/10 PF  1.25 ausat +0.54%
+   portfolio 5 AM: CAGR   +5.6% DD  -29.3% Sharpe 0.37 bura mahina -20.9%
+   portfolio 6 AM: CAGR   +5.8% DD  -28.4% Sharpe 0.38 bura mahina -21.8%
+
+## Market safai (2846 trades jin ka 1h data mila; pehle ghante mein ausat chaal -0.02%)
+   5 AM (backtest): 2846 tr jeet 7.2/10 PF  1.11 ausat +0.32%
+   5:30 AM:         2846 tr jeet 7.2/10 PF  1.12 ausat +0.33%
+   6 AM:            2846 tr jeet 6.8/10 PF  1.13 ausat +0.38%
+   portfolio 5 AM: CAGR  +60.6% DD  -54.9% Sharpe 1.18 bura mahina -29.5%
+   portfolio 6 AM: CAGR  +54.3% DD  -51.0% Sharpe 1.07 bura mahina -28.2%
+
+# 3) SAB 8 BOTS EK SATH (SAB coins, har system 1/8 hissa, mahana barabar) - 5 AM aur 6 AM entry
+   5 AM: CAGR +39.0% | DD -19.5% | Sharpe 1.84 | bura mahina -10.5% | +mahine 61% | taala CAGR +5.1% DD -5.5%
+      saal: 2020:+29 2021:+276 2022:-3 2023:+18 2024:+26 2025:+7 2026:+2
+   6 AM: CAGR +35.9% | DD -17.0% | Sharpe 1.76 | bura mahina -8.9% | +mahine 62% | taala CAGR +6.4% DD -4.0%
+      saal: 2020:+25 2021:+221 2022:-3 2023:+17 2024:+28 2025:+11 2026:+4
+
+   mahana nafa ka correlation (1 = bilkul ek sath, 0 = alag):
+                   Donchia  Capitul   Dip v2     Dip+  W52 5 d  W52 cha  4-din g  Market 
+         Donchian     1.00     0.02     0.25     0.28     0.58     0.69     0.09     0.05
+     Capitulation     0.02     1.00     0.30     0.37     0.15     0.12     0.42     0.13
+           Dip v2     0.25     0.30     1.00     0.55     0.48     0.49     0.49     0.13
+             Dip+     0.28     0.37     0.55     1.00     0.26     0.30     0.43     0.09
+        W52 5 din     0.58     0.15     0.48     0.26     1.00     0.92     0.35     0.05
+    W52 chalta SL     0.69     0.12     0.49     0.30     0.92     1.00     0.26    -0.05
+    4-din girawat     0.09     0.42     0.49     0.43     0.35     0.26     1.00     0.06
+     Market safai     0.05     0.13     0.13     0.09     0.05    -0.05     0.06     1.00
+
+   jis din koi khareed hui: 1181 din | 3+ systems ek din: 441 din | 5+ systems: 87 din | sab se ziada 7 systems ek din
+   ek coin ek din: 7354 khareedain | 2+ systems ne wohi coin usi din khareeda: 21% | 3+: 3%
+   mushtarka sab se bure 5 din: 2024-04-13 -8.4%, 2024-12-09 -5.5%, 2021-02-23 -5.0%, 2021-05-12 -4.6%, 2021-05-19 -4.6%
