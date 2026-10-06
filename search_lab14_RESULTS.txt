@@ -1,0 +1,55 @@
+============================================================================================================================================
+SEARCH LAB 14 - price action + contrarian qaidon mein | TAALA-BAND
+============================================================================================================================================
+Coins: 149 | DEV 2020-10-08 -> 2025-10-01 (260 hafte) | TAALA 2025-10-01 -> 2026-10-05
+jeet/10 = 10 mein se nafa wali | PF = har 1 rupay nuqsan par kitna nafa | 5d fark = 5-din nafa minus random
+
+# SACHAI TEST - 30 din, data kaat kar (farq 0 hona chahiye)
+           REF_DIP: farq 0 (13 signals) -> SAHI
+       A_SUPPORT 1: farq 0 (18 signals) -> SAHI
+       A_SUPPORT 2: farq 0 (21 signals) -> SAHI
+       A_SUPPORT 3: farq 0 (23 signals) -> SAHI
+        B_ENGULF 2: farq 0 (25 signals) -> SAHI
+        B_ENGULF 3: farq 0 (4 signals) -> SAHI
+        B_ENGULF 4: farq 0 (4 signals) -> SAHI
+        C_RETEST 5: farq 0 (15 signals) -> SAHI
+       C_RETEST 10: farq 0 (30 signals) -> SAHI
+       C_RETEST 15: farq 0 (39 signals) -> SAHI
+     D_BTC_FEAR 30: farq 0 (0 signals) -> SAHI
+     D_BTC_FEAR 35: farq 0 (0 signals) -> SAHI
+     D_BTC_FEAR 40: farq 0 (0 signals) -> SAHI
+       E_LOSER30 5: farq 0 (13 signals) -> SAHI
+      E_LOSER30 10: farq 0 (9 signals) -> SAHI
+      E_LOSER30 15: farq 0 (20 signals) -> SAHI
+
+# DEV hissa
+           entry |     n | /hafta | 5d fark | jeet/10 |    PF | rnd95 |                    folds (trades/PF) | boot5 | -top10 | 2xcost |  ausat
+         REF_DIP |   187 |   0.72 |  +2.00% |     8.0 |  2.90 |  1.12 |       27/15.43 0/inf 83/1.62 77/4.84 |  1.91 |   2.67 |   2.57 | +2.15%
+     A_SUPPORT 1 |   718 |   2.76 |  -3.30% |     4.7 |  0.87 |  1.04 |   104/0.93 31/0.60 293/0.70 290/1.10 |  0.73 |   0.84 |   0.75 | -0.25%
+     A_SUPPORT 2 |   887 |   3.41 |  -3.64% |     4.6 |  0.81 |  1.15 |   116/0.90 34/0.64 393/0.64 344/1.05 |  0.70 |   0.79 |   0.69 | -0.38%
+     A_SUPPORT 3 |  1083 |   4.17 |  -2.94% |     4.6 |  0.84 |  1.01 |   144/0.95 44/0.88 499/0.73 396/0.94 |  0.73 |   0.82 |   0.72 | -0.32%
+      B_ENGULF 2 |   948 |   3.65 |  -0.45% |     5.3 |  1.05 |  1.07 |   183/1.73 38/1.17 391/0.69 336/1.39 |  0.90 |   1.03 |   0.90 | +0.10%
+      B_ENGULF 3 |   444 |   1.71 |  -0.43% |     5.1 |  1.07 |  1.07 |    74/2.10 15/3.34 190/0.74 165/1.13 |  0.86 |   1.02 |   0.92 | +0.14%
+      B_ENGULF 4 |   185 |   0.71 |  -2.35% |     4.6 |  0.76 |  1.25 |       31/1.27 4/2.97 78/0.48 72/0.98 |  0.56 |   0.65 |   0.66 | -0.58%
+      C_RETEST 5 |  1388 |   5.34 |  +2.01% |     4.8 |  1.88 |  1.60 |  282/2.36 103/0.72 556/2.17 447/1.63 |  1.67 |   1.67 |   1.80 | +4.63%
+     C_RETEST 10 |  1923 |   7.40 |  +1.24% |     4.6 |  1.70 |  1.60 |  394/2.00 152/0.77 760/2.00 617/1.47 |  1.53 |   1.55 |   1.63 | +3.76%
+     C_RETEST 15 |  2245 |   8.64 |  +1.25% |     4.6 |  1.68 |  1.56 |  447/2.29 180/0.80 894/1.94 724/1.29 |  1.51 |   1.53 |   1.60 | +3.68%
+   D_BTC_FEAR 30 |    52 |   0.20 | -24.77% |     8.3 |  2.64 |  2.07 |         27/3.24 0/inf 11/inf 14/0.81 |  1.16 |   1.91 |   2.37 | +2.04%
+   D_BTC_FEAR 35 |   112 |   0.43 |  -5.75% |     8.2 |  4.08 |  1.20 |        54/4.24 0/inf 45/9.94 13/1.02 |  2.03 |   3.57 |   3.58 | +2.53%
+   D_BTC_FEAR 40 |   482 |   1.85 |  +2.59% |     7.5 |  1.44 |  1.00 |     161/1.01 0/inf 146/2.50 175/1.76 |  1.14 |   1.40 |   1.28 | +0.91%
+     E_LOSER30 5 |   407 |   1.57 |  -0.66% |     5.9 |  0.93 |  1.16 |    130/1.92 28/0.85 168/0.71 81/0.65 |  0.73 |   0.88 |   0.82 | -0.17%
+    E_LOSER30 10 |   661 |   2.54 |  -1.14% |     5.6 |  0.78 |  1.01 |   206/1.47 43/0.63 257/0.63 155/0.57 |  0.65 |   0.75 |   0.68 | -0.60%
+    E_LOSER30 15 |   872 |   3.36 |  -1.32% |     5.9 |  0.90 |  1.09 |   263/1.10 53/1.18 345/0.86 211/0.72 |  0.77 |   0.87 |   0.79 | -0.26%
+
+# DEV PASS / FAIL (beech wali setting)
+       A_SUPPORT 2: FAIL: jeet>=55, PF>rnd95, PF>=1.3, folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2, padosi
+        B_ENGULF 3: FAIL: jeet>=55, PF>=1.3, folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2, padosi
+       C_RETEST 10: FAIL: jeet>=50, folds
+     D_BTC_FEAR 35: FAIL: folds
+      E_LOSER30 10: FAIL: PF>rnd95, PF>=1.3, folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2, padosi
+
+# TAALA KHULA (aakhri 12 mahine)
+           REF_DIP: 14 trades (14 alag din) | jeet/10 7.9 | PF 1.95 | random p95 4.09 | ausat +1.44% -> TAALA FAIL (sirf muqabla)
+koi khayal DEV pass nahi hua - taala kisi ke liye nahi khula
+
+NATIJA: koi naya khayal taala paar nahi kar saka
