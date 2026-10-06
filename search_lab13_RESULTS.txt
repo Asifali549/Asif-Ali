@@ -1,0 +1,58 @@
+============================================================================================================================================
+SEARCH LAB 13 - quant khayal (volatility breakout, squeeze, volume, market flush) + khata test | TAALA-BAND
+============================================================================================================================================
+Coins: 148 | DEV 2020-10-08 -> 2025-10-01 (260 hafte) | TAALA 2025-10-01 -> 2026-10-05
+jeet/10 = 10 mein se nafa wali | PF = har 1 rupay nuqsan par kitna nafa | 5d fark = 5-din nafa minus random
+
+# SACHAI TEST - 30 din, data kaat kar (farq 0 hona chahiye)
+             REF_DIP: farq 0 (3 signals) -> SAHI
+       V_VOL_BRK 0.4: farq 0 (178 signals) -> SAHI
+       V_VOL_BRK 0.6: farq 0 (103 signals) -> SAHI
+       V_VOL_BRK 0.8: farq 0 (69 signals) -> SAHI
+       S_SQUEEZE_D 5: farq 0 (0 signals) -> SAHI
+      S_SQUEEZE_D 10: farq 0 (0 signals) -> SAHI
+      S_SQUEEZE_D 15: farq 0 (1 signals) -> SAHI
+         R_RVOL_UP 2: farq 0 (2 signals) -> SAHI
+         R_RVOL_UP 3: farq 0 (0 signals) -> SAHI
+         R_RVOL_UP 4: farq 0 (0 signals) -> SAHI
+          F_FLUSH 30: farq 0 (0 signals) -> SAHI
+          F_FLUSH 40: farq 0 (0 signals) -> SAHI
+          F_FLUSH 50: farq 0 (0 signals) -> SAHI
+             X_RESID: farq 0 (4 signals) -> SAHI
+            X_STREAK: farq 0 (14 signals) -> SAHI
+
+# DEV hissa
+             entry |     n | /hafta | 5d fark | jeet/10 |    PF | rnd95 |                        folds (trades/PF) | boot5 | -top10 | 2xcost |  ausat
+           REF_DIP |   186 |   0.72 |  +1.87% |     8.0 |  2.97 |  1.22 |           27/15.43 0/inf 83/1.62 76/5.34 |  1.90 |   2.74 |   2.64 | +2.19%
+     V_VOL_BRK 0.4 | 16405 |  63.13 |  +0.36% |     3.8 |  0.99 |  1.02 |  3394/1.19 1028/0.66 6635/1.01 5348/0.91 |  0.96 |   0.96 |   0.85 | -0.01%
+     V_VOL_BRK 0.6 | 11285 |  43.43 |  +0.43% |     3.8 |  1.04 |  1.02 |   2322/1.30 685/0.67 4672/1.02 3606/0.96 |  0.99 |   1.00 |   0.89 | +0.07%
+     V_VOL_BRK 0.8 |  7925 |  30.50 |  +0.83% |     3.7 |  1.07 |  1.02 |   1678/1.31 471/0.69 3281/1.04 2495/1.01 |  1.00 |   1.01 |   0.91 | +0.12%
+     S_SQUEEZE_D 5 |   204 |   0.79 |  -0.13% |     4.1 |  1.37 |  1.51 |           66/1.67 9/0.36 73/1.64 56/0.86 |  0.85 |   0.62 |   1.31 | +2.22%
+    S_SQUEEZE_D 10 |   327 |   1.26 |  +1.09% |     4.3 |  1.54 |  1.70 |         98/2.10 12/0.56 128/1.61 89/0.93 |  1.10 |   0.91 |   1.47 | +3.06%
+    S_SQUEEZE_D 15 |   446 |   1.72 |  +0.94% |     4.1 |  1.36 |  1.58 |       125/1.68 17/0.51 174/1.58 130/0.87 |  1.06 |   0.90 |   1.30 | +2.10%
+       R_RVOL_UP 2 |   332 |   1.28 |  +2.66% |     5.0 |  2.16 |  1.61 |        53/1.78 29/1.48 141/3.38 108/1.57 |  1.65 |   1.52 |   2.04 | +4.39%
+       R_RVOL_UP 3 |    76 |   0.29 |  +3.78% |     4.7 |  2.61 |  2.13 |            8/6.61 4/2.28 29/2.50 35/2.32 |  1.54 |   0.87 |   2.49 | +7.02%
+       R_RVOL_UP 4 | sirf 21 trades
+        F_FLUSH 30 |  1692 |   6.51 |  +0.14% |     6.8 |  1.05 |  0.98 |       473/1.58 27/0.88 480/0.57 712/1.39 |  0.94 |   1.04 |   0.95 | +0.14%
+        F_FLUSH 40 |  1351 |   5.20 |  +1.08% |     7.1 |  1.81 |  0.92 |       386/4.42 27/0.88 307/1.48 631/1.28 |  1.57 |   1.78 |   1.60 | +1.31%
+        F_FLUSH 50 |  1142 |   4.39 |  +1.18% |     7.4 |  1.96 |  1.00 |      294/4.00 13/67.46 296/1.99 539/1.35 |  1.65 |   1.93 |   1.74 | +1.50%
+
+# DEV PASS / FAIL (beech wali setting)
+       V_VOL_BRK 0.6: FAIL: jeet>=50, PF>=1.3, folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2
+      S_SQUEEZE_D 10: FAIL: jeet>=50, PF>rnd95, folds, boot>=1.15, -top10>=1.2, padosi
+         R_RVOL_UP 3: FAIL: jeet>=50, folds, -top10>=1.2, >=0.3/hafta
+          F_FLUSH 40: FAIL: folds
+
+# TAALA KHULA (aakhri 12 mahine)
+             REF_DIP: 14 trades | jeet/10 7.9 | PF 1.95 | random p95 2.56 | ausat +1.44% -> TAALA FAIL (sirf muqabla)
+koi khayal DEV pass nahi hua - taala kisi ke liye nahi khula
+
+# KHATA TEST - Dip+ (Dip v2 + RESID) vs Dip+ + 4-din girawat, 20% / trade, max 10
+     Dip+ (abhi): 530 trades jeet/10 7.2 PF 2.22 | POORA CAGR +31.3% DD -27.0% Sharpe 1.12 bura mahina -8.3% | TAALA CAGR +9.0% DD -5.4% Sharpe 1.06
+                  saal 2021:+22 2022:-4 2023:+60 2024:+118 2025:+5 2026:+3
+    Dip+ + 4-din: 872 trades jeet/10 7.0 PF 1.84 | POORA CAGR +38.9% DD -35.8% Sharpe 1.06 bura mahina -19.1% | TAALA CAGR +24.4% DD -4.9% Sharpe 1.81
+                  saal 2021:+63 2022:-3 2023:+67 2024:+132 2025:+2 2026:+17
+ 4-din akela 20%: 484 trades jeet/10 6.8 PF 1.51 | POORA CAGR +12.6% DD -27.3% Sharpe 0.66 bura mahina -17.0% | TAALA CAGR +19.2% DD -4.9% Sharpe 1.84
+                  saal 2021:+49 2022:+1 2023:+13 2024:+15 2025:+4 2026:+18
+
+NATIJA: koi naya khayal taala paar nahi kar saka
