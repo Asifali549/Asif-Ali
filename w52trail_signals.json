@@ -1,0 +1,13 @@
+[
+  {
+    "system": "W52 + chalta SL",
+    "symbol": "HYPE/USDT",
+    "signal_time_utc": "2026-10-06 00:00:00",
+    "entry_est": 94.179,
+    "sl": null,
+    "tp": null,
+    "risk_pct": null,
+    "size_pct": 10.0,
+    "tag": "W52"
+  }
+]
