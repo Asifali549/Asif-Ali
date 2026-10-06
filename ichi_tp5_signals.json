@@ -48,5 +48,25 @@
     "tp": 0.21798,
     "risk_pct": 7.17,
     "size_pct": 20.0
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "CAP/USDT",
+    "signal_time_utc": "2026-10-06 16:00:00",
+    "entry_est": 0.089975,
+    "sl": 0.0826725,
+    "tp": 0.09447375,
+    "risk_pct": 8.12,
+    "size_pct": 20.0
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "ZIG/USDT",
+    "signal_time_utc": "2026-10-06 16:00:00",
+    "entry_est": 0.06255,
+    "sl": 0.0603125,
+    "tp": 0.0656775,
+    "risk_pct": 3.58,
+    "size_pct": 20.0
   }
 ]
