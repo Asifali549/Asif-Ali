@@ -1,0 +1,66 @@
+============================================================================================================================================
+SEARCH LAB 12 - naye / hat kar khayal + purane adhoore, aakhri 12 mahine TAALA-BAND
+============================================================================================================================================
+Coins: 148 | DEV 2020-10-08 -> 2025-10-01 (260 hafte) | TAALA 2025-10-01 -> 2026-10-05
+jeet/10 = 10 mein se nafa wali | PF = har 1 rupay nuqsan par kitna nafa | 5d fark = 5-din nafa minus random
+
+# SACHAI TEST - 30 din (aadhe mahine ke aakhir ke qareeb), data kaat kar (farq 0 hona chahiye)
+             REF_DIP: farq 0 (4 signals) -> SAHI
+        E_W52_DIP 10: farq 0 (0 signals) -> SAHI
+        E_W52_DIP 15: farq 0 (6 signals) -> SAHI
+        E_W52_DIP 20: farq 0 (4 signals) -> SAHI
+       G_VOL_DRY 0.6: farq 0 (3 signals) -> SAHI
+       G_VOL_DRY 0.8: farq 0 (7 signals) -> SAHI
+       G_VOL_DRY 1.0: farq 0 (14 signals) -> SAHI
+       H_MONTH_END 0: farq 0 (26 signals) -> SAHI
+       H_MONTH_END 1: farq 0 (90 signals) -> SAHI
+       H_MONTH_END 2: farq 0 (165 signals) -> SAHI
+      M_EMA50_BACK 5: farq 0 (2 signals) -> SAHI
+     M_EMA50_BACK 10: farq 0 (0 signals) -> SAHI
+     M_EMA50_BACK 20: farq 0 (0 signals) -> SAHI
+      O_RESID_LONG 7: farq 0 (2 signals) -> SAHI
+     O_RESID_LONG 10: farq 0 (1 signals) -> SAHI
+     O_RESID_LONG 20: farq 0 (3 signals) -> SAHI
+     P_DOWN_STREAK 3: farq 0 (18 signals) -> SAHI
+     P_DOWN_STREAK 4: farq 0 (11 signals) -> SAHI
+     P_DOWN_STREAK 5: farq 0 (2 signals) -> SAHI
+
+# DEV hissa (taala-band data shamil NAHI)
+               entry |    n | /hafta | 5d fark | shor95 | jeet/10 |    PF | rnd95 |                   folds | boot5 | -top10 | 2xcost |  ausat
+             REF_DIP |  190 |   0.73 |  +1.68% | +0.99% |     8.0 |  2.98 |  1.41 | 15.43   inf  1.67  5.34 |  1.97 |   2.75 |   2.65 | +2.19%
+        E_W52_DIP 10 |  103 |   0.40 |  +3.33% | +2.13% |     7.6 |  2.13 |  1.42 |  0.89   inf  2.31  4.50 |  1.17 |   1.82 |   1.90 | +1.66%
+        E_W52_DIP 15 |  229 |   0.88 |  +2.29% | +1.46% |     7.1 |  1.76 |  1.29 |  2.98   inf  1.88  1.09 |  1.25 |   1.64 |   1.54 | +1.28%
+        E_W52_DIP 20 |  379 |   1.46 |  +1.38% | +0.67% |     6.6 |  1.31 |  1.33 |  3.05   inf  1.06  1.08 |  1.01 |   1.25 |   1.15 | +0.64%
+       G_VOL_DRY 0.6 |  242 |   0.93 |  -0.97% | +2.02% |     6.8 |  1.00 |  1.20 |  1.35  0.92  0.84  1.33 |  0.74 |   0.92 |   0.89 | +0.00%
+       G_VOL_DRY 0.8 |  504 |   1.94 |  -1.16% | +1.09% |     6.5 |  0.94 |  1.03 |  2.08  1.63  0.62  1.43 |  0.77 |   0.91 |   0.84 | -0.16%
+       G_VOL_DRY 1.0 |  754 |   2.90 |  -1.52% | +1.25% |     6.5 |  0.94 |  1.12 |  1.69  1.27  0.69  1.18 |  0.80 |   0.92 |   0.84 | -0.15%
+       H_MONTH_END 0 | 1096 |   4.22 |  +4.13% | +0.92% |     5.5 |  2.53 |  1.51 | 14.03  0.66  1.41  2.21 |  2.17 |   2.15 |   2.40 | +5.91%
+       H_MONTH_END 1 | 1037 |   3.99 |  +0.60% | +0.75% |     4.6 |  1.51 |  1.58 |  9.48  1.08  1.09  1.00 |  1.31 |   1.30 |   1.43 | +2.40%
+       H_MONTH_END 2 | 1096 |   4.22 |  +1.72% | +0.84% |     4.8 |  1.85 |  1.53 |  5.93  0.72  1.60  1.72 |  1.61 |   1.62 |   1.74 | +3.43%
+      M_EMA50_BACK 5 |  528 |   2.03 |  -2.92% | +1.14% |     3.7 |  0.85 |  1.76 |  1.71  0.95  1.08  0.43 |  0.66 |   0.60 |   0.81 | -0.98%
+     M_EMA50_BACK 10 |  277 |   1.07 |  -2.44% | +1.29% |     3.9 |  0.91 |  1.72 |  2.18  2.26  1.24  0.38 |  0.66 |   0.55 |   0.86 | -0.56%
+     M_EMA50_BACK 20 |  127 |   0.49 |  -0.88% | +2.43% |     4.6 |  1.48 |  2.22 |  1.49  4.98  1.48  1.25 |  0.88 |   0.62 |   1.40 | +2.28%
+      O_RESID_LONG 7 |  211 |   0.81 |  +2.22% | +1.92% |     6.8 |  1.58 |  1.18 |  3.16  0.78  1.73  1.39 |  1.13 |   1.44 |   1.39 | +0.99%
+     O_RESID_LONG 10 |  192 |   0.74 |  +3.11% | +2.39% |     6.5 |  0.93 |  1.31 |  2.20  2.10  1.31  0.45 |  0.67 |   0.84 |   0.84 | -0.19%
+     O_RESID_LONG 20 |  112 |   0.43 |  +0.95% | +1.94% |     5.7 |  1.33 |  1.12 |  2.59  0.86  0.72  1.14 |  0.89 |   1.07 |   1.14 | +0.54%
+     P_DOWN_STREAK 3 | 1442 |   5.55 |  -0.40% | +0.41% |     6.5 |  1.08 |  1.02 |  1.80  1.83  0.86  1.15 |  0.95 |   1.07 |   0.96 | +0.19%
+     P_DOWN_STREAK 4 |  545 |   2.10 |  -0.03% | +1.51% |     6.9 |  1.60 |  1.17 |  1.79  1.32  1.39  1.84 |  1.28 |   1.55 |   1.41 | +0.98%
+     P_DOWN_STREAK 5 |  207 |   0.80 |  +0.09% | +2.01% |     7.2 |  2.21 |  1.25 |  3.71  0.25  3.25  1.61 |  1.53 |   2.03 |   1.92 | +1.50%
+
+# DEV PASS / FAIL (beech wali setting) -> sirf PASS par taala khulta hai
+          E_W52_DIP 15: FAIL: folds
+         G_VOL_DRY 0.8: FAIL: PF>rnd95, PF>=1.4, folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2, 5d fark, padosi
+         H_MONTH_END 1: FAIL: jeet>=50, PF>rnd95, 5d fark
+       M_EMA50_BACK 10: FAIL: jeet>=50, PF>rnd95, PF>=1.4, folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2, 5d fark, padosi
+       O_RESID_LONG 10: FAIL: PF>rnd95, PF>=1.4, folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2
+       P_DOWN_STREAK 4: FAIL: 5d fark
+
+# TAALA KHULA (aakhri 12 mahine) - REF DIP sirf muqable ke liye
+               REF_DIP: 14 trades | jeet/10 7.9 | PF 1.95 | random p95 1.62 | ausat +1.44% -> TAALA PASS (sirf muqabla)
+koi khayal DEV pass nahi hua - taala kisi ke liye nahi khula
+
+# PORTFOLIO (poora 6 saal, max 10) - DEV pass wale + REF DIP; corr = mahana nafa ka DIP se rishta
+               REF_DIP 10%: CAGR +6.7% | DD -15.9% | Sharpe 0.72 | corr DIP 0.92 | saal 2021:+7 2022:+0 2023:+2 2024:+26 2025:+5 2026:+1
+               REF_DIP 20%: CAGR +11.0% | DD -19.9% | Sharpe 0.86 | corr DIP 1.00 | saal 2021:+13 2022:+0 2023:+5 2024:+37 2025:+9 2026:+1
+
+NATIJA: koi naya khayal taala paar nahi kar saka
