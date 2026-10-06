@@ -1,38 +1,82 @@
+============================================================================================================================================
+FLOW LAB 19 - VWAP / AVWAP / volume profile / FVG / liquidity sweep / MFI / CMF / CVD - sakht imtihan
+============================================================================================================================================
+KuCoin 150 coins 2020-10-08 -> 2026-10-05 | Binance (CVD) 100 coins 2021-01-27 -> 2026-09-30 | TAALA 2025-10-01 se
+jeet/10 = 10 mein se nafa wali | PF = har 1 rupay nuqsan par kitna nafa | rnd95 = random entries ka 95wan hissa
 
-!! GHALTI:
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/ccxt/base/exchange.py", line 636, in fetch
-    response.raise_for_status()
-  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/requests/models.py", line 1167, in raise_for_status
-    raise HTTPError(http_error_msg, response=self)
-requests.exceptions.HTTPError: 429 Client Error: Too Many Requests for url: https://api.kucoin.com/api/v1/market/allTickers
+# SACHAI TEST (KuCoin) - 24 din, data kaat kar
+         REF_DIP: farq 0 (0 signals) -> SAHI
+  A_VWAP_BACK 10: farq 0 (28 signals) -> SAHI
+  A_VWAP_BACK 20: farq 0 (11 signals) -> SAHI
+  A_VWAP_BACK 50: farq 0 (16 signals) -> SAHI
+      B_AVWAP 30: farq 0 (24 signals) -> SAHI
+      B_AVWAP 60: farq 0 (24 signals) -> SAHI
+     B_AVWAP 120: farq 0 (10 signals) -> SAHI
+       C_VPOC 30: farq 0 (23 signals) -> SAHI
+       C_VPOC 60: farq 0 (15 signals) -> SAHI
+       C_VPOC 90: farq 0 (17 signals) -> SAHI
+         D_FVG 5: farq 0 (18 signals) -> SAHI
+        D_FVG 10: farq 0 (21 signals) -> SAHI
+        D_FVG 20: farq 0 (21 signals) -> SAHI
+      E_SWEEP 10: farq 0 (0 signals) -> SAHI
+      E_SWEEP 20: farq 0 (0 signals) -> SAHI
+      E_SWEEP 30: farq 0 (0 signals) -> SAHI
+        F_MFI 15: farq 0 (0 signals) -> SAHI
+        F_MFI 20: farq 0 (0 signals) -> SAHI
+        F_MFI 25: farq 0 (1 signals) -> SAHI
+      G_CMF 0.05: farq 0 (8 signals) -> SAHI
+       G_CMF 0.1: farq 0 (3 signals) -> SAHI
+      G_CMF 0.15: farq 0 (2 signals) -> SAHI
 
-During handling of the above exception, another exception occurred:
+# SACHAI TEST (Binance) - 24 din, data kaat kar
+         REF_DIP: farq 0 (0 signals) -> SAHI
+     H_CVD_DIV 5: farq 0 (0 signals) -> SAHI
+    H_CVD_DIV 10: farq 0 (1 signals) -> SAHI
+    H_CVD_DIV 20: farq 0 (0 signals) -> SAHI
 
-Traceback (most recent call last):
-  File "/home/runner/work/Asif-Ali/Asif-Ali/flow_lab19.py", line 263, in main
-    coins = [s for s in data_fetcher.get_coin_list(ex) if s.split("/")[0].upper() not in STABLES][:S9.TOP_FETCH]
-                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/Asif-Ali/Asif-Ali/data_fetcher.py", line 54, in get_coin_list
-    tickers = exchange.fetch_tickers()
-              ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/ccxt/kucoin.py", line 2951, in fetch_tickers
-    response = self.publicGetMarketAllTickers(paramsMarketType)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/ccxt/base/types.py", line 43, in unbound_method
-    return _self.request(self.path, self.api, self.method, params, config=self.config)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/ccxt/base/exchange.py", line 5823, in request
-    return self.fetch2(path, api, method, params, headers, body, config)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/ccxt/base/exchange.py", line 5819, in fetch2
-    raise e
-  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/ccxt/base/exchange.py", line 5800, in fetch2
-    response = self.fetch(request['url'], request['method'], request['headers'], request['body'])
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/ccxt/base/exchange.py", line 652, in fetch
-    skip_further_error_handling = self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
-                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/ccxt/kucoin.py", line 11066, in handle_errors
-    raise ExchangeError(feedback)
-ccxt.base.errors.ExchangeError: kucoin {"code":"429000","msg":"Too many requests. System-level rate limit exceeded."}
+# DEV hissa - KuCoin
+           entry |     n |  /hft | jeet/10 |    PF | rnd95 |                    folds (trades/PF) | boot5 | -top10 | 2xcost |  ausat
+         REF_DIP |   196 |  0.75 |     8.0 |  2.86 |  1.42 |       28/16.14 0/inf 93/1.70 75/4.73 |  1.92 |   2.65 |   2.55 | +2.16%
+  A_VWAP_BACK 10 |  2607 | 10.03 |     5.1 |  0.82 |  1.00 | 574/1.06 127/1.02 1187/0.73 716/0.77 |  0.74 |   0.81 |   0.70 | -0.42%
+  A_VWAP_BACK 20 |  1803 |  6.94 |     5.0 |  0.83 |  1.05 |  401/1.65 107/0.81 764/0.66 530/0.71 |  0.75 |   0.82 |   0.72 | -0.38%
+  A_VWAP_BACK 50 |  1104 |  4.25 |     5.1 |  1.02 |  1.06 |   253/1.58 63/0.76 479/0.90 309/0.89 |  0.88 |   0.99 |   0.87 | +0.03%
+      B_AVWAP 30 |  2927 | 11.26 |     5.6 |  0.98 |  1.00 | 639/1.42 134/0.89 1347/0.90 800/0.85 |  0.90 |   0.97 |   0.85 | -0.05%
+      B_AVWAP 60 |  2070 |  7.97 |     5.6 |  1.03 |  1.05 |   478/1.38 86/0.67 933/0.98 571/0.94 |  0.93 |   1.02 |   0.90 | +0.07%
+     B_AVWAP 120 |  1307 |  5.03 |     5.4 |  0.86 |  1.04 |   226/1.05 83/0.92 601/0.76 395/0.91 |  0.76 |   0.85 |   0.75 | -0.32%
+       C_VPOC 30 |  2560 |  9.85 |     6.0 |  1.06 |  1.05 | 651/1.27 106/0.92 1137/1.19 662/0.74 |  0.96 |   1.05 |   0.93 | +0.13%
+       C_VPOC 60 |  1781 |  6.85 |     6.0 |  1.01 |  1.05 |   436/1.08 96/0.82 773/1.15 473/0.81 |  0.90 |   0.99 |   0.88 | +0.01%
+       C_VPOC 90 |  1378 |  5.30 |     5.9 |  0.98 |  0.95 |   316/1.06 71/0.34 658/1.24 333/0.75 |  0.87 |   0.96 |   0.86 | -0.05%
+         D_FVG 5 |  1703 |  6.55 |     6.4 |  1.10 |  1.00 |   378/2.13 75/1.20 745/1.05 500/0.75 |  0.98 |   1.08 |   0.97 | +0.22%
+        D_FVG 10 |  1880 |  7.23 |     6.4 |  1.15 |  0.98 |   419/2.25 85/1.38 808/1.06 563/0.82 |  1.02 |   1.14 |   1.02 | +0.33%
+        D_FVG 20 |  1983 |  7.63 |     6.4 |  1.15 |  1.10 |   441/2.20 88/1.41 848/1.06 601/0.82 |  1.03 |   1.14 |   1.02 | +0.33%
+      E_SWEEP 10 |   326 |  1.25 |     6.6 |  1.24 |  1.24 |     66/0.87 6/5.59 139/1.58 115/1.19 |  0.96 |   1.18 |   1.09 | +0.53%
+      E_SWEEP 20 |   224 |  0.86 |     6.3 |  1.20 |  1.16 |        43/0.80 3/inf 96/1.22 82/1.43 |  0.88 |   1.10 |   1.04 | +0.45%
+      E_SWEEP 30 |   142 |  0.55 |     6.3 |  1.04 |  1.53 |        22/1.59 0/inf 68/0.83 52/1.24 |  0.71 |   0.91 |   0.91 | +0.09%
+        F_MFI 15 | sirf 19 trades
+        F_MFI 20 |    79 |  0.30 |     6.1 |  0.56 |  1.54 |      5/129.53 2/0.00 45/0.49 26/0.71 |  0.36 |   0.42 |   0.51 | -1.98%
+        F_MFI 25 |   214 |  0.82 |     6.2 |  0.74 |  1.27 |      26/2.88 6/0.07 104/0.59 78/0.89 |  0.55 |   0.68 |   0.67 | -0.84%
+      G_CMF 0.05 |  1273 |  4.90 |     6.6 |  0.98 |  1.01 |   335/1.49 23/1.17 542/1.19 373/0.58 |  0.86 |   0.97 |   0.87 | -0.06%
+       G_CMF 0.1 |   905 |  3.48 |     6.7 |  1.00 |  1.01 |   244/1.45 15/0.73 385/1.20 261/0.64 |  0.85 |   0.98 |   0.89 | -0.01%
+      G_CMF 0.15 |   554 |  2.13 |     6.9 |  0.98 |  1.11 |    153/1.38 9/0.44 228/1.30 164/0.63 |  0.81 |   0.95 |   0.88 | -0.05%
+
+# DEV hissa - Binance (CVD)
+           entry |     n |  /hft | jeet/10 |    PF | rnd95 |                    folds (trades/PF) | boot5 | -top10 | 2xcost |  ausat
+         REF_DIP |    98 |  0.40 |     7.7 |  2.85 |  1.46 |        16/9.17 0/inf 48/1.44 34/6.67 |  1.75 |   2.41 |   2.47 | +2.02%
+     H_CVD_DIV 5 |    67 |  0.27 |     5.1 |  0.72 |  1.56 |       1/0.00 10/0.75 17/1.25 38/0.61 |  0.43 |   0.40 |   0.61 | -0.59%
+    H_CVD_DIV 10 | sirf 19 trades
+    H_CVD_DIV 20 | sirf 9 trades
+
+# DEV PASS / FAIL (beech wali setting)
+    A_VWAP_BACK 20: FAIL: jeet>=55, PF>rnd95, PF>=1.3, folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2, padosi
+        B_AVWAP 60: FAIL: PF>rnd95, PF>=1.3, folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2, padosi
+         C_VPOC 60: FAIL: PF>rnd95, PF>=1.3, folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2
+          D_FVG 10: FAIL: PF>=1.3, folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2
+        E_SWEEP 20: FAIL: PF>=1.3, folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2
+          F_MFI 20: FAIL: PF>rnd95, PF>=1.3, folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2, padosi
+         G_CMF 0.1: FAIL: PF>rnd95, PF>=1.3, folds, boot>=1.15, -top10>=1.2, 2xcost>=1.2, padosi
+      H_CVD_DIV 10: FAIL (kam trades)
+
+# TAALA KHULA (aakhri 12 mahine) - sirf DEV PASS / BORDERLINE, ek dafa
+koi khayal DEV pass / borderline nahi - taala nahi khula
+
+NATIJA: koi naya khayal taala paar nahi kar saka
