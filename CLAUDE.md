@@ -13,6 +13,8 @@
 - Trading: sirf **spot, buy-only**, daily/swing. Maqsad: ek sach mein qabil-e-aitmaad strategy.
 - Mobile se kaam karta hai (GitHub app + Streamlit dashboard). Coding khud nahi karta - Claude repo mein
   seedha commit/push karta hai (Claude GitHub App installed).
+- **Har test natije mein (2026-10-06, user):** "10 trades mein se kitni jeetein / kitni haarein" bhi likho (win% se), aur PF ko
+  "har 1 rupay nuqsan par kitna nafa" ki shakal mein samjhao.
 - Waqt ke andaazay (estimates) mat do - tests minutes mein khatam hote hain.
 - Commit messages ke aakhir mein attribution lines (system reminder wali) lagao.
 
