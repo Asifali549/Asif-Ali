@@ -1,21 +1,32 @@
 {
-  "cash": 1000.0,
-  "positions": {},
-  "pending": [
-    {
-      "symbol": "HYPE/USDT",
-      "signal_day": "2026-10-05",
-      "stop": null,
+  "cash": 899.9,
+  "positions": {
+    "HYPE/USDT": {
+      "qty": 1.0614237090617233,
+      "entry": 94.213083,
+      "entry_day": "2026-10-06",
+      "trail": null,
+      "init_stop": null,
+      "tp": null,
+      "last_px": 91.991,
+      "cost": 100.1,
+      "bars": 1,
+      "exit_next": false,
       "tag": "W52"
     }
-  ],
-  "last_day": "2026-10-05",
+  },
+  "pending": [],
+  "last_day": "2026-10-06",
   "history": [
     {
       "day": "2026-10-05",
       "equity": 1000.0
+    },
+    {
+      "day": "2026-10-06",
+      "equity": 997.54
     }
   ],
-  "last_updated": "2026-10-06T02:59:39.601114+00:00",
+  "last_updated": "2026-10-07T00:35:58.593980+00:00",
   "btc_regime_ok": true
 }
