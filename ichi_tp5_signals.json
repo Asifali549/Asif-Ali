@@ -68,5 +68,15 @@
     "tp": 0.0656775,
     "risk_pct": 3.58,
     "size_pct": 20.0
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "MET/USDT",
+    "signal_time_utc": "2026-10-07 20:00:00",
+    "entry_est": 0.4358,
+    "sl": 0.378925,
+    "tp": 0.45759,
+    "risk_pct": 13.05,
+    "size_pct": 15.32
   }
 ]
