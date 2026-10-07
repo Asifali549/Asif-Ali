@@ -18,5 +18,15 @@
     "tp": 0.1326280625,
     "risk_pct": 15.8,
     "size_pct": 6.33
+  },
+  {
+    "system": "Ichimoku 4H",
+    "symbol": "MET/USDT",
+    "signal_time_utc": "2026-10-07 20:00:00",
+    "entry_est": 0.4358,
+    "sl": 0.347359375,
+    "tp": 0.701121875,
+    "risk_pct": 20.29,
+    "size_pct": 4.93
   }
 ]
