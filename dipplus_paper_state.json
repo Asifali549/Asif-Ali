@@ -1,8 +1,15 @@
 {
   "cash": 1000.0,
   "positions": {},
-  "pending": [],
-  "last_day": "2026-10-06",
+  "pending": [
+    {
+      "symbol": "UNI/USDT",
+      "signal_day": "2026-10-07",
+      "stop": 5.816164168691932,
+      "tag": "DIP"
+    }
+  ],
+  "last_day": "2026-10-07",
   "history": [
     {
       "day": "2026-10-05",
@@ -11,8 +18,12 @@
     {
       "day": "2026-10-06",
       "equity": 1000.0
+    },
+    {
+      "day": "2026-10-07",
+      "equity": 1000.0
     }
   ],
-  "last_updated": "2026-10-07T06:22:13.431759+00:00",
+  "last_updated": "2026-10-08T00:31:03.364319+00:00",
   "btc_regime_ok": true
 }

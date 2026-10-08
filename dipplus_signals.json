@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "system": "Dip+ (Dip + Resid)",
+    "symbol": "UNI/USDT",
+    "signal_time_utc": "2026-10-08 00:00:00",
+    "entry_est": 7.9124,
+    "sl": 5.8161641687,
+    "tp": 8.30802,
+    "risk_pct": 26.49,
+    "size_pct": 20.0,
+    "tag": "DIP"
+  }
+]
