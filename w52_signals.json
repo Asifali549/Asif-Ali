@@ -9,5 +9,16 @@
     "risk_pct": null,
     "size_pct": 10.0,
     "tag": "W52"
+  },
+  {
+    "system": "W52 (sal ki chouti)",
+    "symbol": "NEAR/USDT",
+    "signal_time_utc": "2026-10-08 00:00:00",
+    "entry_est": 5.3358,
+    "sl": null,
+    "tp": null,
+    "risk_pct": null,
+    "size_pct": 10.0,
+    "tag": "W52"
   }
 ]
