@@ -8,5 +8,25 @@
     "tp": 0.55209,
     "risk_pct": 97.22,
     "size_pct": 20.0
+  },
+  {
+    "system": "Dip Daily",
+    "symbol": "UNI/USDT",
+    "signal_time_utc": "2026-10-08 00:00:00",
+    "entry_est": 7.9124,
+    "sl": 5.8161641687,
+    "tp": 8.30802,
+    "risk_pct": 26.49,
+    "size_pct": 20.0
+  },
+  {
+    "system": "Dip Daily",
+    "symbol": "CAKE/USDT",
+    "signal_time_utc": "2026-10-08 00:00:00",
+    "entry_est": 2.255,
+    "sl": 1.8277640656,
+    "tp": 2.36775,
+    "risk_pct": 18.95,
+    "size_pct": 20.0
   }
 ]
