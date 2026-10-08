@@ -1,8 +1,21 @@
 {
   "cash": 1000.0,
   "positions": {},
-  "pending": [],
-  "last_day": "2026-10-06",
+  "pending": [
+    {
+      "symbol": "WLD/USDT",
+      "signal_day": "2026-10-07",
+      "stop": 0.36867063591487015,
+      "tag": "4-DIN"
+    },
+    {
+      "symbol": "POL/USDT",
+      "signal_day": "2026-10-07",
+      "stop": 0.0812966358120755,
+      "tag": "4-DIN"
+    }
+  ],
+  "last_day": "2026-10-07",
   "history": [
     {
       "day": "2026-10-05",
@@ -11,8 +24,12 @@
     {
       "day": "2026-10-06",
       "equity": 1000.0
+    },
+    {
+      "day": "2026-10-07",
+      "equity": 1000.0
     }
   ],
-  "last_updated": "2026-10-07T06:30:41.826230+00:00",
+  "last_updated": "2026-10-08T00:46:05.375151+00:00",
   "btc_regime_ok": true
 }

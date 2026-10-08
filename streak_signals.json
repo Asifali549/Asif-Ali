@@ -1,1 +1,24 @@
-[]
+[
+  {
+    "system": "4 din ki girawat",
+    "symbol": "WLD/USDT",
+    "signal_time_utc": "2026-10-08 00:00:00",
+    "entry_est": 0.521,
+    "sl": 0.3686706359,
+    "tp": 0.54705,
+    "risk_pct": 29.24,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "POL/USDT",
+    "signal_time_utc": "2026-10-08 00:00:00",
+    "entry_est": 0.1028,
+    "sl": 0.0812966358,
+    "tp": 0.10794,
+    "risk_pct": 20.92,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  }
+]
