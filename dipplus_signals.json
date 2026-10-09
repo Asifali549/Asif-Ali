@@ -9,5 +9,71 @@
     "risk_pct": 26.49,
     "size_pct": 20.0,
     "tag": "DIP"
+  },
+  {
+    "system": "Dip+ (Dip + Resid)",
+    "symbol": "DASH/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 50.62,
+    "sl": 35.6176218757,
+    "tp": 53.151,
+    "risk_pct": 29.64,
+    "size_pct": 20.0,
+    "tag": "DIP"
+  },
+  {
+    "system": "Dip+ (Dip + Resid)",
+    "symbol": "ETH/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 2474.62,
+    "sl": 2198.6310930695,
+    "tp": 2598.351,
+    "risk_pct": 11.15,
+    "size_pct": 20.0,
+    "tag": "DIP"
+  },
+  {
+    "system": "Dip+ (Dip + Resid)",
+    "symbol": "SOL/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 109.62,
+    "sl": 94.3380697131,
+    "tp": 115.101,
+    "risk_pct": 13.94,
+    "size_pct": 20.0,
+    "tag": "DIP"
+  },
+  {
+    "system": "Dip+ (Dip + Resid)",
+    "symbol": "USELESS/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 0.18824,
+    "sl": 0.0791329498,
+    "tp": 0.197652,
+    "risk_pct": 57.96,
+    "size_pct": 20.0,
+    "tag": "DIP"
+  },
+  {
+    "system": "Dip+ (Dip + Resid)",
+    "symbol": "LTC/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 63.15,
+    "sl": 52.878201751,
+    "tp": 66.3075,
+    "risk_pct": 16.27,
+    "size_pct": 20.0,
+    "tag": "DIP"
+  },
+  {
+    "system": "Dip+ (Dip + Resid)",
+    "symbol": "ICP/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 2.913,
+    "sl": 2.1762426094,
+    "tp": 3.05865,
+    "risk_pct": 25.29,
+    "size_pct": 20.0,
+    "tag": "RESID"
   }
 ]

@@ -1,15 +1,59 @@
 {
-  "cash": 1000.0,
-  "positions": {},
-  "pending": [
-    {
-      "symbol": "UNI/USDT",
-      "signal_day": "2026-10-07",
-      "stop": 5.816164168691932,
+  "cash": 799.8,
+  "positions": {
+    "UNI/USDT": {
+      "qty": 25.266064609192913,
+      "entry": 7.9157559,
+      "entry_day": "2026-10-08",
+      "trail": 5.816164168691932,
+      "init_stop": 5.816164168691932,
+      "tp": 8.311543695,
+      "last_px": 7.1212,
+      "cost": 200.2,
+      "bars": 1,
+      "exit_next": false,
       "tag": "DIP"
     }
+  },
+  "pending": [
+    {
+      "symbol": "DASH/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 35.61762187570521,
+      "tag": "DIP"
+    },
+    {
+      "symbol": "ETH/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 2198.63109306955,
+      "tag": "DIP"
+    },
+    {
+      "symbol": "SOL/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 94.33806971311611,
+      "tag": "DIP"
+    },
+    {
+      "symbol": "USELESS/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 0.0791329497564037,
+      "tag": "DIP"
+    },
+    {
+      "symbol": "LTC/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 52.87820175098532,
+      "tag": "DIP"
+    },
+    {
+      "symbol": "ICP/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 2.1762426094198917,
+      "tag": "RESID"
+    }
   ],
-  "last_day": "2026-10-07",
+  "last_day": "2026-10-08",
   "history": [
     {
       "day": "2026-10-05",
@@ -22,8 +66,12 @@
     {
       "day": "2026-10-07",
       "equity": 1000.0
+    },
+    {
+      "day": "2026-10-08",
+      "equity": 979.72
     }
   ],
-  "last_updated": "2026-10-08T06:33:30.375072+00:00",
+  "last_updated": "2026-10-09T00:31:22.697899+00:00",
   "btc_regime_ok": true
 }
