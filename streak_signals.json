@@ -20,5 +20,93 @@
     "risk_pct": 20.92,
     "size_pct": 10.0,
     "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "BTC/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 81741.4,
+    "sl": 75040.6668692566,
+    "tp": 85828.47,
+    "risk_pct": 8.2,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "ETH/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 2474.62,
+    "sl": 2198.6310930695,
+    "tp": 2598.351,
+    "risk_pct": 11.15,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "SOL/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 109.62,
+    "sl": 94.3380697131,
+    "tp": 115.101,
+    "risk_pct": 13.94,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "UNI/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 7.1212,
+    "sl": 4.9536595852,
+    "tp": 7.47726,
+    "risk_pct": 30.44,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "LTC/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 63.15,
+    "sl": 52.878201751,
+    "tp": 66.3075,
+    "risk_pct": 16.27,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "BNB/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 735.786,
+    "sl": 663.0203716989,
+    "tp": 772.5753,
+    "risk_pct": 9.89,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "USELESS/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 0.18824,
+    "sl": 0.0791329498,
+    "tp": 0.197652,
+    "risk_pct": 57.96,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "DASH/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 50.62,
+    "sl": 35.6176218757,
+    "tp": 53.151,
+    "risk_pct": 29.64,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
   }
 ]
