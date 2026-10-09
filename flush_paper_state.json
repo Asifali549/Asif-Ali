@@ -1,8 +1,69 @@
 {
   "cash": 1000.0,
   "positions": {},
-  "pending": [],
-  "last_day": "2026-10-07",
+  "pending": [
+    {
+      "symbol": "BTC/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 75040.66686925656,
+      "tag": "SAFAI"
+    },
+    {
+      "symbol": "ETH/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 2198.63109306955,
+      "tag": "SAFAI"
+    },
+    {
+      "symbol": "ZEC/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 821.0258316233865,
+      "tag": "SAFAI"
+    },
+    {
+      "symbol": "NEAR/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 2.869426155765659,
+      "tag": "SAFAI"
+    },
+    {
+      "symbol": "XMR/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 452.67797727082853,
+      "tag": "SAFAI"
+    },
+    {
+      "symbol": "TAO/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 203.29372763433713,
+      "tag": "SAFAI"
+    },
+    {
+      "symbol": "SOL/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 94.33806971311611,
+      "tag": "SAFAI"
+    },
+    {
+      "symbol": "UNI/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 4.953659585213963,
+      "tag": "SAFAI"
+    },
+    {
+      "symbol": "AVAX/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 7.879823497581636,
+      "tag": "SAFAI"
+    },
+    {
+      "symbol": "AAVE/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 133.2889671706021,
+      "tag": "SAFAI"
+    }
+  ],
+  "last_day": "2026-10-08",
   "history": [
     {
       "day": "2026-10-05",
@@ -15,8 +76,12 @@
     {
       "day": "2026-10-07",
       "equity": 1000.0
+    },
+    {
+      "day": "2026-10-08",
+      "equity": 1000.0
     }
   ],
-  "last_updated": "2026-10-08T06:43:25.636071+00:00",
+  "last_updated": "2026-10-09T00:50:56.610669+00:00",
   "btc_regime_ok": true
 }

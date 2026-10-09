@@ -1,1 +1,112 @@
-[]
+[
+  {
+    "system": "Market safai",
+    "symbol": "BTC/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 81741.4,
+    "sl": 75040.6668692566,
+    "tp": 85828.47,
+    "risk_pct": 8.2,
+    "size_pct": 10.0,
+    "tag": "SAFAI"
+  },
+  {
+    "system": "Market safai",
+    "symbol": "ETH/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 2474.62,
+    "sl": 2198.6310930695,
+    "tp": 2598.351,
+    "risk_pct": 11.15,
+    "size_pct": 10.0,
+    "tag": "SAFAI"
+  },
+  {
+    "system": "Market safai",
+    "symbol": "ZEC/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 1186.449,
+    "sl": 821.0258316234,
+    "tp": 1245.77145,
+    "risk_pct": 30.8,
+    "size_pct": 10.0,
+    "tag": "SAFAI"
+  },
+  {
+    "system": "Market safai",
+    "symbol": "NEAR/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 4.4648,
+    "sl": 2.8694261558,
+    "tp": 4.68804,
+    "risk_pct": 35.73,
+    "size_pct": 10.0,
+    "tag": "SAFAI"
+  },
+  {
+    "system": "Market safai",
+    "symbol": "XMR/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 540.85,
+    "sl": 452.6779772708,
+    "tp": 567.8925,
+    "risk_pct": 16.3,
+    "size_pct": 10.0,
+    "tag": "SAFAI"
+  },
+  {
+    "system": "Market safai",
+    "symbol": "TAO/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 268.71,
+    "sl": 203.2937276343,
+    "tp": 282.1455,
+    "risk_pct": 24.34,
+    "size_pct": 10.0,
+    "tag": "SAFAI"
+  },
+  {
+    "system": "Market safai",
+    "symbol": "SOL/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 109.62,
+    "sl": 94.3380697131,
+    "tp": 115.101,
+    "risk_pct": 13.94,
+    "size_pct": 10.0,
+    "tag": "SAFAI"
+  },
+  {
+    "system": "Market safai",
+    "symbol": "UNI/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 7.1212,
+    "sl": 4.9536595852,
+    "tp": 7.47726,
+    "risk_pct": 30.44,
+    "size_pct": 10.0,
+    "tag": "SAFAI"
+  },
+  {
+    "system": "Market safai",
+    "symbol": "AVAX/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 10.079,
+    "sl": 7.8798234976,
+    "tp": 10.58295,
+    "risk_pct": 21.82,
+    "size_pct": 10.0,
+    "tag": "SAFAI"
+  },
+  {
+    "system": "Market safai",
+    "symbol": "AAVE/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 166.156,
+    "sl": 133.2889671706,
+    "tp": 174.4638,
+    "risk_pct": 19.78,
+    "size_pct": 10.0,
+    "tag": "SAFAI"
+  }
+]
