@@ -1,5 +1,5 @@
 {
-  "cash": 899.9,
+  "cash": 800.4154228472794,
   "positions": {
     "HYPE/USDT": {
       "qty": 1.0614237090617233,
@@ -8,23 +8,30 @@
       "trail": null,
       "init_stop": null,
       "tp": null,
-      "last_px": 88.515,
+      "last_px": 84.231,
       "cost": 100.1,
-      "bars": 2,
+      "bars": 3,
       "exit_next": false,
       "tag": "W52",
       "peak": 94.894
+    },
+    "NEAR/USDT": {
+      "qty": 18.617498350449907,
+      "entry": 5.3382678,
+      "entry_day": "2026-10-08",
+      "trail": null,
+      "init_stop": null,
+      "tp": null,
+      "last_px": 4.4648,
+      "cost": 99.4845771527206,
+      "bars": 1,
+      "exit_next": false,
+      "tag": "W52",
+      "peak": 5.595
     }
   },
-  "pending": [
-    {
-      "symbol": "NEAR/USDT",
-      "signal_day": "2026-10-07",
-      "stop": null,
-      "tag": "W52"
-    }
-  ],
-  "last_day": "2026-10-07",
+  "pending": [],
+  "last_day": "2026-10-08",
   "history": [
     {
       "day": "2026-10-05",
@@ -37,8 +44,12 @@
     {
       "day": "2026-10-07",
       "equity": 993.85
+    },
+    {
+      "day": "2026-10-08",
+      "equity": 972.94
     }
   ],
-  "last_updated": "2026-10-08T06:37:49.086099+00:00",
+  "last_updated": "2026-10-09T00:40:56.663253+00:00",
   "btc_regime_ok": true
 }
