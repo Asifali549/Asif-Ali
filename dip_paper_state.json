@@ -1,19 +1,47 @@
 {
-  "cash": 1009.485105,
-  "positions": {},
+  "cash": 807.3861869790001,
+  "positions": {
+    "UNI/USDT": {
+      "qty": 25.505715884947893,
+      "entry": 7.9157559,
+      "entry_day": "2026-10-08",
+      "trail": 5.816164168691952,
+      "init_stop": 5.816164168691952,
+      "tp": 8.311543695,
+      "last_px": 7.1212,
+      "cost": 202.09891802099997,
+      "bars": 1,
+      "exit_next": false
+    }
+  },
   "pending": [
     {
-      "symbol": "UNI/USDT",
-      "signal_day": "2026-10-07",
-      "stop": 5.816164168691952
+      "symbol": "DASH/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 35.617621875705275
     },
     {
-      "symbol": "CAKE/USDT",
-      "signal_day": "2026-10-07",
-      "stop": 1.8277640656171854
+      "symbol": "ETH/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 2198.631093069538
+    },
+    {
+      "symbol": "SOL/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 94.33806971311684
+    },
+    {
+      "symbol": "USELESS/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 0.07913294975640839
+    },
+    {
+      "symbol": "LTC/USDT",
+      "signal_day": "2026-10-08",
+      "stop": 52.878201750985546
     }
   ],
-  "last_day": "2026-10-07",
+  "last_day": "2026-10-08",
   "history": [
     {
       "day": "2026-10-03",
@@ -34,9 +62,13 @@
     {
       "day": "2026-10-07",
       "equity": 1009.49
+    },
+    {
+      "day": "2026-10-08",
+      "equity": 989.02
     }
   ],
-  "last_updated": "2026-10-08T06:08:17.920524+00:00",
+  "last_updated": "2026-10-09T00:21:01.527719+00:00",
   "btc_regime_ok": true,
   "closed_on": {
     "BR/USDT": "2026-10-06"
