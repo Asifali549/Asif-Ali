@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "system": "Volume Capitulation",
+    "symbol": "VVV/USDT",
+    "signal_time_utc": "2026-10-09 00:00:00",
+    "entry_est": 22.779,
+    "sl": 13.9661742794,
+    "tp": null,
+    "risk_pct": 38.69,
+    "size_pct": 5.17
+  }
+]
