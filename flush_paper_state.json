@@ -1,69 +1,113 @@
 {
-  "cash": 1000.0,
-  "positions": {},
-  "pending": [
-    {
-      "symbol": "BTC/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 75040.66686925656,
+  "cash": 209.63268791734725,
+  "positions": {
+    "BTC/USDT": {
+      "qty": 0.0012227574119328156,
+      "entry": 81782.37075,
+      "entry_day": "2026-10-09",
+      "trail": 75040.66686925656,
+      "init_stop": 75040.66686925656,
+      "tp": 85871.48928750001,
+      "last_px": 82630.7,
+      "cost": 100.1,
+      "bars": 1,
+      "exit_next": true,
       "tag": "SAFAI"
     },
-    {
-      "symbol": "ETH/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 2198.63109306955,
+    "ETH/USDT": {
+      "qty": 0.04038601077539481,
+      "entry": 2475.85731,
+      "entry_day": "2026-10-09",
+      "trail": 2198.63109306955,
+      "init_stop": 2198.63109306955,
+      "tp": 2599.6501755,
+      "last_px": 2487.72,
+      "cost": 100.08999,
+      "bars": 1,
+      "exit_next": false,
       "tag": "SAFAI"
     },
-    {
-      "symbol": "ZEC/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 821.0258316233865,
+    "XMR/USDT": {
+      "qty": 0.18485087785918883,
+      "entry": 540.7602449999999,
+      "entry_day": "2026-10-09",
+      "trail": 452.67797727082853,
+      "init_stop": 452.67797727082853,
+      "tp": 567.79825725,
+      "last_px": 518.83,
+      "cost": 100.0599660055996,
+      "bars": 1,
+      "exit_next": false,
       "tag": "SAFAI"
     },
-    {
-      "symbol": "NEAR/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 2.869426155765659,
+    "TAO/USDT": {
+      "qty": 0.371817998991423,
+      "entry": 268.81434,
+      "entry_day": "2026-10-09",
+      "trail": 203.29372763433713,
+      "init_stop": 203.29372763433713,
+      "tp": 282.255057,
+      "last_px": 275.08,
+      "cost": 100.04996000899904,
+      "bars": 1,
+      "exit_next": false,
       "tag": "SAFAI"
     },
-    {
-      "symbol": "XMR/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 452.67797727082853,
+    "SOL/USDT": {
+      "qty": 0.911239463264173,
+      "entry": 109.67481,
+      "entry_day": "2026-10-09",
+      "trail": 94.33806971311611,
+      "init_stop": 94.33806971311611,
+      "tp": 115.1585505,
+      "last_px": 109.15,
+      "cost": 100.03995501299813,
+      "bars": 1,
+      "exit_next": false,
       "tag": "SAFAI"
     },
-    {
-      "symbol": "TAO/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 203.29372763433713,
+    "UNI/USDT": {
+      "qty": 14.028495316725518,
+      "entry": 7.1233599,
+      "entry_day": "2026-10-09",
+      "trail": 4.953659585213963,
+      "init_stop": 4.953659585213963,
+      "tp": 7.479527895,
+      "last_px": 7.3225,
+      "cost": 100.02995101749684,
+      "bars": 1,
+      "exit_next": false,
       "tag": "SAFAI"
     },
-    {
-      "symbol": "SOL/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 94.33806971311611,
+    "AVAX/USDT": {
+      "qty": 9.909713529264412,
+      "entry": 10.083039,
+      "entry_day": "2026-10-09",
+      "trail": 7.879823497581636,
+      "init_stop": 7.879823497581636,
+      "tp": 10.58719095,
+      "last_px": 10.339,
+      "cost": 100.01994802239508,
+      "bars": 1,
+      "exit_next": false,
       "tag": "SAFAI"
     },
-    {
-      "symbol": "UNI/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 4.953659585213963,
-      "tag": "SAFAI"
-    },
-    {
-      "symbol": "AVAX/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 7.879823497581636,
-      "tag": "SAFAI"
-    },
-    {
-      "symbol": "AAVE/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 133.2889671706021,
+    "AAVE/USDT": {
+      "qty": 0.5976125850517858,
+      "entry": 166.26309,
+      "entry_day": "2026-10-09",
+      "trail": 133.2889671706021,
+      "init_stop": 133.2889671706021,
+      "tp": 174.5762445,
+      "last_px": 167.364,
+      "cost": 99.46027592861131,
+      "bars": 1,
+      "exit_next": false,
       "tag": "SAFAI"
     }
-  ],
-  "last_day": "2026-10-08",
+  },
+  "pending": [],
+  "last_day": "2026-10-09",
   "history": [
     {
       "day": "2026-10-05",
@@ -80,8 +124,16 @@
     {
       "day": "2026-10-08",
       "equity": 1000.0
+    },
+    {
+      "day": "2026-10-09",
+      "equity": 1013.99
     }
   ],
-  "last_updated": "2026-10-09T06:50:19.967398+00:00",
-  "btc_regime_ok": true
+  "last_updated": "2026-10-10T00:51:07.462548+00:00",
+  "btc_regime_ok": true,
+  "closed_on": {
+    "ZEC/USDT": "2026-10-09",
+    "NEAR/USDT": "2026-10-09"
+  }
 }
