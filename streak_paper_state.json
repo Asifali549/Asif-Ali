@@ -1,5 +1,5 @@
 {
-  "cash": 799.8100099999999,
+  "cash": 112.78639281889407,
   "positions": {
     "WLD/USDT": {
       "qty": 191.91633062117177,
@@ -8,10 +8,10 @@
       "trail": 0.36867063591487015,
       "init_stop": 0.36867063591487015,
       "tp": 0.54711342,
-      "last_px": 0.4799,
+      "last_px": 0.5075,
       "cost": 100.1,
-      "bars": 1,
-      "exit_next": false,
+      "bars": 2,
+      "exit_next": true,
       "tag": "4-DIN"
     },
     "POL/USDT": {
@@ -21,8 +21,99 @@
       "trail": 0.0812966358120755,
       "init_stop": 0.0812966358120755,
       "tp": 0.1078889175,
-      "last_px": 0.0982,
+      "last_px": 0.1009,
       "cost": 100.08999,
+      "bars": 2,
+      "exit_next": true,
+      "tag": "4-DIN"
+    },
+    "BTC/USDT": {
+      "qty": 0.001207438243036868,
+      "entry": 81782.37075,
+      "entry_day": "2026-10-09",
+      "trail": 75040.66686925656,
+      "init_stop": 75040.66686925656,
+      "tp": 85871.48928750001,
+      "last_px": 82630.7,
+      "cost": 98.84590921181952,
+      "bars": 1,
+      "exit_next": true,
+      "tag": "4-DIN"
+    },
+    "ETH/USDT": {
+      "qty": 0.03988003950581659,
+      "entry": 2475.85731,
+      "entry_day": "2026-10-09",
+      "trail": 2198.63109306955,
+      "init_stop": 2198.63109306955,
+      "tp": 2599.6501755,
+      "last_px": 2487.72,
+      "cost": 98.83602462089833,
+      "bars": 1,
+      "exit_next": false,
+      "tag": "4-DIN"
+    },
+    "SOL/USDT": {
+      "qty": 0.900183128695016,
+      "entry": 109.67481,
+      "entry_day": "2026-10-09",
+      "trail": 94.33806971311611,
+      "init_stop": 94.33806971311611,
+      "tp": 115.1585505,
+      "last_px": 109.15,
+      "cost": 98.82614101843625,
+      "bars": 1,
+      "exit_next": false,
+      "tag": "4-DIN"
+    },
+    "UNI/USDT": {
+      "qty": 13.858283485503934,
+      "entry": 7.1233599,
+      "entry_day": "2026-10-09",
+      "trail": 4.953659585213963,
+      "init_stop": 4.953659585213963,
+      "tp": 7.479527895,
+      "last_px": 7.3225,
+      "cost": 98.8162584043344,
+      "bars": 1,
+      "exit_next": false,
+      "tag": "4-DIN"
+    },
+    "LTC/USDT": {
+      "qty": 1.5617910390915766,
+      "entry": 63.201585,
+      "entry_day": "2026-10-09",
+      "trail": 52.87820175098532,
+      "init_stop": 52.87820175098532,
+      "tp": 66.36166425,
+      "last_px": 63.47,
+      "cost": 98.80637677849397,
+      "bars": 1,
+      "exit_next": false,
+      "tag": "4-DIN"
+    },
+    "BNB/USDT": {
+      "qty": 0.1340740580087159,
+      "entry": 736.143888,
+      "entry_day": "2026-10-09",
+      "trail": 663.0203716988656,
+      "init_stop": 663.0203716988656,
+      "tp": 772.9510824,
+      "last_px": 742.291,
+      "cost": 98.79649614081612,
+      "bars": 1,
+      "exit_next": false,
+      "tag": "4-DIN"
+    },
+    "DASH/USDT": {
+      "qty": 1.9468761428559933,
+      "entry": 50.68532999999999,
+      "entry_day": "2026-10-09",
+      "trail": 35.61762187570521,
+      "init_stop": 35.61762187570521,
+      "tp": 53.219596499999994,
+      "last_px": 51.25,
+      "cost": 98.77673782955291,
       "bars": 1,
       "exit_next": false,
       "tag": "4-DIN"
@@ -30,55 +121,13 @@
   },
   "pending": [
     {
-      "symbol": "BTC/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 75040.66686925656,
-      "tag": "4-DIN"
-    },
-    {
-      "symbol": "ETH/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 2198.63109306955,
-      "tag": "4-DIN"
-    },
-    {
-      "symbol": "SOL/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 94.33806971311611,
-      "tag": "4-DIN"
-    },
-    {
-      "symbol": "UNI/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 4.953659585213963,
-      "tag": "4-DIN"
-    },
-    {
-      "symbol": "LTC/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 52.87820175098532,
-      "tag": "4-DIN"
-    },
-    {
-      "symbol": "BNB/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 663.0203716988656,
-      "tag": "4-DIN"
-    },
-    {
-      "symbol": "USELESS/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 0.0791329497564037,
-      "tag": "4-DIN"
-    },
-    {
-      "symbol": "DASH/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 35.61762187570521,
+      "symbol": "XMR/USDT",
+      "signal_day": "2026-10-09",
+      "stop": 429.848121751484,
       "tag": "4-DIN"
     }
   ],
-  "last_day": "2026-10-08",
+  "last_day": "2026-10-09",
   "history": [
     {
       "day": "2026-10-05",
@@ -95,8 +144,15 @@
     {
       "day": "2026-10-08",
       "equity": 987.47
+    },
+    {
+      "day": "2026-10-09",
+      "equity": 1005.51
     }
   ],
-  "last_updated": "2026-10-09T06:45:49.297560+00:00",
-  "btc_regime_ok": true
+  "last_updated": "2026-10-10T00:46:06.814197+00:00",
+  "btc_regime_ok": true,
+  "closed_on": {
+    "USELESS/USDT": "2026-10-09"
+  }
 }

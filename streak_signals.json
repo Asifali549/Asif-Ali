@@ -108,5 +108,16 @@
     "risk_pct": 29.64,
     "size_pct": 10.0,
     "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "XMR/USDT",
+    "signal_time_utc": "2026-10-10 00:00:00",
+    "entry_est": 518.83,
+    "sl": 429.8481217515,
+    "tp": 544.7715,
+    "risk_pct": 17.15,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
   }
 ]
