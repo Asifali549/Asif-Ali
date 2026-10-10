@@ -75,5 +75,16 @@
     "risk_pct": 25.29,
     "size_pct": 20.0,
     "tag": "RESID"
+  },
+  {
+    "system": "Dip+ (Dip + Resid)",
+    "symbol": "USELESS/USDT",
+    "signal_time_utc": "2026-10-10 00:00:00",
+    "entry_est": 0.18534,
+    "sl": 0.0797748819,
+    "tp": 0.194607,
+    "risk_pct": 56.96,
+    "size_pct": 20.0,
+    "tag": "DIP"
   }
 ]

@@ -1,5 +1,5 @@
 {
-  "cash": 799.8,
+  "cash": 205.31044088729428,
   "positions": {
     "UNI/USDT": {
       "qty": 25.266064609192913,
@@ -8,8 +8,60 @@
       "trail": 5.816164168691932,
       "init_stop": 5.816164168691932,
       "tp": 8.311543695,
-      "last_px": 7.1212,
+      "last_px": 7.3225,
       "cost": 200.2,
+      "bars": 2,
+      "exit_next": false,
+      "tag": "DIP"
+    },
+    "DASH/USDT": {
+      "qty": 3.8659103109123873,
+      "entry": 50.68532999999999,
+      "entry_day": "2026-10-09",
+      "trail": 35.61762187570521,
+      "init_stop": 35.61762187570521,
+      "tp": 53.219596499999994,
+      "last_px": 51.25,
+      "cost": 196.1408847988559,
+      "bars": 1,
+      "exit_next": false,
+      "tag": "DIP"
+    },
+    "ETH/USDT": {
+      "qty": 0.07912643029942026,
+      "entry": 2475.85731,
+      "entry_day": "2026-10-09",
+      "trail": 2198.63109306955,
+      "init_stop": 2198.63109306955,
+      "tp": 2599.6501755,
+      "last_px": 2487.72,
+      "cost": 196.10165662189613,
+      "bars": 1,
+      "exit_next": false,
+      "tag": "DIP"
+    },
+    "SOL/USDT": {
+      "qty": 1.7858847416362145,
+      "entry": 109.67481,
+      "entry_day": "2026-10-09",
+      "trail": 94.33806971311611,
+      "init_stop": 94.33806971311611,
+      "tp": 115.1585505,
+      "last_px": 109.15,
+      "cost": 196.06243629057172,
+      "bars": 1,
+      "exit_next": false,
+      "tag": "DIP"
+    },
+    "LTC/USDT": {
+      "qty": 0.2445562424299853,
+      "entry": 63.201585,
+      "entry_day": "2026-10-09",
+      "trail": 52.87820175098532,
+      "init_stop": 52.87820175098532,
+      "tp": 66.36166425,
+      "last_px": 63.47,
+      "cost": 15.471798485362541,
       "bars": 1,
       "exit_next": false,
       "tag": "DIP"
@@ -17,43 +69,13 @@
   },
   "pending": [
     {
-      "symbol": "DASH/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 35.61762187570521,
-      "tag": "DIP"
-    },
-    {
-      "symbol": "ETH/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 2198.63109306955,
-      "tag": "DIP"
-    },
-    {
-      "symbol": "SOL/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 94.33806971311611,
-      "tag": "DIP"
-    },
-    {
       "symbol": "USELESS/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 0.0791329497564037,
+      "signal_day": "2026-10-09",
+      "stop": 0.07977488191666231,
       "tag": "DIP"
-    },
-    {
-      "symbol": "LTC/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 52.87820175098532,
-      "tag": "DIP"
-    },
-    {
-      "symbol": "ICP/USDT",
-      "signal_day": "2026-10-08",
-      "stop": 2.1762426094198917,
-      "tag": "RESID"
     }
   ],
-  "last_day": "2026-10-08",
+  "last_day": "2026-10-09",
   "history": [
     {
       "day": "2026-10-05",
@@ -70,8 +92,15 @@
     {
       "day": "2026-10-08",
       "equity": 979.72
+    },
+    {
+      "day": "2026-10-09",
+      "equity": 995.74
     }
   ],
-  "last_updated": "2026-10-09T06:34:47.667018+00:00",
-  "btc_regime_ok": true
+  "last_updated": "2026-10-10T00:30:56.933710+00:00",
+  "btc_regime_ok": true,
+  "closed_on": {
+    "USELESS/USDT": "2026-10-09"
+  }
 }
