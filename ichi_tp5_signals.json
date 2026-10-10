@@ -88,5 +88,25 @@
     "tp": 0.016947,
     "risk_pct": 14.02,
     "size_pct": 14.27
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "CHIP/USDT",
+    "signal_time_utc": "2026-10-10 20:00:00",
+    "entry_est": 0.066555,
+    "sl": 0.05481275,
+    "tp": 0.06988275,
+    "risk_pct": 17.64,
+    "size_pct": 11.34
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "APT/USDT",
+    "signal_time_utc": "2026-10-10 20:00:00",
+    "entry_est": 0.8578,
+    "sl": 0.7294,
+    "tp": 0.90069,
+    "risk_pct": 14.97,
+    "size_pct": 13.36
   }
 ]
