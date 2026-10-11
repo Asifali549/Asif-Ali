@@ -8,5 +8,15 @@
     "tp": null,
     "risk_pct": 10.76,
     "size_pct": 9.29
+  },
+  {
+    "system": "Donchian Daily",
+    "symbol": "DOS/USDT",
+    "signal_time_utc": "2026-10-11 00:00:00",
+    "entry_est": 0.2524,
+    "sl": 0.2045090909,
+    "tp": null,
+    "risk_pct": 18.97,
+    "size_pct": 5.27
   }
 ]
