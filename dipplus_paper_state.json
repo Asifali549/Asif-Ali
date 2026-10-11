@@ -1,5 +1,5 @@
 {
-  "cash": 205.31044088729428,
+  "cash": 5.962329952628181,
   "positions": {
     "UNI/USDT": {
       "qty": 25.266064609192913,
@@ -8,10 +8,10 @@
       "trail": 5.816164168691932,
       "init_stop": 5.816164168691932,
       "tp": 8.311543695,
-      "last_px": 7.3225,
+      "last_px": 7.5894,
       "cost": 200.2,
-      "bars": 2,
-      "exit_next": false,
+      "bars": 3,
+      "exit_next": true,
       "tag": "DIP"
     },
     "DASH/USDT": {
@@ -21,10 +21,10 @@
       "trail": 35.61762187570521,
       "init_stop": 35.61762187570521,
       "tp": 53.219596499999994,
-      "last_px": 51.25,
+      "last_px": 51.05,
       "cost": 196.1408847988559,
-      "bars": 1,
-      "exit_next": false,
+      "bars": 2,
+      "exit_next": true,
       "tag": "DIP"
     },
     "ETH/USDT": {
@@ -34,10 +34,10 @@
       "trail": 2198.63109306955,
       "init_stop": 2198.63109306955,
       "tp": 2599.6501755,
-      "last_px": 2487.72,
+      "last_px": 2506.48,
       "cost": 196.10165662189613,
-      "bars": 1,
-      "exit_next": false,
+      "bars": 2,
+      "exit_next": true,
       "tag": "DIP"
     },
     "SOL/USDT": {
@@ -47,10 +47,10 @@
       "trail": 94.33806971311611,
       "init_stop": 94.33806971311611,
       "tp": 115.1585505,
-      "last_px": 109.15,
+      "last_px": 110.09,
       "cost": 196.06243629057172,
-      "bars": 1,
-      "exit_next": false,
+      "bars": 2,
+      "exit_next": true,
       "tag": "DIP"
     },
     "LTC/USDT": {
@@ -60,8 +60,21 @@
       "trail": 52.87820175098532,
       "init_stop": 52.87820175098532,
       "tp": 66.36166425,
-      "last_px": 63.47,
+      "last_px": 64.01,
       "cost": 15.471798485362541,
+      "bars": 2,
+      "exit_next": true,
+      "tag": "DIP"
+    },
+    "USELESS/USDT": {
+      "qty": 1074.2009565788796,
+      "entry": 0.18539265,
+      "entry_day": "2026-10-10",
+      "trail": 0.07977488191666231,
+      "init_stop": 0.07977488191666231,
+      "tp": 0.1946622825,
+      "last_px": 0.18529,
+      "cost": 199.3481109346661,
       "bars": 1,
       "exit_next": false,
       "tag": "DIP"
@@ -69,13 +82,19 @@
   },
   "pending": [
     {
-      "symbol": "USELESS/USDT",
-      "signal_day": "2026-10-09",
-      "stop": 0.07977488191666231,
+      "symbol": "TRX/USDT",
+      "signal_day": "2026-10-10",
+      "stop": 0.31839248949741306,
       "tag": "DIP"
+    },
+    {
+      "symbol": "SENT/USDT",
+      "signal_day": "2026-10-10",
+      "stop": 0.01460445400401988,
+      "tag": "RESID"
     }
   ],
-  "last_day": "2026-10-09",
+  "last_day": "2026-10-10",
   "history": [
     {
       "day": "2026-10-05",
@@ -96,9 +115,13 @@
     {
       "day": "2026-10-09",
       "equity": 995.74
+    },
+    {
+      "day": "2026-10-10",
+      "equity": 1004.7
     }
   ],
-  "last_updated": "2026-10-10T06:18:06.381963+00:00",
+  "last_updated": "2026-10-11T00:30:55.072388+00:00",
   "btc_regime_ok": true,
   "closed_on": {
     "USELESS/USDT": "2026-10-09"
