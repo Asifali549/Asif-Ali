@@ -108,5 +108,25 @@
     "tp": 0.90069,
     "risk_pct": 14.97,
     "size_pct": 13.36
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "ROSE/USDT",
+    "signal_time_utc": "2026-10-11 16:00:00",
+    "entry_est": 0.00942,
+    "sl": 0.0080225,
+    "tp": 0.009891,
+    "risk_pct": 14.84,
+    "size_pct": 13.48
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "PLUME/USDT",
+    "signal_time_utc": "2026-10-11 16:00:00",
+    "entry_est": 0.020092,
+    "sl": 0.0180565,
+    "tp": 0.0210966,
+    "risk_pct": 10.13,
+    "size_pct": 19.74
   }
 ]
