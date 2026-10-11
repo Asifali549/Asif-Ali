@@ -8,10 +8,10 @@
       "trail": 5.816164168691952,
       "init_stop": 5.816164168691952,
       "tp": 8.311543695,
-      "last_px": 7.3225,
+      "last_px": 7.5894,
       "cost": 202.09891802099997,
-      "bars": 2,
-      "exit_next": false
+      "bars": 3,
+      "exit_next": true
     },
     "DASH/USDT": {
       "qty": 3.902578876131974,
@@ -20,10 +20,10 @@
       "trail": 35.617621875705275,
       "init_stop": 35.617621875705275,
       "tp": 53.219596499999994,
-      "last_px": 51.25,
+      "last_px": 51.05,
       "cost": 198.00130168596598,
-      "bars": 1,
-      "exit_next": false
+      "bars": 2,
+      "exit_next": true
     },
     "ETH/USDT": {
       "qty": 0.07987695279908545,
@@ -32,10 +32,10 @@
       "trail": 2198.631093069538,
       "init_stop": 2198.631093069538,
       "tp": 2599.6501755,
-      "last_px": 2487.72,
+      "last_px": 2506.48,
       "cost": 197.96170142562877,
-      "bars": 1,
-      "exit_next": false
+      "bars": 2,
+      "exit_next": true
     },
     "SOL/USDT": {
       "qty": 1.8028240459285323,
@@ -44,10 +44,10 @@
       "trail": 94.33806971311684,
       "init_stop": 94.33806971311684,
       "tp": 115.1585505,
-      "last_px": 109.15,
+      "last_px": 110.09,
       "cost": 197.92210908534366,
-      "bars": 1,
-      "exit_next": false
+      "bars": 2,
+      "exit_next": true
     },
     "LTC/USDT": {
       "qty": 0.2468758840678391,
@@ -56,14 +56,25 @@
       "trail": 52.878201750985546,
       "init_stop": 52.878201750985546,
       "tp": 66.36166425,
-      "last_px": 63.47,
+      "last_px": 64.01,
       "cost": 15.61855011853504,
-      "bars": 1,
-      "exit_next": false
+      "bars": 2,
+      "exit_next": true
     }
   },
-  "pending": [],
-  "last_day": "2026-10-09",
+  "pending": [
+    {
+      "symbol": "USELESS/USDT",
+      "signal_day": "2026-10-10",
+      "stop": 0.08363096177976642
+    },
+    {
+      "symbol": "TRX/USDT",
+      "signal_day": "2026-10-10",
+      "stop": 0.3183924894974089
+    }
+  ],
+  "last_day": "2026-10-10",
   "history": [
     {
       "day": "2026-10-03",
@@ -92,9 +103,13 @@
     {
       "day": "2026-10-09",
       "equity": 1005.19
+    },
+    {
+      "day": "2026-10-10",
+      "equity": 1014.54
     }
   ],
-  "last_updated": "2026-10-10T05:55:54.290903+00:00",
+  "last_updated": "2026-10-11T00:21:08.449294+00:00",
   "btc_regime_ok": true,
   "closed_on": {
     "BR/USDT": "2026-10-06",

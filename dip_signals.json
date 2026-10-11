@@ -78,5 +78,25 @@
     "tp": 66.3075,
     "risk_pct": 16.27,
     "size_pct": 20.0
+  },
+  {
+    "system": "Dip Daily",
+    "symbol": "USELESS/USDT",
+    "signal_time_utc": "2026-10-11 00:00:00",
+    "entry_est": 0.18529,
+    "sl": 0.0836309618,
+    "tp": 0.1945545,
+    "risk_pct": 54.86,
+    "size_pct": 20.0
+  },
+  {
+    "system": "Dip Daily",
+    "symbol": "TRX/USDT",
+    "signal_time_utc": "2026-10-11 00:00:00",
+    "entry_est": 0.331,
+    "sl": 0.3183924895,
+    "tp": 0.34755,
+    "risk_pct": 3.81,
+    "size_pct": 20.0
   }
 ]
