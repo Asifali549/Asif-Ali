@@ -1,12 +1,12 @@
-PAPER vs BACKTEST - 2026-10-06
+PAPER vs BACKTEST - 2026-10-12
 ==============================================================================================================
-Ichimoku 4H            band   0 | khuli  1 | jeet/10  0.0 (test 4.1) | PF  0.00 (test 1.90) | ausat +0.00% | kam trades (0/10)
-Ichimoku TP5           band   2 | khuli  3 | jeet/10  5.0 (test 6.6) | PF  0.72 (test 1.01) | ausat -0.94% | kam trades (2/10)
-Donchian Daily         band   0 | khuli  0 | jeet/10  0.0 (test 3.7) | PF  0.00 (test 1.55) | ausat +0.00% | kam trades (0/10)
-Dip Daily              band   0 | khuli  1 | jeet/10  0.0 (test 8.1) | PF  0.00 (test 3.99) | ausat +0.00% | kam trades (0/10)
-Volume Capitulation    band   0 | khuli  0 | jeet/10  0.0 (test 6.3) | PF  0.00 (test 1.47) | ausat +0.00% | kam trades (0/10)
-Dip+                   band   0 | khuli  0 | jeet/10  0.0 (test 7.0) | PF  0.00 (test 2.30) | ausat +0.00% | kam trades (0/10)
-W52                    band   0 | khuli  0 | jeet/10  0.0 (test 5.5) | PF  0.00 (test 2.77) | ausat +0.00% | kam trades (0/10)
-W52 Trail              band   0 | khuli  0 | jeet/10  0.0 (test 6.2) | PF  0.00 (test 2.30) | ausat +0.00% | kam trades (0/10)
-Streak                 band   0 | khuli  0 | jeet/10  0.0 (test 6.9) | PF  0.00 (test 1.67) | ausat +0.00% | kam trades (0/10)
-Flush                  band   0 | khuli  0 | jeet/10  0.0 (test 7.0) | PF  0.00 (test 1.83) | ausat +0.00% | kam trades (0/10)
+Ichimoku 4H            band   1 | khuli  4 | jeet/10  0.0 (test 4.1) | PF  0.00 (test 1.90) | ausat -16.74% | kam trades (1/10)
+Ichimoku TP5           band  12 | khuli  2 | jeet/10  5.0 (test 6.6) | PF  0.82 (test 1.01) | ausat -0.51% | theek (backtest ke daire mein)
+Donchian Daily         band   0 | khuli  2 | jeet/10  0.0 (test 3.7) | PF  0.00 (test 1.55) | ausat +0.00% | kam trades (0/10)
+Dip Daily              band   8 | khuli  1 | jeet/10  7.5 (test 8.1) | PF  3.92 (test 3.99) | ausat +1.58% | kam trades (8/10)
+Volume Capitulation    band   0 | khuli  1 | jeet/10  0.0 (test 6.3) | PF  0.00 (test 1.47) | ausat +0.00% | kam trades (0/10)
+Dip+                   band   8 | khuli  1 | jeet/10  7.5 (test 7.0) | PF  3.92 (test 2.30) | ausat +1.58% | kam trades (8/10)
+W52                    band   1 | khuli  1 | jeet/10  0.0 (test 5.5) | PF  0.00 (test 2.77) | ausat -8.20% | kam trades (1/10)
+W52 Trail              band   1 | khuli  1 | jeet/10  0.0 (test 6.2) | PF  0.00 (test 2.30) | ausat -8.20% | kam trades (1/10)
+Streak                 band  11 | khuli  0 | jeet/10  7.3 (test 6.9) | PF  3.91 (test 1.67) | ausat +1.31% | theek (backtest ke daire mein)
+Flush                  band   9 | khuli  1 | jeet/10  8.9 (test 7.0) | PF   inf (test 1.83) | ausat +3.37% | kam trades (9/10)
