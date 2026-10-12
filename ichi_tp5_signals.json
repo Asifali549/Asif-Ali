@@ -138,5 +138,15 @@
     "tp": 0.0240765,
     "risk_pct": 19.22,
     "size_pct": 10.4
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "PYTH/USDT",
+    "signal_time_utc": "2026-10-12 12:00:00",
+    "entry_est": 0.08966,
+    "sl": 0.07959,
+    "tp": 0.094143,
+    "risk_pct": 11.23,
+    "size_pct": 17.81
   }
 ]
