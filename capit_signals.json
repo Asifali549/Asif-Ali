@@ -8,5 +8,25 @@
     "tp": null,
     "risk_pct": 38.69,
     "size_pct": 5.17
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "STRK/USDT",
+    "signal_time_utc": "2026-10-13 00:00:00",
+    "entry_est": 0.08503,
+    "sl": 0.0474989395,
+    "tp": null,
+    "risk_pct": 44.14,
+    "size_pct": 4.53
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "W/USDT",
+    "signal_time_utc": "2026-10-13 00:00:00",
+    "entry_est": 0.01895,
+    "sl": 0.0107924965,
+    "tp": null,
+    "risk_pct": 43.05,
+    "size_pct": 4.65
   }
 ]
