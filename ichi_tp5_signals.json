@@ -148,5 +148,15 @@
     "tp": 0.094143,
     "risk_pct": 11.23,
     "size_pct": 17.81
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "XTZ/USDT",
+    "signal_time_utc": "2026-10-13 08:00:00",
+    "entry_est": 0.3322,
+    "sl": 0.28875,
+    "tp": 0.34881,
+    "risk_pct": 13.08,
+    "size_pct": 15.29
   }
 ]
