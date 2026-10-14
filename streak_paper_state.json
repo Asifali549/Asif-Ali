@@ -1,8 +1,21 @@
 {
   "cash": 1014.2539267161048,
   "positions": {},
-  "pending": [],
-  "last_day": "2026-10-12",
+  "pending": [
+    {
+      "symbol": "QNT/USDT",
+      "signal_day": "2026-10-13",
+      "stop": 117.52929592191843,
+      "tag": "4-DIN"
+    },
+    {
+      "symbol": "VELO/USDT",
+      "signal_day": "2026-10-13",
+      "stop": 0.0032128471863743313,
+      "tag": "4-DIN"
+    }
+  ],
+  "last_day": "2026-10-13",
   "history": [
     {
       "day": "2026-10-05",
@@ -35,9 +48,13 @@
     {
       "day": "2026-10-12",
       "equity": 1014.25
+    },
+    {
+      "day": "2026-10-13",
+      "equity": 1014.25
     }
   ],
-  "last_updated": "2026-10-13T07:07:59.114839+00:00",
+  "last_updated": "2026-10-14T00:46:24.721587+00:00",
   "btc_regime_ok": true,
   "closed_on": {
     "USELESS/USDT": "2026-10-09",

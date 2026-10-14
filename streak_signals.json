@@ -119,5 +119,27 @@
     "risk_pct": 17.15,
     "size_pct": 10.0,
     "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "QNT/USDT",
+    "signal_time_utc": "2026-10-14 00:00:00",
+    "entry_est": 209.796,
+    "sl": 117.5292959219,
+    "tp": 220.2858,
+    "risk_pct": 43.98,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "VELO/USDT",
+    "signal_time_utc": "2026-10-14 00:00:00",
+    "entry_est": 0.004507,
+    "sl": 0.0032128472,
+    "tp": 0.00473235,
+    "risk_pct": 28.71,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
   }
 ]
