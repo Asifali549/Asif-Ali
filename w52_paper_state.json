@@ -1,19 +1,6 @@
 {
-  "cash": 792.0044299343698,
+  "cash": 885.7330994120271,
   "positions": {
-    "NEAR/USDT": {
-      "qty": 18.617498350449907,
-      "entry": 5.3382678,
-      "entry_day": "2026-10-08",
-      "trail": null,
-      "init_stop": null,
-      "tp": null,
-      "last_px": 5.0939,
-      "cost": 99.4845771527206,
-      "bars": 5,
-      "exit_next": false,
-      "tag": "W52"
-    },
     "GRASS/USDT": {
       "qty": 119.36197113748291,
       "entry": 0.8395195499999999,
@@ -21,15 +8,15 @@
       "trail": null,
       "init_stop": null,
       "tp": null,
-      "last_px": 0.7668,
+      "last_px": 0.7193,
       "cost": 100.30691500474907,
-      "bars": 1,
+      "bars": 2,
       "exit_next": false,
       "tag": "W52"
     }
   },
   "pending": [],
-  "last_day": "2026-10-12",
+  "last_day": "2026-10-13",
   "history": [
     {
       "day": "2026-10-05",
@@ -62,11 +49,16 @@
     {
       "day": "2026-10-12",
       "equity": 978.37
+    },
+    {
+      "day": "2026-10-13",
+      "equity": 971.59
     }
   ],
-  "last_updated": "2026-10-13T07:02:47.380220+00:00",
+  "last_updated": "2026-10-14T00:36:09.317840+00:00",
   "btc_regime_ok": true,
   "closed_on": {
-    "HYPE/USDT": "2026-10-11"
+    "HYPE/USDT": "2026-10-11",
+    "NEAR/USDT": "2026-10-13"
   }
 }
