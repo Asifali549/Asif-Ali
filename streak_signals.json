@@ -141,5 +141,16 @@
     "risk_pct": 28.71,
     "size_pct": 10.0,
     "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "NIGHT/USDT",
+    "signal_time_utc": "2026-10-15 00:00:00",
+    "entry_est": 0.0434,
+    "sl": 0.0303484337,
+    "tp": 0.04557,
+    "risk_pct": 30.07,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
   }
 ]
