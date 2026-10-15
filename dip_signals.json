@@ -98,5 +98,15 @@
     "tp": 0.34755,
     "risk_pct": 3.81,
     "size_pct": 20.0
+  },
+  {
+    "system": "Dip Daily",
+    "symbol": "MUBARAK/USDT",
+    "signal_time_utc": "2026-10-15 00:00:00",
+    "entry_est": 0.06089,
+    "sl": 0.0315646443,
+    "tp": 0.0639345,
+    "risk_pct": 48.16,
+    "size_pct": 20.0
   }
 ]

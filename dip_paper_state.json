@@ -8,14 +8,20 @@
       "trail": 0.3183924894974089,
       "init_stop": 0.3183924894974089,
       "tp": 0.3476187225,
-      "last_px": 0.3274,
+      "last_px": 0.3326,
       "cost": 202.90107290594554,
-      "bars": 3,
-      "exit_next": false
+      "bars": 4,
+      "exit_next": true
     }
   },
-  "pending": [],
-  "last_day": "2026-10-13",
+  "pending": [
+    {
+      "symbol": "MUBARAK/USDT",
+      "signal_day": "2026-10-14",
+      "stop": 0.03156464425484263
+    }
+  ],
+  "last_day": "2026-10-14",
   "history": [
     {
       "day": "2026-10-03",
@@ -60,9 +66,13 @@
     {
       "day": "2026-10-13",
       "equity": 1020.86
+    },
+    {
+      "day": "2026-10-14",
+      "equity": 1024.05
     }
   ],
-  "last_updated": "2026-10-14T04:56:59.937962+00:00",
+  "last_updated": "2026-10-15T00:21:08.141306+00:00",
   "btc_regime_ok": true,
   "closed_on": {
     "BR/USDT": "2026-10-06",
