@@ -8,15 +8,28 @@
       "trail": 0.31839248949741306,
       "init_stop": 0.31839248949741306,
       "tp": 0.3476187225,
-      "last_px": 0.3274,
+      "last_px": 0.3326,
       "cost": 200.97287979498415,
-      "bars": 3,
-      "exit_next": false,
+      "bars": 4,
+      "exit_next": true,
       "tag": "DIP"
     }
   },
-  "pending": [],
-  "last_day": "2026-10-13",
+  "pending": [
+    {
+      "symbol": "STRK/USDT",
+      "signal_day": "2026-10-14",
+      "stop": 0.04001255501772291,
+      "tag": "RESID"
+    },
+    {
+      "symbol": "GRASS/USDT",
+      "signal_day": "2026-10-14",
+      "stop": 0.3514312421567224,
+      "tag": "RESID"
+    }
+  ],
+  "last_day": "2026-10-14",
   "history": [
     {
       "day": "2026-10-05",
@@ -53,9 +66,13 @@
     {
       "day": "2026-10-13",
       "equity": 1020.71
+    },
+    {
+      "day": "2026-10-14",
+      "equity": 1023.86
     }
   ],
-  "last_updated": "2026-10-14T05:17:15.844900+00:00",
+  "last_updated": "2026-10-15T00:30:57.156702+00:00",
   "btc_regime_ok": true,
   "closed_on": {
     "USELESS/USDT": "2026-10-11",

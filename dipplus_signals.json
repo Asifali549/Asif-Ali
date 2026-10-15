@@ -108,5 +108,27 @@
     "risk_pct": 30.06,
     "size_pct": 20.0,
     "tag": "RESID"
+  },
+  {
+    "system": "Dip+ (Dip + Resid)",
+    "symbol": "STRK/USDT",
+    "signal_time_utc": "2026-10-15 00:00:00",
+    "entry_est": 0.07693,
+    "sl": 0.040012555,
+    "tp": 0.0807765,
+    "risk_pct": 47.99,
+    "size_pct": 20.0,
+    "tag": "RESID"
+  },
+  {
+    "system": "Dip+ (Dip + Resid)",
+    "symbol": "GRASS/USDT",
+    "signal_time_utc": "2026-10-15 00:00:00",
+    "entry_est": 0.6222,
+    "sl": 0.3514312422,
+    "tp": 0.65331,
+    "risk_pct": 43.52,
+    "size_pct": 20.0,
+    "tag": "RESID"
   }
 ]
