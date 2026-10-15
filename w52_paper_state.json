@@ -8,15 +8,15 @@
       "trail": null,
       "init_stop": null,
       "tp": null,
-      "last_px": 0.7193,
+      "last_px": 0.6222,
       "cost": 100.30691500474907,
-      "bars": 2,
+      "bars": 3,
       "exit_next": false,
       "tag": "W52"
     }
   },
   "pending": [],
-  "last_day": "2026-10-13",
+  "last_day": "2026-10-14",
   "history": [
     {
       "day": "2026-10-05",
@@ -53,9 +53,13 @@
     {
       "day": "2026-10-13",
       "equity": 971.59
+    },
+    {
+      "day": "2026-10-14",
+      "equity": 960.0
     }
   ],
-  "last_updated": "2026-10-14T05:18:15.159524+00:00",
+  "last_updated": "2026-10-15T00:35:58.883555+00:00",
   "btc_regime_ok": true,
   "closed_on": {
     "HYPE/USDT": "2026-10-11",
