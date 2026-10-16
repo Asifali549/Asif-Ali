@@ -1,35 +1,8 @@
 {
-  "cash": 822.16163667433,
-  "positions": {
-    "TRX/USDT": {
-      "qty": 606.4423445191786,
-      "entry": 0.33106545,
-      "entry_day": "2026-10-11",
-      "trail": 0.31839248949741306,
-      "init_stop": 0.31839248949741306,
-      "tp": 0.3476187225,
-      "last_px": 0.3326,
-      "cost": 200.97287979498415,
-      "bars": 4,
-      "exit_next": true,
-      "tag": "DIP"
-    }
-  },
-  "pending": [
-    {
-      "symbol": "STRK/USDT",
-      "signal_day": "2026-10-14",
-      "stop": 0.04001255501772291,
-      "tag": "RESID"
-    },
-    {
-      "symbol": "GRASS/USDT",
-      "signal_day": "2026-10-14",
-      "stop": 0.3514312421567224,
-      "tag": "RESID"
-    }
-  ],
-  "last_day": "2026-10-14",
+  "cash": 1042.915447944417,
+  "positions": {},
+  "pending": [],
+  "last_day": "2026-10-15",
   "history": [
     {
       "day": "2026-10-05",
@@ -70,9 +43,13 @@
     {
       "day": "2026-10-14",
       "equity": 1023.86
+    },
+    {
+      "day": "2026-10-15",
+      "equity": 1042.92
     }
   ],
-  "last_updated": "2026-10-15T05:04:21.029628+00:00",
+  "last_updated": "2026-10-16T00:31:05.431056+00:00",
   "btc_regime_ok": true,
   "closed_on": {
     "USELESS/USDT": "2026-10-11",
@@ -81,6 +58,9 @@
     "ETH/USDT": "2026-10-11",
     "SOL/USDT": "2026-10-11",
     "LTC/USDT": "2026-10-11",
-    "SENT/USDT": "2026-10-11"
+    "SENT/USDT": "2026-10-11",
+    "TRX/USDT": "2026-10-15",
+    "STRK/USDT": "2026-10-15",
+    "GRASS/USDT": "2026-10-15"
   }
 }
