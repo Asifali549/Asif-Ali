@@ -1,69 +1,100 @@
 {
-  "cash": 1029.5468812321901,
-  "positions": {},
-  "pending": [
-    {
-      "symbol": "BTC/USDT",
-      "signal_day": "2026-10-14",
-      "stop": 75107.94911417199,
+  "cash": 323.69146743405065,
+  "positions": {
+    "BTC/USDT": {
+      "qty": 0.0012598370283101396,
+      "entry": 81720.6399,
+      "entry_day": "2026-10-15",
+      "trail": 75107.94911417199,
+      "init_stop": 75107.94911417199,
+      "tp": 85806.67189499999,
+      "last_px": 82241.7,
+      "cost": 103.05764281134222,
+      "bars": 1,
+      "exit_next": false,
       "tag": "SAFAI"
     },
-    {
-      "symbol": "ETH/USDT",
-      "signal_day": "2026-10-14",
-      "stop": 2144.7102763208186,
+    "ETH/USDT": {
+      "qty": 0.04248860128230885,
+      "entry": 2422.87083,
+      "entry_day": "2026-10-15",
+      "trail": 2144.7102763208186,
+      "init_stop": 2144.7102763208186,
+      "tp": 2544.0143715,
+      "last_px": 2442.28,
+      "cost": 103.04733704706109,
+      "bars": 1,
+      "exit_next": false,
       "tag": "SAFAI"
     },
-    {
-      "symbol": "NEAR/USDT",
-      "signal_day": "2026-10-14",
-      "stop": 3.196559667512699,
+    "XMR/USDT": {
+      "qty": 0.1868181645189741,
+      "entry": 550.8753,
+      "entry_day": "2026-10-15",
+      "trail": 469.58680590578695,
+      "init_stop": 469.58680590578695,
+      "tp": 578.419065,
+      "last_px": 549.97,
+      "cost": 103.01642593726405,
+      "bars": 1,
+      "exit_next": false,
       "tag": "SAFAI"
     },
-    {
-      "symbol": "ZEC/USDT",
-      "signal_day": "2026-10-14",
-      "stop": 792.0957561421109,
+    "TAO/USDT": {
+      "qty": 0.3796109661770456,
+      "entry": 271.07547,
+      "entry_day": "2026-10-15",
+      "trail": 207.91019180583578,
+      "init_stop": 207.91019180583578,
+      "tp": 284.62924350000003,
+      "last_px": 278.94,
+      "cost": 103.00612429467033,
+      "bars": 1,
+      "exit_next": true,
       "tag": "SAFAI"
     },
-    {
-      "symbol": "XMR/USDT",
-      "signal_day": "2026-10-14",
-      "stop": 469.58680590578695,
+    "SOL/USDT": {
+      "qty": 0.9858273580951987,
+      "entry": 104.37216,
+      "entry_day": "2026-10-15",
+      "trail": 88.99993584649607,
+      "init_stop": 88.99993584649607,
+      "tp": 109.590768,
+      "last_px": 105.45,
+      "cost": 102.99582368224085,
+      "bars": 1,
+      "exit_next": false,
       "tag": "SAFAI"
     },
-    {
-      "symbol": "TAO/USDT",
-      "signal_day": "2026-10-14",
-      "stop": 207.91019180583578,
+    "AVAX/USDT": {
+      "qty": 10.263619756728582,
+      "entry": 10.023009,
+      "entry_day": "2026-10-15",
+      "trail": 7.868812953352888,
+      "init_stop": 7.868812953352888,
+      "tp": 10.52415945,
+      "last_px": 10.042,
+      "cost": 102.97522554746264,
+      "bars": 1,
+      "exit_next": false,
       "tag": "SAFAI"
     },
-    {
-      "symbol": "SOL/USDT",
-      "signal_day": "2026-10-14",
-      "stop": 88.99993584649607,
-      "tag": "SAFAI"
-    },
-    {
-      "symbol": "UNI/USDT",
-      "signal_day": "2026-10-14",
-      "stop": 5.142342929583736,
-      "tag": "SAFAI"
-    },
-    {
-      "symbol": "AVAX/USDT",
-      "signal_day": "2026-10-14",
-      "stop": 7.868812953352888,
-      "tag": "SAFAI"
-    },
-    {
-      "symbol": "AAVE/USDT",
-      "signal_day": "2026-10-14",
-      "stop": 122.15734387321325,
+    "AAVE/USDT": {
+      "qty": 0.6618052193918331,
+      "entry": 154.5722475,
+      "entry_day": "2026-10-15",
+      "trail": 122.15734387321325,
+      "init_stop": 122.15734387321325,
+      "tp": 162.30085987500001,
+      "last_px": 157.627,
+      "cost": 102.39901688879483,
+      "bars": 1,
+      "exit_next": true,
       "tag": "SAFAI"
     }
-  ],
-  "last_day": "2026-10-14",
+  },
+  "pending": [],
+  "last_day": "2026-10-15",
   "history": [
     {
       "day": "2026-10-05",
@@ -104,16 +135,20 @@
     {
       "day": "2026-10-14",
       "equity": 1029.55
+    },
+    {
+      "day": "2026-10-15",
+      "equity": 1051.05
     }
   ],
-  "last_updated": "2026-10-15T05:20:54.223272+00:00",
+  "last_updated": "2026-10-16T00:50:55.619635+00:00",
   "btc_regime_ok": true,
   "closed_on": {
-    "ZEC/USDT": "2026-10-09",
-    "NEAR/USDT": "2026-10-09",
+    "ZEC/USDT": "2026-10-15",
+    "NEAR/USDT": "2026-10-15",
     "BTC/USDT": "2026-10-10",
     "TAO/USDT": "2026-10-10",
-    "UNI/USDT": "2026-10-10",
+    "UNI/USDT": "2026-10-15",
     "AVAX/USDT": "2026-10-10",
     "AAVE/USDT": "2026-10-10",
     "ETH/USDT": "2026-10-11",
