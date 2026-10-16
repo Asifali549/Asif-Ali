@@ -168,5 +168,15 @@
     "tp": 0.102207,
     "risk_pct": 20.01,
     "size_pct": 9.99
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "TIA/USDT",
+    "signal_time_utc": "2026-10-16 08:00:00",
+    "entry_est": 0.6667,
+    "sl": 0.58305,
+    "tp": 0.700035,
+    "risk_pct": 12.55,
+    "size_pct": 15.94
   }
 ]
