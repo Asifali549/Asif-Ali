@@ -152,5 +152,38 @@
     "risk_pct": 30.07,
     "size_pct": 10.0,
     "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "ICP/USDT",
+    "signal_time_utc": "2026-10-16 00:00:00",
+    "entry_est": 3.057,
+    "sl": 2.2781022956,
+    "tp": 3.20985,
+    "risk_pct": 25.48,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "LIT/USDT",
+    "signal_time_utc": "2026-10-16 00:00:00",
+    "entry_est": 3.03,
+    "sl": 1.9204962598,
+    "tp": 3.1815,
+    "risk_pct": 36.62,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "RAY/USDT",
+    "signal_time_utc": "2026-10-16 00:00:00",
+    "entry_est": 1.8278,
+    "sl": 1.1479472917,
+    "tp": 1.91919,
+    "risk_pct": 37.2,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
   }
 ]
