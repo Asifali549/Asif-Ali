@@ -1,8 +1,15 @@
 {
   "cash": 1042.915447944417,
   "positions": {},
-  "pending": [],
-  "last_day": "2026-10-15",
+  "pending": [
+    {
+      "symbol": "QNT/USDT",
+      "signal_day": "2026-10-16",
+      "stop": 115.75634371007803,
+      "tag": "DIP"
+    }
+  ],
+  "last_day": "2026-10-16",
   "history": [
     {
       "day": "2026-10-05",
@@ -47,9 +54,13 @@
     {
       "day": "2026-10-15",
       "equity": 1042.92
+    },
+    {
+      "day": "2026-10-16",
+      "equity": 1042.92
     }
   ],
-  "last_updated": "2026-10-16T04:53:29.330698+00:00",
+  "last_updated": "2026-10-17T00:31:01.953414+00:00",
   "btc_regime_ok": true,
   "closed_on": {
     "USELESS/USDT": "2026-10-11",
