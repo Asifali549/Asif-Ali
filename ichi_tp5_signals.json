@@ -178,5 +178,15 @@
     "tp": 0.700035,
     "risk_pct": 12.55,
     "size_pct": 15.94
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "Q/USDT",
+    "signal_time_utc": "2026-10-17 00:00:00",
+    "entry_est": 0.058116,
+    "sl": 0.05331125,
+    "tp": 0.0610218,
+    "risk_pct": 8.27,
+    "size_pct": 20.0
   }
 ]
