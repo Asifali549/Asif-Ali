@@ -108,5 +108,15 @@
     "tp": 0.0639345,
     "risk_pct": 48.16,
     "size_pct": 20.0
+  },
+  {
+    "system": "Dip Daily",
+    "symbol": "QNT/USDT",
+    "signal_time_utc": "2026-10-17 00:00:00",
+    "entry_est": 200.769,
+    "sl": 115.7563437101,
+    "tp": 210.80745,
+    "risk_pct": 42.34,
+    "size_pct": 20.0
   }
 ]
