@@ -185,5 +185,16 @@
     "risk_pct": 37.2,
     "size_pct": 10.0,
     "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "BNB/USDT",
+    "signal_time_utc": "2026-10-18 00:00:00",
+    "entry_est": 717.777,
+    "sl": 651.6523600518,
+    "tp": 753.66585,
+    "risk_pct": 9.21,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
   }
 ]
