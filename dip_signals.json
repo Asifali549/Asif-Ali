@@ -118,5 +118,15 @@
     "tp": 210.80745,
     "risk_pct": 42.34,
     "size_pct": 20.0
+  },
+  {
+    "system": "Dip Daily",
+    "symbol": "PUMP/USDT",
+    "signal_time_utc": "2026-10-18 00:00:00",
+    "entry_est": 0.004345,
+    "sl": 0.0025509322,
+    "tp": 0.00456225,
+    "risk_pct": 41.29,
+    "size_pct": 20.0
   }
 ]
