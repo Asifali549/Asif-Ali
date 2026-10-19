@@ -8,10 +8,10 @@
       "trail": 75107.94911417199,
       "init_stop": 75107.94911417199,
       "tp": 85806.67189499999,
-      "last_px": 81480.7,
+      "last_px": 82111.6,
       "cost": 103.05764281134222,
-      "bars": 3,
-      "exit_next": false,
+      "bars": 4,
+      "exit_next": true,
       "tag": "SAFAI"
     },
     "ETH/USDT": {
@@ -21,9 +21,9 @@
       "trail": 2144.7102763208186,
       "init_stop": 2144.7102763208186,
       "tp": 2544.0143715,
-      "last_px": 2402.62,
+      "last_px": 2410.22,
       "cost": 103.04733704706109,
-      "bars": 3,
+      "bars": 4,
       "exit_next": false,
       "tag": "SAFAI"
     },
@@ -34,10 +34,10 @@
       "trail": 88.99993584649607,
       "init_stop": 88.99993584649607,
       "tp": 109.590768,
-      "last_px": 103.46,
+      "last_px": 104.11,
       "cost": 102.99582368224085,
-      "bars": 3,
-      "exit_next": false,
+      "bars": 4,
+      "exit_next": true,
       "tag": "SAFAI"
     },
     "AVAX/USDT": {
@@ -47,15 +47,15 @@
       "trail": 7.868812953352888,
       "init_stop": 7.868812953352888,
       "tp": 10.52415945,
-      "last_px": 9.768,
+      "last_px": 9.78,
       "cost": 102.97522554746264,
-      "bars": 3,
+      "bars": 4,
       "exit_next": false,
       "tag": "SAFAI"
     }
   },
   "pending": [],
-  "last_day": "2026-10-17",
+  "last_day": "2026-10-18",
   "history": [
     {
       "day": "2026-10-05",
@@ -108,9 +108,13 @@
     {
       "day": "2026-10-17",
       "equity": 1044.63
+    },
+    {
+      "day": "2026-10-18",
+      "equity": 1046.51
     }
   ],
-  "last_updated": "2026-10-18T05:13:10.005718+00:00",
+  "last_updated": "2026-10-19T00:51:09.066615+00:00",
   "btc_regime_ok": true,
   "closed_on": {
     "ZEC/USDT": "2026-10-15",
