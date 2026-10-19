@@ -188,5 +188,15 @@
     "tp": 0.0610218,
     "risk_pct": 8.27,
     "size_pct": 20.0
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "GRVT/USDT",
+    "signal_time_utc": "2026-10-19 16:00:00",
+    "entry_est": 0.2271,
+    "sl": 0.21065,
+    "tp": 0.238455,
+    "risk_pct": 7.24,
+    "size_pct": 20.0
   }
 ]
