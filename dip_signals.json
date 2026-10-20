@@ -128,5 +128,15 @@
     "tp": 0.00456225,
     "risk_pct": 41.29,
     "size_pct": 20.0
+  },
+  {
+    "system": "Dip Daily",
+    "symbol": "USELESS/USDT",
+    "signal_time_utc": "2026-10-20 00:00:00",
+    "entry_est": 0.1416,
+    "sl": 0.058353761,
+    "tp": 0.14868,
+    "risk_pct": 58.79,
+    "size_pct": 20.0
   }
 ]
