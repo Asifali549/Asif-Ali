@@ -1,5 +1,5 @@
 {
-  "cash": 619.2349841935747,
+  "cash": 720.4153949841063,
   "positions": {
     "QNT/USDT": {
       "qty": 0.48267003756124643,
@@ -8,10 +8,10 @@
       "trail": 117.52929592191843,
       "init_stop": 117.52929592191843,
       "tp": 220.64071522499998,
-      "last_px": 192.202,
+      "last_px": 194.855,
       "cost": 101.5268180642821,
-      "bars": 5,
-      "exit_next": false,
+      "bars": 6,
+      "exit_next": true,
       "tag": "4-DIN"
     },
     "NIGHT/USDT": {
@@ -21,9 +21,9 @@
       "trail": 0.03034843370167614,
       "init_stop": 0.03034843370167614,
       "tp": 0.0455717745,
-      "last_px": 0.03984,
+      "last_px": 0.04016,
       "cost": 101.2915155201632,
-      "bars": 4,
+      "bars": 5,
       "exit_next": false,
       "tag": "4-DIN"
     },
@@ -34,28 +34,58 @@
       "trail": 2.278102295606343,
       "init_stop": 2.278102295606343,
       "tp": 3.2062022999999997,
-      "last_px": 2.896,
+      "last_px": 2.864,
       "cost": 101.02550715379753,
-      "bars": 3,
+      "bars": 4,
       "exit_next": false,
-      "tag": "4-DIN"
-    },
-    "BNB/USDT": {
-      "qty": 0.14010909071876063,
-      "entry": 718.33899,
-      "entry_day": "2026-10-18",
-      "trail": 651.6523600518246,
-      "init_stop": 651.6523600518246,
-      "tp": 754.2559395,
-      "last_px": 723.242,
-      "cost": 100.74646853944961,
-      "bars": 1,
-      "exit_next": true,
       "tag": "4-DIN"
     }
   },
-  "pending": [],
-  "last_day": "2026-10-18",
+  "pending": [
+    {
+      "symbol": "STRK/USDT",
+      "signal_day": "2026-10-19",
+      "stop": 0.020398256995218078,
+      "tag": "4-DIN"
+    },
+    {
+      "symbol": "USELESS/USDT",
+      "signal_day": "2026-10-19",
+      "stop": 0.058353760951075306,
+      "tag": "4-DIN"
+    },
+    {
+      "symbol": "FIL/USDT",
+      "signal_day": "2026-10-19",
+      "stop": 0.684966681946814,
+      "tag": "4-DIN"
+    },
+    {
+      "symbol": "RENDER/USDT",
+      "signal_day": "2026-10-19",
+      "stop": 1.361450151109059,
+      "tag": "4-DIN"
+    },
+    {
+      "symbol": "ALGO/USDT",
+      "signal_day": "2026-10-19",
+      "stop": 0.08176448958457169,
+      "tag": "4-DIN"
+    },
+    {
+      "symbol": "AERO/USDT",
+      "signal_day": "2026-10-19",
+      "stop": 0.5727272977128329,
+      "tag": "4-DIN"
+    },
+    {
+      "symbol": "PLUME/USDT",
+      "signal_day": "2026-10-19",
+      "stop": 0.01178483184249989,
+      "tag": "4-DIN"
+    }
+  ],
+  "last_day": "2026-10-19",
   "history": [
     {
       "day": "2026-10-05",
@@ -112,9 +142,13 @@
     {
       "day": "2026-10-18",
       "equity": 1001.94
+    },
+    {
+      "day": "2026-10-19",
+      "equity": 1002.76
     }
   ],
-  "last_updated": "2026-10-19T05:21:49.123039+00:00",
+  "last_updated": "2026-10-20T00:46:21.831353+00:00",
   "btc_regime_ok": true,
   "closed_on": {
     "USELESS/USDT": "2026-10-09",
@@ -125,7 +159,7 @@
     "ETH/USDT": "2026-10-11",
     "SOL/USDT": "2026-10-11",
     "LTC/USDT": "2026-10-11",
-    "BNB/USDT": "2026-10-11",
+    "BNB/USDT": "2026-10-19",
     "DASH/USDT": "2026-10-11",
     "XMR/USDT": "2026-10-11",
     "LIT/USDT": "2026-10-16",

@@ -196,5 +196,82 @@
     "risk_pct": 9.21,
     "size_pct": 10.0,
     "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "STRK/USDT",
+    "signal_time_utc": "2026-10-20 00:00:00",
+    "entry_est": 0.05772,
+    "sl": 0.020398257,
+    "tp": 0.060606,
+    "risk_pct": 64.66,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "USELESS/USDT",
+    "signal_time_utc": "2026-10-20 00:00:00",
+    "entry_est": 0.1416,
+    "sl": 0.058353761,
+    "tp": 0.14868,
+    "risk_pct": 58.79,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "FIL/USDT",
+    "signal_time_utc": "2026-10-20 00:00:00",
+    "entry_est": 1.0194,
+    "sl": 0.6849666819,
+    "tp": 1.07037,
+    "risk_pct": 32.81,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "RENDER/USDT",
+    "signal_time_utc": "2026-10-20 00:00:00",
+    "entry_est": 1.812,
+    "sl": 1.3614501511,
+    "tp": 1.9026,
+    "risk_pct": 24.86,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "ALGO/USDT",
+    "signal_time_utc": "2026-10-20 00:00:00",
+    "entry_est": 0.1098,
+    "sl": 0.0817644896,
+    "tp": 0.11529,
+    "risk_pct": 25.53,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "AERO/USDT",
+    "signal_time_utc": "2026-10-20 00:00:00",
+    "entry_est": 0.7959,
+    "sl": 0.5727272977,
+    "tp": 0.835695,
+    "risk_pct": 28.04,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "PLUME/USDT",
+    "signal_time_utc": "2026-10-20 00:00:00",
+    "entry_est": 0.017599,
+    "sl": 0.0117848318,
+    "tp": 0.01847895,
+    "risk_pct": 33.04,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
   }
 ]
