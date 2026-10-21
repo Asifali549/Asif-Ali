@@ -163,5 +163,16 @@
     "risk_pct": 58.79,
     "size_pct": 20.0,
     "tag": "DIP"
+  },
+  {
+    "system": "Dip+ (Dip + Resid)",
+    "symbol": "ADI/USDT",
+    "signal_time_utc": "2026-10-21 00:00:00",
+    "entry_est": 8.1665,
+    "sl": 7.8503702922,
+    "tp": 8.574825,
+    "risk_pct": 3.87,
+    "size_pct": 20.0,
+    "tag": "DIP"
   }
 ]
