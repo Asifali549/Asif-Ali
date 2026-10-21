@@ -1,8 +1,15 @@
 {
   "cash": 991.3811661509981,
   "positions": {},
-  "pending": [],
-  "last_day": "2026-10-19",
+  "pending": [
+    {
+      "symbol": "INJ/USDT",
+      "signal_day": "2026-10-20",
+      "stop": null,
+      "tag": "W52"
+    }
+  ],
+  "last_day": "2026-10-20",
   "history": [
     {
       "day": "2026-10-05",
@@ -63,9 +70,13 @@
     {
       "day": "2026-10-19",
       "equity": 991.38
+    },
+    {
+      "day": "2026-10-20",
+      "equity": 991.38
     }
   ],
-  "last_updated": "2026-10-20T05:14:05.846317+00:00",
+  "last_updated": "2026-10-21T00:40:59.732665+00:00",
   "btc_regime_ok": true,
   "closed_on": {
     "HYPE/USDT": "2026-10-11",
