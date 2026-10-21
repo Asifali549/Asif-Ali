@@ -273,5 +273,27 @@
     "risk_pct": 33.04,
     "size_pct": 10.0,
     "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "TRX/USDT",
+    "signal_time_utc": "2026-10-21 00:00:00",
+    "entry_est": 0.3316,
+    "sl": 0.319914243,
+    "tp": 0.34818,
+    "risk_pct": 3.52,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
+  },
+  {
+    "system": "4 din ki girawat",
+    "symbol": "ADI/USDT",
+    "signal_time_utc": "2026-10-21 00:00:00",
+    "entry_est": 8.1665,
+    "sl": 7.8503702922,
+    "tp": 8.574825,
+    "risk_pct": 3.87,
+    "size_pct": 10.0,
+    "tag": "4-DIN"
   }
 ]
