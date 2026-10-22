@@ -8,9 +8,9 @@
       "trail": 0.047498939547182734,
       "init_stop": 0.047498939547182734,
       "tp": null,
-      "last_px": 0.05724,
+      "last_px": 0.05737,
       "cost": 45.50509901408362,
-      "bars": 8,
+      "bars": 9,
       "exit_next": false
     },
     "W/USDT": {
@@ -20,14 +20,25 @@
       "trail": 0.010792496479602412,
       "init_stop": 0.010792496479602412,
       "tp": null,
-      "last_px": 0.01307,
+      "last_px": 0.0144,
       "cost": 46.79277329392525,
-      "bars": 6,
-      "exit_next": false
+      "bars": 7,
+      "exit_next": true
     }
   },
-  "pending": [],
-  "last_day": "2026-10-20",
+  "pending": [
+    {
+      "symbol": "AKE/USDT",
+      "signal_day": "2026-10-21",
+      "stop": 0.003274399107632213
+    },
+    {
+      "symbol": "AGT/USDT",
+      "signal_day": "2026-10-21",
+      "stop": 0.004260250398461993
+    }
+  ],
+  "last_day": "2026-10-21",
   "history": [
     {
       "day": "2026-10-03",
@@ -100,9 +111,13 @@
     {
       "day": "2026-10-20",
       "equity": 993.22
+    },
+    {
+      "day": "2026-10-21",
+      "equity": 996.58
     }
   ],
-  "last_updated": "2026-10-21T05:03:04.207059+00:00",
+  "last_updated": "2026-10-22T00:25:56.507374+00:00",
   "closed_on": {
     "VVV/USDT": "2026-10-12",
     "AGT/USDT": "2026-10-20",

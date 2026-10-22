@@ -48,5 +48,25 @@
     "tp": null,
     "risk_pct": 42.54,
     "size_pct": 4.7
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "AKE/USDT",
+    "signal_time_utc": "2026-10-22 00:00:00",
+    "entry_est": 0.0239833,
+    "sl": 0.0032743991,
+    "tp": null,
+    "risk_pct": 86.35,
+    "size_pct": 2.32
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "AGT/USDT",
+    "signal_time_utc": "2026-10-22 00:00:00",
+    "entry_est": 0.056502,
+    "sl": 0.0042602504,
+    "tp": null,
+    "risk_pct": 92.46,
+    "size_pct": 2.16
   }
 ]
