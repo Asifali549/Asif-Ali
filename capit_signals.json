@@ -68,5 +68,15 @@
     "tp": null,
     "risk_pct": 92.46,
     "size_pct": 2.16
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "LIT/USDT",
+    "signal_time_utc": "2026-10-23 00:00:00",
+    "entry_est": 3.395,
+    "sl": 2.2668629247,
+    "tp": null,
+    "risk_pct": 33.23,
+    "size_pct": 6.02
   }
 ]
