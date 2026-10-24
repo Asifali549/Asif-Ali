@@ -21,10 +21,10 @@
       "trail": 0.3199142429801469,
       "init_stop": 0.3199142429801469,
       "tp": 0.34835409,
-      "last_px": 0.3286,
+      "last_px": 0.3301,
       "cost": 102.2084962818641,
-      "bars": 2,
-      "exit_next": false,
+      "bars": 3,
+      "exit_next": true,
       "tag": "4-DIN"
     },
     "ADI/USDT": {
@@ -34,15 +34,15 @@
       "trail": 7.850370292180142,
       "init_stop": 7.850370292180142,
       "tp": 8.57900736,
-      "last_px": 8.0539,
+      "last_px": 8.0487,
       "cost": 102.19827543223592,
-      "bars": 2,
+      "bars": 3,
       "exit_next": false,
       "tag": "4-DIN"
     }
   },
   "pending": [],
-  "last_day": "2026-10-22",
+  "last_day": "2026-10-23",
   "history": [
     {
       "day": "2026-10-05",
@@ -115,9 +115,13 @@
     {
       "day": "2026-10-22",
       "equity": 1028.34
+    },
+    {
+      "day": "2026-10-23",
+      "equity": 1028.74
     }
   ],
-  "last_updated": "2026-10-23T05:25:09.089127+00:00",
+  "last_updated": "2026-10-24T00:46:09.207909+00:00",
   "btc_regime_ok": true,
   "closed_on": {
     "USELESS/USDT": "2026-10-20",
