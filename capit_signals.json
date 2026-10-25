@@ -78,5 +78,25 @@
     "tp": null,
     "risk_pct": 33.23,
     "size_pct": 6.02
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "IRYS/USDT",
+    "signal_time_utc": "2026-10-25 00:00:00",
+    "entry_est": 0.04043,
+    "sl": -0.0456091624,
+    "tp": null,
+    "risk_pct": 212.81,
+    "size_pct": 0.94
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "AKE/USDT",
+    "signal_time_utc": "2026-10-25 00:00:00",
+    "entry_est": 0.0312612,
+    "sl": 0.0077747845,
+    "tp": null,
+    "risk_pct": 75.13,
+    "size_pct": 2.66
   }
 ]
