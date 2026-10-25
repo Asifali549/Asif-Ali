@@ -8,15 +8,22 @@
       "trail": 7.850370292180142,
       "init_stop": 7.850370292180142,
       "tp": 8.57900736,
-      "last_px": 8.0487,
+      "last_px": 8.0657,
       "cost": 211.27337584019003,
-      "bars": 3,
-      "exit_next": false,
+      "bars": 4,
+      "exit_next": true,
       "tag": "DIP"
     }
   },
-  "pending": [],
-  "last_day": "2026-10-23",
+  "pending": [
+    {
+      "symbol": "STRK/USDT",
+      "signal_day": "2026-10-24",
+      "stop": 0.01589126077401757,
+      "tag": "DIP"
+    }
+  ],
+  "last_day": "2026-10-24",
   "history": [
     {
       "day": "2026-10-05",
@@ -93,9 +100,13 @@
     {
       "day": "2026-10-23",
       "equity": 1051.95
+    },
+    {
+      "day": "2026-10-24",
+      "equity": 1052.39
     }
   ],
-  "last_updated": "2026-10-24T04:57:02.773349+00:00",
+  "last_updated": "2026-10-25T00:31:07.377991+00:00",
   "btc_regime_ok": true,
   "closed_on": {
     "USELESS/USDT": "2026-10-20",
