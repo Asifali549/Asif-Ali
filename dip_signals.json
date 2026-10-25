@@ -148,5 +148,15 @@
     "tp": 8.574825,
     "risk_pct": 3.87,
     "size_pct": 20.0
+  },
+  {
+    "system": "Dip Daily",
+    "symbol": "STRK/USDT",
+    "signal_time_utc": "2026-10-25 00:00:00",
+    "entry_est": 0.04713,
+    "sl": 0.0158912608,
+    "tp": 0.0494865,
+    "risk_pct": 66.28,
+    "size_pct": 20.0
   }
 ]
