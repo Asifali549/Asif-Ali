@@ -2,7 +2,7 @@
   "cash": 987.458753383427,
   "positions": {},
   "pending": [],
-  "last_day": "2026-10-24",
+  "last_day": "2026-10-25",
   "history": [
     {
       "day": "2026-10-05",
@@ -83,10 +83,14 @@
     {
       "day": "2026-10-24",
       "equity": 987.46
+    },
+    {
+      "day": "2026-10-25",
+      "equity": 987.46
     }
   ],
-  "last_updated": "2026-10-25T05:15:13.135199+00:00",
-  "btc_regime_ok": true,
+  "last_updated": "2026-10-26T00:41:21.342626+00:00",
+  "btc_regime_ok": false,
   "closed_on": {
     "HYPE/USDT": "2026-10-11",
     "NEAR/USDT": "2026-10-12",
