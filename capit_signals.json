@@ -98,5 +98,25 @@
     "tp": null,
     "risk_pct": 75.13,
     "size_pct": 2.66
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "JCT/USDT",
+    "signal_time_utc": "2026-10-26 00:00:00",
+    "entry_est": 0.006134,
+    "sl": 0.0023001719,
+    "tp": null,
+    "risk_pct": 62.5,
+    "size_pct": 3.2
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "SOON/USDT",
+    "signal_time_utc": "2026-10-26 00:00:00",
+    "entry_est": 0.2795,
+    "sl": 0.1919544623,
+    "tp": null,
+    "risk_pct": 31.32,
+    "size_pct": 6.39
   }
 ]
