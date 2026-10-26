@@ -68,5 +68,15 @@
     "tp": 0.0928418437,
     "risk_pct": 19.92,
     "size_pct": 5.02
+  },
+  {
+    "system": "Ichimoku 4H",
+    "symbol": "QNT/USDT",
+    "signal_time_utc": "2026-10-26 12:00:00",
+    "entry_est": 215.864,
+    "sl": 180.468625,
+    "tp": 322.050125,
+    "risk_pct": 16.4,
+    "size_pct": 6.1
   }
 ]
