@@ -118,5 +118,15 @@
     "tp": null,
     "risk_pct": 31.32,
     "size_pct": 6.39
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "Q/USDT",
+    "signal_time_utc": "2026-10-28 00:00:00",
+    "entry_est": 0.053142,
+    "sl": -0.0848372107,
+    "tp": null,
+    "risk_pct": 259.64,
+    "size_pct": 0.77
   }
 ]
