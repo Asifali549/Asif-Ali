@@ -158,5 +158,15 @@
     "tp": 0.0494865,
     "risk_pct": 66.28,
     "size_pct": 20.0
+  },
+  {
+    "system": "Dip Daily",
+    "symbol": "AAVE/USDT",
+    "signal_time_utc": "2026-10-28 00:00:00",
+    "entry_est": 133.769,
+    "sl": 105.9414393816,
+    "tp": 140.45745,
+    "risk_pct": 20.8,
+    "size_pct": 20.0
   }
 ]
