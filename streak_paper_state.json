@@ -8,15 +8,15 @@
       "trail": 0.3069438348048928,
       "init_stop": 0.3069438348048928,
       "tp": 0.4925911725,
-      "last_px": 0.4377,
+      "last_px": 0.3819,
       "cost": 102.94697370399449,
-      "bars": 4,
+      "bars": 5,
       "exit_next": false,
       "tag": "4-DIN"
     }
   },
   "pending": [],
-  "last_day": "2026-10-28",
+  "last_day": "2026-10-29",
   "history": [
     {
       "day": "2026-10-05",
@@ -113,10 +113,14 @@
     {
       "day": "2026-10-28",
       "equity": 1022.01
+    },
+    {
+      "day": "2026-10-29",
+      "equity": 1009.78
     }
   ],
-  "last_updated": "2026-10-29T06:29:54.022704+00:00",
-  "btc_regime_ok": true,
+  "last_updated": "2026-10-30T00:46:07.132710+00:00",
+  "btc_regime_ok": false,
   "closed_on": {
     "USELESS/USDT": "2026-10-20",
     "WLD/USDT": "2026-10-10",
