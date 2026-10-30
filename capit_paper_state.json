@@ -8,9 +8,9 @@
       "trail": 2.266862924725744,
       "init_stop": 2.266862924725744,
       "tp": null,
-      "last_px": 2.938,
+      "last_px": 2.705,
       "cost": 60.26791502173982,
-      "bars": 6,
+      "bars": 7,
       "exit_next": false
     },
     "IRYS/USDT": {
@@ -20,9 +20,9 @@
       "trail": -0.04560916243120699,
       "init_stop": -0.04560916243120699,
       "tp": null,
-      "last_px": 0.02423,
+      "last_px": 0.02129,
       "cost": 9.41957671088424,
-      "bars": 4,
+      "bars": 5,
       "exit_next": false
     },
     "AKE/USDT": {
@@ -32,9 +32,9 @@
       "trail": 0.007774784453158885,
       "init_stop": 0.007774784453158885,
       "tp": null,
-      "last_px": 0.0226432,
+      "last_px": 0.0209742,
       "cost": 26.673966370094703,
-      "bars": 4,
+      "bars": 5,
       "exit_next": false
     },
     "SOON/USDT": {
@@ -56,14 +56,35 @@
       "trail": -0.08483721066027267,
       "init_stop": -0.08483721066027267,
       "tp": null,
-      "last_px": 0.068967,
+      "last_px": 0.049133,
       "cost": 7.705109060995657,
-      "bars": 1,
+      "bars": 2,
       "exit_next": false
     }
   },
-  "pending": [],
-  "last_day": "2026-10-28",
+  "pending": [
+    {
+      "symbol": "ENA/USDT",
+      "signal_day": "2026-10-29",
+      "stop": 0.1088783328174921
+    },
+    {
+      "symbol": "ZRO/USDT",
+      "signal_day": "2026-10-29",
+      "stop": 0.923323477470859
+    },
+    {
+      "symbol": "ARB/USDT",
+      "signal_day": "2026-10-29",
+      "stop": 0.10897886579037598
+    },
+    {
+      "symbol": "BNB/USDT",
+      "signal_day": "2026-10-29",
+      "stop": 625.4321093896941
+    }
+  ],
+  "last_day": "2026-10-29",
   "history": [
     {
       "day": "2026-10-03",
@@ -168,9 +189,13 @@
     {
       "day": "2026-10-28",
       "equity": 999.62
+    },
+    {
+      "day": "2026-10-29",
+      "equity": 990.52
     }
   ],
-  "last_updated": "2026-10-29T06:04:01.686901+00:00",
+  "last_updated": "2026-10-30T00:25:59.717528+00:00",
   "closed_on": {
     "VVV/USDT": "2026-10-12",
     "AGT/USDT": "2026-10-23",

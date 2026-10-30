@@ -128,5 +128,45 @@
     "tp": null,
     "risk_pct": 259.64,
     "size_pct": 0.77
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "ENA/USDT",
+    "signal_time_utc": "2026-10-30 00:00:00",
+    "entry_est": 0.1755,
+    "sl": 0.1088783328,
+    "tp": null,
+    "risk_pct": 37.96,
+    "size_pct": 5.27
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "ZRO/USDT",
+    "signal_time_utc": "2026-10-30 00:00:00",
+    "entry_est": 1.5228,
+    "sl": 0.9233234775,
+    "tp": null,
+    "risk_pct": 39.37,
+    "size_pct": 5.08
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "ARB/USDT",
+    "signal_time_utc": "2026-10-30 00:00:00",
+    "entry_est": 0.1544,
+    "sl": 0.1089788658,
+    "tp": null,
+    "risk_pct": 29.42,
+    "size_pct": 6.8
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "BNB/USDT",
+    "signal_time_utc": "2026-10-30 00:00:00",
+    "entry_est": 698.0,
+    "sl": 625.4321093897,
+    "tp": null,
+    "risk_pct": 10.4,
+    "size_pct": 19.24
   }
 ]
