@@ -8,14 +8,14 @@
       "trail": 105.9414393815808,
       "init_stop": 105.9414393815808,
       "tp": 140.39216099999996,
-      "last_px": 134.087,
+      "last_px": 119.185,
       "cost": 206.75826230657984,
-      "bars": 1,
+      "bars": 2,
       "exit_next": false
     }
   },
   "pending": [],
-  "last_day": "2026-10-28",
+  "last_day": "2026-10-29",
   "history": [
     {
       "day": "2026-10-03",
@@ -120,10 +120,14 @@
     {
       "day": "2026-10-28",
       "equity": 1033.14
+    },
+    {
+      "day": "2026-10-29",
+      "equity": 1010.12
     }
   ],
-  "last_updated": "2026-10-29T05:51:32.632826+00:00",
-  "btc_regime_ok": true,
+  "last_updated": "2026-10-30T00:21:03.960924+00:00",
+  "btc_regime_ok": false,
   "closed_on": {
     "BR/USDT": "2026-10-06",
     "USELESS/USDT": "2026-10-20",
