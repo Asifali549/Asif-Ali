@@ -8,15 +8,15 @@
       "trail": 105.94143938157859,
       "init_stop": 105.94143938157859,
       "tp": 140.39216099999996,
-      "last_px": 134.087,
+      "last_px": 119.185,
       "cost": 210.6433576928206,
-      "bars": 1,
+      "bars": 2,
       "exit_next": false,
       "tag": "DIP"
     }
   },
   "pending": [],
-  "last_day": "2026-10-28",
+  "last_day": "2026-10-29",
   "history": [
     {
       "day": "2026-10-05",
@@ -113,10 +113,14 @@
     {
       "day": "2026-10-28",
       "equity": 1052.55
+    },
+    {
+      "day": "2026-10-29",
+      "equity": 1029.1
     }
   ],
-  "last_updated": "2026-10-29T06:20:04.939525+00:00",
-  "btc_regime_ok": true,
+  "last_updated": "2026-10-30T00:31:04.973994+00:00",
+  "btc_regime_ok": false,
   "closed_on": {
     "USELESS/USDT": "2026-10-20",
     "UNI/USDT": "2026-10-11",
