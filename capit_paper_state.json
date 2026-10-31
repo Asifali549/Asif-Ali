@@ -1,5 +1,5 @@
 {
-  "cash": 841.6640001369187,
+  "cash": 482.6399905321173,
   "positions": {
     "LIT/USDT": {
       "qty": 17.678501323493776,
@@ -8,9 +8,9 @@
       "trail": 2.266862924725744,
       "init_stop": 2.266862924725744,
       "tp": null,
-      "last_px": 2.705,
+      "last_px": 2.78,
       "cost": 60.26791502173982,
-      "bars": 7,
+      "bars": 8,
       "exit_next": false
     },
     "IRYS/USDT": {
@@ -20,9 +20,9 @@
       "trail": -0.04560916243120699,
       "init_stop": -0.04560916243120699,
       "tp": null,
-      "last_px": 0.02129,
+      "last_px": 0.02377,
       "cost": 9.41957671088424,
-      "bars": 5,
+      "bars": 6,
       "exit_next": false
     },
     "AKE/USDT": {
@@ -32,9 +32,9 @@
       "trail": 0.007774784453158885,
       "init_stop": 0.007774784453158885,
       "tp": null,
-      "last_px": 0.0209742,
+      "last_px": 0.0139609,
       "cost": 26.673966370094703,
-      "bars": 5,
+      "bars": 6,
       "exit_next": false
     },
     "SOON/USDT": {
@@ -56,35 +56,68 @@
       "trail": -0.08483721066027267,
       "init_stop": -0.08483721066027267,
       "tp": null,
-      "last_px": 0.049133,
+      "last_px": 0.049287,
       "cost": 7.705109060995657,
-      "bars": 2,
+      "bars": 3,
+      "exit_next": false
+    },
+    "ENA/USDT": {
+      "qty": 296.5219829603187,
+      "entry": 0.1756878,
+      "entry_day": "2026-10-30",
+      "trail": 0.1088783328174921,
+      "init_stop": 0.1088783328174921,
+      "tp": null,
+      "last_px": 0.1897,
+      "cost": 52.14739013277382,
+      "bars": 1,
+      "exit_next": false
+    },
+    "ZRO/USDT": {
+      "qty": 32.903914236567324,
+      "entry": 1.5253622999999998,
+      "entry_day": "2026-10-30",
+      "trail": 0.923323477470859,
+      "init_stop": 0.923323477470859,
+      "tp": null,
+      "last_px": 1.712,
+      "cost": 50.24058068919196,
+      "bars": 1,
+      "exit_next": true
+    },
+    "ARB/USDT": {
+      "qty": 436.3255202402043,
+      "entry": 0.15437715,
+      "entry_day": "2026-10-30",
+      "trail": 0.10897886579037598,
+      "init_stop": 0.10897886579037598,
+      "tp": null,
+      "last_px": 0.163,
+      "cost": 67.42604897723699,
+      "bars": 1,
+      "exit_next": false
+    },
+    "BNB/USDT": {
+      "qty": 0.27055516257378015,
+      "entry": 698.6411459999999,
+      "entry_day": "2026-10-30",
+      "trail": 625.4321093896941,
+      "init_stop": 625.4321093896941,
+      "tp": null,
+      "last_px": 704.034,
+      "cost": 189.20998980559878,
+      "bars": 1,
       "exit_next": false
     }
   },
   "pending": [
     {
-      "symbol": "ENA/USDT",
-      "signal_day": "2026-10-29",
-      "stop": 0.1088783328174921
-    },
-    {
-      "symbol": "ZRO/USDT",
-      "signal_day": "2026-10-29",
-      "stop": 0.923323477470859
-    },
-    {
-      "symbol": "ARB/USDT",
-      "signal_day": "2026-10-29",
-      "stop": 0.10897886579037598
-    },
-    {
-      "symbol": "BNB/USDT",
-      "signal_day": "2026-10-29",
-      "stop": 625.4321093896941
+      "symbol": "TRX/USDT",
+      "signal_day": "2026-10-30",
+      "stop": 0.3050553398981122
     }
   ],
-  "last_day": "2026-10-29",
+  "last_day": "2026-10-30",
   "history": [
     {
       "day": "2026-10-03",
@@ -193,9 +226,13 @@
     {
       "day": "2026-10-29",
       "equity": 990.52
+    },
+    {
+      "day": "2026-10-30",
+      "equity": 1001.64
     }
   ],
-  "last_updated": "2026-10-30T06:04:40.662213+00:00",
+  "last_updated": "2026-10-31T05:59:07.860320+00:00",
   "closed_on": {
     "VVV/USDT": "2026-10-12",
     "AGT/USDT": "2026-10-23",

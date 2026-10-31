@@ -168,5 +168,15 @@
     "tp": null,
     "risk_pct": 10.4,
     "size_pct": 19.24
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "TRX/USDT",
+    "signal_time_utc": "2026-10-31 00:00:00",
+    "entry_est": 0.3357,
+    "sl": 0.3050553399,
+    "tp": null,
+    "risk_pct": 9.13,
+    "size_pct": 20.0
   }
 ]
