@@ -178,5 +178,15 @@
     "tp": null,
     "risk_pct": 9.13,
     "size_pct": 20.0
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "NIL/USDT",
+    "signal_time_utc": "2026-11-01 00:00:00",
+    "entry_est": 0.07296,
+    "sl": 0.0298536786,
+    "tp": null,
+    "risk_pct": 59.08,
+    "size_pct": 3.39
   }
 ]
