@@ -8,15 +8,15 @@
       "trail": 0.3069438348048928,
       "init_stop": 0.3069438348048928,
       "tp": 0.4925911725,
-      "last_px": 0.4073,
+      "last_px": 0.3985,
       "cost": 102.94697370399449,
-      "bars": 6,
-      "exit_next": false,
+      "bars": 7,
+      "exit_next": true,
       "tag": "4-DIN"
     }
   },
   "pending": [],
-  "last_day": "2026-10-30",
+  "last_day": "2026-10-31",
   "history": [
     {
       "day": "2026-10-05",
@@ -121,9 +121,13 @@
     {
       "day": "2026-10-30",
       "equity": 1015.35
+    },
+    {
+      "day": "2026-10-31",
+      "equity": 1013.42
     }
   ],
-  "last_updated": "2026-10-31T06:19:00.113903+00:00",
+  "last_updated": "2026-11-01T00:46:05.642047+00:00",
   "btc_regime_ok": false,
   "closed_on": {
     "USELESS/USDT": "2026-10-20",
