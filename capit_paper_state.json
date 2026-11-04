@@ -8,9 +8,9 @@
       "trail": -0.04560916243120699,
       "init_stop": -0.04560916243120699,
       "tp": null,
-      "last_px": 0.02002,
+      "last_px": 0.02132,
       "cost": 9.41957671088424,
-      "bars": 9,
+      "bars": 10,
       "exit_next": false
     },
     "Q/USDT": {
@@ -20,9 +20,9 @@
       "trail": -0.08483721066027267,
       "init_stop": -0.08483721066027267,
       "tp": null,
-      "last_px": 0.028627,
+      "last_px": 0.028797,
       "cost": 7.705109060995657,
-      "bars": 6,
+      "bars": 7,
       "exit_next": false
     },
     "ENA/USDT": {
@@ -32,9 +32,9 @@
       "trail": 0.1088783328174921,
       "init_stop": 0.1088783328174921,
       "tp": null,
-      "last_px": 0.1706,
+      "last_px": 0.1748,
       "cost": 52.14739013277382,
-      "bars": 4,
+      "bars": 5,
       "exit_next": false
     },
     "BNB/USDT": {
@@ -44,9 +44,9 @@
       "trail": 625.4321093896941,
       "init_stop": 625.4321093896941,
       "tp": null,
-      "last_px": 699.055,
+      "last_px": 698.158,
       "cost": 189.20998980559878,
-      "bars": 4,
+      "bars": 5,
       "exit_next": false
     },
     "NIL/USDT": {
@@ -56,14 +56,20 @@
       "trail": 0.02985367855612485,
       "init_stop": 0.02985367855612485,
       "tp": null,
-      "last_px": 0.06443,
+      "last_px": 0.06405,
       "cost": 33.4229037192873,
-      "bars": 2,
+      "bars": 3,
       "exit_next": false
     }
   },
-  "pending": [],
-  "last_day": "2026-11-02",
+  "pending": [
+    {
+      "symbol": "TRUTH/USDT",
+      "signal_day": "2026-11-03",
+      "stop": 0.010713764494165315
+    }
+  ],
+  "last_day": "2026-11-03",
   "history": [
     {
       "day": "2026-10-03",
@@ -188,9 +194,13 @@
     {
       "day": "2026-11-02",
       "equity": 968.35
+    },
+    {
+      "day": "2026-11-03",
+      "equity": 969.51
     }
   ],
-  "last_updated": "2026-11-03T07:01:04.441367+00:00",
+  "last_updated": "2026-11-04T00:26:01.502510+00:00",
   "closed_on": {
     "VVV/USDT": "2026-10-12",
     "AGT/USDT": "2026-10-23",

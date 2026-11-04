@@ -188,5 +188,15 @@
     "tp": null,
     "risk_pct": 59.08,
     "size_pct": 3.39
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "TRUTH/USDT",
+    "signal_time_utc": "2026-11-04 00:00:00",
+    "entry_est": 0.016677,
+    "sl": 0.0107137645,
+    "tp": null,
+    "risk_pct": 35.76,
+    "size_pct": 5.59
   }
 ]
