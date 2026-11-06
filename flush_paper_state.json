@@ -2,7 +2,7 @@
   "cash": 1045.4978493885471,
   "positions": {},
   "pending": [],
-  "last_day": "2026-11-04",
+  "last_day": "2026-11-05",
   "history": [
     {
       "day": "2026-10-05",
@@ -127,10 +127,14 @@
     {
       "day": "2026-11-04",
       "equity": 1045.5
+    },
+    {
+      "day": "2026-11-05",
+      "equity": 1045.5
     }
   ],
-  "last_updated": "2026-11-05T07:28:15.204125+00:00",
-  "btc_regime_ok": true,
+  "last_updated": "2026-11-06T00:51:17.938487+00:00",
+  "btc_regime_ok": false,
   "closed_on": {
     "ZEC/USDT": "2026-10-15",
     "NEAR/USDT": "2026-10-15",
