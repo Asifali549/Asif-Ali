@@ -198,5 +198,15 @@
     "tp": null,
     "risk_pct": 35.76,
     "size_pct": 5.59
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "AIN/USDT",
+    "signal_time_utc": "2026-11-07 00:00:00",
+    "entry_est": 0.10394,
+    "sl": -0.0509275008,
+    "tp": null,
+    "risk_pct": 149.0,
+    "size_pct": 1.34
   }
 ]

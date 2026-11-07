@@ -20,9 +20,9 @@
       "trail": -0.08483721066027267,
       "init_stop": -0.08483721066027267,
       "tp": null,
-      "last_px": 0.025974,
+      "last_px": 0.027397,
       "cost": 7.705109060995657,
-      "bars": 9,
+      "bars": 10,
       "exit_next": false
     },
     "NIL/USDT": {
@@ -32,9 +32,9 @@
       "trail": 0.02985367855612485,
       "init_stop": 0.02985367855612485,
       "tp": null,
-      "last_px": 0.0603,
+      "last_px": 0.06168,
       "cost": 33.4229037192873,
-      "bars": 5,
+      "bars": 6,
       "exit_next": false
     },
     "TRUTH/USDT": {
@@ -50,8 +50,14 @@
       "exit_next": true
     }
   },
-  "pending": [],
-  "last_day": "2026-11-05",
+  "pending": [
+    {
+      "symbol": "AIN/USDT",
+      "signal_day": "2026-11-06",
+      "stop": -0.05092750082640482
+    }
+  ],
+  "last_day": "2026-11-06",
   "history": [
     {
       "day": "2026-10-03",
@@ -188,9 +194,13 @@
     {
       "day": "2026-11-05",
       "equity": 982.04
+    },
+    {
+      "day": "2026-11-06",
+      "equity": 982.88
     }
   ],
-  "last_updated": "2026-11-06T07:04:08.019176+00:00",
+  "last_updated": "2026-11-07T00:26:00.142434+00:00",
   "closed_on": {
     "VVV/USDT": "2026-10-12",
     "AGT/USDT": "2026-10-23",
