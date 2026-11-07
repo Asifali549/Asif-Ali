@@ -78,5 +78,15 @@
     "tp": 322.050125,
     "risk_pct": 16.4,
     "size_pct": 6.1
+  },
+  {
+    "system": "Ichimoku 4H",
+    "symbol": "MEGA/USDT",
+    "signal_time_utc": "2026-11-07 12:00:00",
+    "entry_est": 0.04972,
+    "sl": 0.0427740625,
+    "tp": 0.0705578125,
+    "risk_pct": 13.97,
+    "size_pct": 7.16
   }
 ]
