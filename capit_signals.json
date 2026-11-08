@@ -208,5 +208,15 @@
     "tp": null,
     "risk_pct": 149.0,
     "size_pct": 1.34
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "ELSA/USDT",
+    "signal_time_utc": "2026-11-08 00:00:00",
+    "entry_est": 0.07458,
+    "sl": 0.0376007008,
+    "tp": null,
+    "risk_pct": 49.58,
+    "size_pct": 4.03
   }
 ]
