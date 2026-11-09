@@ -1,0 +1,68 @@
+DIP v2 PAPER CHECK - bot ki asli trades vs backtest engine, wohi muddat (2026-10-03 se), asli KuCoin data
+==============================================================================================================
+PAPER (bot): 15 trades | jeet/10 5.3 | PF 2.03 | ausat +0.90%
+
+### A BOT-jaisa data (1d)
+TEST isi muddat mein (sab signals, slot had nahi): 25 trades | jeet/10 5.6 | PF 3.58 | ausat +1.48%  (+0 khuli)
+Dono mein: 15 | sirf paper: 0 | sirf test: 10
+Mushtarka trades - paper 15 trades | jeet/10 5.3 | PF 2.03 | ausat +0.90%
+Mushtarka trades - test  15 trades | jeet/10 5.3 | PF 2.03 | ausat +0.90%
+          coin |      entry |     exit P |     exit T |  nafa P |  nafa T | haal
+       BR/USDT | 2026-10-04 | 2026-10-06 | 2026-10-06 |   +4.74 |   +4.74 | dono OK
+       BR/USDT | 2026-10-05 |        nan | 2026-10-05 |    +nan |   +4.74 | SIRF TEST 
+      UNI/USDT | 2026-10-08 | 2026-10-11 | 2026-10-11 |   -4.33 |   -4.33 | dono OK
+     DASH/USDT | 2026-10-09 | 2026-10-11 | 2026-10-11 |   +0.61 |   +0.61 | dono OK
+      ETH/USDT | 2026-10-09 | 2026-10-11 | 2026-10-11 |   +0.98 |   +0.98 | dono OK
+      LTC/USDT | 2026-10-09 | 2026-10-11 | 2026-10-11 |   +1.01 |   +1.01 | dono OK
+      SOL/USDT | 2026-10-09 | 2026-10-11 | 2026-10-11 |   +0.14 |   +0.14 | dono OK
+      UNI/USDT | 2026-10-09 |        nan | 2026-10-10 |    +nan |   +4.74 | SIRF TEST 
+  USELESS/USDT | 2026-10-09 | 2026-10-09 | 2026-10-09 |   +4.74 |   +4.74 | dono OK
+      SOL/USDT | 2026-10-10 |        nan | 2026-10-11 |    +nan |   +0.54 | SIRF TEST 
+  USELESS/USDT | 2026-10-10 |        nan | 2026-10-11 |    +nan |   +4.74 | SIRF TEST 
+      TRX/USDT | 2026-10-11 | 2026-10-15 | 2026-10-15 |   +0.18 |   +0.18 | dono OK
+  USELESS/USDT | 2026-10-11 | 2026-10-11 | 2026-10-11 |   +4.74 |   +4.74 | dono OK
+      TRX/USDT | 2026-10-12 |        nan | 2026-10-15 |    +nan |   +0.39 | SIRF TEST 
+      QNT/USDT | 2026-10-17 | 2026-10-20 | 2026-10-20 |   -3.52 |   -3.52 | dono OK
+     PUMP/USDT | 2026-10-18 | 2026-10-19 | 2026-10-19 |   +4.74 |   +4.74 | dono OK
+      QNT/USDT | 2026-10-18 |        nan | 2026-10-20 |    +nan |   -0.97 | SIRF TEST 
+     PUMP/USDT | 2026-10-19 |        nan | 2026-10-19 |    +nan |   +4.74 | SIRF TEST 
+      QNT/USDT | 2026-10-19 |        nan | 2026-10-19 |    +nan |   +4.74 | SIRF TEST 
+  USELESS/USDT | 2026-10-20 | 2026-10-20 | 2026-10-20 |   +4.74 |   +4.74 | dono OK
+      ADI/USDT | 2026-10-21 | 2026-10-25 | 2026-10-25 |   -1.53 |   -1.53 | dono OK
+      ADI/USDT | 2026-10-23 |        nan | 2026-10-25 |    +nan |   -0.14 | SIRF TEST 
+      ADI/USDT | 2026-10-24 |        nan | 2026-10-25 |    +nan |   -0.11 | SIRF TEST 
+     STRK/USDT | 2026-10-25 | 2026-10-27 | 2026-10-27 |   +0.04 |   +0.04 | dono OK
+     AAVE/USDT | 2026-10-28 | 2026-10-31 | 2026-10-31 |   -3.74 |   -3.74 | dono OK
+
+### B TEST-jaisa data (4h->daily)
+TEST isi muddat mein (sab signals, slot had nahi): 26 trades | jeet/10 5.8 | PF 3.63 | ausat +1.45%  (+0 khuli)
+Dono mein: 15 | sirf paper: 0 | sirf test: 11
+Mushtarka trades - paper 15 trades | jeet/10 5.3 | PF 2.03 | ausat +0.90%
+Mushtarka trades - test  15 trades | jeet/10 5.3 | PF 2.03 | ausat +0.90%
+          coin |      entry |     exit P |     exit T |  nafa P |  nafa T | haal
+       BR/USDT | 2026-10-04 | 2026-10-06 | 2026-10-06 |   +4.74 |   +4.74 | dono OK
+       BR/USDT | 2026-10-05 |        nan | 2026-10-05 |    +nan |   +4.74 | SIRF TEST 
+      UNI/USDT | 2026-10-08 | 2026-10-11 | 2026-10-11 |   -4.33 |   -4.33 | dono OK
+     DASH/USDT | 2026-10-09 | 2026-10-11 | 2026-10-11 |   +0.61 |   +0.61 | dono OK
+      ETH/USDT | 2026-10-09 | 2026-10-11 | 2026-10-11 |   +0.98 |   +0.98 | dono OK
+      LTC/USDT | 2026-10-09 | 2026-10-11 | 2026-10-11 |   +1.01 |   +1.01 | dono OK
+      SOL/USDT | 2026-10-09 | 2026-10-11 | 2026-10-11 |   +0.14 |   +0.14 | dono OK
+      UNI/USDT | 2026-10-09 |        nan | 2026-10-10 |    +nan |   +4.74 | SIRF TEST 
+  USELESS/USDT | 2026-10-09 | 2026-10-09 | 2026-10-09 |   +4.74 |   +4.74 | dono OK
+      SOL/USDT | 2026-10-10 |        nan | 2026-10-11 |    +nan |   +0.54 | SIRF TEST 
+  USELESS/USDT | 2026-10-10 |        nan | 2026-10-11 |    +nan |   +4.74 | SIRF TEST 
+      TRX/USDT | 2026-10-11 | 2026-10-15 | 2026-10-15 |   +0.18 |   +0.18 | dono OK
+  USELESS/USDT | 2026-10-11 | 2026-10-11 | 2026-10-11 |   +4.74 |   +4.74 | dono OK
+      TRX/USDT | 2026-10-12 |        nan | 2026-10-15 |    +nan |   +0.39 | SIRF TEST 
+      TRX/USDT | 2026-10-13 |        nan | 2026-10-15 |    +nan |   +0.73 | SIRF TEST 
+      QNT/USDT | 2026-10-17 | 2026-10-20 | 2026-10-20 |   -3.52 |   -3.52 | dono OK
+     PUMP/USDT | 2026-10-18 | 2026-10-19 | 2026-10-19 |   +4.74 |   +4.74 | dono OK
+      QNT/USDT | 2026-10-18 |        nan | 2026-10-20 |    +nan |   -0.97 | SIRF TEST 
+     PUMP/USDT | 2026-10-19 |        nan | 2026-10-19 |    +nan |   +4.74 | SIRF TEST 
+      QNT/USDT | 2026-10-19 |        nan | 2026-10-19 |    +nan |   +4.74 | SIRF TEST 
+  USELESS/USDT | 2026-10-20 | 2026-10-20 | 2026-10-20 |   +4.74 |   +4.74 | dono OK
+      ADI/USDT | 2026-10-21 | 2026-10-25 | 2026-10-25 |   -1.53 |   -1.53 | dono OK
+      ADI/USDT | 2026-10-23 |        nan | 2026-10-25 |    +nan |   -0.14 | SIRF TEST 
+      ADI/USDT | 2026-10-24 |        nan | 2026-10-25 |    +nan |   -0.11 | SIRF TEST 
+     STRK/USDT | 2026-10-25 | 2026-10-27 | 2026-10-27 |   +0.04 |   +0.04 | dono OK
+     AAVE/USDT | 2026-10-28 | 2026-10-31 | 2026-10-31 |   -3.74 |   -3.74 | dono OK
