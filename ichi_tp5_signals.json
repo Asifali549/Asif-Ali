@@ -218,5 +218,15 @@
     "tp": 0.052206,
     "risk_pct": 9.52,
     "size_pct": 20.0
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "NES/USDT",
+    "signal_time_utc": "2026-11-09 12:00:00",
+    "entry_est": 0.16713,
+    "sl": 0.147355,
+    "tp": 0.1754865,
+    "risk_pct": 11.83,
+    "size_pct": 16.9
   }
 ]
