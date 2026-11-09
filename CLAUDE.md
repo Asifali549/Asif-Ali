@@ -566,3 +566,9 @@ User: live CARDS (Donchian) -11.9% (SL 42% door), US (Capitulation) -24.8% (SL 8
   40-50%: 5.10 | 50-60%: 6.94 (win 90%) | 60-80%: 2.68 | 80%+: sirf 1 trade (-17.6%). maxSL 30/40/50%: CAGR 11.1 -> 1.9/7.7/9.9% (BURA).
   maxSL 70%: 11.6% / -19.4% / Sharpe 0.84 (live 0.81) - sirf 2 trades hatin. Chhota size (R4-8%) bhi bura. Portfolio TP5 70/Dip 30 sab ~2.78-2.80.
   FAISLA/mashwara: SL tang ya filter NAHI; zyada se zyada hifazati had maxSL 70-80% (sirf 1-2 trades ka saboot, kamzor) - user ki ijazat baqi.
+
+- **DIP PAPER CHECK (2026-11-09, `dip_paper_check.py` / workflow "Dip Paper Check" / `_RESULTS.txt`):** paper report ne Dip v2 par "GADBAD?" diya
+  (15 trades jeet 5.3/10 vs test 8.1). Asli KuCoin data par wohi muddat (10-03 se) backtest engine se dobara: **bot ki 15/15 trades hubahu
+  (entry, exit din, nafa) - bot mein koi gadbad NAHI.** Test bhi isi muddat mein sirf jeet 5.6-5.8/10 (PF 3.6) deta hai; "sirf test" wali
+  trades sirf usi coin ke dobara signals hain jab bot pehle se usi coin mein tha. Wajah: muddat buri (10 Oct crash ke baad SMA3 par
+  chhote nafe wale exits). Koi tabdeeli nahi. Note: 31 Oct se BTC filter band - zyada tar bots ne crash mein nayi trades nahi leen.
