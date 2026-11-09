@@ -88,5 +88,15 @@
     "tp": 0.0705578125,
     "risk_pct": 13.97,
     "size_pct": 7.16
+  },
+  {
+    "system": "Ichimoku 4H",
+    "symbol": "NES/USDT",
+    "signal_time_utc": "2026-11-09 12:00:00",
+    "entry_est": 0.16713,
+    "sl": 0.139800625,
+    "tp": 0.249118125,
+    "risk_pct": 16.35,
+    "size_pct": 6.12
   }
 ]
