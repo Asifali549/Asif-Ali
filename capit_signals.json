@@ -218,5 +218,25 @@
     "tp": null,
     "risk_pct": 49.58,
     "size_pct": 4.03
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "JCT/USDT",
+    "signal_time_utc": "2026-11-11 00:00:00",
+    "entry_est": 0.005193,
+    "sl": -0.0045202078,
+    "tp": null,
+    "risk_pct": 187.04,
+    "size_pct": 1.07
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "VVV/USDT",
+    "signal_time_utc": "2026-11-11 00:00:00",
+    "entry_est": 19.313,
+    "sl": 12.3699245392,
+    "tp": null,
+    "risk_pct": 35.95,
+    "size_pct": 5.56
   }
 ]
