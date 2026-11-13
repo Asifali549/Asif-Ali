@@ -20,9 +20,9 @@
       "trail": -0.05092750082640482,
       "init_stop": -0.05092750082640482,
       "tp": null,
-      "last_px": 0.12688,
+      "last_px": 0.10349,
       "cost": 13.151471617589262,
-      "bars": 5,
+      "bars": 6,
       "exit_next": false
     },
     "ELSA/USDT": {
@@ -32,9 +32,9 @@
       "trail": 0.03760070080862743,
       "init_stop": 0.03760070080862743,
       "tp": null,
-      "last_px": 0.06962,
+      "last_px": 0.06579,
       "cost": 39.736599489294335,
-      "bars": 3,
+      "bars": 4,
       "exit_next": false
     },
     "JCT/USDT": {
@@ -44,9 +44,9 @@
       "trail": -0.004520207821733034,
       "init_stop": -0.004520207821733034,
       "tp": null,
-      "last_px": 0.005017,
+      "last_px": 0.002358,
       "cost": 10.432601017060076,
-      "bars": 1,
+      "bars": 2,
       "exit_next": false
     },
     "VVV/USDT": {
@@ -56,14 +56,25 @@
       "trail": 12.369924539240582,
       "init_stop": 12.369924539240582,
       "tp": null,
-      "last_px": 19.752,
+      "last_px": 18.974,
       "cost": 53.91538631315801,
-      "bars": 1,
+      "bars": 2,
       "exit_next": false
     }
   },
-  "pending": [],
-  "last_day": "2026-11-11",
+  "pending": [
+    {
+      "symbol": "AGT/USDT",
+      "signal_day": "2026-11-12",
+      "stop": 0.011822490862534903
+    },
+    {
+      "symbol": "ARIA/USDT",
+      "signal_day": "2026-11-12",
+      "stop": 0.09836009397182832
+    }
+  ],
+  "last_day": "2026-11-12",
   "history": [
     {
       "day": "2026-10-03",
@@ -224,9 +235,13 @@
     {
       "day": "2026-11-11",
       "equity": 976.78
+    },
+    {
+      "day": "2026-11-12",
+      "equity": 964.28
     }
   ],
-  "last_updated": "2026-11-12T07:27:34.284816+00:00",
+  "last_updated": "2026-11-13T00:26:02.718537+00:00",
   "closed_on": {
     "VVV/USDT": "2026-10-12",
     "AGT/USDT": "2026-10-23",

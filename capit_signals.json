@@ -238,5 +238,25 @@
     "tp": null,
     "risk_pct": 35.95,
     "size_pct": 5.56
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "AGT/USDT",
+    "signal_time_utc": "2026-11-13 00:00:00",
+    "entry_est": 0.060893,
+    "sl": 0.0118224909,
+    "tp": null,
+    "risk_pct": 80.58,
+    "size_pct": 2.48
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "ARIA/USDT",
+    "signal_time_utc": "2026-11-13 00:00:00",
+    "entry_est": 0.20658,
+    "sl": 0.098360094,
+    "tp": null,
+    "risk_pct": 52.39,
+    "size_pct": 3.82
   }
 ]
