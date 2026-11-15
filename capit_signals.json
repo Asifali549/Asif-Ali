@@ -258,5 +258,15 @@
     "tp": null,
     "risk_pct": 52.39,
     "size_pct": 3.82
+  },
+  {
+    "system": "Volume Capitulation",
+    "symbol": "INJ/USDT",
+    "signal_time_utc": "2026-11-15 00:00:00",
+    "entry_est": 6.819,
+    "sl": 4.579118808,
+    "tp": null,
+    "risk_pct": 32.85,
+    "size_pct": 6.09
   }
 ]
