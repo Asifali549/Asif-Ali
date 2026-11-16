@@ -108,5 +108,15 @@
     "tp": 0.0818896875,
     "risk_pct": 21.28,
     "size_pct": 4.7
+  },
+  {
+    "system": "Ichimoku 4H",
+    "symbol": "BLESS/USDT",
+    "signal_time_utc": "2026-11-16 12:00:00",
+    "entry_est": 0.0128,
+    "sl": 0.00860125,
+    "tp": 0.02539625,
+    "risk_pct": 32.8,
+    "size_pct": 3.05
   }
 ]
