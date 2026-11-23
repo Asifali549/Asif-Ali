@@ -258,5 +258,15 @@
     "tp": 0.013545,
     "risk_pct": 25.81,
     "size_pct": 7.75
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "ARIA/USDT",
+    "signal_time_utc": "2026-11-23 08:00:00",
+    "entry_est": 0.32332,
+    "sl": 0.25147,
+    "tp": 0.339486,
+    "risk_pct": 22.22,
+    "size_pct": 9.0
   }
 ]
