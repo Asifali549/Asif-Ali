@@ -1,7 +1,7 @@
 PAPER vs BACKTEST - 2026-11-23
 ==============================================================================================================
 Ichimoku 4H            band  12 | khuli  0 | jeet/10  1.7 (test 4.1) | PF  0.46 (test 1.90) | ausat -5.86% | theek (backtest ke daire mein)
-Ichimoku TP5           band  25 | khuli  0 | jeet/10  5.2 (test 6.6) | PF  0.54 (test 1.01) | ausat -2.07% | theek (backtest ke daire mein)
+Ichimoku TP5           band  26 | khuli  0 | jeet/10  5.4 (test 6.6) | PF  0.59 (test 1.01) | ausat -1.81% | theek (backtest ke daire mein)
 Donchian Daily         band   4 | khuli  0 | jeet/10  0.0 (test 3.7) | PF  0.00 (test 1.55) | ausat -10.06% | kam trades (4/10)
 Dip Daily              band  15 | khuli  0 | jeet/10  5.3 (test 8.1) | PF  2.03 (test 3.99) | ausat +0.90% | GADBAD? jeet backtest se kafi kam (5% se kam imkaan)
 Volume Capitulation    band  26 | khuli  1 | jeet/10  6.2 (test 6.3) | PF  0.58 (test 1.47) | ausat -5.59% | theek (backtest ke daire mein)
