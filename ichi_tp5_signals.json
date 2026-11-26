@@ -268,5 +268,15 @@
     "tp": 0.339486,
     "risk_pct": 22.22,
     "size_pct": 9.0
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "TEL/USDT",
+    "signal_time_utc": "2026-11-26 00:00:00",
+    "entry_est": 0.001749,
+    "sl": 0.0014655,
+    "tp": 0.00183645,
+    "risk_pct": 16.21,
+    "size_pct": 12.34
   }
 ]
