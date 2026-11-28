@@ -278,5 +278,15 @@
     "tp": 0.00183645,
     "risk_pct": 16.21,
     "size_pct": 12.34
+  },
+  {
+    "system": "Ichimoku TP5",
+    "symbol": "NIGHT/USDT",
+    "signal_time_utc": "2026-11-28 12:00:00",
+    "entry_est": 0.05482,
+    "sl": 0.04798,
+    "tp": 0.057561,
+    "risk_pct": 12.48,
+    "size_pct": 16.03
   }
 ]
